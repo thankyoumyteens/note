@@ -1,3 +1,1 @@
 note for study
-
-
