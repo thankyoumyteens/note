@@ -1,1 +1,1 @@
-note
+note for study
