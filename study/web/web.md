@@ -1370,6 +1370,33 @@ fs.readFile('./sample.txt', 'utf-8', (err, content) => {
 
 嵌套操作变成了通过then连接的链式操作。代码的整洁度上有了一个较大的提高。
 
+```
+function getData(url) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(url.replace('url', 'data'))
+        }, 1000)
+    })
+}
+
+function doTest() {
+    getData('url_111').then(data => {
+        console.log(data)
+        // getData('url_222').then(data => {
+        //     console.log(data)
+        // })
+        return getData('url_222')
+    }).then(data => {
+        console.log(data)
+        return getData('url_333')
+    }).then(data => {
+        console.log(data)
+    })
+}
+
+doTest()
+```
+
 # readyState状态
 
 1. > 0 － （未初始化） 
@@ -1416,7 +1443,7 @@ var json = {
     show(){
         // alert(this.a); // 输出：1
         setTimeout(function(){
-            // setTimeout中this默认为window，
+            // setTimeout中this默认为window,
             // 使用bind()改变this为json对象
             alert(this.a);
         }.bind(this),1000)
