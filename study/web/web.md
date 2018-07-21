@@ -2060,17 +2060,65 @@ window.addEventListener('storage', (e) => console.log(e))
 
 4. SharedWorker(todo)
 
-# WebSocket
-
-todo
-
-# ES6新特性
-
-todo
-
 # async和await
 
-todo
+```
+function getData(url) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(url.replace('url', 'data'))
+        }, 1000)
+    })
+}
+
+function doTest() {
+    getData('url_111').then(data => {
+        console.log(data)
+        return getData('url_222')
+    }).then(data => {
+        console.log(data)
+        return getData('url_333')
+    }).then(data => {
+        console.log(data)
+    })
+}
+
+doTest()
+/**
+    * 输出:
+    * data_111
+    * data_222
+    * data_333
+    */
+
+async function doTest2() {
+    // data是resolve的参数:url.replace('url', 'data')
+    // await等到getData执行完继续执行后面的代码
+    let data = await getData('async_url_111')
+    console.log(data)
+    data = await getData('async_url_222')
+    console.log(data)
+    data = await getData('async_url_333')
+    console.log(data)
+
+    return 'ok'
+}
+
+// async 函数返回的 Promise 对象，
+//必须等到内部所有的 await 命令的 Promise 对象执行完，
+//才会执行 then 方法的回调
+doTest2().then(msg => {
+    console.log(msg)
+})
+// 
+/**
+    * 输出:
+    * async_data_111
+    * async_data_222
+    * async_data_333
+    * ok
+    */
+```
 
 # 数组去重
 
@@ -2109,5 +2157,13 @@ todo
 todo
 
 # git工作流
+
+todo
+
+# WebSocket
+
+todo
+
+# ES6新特性
 
 todo
