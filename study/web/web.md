@@ -34,118 +34,74 @@ typeof null                   // 返回 object
 
 # 类的创建.继承
 
+> 创建
+
 ```
-//类的声明
 var Animal = function () {
     this.name = 'Animal';
 };
-
-//ES6中类的声明
+```
+```
+// ES6
 class Animal2 {
     constructor () {
         this.name = 'Animal2';
     }
 }
 ```
-第一种借助构造函数实现继承
+
+> 继承
+
 ```
-function Parent1 () {
-    this.name = 'parent1';
+function People() {
+    this.name = ''
+    this.age = 0
 }
-function Child1 () {
-    Parent1.call(this); //这里的call用apply也可以
-    this.type = 'child1';
+
+People.prototype.say = function () {
+    console.log(`${this.name} is ${this.age}`)
 }
-console.log(new Child1());
+
+function Student() {
+    // 添加父类属性
+    People.call(this)
+    this.no = 0
+}
+
+// 添加父类原型中的属性和方法
+function extend(Child, Parent) {
+    let Tmp = function () {}
+    Tmp.prototype = Parent.prototype
+    Child.prototype = new Tmp()
+    Child.prototype.constructor = Child
+}
+
+extend(Student, People)
+
+let student = new Student()
 ```
-缺点: 它只是把父类中的属性继承了，但父类的原型中的属性继承不了
-
-第二种是借助原型链实现继承
 ```
-function Parent2 () {
-    this.name = 'parent2';
-    this.play = [1, 2, 3];
+// ES6
+
+class People {
+    constructor() {
+        this.name = ''
+        this.age = 0
+    }
+
+    say() {
+        console.log(`${this.name} is ${this.age}`)
+    }
 }
 
-function Child2 () {
-    this.type = 'child2';
+class Student extends People {
+    constructor() {
+        super()
+        this.no = 0
+    }
 }
 
-Child2.prototype = new Parent2(); //通过把Child2的原型指向Parent2来实现继承
-Child2.prototype.constructor = Child2;
-```
-缺点: 改变子类对象的属性, 原型中的属性也会改变
-
-第三种 组合方式
-```
-function Parent3 () {
-    this.name = 'parent3';
-    this.play = [1, 2, 3];
-}
-
-function Child3 () {
-    Parent3.call(this);  //子类里执行父类构造函数
-    this.type = 'child3';
-}
-
-Child3.prototype = new Parent3(); //子类的原型指向父类
-
-//以下是测试代码
-var s3 = new Child3();
-var s4 = new Child3();
-
-s3.play.push(4);
-
-console.log(s3.play, s4.play);
-```
-缺点: 创建一个子类的实例的时候，父类的构造函数执行了两次
-
-第四种 组合方式的优化
-```
-function Parent4 () {
-    this.name = 'parent4';
-    this.play = [1, 2, 3];
-}
-
-function Child4 () {
-    Parent4.call(this);
-    this.type = 'child4';
-}
-
-Child4.prototype = Parent4.prototype;  //优化的点在这里
-
-//以下为测试代码
-var s5 = new Child4();
-var s6 = new Child4();
-console.log(s5, s6);
-
-console.log(s5 instanceof Child4, s5 instanceof Parent4);
-console.log(s5.constructor);
-```
-缺点: Child4属性的修改会影响prototype
-
-第五种 组合的完美优化
-```
-function Parent5 () {
-    this.name = 'parent5';
-    this.play = [1, 2, 3];
-}
-
-function Child5 () {
-    Parent5.call(this);
-    this.type = 'child5';
-}
-
-//把子类的原型指向通过Object.create创建的中间对象
-Child5.prototype = Object.create(Parent5.prototype);
-
-//把Child5的原型的构造函数指向自己
-Child5.prototype.constructor = Child5;
-
-//测试
-var s7= new Child5();
-console.log(s7 instanceof Child5, s7 instanceof Parent5)
-console.log(s7.constructor);
+let student = new Student()
 ```
 
 # 闭包
@@ -1890,7 +1846,8 @@ str.match(reg);  //["a", "a", "a", "a"]
 
 # 浏览器的缓存机制
 
-## 浏览器端的缓存规则：
+> ## 浏览器端的缓存规则：
+
 　　对于浏览器端的缓存来讲，这些规则是在HTTP协议头和HTML页面的Meta标签中定义的。他们分别从新鲜度和校验值两个维度来规定浏览器是否可以直接使用缓存中的副本，还是需要去源服务器获取更新的版本。
 
 　　新鲜度（过期机制）：也就是缓存副本有效期。一个缓存副本必须满足以下条件，浏览器会认为它是有效的，足够新的：
@@ -1903,7 +1860,7 @@ str.match(reg);  //["a", "a", "a", "a"]
 
 　　校验值（验证机制）：服务器返回资源的时候有时在控制头信息带上这个资源的实体标签Etag（Entity Tag），它可以用来作为浏览器再次请求过程的校验标识。如过发现校验标识不匹配，说明资源已经被修改或过期，浏览器需求重新获取资源内容。
 
-## 在HTTP请求和响应的消息报头中，常见的与缓存有关的消息报头
+> ## 在HTTP请求和响应的消息报头中，常见的与缓存有关的消息报头
 
 > Cache-Control与Expires
 
@@ -1931,7 +1888,6 @@ Etag是服务器自动生成或者由开发者生成的对应资源在服务器�
 轻量级的数据交换格式, 使用js语法的**文本**
 
 # 正则表达式
-
 
 |字符|描述
 |-|-
