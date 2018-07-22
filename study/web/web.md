@@ -63,13 +63,17 @@ People.prototype.say = function () {
 }
 
 function Student() {
-    // 添加父类属性
+    // 添加(继承)父类属性
     People.call(this)
     this.no = 0
 }
 
-// 添加父类原型中的属性和方法
+// 添加父类原型中的属性和方法(使用空对象中继)
 function extend(Child, Parent) {
+    // 此处如果使用 Child.prototype = new Parent()
+    // 会导致调用两次父类构造函数(上一次是Student中的'People.call(this)')
+    // new Parent()会执行父类constructor, 如果constructor比较复杂,
+    // 执行两次会耗费资源
     let Tmp = function () {}
     Tmp.prototype = Parent.prototype
     Child.prototype = new Tmp()
