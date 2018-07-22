@@ -350,9 +350,7 @@ web浏览器允许第一个页面的脚本访问第二个页面里的数据，�
 
 1. none 此元素不会被显示，并且不占据页面空间，这也是与visibility:hidden不同的地方，设置visibility:hidden的元素，不会被显示，但是还是会占据原来的页面空间 
 2. inline 行内元素 元素会在一行内显示，超出屏幕宽度自动换行，不能设置宽度和高度，元素的宽度和高度只能是靠元素内的内容撑开 
-示例元素：span,b,i,a,u,sub,sup,strong,em
 3. block 块级元素 会独占一行，如果不设置宽度，其宽度会自动填满父元素的宽度，可以设置宽高，即使设置了宽度，小于父元素的宽度，块级元素也会独占一行 
-示例元素：div,h1-h6,ul,ol,dl,p
 4. inline-block 行内块元素 与行内元素一样可以再一行内显示，而且可以设置宽高，可以设置margin和padding 
 示例元素：input,button,img
 5. list-item 列表元素
@@ -360,7 +358,7 @@ web浏览器允许第一个页面的脚本访问第二个页面里的数据，�
 6. table 会作为块级表格来显示(类似于`<table>`)，表格前后带有换行符 
 7. inline-table 会作为内联表格来显示(类似于`<table>`)，表格前后没有换行符 
 8. table-cell 会作为表格单元格来显示(类似于`<td>`)
-9. flex 多栏多列布局，火狐可以直接使用，谷歌和欧朋需要在属性值前面加-webkit-前缀，比较适合移动端开发使用 
+9. flex 多栏多列布局
 
 # text-decoration 分别有哪几种值
 
@@ -445,86 +443,6 @@ height：value；
 描述：给上边元素设置了margin-bottom，给下边元素设置了margin-top，浏览器只会识别较大值；
 
 解决方案：margin-top和margin-bottom中选择一个，只设置其中一个值
-
-# JS事件冒泡和事件捕获
-
-先上结论：他们是描述事件触发时序问题的术语 事件捕获指的是从document到触发事件的那个节点，即自上而下的去触发事件 相反的，事件冒泡是自下而上的去触发事件 绑定事件方法的第三个参数，就是控制事件触发顺序是否为事件捕获 true,事件捕获；false,事件冒泡 默认false,即事件冒泡 Jquery的e.stopPropagation会阻止冒泡，意思就是到我为止，我的爹和祖宗的事件就不要触发了 
-
-这是HTML结构
-```
-<div id="parent">
-　　<div id="child" class="child"></div>
-</div>
-```
-现在我们给它们绑定上事件
-```
-document.getElementById("parent").addEventListener("click",function(e){
-    alert("parent事件被触发，"+this.id);
-})
-document.getElementById("child").addEventListener("click",function(e){
-    alert("child事件被触发，"+this.id)
-})
-```
-结果：
-```
-child事件被触发，child
-parent事件被触发，parent
-```
-结论：先child，然后parent 事件的触发顺序自内向外，这就是事件冒泡 
-
-现在改变第三个参数的值为true
-```
-document.getElementById("parent").addEventListener("click",function(e){
-    alert("parent事件被触发，"+e.target.id);
-},true)
-document.getElementById("child").addEventListener("click",function(e){
-    alert("child事件被触发，"+e.target.id)
-},true)
-```
-结果：
-```
-parent事件被触发，parent
-child事件被触发，child
-```
-结论：先parent,然后child 事件触发顺序变更为自外向内，这就是事件捕获 
-
-貌似没什么卵用，上一个利用事件冒泡的案例，反正我是经常会用到 
-
-```
-<ul>
-    <li>item1</li>
-    <li>item2</li>
-    <li>item3</li>
-    <li>item4</li>
-    <li>item5</li>
-    <li>item6</li>
-</ul>
-```
-需求是这样的：鼠标放到li上对应的li背景变灰 
-
-利用事件冒泡实现：
-```
-$("ul").on("mouseover",function(e){
-    $(e.target).css("background-color","#ddd")
-    .siblings().css("background-color","white");
-})
-```
-也许有人会说，我们直接给所有li都绑上事件也可以啊，一点也不麻烦，只要……
-```
-$("li").on("mouseover",function(){
-    $(this).css("background-color","#ddd")
-    .siblings().css("background-color","white");
-})
-```
-是，这样也行 而且从代码简洁程度上，两者是相若仿佛的 但是，前者少了一个遍历所有li节点的操作，所以在性能上肯定是更优的 
-
-还有就是，如果我们在绑定事件完成后，页面又动态的加载了一些元素……
-```
-$("<li>item7</li>").appendTo("ul");
-```
-这时候，第二种方案，由于绑定事件的时候item7还不存在，所以为了效果，我们还要给它再绑定一次事件 而利用冒泡方案由于是给ul绑的事件……
-
-高下立判！
 
 # CSS Hack 有哪些
 
@@ -1888,7 +1806,7 @@ Etag是服务器自动生成或者由开发者生成的对应资源在服务器�
 
 |字符|描述
 |-|-
-|\\|转义符。例如，'n' 匹配字符 "n"。'\\n' 匹配一个换行符。序列 '\\\\' 匹配 "\\" 而 "\\(" 则匹配 "("。
+| \\ |转义符。例如，'n' 匹配字符 "n"。'\\n' 匹配一个换行符。序列 '\\\\' 匹配 "\\" 而 "\\(" 则匹配 "("。
 |^|匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。
 |$|匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。
 |\*|匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。
@@ -2118,5 +2036,9 @@ todo
 todo
 
 # ES6新特性
+
+todo
+
+# 负边距
 
 todo
