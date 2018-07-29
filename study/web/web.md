@@ -718,18 +718,8 @@ sessionStorage仅在当前浏览器窗口关闭前有效 localStorage始终有�
 
 this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的
 
-```
-function fn(){
-    this.num = 1;
-}
-var a = new fn();
-console.log(a.num); //1
-```
-
-为什么this会指向a？首先new关键字会创建一个空的对象，然后会自动调用一个函数apply方法，将this指向这个空对象，这样的话函数内部的this就会被这个空的对象替代。(注意: 当你new一个空对象的时候,js内部的实现并不一定是用的apply方法来改变this指向的,这里我只是打个比方而已.)
-
 # 标准盒模型和IE盒模型
-
++
 > W3C
 
 ![w3c](w3cbox.jpg)
@@ -765,41 +755,16 @@ BFC的效果
 
 垂直margin合并就是上下相邻的两个块级元素，如果刚好，上面设置margin-bottom，下面设置margin-top，这俩外边距相遇了，那两个就合并了，本来可能上面margin-bottom设置20px，margin-top设置10px，合并之后两个元素上下的距离就变为20px，即两个属性中较大的值 
 
-这里补充的一点就是垂直margin合并的条件时在同一个BFC中才会发生的，如果两个BFC就算它俩的margin相遇了，也不会融合的 
+垂直margin合并是在同一个BFC中才会发生的，如果两个BFC的垂直margin不会合并 
 
 # 垂直水平居中
 
 > 元素水平居中
 
-margin: 0 auto;
-1
-居中不好使的原因： 
-1.元素没有设置宽度，没有宽度怎么居中嘛！ 
-2.设置了宽度依然不好使，你设置的是行内元素吧
-
 ```
-<div class="box">
-    <div class="content">
-        哇！居中了
-    </div>
-</div>
-
-<style type="text/css">
-.box {
-    background-color: #FF8C00;
-    width: 300px;
-    height: 300px;
-    margin: 0 auto;
-}
-.content {
-    background-color: #F00;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;//文字在块内垂直居中
-    text-align: center;//文字居中
-    margin: 0 auto;
-}
-</style>
+// 元素需要设置宽度
+// 不是行内元素
+margin: 0 auto;
 ```
 
 > 元素水平垂直居中
@@ -978,8 +943,6 @@ sessionStorage存储一个会话中的数据，会话结束后数据就会被销
 
 localStorage的数据是永久存储在客户端的，除非主动删除，否则不会过期 
 
-一般设置大小为5M以下 
-
 过期时间：localStorage 永久存储，永不失效除非手动删除sessionStorage 浏览器重新打开后就消失了
 
 大小：每个域名是5M
@@ -1000,7 +963,7 @@ sessionStorage.clear(); //删除所有sessionStorage中的属性
 
 ```
 var arr = [1,2,3];
-Object.prototype.toString.call(arr);//[object Array]
+Object.prototype.toString.call(arr); // [object Array]
 
 //还可以用instanceof
 arr instanceof Array; // true
@@ -1008,17 +971,28 @@ arr instanceof Array; // true
 
 # prototype和__proto__
 
-显示原型（prototype）：显示原型实现基于原型的继承和属性的共享 
+显示原型(prototype): 显示原型实现基于原型的继承和属性的共享 
 
-隐式原型（[[prototype]]）：隐式原型是的作用就是构成原型链，通过隐式原型可以一层层往上查找对象的原型 __proto__是个不标准的属性，是浏览器为了实现对[[prototype]]的访问所提供的一个方法 常理来说[[prototype]]即隐式原型是不可访问的 ES5里提供了Object.getPrototypeOf()这个方法来获得[[prototype]] 
+隐式原型([[prototype]]): 隐式原型是的作用就是构成原型链，通过隐式原型可以一层层往上查找对象的原型 __proto__是个不标准的属性，是浏览器为了实现对[[prototype]]的访问所提供的一个方法 常理来说[[prototype]]即隐式原型是不可访问的 ES5里提供了Object.getPrototypeOf()这个方法来获得[[prototype]] 
 
-prototype和__proto__都指向原型对象，任意一个函数（包括构造函数）都有一个prototype属性，指向该函数的原型对象，同样任意一个构造函数实例化的对象，都有一个__proto__属性，指向构造函数的原型对象 
+prototype和__proto__都指向原型对象，任意一个函数(包括构造函数)都有一个prototype属性，指向该函数的原型对象，同样 **任意一个构造函数实例化的对象** ，都有一个__proto__属性，指向构造函数的原型对象 
 
-所有对象都有__proto__属性，函数这个特殊对象除了具有__proto__属性，还有特有的原型属性prototype prototype对象默认有两个属性，constructor属性和__proto__属性 prototype属性可以给函数和对象添加可共享（继承）的方法.属性，而__proto__是查找某函数或对象的原型链方式 constructor，这个属性包含了一个指针，指回原构造函数 
+```
+function Foo(){}
+var Boo = {name: "Boo"};
+Foo.prototype = Boo;
+var f = new Foo();
 
-# 写了一个表达式让我说元素的原型是什么
+console.log(f.__proto__ === Foo.prototype); // true
+console.log(f.__proto__ === Boo);   // true
+Object.getPrototypeOf(f) === f.__proto__;   // true
 
-首先是写了一个var dog = new Animal()，我说是Animal.prototype；然后是var arr = [1,2,3]，我说是Array.prototype；最后是问Object的原型，Object是个构造函数嘛，那就是Function.prototype 
+let b = 1;
+console.log(b.__proto__ === Number.prototype) // true
+console.log(1.__proto__) // Uncaught SyntaxError: Invalid or unexpected token
+```
+
+![prototype](prototype.png)
 
 # 作用域.作用域链
 
@@ -1076,33 +1050,19 @@ JavaScript没有块级作用域。JavaScript取而代之地使用了函数作用
 
 ```
 function test（0）{
-       var i = 0;  // i在行函数体内时有定义的，
-       if（typof 0 == "object"){
-            var j = 0;  //j在函数体内是有定义的，不仅仅是在循环内
-            for(var k=0; k<10;k++){ //k在行函数体内是有定义的，不仅仅是在循环内
-                       console.log(k);//输出数字0-9
-
-            }
-           console.log(k);  //k 已经定义了，输出10
-      }
-       console.log(j);    //j 已经定义了，但是可能没有初始化
+    var i = 0;  // i在行函数体内时有定义的，
+    if（typof 0 == "object"){
+        var j = 0;  //j在函数体内是有定义的，不仅仅是在循环内
+        for(var k=0; k<10;k++){ //k在行函数体内是有定义的，不仅仅是在循环内
+            console.log(k);//输出数字0-9
+        }
+        console.log(k);  //k 已经定义了，输出10
+    }
+    console.log(j);    //j 已经定义了，但是可能没有初始化
 }
 ```
 
-### 函数的提前声明
-
-javascript的函数作用域是指在函数内声明的所有变量在函数体内始终是可见的，有意思的是，这意味着变量在声明之前甚至已经可用。JavaScript的这个特性被非正式地称为声明提前，即JavaScript函数里声明的所有变量（但不涉及赋值）都被"提前"至函数体的顶部。
-
-```
-var scope = "glocal";
-function f(){
-       console.log(scope);//输出"undefined",而不是"global"
-       var scope = "local";//变量在这里赋初始值，但变量本身在函数体内任何地方均是有定义的
-       console.log(scope);//输出"local"
-}
-```
-
-### 作为属性的变量
+## 作为属性的变量
 
 当声明一个全局变量时，实际上是定义了全局对象的一个属性。使用var声明的变量不可配置，未声明的可配置
 
@@ -1127,35 +1087,11 @@ delete this.fakevar2 //=> true:变量并没有被删除
 2. 在不包含嵌套的函数体内，作用域链上有两个对象，第一个是定义函数参数和局部变量的对象，第二个是全局对象。
 3. 在一个嵌套的函数体内，作用域链上至少有三个对象。当调用这个函数时，它创建一个新的对象来存储它的局部变量，它实际上保存在同一个作用域链。
 
-# 变量对象
-
-变量对象定义着一个函数内定义的参数列表.内部变量和内部函数。
-
-![vo](vo.png)
-
-变量对象是在函数被调用，但是函数尚未执行的时刻被创建的，这个创建变量对象的过程实际就是函数内数据(函数参数.内部变量.内部函数)初始化的过程。
-
-## 活动对象
-
-未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象转变为了活动对象，里面的属性都能被访问了，然后开始进行执行阶段的操作。所以活动对象实际就是变量对象在真正执行时的另一种形式。
-
-# MVVM
+# MVVM(Model View ViewModel)
 
 MVVM的设计思想：关注Model的变化，让MVVM框架去自动更新DOM的状态，从而把开发者从操作DOM的繁琐步骤中解脱出来
 
 改变JavaScript对象的状态，会导致DOM结构作出对应的变化！这让我们的关注点从如何操作DOM变成了如何更新JavaScript对象的状态，而操作JavaScript对象比DOM简单多了
-
-# Web安全了解哪些
-
-这里我就说了两个，XSS（Cross Site Scripting）和CRSF（Cross Site Request Forgery） 
-
-是什么：XSS是跨站脚本攻击，在所有可输入的地方，没有对输入数据进行处理的话，都会存在XSS漏洞；CRSF是跨站请求伪造，攻击者盗用用户身份，发送恶意请求 
-
-如何防范：
-
-XSS：对输入进行转义，例如<>转换为HTML字符实体&lt &gt
-
-CRSF：增加验证流程（验证码，指纹验证等） 
 
 # 全文单词首字母大写
 
@@ -1169,6 +1105,7 @@ function ReplaceFirstUper(str)
 }
  
 console.log(ReplaceFirstUper('i have a pen, i have an apple!'));
+// 输出: I Have A Pen, I Have An Apple!
 ```
 
 # Ajax的工作原理和过程
@@ -1184,17 +1121,49 @@ Ajax异步请求
 Ajax的工作过程
 
 1. 创建Ajax引擎对象(XMLHttpRequest(其它).ActiveXObject(ie))
-```
-var xhr =newXMLHttpRequest();// msie7+.firefox.chrome.opera
-var xhr =newActiveXObject("msie浏览器的版本号");// msie7-
-```
-2. 调用xhr.open()方法打开服务器之间的连接
-```
-xhr.open("get|post","url",true|false);
-```
+
+2. 打开服务器之间的连接
+
 3. 发送异步请求
 
 4. 获取服务器端的响应数据
+
+```
+function getData() {
+    // 1. 创建Ajax引擎对象
+    var xmlhttp = null;
+    // 非IE浏览器创建XmlHttpRequest对象
+    if (window.XmlHttpRequest) {
+        xmlhttp = new XmlHttpRequest();
+    }
+    // IE浏览器创建XmlHttpRequest对象
+    if (window.ActiveXObject) {
+        try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
+        catch (e) {
+            try { xmlhttp = new ActiveXObject("msxml2.XMLHTTP"); }
+            catch (ex) {}
+        }
+    }
+    if (!xmlhttp) {
+        alert("创建xmlhttp对象异常！");
+        return false;
+    }
+    // 2. 打开服务器之间的连接
+    xmlhttp.open("POST", url, false);
+
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4) {
+            document.getElementById("user1").innerHTML = "数据正在加载...";
+            // 4. 获取服务器端的响应数据
+            if (xmlhttp.status == 200) {
+                console.log(xmlhttp.responseText);
+            }
+        }
+    }
+    // 3. 发送异步请求
+    xmlhttp.send();
+}
+```
 
 # JavaScript异步加载
 
@@ -1887,6 +1856,19 @@ Etag是服务器自动生成或者由开发者生成的对应资源在服务器�
 |\\nml|如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
 |\\un|匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \\u00A9 匹配版权符号 (?)。
 
+
+# 变量对象
+
+变量对象定义着一个函数内定义的参数列表.内部变量和内部函数。
+
+![vo](vo.png)
+
+变量对象是在函数被调用，但是函数尚未执行的时刻被创建的，这个创建变量对象的过程实际就是函数内数据(函数参数.内部变量.内部函数)初始化的过程。
+
+# 活动对象
+
+未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象转变为了活动对象，里面的属性都能被访问了，然后开始进行执行阶段的操作。所以活动对象实际就是变量对象在真正执行时的另一种形式。
+
 # 变量提升
 
 JavaScript引擎的工作方式是，先解析代码，获取所有被声明的变量，然后再一行一行地运行。这造成的结果，就是所有的变量的声明语句，都会被提升到代码的头部，这就叫做变量提升。
@@ -2029,6 +2011,13 @@ doTest2().then(msg => {
     */
 ```
 
+
+# Web安全问题和防范
+
+XSS(Cross Site Scripting)
+
+CRSF(Cross Site Request Forgery)
+
 # 数组去重
 
 todo
@@ -2074,6 +2063,10 @@ todo
 todo
 
 # ES6新特性
+
+todo
+
+# ES7/8新特性
 
 todo
 
