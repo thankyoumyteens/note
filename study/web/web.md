@@ -1149,6 +1149,10 @@ function getData() {
         return false;
     }
     // 2. 打开服务器之间的连接
+    // 第三个参数设置请求是否为异步模式。
+    // 如果是TRUE，JavaScript函数将继续执行，而不等待服务器响应。
+    // 同步：提交请求->等待服务器处理->处理完毕返回 这个期间客户端浏览器不能干任何事
+    // 异步: 请求通过事件触发->服务器处理（这是浏览器仍然可以作其他事情）->处理完毕
     xmlhttp.open("POST", url, false);
 
     xmlhttp.onreadystatechange = function () {
