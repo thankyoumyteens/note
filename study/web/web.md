@@ -216,6 +216,34 @@ Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1
 有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形
 Etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。
 
+# Web安全问题和防范
+
+### 跨站脚本 XSS(Cross Site Scripting)
+
+代码注入, 攻击者将脚本上传到帖子让其他人浏览到有恶意脚本的页面
+
+防范
+
+1. 输入编码过滤:对于每一个输入，在客户端和服务器端验证是否合法字符，长度是否合法，格式是否正确,对字符进行转义.非法字符过滤
+
+2. 输出编码过滤:对所有要动态输出到页面的内容，进行相关的编码和转义.主要有HTML字符过滤和转义,JS脚本转义过滤.url转义过滤
+
+3. 设置http-only,避免攻击脚本读取cookie
+
+### 跨站请求伪造 CRSF(Cross Site Request Forgery)
+
+是一种伪造跨站请求的攻击方式. 例如利用你在 A 站 (攻击目标) 的 cookie / 权限等, 在 B 站 (恶意/钓鱼网站) 拼装 A 站的请求
+
+防范
+
+1. 在 HTTP 头中自定义属性并验证
+
+2. 检查 CSRF token.
+
+3. cookie中加入hash随机数.
+
+4. 通过检查来过滤简单的 CSRF 攻击, 主要检查一下两个 header: Origin Header和Referer Header
+
 # JSON是什么
 
 轻量级的数据交换格式, 使用js语法的**文本**
@@ -1868,6 +1896,115 @@ str.match(reg);  //["a", "a", "a", "a"]
 
 12. search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
 
+# 数组去重
+
+1. 
+```
+/*
+    * 新建一新数组，遍历传入数组，值不在新数组就push进该新数组中
+    */
+function uniq(array) {
+    let temp = [];
+    for (let i = 0; i < array.length; i++) {
+        if (temp.indexOf(array[i]) == -1) {
+            temp.push(array[i]);
+        }
+    }
+    return temp;
+}
+```
+
+2. 
+
+```
+/*
+    * 缺点: 空间占用多
+    *
+    * 新建一js对象以及新数组，遍历传入数组时，判断值是否为js对象的键，
+    * 不是的话给对象新增该键并放入新数组。
+    * 问题: 判断是否为js对象键时，会自动对传入的键执行toString()，
+    * 不同的键可能会被误认为一样，例如n[val]-- n[1]、n["1"]；
+    * 解决上述问题还是得调用"indexOf"
+    */
+function uniq(array) {
+    let result = [];
+    let obj = {};
+    for (let i = 0; i < array.length; i++) {
+        let item = array[i];
+        if (!obj[item]) {
+            result.push(item);
+            obj[item] = true;
+        }
+    }
+    return result;
+}
+```
+
+3. 
+
+```
+/*
+    * 给传入数组排序，排序后相同值相邻，
+    * 然后遍历时,新数组只加入不与前一值重复的值。
+    * 会打乱原来数组的顺序
+    */
+function uniq(array) {
+    array.sort();
+    var temp = [array[0]];
+    for (var i = 1; i < array.length; i++) {
+        if (array[i] !== temp[temp.length - 1]) {
+            temp.push(array[i]);
+        }
+    }
+    return temp;
+}
+```
+
+4. 
+
+```
+/*
+    *
+    * 如果当前数组的第i项在当前数组中第一次出现的位置不是i，
+    * 那么表示第i项是重复的，忽略掉。否则存入结果数组。
+    */
+function uniq(array) {
+    var temp = [];
+    for (var i = 0; i < array.length; i++) {
+        if (array.indexOf(array[i]) == i) {
+            temp.push(array[i])
+        }
+    }
+    return temp;
+}
+```
+
+5. 
+
+```
+// ES6的Set
+function uniq(array) {
+    return Array.from(new Set(array));
+}
+```
+
+# new
+
+1. 创建一个新对象；
+2. 将构造函数的作用域赋给新对象（因此 this 就指向了这个新对象） ；
+3. 执行构造函数中的代码（为这个新对象添加属性） ；
+4. 返回新对象。
+
+```
+var obj = new Base();
+```
+
+```
+var obj  = {};
+obj.__proto__ = Base.prototype;
+Base.call(obj);
+```
+
 # 变量对象
 
 变量对象定义着一个函数内定义的参数列表.内部变量和内部函数。
@@ -1995,7 +2132,7 @@ doTest()
 
 async function doTest2() {
     // data是resolve的参数:url.replace('url', 'data')
-    // await等到getData执行完继续执行后面的代码
+    // await等到getData执行完才会继续执行后面的代码
     let data = await getData('async_url_111')
     console.log(data)
     data = await getData('async_url_222')
@@ -2022,17 +2159,6 @@ doTest2().then(msg => {
     */
 ```
 
-
-# Web安全问题和防范
-
-XSS(Cross Site Scripting)
-
-CRSF(Cross Site Request Forgery)
-
-# 数组去重
-
-todo
-
 # Promise
 
 todo
@@ -2050,6 +2176,10 @@ todo
 todo
 
 # 模块化
+
+todo
+
+# 自我介绍
 
 todo
 
@@ -2082,9 +2212,5 @@ todo
 todo
 
 # 负边距
-
-todo
-
-# js new
 
 todo
