@@ -1,3 +1,682 @@
+# **其他**
+
+# get和post请求的区别
+
+1. 最直观的就是语义上的区别，get用于获取数据，post用于提交数据 
+2. get参数有长度限制（受限于url长度，具体的数值取决于浏览器和服务器的限制），而post无限制
+
+# 常见http状态码
+
+|状态码|状态码英文名称|中文描述
+|-|-|-
+|100|Continue|继续。客户端应继续其请求
+|101|Switching Protocols|切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议
+|200|OK|请求成功。一般用于GET与POST请求
+|201|Created|已创建。成功请求并创建了新的资源
+|202|Accepted|已接受。已经接受请求，但未处理完成
+|203|Non-Authoritative Information|非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本
+|204|No Content|无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档
+|205|Reset Content|重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域
+|206|Partial Content|部分内容。服务器成功处理了部分GET请求
+|300|Multiple Choices|多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择
+|301|Moved Permanently|永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替
+|302|Found|临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI
+|303|See Other|查看其它地址。与301类似。使用GET和POST请求查看
+|304|Not Modified|未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源
+|305|Use Proxy|使用代理。所请求的资源必须通过代理访问
+|306|Unused|已经被废弃的HTTP状态码
+|307|Temporary Redirect|临时重定向。与302类似。使用GET请求重定向
+|400|Bad Request|客户端请求的语法错误，服务器无法理解
+|401|Unauthorized|请求要求用户的身份认证
+|402|Payment Required|保留，将来使用
+|403|Forbidden|服务器理解请求客户端的请求，但是拒绝执行此请求
+|404|Not Found|服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置"您所请求的资源无法找到"的个性页面
+|405|Method Not Allowed|客户端请求中的方法被禁止
+|406|Not Acceptable|服务器无法根据客户端请求的内容特性完成请求
+|407|Proxy Authentication Required|请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权
+|408|Request Time-out|服务器等待客户端发送的请求时间过长，超时
+|409|Conflict|服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突
+|410|Gone|客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置
+|411|Length Required|服务器无法处理客户端发送的不带Content-Length的请求信息
+|412|Precondition Failed|客户端请求信息的先决条件错误
+|413|Request Entity Too Large|由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息
+|414|Request-URI Too Large|请求的URI过长（URI通常为网址），服务器无法处理
+|415|Unsupported Media Type|服务器无法处理请求附带的媒体格式
+|416|Requested range not satisfiable|客户端请求的范围无效
+|417|Expectation Failed|服务器无法满足Expect的请求头信息
+|500|Internal Server Error|服务器内部错误，无法完成请求
+|501|Not Implemented|服务器不支持请求的功能，无法完成请求
+|502|Bad Gateway|充当网关或代理的服务器，从远端服务器接收到了一个无效的请求
+|503|Service Unavailable|由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中
+|504|Gateway Time-out|充当网关或代理的服务器，未及时从远端服务器获取请求
+|505|HTTP Version not supported|服务器不支持请求的HTTP协议的版本，无法完成处理
+
+# HTTP状态码分类
+
+* 1** 信息，服务器收到请求，需要请求者继续执行操作
+* 2** 成功，操作被成功接收并处理
+* 3** 重定向，需要进一步的操作以完成请求
+* 4** 客户端错误，请求包含语法错误或无法完成请求
+* 5** 服务器错误，服务器在处理请求的过程中发生了错误
+
+# 同源策略
+
+web浏览器允许第一个页面的脚本访问第二个页面里的数据，但是也只有在两个页面有相同的源时。源是由URI，主机名，端口号组合而成的。这个策略可以阻止一个页面上的恶意脚本通过页面的DOM对象获得访问另一个页面上敏感信息的权限。
+
+# SEO(Search English Optimization, 搜索引擎优化)
+
+1. 标签语义化
+2. < meta name="keywords" content="关键词1，关键词2" />< meta name="description" content="描述1，描述2" />
+3. 导航栏的层级数不宜太深
+
+# 前端性能优化 怎么增加页面的加载速度
+
+> 减少HTTP请求
+
+### 图片地图：
+
+假设导航栏上有五幅图片，点击每张图片都会进入一个链接，这样五张导航的图片在加载时会产生5个HTTP请求 然而，使用一个图片地图可以提高效率，这样就只需要一个HTTP请求 
+
+服务器端图片地图：将所有点击提交到同一个url，同时提交用户点击的x.y坐标，服务器端根据坐标映射响应
+
+客户端图片地图：直接将点击映射到操作
+
+缺点：指定坐标区域时，矩形或圆形比较容易指定，而其它形状手工指定比较难
+
+### CSS Sprites(CSS精灵)
+
+通过将多个图片融合到一副图里面，然后通过CSS的一些技术(如: background-position)布局到网页上 特别是图片特别多的网站，如果能用css sprites降低图片数量，带来的将是速度的提升 
+
+缺点: 合并所有的样式文件或者脚本文件可能会导致在一个页面加载时加载了多于自己所需要的样式或者脚本，对于只访问该网站一个（或几个）页面的人来说反而增加了下载量
+
+> 使用CDN
+
+CDN（内容发布网络）是一组分布在多个不同地理位置的Web服务器，用于更加有效地向用户发布内容 在优化性能时，向特定用户发布内容的服务器的选择基于对网络慕课拥堵的测量 例如，CDN可能选择网络阶跃数最小的服务器，或者具有最短响应时间的服务器 
+
+CDN还可以进行数据备份.扩展存储能力，进行缓存，同时有助于缓和Web流量峰值压力 
+
+缺点：
+
+1. 响应时间可能会受到其他网站流量的影响 CDN服务提供商在其所有客户之间共享Web服务器组 
+
+2. 如果CDN服务质量下降了，那么你的工作质量也将下降
+
+3. 无法直接控制组件服务器
+
+> 添加Expires头
+
+页面的初次访问者会进行很多HTTP请求，但是通过使用一个长久的Expires头，可以使这些组件被缓存，下次访问的时候，就可以减少不必要的HTPP请求，从而提高加载速度 
+
+缺点： 它要求服务器和客户端时钟严格同步；过期日期需要经常检查
+
+> 压缩组件
+
+从HTTP1.1开始，Web客户端可以通过HTTP请求中的Accept-Encoding头来表示对压缩的支持
+
+`Accept-Encoding: gzip,deflate`
+
+如果Web服务器看到请求中有这个头，就会使用客户端列出来的方法中的一种来进行压缩 Web服务器通过响应中的Content-Encoding来通知 Web客户端 
+
+`Content-Encoding: gzip`
+
+> 将样式表放在头部
+
+首先说明一下，将样式表放在头部对于实际页面加载的时间并不能造成太大影响，但是这会减少页面首屏出现的时间，使页面内容逐步呈现，改善用户体验，防止“白屏” 
+
+我们总是希望页面能够尽快显示内容，为用户提供可视化的回馈，这对网速慢的用户来说是很重要的 
+
+将样式表放在文档底部会阻止浏览器中的内容逐步出现 为了避免当样式变化时重绘页面元素，浏览器会阻塞内容逐步呈现，造成“白屏” 这源自浏览器的行为：如果样式表仍在加载，构建呈现树就是一种浪费，因为所有样式表加载解析完毕之前务虚会之任何东西
+ 
+> 将脚本放在底部
+
+更样式表相同，脚本放在底部对于实际页面加载的时间并不能造成太大影响，但是这会减少页面首屏出现的时间，使页面内容逐步呈现 
+
+js的下载和执行会阻塞Dom树的构建（严谨地说是中断了Dom树的更新），所以script标签放在首屏范围内的HTML代码段里会截断首屏的内容 
+
+下载脚本时并行下载是被禁用的——即使使用了不同的主机名，也不会启用其他的下载 因为脚本可能修改页面内容，因此浏览器会等待；另外，也是为了保证脚本能够按照正确的顺序执行，因为后面的脚本可能与前面的脚本存在依赖关系，不按照顺序执行可能会产生错误 
+
+> 避免CSS表达式
+
+IE5以及之后版本.IE8之前版本支持
+
+```
+width: expression(func(),document.body.clientWidth > 400 ? "400px" : "auto");
+```
+
+> 使用外部的JavaScript和CSS
+
+内联脚本或者样式可以减少HTTP请求，按理来说可以提高页面加载的速度 然而在实际情况中，当脚本或者样式是从外部引入的文件，浏览器就有可能缓存它们，从而在以后加载的时候能够直接使用缓存，而HTML文档的大小减小，从而提高加载速度 
+
+> 减少DNS查找
+
+当我们在浏览器的地址栏输入网址（譬如： www.linux178.com） ，然后回车，回车这一瞬间到看到页面到底发生了什么呢？
+
+域名解析 --> 发起TCP的3次握手 --> 建立TCP连接后发起http请求 --> 服务器响应http请求，浏览器得到html代码 --> 浏览器解析html代码，并请求html代码中的资源（如js.css.图片等） --> 浏览器对页面进行渲染呈现给用户
+
+减少主机名的数量就可以减少DNS查找的数量
+
+> 压缩代码
+
+> 避免重定向
+
+# 输入一个网址，浏览器执行的过程
+
+域名解析 --> 发起TCP的3次握手 --> 建立TCP连接后发起http请求 --> 服务器响应http请求，浏览器得到html代码 --> 浏览器解析html代码，并请求html代码中的资源（如js.css.图片等） --> 浏览器对页面进行渲染呈现给用户
+
+# 浏览器加载和渲染过程
+
+当浏览器获得一个html文件时，会“自上而下”加载，并在加载过程中进行解析渲染。 
+解析： 
+1. 浏览器会将HTML解析成一个DOM树，DOM 树的构建过程是一个深度遍历过程：当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点。 
+2. 将CSS解析成 CSS Rule Tree 。 
+3. 根据DOM树和CSSOM来构造 Rendering Tree。注意：Rendering Tree 渲染树并不等同于 DOM 树，因为一些像 Header 或 display:none 的东西就没必要放在渲染树中了。
+4. 有了Render Tree，浏览器已经能知道网页中有哪些节点.各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。 
+5. 再下一步就是绘制，即遍历render树，并使用UI后端层绘制每个节点。
+
+![RenderTree](RenderTree.jpg)
+
+上述这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的html都解析完成之后再去构建和布局render树。它是解析完一部分内容就显示一部分内容，同时，可能还在通过网络下载其余内容。
+
+# 浏览器的缓存机制
+
+> ## 浏览器端的缓存规则：
+
+　　对于浏览器端的缓存来讲，这些规则是在HTTP协议头和HTML页面的Meta标签中定义的。他们分别从新鲜度和校验值两个维度来规定浏览器是否可以直接使用缓存中的副本，还是需要去源服务器获取更新的版本。
+
+　　新鲜度（过期机制）：也就是缓存副本有效期。一个缓存副本必须满足以下条件，浏览器会认为它是有效的，足够新的：
+
+1. 含有完整的过期时间控制头信息（HTTP协议报头），并且仍在有效期内；
+
+2. 浏览器已经使用过这个缓存副本，并且在一个会话中已经检查过新鲜度；
+
+　　满足以上两个情况的一种，浏览器会直接从缓存中获取副本并渲染。
+
+　　校验值（验证机制）：服务器返回资源的时候有时在控制头信息带上这个资源的实体标签Etag（Entity Tag），它可以用来作为浏览器再次请求过程的校验标识。如过发现校验标识不匹配，说明资源已经被修改或过期，浏览器需求重新获取资源内容。
+
+> ## 在HTTP请求和响应的消息报头中，常见的与缓存有关的消息报头
+
+> Cache-Control与Expires
+
+　　Cache-Control与Expires的作用一致，都是指明当前资源的有效期，控制浏览器是否直接从浏览器缓存取数据还是重新发请求到服务器取数据。只不过Cache-Control的选择更多，设置更细致，如果同时设置的话，其优先级高于Expires。
+
+> Last-Modified/ETag与Cache-Control/Expires
+
+　　配置Last-Modified/ETag的情况下，浏览器再次访问统一URI的资源，还是会发送请求到服务器询问文件是否已经修改，如果没有，服务器会只发送一个304回给浏览器，告诉浏览器直接从自己本地的缓存取数据；如果修改过那就整个数据重新发给浏览器；
+
+　　Cache-Control/Expires则不同，如果检测到本地的缓存还是有效的时间范围内，浏览器直接使用本地副本，不会发送任何请求。两者一起使用时，Cache-Control/Expires的优先级要高于Last-Modified/ETag。即当本地副本根据Cache-Control/Expires发现还在有效期内时，则不会再次发送请求去服务器询问修改时间（Last-Modified）或实体标识（Etag）了。
+
+　　一般情况下，使用Cache-Control/Expires会配合Last-Modified/ETag一起使用，因为即使服务器设置缓存时间, 当用户点击“刷新”按钮时，浏览器会忽略缓存继续向服务器发送请求，这时Last-Modified/ETag将能够很好利用304，从而减少响应开销。
+
+> Last-Modified与ETag
+
+你可能会觉得使用Last-Modified已经足以让浏览器知道本地的缓存副本是否足够新，为什么还需要Etag（实体标识）呢？HTTP1.1中Etag的出现主要是为了解决几个Last-Modified比较难解决的问题：
+
+Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的新鲜度
+如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存
+有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形
+Etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。
+
+# JSON是什么
+
+轻量级的数据交换格式, 使用js语法的**文本**
+
+# 正则表达式
+
+|字符|描述
+|-|-
+| \\ |转义符。例如，'n' 匹配字符 "n"。'\\n' 匹配一个换行符。序列 '\\\\' 匹配 "\\" 而 "\\(" 则匹配 "("。
+|^|匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。
+|$|匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。
+|\*|匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。
+|+|匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
+|?|匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 。? 等价于 {0,1}。
+|{n}|n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
+|{n,}|n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
+|{n,m}|m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
+|?|当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。
+|.|匹配除换行符（\n、\r）之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用像"(.|\n)"的模式。
+|(pattern)|匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。
+|(?:pattern)|匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符 (|) 来组合一个模式的各个部分是很有用。例如， 'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。
+|(?=pattern)|正向肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，"Windows(?=95|98|NT|2000)"能匹配"Windows2000"中的"Windows"，但不能匹配"Windows3.1"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+|(?!pattern)|正向否定预查(negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如"Windows(?!95|98|NT|2000)"能匹配"Windows3.1"中的"Windows"，但不能匹配"Windows2000"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+|(?<=pattern)|反向(look behind)肯定预查，与正向肯定预查类似，只是方向相反。例如，"(?<=95\|98\|NT\|2000)Windows"能匹配"2000Windows"中的"Windows"，但不能匹配"3.1Windows"中的"Windows"。
+|(?<\!pattern)|反向否定预查，与正向否定预查类似，只是方向相反。例如"(?<\!95\|98\|NT\|2000)Windows"能匹配"3.1Windows"中的"Windows"，但不能匹配"2000Windows"中的"Windows"。
+|x\|y|匹配 x 或 y。例如，'z|food' 能匹配 "z" 或 "food"。'(z\|f)ood' 则匹配 "zood" 或 "food"。
+|[xyz]|字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。
+|[^xyz]|负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'、'l'、'i'、'n'。
+|[a-z]|字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。
+|[^a-z]|负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。
+|\\b|匹配一个单词边界，也就是指单词和空格间的位置。例如， 'er\\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。
+|\\B|匹配非单词边界。'er\\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。
+|\\cx|匹配由 x 指明的控制字符。例如， \\cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。
+|\\d|匹配一个数字字符。等价于 [0-9]。
+|\\D|匹配一个非数字字符。等价于 [^0-9]。
+|\\f|匹配一个换页符。等价于 \\x0c 和 \\cL。
+|\\n|匹配一个换行符。等价于 \\x0a 和 \\cJ。
+|\\r|匹配一个回车符。等价于 \\x0d 和 \\cM。
+|\\s|匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \\f\\n\\r\\t\\v]。
+|\\S|匹配任何非空白字符。等价于 [^ \\f\\n\\r\\t\\v]。
+|\\t|匹配一个制表符。等价于 \\x09 和 \\cI。
+|\\v|匹配一个垂直制表符。等价于 \\x0b 和 \\cK。
+|\\w|匹配字母、数字、下划线。等价于'[A-Za-z0-9_]'。
+|\\W|匹配非字母、数字、下划线。等价于 '[^A-Za-z0-9_]'。
+|\\xn|匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，'\\x41' 匹配 "A"。'\\x041' 则等价于 '\\x04' & "1"。正则表达式中可以使用 ASCII 编码。
+|\\num|匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，'(.)\\1' 匹配两个连续的相同字符。
+|\\n|标识一个八进制转义值或一个向后引用。如果 \\n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。
+|\\nm|标识一个八进制转义值或一个向后引用。如果 \\nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \\nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \\nm 将匹配八进制转义值 nm。
+|\\nml|如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
+|\\un|匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \\u00A9 匹配版权符号 (?)。
+
+# **HTML**
+
+# HTML5新增了哪些
+
+语义化方面：header footer nav section article section hgroup aside
+
+视频和音频：audio video
+
+图像方面：canvas, WebGL(通过canvas.getContext('webgl')获得对象), SVG
+
+数据存储：sessionStorage, localStorage
+
+# **CSS**
+
+# CSS选择器
+
+| 选择器 | 例子 | 例子描述 | CSS |
+| - | - | - | - |
+| .class | .intro | 选择 class="intro" 的所有元素 | 1
+| #id | #firstname | 选择 id="firstname" 的所有元素 | 1
+| * | * | 选择所有元素 | 2
+| element | p | 选择所有`<p>`元素 | 1
+| element,element | div,p | 选择所有`<div>`元素和所有`<p>`元素 | 1
+| element element | div p | 选择`<div>`元素内部的所有`<p>`元素 | 1
+| element>element | div>p | 选择父元素为`<div>`元素的所有`<p>`元素  | 2
+| element+element | div+p | 选择紧接在`<div>`元素之后的所有`<p>`元素  | 2
+| [attribute] | [target] | 选择带有 target 属性所有元素  | 2
+| [attribute=value] | [target=_blank] | 选择 target="_blank" 的所有元素  | 2
+| [attribute~=value] | [title~=flower] | 选择 title 属性包含单词 "flower" 的所有元素  | 2
+| [attribute\|=value] | [lang\|=en] | 选择 lang 属性值以 "en" 开头的所有元素  | 2
+| :link | a:link | 选择所有未被访问的链接  | 1
+| :visited | a:visited | 选择所有已被访问的链接  | 1
+| :active | a:active | 选择活动链接  | 1
+| :hover | a:hover | 选择鼠标指针位于其上的链接  | 1
+| :focus | input:focus | 选择获得焦点的 input 元素  | 2
+| :first-letter | p:first-letter | 选择每个`<p>`元素的首字母  | 1
+| :first-line | p:first-line | 选择每个`<p>`元素的首行  | 1
+| :first-child | p:first-child | 选择属于父元素的第一个子元素的每个`<p>`元素  | 2
+| :before | p:before | 在每个`<p>`元素的内容之前插入内容  | 2
+| :after | p:after | 在每个`<p>`元素的内容之后插入内容  | 2
+| :lang(language) | p:lang(it) | 选择带有以 "it" 开头的 lang 属性值的每个`<p>`元素  | 2
+| element1~element2 | p~ul | 选择前面有`<p>`元素的每个`<ul>`元素  | 3
+| [attribute^=value] | a[src^="https"] | 选择其 src 属性值以 "https" 开头的每个`<a>`元素  | 3
+| [attribute$=value] | a[src$=".pdf"] | 选择其 src 属性以 ".pdf" 结尾的所有`<a>`元素  | 3
+| [attribute*=value] | a[src*="abc"] | 选择其 src 属性中包含 "abc" 子串的每个`<a>`元素  | 3
+| :first-of-type | p:first-of-type | 选择属于其父元素的首个 `<p>`元素的每个 `<p>`元素  | 3
+| :last-of-type | p:last-of-type | 选择属于其父元素的最后 `<p>`元素的每个 `<p>`元素  | 3
+| :only-of-type | p:only-of-type | 选择属于其父元素唯一的 `<p>`元素的每个 `<p>`元素  | 3
+| :only-child | p:only-child | 选择属于其父元素的唯一子元素的每个 `<p>`元素  | 3
+| :nth-child(n) | p:nth-child(2) | 选择属于其父元素的第二个子元素的每个 `<p>`元素  | 3
+| :nth-last-child(n) | p:nth-last-child(2) | 同上，从最后一个子元素开始计数  | 3
+| :nth-of-type(n) | p:nth-of-type(2) | 选择属于其父元素第二个 `<p>`元素的每个 `<p>`元素  | 3
+| :nth-last-of-type(n) | p:nth-last-of-type(2) | 同上，但是从最后一个子元素开始计数  | 3
+| :last-child | p:last-child | 选择属于其父元素最后一个子元素每个 `<p>`元素  | 3
+| :root | :root | 选择文档的根元素  | 3
+| :empty | p:empty | 选择没有子元素的每个 `<p>`元素（包括文本节点）  | 3
+| :target | #news:target | 选择当前活动的 #news 元素  | 3
+| :enabled | input:enabled | 选择每个启用的`<input>`元素  | 3
+| :disabled | input:disabled | 选择每个禁用的`<input>`元素 | 3
+| :checked | input:checked | 选择每个被选中的`<input>`元素  | 3
+| :not(selector) | :not(p) | 选择非 `<p>`元素的每个元素  | 3
+| ::selection | ::selection | 选择被用户选取的元素部分  | 3
+
+# css的选择器权重比较以及权重计算规则
+
+CSS优先级的计算规则如下：
+* 元素标签中定义的样式（Style属性）,加1,0,0,0
+* 每个ID选择符(如 #id),加0,1,0,0
+* 每个Class选择符(如 .class).每个属性选择符(如 [attribute=]).每个伪类(如 :hover)加0,0,1,0
+* 每个元素选择符（如p）或伪元素选择符(如 :firstchild)等，加0,0,0,1
+然后，将这四个数字分别累加，就得到每个CSS定义的优先级的值，
+然后从左到右逐位比较大小，数字大的CSS样式的优先级就高。
+1,0,0,0 > 0,99,99,99。也就是说从左往右逐个等级比较，前一等级相等才往后比。
+例子：
+css文件或`<style>`中如下定义：
+1. h1 {color: red;}
+/* 一个元素选择符，结果是0,0,0,1 */
+2. body h1 {color: green;}
+/* 两个元素选择符，结果是 0,0,0,2 */
+3. h2.grape {color: purple;}
+/* 一个元素选择符.一个Class选择符，结果是 0,0,1,1*/
+4. li#answer {color: navy;}
+/* 一个元素选择符，一个ID选择符，结果是0,1,0,1 */
+元素的style属性中如下定义：
+h1 {color: blue;}
+/* 元素标签中定义，一个元素选择符，结果是1,0,0,1*/
+
+如此以来，h1元素的颜色是蓝色。
+注意：
+1.!important声明的样式优先级最高，如果冲突再进行计算。
+2.如果优先级相同，则选择最后出现的样式。
+3.继承得到的样式的优先级最低。
+
+结论是：比较同一级别的个数，数量多的优先级高，如果相同即比较下一级别的个数
+important->内联->ID->类->标签|伪类|属性选择->伪对象->继承->通配符->继承
+
+最后汇总为一张表
+
+|选择器|表达式或示例|权重
+|-|-|-
+|ID选择器|#aaa|100
+|类选择器|.aaa|10
+|标签选择器|h1|	1
+|属性选择器|[title]|10
+|相邻选择器|selecter+selecter|拆分为两个选择器再计算	 
+|兄长选择器|selecter~selecter|拆分为两个选择器再计算	 
+|父子选择器|selecter>selecter|拆分为两个选择器再计算	 
+|后代选择器|selecter selecter|拆分为两个选择器再计算	 
+|通配符|*|0
+|各种伪类选择器|:hover|10
+|各种伪元素|::after|1
+
+
+# display 有哪几种值，分别是什么意思
+
+1. none 此元素不会被显示，并且不占据页面空间，这也是与visibility:hidden不同的地方，设置visibility:hidden的元素，不会被显示，但是还是会占据原来的页面空间 
+2. inline 行内元素 元素会在一行内显示，超出屏幕宽度自动换行，不能设置宽度和高度，元素的宽度和高度只能是靠元素内的内容撑开 
+3. block 块级元素 会独占一行，如果不设置宽度，其宽度会自动填满父元素的宽度，可以设置宽高，即使设置了宽度，小于父元素的宽度，块级元素也会独占一行 
+4. inline-block 行内块元素 与行内元素一样可以再一行内显示，而且可以设置宽高，可以设置margin和padding 
+示例元素：input,button,img
+5. list-item 列表元素
+示例元素：li
+6. table 会作为块级表格来显示(类似于`<table>`)，表格前后带有换行符 
+7. inline-table 会作为内联表格来显示(类似于`<table>`)，表格前后没有换行符 
+8. table-cell 会作为表格单元格来显示(类似于`<td>`)
+9. flex 多栏多列布局
+
+# text-decoration 分别有哪几种值
+
+1. text-decoration:none  //默认，定义标准的文本，没有任何样式，正常显示
+2. text-decoration:underline  //定义文本下的一条线
+3. text-decoration:overline  //定义文本上的一条线
+4. text-decoration:line-through  //定义文本中间的一条线
+5. text-decoration:blink  //定义闪烁的文本， IE.Chrome 或 Safari 不支持 "blink" 属性值 
+6. text-deration:inherit  //从父元素继承text-decoration的值，任何的版本的 IE(包括 IE8)都不支持属性值 "inherit" 
+
+# 标准盒模型和IE盒模型
++
+> W3C
+
+![w3c](w3cbox.jpg)
+
+> IE
+
+![ie](iebox.jpg)
+
+# box-sizing:border-box是什么效果
+
+border-box就类似于IE的盒模型，如果你设置了一个width，同时设置了box-sizing:border-box ，这时候浏览器就会帮你把border和padding计算到width中去 
+
+# BFC(Block Formatting Context, 块格式化上下文)
+
+BFC的创建方法
+* 根元素或其它包含它的元素；
+* 浮动 (元素的float不为none)；
+* 绝对定位元素 (元素的position为absolute或fixed)；
+* 行内块inline-blocks(元素的 display: inline-block)；
+* 表格单元格(元素的display: table-cell，HTML表格单元格默认属性)；
+* overflow的值不为visible的元素；
+* 弹性盒 flex boxes (元素的display: flex或inline-flex)；
+
+BFC的效果
+* 内部的盒会在垂直方向一个接一个排列（可以看作BFC中有一个的常规流）；
+* 处于同一个BFC中的元素相互影响，可能会发生margin collapse；
+* 每个元素的margin box的左边，与容器块border box的左边相接触(对于从左* 往右的格式化，否则相反) 即使存在浮动也是如此；
+* BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然；
+* 计算BFC的高度时，考虑BFC所包含的所有元素，连浮动元素也参与计算；
+* 浮动盒区域不叠加到BFC上；
+
+# 垂直margin的合并
+
+垂直margin合并就是上下相邻的两个块级元素，如果刚好，上面设置margin-bottom，下面设置margin-top，这俩外边距相遇了，那两个就合并了，本来可能上面margin-bottom设置20px，margin-top设置10px，合并之后两个元素上下的距离就变为20px，即两个属性中较大的值 
+
+垂直margin合并是在同一个BFC中才会发生的，如果两个BFC的垂直margin不会合并 
+
+# 垂直水平居中
+
+> 元素水平居中
+
+```
+// 元素需要设置宽度
+// 不是行内元素
+margin: 0 auto;
+```
+
+> 元素水平垂直居中
+
+方案1：position 元素已知宽度 
+父元素设置为：position: relative; 
+子元素设置为：position: absolute; 
+距上50%，据左50%，然后减去元素自身宽度的距离就可以实现 
+
+```
+<div class="box">
+    <div class="content">
+    </div>
+</div>
+
+.box {
+    background-color: #FF8C00;
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+.content {
+    background-color: #F00;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -50px 0 0 -50px;
+}
+```
+
+方案2：position transform 元素未知宽度 
+如果元素未知宽度，只需将上面例子中的margin: -50px 0 0 -50px;替换为：transform: translate(-50%,-50%); 
+
+```
+<div class="box">
+    <div class="content">
+    </div>
+</div>
+
+.box {
+    background-color: #FF8C00;
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+.content {
+    background-color: #F00;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+```
+
+方案3：flex布局 
+
+```
+<div class="box">
+    <div class="content">
+    </div>
+</div>
+
+.box {
+    background-color: #FF8C00;
+    width: 300px;
+    height: 300px;
+    display: flex;//flex布局
+    justify-content: center;//使子项目水平居中
+    align-items: center;//使子项目垂直居中
+}
+.content {
+    background-color: #F00;
+    width: 100px;
+    height: 100px;
+}
+```
+
+方案4：table-cell布局 
+因为table-cell相当与表格的td，td为行内元素，无法设置宽和高，所以嵌套一层，嵌套一层必须设置display: inline-block;td的背景覆盖了橘黄色，不推荐使用
+
+```
+<div class="box">
+    <div class="content">
+        <div class="inner">
+        </div>
+    </div>
+</div>
+
+.box {
+    background-color: #FF8C00;//橘黄色
+    width: 300px;
+    height: 300px;
+    display: table;
+}
+.content {
+    background-color: #F00;//红色
+    display: table-cell;
+    vertical-align: middle;//使子元素垂直居中
+    text-align: center;//使子元素水平居中
+}
+.inner {
+    background-color: #000;//黑色
+    display: inline-block;
+    width: 20%;
+    height: 20%;
+}
+```
+
+# 常见的浏览器兼容性问题有哪些
+
+>第一类：块状元素float后，有添加了横向的margin，在IE6下比设置的值要大（属于双倍浮动的bug）
+
+解决方案：给float标签添加display：inline，将其转换为行内元素
+
+>第二类：表单元素行高不一致
+
+解决方案：给表单元素添加float：left（左浮动）；或者是vertical-align：middle；（垂直对齐方式：居中）
+
+> 第三类：设置较小高度的容器（小于10px），在IE6下不识别小于10px的高度；
+
+解决方案：给容器添加overflow：hidden；
+
+> 第四类：当在a标签中嵌套img标签时，在某些浏览器中img会有蓝色边框；
+
+解决方案：给img添加border：0；或者是border：none；
+
+> 第五类：min-height在IE6下不兼容
+
+解决方案：
+
+```
+1）
+min-height：value；
+_height：value；
+```
+
+```
+2）
+min-height：value；
+height：auto！important；
+height：value；
+```
+
+> 第六类：图片默认有间隙
+
+解决方案：
+
+1）给img标签添加左浮动float：left；
+
+2）给img标签添加display：block；
+
+> 第七类：按钮默认大小不一
+
+解决方案：
+
+1）用a标签来模拟按钮，添加样式；
+
+2）如果按钮是一张背景图片，那么直接给按钮添加背景图；
+
+> 第八类：百分比的bug
+
+解决方案：父元素宽度为100%，子元素宽度各为50%，在IE6下各个元素宽度之和超过100%
+
+解决方案：给右边浮动的子元素添加clear：right；
+
+> 第九类：鼠标指针bug
+
+描述：cursor：hand；只有ie浏览器识别，其他浏览器不识别
+
+解决方案：cursor：pointer；IE6以上浏览器及其他内核浏览器都识别；
+
+> 第十类：透明度属性
+
+解决方案：针对IE浏览器：filter：alpha（opacity=value）；（取值范围1--100）
+
+兼容其他浏览器：opacity：value；（取值范围0--1）
+
+> 第十一类：上下margin的重叠问题
+
+描述：给上边元素设置了margin-bottom，给下边元素设置了margin-top，浏览器只会识别较大值；
+
+解决方案：margin-top和margin-bottom中选择一个，只设置其中一个值
+
+
+# CSS Hack 有哪些
+
+```
+/* CSS属性级Hack */
+color:red; /* 所有浏览器可识别*/
+_color:red; /* 仅IE6 识别 */
+*color:red; /* IE6.IE7 识别 */
++color:red; /* IE6.IE7 识别 */
+*+color:red; /* IE6.IE7 识别 */
+[color:red; /* IE6.IE7 识别 */
+color:red9; /* IE6.IE7.IE8.IE9 识别 */
+color:red; /* IE8.IE9 识别*/
+color:red9; /* 仅IE9识别 */
+color:red; /* 仅IE9识别 */
+color:red !important; /* IE6 不识别!important*/
+```
+```
+/* CSS选择符级Hack */
+*html #demo { color:red;} /* 仅IE6 识别 */
+*+html #demo { color:red;} /* 仅IE7 识别 */
+body:nth-of-type(1) #demo { color:red;} /* IE9+.FF3.5+.Chrome.Safari.Opera 可以识别 */
+head:first-child+body #demo { color:red; } /* IE7+.FF.Chrome.Safari.Opera 可以识别 */
+:root #demo { color:red9; } : /* 仅IE9识别 */
+```
+```
+/* IE条件注释Hack */
+<!--[if IE]>此处内容只有IE可见<![endif]--> 
+<!--[if IE 6]>此处内容只有IE6.0可见<![endif]--> 
+<!--[if IE 7]>此处内容只有IE7.0可见<![endif]--> 
+<!--[if !IE 7]>此处内容只有IE7不能识别<![endif]-->
+<!--[if gt IE 6]> IE6以上版本可识别,IE6无法识别 <![endif]-->
+<!--[if gte IE 7]> IE7以及IE7以上版本可识别 <![endif]-->
+<!--[if lt IE 7]> 低于IE7的版本才能识别，IE7无法识别  <![endif]-->
+<!--[if lte IE 7]> IE7以及IE7以下版本可识别<![endif]-->
+<!--[if !IE]>此处内容只有非IE可见<![endif]-->
+```
+
+# **JavaScript**
+
 # JavaScript 数据类型
 
 > 5 种不同的数据类型：
@@ -132,11 +811,6 @@ todo
 1. 由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大
 
 2. 使用闭包时，会涉及到跨作用域访问，每次访问都会导致性能损失
-
-# get和post请求的区别
-
-1. 最直观的就是语义上的区别，get用于获取数据，post用于提交数据 
-2. get参数有长度限制（受限于url长度，具体的数值取决于浏览器和服务器的限制），而post无限制
 
 # 事件绑定
 
@@ -346,151 +1020,6 @@ response.setHeader("Access-Control-Allow-Credentials", "true");
 
 服务器A的test01.html页面想访问服务器B的后台action，返回“test”字符串，此时就出现跨域请求，浏览器控制台会出现报错提示，由于跨域是浏览器的同源策略造成的，对于服务器后台不存在该问题，可以在服务器A中添加一个代理action，在该action中完成对服务器B中action数据的请求，然后在返回到test01.html页面 
 
-# 同源策略
-
-web浏览器允许第一个页面的脚本访问第二个页面里的数据，但是也只有在两个页面有相同的源时。源是由URI，主机名，端口号组合而成的。这个策略可以阻止一个页面上的恶意脚本通过页面的DOM对象获得访问另一个页面上敏感信息的权限。
-
-# display 有哪几种值，分别是什么意思
-
-1. none 此元素不会被显示，并且不占据页面空间，这也是与visibility:hidden不同的地方，设置visibility:hidden的元素，不会被显示，但是还是会占据原来的页面空间 
-2. inline 行内元素 元素会在一行内显示，超出屏幕宽度自动换行，不能设置宽度和高度，元素的宽度和高度只能是靠元素内的内容撑开 
-3. block 块级元素 会独占一行，如果不设置宽度，其宽度会自动填满父元素的宽度，可以设置宽高，即使设置了宽度，小于父元素的宽度，块级元素也会独占一行 
-4. inline-block 行内块元素 与行内元素一样可以再一行内显示，而且可以设置宽高，可以设置margin和padding 
-示例元素：input,button,img
-5. list-item 列表元素
-示例元素：li
-6. table 会作为块级表格来显示(类似于`<table>`)，表格前后带有换行符 
-7. inline-table 会作为内联表格来显示(类似于`<table>`)，表格前后没有换行符 
-8. table-cell 会作为表格单元格来显示(类似于`<td>`)
-9. flex 多栏多列布局
-
-# text-decoration 分别有哪几种值
-
-1. text-decoration:none  //默认，定义标准的文本，没有任何样式，正常显示
-2. text-decoration:underline  //定义文本下的一条线
-3. text-decoration:overline  //定义文本上的一条线
-4. text-decoration:line-through  //定义文本中间的一条线
-5. text-decoration:blink  //定义闪烁的文本， IE.Chrome 或 Safari 不支持 "blink" 属性值 
-6. text-deration:inherit  //从父元素继承text-decoration的值，任何的版本的 IE(包括 IE8)都不支持属性值 "inherit" 
-
-# 常见的浏览器兼容性问题有哪些
-
->第一类：块状元素float后，有添加了横向的margin，在IE6下比设置的值要大（属于双倍浮动的bug）
-
-解决方案：给float标签添加display：inline，将其转换为行内元素
-
->第二类：表单元素行高不一致
-
-解决方案：给表单元素添加float：left（左浮动）；或者是vertical-align：middle；（垂直对齐方式：居中）
-
-> 第三类：设置较小高度的容器（小于10px），在IE6下不识别小于10px的高度；
-
-解决方案：给容器添加overflow：hidden；
-
-> 第四类：当在a标签中嵌套img标签时，在某些浏览器中img会有蓝色边框；
-
-解决方案：给img添加border：0；或者是border：none；
-
-> 第五类：min-height在IE6下不兼容
-
-解决方案：
-
-```
-1）
-min-height：value；
-_height：value；
-```
-
-```
-2）
-min-height：value；
-height：auto！important；
-height：value；
-```
-
-> 第六类：图片默认有间隙
-
-解决方案：
-
-1）给img标签添加左浮动float：left；
-
-2）给img标签添加display：block；
-
-> 第七类：按钮默认大小不一
-
-解决方案：
-
-1）用a标签来模拟按钮，添加样式；
-
-2）如果按钮是一张背景图片，那么直接给按钮添加背景图；
-
-> 第八类：百分比的bug
-
-解决方案：父元素宽度为100%，子元素宽度各为50%，在IE6下各个元素宽度之和超过100%
-
-解决方案：给右边浮动的子元素添加clear：right；
-
-> 第九类：鼠标指针bug
-
-描述：cursor：hand；只有ie浏览器识别，其他浏览器不识别
-
-解决方案：cursor：pointer；IE6以上浏览器及其他内核浏览器都识别；
-
-> 第十类：透明度属性
-
-解决方案：针对IE浏览器：filter：alpha（opacity=value）；（取值范围1--100）
-
-兼容其他浏览器：opacity：value；（取值范围0--1）
-
-> 第十一类：上下margin的重叠问题
-
-描述：给上边元素设置了margin-bottom，给下边元素设置了margin-top，浏览器只会识别较大值；
-
-解决方案：margin-top和margin-bottom中选择一个，只设置其中一个值
-
-# CSS Hack 有哪些
-
-```
-/* CSS属性级Hack */
-color:red; /* 所有浏览器可识别*/
-_color:red; /* 仅IE6 识别 */
-*color:red; /* IE6.IE7 识别 */
-+color:red; /* IE6.IE7 识别 */
-*+color:red; /* IE6.IE7 识别 */
-[color:red; /* IE6.IE7 识别 */
-color:red9; /* IE6.IE7.IE8.IE9 识别 */
-color:red; /* IE8.IE9 识别*/
-color:red9; /* 仅IE9识别 */
-color:red; /* 仅IE9识别 */
-color:red !important; /* IE6 不识别!important*/
-```
-```
-/* CSS选择符级Hack */
-*html #demo { color:red;} /* 仅IE6 识别 */
-*+html #demo { color:red;} /* 仅IE7 识别 */
-body:nth-of-type(1) #demo { color:red;} /* IE9+.FF3.5+.Chrome.Safari.Opera 可以识别 */
-head:first-child+body #demo { color:red; } /* IE7+.FF.Chrome.Safari.Opera 可以识别 */
-:root #demo { color:red9; } : /* 仅IE9识别 */
-```
-```
-/* IE条件注释Hack */
-<!--[if IE]>此处内容只有IE可见<![endif]--> 
-<!--[if IE 6]>此处内容只有IE6.0可见<![endif]--> 
-<!--[if IE 7]>此处内容只有IE7.0可见<![endif]--> 
-<!--[if !IE 7]>此处内容只有IE7不能识别<![endif]-->
-<!--[if gt IE 6]> IE6以上版本可识别,IE6无法识别 <![endif]-->
-<!--[if gte IE 7]> IE7以及IE7以上版本可识别 <![endif]-->
-<!--[if lt IE 7]> 低于IE7的版本才能识别，IE7无法识别  <![endif]-->
-<!--[if lte IE 7]> IE7以及IE7以下版本可识别<![endif]-->
-<!--[if !IE]>此处内容只有非IE可见<![endif]-->
-```
-
-# SEO(Search English Optimization, 搜索引擎优化)
-
-1. 标签语义化
-2. < meta name="keywords" content="关键词1，关键词2" />< meta name="description" content="描述1，描述2" />
-3. 导航栏的层级数不宜太深
-
 # true false
 
 > 值为false
@@ -513,114 +1042,6 @@ Boolean([]) // true
 Boolean("null") // true
 Boolean("0") // true
 ```
-
-# 前端性能优化 怎么增加页面的加载速度
-
-> 减少HTTP请求
-
-### 图片地图：
-
-假设导航栏上有五幅图片，点击每张图片都会进入一个链接，这样五张导航的图片在加载时会产生5个HTTP请求 然而，使用一个图片地图可以提高效率，这样就只需要一个HTTP请求 
-
-服务器端图片地图：将所有点击提交到同一个url，同时提交用户点击的x.y坐标，服务器端根据坐标映射响应
-
-客户端图片地图：直接将点击映射到操作
-
-缺点：指定坐标区域时，矩形或圆形比较容易指定，而其它形状手工指定比较难
-
-### CSS Sprites(CSS精灵)
-
-通过将多个图片融合到一副图里面，然后通过CSS的一些技术(如: background-position)布局到网页上 特别是图片特别多的网站，如果能用css sprites降低图片数量，带来的将是速度的提升 
-
-缺点: 合并所有的样式文件或者脚本文件可能会导致在一个页面加载时加载了多于自己所需要的样式或者脚本，对于只访问该网站一个（或几个）页面的人来说反而增加了下载量
-
-> 使用CDN
-
-CDN（内容发布网络）是一组分布在多个不同地理位置的Web服务器，用于更加有效地向用户发布内容 在优化性能时，向特定用户发布内容的服务器的选择基于对网络慕课拥堵的测量 例如，CDN可能选择网络阶跃数最小的服务器，或者具有最短响应时间的服务器 
-
-CDN还可以进行数据备份.扩展存储能力，进行缓存，同时有助于缓和Web流量峰值压力 
-
-缺点：
-
-1. 响应时间可能会受到其他网站流量的影响 CDN服务提供商在其所有客户之间共享Web服务器组 
-
-2. 如果CDN服务质量下降了，那么你的工作质量也将下降
-
-3. 无法直接控制组件服务器
-
-> 添加Expires头
-
-页面的初次访问者会进行很多HTTP请求，但是通过使用一个长久的Expires头，可以使这些组件被缓存，下次访问的时候，就可以减少不必要的HTPP请求，从而提高加载速度 
-
-缺点： 它要求服务器和客户端时钟严格同步；过期日期需要经常检查
-
-> 压缩组件
-
-从HTTP1.1开始，Web客户端可以通过HTTP请求中的Accept-Encoding头来表示对压缩的支持
-
-`Accept-Encoding: gzip,deflate`
-
-如果Web服务器看到请求中有这个头，就会使用客户端列出来的方法中的一种来进行压缩 Web服务器通过响应中的Content-Encoding来通知 Web客户端 
-
-`Content-Encoding: gzip`
-
-> 将样式表放在头部
-
-首先说明一下，将样式表放在头部对于实际页面加载的时间并不能造成太大影响，但是这会减少页面首屏出现的时间，使页面内容逐步呈现，改善用户体验，防止“白屏” 
-
-我们总是希望页面能够尽快显示内容，为用户提供可视化的回馈，这对网速慢的用户来说是很重要的 
-
-将样式表放在文档底部会阻止浏览器中的内容逐步出现 为了避免当样式变化时重绘页面元素，浏览器会阻塞内容逐步呈现，造成“白屏” 这源自浏览器的行为：如果样式表仍在加载，构建呈现树就是一种浪费，因为所有样式表加载解析完毕之前务虚会之任何东西
- 
-> 将脚本放在底部
-
-更样式表相同，脚本放在底部对于实际页面加载的时间并不能造成太大影响，但是这会减少页面首屏出现的时间，使页面内容逐步呈现 
-
-js的下载和执行会阻塞Dom树的构建（严谨地说是中断了Dom树的更新），所以script标签放在首屏范围内的HTML代码段里会截断首屏的内容 
-
-下载脚本时并行下载是被禁用的——即使使用了不同的主机名，也不会启用其他的下载 因为脚本可能修改页面内容，因此浏览器会等待；另外，也是为了保证脚本能够按照正确的顺序执行，因为后面的脚本可能与前面的脚本存在依赖关系，不按照顺序执行可能会产生错误 
-
-> 避免CSS表达式
-
-IE5以及之后版本.IE8之前版本支持
-
-```
-width: expression(func(),document.body.clientWidth > 400 ? "400px" : "auto");
-```
-
-> 使用外部的JavaScript和CSS
-
-内联脚本或者样式可以减少HTTP请求，按理来说可以提高页面加载的速度 然而在实际情况中，当脚本或者样式是从外部引入的文件，浏览器就有可能缓存它们，从而在以后加载的时候能够直接使用缓存，而HTML文档的大小减小，从而提高加载速度 
-
-> 减少DNS查找
-
-当我们在浏览器的地址栏输入网址（譬如： www.linux178.com） ，然后回车，回车这一瞬间到看到页面到底发生了什么呢？
-
-域名解析 --> 发起TCP的3次握手 --> 建立TCP连接后发起http请求 --> 服务器响应http请求，浏览器得到html代码 --> 浏览器解析html代码，并请求html代码中的资源（如js.css.图片等） --> 浏览器对页面进行渲染呈现给用户
-
-减少主机名的数量就可以减少DNS查找的数量
-
-> 压缩代码
-
-> 避免重定向
-
-# 输入一个网址，浏览器执行的过程
-
-域名解析 --> 发起TCP的3次握手 --> 建立TCP连接后发起http请求 --> 服务器响应http请求，浏览器得到html代码 --> 浏览器解析html代码，并请求html代码中的资源（如js.css.图片等） --> 浏览器对页面进行渲染呈现给用户
-
-# 浏览器加载和渲染过程
-
-当浏览器获得一个html文件时，会“自上而下”加载，并在加载过程中进行解析渲染。 
-解析： 
-1. 浏览器会将HTML解析成一个DOM树，DOM 树的构建过程是一个深度遍历过程：当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点。 
-2. 将CSS解析成 CSS Rule Tree 。 
-3. 根据DOM树和CSSOM来构造 Rendering Tree。注意：Rendering Tree 渲染树并不等同于 DOM 树，因为一些像 Header 或 display:none 的东西就没必要放在渲染树中了。
-4. 有了Render Tree，浏览器已经能知道网页中有哪些节点.各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。 
-5. 再下一步就是绘制，即遍历render树，并使用UI后端层绘制每个节点。
-
-![RenderTree](RenderTree.jpg)
-
-上述这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的html都解析完成之后再去构建和布局render树。它是解析完一部分内容就显示一部分内容，同时，可能还在通过网络下载其余内容。
 
 # 设置和删除cookie
 
@@ -660,282 +1081,9 @@ sessionStorage仅在当前浏览器窗口关闭前有效 localStorage始终有�
 
 4. 作用域不同: sessionStorage不在不同的浏览器窗口中共享；localStorage在所有同源窗口中都是共享的；cookie也是在所有同源窗口中都是共享的；
 
-# 常见http状态码
-
-|状态码|状态码英文名称|中文描述
-|-|-|-
-|100|Continue|继续。客户端应继续其请求
-|101|Switching Protocols|切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议
-|200|OK|请求成功。一般用于GET与POST请求
-|201|Created|已创建。成功请求并创建了新的资源
-|202|Accepted|已接受。已经接受请求，但未处理完成
-|203|Non-Authoritative Information|非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本
-|204|No Content|无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档
-|205|Reset Content|重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域
-|206|Partial Content|部分内容。服务器成功处理了部分GET请求
-|300|Multiple Choices|多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择
-|301|Moved Permanently|永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替
-|302|Found|临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI
-|303|See Other|查看其它地址。与301类似。使用GET和POST请求查看
-|304|Not Modified|未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源
-|305|Use Proxy|使用代理。所请求的资源必须通过代理访问
-|306|Unused|已经被废弃的HTTP状态码
-|307|Temporary Redirect|临时重定向。与302类似。使用GET请求重定向
-|400|Bad Request|客户端请求的语法错误，服务器无法理解
-|401|Unauthorized|请求要求用户的身份认证
-|402|Payment Required|保留，将来使用
-|403|Forbidden|服务器理解请求客户端的请求，但是拒绝执行此请求
-|404|Not Found|服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置"您所请求的资源无法找到"的个性页面
-|405|Method Not Allowed|客户端请求中的方法被禁止
-|406|Not Acceptable|服务器无法根据客户端请求的内容特性完成请求
-|407|Proxy Authentication Required|请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权
-|408|Request Time-out|服务器等待客户端发送的请求时间过长，超时
-|409|Conflict|服务器完成客户端的PUT请求是可能返回此代码，服务器处理请求时发生了冲突
-|410|Gone|客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置
-|411|Length Required|服务器无法处理客户端发送的不带Content-Length的请求信息
-|412|Precondition Failed|客户端请求信息的先决条件错误
-|413|Request Entity Too Large|由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息
-|414|Request-URI Too Large|请求的URI过长（URI通常为网址），服务器无法处理
-|415|Unsupported Media Type|服务器无法处理请求附带的媒体格式
-|416|Requested range not satisfiable|客户端请求的范围无效
-|417|Expectation Failed|服务器无法满足Expect的请求头信息
-|500|Internal Server Error|服务器内部错误，无法完成请求
-|501|Not Implemented|服务器不支持请求的功能，无法完成请求
-|502|Bad Gateway|充当网关或代理的服务器，从远端服务器接收到了一个无效的请求
-|503|Service Unavailable|由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中
-|504|Gateway Time-out|充当网关或代理的服务器，未及时从远端服务器获取请求
-|505|HTTP Version not supported|服务器不支持请求的HTTP协议的版本，无法完成处理
-
-# HTTP状态码分类
-
-* 1** 信息，服务器收到请求，需要请求者继续执行操作
-* 2** 成功，操作被成功接收并处理
-* 3** 重定向，需要进一步的操作以完成请求
-* 4** 客户端错误，请求包含语法错误或无法完成请求
-* 5** 服务器错误，服务器在处理请求的过程中发生了错误
-
 # javascript中的this
 
 this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的
-
-# 标准盒模型和IE盒模型
-+
-> W3C
-
-![w3c](w3cbox.jpg)
-
-> IE
-
-![ie](iebox.jpg)
-
-# box-sizing:border-box是什么效果
-
-border-box就类似于IE的盒模型，如果你设置了一个width，同时设置了box-sizing:border-box ，这时候浏览器就会帮你把border和padding计算到width中去 
-
-# BFC(Block Formatting Context, 块格式化上下文)
-
-BFC的创建方法
-* 根元素或其它包含它的元素；
-* 浮动 (元素的float不为none)；
-* 绝对定位元素 (元素的position为absolute或fixed)；
-* 行内块inline-blocks(元素的 display: inline-block)；
-* 表格单元格(元素的display: table-cell，HTML表格单元格默认属性)；
-* overflow的值不为visible的元素；
-* 弹性盒 flex boxes (元素的display: flex或inline-flex)；
-
-BFC的效果
-* 内部的盒会在垂直方向一个接一个排列（可以看作BFC中有一个的常规流）；
-* 处于同一个BFC中的元素相互影响，可能会发生margin collapse；
-* 每个元素的margin box的左边，与容器块border box的左边相接触(对于从左* 往右的格式化，否则相反) 即使存在浮动也是如此；
-* BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然；
-* 计算BFC的高度时，考虑BFC所包含的所有元素，连浮动元素也参与计算；
-* 浮动盒区域不叠加到BFC上；
-
-# 垂直margin的合并
-
-垂直margin合并就是上下相邻的两个块级元素，如果刚好，上面设置margin-bottom，下面设置margin-top，这俩外边距相遇了，那两个就合并了，本来可能上面margin-bottom设置20px，margin-top设置10px，合并之后两个元素上下的距离就变为20px，即两个属性中较大的值 
-
-垂直margin合并是在同一个BFC中才会发生的，如果两个BFC的垂直margin不会合并 
-
-# 垂直水平居中
-
-> 元素水平居中
-
-```
-// 元素需要设置宽度
-// 不是行内元素
-margin: 0 auto;
-```
-
-> 元素水平垂直居中
-
-方案1：position 元素已知宽度 
-父元素设置为：position: relative; 
-子元素设置为：position: absolute; 
-距上50%，据左50%，然后减去元素自身宽度的距离就可以实现 
-
-```
-<div class="box">
-    <div class="content">
-    </div>
-</div>
-
-.box {
-    background-color: #FF8C00;
-    width: 300px;
-    height: 300px;
-    position: relative;
-}
-.content {
-    background-color: #F00;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -50px 0 0 -50px;
-}
-```
-
-方案2：position transform 元素未知宽度 
-如果元素未知宽度，只需将上面例子中的margin: -50px 0 0 -50px;替换为：transform: translate(-50%,-50%); 
-
-```
-<div class="box">
-    <div class="content">
-    </div>
-</div>
-
-.box {
-    background-color: #FF8C00;
-    width: 300px;
-    height: 300px;
-    position: relative;
-}
-.content {
-    background-color: #F00;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-}
-```
-
-方案3：flex布局 
-
-```
-<div class="box">
-    <div class="content">
-    </div>
-</div>
-
-.box {
-    background-color: #FF8C00;
-    width: 300px;
-    height: 300px;
-    display: flex;//flex布局
-    justify-content: center;//使子项目水平居中
-    align-items: center;//使子项目垂直居中
-}
-.content {
-    background-color: #F00;
-    width: 100px;
-    height: 100px;
-}
-```
-
-方案4：table-cell布局 
-因为table-cell相当与表格的td，td为行内元素，无法设置宽和高，所以嵌套一层，嵌套一层必须设置display: inline-block;td的背景覆盖了橘黄色，不推荐使用
-
-```
-<div class="box">
-    <div class="content">
-        <div class="inner">
-        </div>
-    </div>
-</div>
-
-.box {
-    background-color: #FF8C00;//橘黄色
-    width: 300px;
-    height: 300px;
-    display: table;
-}
-.content {
-    background-color: #F00;//红色
-    display: table-cell;
-    vertical-align: middle;//使子元素垂直居中
-    text-align: center;//使子元素水平居中
-}
-.inner {
-    background-color: #000;//黑色
-    display: inline-block;
-    width: 20%;
-    height: 20%;
-}
-```
-
-# CSS选择器
-
-| 选择器 | 例子 | 例子描述 | CSS |
-| - | - | - | - |
-| .class | .intro | 选择 class="intro" 的所有元素 | 1
-| #id | #firstname | 选择 id="firstname" 的所有元素 | 1
-| * | * | 选择所有元素 | 2
-| element | p | 选择所有`<p>`元素 | 1
-| element,element | div,p | 选择所有`<div>`元素和所有`<p>`元素 | 1
-| element element | div p | 选择`<div>`元素内部的所有`<p>`元素 | 1
-| element>element | div>p | 选择父元素为`<div>`元素的所有`<p>`元素  | 2
-| element+element | div+p | 选择紧接在`<div>`元素之后的所有`<p>`元素  | 2
-| [attribute] | [target] | 选择带有 target 属性所有元素  | 2
-| [attribute=value] | [target=_blank] | 选择 target="_blank" 的所有元素  | 2
-| [attribute~=value] | [title~=flower] | 选择 title 属性包含单词 "flower" 的所有元素  | 2
-| [attribute\|=value] | [lang\|=en] | 选择 lang 属性值以 "en" 开头的所有元素  | 2
-| :link | a:link | 选择所有未被访问的链接  | 1
-| :visited | a:visited | 选择所有已被访问的链接  | 1
-| :active | a:active | 选择活动链接  | 1
-| :hover | a:hover | 选择鼠标指针位于其上的链接  | 1
-| :focus | input:focus | 选择获得焦点的 input 元素  | 2
-| :first-letter | p:first-letter | 选择每个`<p>`元素的首字母  | 1
-| :first-line | p:first-line | 选择每个`<p>`元素的首行  | 1
-| :first-child | p:first-child | 选择属于父元素的第一个子元素的每个`<p>`元素  | 2
-| :before | p:before | 在每个`<p>`元素的内容之前插入内容  | 2
-| :after | p:after | 在每个`<p>`元素的内容之后插入内容  | 2
-| :lang(language) | p:lang(it) | 选择带有以 "it" 开头的 lang 属性值的每个`<p>`元素  | 2
-| element1~element2 | p~ul | 选择前面有`<p>`元素的每个`<ul>`元素  | 3
-| [attribute^=value] | a[src^="https"] | 选择其 src 属性值以 "https" 开头的每个`<a>`元素  | 3
-| [attribute$=value] | a[src$=".pdf"] | 选择其 src 属性以 ".pdf" 结尾的所有`<a>`元素  | 3
-| [attribute*=value] | a[src*="abc"] | 选择其 src 属性中包含 "abc" 子串的每个`<a>`元素  | 3
-| :first-of-type | p:first-of-type | 选择属于其父元素的首个 `<p>`元素的每个 `<p>`元素  | 3
-| :last-of-type | p:last-of-type | 选择属于其父元素的最后 `<p>`元素的每个 `<p>`元素  | 3
-| :only-of-type | p:only-of-type | 选择属于其父元素唯一的 `<p>`元素的每个 `<p>`元素  | 3
-| :only-child | p:only-child | 选择属于其父元素的唯一子元素的每个 `<p>`元素  | 3
-| :nth-child(n) | p:nth-child(2) | 选择属于其父元素的第二个子元素的每个 `<p>`元素  | 3
-| :nth-last-child(n) | p:nth-last-child(2) | 同上，从最后一个子元素开始计数  | 3
-| :nth-of-type(n) | p:nth-of-type(2) | 选择属于其父元素第二个 `<p>`元素的每个 `<p>`元素  | 3
-| :nth-last-of-type(n) | p:nth-last-of-type(2) | 同上，但是从最后一个子元素开始计数  | 3
-| :last-child | p:last-child | 选择属于其父元素最后一个子元素每个 `<p>`元素  | 3
-| :root | :root | 选择文档的根元素  | 3
-| :empty | p:empty | 选择没有子元素的每个 `<p>`元素（包括文本节点）  | 3
-| :target | #news:target | 选择当前活动的 #news 元素  | 3
-| :enabled | input:enabled | 选择每个启用的`<input>`元素  | 3
-| :disabled | input:disabled | 选择每个禁用的`<input>`元素 | 3
-| :checked | input:checked | 选择每个被选中的`<input>`元素  | 3
-| :not(selector) | :not(p) | 选择非 `<p>`元素的每个元素  | 3
-| ::selection | ::selection | 选择被用户选取的元素部分  | 3
-
-
-# HTML5新增了哪些
-
-语义化方面：header footer nav section article section hgroup aside
-
-视频和音频：audio video
-
-图像方面：canvas, WebGL(通过canvas.getContext('webgl')获得对象), SVG
-
-数据存储：sessionStorage, localStorage
 
 # localStorage和sessionStorage
 
@@ -1171,10 +1319,9 @@ function getData() {
 
 # JavaScript异步加载
 
-1.defer="defer"和async="true/false"
+## 1. defer="defer"和async="true/false"
 
 html4.0中定义了defer
-
 html5.0中定义了async 
 
 有async，加载后续文档元素的过程将和JS的加载与执行并行进行（异步） 
@@ -1183,7 +1330,7 @@ html5.0中定义了async
 
 使用这两个属性的脚本中不能调用document.write方法
 
-2.动态创建script
+## 2. 动态创建script
 
 ```
 function addScriptTag(src){
@@ -1338,55 +1485,6 @@ json.show();// 正确输出：1，而不是：2
 # 将字符串转换为整数的parseInt的第二个参数代表什么
 
 转换成几进制
-
-# css的选择器权重比较以及权重计算规则
-
-CSS优先级的计算规则如下：
-* 元素标签中定义的样式（Style属性）,加1,0,0,0
-* 每个ID选择符(如 #id),加0,1,0,0
-* 每个Class选择符(如 .class).每个属性选择符(如 [attribute=]).每个伪类(如 :hover)加0,0,1,0
-* 每个元素选择符（如p）或伪元素选择符(如 :firstchild)等，加0,0,0,1
-然后，将这四个数字分别累加，就得到每个CSS定义的优先级的值，
-然后从左到右逐位比较大小，数字大的CSS样式的优先级就高。
-1,0,0,0 > 0,99,99,99。也就是说从左往右逐个等级比较，前一等级相等才往后比。
-例子：
-css文件或`<style>`中如下定义：
-1. h1 {color: red;}
-/* 一个元素选择符，结果是0,0,0,1 */
-2. body h1 {color: green;}
-/* 两个元素选择符，结果是 0,0,0,2 */
-3. h2.grape {color: purple;}
-/* 一个元素选择符.一个Class选择符，结果是 0,0,1,1*/
-4. li#answer {color: navy;}
-/* 一个元素选择符，一个ID选择符，结果是0,1,0,1 */
-元素的style属性中如下定义：
-h1 {color: blue;}
-/* 元素标签中定义，一个元素选择符，结果是1,0,0,1*/
-
-如此以来，h1元素的颜色是蓝色。
-注意：
-1.!important声明的样式优先级最高，如果冲突再进行计算。
-2.如果优先级相同，则选择最后出现的样式。
-3.继承得到的样式的优先级最低。
-
-结论是：比较同一级别的个数，数量多的优先级高，如果相同即比较下一级别的个数
-important->内联->ID->类->标签|伪类|属性选择->伪对象->继承->通配符->继承
-
-最后汇总为一张表
-
-|选择器|表达式或示例|权重
-|-|-|-
-|ID选择器|#aaa|100
-|类选择器|.aaa|10
-|标签选择器|h1|	1
-|属性选择器|[title]|10
-|相邻选择器|selecter+selecter|拆分为两个选择器再计算	 
-|兄长选择器|selecter~selecter|拆分为两个选择器再计算	 
-|父子选择器|selecter>selecter|拆分为两个选择器再计算	 
-|后代选择器|selecter selecter|拆分为两个选择器再计算	 
-|通配符|*|0
-|各种伪类选择器|:hover|10
-|各种伪元素|::after|1
 
 # 数组方法
 
@@ -1770,97 +1868,6 @@ str.match(reg);  //["a", "a", "a", "a"]
 
 12. search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
 
-# 浏览器的缓存机制
-
-> ## 浏览器端的缓存规则：
-
-　　对于浏览器端的缓存来讲，这些规则是在HTTP协议头和HTML页面的Meta标签中定义的。他们分别从新鲜度和校验值两个维度来规定浏览器是否可以直接使用缓存中的副本，还是需要去源服务器获取更新的版本。
-
-　　新鲜度（过期机制）：也就是缓存副本有效期。一个缓存副本必须满足以下条件，浏览器会认为它是有效的，足够新的：
-
-1. 含有完整的过期时间控制头信息（HTTP协议报头），并且仍在有效期内；
-
-2. 浏览器已经使用过这个缓存副本，并且在一个会话中已经检查过新鲜度；
-
-　　满足以上两个情况的一种，浏览器会直接从缓存中获取副本并渲染。
-
-　　校验值（验证机制）：服务器返回资源的时候有时在控制头信息带上这个资源的实体标签Etag（Entity Tag），它可以用来作为浏览器再次请求过程的校验标识。如过发现校验标识不匹配，说明资源已经被修改或过期，浏览器需求重新获取资源内容。
-
-> ## 在HTTP请求和响应的消息报头中，常见的与缓存有关的消息报头
-
-> Cache-Control与Expires
-
-　　Cache-Control与Expires的作用一致，都是指明当前资源的有效期，控制浏览器是否直接从浏览器缓存取数据还是重新发请求到服务器取数据。只不过Cache-Control的选择更多，设置更细致，如果同时设置的话，其优先级高于Expires。
-
-> Last-Modified/ETag与Cache-Control/Expires
-
-　　配置Last-Modified/ETag的情况下，浏览器再次访问统一URI的资源，还是会发送请求到服务器询问文件是否已经修改，如果没有，服务器会只发送一个304回给浏览器，告诉浏览器直接从自己本地的缓存取数据；如果修改过那就整个数据重新发给浏览器；
-
-　　Cache-Control/Expires则不同，如果检测到本地的缓存还是有效的时间范围内，浏览器直接使用本地副本，不会发送任何请求。两者一起使用时，Cache-Control/Expires的优先级要高于Last-Modified/ETag。即当本地副本根据Cache-Control/Expires发现还在有效期内时，则不会再次发送请求去服务器询问修改时间（Last-Modified）或实体标识（Etag）了。
-
-　　一般情况下，使用Cache-Control/Expires会配合Last-Modified/ETag一起使用，因为即使服务器设置缓存时间, 当用户点击“刷新”按钮时，浏览器会忽略缓存继续向服务器发送请求，这时Last-Modified/ETag将能够很好利用304，从而减少响应开销。
-
-> Last-Modified与ETag
-
-你可能会觉得使用Last-Modified已经足以让浏览器知道本地的缓存副本是否足够新，为什么还需要Etag（实体标识）呢？HTTP1.1中Etag的出现主要是为了解决几个Last-Modified比较难解决的问题：
-
-Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的新鲜度
-如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存
-有可能存在服务器没有准确获取文件修改时间，或者与代理服务器时间不一致等情形
-Etag是服务器自动生成或者由开发者生成的对应资源在服务器端的唯一标识符，能够更加准确的控制缓存。Last-Modified与ETag是可以一起使用的，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。
-
-# JSON是什么
-
-轻量级的数据交换格式, 使用js语法的**文本**
-
-# 正则表达式
-
-|字符|描述
-|-|-
-| \\ |转义符。例如，'n' 匹配字符 "n"。'\\n' 匹配一个换行符。序列 '\\\\' 匹配 "\\" 而 "\\(" 则匹配 "("。
-|^|匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。
-|$|匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。
-|\*|匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。
-|+|匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
-|?|匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 。? 等价于 {0,1}。
-|{n}|n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。
-|{n,}|n 是一个非负整数。至少匹配n 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。
-|{n,m}|m 和 n 均为非负整数，其中n <= m。最少匹配 n 次且最多匹配 m 次。例如，"o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。
-|?|当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。
-|.|匹配除换行符（\n、\r）之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用像"(.|\n)"的模式。
-|(pattern)|匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。
-|(?:pattern)|匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符 (|) 来组合一个模式的各个部分是很有用。例如， 'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。
-|(?=pattern)|正向肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，"Windows(?=95|98|NT|2000)"能匹配"Windows2000"中的"Windows"，但不能匹配"Windows3.1"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
-|(?!pattern)|正向否定预查(negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如"Windows(?!95|98|NT|2000)"能匹配"Windows3.1"中的"Windows"，但不能匹配"Windows2000"中的"Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
-|(?<=pattern)|反向(look behind)肯定预查，与正向肯定预查类似，只是方向相反。例如，"(?<=95\|98\|NT\|2000)Windows"能匹配"2000Windows"中的"Windows"，但不能匹配"3.1Windows"中的"Windows"。
-|(?<\!pattern)|反向否定预查，与正向否定预查类似，只是方向相反。例如"(?<\!95\|98\|NT\|2000)Windows"能匹配"3.1Windows"中的"Windows"，但不能匹配"2000Windows"中的"Windows"。
-|x\|y|匹配 x 或 y。例如，'z|food' 能匹配 "z" 或 "food"。'(z\|f)ood' 则匹配 "zood" 或 "food"。
-|[xyz]|字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。
-|[^xyz]|负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'、'l'、'i'、'n'。
-|[a-z]|字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。
-|[^a-z]|负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。
-|\\b|匹配一个单词边界，也就是指单词和空格间的位置。例如， 'er\\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。
-|\\B|匹配非单词边界。'er\\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。
-|\\cx|匹配由 x 指明的控制字符。例如， \\cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。
-|\\d|匹配一个数字字符。等价于 [0-9]。
-|\\D|匹配一个非数字字符。等价于 [^0-9]。
-|\\f|匹配一个换页符。等价于 \\x0c 和 \\cL。
-|\\n|匹配一个换行符。等价于 \\x0a 和 \\cJ。
-|\\r|匹配一个回车符。等价于 \\x0d 和 \\cM。
-|\\s|匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \\f\\n\\r\\t\\v]。
-|\\S|匹配任何非空白字符。等价于 [^ \\f\\n\\r\\t\\v]。
-|\\t|匹配一个制表符。等价于 \\x09 和 \\cI。
-|\\v|匹配一个垂直制表符。等价于 \\x0b 和 \\cK。
-|\\w|匹配字母、数字、下划线。等价于'[A-Za-z0-9_]'。
-|\\W|匹配非字母、数字、下划线。等价于 '[^A-Za-z0-9_]'。
-|\\xn|匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，'\\x41' 匹配 "A"。'\\x041' 则等价于 '\\x04' & "1"。正则表达式中可以使用 ASCII 编码。
-|\\num|匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，'(.)\\1' 匹配两个连续的相同字符。
-|\\n|标识一个八进制转义值或一个向后引用。如果 \\n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。
-|\\nm|标识一个八进制转义值或一个向后引用。如果 \\nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \\nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \\nm 将匹配八进制转义值 nm。
-|\\nml|如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
-|\\un|匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \\u00A9 匹配版权符号 (?)。
-
-
 # 变量对象
 
 变量对象定义着一个函数内定义的参数列表.内部变量和内部函数。
@@ -2079,3 +2086,5 @@ todo
 todo
 
 # js new
+
+todo
