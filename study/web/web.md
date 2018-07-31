@@ -961,7 +961,7 @@ response.setHeader("Access-Control-Allow-Credentials", "true");
 1. 兼容性, 只支持现代浏览器
 2. 对于复杂请求，CORS会发两次请求
 
-3. 代理请求
+## 3. 代理请求
 
 服务器A的test01.html页面想访问服务器B的后台action，返回“test”字符串，此时就出现跨域请求，浏览器控制台会出现报错提示，由于跨域是浏览器的同源策略造成的，对于服务器后台不存在该问题，可以在服务器A中添加一个代理action，在该action中完成对服务器B中action数据的请求，然后在返回到test01.html页面 
 
@@ -991,7 +991,7 @@ Boolean("0") // true
 # 设置和删除cookie
 
 ```
-//设置cookie
+// 设置cookie
 // key: 键, value: 值, expires: 有效时长(ms)
 function setCookie(key, value, expires) {
     let d = new Date();
@@ -999,7 +999,7 @@ function setCookie(key, value, expires) {
     document.cookie = key + "=" + value + "; " + "expires="+d.toUTCString();
 }
 
-//获取cookie
+// 获取cookie
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -1011,8 +1011,8 @@ function getCookie(cname) {
     return "";
 }
 
-//清除cookie  
-function clearCookie(key) {  
+// 清除cookie  
+function clearCookie(key) {
     setCookie(key, "", -1);  
 }  
 ```
@@ -1123,21 +1123,7 @@ alert(scope); //脚本错误
 
 所有window对象的属性拥有全局作用域
 
-## 2. 局部作用域（Local Scope）
-
-```
-function  checksocpe(){
-    var socpe="local";
-    function inner(){
-        alert(socpe);
-    }
-    inner();
-}
-alert(socpe);  //脚本错误
-inner();  //脚本错误 函数外部无法访问内部定义的函数
-```
-
-## 3. 函数作用域
+## 2. 函数作用域
 
 JavaScript没有块级作用域。JavaScript取而代之地使用了函数作用域：变量在声明他们的函数体以及这个函数体嵌套的任意函数体内都有定义的。
 
@@ -1947,7 +1933,7 @@ console.log(aa); // ReferenceError: aa is not defined
 aa =1;
 ```
 
-let声明的变量存在变量提升， 但是由于死区(当前作用域顶部到该变量声明位置中间的部分，都是该let变量的死区)我们无法在声明前访问这个变量
+let/const声明的变量存在变量提升， 但是由于死区(当前作用域顶部到该变量声明位置中间的部分，都是该let变量的死区)我们无法在声明前访问这个变量
 
 ```
 console.log(a);// ReferenceError: a is not defined
