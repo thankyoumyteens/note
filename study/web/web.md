@@ -4,6 +4,10 @@
 
 <a href="#js">JavaScript</a>
 
+<a href="#vue">Vue.js</a>
+
+<a href="#tables">其他表格</a>
+
 # get和post请求的区别
 
 1. 最直观的就是语义上的区别，get用于获取数据，post用于提交数据 
@@ -2112,6 +2116,69 @@ doTest2().then(msg => {
     */
 ```
 
+# 箭头函数
+
+优势
+
+* 更加简洁
+
+* 修复了this的指向
+
+普通函数中的this:
+
+1. this总是代表它的直接调用者(js的this是执行上下文), 例如 obj.func ,那么func中的this就是obj
+
+2. 非严格模式下, 没找到直接调用者,则this指的是window
+
+3. 在严格模式下, 没找到直接调用者,则this指的是undefined
+
+4. 使用call,apply,bind可以改变this的指向
+
+箭头函数中的this
+
+箭头函数没有自己的this(也没有arguments), 它的this(和arguments)是从父作用域继承而来; 默认指向在定义它时所处的对象(宿主对象),而不是执行时的对象
+
+由于箭头函数不绑定this, 它会捕获其所在上下文(即定义的位置)的this值, 作为自己的this值
+
+所以 call() / apply() / bind() 方法对于箭头函数来说只是传入参数，对它的 this 毫无影响。
+
+```
+function P() {
+    this.tmp = 0;
+    setInterval(function () {
+        // this -> Window
+        this.tmp++;
+        console.log('P -> ' + this.tmp);
+    }, 1000);
+}
+
+function P2(val) {
+    this.tmp2 = val;
+    setInterval(() => {
+        // this -> P2实例化的对象
+        this.tmp2++;
+        console.log('P2 -> ' + this.tmp2);
+    }, 1000);
+}
+
+let o = new P();
+let o2 = new P2(0);
+let o3 = new P2(100);
+
+/*
+    输出:
+    P -> NaN
+    P2 -> 1
+    P2 -> 101
+    P -> NaN
+    P2 -> 2
+    P2 -> 102
+    P -> NaN
+    P2 -> 3
+    P2 -> 103
+*/
+```
+
 # Promise
 
 todo
@@ -2163,6 +2230,16 @@ todo
 # 负边距
 
 todo
+
+<a id="vue"></a>
+
+# **Vue.js**
+
+# Vue生命周期
+
+![VueLifecycle](VueLifecycle.png)
+
+<a id="tables"></a>
 
 # **其他表格**
 
