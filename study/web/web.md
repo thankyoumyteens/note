@@ -584,6 +584,9 @@ height：value；
 
 解决方案：margin-top和margin-bottom中选择一个，只设置其中一个值
 
+# 负边距
+
+todo
 
 # CSS Hack 有哪些
 
@@ -2193,6 +2196,8 @@ todo
 
 # 模块化
 
+## 什么是模块
+
 todo
 
 # 自我介绍
@@ -2225,11 +2230,63 @@ todo
 
 # ES7/8新特性
 
-todo
+ES7
 
-# 负边距
+1. 判断元素是否在数组中 `Array.prototype.includes(返回Boolean)`
 
-todo
+2. 求幂运算 `2 ** 7(2的7次方)`
+
+ES8
+
+1. 在字符串开头或结尾添加填充字符串 `String.prototype.padStart`和`String.prototype.padEnd`
+
+```
+// 第一个参数是填充后字符串的长度
+// 第二个参数是填充的字符串, 默认是空格
+'es8'.padStart(6, 'woof');  // 'wooes8'
+'es8'.padEnd(9, 'woof');  // 'es8woofwo'
+```
+
+2. `Object.values`和`Object.entries` 这两个静态方法是对原有的`Object.keys()`方法的补充。
+
+```
+const obj = { 
+  x: 'xxx', 
+  y: 1 
+};
+
+Object.keys(obj); // ['x', 'y']
+
+Object.values(obj); // ['xxx', 1]
+
+Object.entries(obj); // [['x', 'xxx'], ['y', 1]]
+```
+
+3. 获取对象的属性描述符(不能是继承自原型链中的属性) `Object.getOwnPropertyDescriptors`
+
+```
+const obj = { es8: 'hello es8' };
+Object.getOwnPropertyDescriptor(obj, 'es8');
+/*
+    {
+        configurable: true,
+        enumerable: true,
+        value: "hello es8"
+        writable: true
+    }
+*/
+```
+
+4. 允许定义或调用函数时在参数末尾添加逗号
+
+```
+function es8(var1, var2, var3,) {
+  console.log(arguments.length); // 3
+}
+es8(10, 20, 30,);
+```
+
+5. async/await
 
 <a id="vue"></a>
 
