@@ -2002,6 +2002,56 @@ window.addEventListener('storage', (e) => console.log(e))
 
 4. SharedWorker(todo)
 
+# AMD和CommonJS
+
+ **CommonJS规范**
+
+ 模块必须通过  module.exports导出对外的变量或接口，通过require()来导入其他模块的输出到当前模块
+
+ ```
+// moduleA.js
+module.exports = function(){
+    return 'ok';
+}
+
+// moduleB.js
+var func = require('./moduleA');
+// 后续代码要等到moduleA加载完成后才会执行
+var result = func();
+console.log(result); // ok
+ ```
+
+CommonJS是同步加载的。
+
+在服务器端，所有模块都存放在本地磁盘, 加载时间是硬盘的读取时间。
+
+在浏览器端，模块都放在服务器上，加载时间取决于网速，会阻塞页面。
+
+**AMD规范**
+
+实现: require.js
+
+```
+// [module]: 要加载的模块的数组
+// callback: 加载成功之后的回调函数
+require([module], callback);
+```
+
+```
+// moduleA.js
+define("moduleA", ["moduleC", "moduleD"], function(m1, m2) {
+    return 'ok';
+});
+
+// moduleB.js
+require(["moduleA"], function(func) {
+    var result = func();
+    console.log(result); // ok
+});
+```
+
+AMD的加载是异步的, 不会阻塞页面
+
 # async和await
 
 ```
@@ -2067,10 +2117,6 @@ doTest2().then(msg => {
 todo
 
 # TCP建立连接的三次握手和释放连接的四次挥手
-
-todo
-
-# AMD CMD CommonJS
 
 todo
 
