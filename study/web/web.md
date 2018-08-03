@@ -994,6 +994,15 @@ response.setHeader("Access-Control-Allow-Credentials", "true");
 
 服务器 A 的 test01.html 页面想访问服务器 B 的后台 action，返回“test”字符串，此时就出现跨域请求，浏览器控制台会出现报错提示，由于跨域是浏览器的同源策略造成的，对于服务器后台不存在该问题，可以在服务器 A 中添加一个代理 action，在该 action 中完成对服务器 B 中 action 数据的请求，然后在返回到 test01.html 页面
 
+# ajax 跨域携带cookie
+
+```
+var xhr = new XMLHttpRequest();  
+xhr.open("POST", "http://xxxx.com/xxx", true);  
+xhr.withCredentials = true; //支持跨域发送cookies
+xhr.send();
+```
+
 # true false
 
 > 值为 false
