@@ -121,11 +121,7 @@ important->内联->ID->类->标签|伪类|属性选择->伪对象->继承->通�
 
 # 标准盒模型和 IE 盒模型
 
-### W3C
-
 ![w3c](img/w3cbox.jpg)
-
-### IE
 
 ![ie](img/iebox.jpg)
 
@@ -361,39 +357,4 @@ todo
 
 # CSS Hack 有哪些
 
-```
-/* CSS属性级Hack */
-color:red; /* 所有浏览器可识别*/
-_color:red; /* 仅IE6 识别 */
-*color:red; /* IE6.IE7 识别 */
-+color:red; /* IE6.IE7 识别 */
-*+color:red; /* IE6.IE7 识别 */
-[color:red; /* IE6.IE7 识别 */
-color:red9; /* IE6.IE7.IE8.IE9 识别 */
-color:red; /* IE8.IE9 识别*/
-color:red9; /* 仅IE9识别 */
-color:red; /* 仅IE9识别 */
-color:red !important; /* IE6 不识别!important*/
-```
-
-```
-/* CSS选择符级Hack */
-*html #demo { color:red;} /* 仅IE6 识别 */
-*+html #demo { color:red;} /* 仅IE7 识别 */
-body:nth-of-type(1) #demo { color:red;} /* IE9+.FF3.5+.Chrome.Safari.Opera 可以识别 */
-head:first-child+body #demo { color:red; } /* IE7+.FF.Chrome.Safari.Opera 可以识别 */
-:root #demo { color:red9; } : /* 仅IE9识别 */
-```
-
-```
-/* IE条件注释Hack */
-\<\!--[if IE]>此处内容只有IE可见\<\![endif]-->
-\<\!--[if IE 6]>此处内容只有IE6.0可见\<\![endif]-->
-\<\!--[if IE 7]>此处内容只有IE7.0可见\<\![endif]-->
-\<\!--[if !IE 7]>此处内容只有IE7不能识别\<\![endif]-->
-\<\!--[if gt IE 6]> IE6以上版本可识别,IE6无法识别 \<\![endif]-->
-\<\!--[if gte IE 7]> IE7以及IE7以上版本可识别 \<\![endif]-->
-\<\!--[if lt IE 7]> 低于IE7的版本才能识别，IE7无法识别  \<\![endif]-->
-\<\!--[if lte IE 7]> IE7以及IE7以下版本可识别\<\![endif]-->
-\<\!--[if !IE]>此处内容只有非IE可见\<\![endif]-->
-```
+todo
