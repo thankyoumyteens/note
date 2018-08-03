@@ -1,6 +1,6 @@
 # JavaScript 数据类型
 
-> 5 种不同的数据类型：
+### 5 种不同的数据类型：
 
 - string
 - number
@@ -8,13 +8,13 @@
 - object
 - function
 
-> 3 种对象类型：
+### 3 种对象类型：
 
 - Object
 - Date
 - Array
 
-> 2 个不包含任何值的数据类型：
+### 2 个不包含任何值的数据类型：
 
 - null
 - undefined
@@ -32,9 +32,19 @@ typeof myCar                  // 返回 undefined (如果 myCar 没有声明)
 typeof null                   // 返回 object
 ```
 
+# 判断类型
+
+1. typeof(例: typeof a // 不能判断object的具体类型)
+
+2. instanceof(例: a instanceof Array)
+
+3. constructor(例: [1, 2].constructor === Array)
+
+4. Object.prototype.toString.call(例: Object.prototype.toString.call(a) // 输出: [object Array])
+
 # 类的创建.继承
 
-> 创建
+### 创建
 
 ```
 var Animal = function () {
@@ -51,7 +61,7 @@ class Animal2 {
 }
 ```
 
-> 继承
+### 继承
 
 ```
 function People() {
@@ -125,11 +135,7 @@ function f1(){
 
 上面代码中的 f2 函数，就是闭包。
 
-> 闭包的用途
-
-todo
-
-> 闭包的缺点
+### 闭包的缺点
 
 1.  由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大
 
@@ -230,23 +236,24 @@ myIntro.attachEvent('onclick', introClick);
 获取事件冒泡里任意层指定的元素
 
 ```
- // 期望li触发事件, 但触发事件的元素可能是li下的某个元素,
- // 所以找到这个元素的父节点, 如果是li的话就触发li的事件
- function toApply(e) {
-      let target=e.target||e.srcElement
-      while(target.tagName!='LI'){
-        // 不断取父节点来替换target
-        target=target.parentNode?target.parentNode:''
-      }
-      if(target) {   //如果目标元素LI存在
-        // do something
-      }
- }
+// 期望li触发事件, 但触发事件的元素可能是li下的某个元素,
+// 所以找到这个元素的父节点, 如果是li的话就触发li的事件
+function toApply(e) {
+  let target=e.target||e.srcElement
+  while(target.parentNode){
+    // 不断取父节点来替换target
+    target=target.parentNode
+  }
+  // 如果目标元素LI存在
+  if(target.tagName!='LI') {
+    // do something
+  }
+}
 ```
 
 # JavaScript 事件模型
 
-> 原始事件模型
+### 原始事件模型
 
 在原始事件模型中（也有说 DOM0 级），事件发生后没有传播的概念，没有事件流 事件发生，马上处理，完事，就这么简单 监听函数只是元素的一个属性值，通过指定元素的属性值来绑定监听器 书写方式有两种：
 
@@ -262,7 +269,7 @@ HTML代码中指定属性值：<input type=”button” onclick=”func1()” />
 
 在当前 web 程序模块化开发以及更加复杂的逻辑状况下，这种方式显然已经落伍了，所以在真正项目中不推荐使用，平时写点博客小例子啥的倒是可以，速度比较快
 
-> IE 事件模型
+### IE 事件模型
 
 在参考其他资料时，我有看到这样的一句话“IE 不把该对象传入事件处理函数,由于在任意时刻只会存在一个事件,所以 IE 把它作为全局对象 window 的一个属性”，为求证其真伪，我用 IE8 执行了代码 alert(window.event)，结果弹出是 null，说明该属性已经定义，只是值为 null（与 undefined 不同） 我想难道这个全局对象的属性是在监听函数里才加的？于是执行下面代码：
 
@@ -276,7 +283,7 @@ setTimeout(function(){alert(window.event);},2000);
 
 IE 的事件模型已经可以解决原始模型的三个缺点，但其自己的缺点就是兼容性，只有 IE 系列浏览器才可以这样写
 
-> DOM2 事件模型
+### DOM2 事件模型
 
 此模型是 W3C 制定的标准模型，既然是标准，那大家都得按这个来，我们现在使用的现代浏览器（指 IE6~8 除外的浏览器）都已经遵循这个规范 W3C 制定的事件模型中，一次事件的发生包含三个过程：
 
@@ -292,7 +299,7 @@ IE 的事件模型已经可以解决原始模型的三个缺点，但其自己�
 
 # Ajax 如何跨域
 
-## 1. JSONP
+### JSONP
 
 ```
 // 创建script标签,并追加到dom中
@@ -316,19 +323,19 @@ function foo(data) {
 };
 ```
 
-> 优点
+优点
 
 1.  不受到同源策略的限制
 2.  兼容性好，在更加古老的浏览器中都可以运行
 
-> 缺点
+缺点
 
 1.  只支持 GET 请求
 2.  它只支持跨域 HTTP 请求这种情况，不能解决不同域的两个页面之间如何进行 JavaScript 调用的问题。
 3.  jsonp 在调用失败的时候不会返回各种 HTTP 状态码。
 4.  安全性 假如它返回的 javascript 的内容被人控制的
 
-## 2. CORS(跨域资源共享 Cross-origin resource sharing)
+### CORS(跨域资源共享 Cross-origin resource sharing)
 
 服务器端:
 
@@ -343,17 +350,17 @@ response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Ty
 response.setHeader("Access-Control-Allow-Credentials", "true");
 ```
 
-> 优点
+优点
 
 1.  CORS 支持所有类型的 HTTP 请求，功能完善
 2.  CORS 可以通过 onerror 事件监听错误，并且浏览器控制台会看到报错信息，利于排查。
 
-> 缺点
+缺点
 
 1.  兼容性, 只支持现代浏览器
 2.  对于复杂请求，CORS 会发两次请求
 
-## 3. 代理请求
+### 代理请求
 
 服务器 A 的 test01.html 页面想访问服务器 B 的后台 action，返回“test”字符串，此时就出现跨域请求，浏览器控制台会出现报错提示，由于跨域是浏览器的同源策略造成的，对于服务器后台不存在该问题，可以在服务器 A 中添加一个代理 action，在该 action 中完成对服务器 B 中 action 数据的请求，然后在返回到 test01.html 页面
 
@@ -368,7 +375,7 @@ xhr.send();
 
 # true false
 
-> 值为 false
+值为 false
 
 ```
 new Boolean();
@@ -380,7 +387,7 @@ Boolean(false);
 Boolean(NaN);
 ```
 
-> 其他情况均为 true
+其他情况均为 true
 
 ```
 Boolean({}) // true
@@ -443,7 +450,7 @@ localStorage 的数据是永久存储在客户端的，除非主动删除，否�
 
 localStorage 在泛域名下也存在跨域问题
 
-> API：（localStorage 和 sessionStorage 的 API 都是一样的，这里以 sessionStorage 为示例）
+### API：（localStorage 和 sessionStorage 的 API 都是一样的，这里以 sessionStorage 为示例）
 
 ```
 sessionStorage.key(0) //0位索引，返回第0位数据的键值
