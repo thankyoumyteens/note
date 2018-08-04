@@ -470,13 +470,20 @@ sessionStorage.removeItem("key") //删除键值为key的属性
 sessionStorage.clear(); //删除所有sessionStorage中的属性
 ```
 
-# prototype 和__proto__
+# prototype 和\_\_proto\_\_
 
 显示原型(prototype): 显示原型实现基于原型的继承和属性的共享
 
-隐式原型(\[\[prototype]]): 隐式原型是的作用就是构成原型链，通过隐式原型可以一层层往上查找对象的原型 **proto**是个不标准的属性，是浏览器为了实现对\[\[prototype]]的访问所提供的一个方法 常理来说\[\[prototype]]即隐式原型是不可访问的 ES5 里提供了 Object.getPrototypeOf()这个方法来获得\[\[prototype]]
+隐式原型(\[\[prototype\]\]): 隐式原型是的作用就是构成原型链, 
+通过隐式原型可以一层层往上查找对象的原型 \_\_proto\_\_是个不标准的属性, 
+是浏览器为了实现对\[\[prototype\]\]的访问所提供的一个方法, 
+常理来说\[\[prototype\]\]即隐式原型是不可访问的,
+ES5 里提供了 Object.getPrototypeOf()这个方法来获得\[\[prototype\]\]
 
-prototype 和\_\_proto__都指向原型对象，任意一个函数(包括构造函数)都有一个 prototype 属性，指向该函数的原型对象，同样 **任意一个构造函数实例化的对象** ，都有一个**proto**属性，指向构造函数的原型对象
+prototype 和\_\_proto\_\_都指向原型对象, 
+任意一个函数(包括构造函数)都有一个 prototype 属性, 
+指向该函数的原型对象，同样 **任意一个构造函数实例化的对象** , 
+都有一个\_\_proto\_\_属性, 指向构造函数的原型对象
 
 ```
 function Foo(){}
