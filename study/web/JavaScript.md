@@ -583,9 +583,9 @@ delete this.fakevar2 //=> true:变量并没有被删除
 
 # MVVM(Model View ViewModel)
 
-MVVM 的设计思想：关注 Model 的变化，让 MVVM 框架去自动更新 DOM 的状态，从而把开发者从操作 DOM 的繁琐步骤中解脱出来
+MVVM 的设计思想: 关注 Model 的变化，让 MVVM 框架去自动更新 DOM 的状态，从而把开发者从操作 DOM 的繁琐步骤中解脱出来
 
-改变 JavaScript 对象的状态，会导致 DOM 结构作出对应的变化！这让我们的关注点从如何操作 DOM 变成了如何更新 JavaScript 对象的状态，而操作 JavaScript 对象比 DOM 简单多了
+改变 JavaScript 对象的状态，会导致 DOM 结构作出对应的变化, 这让我们的关注点从如何操作 DOM 变成了如何更新 JavaScript 对象的状态，而操作 JavaScript 对象比 DOM 简单多了
 
 # 全文单词首字母大写
 
@@ -667,12 +667,9 @@ function getData() {
 
 ### defer="defer"和 async="true/false"
 
-html4.0 中定义了 defer
-html5.0 中定义了 async
+async: 加载后续文档元素的过程将和 JS 的加载与执行并行进行（异步）
 
-有 async，加载后续文档元素的过程将和 JS 的加载与执行并行进行（异步）
-
-有 defer，加载后续文档元素的过程将和 JS 的加载并行进行（异步），但 JS 的执行要在所有文档元素解析完成之后，DOMContentLoaded 事件触发之前完成
+defer: 加载后续文档元素的过程将和 JS 的加载并行进行（异步），但 JS 的执行要在所有文档元素解析完成之后，DOMContentLoaded 事件触发之前完成
 
 使用这两个属性的脚本中不能调用 document.write 方法
 
@@ -692,11 +689,7 @@ window.onload = function(){
 
 # DOMContentLoaded
 
-当页面完全加载完毕后会触发 window.onload 事件，我们知道可以利用 window.onload 事件来触发并执行需要页面完全加载完毕后才能执行的 javascript 脚本，但是假如页面包含很多样式文件.图片文件.子框架页面（iframe）的话，onload 事件也会被相应延迟到这些文件加载完成才执行，有时候并不是我们所需要的，例如我们想知道页面从接受完毕到 dom 树解析完成所需要的时间，那么 onload 事件则不适合了
-
-这个时候 DOMContentLoaded 就出场了，它定义为： 当页面文档加载并解析完毕之后会马上出发 DOMContentLoaded 事件，而不会等待样式文件.图片文件和子框架页面的加载
-
-示例
+当页面文档加载并解析完毕之后会马上触发 DOMContentLoaded 事件，而不会等待样式文件.图片文件和子框架页面的加载
 
 ```
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -1419,7 +1412,7 @@ window.addEventListener('storage', (e) => console.log(e))
 
 # AMD 和 CommonJS
 
-**CommonJS 规范**
+### CommonJS 规范
 
 模块必须通过 module.exports 导出对外的变量或接口，通过 require()来导入其他模块的输出到当前模块
 
@@ -1442,7 +1435,7 @@ CommonJS 是同步加载的。
 
 在浏览器端，模块都放在服务器上，加载时间取决于网速，会阻塞页面。
 
-**AMD 规范**
+### AMD 规范
 
 实现: require.js
 
@@ -1625,13 +1618,6 @@ Promise.all([p1, p2]).then((result) => {
 返回最先完成的结果，不管结果本身是成功状态还是失败状态。
 
 实现原理
-todo
-
-# TCP 建立连接的三次握手和释放连接的四次挥手
-
-todo
-
-# 观察者模式
 
 todo
 
@@ -1641,31 +1627,7 @@ todo
 
 todo
 
-# 自我介绍
-
-todo
-
-# 项目中遇到什么问题
-
-todo
-
-# 项目有什么收获
-
-todo
-
 # 原型链
-
-todo
-
-# git 工作流
-
-todo
-
-# WebSocket
-
-todo
-
-# SharedWorker
 
 todo
 

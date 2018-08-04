@@ -1,3 +1,5 @@
+# 前端
+
 * <a href="HTML.md">HTML</a>
 
 * <a href="CSS.md">CSS</a>
@@ -13,6 +15,18 @@
 * <a href="regExp.md">正则表达式</a>
 
 # 其他
+
+# 自我介绍
+
+todo
+
+# 项目中遇到什么问题
+
+todo
+
+# 项目有什么收获
+
+todo
 
 # SEO(Search English Optimization, 搜索引擎优化)
 
@@ -64,3 +78,15 @@
 4. 压缩CSS和JS
 
 5. 避免重定向
+
+# TCP 建立连接的三次握手和释放连接的四次挥手
+
+todo
+
+# git 工作流
+
+todo
+
+# WebSocket
+
+todo

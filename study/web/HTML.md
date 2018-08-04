@@ -7,3 +7,7 @@
 图像方面：canvas, WebGL, SVG
 
 数据存储：sessionStorage, localStorage
+
+# SharedWorker
+
+todo
