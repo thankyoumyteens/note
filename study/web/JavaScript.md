@@ -255,47 +255,57 @@ function toApply(e) {
 
 ### 原始事件模型
 
-在原始事件模型中（也有说 DOM0 级），事件发生后没有传播的概念，没有事件流 事件发生，马上处理，完事，就这么简单 监听函数只是元素的一个属性值，通过指定元素的属性值来绑定监听器 书写方式有两种：
+没有事件流, 事件发生后马上处理
 
 ```
-HTML代码中指定属性值：<input type=”button” onclick=”func1()” />
+// HTML代码中指定属性值
+<input type=”button” onclick=”func1()” />
 
-在js代码中指定属性值：document.getElementById('input').onclick = func1
+// 在js代码中指定属性值
+document.getElementById('input').onclick = func1
 ```
 
-优点：所有浏览器都兼容
+优点
 
-缺点：1）逻辑与显示没有分离；2）相同事件的监听函数只能绑定一个，后绑定的会覆盖掉前面的，如：a.onclick = func1; a.onclick = func2;将只会执行 func2 中的内容 3）无法通过事件的冒泡.委托等机制（后面系列会讲到）完成更多事情
+所有浏览器都兼容
 
-在当前 web 程序模块化开发以及更加复杂的逻辑状况下，这种方式显然已经落伍了，所以在真正项目中不推荐使用，平时写点博客小例子啥的倒是可以，速度比较快
+缺点
+
+1. 逻辑与显示没有分离
+
+2. 相同事件的监听函数只能绑定一个，后绑定的会覆盖掉前面的
+
+3. 没有事件的冒泡.委托等机制
 
 ### IE 事件模型
 
-在参考其他资料时，我有看到这样的一句话“IE 不把该对象传入事件处理函数,由于在任意时刻只会存在一个事件,所以 IE 把它作为全局对象 window 的一个属性”，为求证其真伪，我用 IE8 执行了代码 alert(window.event)，结果弹出是 null，说明该属性已经定义，只是值为 null（与 undefined 不同） 我想难道这个全局对象的属性是在监听函数里才加的？于是执行下面代码：
+IE 把event作为全局对象 window 的一个属性
 
 ```
-window.onload = function (){alert(window.event);}
+window.onload = function (){
+  alert(window.event); // [object event]
+}
 
-setTimeout(function(){alert(window.event);},2000);
+setTimeout(function(){
+  alert(window.event); // null
+},2000);
 ```
 
-结果第一次弹出[object event], 两秒后弹出依然是 null 由此可见 IE 是将 event 对象在处理函数中设为 window 的属性，一旦函数执行结束，便被置为 null 了 IE 的事件模型只有两步，先执行元素的监听函数，然后事件沿着父节点一直冒泡到 document 冒泡机制后面系列会讲，此处暂记 IE 模型下的事件监听方式也挺独特，绑定监听函数的方法是：attachEvent( "eventType","handler")，其中 evetType 为事件的类型，如 onclick，注意要加’on’ 解除事件监听器的方法是 detachEvent("eventType","handler" )
-
-IE 的事件模型已经可以解决原始模型的三个缺点，但其自己的缺点就是兼容性，只有 IE 系列浏览器才可以这样写
+IE 是将 event 对象在处理函数中设为 window 的属性，
+一旦函数执行结束，便被置为 null,
+IE 的事件模型只有两步，先执行元素的监听函数，然后事件沿着父节点一直冒泡到 document
 
 ### DOM2 事件模型
 
-此模型是 W3C 制定的标准模型，既然是标准，那大家都得按这个来，我们现在使用的现代浏览器（指 IE6~8 除外的浏览器）都已经遵循这个规范 W3C 制定的事件模型中，一次事件的发生包含三个过程：
+一次事件的发生包含三个过程：
 
-(1)capturing phase:事件捕获阶段 事件被从 document 一直向下传播到目标元素,在这过程中依次检查经过的节点是否注册了该事件的监听函数，若有则执行
+1. capturing phase: 事件捕获阶段 事件被从 document 一直向下传播到目标元素,在这过程中依次检查经过的节点是否注册了该事件的监听函数，若有则执行
 
-(2)target phase:事件处理阶段 事件到达目标元素,执行目标元素的事件处理函数.
+2. target phase: 事件处理阶段 事件到达目标元素,执行目标元素的事件处理函数.
 
-(3)bubbling phase:事件冒泡阶段 事件从目标元素上升一直到达 document，同样依次检查经过的节点是否注册了该事件的监听函数，有则执行
+3. bubbling phase: 事件冒泡阶段 事件从目标元素上升一直到达 document，同样依次检查经过的节点是否注册了该事件的监听函数，有则执行
 
 所有的事件类型都会经历 captruing phase 但是只有部分事件会经历 bubbling phase 阶段,例如 submit 事件就不会被冒泡
-
-标准的事件监听器该如何绑定：addEventListener("eventType","handler","true|false");其中 eventType 指事件类型，注意不要加‘on’前缀，与 IE 下不同 第二个参数是处理函数，第三个即用来指定是否在捕获阶段进行处理，一般设为 false 来与 IE 保持一致，除非你有特殊的逻辑需求 监听器的解除也类似：removeEventListner("eventType","handler","true!false");
 
 # Ajax 如何跨域
 
@@ -460,23 +470,13 @@ sessionStorage.removeItem("key") //删除键值为key的属性
 sessionStorage.clear(); //删除所有sessionStorage中的属性
 ```
 
-# 怎么判断一个数组
-
-```
-var arr = [1,2,3];
-Object.prototype.toString.call(arr); // [object Array]
-
-//还可以用instanceof
-arr instanceof Array; // true
-```
-
-# prototype 和**proto**
+# prototype 和__proto__
 
 显示原型(prototype): 显示原型实现基于原型的继承和属性的共享
 
 隐式原型(\[\[prototype]]): 隐式原型是的作用就是构成原型链，通过隐式原型可以一层层往上查找对象的原型 **proto**是个不标准的属性，是浏览器为了实现对\[\[prototype]]的访问所提供的一个方法 常理来说\[\[prototype]]即隐式原型是不可访问的 ES5 里提供了 Object.getPrototypeOf()这个方法来获得\[\[prototype]]
 
-prototype 和**proto**都指向原型对象，任意一个函数(包括构造函数)都有一个 prototype 属性，指向该函数的原型对象，同样 **任意一个构造函数实例化的对象** ，都有一个**proto**属性，指向构造函数的原型对象
+prototype 和\_\_proto__都指向原型对象，任意一个函数(包括构造函数)都有一个 prototype 属性，指向该函数的原型对象，同样 **任意一个构造函数实例化的对象** ，都有一个**proto**属性，指向构造函数的原型对象
 
 ```
 function Foo(){}
