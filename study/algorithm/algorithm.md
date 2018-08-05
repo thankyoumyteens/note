@@ -1,7 +1,18 @@
 
-# 排序
+# 排序(从小到大)
 
 ## 选择排序
+
+找到未排序的元素中最小的元素将它与未排序元素的第一个元素交换
+
+找到最小元素: 1
+![selectionSort1](img/selectionSort1.png)
+与第一个元素: 8 交换
+![selectionSort2](img/selectionSort2.png)
+找到最小元素: 2
+![selectionSort3](img/selectionSort3.png)
+与第一个元素: 6 交换
+![selectionSort4](img/selectionSort4.png)
 
 ```
 /**
