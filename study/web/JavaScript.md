@@ -435,40 +435,9 @@ function clearCookie(key) {
 }  
 ```
 
-# cookie 和 localStorage 的区别
-
-1.  cookie 在浏览器与服务器之间来回传递 sessionStorage 和 localStorage 不会把数据发给服务器，仅在本地保存
-2.  cookie 只在设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭
-    sessionStorage 仅在当前浏览器窗口关闭前有效 localStorage 始终有效，长期保存
-3.  cookie 数据不能超过 4k，sessionStorage 和 localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大
-
-4.  作用域不同: sessionStorage 不在不同的浏览器窗口中共享；localStorage 在所有同源窗口中都是共享的；cookie 也是在所有同源窗口中都是共享的；
-
 # javascript 中的 this
 
 this 永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的
-
-# localStorage 和 sessionStorage
-
-sessionStorage 存储一个会话中的数据，会话结束后数据就会被销毁
-
-localStorage 的数据是永久存储在客户端的，除非主动删除，否则不会过期
-
-过期时间：localStorage 永久存储，永不失效除非手动删除 sessionStorage 浏览器重新打开后就消失了
-
-大小：每个域名是 5M
-
-localStorage 在泛域名下也存在跨域问题
-
-### API：（localStorage 和 sessionStorage 的 API 都是一样的，这里以 sessionStorage 为示例）
-
-```
-sessionStorage.key(0) //0位索引，返回第0位数据的键值
-sessionStorage.getItem("key") //键值为key的属性值
-sessionStorage.setItem("key","value") //存储名为key，值为value
-sessionStorage.removeItem("key") //删除键值为key的属性
-sessionStorage.clear(); //删除所有sessionStorage中的属性
-```
 
 # prototype 和\_\_proto\_\_
 
@@ -1631,9 +1600,127 @@ todo
 
 todo
 
-# ES6 新特性
+# Symbol
 
 todo
+
+# ES6 新特性
+
+1. 箭头函数
+
+2. 使用class关键字创建类
+
+3. 对象字面量增强
+
+```
+let person = {
+    // 定义方法可以不用function关键字
+    say() {
+        console.log('hahaha')
+    }
+}
+
+let student = {
+    // 可以在对象字面量里面定义原型
+    __proto__: person,
+    study() {
+        console.log('lalala')
+    }
+}
+
+student.say() // hahaha
+```
+
+4. 字符串模板
+
+```
+let name = 'kazuma'
+let str = `your name is ${name}`
+console.log(str) // your name is kazuma
+```
+
+5. 解构赋值
+
+```
+let [a, b, c] = [1, 2, 3]
+console.log(a) // 1
+console.log(b) // 2
+console.log(c) // 3
+```
+
+6. 默认参数，不定参数，拓展参数
+
+```
+// 默认参数
+function test(type, val = 0) {
+    console.log(`${type}${val}`)
+}
+
+test('type_') // type_0
+test('type_', 1) // type_1
+
+// 不定参数
+function test(...args) {
+    console.log(args)
+}
+
+test(1, 2, 3) // [1, 2, 3]
+
+// 拓展参数
+function test(arg1, arg2, arg3) {
+    console.log(arg1)
+    console.log(arg2)
+    console.log(arg3)
+}
+
+test(...[1, 2, 3])
+
+// 输出
+// 1
+// 2
+// 3
+```
+
+7. let与const关键字
+
+8. for of
+
+```
+var arr = [ "a", "b", "c" ];
+ 
+for (v of arr) {
+    console.log(v);
+}
+
+// 输出 
+// a
+// b
+// c
+```
+
+9. Map，Set 和 WeakMap，WeakSet
+
+10. Proxy(target, handler)
+
+```
+var engineer = { name: 'Joe Sixpack', salary: 50 };
+ 
+var interceptor = {
+  set: function (receiver, property, value) {
+    console.log(property, 'is changed to', value);
+    receiver[property] = value;
+  }
+};
+ 
+engineer = Proxy(engineer, interceptor);
+
+engineer.salary = 60;
+// salary is changed to 60
+```
+
+11. Promise
+
+12. Symbol
 
 # ES7/8 新特性
 

@@ -24,4 +24,6 @@
 
 # 浏览器的缓存机制
 
+![cache](img/cache.png)
+
 todo
