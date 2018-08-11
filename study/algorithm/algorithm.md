@@ -41,21 +41,21 @@ public void sort(Comparable[] array) {
 遍历所有元素, 将遍历到的元素放到正确的位置
 
 首先遍历到8, 由于在8之前没有元素, 继续下一步
-![insertionSort1](img/insertionSort1.png)
+![insertionSort1](img/insertionSort1.PNG)
 接着遍历到6
-![insertionSort2](img/insertionSort2.png)
+![insertionSort2](img/insertionSort2.PNG)
 由于6比8小, 所以将8向后移动
-![insertionSort3](img/insertionSort3.png)
+![insertionSort3](img/insertionSort3.PNG)
 将6放到8原来的位置(正确的位置), 前两个元素排好序了, 继续下一步
-![insertionSort4](img/insertionSort4.png)
+![insertionSort4](img/insertionSort4.PNG)
 接着遍历到2
-![insertionSort5](img/insertionSort5.png)
+![insertionSort5](img/insertionSort5.PNG)
 由于2比8小, 所以将8向后移动
-![insertionSort6](img/insertionSort6.png)
+![insertionSort6](img/insertionSort6.PNG)
 由于2比6小, 所以将6向后移动
-![insertionSort7](img/insertionSort7.png)
+![insertionSort7](img/insertionSort7.PNG)
 将2放到6原来的位置(正确的位置), 前三个元素排好序了, 继续下一步
-![insertionSort8](img/insertionSort8.png)
+![insertionSort8](img/insertionSort8.PNG)
 
 ```
 /**
