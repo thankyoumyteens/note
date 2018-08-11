@@ -1,1 +1,1 @@
-# <a href="git/index.md">Git</a>
+* <a href="git/index.md">Git</a>
