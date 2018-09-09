@@ -161,13 +161,13 @@ private static void merge(Comparable[] arr, int l, int mid, int r) {
  * 将数组二分
  * 递归使用归并排序,对arr[l...r]的范围进行排序
  */
-private static void sort(Comparable[] arr, int l, int r) {
+private static void mergeSort(Comparable[] arr, int l, int r) {
     if (l >= r)
         return;
 
     int mid = (l + r) / 2;
-    sort(arr, l, mid);
-    sort(arr, mid + 1, r);
+    mergeSort(arr, l, mid);
+    mergeSort(arr, mid + 1, r);
     merge(arr, l, mid, r);
 }
 
@@ -176,10 +176,72 @@ private static void sort(Comparable[] arr, int l, int r) {
  */
 @Override
 public void sort(Comparable[] array) {
-    sort(array, 0, array.length - 1);
+    mergeSort(array, 0, array.length - 1);
 }
 ```
 
 <a id="quickSort"></a>
 ## 快速排序
 
+选择数组中第一个元素v(array\[left\]), 调整数组, 使得v左面的元素都小于v, 
+v右面的元素都大于v, 递归执行
+
+![](img/quickSort01.PNG)
+
+将e与v比较, 如果e大于v, 则i+1
+
+![](img/quickSort02.PNG)
+
+如果e小于v, 则交换arr\[i\]和arr\[j\], 再j+1
+
+![](img/quickSort03.PNG)
+
+处理后
+
+![](img/quickSort04.PNG)
+
+最后将v与arr\[j\]交换
+
+![](img/quickSort05.PNG)
+
+```
+/**
+ * 对arr[l...r]部分进行partition操作
+ * 返回p, 使得arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
+ */
+private static int partition(Comparable[] arr, int l, int r) {
+    Comparable v = arr[l];
+
+    int j = l;
+    // 调整数组, 使得: arr[l+1...j] < v, arr[j+1...i-1] > v
+    for (int i = l + 1; i <= r; i++)
+        if (arr[i].compareTo(v) < 0) {
+            j++;
+            ArrayUtil.swap(arr, j, i);
+        }
+    ArrayUtil.swap(arr, l, j);
+
+    return j;
+}
+
+/**
+ * 递归使用快速排序,对arr[l...r]的范围进行排序
+ */
+private static void quickSort(Comparable[] arr, int l, int r) {
+    // 数组长度<=1
+    if (l >= r)
+        return;
+
+    int p = partition(arr, l, r);
+    quickSort(arr, l, p - 1);
+    quickSort(arr, p + 1, r);
+}
+
+/**
+ * 快速排序
+ */
+@Override
+public void sort(Comparable[] array) {
+    quickSort(array, 0, array.length - 1);
+}
+```
