@@ -81,3 +81,94 @@ public void sort(Comparable[] array) {
     }
 }
 ```
+
+## 归并排序
+
+将素组不断二分, 直到每个数组长度为1,
+再将分开的数组不断合并, 合并过程中排序
+
+![](img/mergeSort.png)
+
+合并过程
+
+创建待排序数组的副本,
+建立3个索引i,j,k
+
+![](img/mergeSort02.PNG)
+
+比较i和j元素的大小,j指向的值小
+
+![](img/mergeSort03.PNG)
+
+将j指向的值覆盖原数组k指向的值,
+k右移,j右移,i保持不变
+
+![](img/mergeSort04.PNG)
+
+比较i和j元素的大小,i指向的值小
+
+![](img/mergeSort05.PNG)
+
+将i指向的值覆盖原数组k指向的值,
+k右移,i右移,j保持不变
+
+![](img/mergeSort06.png)
+
+```
+/**
+ * 归并, 合并
+ * 将arr[l...mid]和arr[mid+1...r]两部分进行归并
+ *
+ * @param l   left
+ * @param mid middle
+ * @param r   right
+ */
+private static void merge(Comparable[] arr, int l, int mid, int r) {
+    Comparable[] aux = Arrays.copyOfRange(arr, l, r + 1);
+    // 初始化, i指向左半部分的起始索引位置l
+    // j指向右半部分起始索引位置mid + 1
+    int i = l;
+    int j = mid + 1;
+    for (int k = l; k <= r; k++) {
+        if (i > mid) {
+            // 左半部分元素已经全部处理完毕
+            arr[k] = aux[j - l];
+            j++;
+        } else if (j > r) {
+            // 右半部分元素已经全部处理完毕
+            arr[k] = aux[i - l];
+            i++;
+        } else if (aux[i - l].compareTo(aux[j - l]) < 0) {
+            // 左半部分所指元素 < 右半部分所指元素
+            arr[k] = aux[i - l];
+            i++;
+        } else {
+            // 左半部分所指元素 >= 右半部分所指元素
+            arr[k] = aux[j - l];
+            j++;
+        }
+    }
+}
+
+/**
+ * 将数组二分
+ * 递归使用归并排序,对arr[l...r]的范围进行排序
+ */
+private static void sort(Comparable[] arr, int l, int r) {
+    if (l >= r)
+        return;
+
+    int mid = (l + r) / 2;
+    sort(arr, l, mid);
+    sort(arr, mid + 1, r);
+    merge(arr, l, mid, r);
+}
+
+/**
+ * 归并排序
+ */
+@Override
+public void sort(Comparable[] array) {
+    sort(array, 0, array.length - 1);
+}
+```
