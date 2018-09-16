@@ -266,3 +266,89 @@ public void sort(Comparable[] array) {
     quickSort(array, 0, array.length - 1);
 }
 ```
+
+## 三路快速排序(快速排序优化)
+
+将数组分割成3部分: 小于v, 等于v, 大于v
+
+## 分割过程
+
+![](img/qS3_1.PNG)
+
+e等于v
+
+无操作, i++
+
+![](img/qS3_2.PNG)
+
+e小于v
+
+将arr\[i\]和arr\[lt+1\]交换, i++, lt++
+
+![](img/qS3_4.PNG)
+
+e大于v
+
+将arr\[i\]和arr\[gt-1\]交换, i不变, gt--
+
+![](img/qS3_5.PNG)
+
+处理完成后
+
+![](img/qS3_6.PNG)
+
+将arr\[l\]和arr\[lt\]交换
+
+![](img/qS3_7.PNG)
+
+```
+/**
+ * 递归使用快速排序, 对arr[l...r]的范围进行排序
+ */
+private static void quickSsort(Comparable[] arr, int l, int r) {
+
+    // 对于小规模数组, 使用插入排序
+    if (r - l <= 15) {
+        InsertionSort.sort(arr, l, r);
+        return;
+    }
+
+    // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
+    ArrayUtil.swap(arr, l, (int) (Math.random() * (r - l + 1)) + l);
+
+    Comparable v = arr[l];
+
+    // arr[l+1...lt] < v
+    int lt = l;
+    // arr[gt...r] > v
+    int gt = r + 1;
+    // arr[lt+1...i) == v
+    int i = l + 1;
+
+    while (i < gt) {
+        if (arr[i].compareTo(v) < 0) {
+            ArrayUtil.swap(arr, i, lt + 1);
+            i++;
+            lt++;
+        } else if (arr[i].compareTo(v) > 0) {
+            ArrayUtil.swap(arr, i, gt - 1);
+            gt--;
+        } else { // arr[i] == v
+            i++;
+        }
+    }
+
+    ArrayUtil.swap(arr, l, lt);
+
+    quickSsort(arr, l, lt - 1);
+    quickSsort(arr, gt, r);
+}
+
+/**
+ * 快速排序
+ */
+@Override
+public void sort(Comparable[] array) {
+    quickSsort(array, 0, array.length - 1);
+}
+```
