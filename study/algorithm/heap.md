@@ -54,11 +54,18 @@ public class Heap {
         this.capacity = capacity;
     }
 
+    /**
+     * Heapify
+     * 将数组转化为堆
+     */
     public Heap(Comparable[] array) {
         data = new Comparable[array.length + 1];
         capacity = array.length;
         System.arraycopy(array, 0, data, 1, array.length);
         count = array.length;
+        // 叶子节点可以看作一个最大堆
+        // 只需要堆非叶子节点做ShiftDown操作
+        // 完全二叉树中元素个数除以2是最后一个非叶子节点
         for (int i = count / 2; i >= 1; i--) {
             shiftDown(i);
         }
