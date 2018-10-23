@@ -17,12 +17,14 @@
 - parent(index) = index / 2
 - leftChild(index) = 2 * index
 - rightChild(index) = 2 * index + 1
+- 最后一个非叶子节点的索引: count / 2
 
 根节点从0开始建立索引, 根据某个节点的索引(index)可以计算出它的根节点和子节点的索引
 
 - parent(index) = (index - 1) / 2
 - leftChild(index) = 2 * index + 1
 - rightChild(index) = 2 * index + 2
+- 最后一个非叶子节点的索引: (count - 1) / 2
 
 ## 添加元素
 
