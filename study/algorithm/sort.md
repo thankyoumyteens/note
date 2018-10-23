@@ -4,8 +4,10 @@
 - <a href="#insertionSort">插入排序</a>
 - <a href="#mergeSort">归并排序</a>
 - <a href="#quickSort">快速排序</a>
+- <a href="#heapSort">堆排序(从大到小)</a>
 
 <a id="selectionSort"></a>
+
 ## 选择排序
 
 找到未排序的元素中最小的元素将它与未排序元素的第一个元素交换
@@ -42,6 +44,7 @@ public void sort(Comparable[] array) {
 ```
 
 <a id="insertionSort"></a>
+
 ## 插入排序
 
 遍历所有元素, 将遍历到的元素放到正确的位置
@@ -89,6 +92,7 @@ public void sort(Comparable[] array) {
 ```
 
 <a id="mergeSort"></a>
+
 ## 归并排序
 
 将素组不断二分, 直到每个数组长度为1,
@@ -181,6 +185,7 @@ public void sort(Comparable[] array) {
 ```
 
 <a id="quickSort"></a>
+
 ## 快速排序
 
 选中第一个元素4, 调整数组使得4左边的元素小于4,
@@ -351,4 +356,22 @@ private static void quickSsort(Comparable[] arr, int l, int r) {
 public void sort(Comparable[] array) {
     quickSsort(array, 0, array.length - 1);
 }
+```
+
+<a id="heapSort"></a>
+
+## 堆排序(从大到小)
+
+最大堆中, 根节点最大, 将数组中的元素放入堆中再依此取出根节点就是从大到小的顺序
+
+```
+public void heapSort(Comparable[] array) {
+      Heap heap = new Heap(array.length);
+      for (Comparable item : array) {
+          heap.insert(item);
+      }
+      for (int i = 0; i < array.length; i++) {
+          array[i] = heap.extractMax();
+      }
+  }
 ```
