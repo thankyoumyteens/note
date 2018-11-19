@@ -41,12 +41,7 @@ sessionStorage.clear(); //删除所有sessionStorage中的属性
 # cookie 和 localStorage 的区别
 
 1.  cookie 在浏览器与服务器之间来回传递 sessionStorage 和 localStorage 不会把数据发给服务器，仅在本地保存
-2.  cookie 只在设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭
+2.  cookie 只在设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭。
     sessionStorage 仅在当前浏览器窗口关闭前有效 localStorage 始终有效，长期保存
 3.  cookie 数据不能超过 4k，sessionStorage 和 localStorage 虽然也有存储大小的限制，但比 cookie 大得多，可以达到 5M 或更大
-
 4.  作用域不同: sessionStorage 不在不同的浏览器窗口中共享；localStorage 在所有同源窗口中都是共享的；cookie 也是在所有同源窗口中都是共享的；
-
-# SharedWorker
-
-todo
