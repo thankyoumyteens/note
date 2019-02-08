@@ -95,7 +95,7 @@ public void sort(Comparable[] array) {
 
 ## 归并排序
 
-将素组不断二分, 直到每个数组长度为1,
+将数组不断二分, 直到每个数组长度为1,
 再将分开的数组不断合并, 合并过程中排序
 
 ![](img/mergeSort.png)
@@ -362,7 +362,7 @@ public void sort(Comparable[] array) {
 
 ## 堆排序(从大到小)
 
-最大堆中, 根节点最大, 将数组中的元素放入堆中再依此取出根节点就是从大到小的顺序
+最大堆中, 根节点最大, 将数组中的元素放入堆中再依次取出根节点就是从大到小的顺序
 
 ```
 public void heapSort(Comparable[] array) {
