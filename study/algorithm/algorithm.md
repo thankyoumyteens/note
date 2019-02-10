@@ -33,7 +33,6 @@ int search(Comparable[] array, Comparable target) {
 # 数据结构
 
 - <a href="heap.md">堆</a>
-
 - <a href="binarySearchTree.md">二分搜索树</a>
 
 
