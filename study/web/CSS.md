@@ -10,6 +10,7 @@
 - <a href="#display的取值">display的取值</a>
 - <a href="#垂直margin的合并">垂直margin的合并</a>
 - <a href="css/center.md">居中</a>
+- <a href="#display:none与visible:hidden的区别">display:none与visible:hidden的区别</a>
 - <a href="#负边距">负边距</a>
 
 <a id="常用的块级元素和行内元素有哪些"></a>
@@ -144,6 +145,15 @@ important->内联->ID->类->标签|伪类|属性选择->伪对象->继承->通�
 垂直 margin 合并就是上下相邻的两个块级元素，如果刚好，上面设置 margin-bottom，下面设置 margin-top，这俩外边距相遇了，那两个就合并了，本来可能上面 margin-bottom 设置 20px，margin-top 设置 10px，合并之后两个元素上下的距离就变为 20px，即两个属性中较大的值
 
 垂直 margin 合并是在同一个 BFC 中才会发生的，如果两个 BFC 的垂直 margin 不会合并
+
+<a id="display:none与visible:hidden的区别"></a>
+# display:none与visible:hidden的区别
+
+display:none视为不存在且不加载，即，不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失。
+visibility:hidden隐藏，但在浏览时保留位置，即，使对象在网页上不可见，但该对象在网页上所占的空间没有改变。
+ 
+使用 display:none属性后，HTML元素（对象）的宽度、高度等各种属性值都将“丢失”;
+而使用visibility:hidden属性后，HTML元素（对象）仅仅是在视觉上看不见（完全透明），而它所占据的空间位置仍然存在。也即是说它仍具有高度、宽度等属性值。
 
 <a id="负边距"></a>
 # 负边距
