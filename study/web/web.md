@@ -7,6 +7,7 @@
 - <a href="http.md">HTTP</a>
 - <a href="browser.md">浏览器</a>
 - <a href="regExp.md">正则表达式</a>
+- <a href="secure.md">Web 安全问题和防范</a>
 
 # 其他
 
@@ -33,30 +34,6 @@ todo
 5. 标签语义化
 6. 少使用iframe框架
 
-# Web 安全问题和防范
-
-### 跨站脚本 XSS(Cross Site Scripting)
-
-代码注入, 攻击者将恶意脚本上传执行
-
-防范
-
-1. 对特殊字符进行转义, 对输入数据进行验证,(是否是合法字符, 长度是否合法, 格式是否正确)
-
-2. 设置 http-only, 避免JS读取cookie
-
-### 跨站请求伪造 CRSF(Cross Site Request Forgery)
-
-伪造跨站请求, 以用户的名义伪造请求发送给被攻击站点
-
-防范
-
-1.  在 HTTP 头中自定义属性并验证
-
-2.  cookie 中加入 hash 随机数.
-
-3.  检查http header: Origin Header和Referer Header
-
 # JSON 是什么
 
 轻量级的数据交换格式, 使用 js 语法的 **文本**
@@ -72,14 +49,6 @@ todo
 4. 压缩CSS和JS
 
 5. 避免重定向
-
-# TCP 建立连接的三次握手和释放连接的四次挥手
-
-todo
-
-# git 工作流
-
-todo
 
 # WebSocket
 

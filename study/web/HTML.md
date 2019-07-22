@@ -18,17 +18,19 @@
 
 # localStorage 和 sessionStorage
 
-sessionStorage 存储一个会话中的数据，会话结束后数据就会被销毁
+- sessionStorage 存储一个会话中的数据，会话结束后数据就会被销毁
 
-localStorage 的数据是永久存储在客户端的，除非主动删除，否则不会过期
+- localStorage 的数据是永久存储在客户端的，除非主动删除，否则不会过期
 
-过期时间：localStorage 永久存储，永不失效除非手动删除 sessionStorage 浏览器重新打开后就消失了
+- 过期时间：localStorage 永久存储，永不失效除非手动删除 
 
-大小：每个域名是 5M
+- sessionStorage 浏览器重新打开后就消失了
 
-localStorage 在泛域名下也存在跨域问题
+- 大小：每个域名是 5M
 
-### API：（localStorage 和 sessionStorage 的 API 都是一样的，这里以 sessionStorage 为示例）
+# localStorage 和 sessionStorage 的API
+
+localStorage 和 sessionStorage 的 API 都是一样的，这里以 sessionStorage 为示例
 
 ```
 sessionStorage.key(0) //0位索引，返回第0位数据的键值
