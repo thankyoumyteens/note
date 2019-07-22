@@ -1,3 +1,10 @@
+- <a href="#HTML5新特性">HTML5新特性</a>
+- <a href="#语义化">语义化</a>
+- <a href="#localStorage和sessionStorage">localStorage和sessionStorage</a>
+- <a href="#localStorage和sessionStorage的API">localStorage和sessionStorage的API</a>
+- <a href="#cookie和localStorage的区别">cookie和localStorage的区别</a>
+
+<a id="HTML5新特性"></a>
 # HTML5新特性
 
 语义化方面: header footer nav section article section hgroup aside
@@ -8,6 +15,7 @@
 
 数据存储: sessionStorage, localStorage
 
+<a id="语义化"></a>
 # 语义化
 
 1. 用正确的标签做正确的事。
@@ -16,7 +24,8 @@
 4. 搜索引擎的爬虫依赖于标记来确定上下文和各个关键字的权重，有利于SEO。
 5. 便于团队开发和维护，语义化更具可读性，可以减少差异性。
 
-# localStorage 和 sessionStorage
+<a id="localStorage和sessionStorage"></a>
+# localStorage和sessionStorage
 
 - sessionStorage 存储一个会话中的数据，会话结束后数据就会被销毁
 
@@ -28,7 +37,8 @@
 
 - 大小：每个域名是 5M
 
-# localStorage 和 sessionStorage 的API
+<a id="localStorage和sessionStorage的API"></a>
+# localStorage和sessionStorage的API
 
 localStorage 和 sessionStorage 的 API 都是一样的，这里以 sessionStorage 为示例
 
@@ -40,7 +50,8 @@ sessionStorage.removeItem("key") //删除键值为key的属性
 sessionStorage.clear(); //删除所有sessionStorage中的属性
 ```
 
-# cookie 和 localStorage 的区别
+<a id="cookie和localStorage的区别"></a>
+# cookie和localStorage的区别
 
 1.  cookie 在浏览器与服务器之间来回传递 sessionStorage 和 localStorage 不会把数据发给服务器，仅在本地保存
 2.  cookie 只在设置的 cookie 过期时间之前一直有效，即使窗口或浏览器关闭。
