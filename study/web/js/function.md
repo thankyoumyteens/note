@@ -18,7 +18,7 @@ var arr6 = ["lily","lucy","Tom"]; // 创建一个包含3个字符串的数组
 
 ## 数组方法
 
-1.  join()
+> 1.  join()
 
 join(separator): 将数组的元素组起一个字符串，以 separator 为分隔符，省略的话则用默认用逗号为分隔符，该方法只接收一个参数：即分隔符。
 
@@ -39,7 +39,7 @@ console.log(repeatString("abc", 3)); // abcabcabc
 console.log(repeatString("Hi", 5)); // HiHiHiHiHi
 ```
 
-2.  push()和 pop()
+> 2.  push()和 pop()
 
 push(): 可以接收任意数量的参数，把它们逐个添加到数组末尾，并返回修改后数组的长度。
 pop()：数组末尾移除最后一项，减少数组的 length 值，然后返回移除的项。
@@ -54,7 +54,7 @@ console.log(item); // Sean
 console.log(arr); // ["Lily", "lucy", "Tom", "Jack"]
 ```
 
-3.  shift() 和 unshift()
+> 3.  shift() 和 unshift()
 
 shift()：删除原数组第一项，并返回删除元素的值；如果数组为空则返回 undefined 。
 unshift:将参数添加到原数组开头，并返回数组的长度 。
@@ -71,7 +71,7 @@ console.log(item); // Jack
 console.log(arr); // ["Sean", "Lily", "lucy", "Tom"]
 ```
 
-4.  sort()
+> 4.  sort()
 
 sort()：按升序排列数组项——即最小的值位于最前面，最大的值排在最后面。
 
@@ -117,7 +117,7 @@ arr2 = [13, 24, 51, 3];
 console.log(arr2.sort(compare)); // [51, 24, 13, 3]
 ```
 
-5.  reverse()
+> 5.  reverse()
 
 reverse()：反转数组项的顺序。
 
@@ -127,7 +127,7 @@ console.log(arr.reverse()); //[3, 51, 24, 13]
 console.log(arr); //[3, 51, 24, 13](原数组改变)
 ```
 
-6.  concat()
+> 6.  concat()
 
 concat() ：将参数添加到原数组中。这个方法会先创建当前数组一个副本，然后将接收到的参数添加到这个副本的末尾，最后返回新构建的数组。在没有给 concat()方法传递参数的情况下，它只是复制当前数组并返回副本。
 
@@ -148,7 +148,7 @@ console.log(arrCopy2[5]); //[11, 13]
 
 上述代码中，arrCopy2 数组的第五项是一个包含两项的数组，也就是说 concat 方法只能将传入数组中的每一项添加到数组中，如果传入数组中有些项是数组，那么也会把这一数组项当作一项添加到 arrCopy2 中。
 
-7.  slice()
+> 7.  slice()
 
 slice()：返回从原数组中指定开始下标到结束下标之间的项组成的新数组。slice()方法可以接受一或两个参数，即要返回项的起始和结束位置。在只有一个参数的情况下， slice()方法返回从该参数指定位置开始到当前数组末尾的所有项。如果有两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项。
 
@@ -170,7 +170,7 @@ arrCopy2 设置了两个参数，返回起始下标（包括 1）开始到终止
 arrCopy3 设置了两个参数，终止下标为负数，当出现负数时，将负数加上数组长度的值（6）来替换该位置的数，因此就是从 1 开始到 4（不包括）的子数组。
 arrCopy4 中两个参数都是负数，所以都加上数组长度 6 转换成正数，因此相当于 slice(2,5)。
 
-8.  splice()
+> 8.  splice()
 
 splice()：很强大的数组方法，它有很多种用法，可以实现删除.插入和替换。
 
@@ -194,7 +194,7 @@ console.log(arr); // [5, 2, 4, 4, 6, 9, 11]
 console.log(arrRemoved3); //[7]
 ```
 
-9.  indexOf()和 lastIndexOf()
+> 9.  indexOf()和 lastIndexOf()
 
 indexOf()：接收两个参数：要查找的项和（可选的）表示查找起点位置的索引。其中， 从数组的开头（位置 0）开始向后查找。
 lastIndexOf：接收两个参数：要查找的项和（可选的）表示查找起点位置的索引。其中， 从数组的末尾开始向前查找。
@@ -210,7 +210,7 @@ console.log(arr.lastIndexOf(5,4)); //2
 console.log(arr.indexOf("5")); //-
 ```
 
-10. forEach()
+> 10. forEach()
 
 forEach()：对数组进行遍历循环，对数组中的每一项运行给定函数。这个方法没有返回值。参数都是 function 类型，默认有传参，参数分别为：遍历的数组内容；第对应的数组索引，数组本身。
 
@@ -227,7 +227,7 @@ arr.forEach(function(x, index, a){
 // 5|4|true
 ```
 
-11. map()
+> 11. map()
 
 map()：指“映射”，对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组。
 
@@ -241,7 +241,7 @@ var arr2 = arr.map(function(item){
 console.log(arr2); //[1, 4, 9, 16, 25]
 ```
 
-12. filter()
+> 12. filter()
 
 filter()：“过滤”功能，数组中的每一项运行给定函数，返回满足过滤条件组成的数组。
 
@@ -253,7 +253,7 @@ var arr2 = arr.filter(function(x, index) {
 console.log(arr2); //[1, 4, 7, 8, 9, 10]
 ```
 
-13. every()
+> 13. every()
 
 every()：判断数组中每一项都是否满足条件，只有所有项都满足条件，才会返回 true。
 
@@ -269,7 +269,7 @@ var arr3 = arr.every(function(x) {
 console.log(arr3); // false
 ```
 
-14. some()
+> 14. some()
 
 some()：判断数组中是否存在满足条件的项，只要有一项满足条件，就会返回 true。
 
@@ -285,7 +285,7 @@ var arr3 = arr.some(function(x) {
 console.log(arr3); // false
 ```
 
-15. reduce()和 reduceRight()
+> 15. reduce()和 reduceRight()
 
 这两个方法都会实现迭代数组的所有项，然后构建一个最终返回的值。reduce()方法从数组的第一项开始，逐个遍历到最后。而 reduceRight()则从数组的最后一项开始，向前遍历到第一项。
 
@@ -306,7 +306,7 @@ console.log(sum); //25
 <a id="字符串方法"></a>
 # 字符串方法
 
-1.  charAt 返回指定索引出的字符
+> 1.  charAt 返回指定索引出的字符
 
 ```
 var str='abcd';
@@ -315,27 +315,27 @@ console.log(a); //'a'
 console.log(str); //'abcd'
 ```
 
-2.  charCodeAt 返回指定索引出的 unicode 字符
+> 2.  charCodeAt 返回指定索引出的 unicode 字符
 
 ```
 str.charCodeAt(0);   //97
 ```
 
-3.  indexof 判断一个字符第一次出现在某个字符串的索引，如果包含返回它的索引，如果不包含返回-1.
+> 3.  indexOf 判断一个字符第一次出现在某个字符串的索引，如果包含返回它的索引，如果不包含返回-1.
 
 ```
 str.indexOf('a');     //0
 str.indexOf('e');     //-1
 ```
 
-4.  lastIndexOf 判断一个字符最后一次出现在某个字符串的索引，如果包含返回它的索引，如果不包含返回-1.
+> 4.  lastIndexOf 判断一个字符最后一次出现在某个字符串的索引，如果包含返回它的索引，如果不包含返回-1.
 
 ```
 str.lastIndexOf('b');   //1
 str.lastIndexOf('e');   //-1
 ```
 
-5.  concat 拼接 2 个字符串，返回一个新字符串，对原有字符串没有任何改变。
+> 5.  concat 拼接 2 个字符串，返回一个新字符串，对原有字符串没有任何改变。
 
 ```
 var str='qwe';
@@ -344,35 +344,35 @@ var str2=str.concat(str1);
 console.log(str2);//"qweabc"
 ```
 
-6.  substr(n,m) 从索引 n 开始，截取 m 个字符，将截取的字符返回，对原字符串没有任何改变。
+> 6.  substr(n,m) 从索引 n 开始，截取 m 个字符，将截取的字符返回，对原字符串没有任何改变。
 
 ```
 var b=s.substr(1,1)
 console.log(b);  //'w'
 ```
 
-7.  substring(n,m) 从索引 n 开始，截取到索引 m,不包括 m.将截取的字符返回,对原字符串没有任何改变.
+> 7.  substring(n,m) 从索引 n 开始，截取到索引 m,不包括 m.将截取的字符返回,对原字符串没有任何改变.
 
 ```
 var ee=str.substring(1,3);
 console.log(ee);  //"bc"
 ```
 
-8.  slice(n,m) 从索引 n 开始，截取到索引 m,不包括 m.将截取的字符返回,对原字符串没有任何改变.
+> 8.  slice(n,m) 从索引 n 开始，截取到索引 m,不包括 m.将截取的字符返回,对原字符串没有任何改变.
 
 ```
 var aa=str.slice(0,3);
 console.log（aa）;//'abc'
 ```
 
-9.  split 用指定字符分割字符串，返回一个数组.对原字符串没有任何改变。
+> 9.  split 用指定字符分割字符串，返回一个数组.对原字符串没有任何改变。
 
 ```
 var a=str.split('');
 console.log(a);  //["a", "b", "c", "d"]
 ```
 
-10. replace('a',1); 替换指定字符，返回替换后新的字符串，对原有字符串有改变。(第一个参数可以是正则表达式) 只能替换一次 ，配合正则模式修饰符 g 使用
+> 10. replace('a',1); 替换指定字符，返回替换后新的字符串，对原有字符串有改变。(第一个参数可以是正则表达式) 只能替换一次 ，配合正则模式修饰符 g 使用
 
 ```
 var str='aaaaee';
@@ -380,7 +380,7 @@ var reg=/a/g;
 str.replace(reg,1);   //"1111ee"
 ```
 
-11. match() 可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。把找到的字符放在数组里，返回一个数组。
+> 11. match() 可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。把找到的字符放在数组里，返回一个数组。
 
 ```
 var str='aaaa3ed33';
@@ -388,12 +388,11 @@ var reg=/a/g;
 str.match(reg);  //["a", "a", "a", "a"]
 ```
 
-12. search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
+> 12. search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
 
 <a id="数组去重"></a>
 # 数组去重
 
-1.
 
 ```
 /*
@@ -410,7 +409,6 @@ function uniq(array) {
 }
 ```
 
-2.
 
 ```
 /*
@@ -436,7 +434,6 @@ function uniq(array) {
 }
 ```
 
-3.
 
 ```
 /*
@@ -456,7 +453,6 @@ function uniq(array) {
 }
 ```
 
-4.
 
 ```
 /*
@@ -475,7 +471,6 @@ function uniq(array) {
 }
 ```
 
-5.
 
 ```
 // ES6的Set
