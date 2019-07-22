@@ -12,6 +12,10 @@
 - <a href="#全文单词首字母大写">全文单词首字母大写</a>
 - <a href="#ajax的工作原理和过程">ajax的工作原理和过程</a>
 - <a href="#JavaScript异步加载">JavaScript异步加载</a>
+- <a href="#DOMContentLoaded">DOMContentLoaded</a>
+- <a href="#数组拷贝">数组拷贝</a>
+- <a href="#回调地狱">回调地狱</a>
+- <a href="#JavaScript异步加载">JavaScript异步加载</a>
 
 <a id="闭包"></a>
 # 闭包
@@ -231,6 +235,7 @@ window.onload = function(){
 }
 ```
 
+<a id="DOMContentLoaded"></a>
 # DOMContentLoaded
 
 当页面文档加载并解析完毕之后会马上触发 DOMContentLoaded 事件，
@@ -242,20 +247,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 ```
 
-# 数组深拷贝
+<a id="数组拷贝"></a>
+# 数组拷贝
+
+## 数组深拷贝
 
 1.  简单方法: `arr2 = JSON.parse(JSON.stringify(arr1));`
 2.  递归
 
-# 数组浅拷贝
+## 数组浅拷贝
 
 1.  `arr2 = arr1.slice(0);`
 2.  `arr2 = arr1.concat();`
 
-# 提高递归效率
-
-todo
-
+<a id="回调地狱"></a>
 # 回调地狱
 
 ```
@@ -981,66 +986,6 @@ require(["moduleA"], function(func) {
 
 AMD 的加载是异步的, 不会阻塞页面
 
-# async 和 await
-
-```
-function getData(url) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(url.replace('url', 'data'))
-        }, 1000)
-    })
-}
-
-function doTest() {
-    getData('url_111').then(data => {
-        console.log(data)
-        return getData('url_222')
-    }).then(data => {
-        console.log(data)
-        return getData('url_333')
-    }).then(data => {
-        console.log(data)
-    })
-}
-
-doTest()
-/**
-    * 输出:
-    * data_111
-    * data_222
-    * data_333
-    */
-
-async function doTest2() {
-    // data是resolve的参数:url.replace('url', 'data')
-    // await等到getData执行完才会继续执行后面的代码
-    let data = await getData('async_url_111')
-    console.log(data)
-    data = await getData('async_url_222')
-    console.log(data)
-    data = await getData('async_url_333')
-    console.log(data)
-
-    return 'ok'
-}
-
-// async 函数返回的 Promise 对象，
-//必须等到内部所有的 await 命令的 Promise 对象执行完，
-//才会执行 then 方法的回调
-doTest2().then(msg => {
-    console.log(msg)
-})
-//
-/**
-    * 输出:
-    * async_data_111
-    * async_data_222
-    * async_data_333
-    * ok
-    */
-```
-
 # 箭头函数
 
 优势
@@ -1142,17 +1087,7 @@ Promise.all([p1, p2]).then((result) => {
 
 todo
 
-# 模块化
-
-## 什么是模块
-
-todo
-
 # 原型链
-
-todo
-
-# Symbol
 
 todo
 
