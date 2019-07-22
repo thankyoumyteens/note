@@ -1,4 +1,4 @@
-# 学习笔记
+# 积累
 
 - <a href="study/web/web.md">前端</a>
 - <a href="study/git/Git.md">Git+github</a>
