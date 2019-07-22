@@ -1,125 +1,19 @@
-# JavaScript 数据类型
+- <a href="js/type.md">JavaScript数据类型</a>
+- <a href="js/jsclass.md">类</a>
+- <a href="#闭包">闭包</a>
+- <a href="#闭包的缺点">闭包的缺点</a>
+- <a href="js/event.md">事件</a>
+- <a href="js/cross.md">跨域</a>
+- <a href="#判断true或false">判断true或false</a>
+- <a href="#设置和删除cookie">设置和删除cookie</a>
+- <a href="#javascript中的this">javascript中的this</a>
+- <a href="#prototype和">prototype和proto</a>
+- <a href="js/scope.md">作用域.作用域链</a>
+- <a href="#全文单词首字母大写">全文单词首字母大写</a>
+- <a href="#ajax的工作原理和过程">ajax的工作原理和过程</a>
+- <a href="#JavaScript异步加载">JavaScript异步加载</a>
 
-### 5 种不同的数据类型：
-
-- string
-- number
-- boolean
-- object
-- function
-
-### 3 种对象类型：
-
-- Object
-- Date
-- Array
-
-### 2 个不包含任何值的数据类型：
-
-- null
-- undefined
-
-```
-typeof "John"                 // 返回 string
-typeof 3.14                   // 返回 number
-typeof NaN                    // 返回 number
-typeof false                  // 返回 boolean
-typeof [1,2,3,4]              // 返回 object
-typeof {name:'John', age:34}  // 返回 object
-typeof new Date()             // 返回 object
-typeof function () {}         // 返回 function
-typeof myCar                  // 返回 undefined (如果 myCar 没有声明)
-typeof null                   // 返回 object
-```
-
-# 判断类型
-
-1. typeof(例: typeof a // 不能判断object的具体类型)
-
-2. instanceof(例: a instanceof Array)
-
-3. constructor(例: [1, 2].constructor === Array)
-
-4. Object.prototype.toString.call(例: Object.prototype.toString.call(a) // 输出: [object Array])
-
-# 类的创建.继承
-
-### 创建
-
-```
-var Animal = function () {
-    this.name = 'Animal';
-};
-```
-
-```
-// ES6
-class Animal2 {
-    constructor () {
-        this.name = 'Animal2';
-    }
-}
-```
-
-### 继承
-
-```
-function People() {
-    this.name = ''
-    this.age = 0
-}
-
-People.prototype.say = function () {
-    console.log(`${this.name} is ${this.age}`)
-}
-
-function Student() {
-    // 添加(继承)父类属性
-    People.call(this)
-    this.no = 0
-}
-
-// 添加父类原型中的属性和方法(使用空对象中继)
-function extend(Child, Parent) {
-    // 此处如果使用 Child.prototype = new Parent()
-    // 会导致调用两次父类构造函数(上一次是Student中的'People.call(this)')
-    // new Parent()会执行父类constructor, 如果constructor比较复杂,
-    // 执行两次会耗费资源
-    let Tmp = function () {}
-    Tmp.prototype = Parent.prototype
-    Child.prototype = new Tmp()
-    Child.prototype.constructor = Child
-}
-
-extend(Student, People)
-
-let student = new Student()
-```
-
-```
-// ES6
-
-class People {
-    constructor() {
-        this.name = ''
-        this.age = 0
-    }
-
-    say() {
-        console.log(`${this.name} is ${this.age}`)
-    }
-}
-
-class Student extends People {
-    constructor() {
-        super()
-        this.no = 0
-    }
-}
-
-let student = new Student()
-```
-
+<a id="闭包"></a>
 # 闭包
 
 闭包就是能够读取其他函数内部变量的函数
@@ -135,255 +29,15 @@ function f1(){
 
 上面代码中的 f2 函数，就是闭包。
 
-### 闭包的缺点
+<a id="闭包的缺点"></a>
+# 闭包的缺点
 
 1.  由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大
 
 2.  使用闭包时，会涉及到跨作用域访问，每次访问都会导致性能损失
 
-# 事件绑定
-
-1.  嵌入 dom
-
-```
-<button onclick="open()">按钮</button>
-
-<script>
-function open(){
-    alert(1)
-}
-</script>
-```
-
-2.  直接绑定
-
-```
-<button id="btn">按钮</button>
-<script>
-document.getElementById('btn').onclick = function(){
-    alert(1)
-}
-</script>
-```
-
-3.  事件监听
-
-```
-<button id="btn">按钮</button>
-<script>
-document.getElementById('btn').addEventListener('click',function(){
-    alert(1)
-})
-//兼容IE
-document.getElementById('btn').attachEvent('click',function(){
-    alert(1)
-})
-</script>
-```
-
-# 事件委托
-
-事件委托是利用事件的冒泡原理来实现的, 我们给最外面的 div 加点击事件，那么里面的 ul，li，a 做点击事件的时候，都会冒泡到最外层的 div 上，所以都会触发，这就是事件委托，委托它们父级代为执行事件
-
-```
-window.onload = function(){
-    var oUl = document.getElementById("ul1");
-    oUl.onclick = function(ev){
-        var ev = ev || window.event;
-        // 兼容IE
-        var target = ev.target || ev.srcElement;
-        if(target.tagName == 'LI'){
-            alert(123);
-            alert(target.innerHTML);
-        }
-    }
-}
-```
-
-当用事件委托的时候，根本就不需要去遍历元素的子节点，只需要给父级元素添加事件就好了，其他的都是在 js 里面的执行，这样可以大大的减少 dom 操作，这才是事件委托的精髓所在
-
-event.target 返回触发事件的元素, 起泡元素
-
-event.currentTarget 返回绑定事件的元素
-
-# W3C 和 IE 两种事件绑定有什么不同
-
-W3C
-
-```
-// 格式：
-target.addEventListener( type, function, useCapture );
-// useCapture: 默认false, 是否使用事件捕获
-// 例子:  
-var myIntro = document.getElementById('intro');
-myIntro.addEventListener('click', introClick, false);
-```
-
-IE
-
-```
-// 格式:
-target.attachEvent ( 'on' + type, function );  
-// 例子:  
-var myIntro = document.getElementById('intro');
-myIntro.attachEvent('onclick', introClick);
-```
-
-# 事件冒泡的机制
-
-从目标元素起，再依次往顶层对象传递，途中如果有节点绑定了同名事件，这些事件所对应的函数会逐一被触发，此过程便称之为事件冒泡
-
-获取事件冒泡里任意层指定的元素
-
-```
-// 期望li触发事件, 但触发事件的元素可能是li下的某个元素,
-// 所以找到这个元素的父节点, 如果是li的话就触发li的事件
-function toApply(e) {
-  let target=e.target||e.srcElement
-  while(target.parentNode){
-    // 不断取父节点来替换target
-    target=target.parentNode
-  }
-  // 如果目标元素LI存在
-  if(target.tagName!='LI') {
-    // do something
-  }
-}
-```
-
-# JavaScript 事件模型
-
-### 原始事件模型
-
-没有事件流, 事件发生后马上处理
-
-```
-// HTML代码中指定属性值
-<input type=”button” onclick=”func1()” />
-
-// 在js代码中指定属性值
-document.getElementById('input').onclick = func1
-```
-
-优点
-
-所有浏览器都兼容
-
-缺点
-
-1. 逻辑与显示没有分离
-
-2. 相同事件的监听函数只能绑定一个，后绑定的会覆盖掉前面的
-
-3. 没有事件的冒泡.委托等机制
-
-### IE 事件模型
-
-IE 把event作为全局对象 window 的一个属性
-
-```
-window.onload = function (){
-  alert(window.event); // [object event]
-}
-
-setTimeout(function(){
-  alert(window.event); // null
-},2000);
-```
-
-IE 是将 event 对象在处理函数中设为 window 的属性，
-一旦函数执行结束，便被置为 null,
-IE 的事件模型只有两步，先执行元素的监听函数，然后事件沿着父节点一直冒泡到 document
-
-### DOM2 事件模型
-
-一次事件的发生包含三个过程：
-
-1. capturing phase: 事件捕获阶段 事件被从 document 一直向下传播到目标元素,在这过程中依次检查经过的节点是否注册了该事件的监听函数，若有则执行
-
-2. target phase: 事件处理阶段 事件到达目标元素,执行目标元素的事件处理函数.
-
-3. bubbling phase: 事件冒泡阶段 事件从目标元素上升一直到达 document，同样依次检查经过的节点是否注册了该事件的监听函数，有则执行
-
-所有的事件类型都会经历 captruing phase 但是只有部分事件会经历 bubbling phase 阶段,例如 submit 事件就不会被冒泡
-
-# Ajax 如何跨域
-
-### JSONP
-
-```
-// 创建script标签,并追加到dom中
-function addScriptTag(src) {
-  var script = document.createElement('script');
-  script.setAttribute("type","text/javascript");
-  script.src = src;
-  document.body.appendChild(script);
-}
-
-// callback是接收数据并处理的函数
-window.onload = function () {
-  addScriptTag('http://example.com/ip?callback=foo');
-}
-
-// 服务器返回的数据: foo({"test": "testData"});
-// 因为创建了script标签, 浏览器接收到数据后会立即执行(作为js脚本)
-// 就会执行callback指定的函数并把数据传入
-function foo(data) {
-  console.log('response data: ' + JSON.stringify(data));
-};
-```
-
-优点
-
-1.  不受到同源策略的限制
-2.  兼容性好，在更加古老的浏览器中都可以运行
-
-缺点
-
-1.  只支持 GET 请求
-2.  它只支持跨域 HTTP 请求这种情况，不能解决不同域的两个页面之间如何进行 JavaScript 调用的问题。
-3.  jsonp 在调用失败的时候不会返回各种 HTTP 状态码。
-4.  安全性 假如它返回的 javascript 的内容被人控制的
-
-### CORS(跨域资源共享 Cross-origin resource sharing)
-
-服务器端:
-
-```
-// 允许的域名
-response.setHeader("Access-Control-Allow-Origin", originHeader);
-// 允许的请求类型，多个用逗号隔开
-response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
-// 在实际请求中，允许的自定义header，多个用逗号隔开
-response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type");
-// 是否允许带凭证的请求(跨域cookie)
-response.setHeader("Access-Control-Allow-Credentials", "true");
-```
-
-优点
-
-1.  CORS 支持所有类型的 HTTP 请求，功能完善
-2.  CORS 可以通过 onerror 事件监听错误，并且浏览器控制台会看到报错信息，利于排查。
-
-缺点
-
-1.  兼容性, 只支持现代浏览器
-2.  对于复杂请求，CORS 会发两次请求
-
-### 代理请求
-
-服务器 A 的 test01.html 页面想访问服务器 B 的后台 action，返回“test”字符串，此时就出现跨域请求，浏览器控制台会出现报错提示，由于跨域是浏览器的同源策略造成的，对于服务器后台不存在该问题，可以在服务器 A 中添加一个代理 action，在该 action 中完成对服务器 B 中 action 数据的请求，然后在返回到 test01.html 页面
-
-# ajax 跨域携带cookie
-
-```
-var xhr = new XMLHttpRequest();  
-xhr.open("POST", "http://xxxx.com/xxx", true);  
-xhr.withCredentials = true; //支持跨域发送cookies
-xhr.send();
-```
-
-# true false
+<a id="判断true或false"></a>
+# 判断true或false
 
 值为 false
 
@@ -406,7 +60,8 @@ Boolean("null") // true
 Boolean("0") // true
 ```
 
-# 设置和删除 cookie
+<a id="设置和删除cookie"></a>
+# 设置和删除cookie
 
 ```
 // 设置cookie
@@ -435,11 +90,13 @@ function clearCookie(key) {
 }  
 ```
 
-# javascript 中的 this
+<a id="javascript中的this"></a>
+# javascript中的this
 
 this 永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的
 
-# prototype 和\_\_proto\_\_
+<a id="prototype和"></a>
+# prototype和\_\_proto\_\_
 
 显示原型(prototype): 显示原型实现基于原型的继承和属性的共享
 
@@ -471,91 +128,7 @@ console.log(1.__proto__) // Uncaught SyntaxError: Invalid or unexpected token
 
 ![proto](img/proto.png)
 
-# 作用域.作用域链
-
-## 作用域(scope)
-
-### 全局作用域（Global Scope）
-
-最外层函数和在最外层函数外面定义的变量拥有全局作用域
-
-```
-var scope="global";  //声明一个全局变量
-function checksope(){
-    function showglobal(){
-        alert(scope); //弹窗全局变量
-    }
-    showglobal();
-}
-checksope()   // global 内部函数可以访问全局变量
-```
-
-所有末定义直接赋值的变量自动声明为拥有全局作用域
-
-```
-function checksope(){
-    var scope="local";
-    scopeglobal="global";
-    alert(scope);
-}
-checksope();  // local
-alert(scopeglobal); //    global  不带var关键词声明的变量，
-                          直接升级为全局变量，同时也是全局变量
-                           的一个属性
-alert(scope); //脚本错误
-```
-
-所有 window 对象的属性拥有全局作用域
-
-### 函数作用域
-
-JavaScript 没有块级作用域。JavaScript 取而代之地使用了函数作用域：变量在声明他们的函数体以及这个函数体嵌套的任意函数体内都有定义的。
-
-```
-function test（0）{
-    var i = 0;  // i在行函数体内时有定义的，
-    if（typof 0 == "object"){
-        var j = 0;  //j在函数体内是有定义的，不仅仅是在循环内
-        for(var k=0; k<10;k++){ //k在行函数体内是有定义的，不仅仅是在循环内
-            console.log(k);//输出数字0-9
-        }
-        console.log(k);  //k 已经定义了，输出10
-    }
-    console.log(j);    //j 已经定义了，但是可能没有初始化
-}
-```
-
-### 作为属性的变量
-
-当声明一个全局变量时，实际上是定义了全局对象的一个属性。使用 var 声明的变量不可配置，未声明的可配置
-
-此规则只对全局变量有效
-
-```
-var  truvar = 1;   //声明一个不可删除的全局变量
-fakevar = 2；       //创建全局对象的一个可删除的属性
-this.fakecar2 = 3;//同上
-delete truevar //=> false:变量并没有被删除
-delete fakevar //=> true:变量并没有被删除
-delete this.fakevar2 //=> true:变量并没有被删除
-```
-
-## 作用域链
-
-每一段 javascript 代码（全局代码或函数）都有一个与之关联的作用域链。这个作用域连是一个对象列表或者链表，这组对象定义了这段代码“作用域中”的变量。当 javascript 需要查找变量 x 的值的时候（这个过程称作“变量解析”),它会从链中的第一个对象开始查找，如果这个对象有一个名为 x 属性，则会直接使用这个属性的值，如果第一个对象中不存在，则会继续寻找下一个对象，依次类推。如果作用域链上没有任何一个对象含有属性 x，则抛出错误（ReferenceError）异常。
-
-不同的层级作用域上对象的分布
-
-1.  在 javascript 的最顶层（也就是不包含任何函数定义内的代码），作用域链由一个全局对象组成。
-2.  在不包含嵌套的函数体内，作用域链上有两个对象，第一个是定义函数参数和局部变量的对象，第二个是全局对象。
-3.  在一个嵌套的函数体内，作用域链上至少有三个对象。当调用这个函数时，它创建一个新的对象来存储它的局部变量，它实际上保存在同一个作用域链。
-
-# MVVM(Model View ViewModel)
-
-MVVM 的设计思想: 关注 Model 的变化，让 MVVM 框架去自动更新 DOM 的状态，从而把开发者从操作 DOM 的繁琐步骤中解脱出来
-
-改变 JavaScript 对象的状态，会导致 DOM 结构作出对应的变化, 这让我们的关注点从如何操作 DOM 变成了如何更新 JavaScript 对象的状态，而操作 JavaScript 对象比 DOM 简单多了
-
+<a id="全文单词首字母大写"></a>
 # 全文单词首字母大写
 
 ```
@@ -571,7 +144,8 @@ console.log(ReplaceFirstUper('i have a pen, i have an apple!'));
 // 输出: I Have A Pen, I Have An Apple!
 ```
 
-# Ajax 的工作原理和过程
+<a id="ajax的工作原理和过程"></a>
+# ajax的工作原理和过程
 
 Ajax 的工作原理相当于在用户和服务器之间加了—个中间层(AJAX 引擎),使用户操作与服务器响应异步化 并不是所有的用户请求都提交给服务器,像—些数据验证和数据处理等都交给 Ajax 引擎自己来做, 只有确定需要从服务器读取新数据时再由 Ajax 引擎代为向服务器提交请求
 
@@ -632,9 +206,10 @@ function getData() {
 }
 ```
 
-# JavaScript 异步加载
+<a id="JavaScript异步加载"></a>
+# JavaScript异步加载
 
-### defer="defer"和 async="true/false"
+## defer="defer"和 async="true/false"
 
 async: 加载后续文档元素的过程将和 JS 的加载与执行并行进行（异步）
 
@@ -642,7 +217,7 @@ defer: 加载后续文档元素的过程将和 JS 的加载并行进行（异步
 
 使用这两个属性的脚本中不能调用 document.write 方法
 
-### 动态创建 script
+## 动态创建 script
 
 ```
 function addScriptTag(src){
@@ -741,24 +316,6 @@ doTest()
 - 2: 载入完成 此阶段接收服务器端的响应数据。但获得的还只是服务端响应的原始数据，并不能直接在客户端使用。值为 2 表示 send()方法执行完成，已经接收完全部响应数据。并为下一阶段对数据解析作好准备。
 - 3: 解析数据 正在解析响应内容 此阶段解析接收到的服务器端响应数据。即根据服务器端响应头部返回的 MIME 类型把数据转换成能通过 responseBody.responseText 或 responseXML 属性存取的格式，为在客户端调用作好准备。值为 3 表示正在解析数据。
 - 4: 响应内容解析完成 此阶段确认全部数据都已经解析为客户端可用的格式，解析已经完成。值为 4 表示数据解析完毕，可以通过 XMLHttpRequest 对象的相应属性取得数据。
-
-# Event
-
-| 属性          | 描述                                                                                       |
-| ------------- | ------------------------------------------------------------------------------------------ |
-| bubbles       | 返回布尔值，指示事件是否是冒泡事件类型。                                                   |
-| cancelable    | 返回布尔值，指示事件是否可拥可取消的默认动作。                                             |
-| currentTarget | 返回其事件监听器触发该事件的元素。                                                         |
-| eventPhase    | 返回事件传播的当前阶段。(Event.CAPTURING_PHASE 1,Event.AT_TARGET 2,Event.BUBBLING_PHASE 3) |
-| target        | 返回触发此事件的元素（事件的目标节点）。                                                   |
-| timeStamp     | 返回事件生成的日期和时间。                                                                 |
-| type          | 返回当前 Event 对象表示的事件的名称。                                                      |
-
-| 方法              | 描述                                     |
-| ----------------- | ---------------------------------------- |
-| initEvent()       | 初始化新创建的 Event 对象的属性。        |
-| preventDefault()  | 通知浏览器不要执行与事件关联的默认动作。 |
-| stopPropagation() | 阻止事件继续冒泡。                       |
 
 # 改变 this 的指向，call 和 apply 和 bind 的区别
 
