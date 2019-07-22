@@ -4,6 +4,7 @@
 - <a href="#事件冒泡的机制">事件冒泡的机制</a>
 - <a href="#JavaScript事件模型">JavaScript事件模型</a>
 - <a href="#Event">Event对象</a>
+- <a href="#事件流">事件流</a>
 
 <a id="事件绑定"></a>
 # 事件绑定
@@ -194,3 +195,10 @@ IE 的事件模型只有两步，先执行元素的监听函数，然后事件�
 | initEvent()       | 初始化新创建的 Event 对象的属性。        |
 | preventDefault()  | 通知浏览器不要执行与事件关联的默认动作。 |
 | stopPropagation() | 阻止事件继续冒泡。                       |
+
+<a id="事件流"></a>
+# 事件流
+
+DOM 标准事件流则分为三个阶段:事件捕获阶段，处理事件阶段，事件冒泡阶段
+
+![事件流](../img/event.png)

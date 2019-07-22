@@ -233,19 +233,14 @@ window.onload = function(){
 
 # DOMContentLoaded
 
-当页面文档加载并解析完毕之后会马上触发 DOMContentLoaded 事件，而不会等待样式文件.图片文件和子框架页面的加载
+当页面文档加载并解析完毕之后会马上触发 DOMContentLoaded 事件，
+而不会等待样式文件.图片文件和子框架页面的加载
 
 ```
 document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
 });
 ```
-
-# 事件流
-
-DOM 标准事件流则分为三个阶段:事件捕获阶段，处理事件阶段，事件冒泡阶段
-
-![事件流](img/event.png)
 
 # 数组深拷贝
 
