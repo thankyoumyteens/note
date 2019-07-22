@@ -10,7 +10,7 @@
 - <a href="#display的取值">display的取值</a>
 - <a href="#垂直margin的合并">垂直margin的合并</a>
 - <a href="css/center.md">居中</a>
-- <a href="#display:none与visible:hidden的区别">display:none与visible:hidden的区别</a>
+- <a href="#displaynone与visiblehidden的区别">display:none与visible:hidden的区别</a>
 - <a href="#负边距">负边距</a>
 
 <a id="常用的块级元素和行内元素有哪些"></a>
@@ -146,7 +146,7 @@ important->内联->ID->类->标签|伪类|属性选择->伪对象->继承->通�
 
 垂直 margin 合并是在同一个 BFC 中才会发生的，如果两个 BFC 的垂直 margin 不会合并
 
-<a id="display:none与visible:hidden的区别"></a>
+<a id="displaynone与visiblehidden的区别"></a>
 # display:none与visible:hidden的区别
 
 display:none视为不存在且不加载，即，不为被隐藏的对象保留其物理空间，即该对象在页面上彻底消失。
