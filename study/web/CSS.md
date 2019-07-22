@@ -1,5 +1,3 @@
-<a id="top"></a>
-<div style="position: fixed; right: 10px; bottom: 10px">回顶部</div>
 - <a href="#常用的块级元素和行内元素有哪些">常用的块级元素和行内元素有哪些</a>
 - <a href="#块级元素的特点">块级元素的特点</a>
 - <a href="#行内元素的特点">行内元素的特点</a>
