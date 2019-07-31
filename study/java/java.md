@@ -163,3 +163,52 @@ StringBuilder: 可变字符序列, 效率高, 线程不安全
 4. 如果return的数据是引用数据类型，而在finally中对该引用数据类型的属性值的改变起作用，try中的return语句返回的就是在finally中改变后的该属性的值。
 5. finally代码中最好不要包含return，程序会提前退出，也就是说返回的值不是try或catch中的值
 
+# 抽象类和接口的不同
+
+1. 抽象类是对类抽象，而接口是对行为抽象；
+2. 抽象类只能继承一个，而接口可以实现多个；
+3. 抽象类有构造方法（为子类准备），而接口没有构造方法；
+4. 抽象类中可以有非抽象方法，而接口中只能有抽象方法，并且只能是public类型的，默认为 public abstract 类型（JDK1.8开始，接口中可以通过default关键字来定义非抽象方法，解决扩展问题）；
+5. 抽象类中可以有成员变量和属性，而接口中只能有由static final修饰的常量；
+6. 抽象类和接口中都可以包含静态成员变量，抽象类中的静态成员变量的访问类型可以是任意类型，但接口中定义的变量只能是 public static final 类型，并且默认为 public static final 类型。
+
+# 实现多线程的两种方法
+
+## 继承Thread类创建线程
+
+Thread类本质上是实现了Runnable接口的一个实例，代表一个线程的实例。
+启动线程的唯一方法就是通过Thread类的start()实例方法。
+start()方法是一个native方法，它将启动一个新线程，并执行run()方法。
+这种方式实现多线程很简单，通过自己的类直接extend Thread，并复写run()方法，
+就可以启动新线程并执行自己定义的run()方法
+
+```
+public class MyThread extends Thread {  
+　　public void run() {  
+　　 System.out.println("MyThread.run()");  
+　　}  
+}  
+ 
+MyThread myThread1 = new MyThread();  
+MyThread myThread2 = new MyThread();  
+myThread1.start();  
+myThread2.start();
+```
+
+## 实现Runnable接口创建线程
+
+如果自己的类已经extends另一个类，就无法直接extends Thread，
+此时，可以实现一个Runnable接口
+
+```
+public class MyThread extends OtherClass implements Runnable {  
+　　public void run() {  
+　　 System.out.println("MyThread.run()");  
+　　}  
+} 
+
+MyThread myThread = new MyThread();  
+Thread thread = new Thread(myThread);  
+thread.start();
+```
+
