@@ -212,3 +212,24 @@ Thread thread = new Thread(myThread);
 thread.start();
 ```
 
+# String类中常用的方法
+
+1. int length(): 获取字符串的长度
+2. char charAt(int index): 获取指定的索引处的字符串
+3. int indexOf(String str, int fromIndex): 获取str在字符串对象中第一次出现的索引
+4. int lastIndexOf(String str, int fromIndex): 从字符串的末尾位置向前查找
+5. String substring(int start，int end): 从start开始截取字符，到end结束截取字符
+6. char[] toCharArray(): 把字符串转换为字符数组；
+7. String toLowerCase(): 把字符串转换为小写字符串
+8. String toUpperCase(): 把字符串转换为小写字符串
+9. int compareTo(String str): 对字符串内容按字典顺序进行大小比较 
+10. int compareToIgnoreCase (String str): 与compareTo方法相似，但忽略大小写
+11. boolean equals(Object obj): 比较当前字符串和参数字符串是否相等
+12. boolean equalsIgnoreCase(String str): 与equals方法相似，但忽略大小写
+13. String trim(): 去除字符串两端的空格，中间的空格不变
+14. String[] split(String str): 将字符串分割成字符串数组
+15. String replace(char oldChar, char newChar): 用字符newChar替换当前字符串中所有的oldChar字符，并返回一个新的字符串
+16. String replace(String oldStr, String newStr): 用字符串newStr替换当前字符串中所有的oldStr字符串，并返回一个新的字符串
+17. String replaceFirst(String regex,String replacement): 用字符replacement的内容替换当前字符串中遇到的第一个和正则表达式regex相匹配的子串，并将新的字符串返回
+18. String replaceAll(String regex,String replacement): 用字符replacement的内容替换当前字符串中遇到的所有和正则表达式regex相匹配的子串，并将新的字符串返回
+
