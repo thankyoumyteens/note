@@ -1,1 +1,0 @@
-- <a href="redisForWindows.md">在windows上部署使用Redis</a>
