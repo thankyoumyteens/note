@@ -212,6 +212,16 @@ trim属性主要有以下四个
 </insert>
 ```
 
+## sql标签
+
+定义常量
+
+```
+<sql id="Base_Column_List">
+    ID,MAJOR,BIRTHDAY,AGE,NAME,HOBBY
+</sql>
+```
+
 ## include标签
 
 用于引用定义的常量
