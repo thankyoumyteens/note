@@ -13,5 +13,5 @@
 字符型|char|2个字节|0-65535
 布尔类型|boolean|1个字节|true，false
 
-Java中的默认类型：整数类型是 int 、浮点类型是 double
+Java中的默认类型：整数类型是 int , 浮点类型是 double
 
