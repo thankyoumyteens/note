@@ -1,4 +1,6 @@
 - <a href="java.md">Java</a>
+- <a href="mysql.md">MySQL</a>
+- <a href="servlet.md">Servlet</a>
 - <a href="javaweb.md">JavaWeb</a>
 - <a href="mybatis.md">MyBatis</a>
 - <a href="redis/index.md">Redis</a>
