@@ -1,4 +1,5 @@
 # MySQL数据库软件
+
 MySQL登录
 
 1. mysql -u用户名 -p密码
@@ -23,6 +24,7 @@ SQL通用语法
     * 多行注释: /* 注释 */
 		
 SQL分类
+
 1. DDL(Data Definition Language)数据定义语言
 用来定义数据库对象：数据库，表，列等。关键字：create, drop,alter 等
 2. DML(Data Manipulation Language)数据操作语言
@@ -35,37 +37,59 @@ SQL分类
 ## DDL:操作数据库、表
 
 ### 操作数据库：CRUD
+
 1. C(Create):创建
     * 创建数据库：
-        * create database 数据库名称;
+        ```
+        create database 数据库名称;
+        ```
     * 创建数据库，判断不存在，再创建：
-        * create database if not exists 数据库名称;
+        ```
+        create database if not exists 数据库名称;
+        ```
     * 创建数据库，并指定字符集
-        * create database 数据库名称 character set 字符集名;
-
+        ```
+        create database 数据库名称 character set 字符集名;
+        ```
     * 练习： 创建db4数据库，判断是否存在，并制定字符集为gbk
-        * create database if not exists db4 character set gbk;
+        ```
+        create database if not exists db4 character set gbk;
+        ```
 2. R(Retrieve)：查询
     * 查询所有数据库的名称:
-        * show databases;
+        ```    
+        show databases;
+        ```
     * 查询某个数据库的字符集:查询某个数据库的创建语句
-        * show create database 数据库名称;
+        ```
+        show create database 数据库名称;
+        ```
 3. U(Update):修改
     * 修改数据库的字符集
-        * alter database 数据库名称 character set 字符集名称;
+        ```    
+        alter database 数据库名称 character set 字符集名称;
+        ```
 4. D(Delete):删除
     * 删除数据库
-        * drop database 数据库名称;
+        ```
+        drop database 数据库名称;
+        ```
     * 判断数据库存在，存在再删除
-        * drop database if exists 数据库名称;
+        ```    
+        drop database if exists 数据库名称;
+        ```
 5. 使用数据库
     * 查询当前正在使用的数据库名称
-        * select database();
+        ```
+        select database();
+        ```
     * 使用数据库
-        * use 数据库名称;
-
+        ```
+        use 数据库名称;
+        ```
 
 ### 操作表
+
 1. C(Create):创建
     ```
     create table 表名(
@@ -86,61 +110,74 @@ SQL分类
             * 如果将来不给这个字段赋值，或赋值为null，则默认使用当前的系统时间，来自动赋值
         6. varchar：字符串
             * name varchar(20):姓名最大20个字符
-            * zhangsan 8个字符  张三 2个字符
-                    
     * 复制表：
-        * create table 表名 like 被复制的表名;	  	
+        ```
+        create table 表名 like 被复制的表名;
+        ```
 2. R(Retrieve)：查询
     * 查询某个数据库中所有的表名称
-        * show tables;
+        ```
+        show tables;
+        ```
     * 查询表结构
-        * desc 表名;
+        ```
+        desc 表名;
+        ```
 3. U(Update):修改
     1. 修改表名
-        * alter table 表名 rename to 新的表名;
+        ```
+        alter table 表名 rename to 新的表名;
+        ```
     2. 修改表的字符集
-        * alter table 表名 character set 字符集名称;
+        ```
+        alter table 表名 character set 字符集名称;
+        ```
     3. 添加一列
-        * alter table 表名 add 列名 数据类型;
+        ```
+        alter table 表名 add 列名 数据类型;
+        ```
     4. 修改列名称 类型
-        * alter table 表名 change 列名 新列别 新数据类型;
-        * alter table 表名 modify 列名 新数据类型;
+        ```
+        alter table 表名 change 列名 新列别 新数据类型;
+        alter table 表名 modify 列名 新数据类型;
+        ```
     5. 删除列
-        * alter table 表名 drop 列名;
+        ```
+        alter table 表名 drop 列名;
+        ```
 4. D(Delete):删除
+    ```
     * drop table 表名;
     * drop table  if exists 表名 ;
-
+    ```
 
 ## DML：增删改表中数据
 
 1. 添加数据：
-    * 语法：
-        * insert into 表名(列名1,列名2,...列名n) values(值1,值2,...值n);
+    ```
+    insert into 表名(列名1,列名2,...列名n) values(值1,值2,...值n);
+    ```
     * 注意：
         1. 列名和值要一一对应。
         2. 如果表名后，不定义列名，则默认给所有列添加值
-            insert into 表名 values(值1,值2,...值n);
-        3. 除了数字类型，其他类型需要使用引号(单双都可以)引起来
+        3. 除了数字类型，其他类型需要使用引号引起来
 2. 删除数据：
-    * 语法：
-        * delete from 表名 [where 条件]
+    ```
+    delete from 表名 [where 条件]
+    ```
     * 注意：
         1. 如果不加条件，则删除表中所有记录。
         2. 如果要删除所有记录
             1. delete from 表名; -- 不推荐使用。有多少条记录就会执行多少次删除操作
             2. TRUNCATE TABLE 表名; -- 推荐使用，效率更高 先删除表，然后再创建一张一样的表。
 3. 修改数据：
-    * 语法：
-        * update 表名 set 列名1 = 值1, 列名2 = 值2,... [where 条件];
-
+    ```
+    update 表名 set 列名1 = 值1, 列名2 = 值2,... [where 条件];
+    ```
     * 注意：
         1. 如果不加任何条件，则会将表中所有记录全部修改。
 
-
-
 ## DQL：查询表中的记录
-* select * from 表名;
 
 1. 语法：
     ```
@@ -159,12 +196,9 @@ SQL分类
     limit
         分页限定
     ```
-
 2. 基础查询
     1. 多个字段的查询
         select 字段名1，字段名2... from 表名；
-        * 注意：
-            * 如果查询所有字段，则可以使用*来替代字段列表。
     2. 去除重复：
         * distinct
     3. 计算列
@@ -174,8 +208,6 @@ SQL分类
             * 如果该字段为null后的替换值。
     4. 起别名：
         * as：as也可以省略
-        
-
 3. 条件查询
     1. where子句后跟条件
     2. 运算符
@@ -190,7 +222,6 @@ SQL分类
         * and  或 &&
         * or  或 || 
         * not  或 !
-
 
 # DQL:查询语句
 1. 排序查询
