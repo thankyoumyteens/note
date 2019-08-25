@@ -180,3 +180,408 @@ ${}可以接收简单类型值或 pojo 属性值，如果 parameterType 传输�
 </select>
 ```
 
+# 动态SQL标签
+
+## if 标签
+   
+if标签通常用于WHERE语句、UPDATE语句、INSERT语句中，
+通过判断参数值来决定是否使用某个查询条件、判断是否更新某一个字段、
+判断是否插入某个字段的值。
+
+```
+<if test="name != null and name != ''">
+         and NAME = #{name}
+</if>
+```
+
+## foreach 标签
+
+foreach标签主要用于构建in条件，可在sql中对集合进行迭代。
+也常用到批量删除、添加等操作中。
+
+属性介绍：
+
+- collection：collection属性的值有三个分别是list、array、map三种，分别对应的参数类型为：List、数组、map集合。
+- item ：表示在迭代过程中每一个元素的别名
+- index ：表示在迭代过程中每次迭代到的位置（下标）
+- open ：前缀
+- close ：后缀
+- separator ：分隔符，表示迭代时每个元素之间以什么分隔
+
+```
+<!-- in查询所有，不分页 -->
+<select id="selectIn" resultMap="BaseResultMap">
+    select name,hobby from student where id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+</select>
+```
+
+## where标签
+
+where标签会知道如果它包含的标签中有返回值的话，它就插入一个‘where’。
+此外，如果标签返回的内容是以AND 或OR 开头的，则它会剔除掉。
+
+```
+<select id="getStudentListWhere" parameterType="Object" resultMap="BaseResultMap">     
+    SELECT * from STUDENT      
+       <where>   
+         <if test="name!=null and name!='' ">     
+            NAME LIKE CONCAT(CONCAT('%', #{name}),'%')      
+         </if>     
+         <if test="hobby!= null and hobby!= '' ">     
+            AND hobby = #{hobby}      
+         </if>  
+       </where>        
+</select>    
+```
+
+## set标签
+
+当在update语句中使用if标签时，如果最后的if没有执行，则或导致逗号多余错误。
+使用set标签可以将动态的配置set关键字，和剔除追加到条件末尾的任何不相关的逗号。
+
+```
+<update id="updateStudent" parameterType="Object">     
+    UPDATE STUDENT      
+    <set>     
+        <if test="name!=null and name!='' ">     
+            NAME = #{name},      
+        </if>     
+        <if test="hobby!=null and hobby!='' ">     
+            MAJOR = #{major},      
+        </if> 
+        <if test="hobby!=null and hobby!='' ">     
+            HOBBY = #{hobby},  
+        </if>     
+    </set>     
+    WHERE ID = #{id};      
+</update>  
+```
+
+## trim标签
+
+一般用于去除sql语句中多余的and关键字，逗号，或者给sql语句前拼接
+“where“、“set“以及“values(“ 等前缀，或者添加“)“等后缀，
+可用于选择性插入、更新、删除或者条件查询等操作。
+
+trim属性主要有以下四个
+
+- prefix：给sql语句拼接的前缀
+- suffix：给sql语句拼接的后缀
+- prefixOverrides：去除sql语句前面的关键字或者字符，该关键字或者字符由prefixOverrides属性指定，假设该属性指定为"AND"，当sql语句的开头为"AND"，trim标签将会去除该"AND"
+- suffixOverrides：去除sql语句后面的关键字或者字符，该关键字或者字符由suffixOverrides属性指定
+
+```
+<insert id="insert" parameterType="Object">
+    insert into student    
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="name != null">
+            NAME,
+        </if>
+        <if test="hobby != null">
+            HOBBY,
+        </if>    
+    </trim>    
+    <trim prefix="values(" suffix=")" suffixOverrides=",">  
+        <if test="name != null">
+            #{name},
+        </if>
+        <if test="hobby != null">
+            #{hobby},
+        </if>
+    </trim>
+</insert>
+```
+
+## sql标签
+
+定义常量
+
+```
+<sql id="Base_Column_List">
+    ID,MAJOR,BIRTHDAY,AGE,NAME,HOBBY
+</sql>
+```
+
+## include标签
+
+用于引用定义的常量
+
+```
+<select id="selectAll" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM student
+</select>
+```
+
+# 多表查询
+
+## 一对一查询(多对一)
+
+### 表
+
+用户表
+
+列名|类型|约束
+-|-|-
+i d|int|主键
+用户名|varchar(20)|
+性别|varchar(10)|
+出生日期|date|
+地址|varchar(60)|
+
+账户表
+
+列名|类型|约束
+-|-|-
+i d|int|主键
+用户id|int|外键
+金额|double|
+
+### 定义账户实体类
+
+```
+public class Account {
+    private Integer id;
+    private Integer uid;
+    private Double money;
+    
+    private User user;
+}
+```
+
+### Mapper.xml
+
+```
+List<Account> findAll();
+
+<mapper namespace="com.itheima.dao.IAccountDao">
+    <!-- 建立对应关系 -->
+    <resultMap type="account" id="accountMap">
+        <id column="aid" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="money" property="money"/>
+        <!-- 它是用于指定从表方的引用实体属性的 -->
+        <association property="user" javaType="user">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="sex" property="sex"/>
+            <result column="birthday" property="birthday"/>
+            <result column="address" property="address"/>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="accountMap">
+        select u.*,a.id as aid,a.uid,a.money 
+        from account a,user u where a.uid =u.id;
+    </select>
+</mapper>
+```
+
+## 一对多查询
+
+### 表
+
+用户表
+
+列名|类型|约束
+-|-|-
+i d|int|主键
+用户名|varchar(20)|
+性别|varchar(10)|
+出生日期|date|
+地址|varchar(60)|
+
+账户表
+
+列名|类型|约束
+-|-|-
+i d|int|主键
+用户id|int|外键
+金额|double|
+
+### 定义用户实体类
+
+```
+public class User {
+    private Integer id;
+    private String username;
+    private Date birthday;
+    private String sex;
+    private String address;
+    
+    private List<Account> accounts;
+}
+```
+
+### Mapper.xml
+
+collection部分定义了用户关联的账户信息。表示关联查询结果集
+
+property="accList"：关联查询的结果集存储在 User 对象的上哪个属性。
+
+ofType="account"：指定关联查询的结果集中的对象类型即List中的对象类型。此处可以使用别名，也可以使用全限定名
+
+```
+List<User> findAll();
+
+<mapper namespace="com.itheima.dao.IUserDao">
+    <resultMap type="user" id="userMap">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"/>
+        <result column="address" property="address"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+
+        <collection property="accounts" ofType="account">
+            <id column="aid" property="id"/>
+            <result column="uid" property="uid"/>
+            <result column="money" property="money"/>
+        </collection>
+    </resultMap>
+    <!-- 配置查询所有操作 -->
+    <select id="findAll" resultMap="userMap">
+        select u.*,a.id as aid ,a.uid,a.money 
+        from user u left outer join account a 
+        on u.id =a.uid
+    </select>
+</mapper>
+```
+
+## 多对多查询
+
+### 表
+
+用户表
+
+列名|类型|约束
+-|-|-
+i d|int|主键
+用户名|varchar(20)|
+性别|varchar(10)|
+出生日期|date|
+地址|varchar(60)|
+
+角色表
+
+列名|类型|约束
+-|-|-
+i d|int|主键
+角色名称|varchar(20)|
+角色描述|varchar(20)|
+
+用户角色中间表
+
+列名|类型|约束
+-|-|-
+用户id|int|外键
+角色id|int|外键
+
+### 定义实体类
+```
+public class Role implements Serializable {
+    private Integer roleId;
+    private String roleName;
+    private String roleDesc;
+    //多对多的关系映射：一个角色可以赋予多个用户
+    private List<User> users;
+}
+```
+
+### Mapper.xml
+
+```
+List<Role> findAll();
+
+<mapper namespace="com.itheima.dao.IRoleDao">
+    <!--定义 role 表的 ResultMap-->
+    <resultMap id="roleMap" type="role">
+        <id property="roleId" column="rid"></id>
+        <result property="roleName" column="role_name"></result>
+        <result property="roleDesc" column="role_desc"></result>
+        <collection property="users" ofType="user">
+            <id column="id" property="id"></id>
+            <result column="username" property="username"></result>
+            <result column="address" property="address"></result>
+            <result column="sex" property="sex"></result>
+            <result column="birthday" property="birthday"></result>
+        </collection>
+    </resultMap>
+    <!--查询所有-->
+    <select id="findAll" resultMap="roleMap">
+        select u.*,r.id as rid,r.role_name,r.role_desc 
+        from role r left outer join user_role ur 
+        on r.id = ur.rid
+        left outer join user u 
+        on u.id = ur.uid
+    </select>
+</mapper>
+```
+
+# 缓存
+
+## 什么是缓存
+
+存在于内存中的临时数据
+
+## 为什么使用缓存
+
+减少和数据库的交互次数, 提高执行效率
+
+## 什么样的数据适合缓存
+
+1. 经常查询并且不经常改变的数据
+2. 数据的正确与否对最终结果影响不大的数据
+
+## 什么样的数据不适合缓存
+   
+1. 经常改变的数据
+2. 数据的正确与否对最终结果影响很大的数据
+
+## MyBatis中的一级缓存
+
+它指的是MyBatis中SqlSession对象的缓存
+
+当我们执行查询后, 查询的结果会同时存入SqlSession提供的一块区域中,
+该区域的结构是Map, 当我们再次查询同样的数据, 
+MyBatis会先去SqlSession中查询, 有的话直接拿来用
+
+当SqlSession对象消失后, 一级缓存也消失了
+
+一级缓存中保存的是Java对象, 查询缓存会取出相同的对象
+
+当调用 SqlSession 的修改, 添加, 删除, commit(), close()等方法时，就会清空一级缓存
+
+## MyBatis中的二级缓存
+
+它指的是MyBatis中SqlSessionFactory对象的缓存, 
+由同一个SqlSessionFactory对象创建的SqlSession对象会共享
+SqlSessionFactory对象的缓存
+
+二级缓存中保存的不是Java对象, 而是数据库中的数据
+
+### 开启二级缓存
+
+1. 在 SqlMapConfig.xml 文件开启二级缓存
+    ```
+    <settings>
+        <!-- 开启二级缓存的支持 -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    ```
+2. 配置要使用缓存的 Mapper 映射文件
+    ```
+    <mapper namespace="com.itheima.dao.IUserDao">
+        <!-- 开启二级缓存的支持 -->
+        <cache/>
+    </mapper>
+    ```
+3. 配置 statement 上面的 useCache 属性
+    ```
+    <!-- 根据 id 查询 -->
+    <select id="findById" resultType="user" parameterType="int" useCache="true">
+        select * from user where id = #{uid}
+    </select>
+    ```
