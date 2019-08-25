@@ -560,7 +560,8 @@ MyBatis会先去SqlSession中查询, 有的话直接拿来用
 由同一个SqlSessionFactory对象创建的SqlSession对象会共享
 SqlSessionFactory对象的缓存
 
-二级缓存中保存的不是Java对象, 而是数据库中的数据
+二级缓存中保存的不是Java对象, 而是序列化后的数据, 
+查询缓存会创建新对象, 并把数据赋值给新对象
 
 ### 开启二级缓存
 
@@ -585,3 +586,103 @@ SqlSessionFactory对象的缓存
         select * from user where id = #{uid}
     </select>
     ```
+
+### 注意
+
+当我们在使用二级缓存时，所缓存的类一定要实现 java.io.Serializable 接口，这种就可以使用序列化
+方式来保存对象
+
+# 延迟加载
+
+就是在需要用到数据时才进行加载，不需要用到数据时就不加载数据。延迟加载也称懒加载.
+好处：先从单表查询，需要时再从关联表去关联查询，大大提高数据库性能，因为查询单表要比关联查询多张表速
+度要快
+
+## 配置 SqlMapConfig.xml 文件打开延迟加载
+
+```
+<settings>
+    <setting name="lazyLoadingEnabled" value="true"/>
+    <setting name="aggressiveLazyLoading" value="false"/>
+</settings>
+
+```
+
+## 使用 association 实现延迟加载
+
+
+```
+List<Account> findAll();
+
+<mapper namespace="com.itheima.dao.IAccountDao">
+    <!-- 建立对应关系 -->
+    <resultMap type="account" id="accountMap">
+        <id column="aid" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="money" property="money"/>
+        <!-- 它是用于指定从表方的引用实体属性的 -->
+        <!-- select： 填写我们要调用的 select 映射的 id  -->
+        <!-- column ： 填写我们要传递给 select 映射的参数 -->
+        <association property="user" javaType="user"
+            select="com.itheima.dao.IUserDao.findById"
+            column="uid"/>
+    </resultMap>
+    <select id="findAll" resultMap="accountMap">
+        select * from account
+    </select>
+</mapper>
+```
+com.itheima.dao.IUserDao
+```
+User findById(Integer userId);
+
+<mapper namespace="com.itheima.dao.IUserDao">
+    <!-- 根据 id 查询 -->
+    <select id="findById" resultType="user" parameterType="int" >
+        select * from user where id = #{uid}
+    </select>
+</mapper>
+```
+
+## 使用 Collection 实现延迟加载
+
+```
+List<User> findAll();
+
+<mapper>
+    <resultMap type="user" id="userMap">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"/>
+        <result column="address" property="address"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <!-- 
+            collection 是用于建立一对多中集合属性的对应关系
+            ofType 用于指定集合元素的数据类型
+            select 是用于指定查询账户的唯一标识（账户的 dao 全限定类名加上方法名称）
+            column 是用于指定使用哪个字段的值作为条件查询
+            collection标签：
+            主要用于加载关联的集合对象
+            select 属性：
+            用于指定查询 account 列表的 sql 语句，所以填写的是该 sql 映射的 id
+            column 属性：
+            用于指定 select 属性的 sql 语句的参数来源，上面的参数来自于 user 的 id 列，所以就写成 id 这一
+            个字段名了
+        -->
+        <collection property="accounts" ofType="account"
+            select="com.itheima.dao.IAccountDao.findByUid"
+            column="id"/>
+    </resultMap>
+    <!-- 配置查询所有操作 -->
+    <select id="findAll" resultMap="userMap">
+        select * from user
+    </select>
+</mapper>
+```
+com.itheima.dao.IAccountDao
+```
+<!-- 根据用户 id 查询账户信息 -->
+<select id="findByUid" resultType="account" parameterType="int">
+    select * from account where uid = #{uid}
+</select>
+```
