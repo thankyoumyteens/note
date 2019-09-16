@@ -1,5 +1,4 @@
-# 积累
-
+- <a href="study/ide/index.md">IDE</a>
 - <a href="study/web/web.md">前端</a>
 - <a href="study/java/index.md">Java</a>
 - <a href="study/git/Git.md">Git+github</a>
