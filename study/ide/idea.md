@@ -50,3 +50,47 @@ resource文件夹是存放资源的，
 ```
 <value>hbm/xxx.hbm.xml</value>
 ```
+
+# Compilation failed: internal java compiler error 解决办法
+
+## 错误现象
+
+使用Idea导入新项目或升级idea或新建项目时会出现以下异常信息：
+Error:java: Compilation failed: internal java compiler error 
+
+## 错误原因
+
+导致这个错误的原因主要是因为jdk版本问题，此处有两个原因，一个是编译版本不匹配，一个是当前项目jdk版本不支持。
+
+## 查看项目的jdk
+
+File ->Project Structure ->Project Settings ->Project:
+![](img/jdk1.jpg)
+查看此两处是否与目标jdk一致。
+
+## 查看工程的jdk
+
+File ->Project Structure ->Project Settings ->Modules:
+![](img/jdk2.jpg)
+
+## 查看java编译器版本
+
+File ->Settings ->Build, Execution, Deployment ->Compiler ->Java Compiler:
+![](img/jdk3.jpg)
+
+导入java项目时此处处问题的概率比较多。
+针对此问题，重新打开或修改pom文件（maven项目）中的内容很可能导致jdk版本重新变为1.5。如果是maven项目，可在pom文件中指定jdk相关信息：
+```
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
