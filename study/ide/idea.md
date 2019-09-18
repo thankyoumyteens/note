@@ -94,3 +94,13 @@ File ->Settings ->Build, Execution, Deployment ->Compiler ->Java Compiler:
     </plugins>
 </build>
 ```
+
+# IDEA格式化代码快捷键失灵原因
+
+今天做代码优化时发现格式化代码快捷键不好使了
+
+各种找原因，最后发现是与网易云音乐快捷键冲突
+
+解决办法：
+1. 关闭网易云音乐   
+2. 修改网易云音乐快捷键
