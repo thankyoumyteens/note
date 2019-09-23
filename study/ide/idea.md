@@ -25,6 +25,7 @@ spring配置文件中用到了dbcp2, 但是maven中没有它的依赖
     ![](img/dbcp3.png)
 4. 选择tomcat即可，然后Add Selected
     ![](img/dbcp4.png)
+5. 此时idea虽然还会报错, 但是已经可以正常运行了
 
 # IDEA中SSH框架配置问题: 找不到hbm.xml映射文件
 
