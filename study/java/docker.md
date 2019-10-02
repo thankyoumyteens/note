@@ -627,3 +627,28 @@ docker start registry
 docker push 192.168.184.141:5000/jdk1.8
 ```
 
+## 7.3 从私有仓库下载镜像
+
+修改daemon.json
+
+```
+vi /etc/docker/daemon.json
+```
+
+添加以下内容，保存退出。
+
+```json
+{"insecure-registries":["192.168.184.141:5000"]} 
+```
+
+重启docker 服务
+
+```
+systemctl restart docker
+```
+
+下载镜像
+
+```
+docker pull 192.168.184.141:5000/jdk1.8
+```
