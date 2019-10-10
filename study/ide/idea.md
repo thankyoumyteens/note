@@ -105,3 +105,13 @@ File ->Settings ->Build, Execution, Deployment ->Compiler ->Java Compiler:
 解决办法：
 1. 关闭网易云音乐   
 2. 修改网易云音乐快捷键
+
+# 解决IDEA调试时不显示list中为null的元素
+
+设置显示Arraylist中的null完整查看初始数组大小，扩容过程
+
+* 老版本：Settings -> Debugger -> Data Views -> Arrays -> Hide null array elements
+* 新版本：Settings -> Debugger -> Data Views -> Java 取消Hide null elements in array and collections
+
+或者设置断点，开始调试后，在idea下方的提示信息区的Variables或Watches右键选择Customize Data Views,取消Hide null elements in array and collections
+
