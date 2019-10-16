@@ -4,6 +4,6 @@
 - <a href="push.md">推送至远程仓库</a>
 - <a href="pull.md">从远程仓库获取</a>
 
-# git 工作流
+# git flow
 
 todo
