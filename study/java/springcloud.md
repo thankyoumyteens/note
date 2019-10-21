@@ -970,7 +970,7 @@ eureka:
 
 先添加SpringCloud依赖：
 
-```xml
+```
 <!-- SpringCloud的依赖 -->
 <dependencyManagement>
     <dependencies>
@@ -1075,7 +1075,7 @@ eureka:
 
 先添加SpringCloud依赖：
 
-```xml
+```
 <!-- SpringCloud的依赖 -->
 <dependencyManagement>
     <dependencies>
