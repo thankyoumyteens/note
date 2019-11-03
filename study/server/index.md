@@ -1,3 +1,5 @@
+- <a href="linuxCmd.md">Linux命令</a>
+
 # 在ubuntu上搭建ss
 
 通过如下命令安装：
