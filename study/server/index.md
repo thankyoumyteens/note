@@ -1,4 +1,5 @@
 - <a href="linuxCmd.md">Linux命令</a>
+- <a href="vim.md">Vim</a>
 
 # 在ubuntu上搭建ss
 
