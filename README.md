@@ -3,7 +3,7 @@
 - <a href="study/ide/index.md">IDE</a>
 - <a href="study/navicat/index.md">数据库连接客户端</a>
 - <a href="study/chrome/index.md">Chrome浏览器</a>
-- <a href="study/web/web.md">前端</a>
+- <a href="study/web/index.md">前端</a>
 - <a href="study/java/index.md">Java</a>
 - <a href="redis/index.md">Redis</a>
 - <a href="study/git/index.md">Git+github</a>

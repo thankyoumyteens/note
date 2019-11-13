@@ -1,0 +1,236 @@
+# 线条
+
+canvas是基于状态的绘图
+
+基本使用
+```
+<canvas id="canvas"></canvas>
+<script>
+    var canvas = document.getElementById('canvas')
+    var context = canvas.getContext('2d')
+    // 设置状态
+    ...
+    // 使用context进行绘制
+    ...
+</script>
+```
+
+## 画一条直线
+
+```
+// 把笔尖移动到(100, 100)
+context.moveTo(100, 100)
+// 连接从(100, 100)到(700, 700)的直线
+context.lineTo(700, 700)
+// 线条宽度
+context.lineWidth = 10
+// 线条的样式(这里设置了颜色)
+context.strokeStyle = '#058'
+// 进行绘制
+context.stroke()
+```
+![](img/clipboard.png)
+### 折线
+```
+// 把笔尖移动到(100, 100)
+context.moveTo(100, 100)
+// 连接从(100, 100)到(700, 700)的直线
+context.lineTo(700, 700)
+//连接从(700, 700)到(100, 700)的直线
+context.lineTo(100, 700)
+// 线条宽度
+context.lineWidth = 10
+// 线条的样式(这里设置了颜色)
+context.strokeStyle = '#058'
+// 进行绘制
+context.stroke()
+```
+![](img/clipboard%20(1).png)
+### 绘制不同颜色的折线
+调用stroke()会将所有的状态绘制一遍,
+如果有beginPath()的话stroke()会检查beginPath()之后指定的状态进行绘制
+beginPath会开启一条新的路径
+```
+// lineWidth没有改变, 会被一直使用
+context.lineWidth = 10
+// beginPath表示从这里开始要进行全新的绘制
+context.beginPath()
+context.moveTo(100, 200)
+context.lineTo(300, 400)
+context.lineTo(100, 600)
+context.strokeStyle = 'red'
+context.stroke();
+// beginPath表示从这里开始要进行全新的绘制
+context.beginPath()
+context.moveTo(300, 200)
+context.lineTo(500, 400)
+context.lineTo(300, 600)
+context.strokeStyle = 'green'
+context.stroke();
+// beginPath表示从这里开始要进行全新的绘制
+context.beginPath()
+context.moveTo(500, 200)
+context.lineTo(700, 400)
+context.lineTo(500, 600)
+context.strokeStyle = 'blue'
+context.stroke()
+```
+![](img/clipboard%20(2).png)
+### 绘制封闭多边形
+```
+context.beginPath()
+context.moveTo(100, 350)
+context.lineTo(500, 350)
+context.lineTo(500, 200)
+context.lineTo(700, 400)
+context.lineTo(500, 600)
+context.lineTo(500, 450)
+context.lineTo(100, 450)
+// closePath会帮我们从最后一个顶点连接到第一个顶点
+context.closePath()
+context.lineWidth = 10
+context.strokeStyle = 'blue'
+context.stroke()
+```
+![](img/clipboard%20(3).png)
+### 为封闭的多边形填充颜色
+```
+context.beginPath()
+context.moveTo(100, 350)
+context.lineTo(500, 350)
+context.lineTo(500, 200)
+context.lineTo(700, 400)
+context.lineTo(500, 600)
+context.lineTo(500, 450)
+context.lineTo(100, 450)
+context.closePath()
+context.lineWidth = 10
+context.strokeStyle = 'blue'
+context.fillStyle='yellow'
+// 先stroke的话fill会覆盖部分线条
+context.fill()
+context.stroke()
+```
+![](img/clipboard%20(4).png)
+
+## 绘制矩形
+
+```
+context.beginPath()
+// (x, y, width, height)
+context.rect(0, 0, 100, 100)
+context.closePath()
+context.fillStyle='yellow'
+context.strokeStyle = 'blue'
+context.fill()
+context.stroke()
+```
+![](img/clipboard%20(5).png)
+```
+context.fillStyle='yellow'
+// (x, y, width, height)
+context.fillRect(0, 0, 100, 100)
+```
+![](img/clipboard%20(6).png)
+```
+context.lineWidth = 10
+context.strokeStyle = 'blue'
+// (x, y, width, height)
+context.strokeRect(0, 0, 100, 100)
+```
+![](img/clipboard%20(7).png)
+### 清空矩形区域
+```
+context.clearRect(x, y, width, height)
+```
+
+## 设置线条两端的形状
+
+lineCap
+* 取值: butt(默认), round, square
+* 只对线段的两端有效, 对线段的连接处无效
+```
+context.lineWidth = 50
+context.strokeStyle = '#058'
+
+context.beginPath()
+context.moveTo(100, 200)
+context.lineTo(700, 200)
+context.lineCap = 'butt'
+context.stroke()
+
+context.beginPath()
+context.moveTo(100, 400)
+context.lineTo(700, 400)
+context.lineCap = 'round'
+context.stroke()
+
+context.beginPath()
+context.moveTo(100, 600)
+context.lineTo(700, 600)
+context.lineCap = 'square'
+context.stroke()
+
+// 比较的baseline
+context.lineWidth = 1
+context.strokeStyle = '#27a'
+context.moveTo(100, 100)
+context.lineTo(100, 700)
+context.moveTo(700, 100)
+context.lineTo(700, 700)
+context.stroke()
+```
+![](img/clipboard%20(8).png)
+### 设置线条交点的形状
+lineJoin
+* 取值: miter(默认), bevel, round
+```
+// 画五角星
+function drawStar(cxt, r, R, x, y, rot) {
+    cxt.beginPath()
+    for (let i = 0; i < 5; i++) {
+        cxt.lineTo(Math.cos((18 + i * 72 - rot) / 180 * Math.PI) * R + x,
+            -Math.sin((18 + i * 72 - rot) / 180 * Math.PI) * R + y)
+            cxt.lineTo(Math.cos((54 + i * 72 - rot) / 180 * Math.PI) * r + x,
+            -Math.sin((54 + i * 72 - rot) / 180 * Math.PI) * r + y)
+    }
+    cxt.closePath()
+    cxt.stroke()
+}
+```
+不同的交点形状
+```
+context.lineWidth = 10
+context.lineJoin = 'miter'
+drawStar(context, 50, 300, 400, 400, 0)
+```
+![](img/clipboard%20(9).png)
+```
+context.lineWidth = 10
+context.lineJoin = 'bevel' // 线条与线条斜接
+drawStar(context, 50, 300, 400, 400, 0)
+```
+![](img/clipboard%20(10).png)
+```
+context.lineWidth = 10
+context.lineJoin = 'round'
+drawStar(context, 50, 300, 400, 400, 0)
+```
+![](img/clipboard%20(11).png)
+miterLimit
+* 限制lineJoin为miter时内角与外角的最大距离, 超过这个最大线与线会使用bevel连接
+![](img/clipboard%20(12).png)
+```
+context.lineWidth = 10
+context.lineJoin = 'miter'
+context.miterLimit = 10
+drawStar(context, 30, 300, 400, 400, 0)
+```
+![](img/clipboard%20(13).png)
+```
+context.lineWidth = 10
+context.lineJoin = 'miter'
+context.miterLimit = 20
+drawStar(context, 30, 300, 400, 400, 0)
+```
+![](img/clipboard%20(14).png)
