@@ -1,8 +1,6 @@
-# 线条
+* canvas是基于状态的绘图
 
-canvas是基于状态的绘图
-
-基本使用
+# 基本使用
 ```
 <canvas id="canvas"></canvas>
 <script>
@@ -15,7 +13,7 @@ canvas是基于状态的绘图
 </script>
 ```
 
-## 画一条直线
+# 画一条直线
 
 ```
 // 把笔尖移动到(100, 100)
@@ -29,8 +27,7 @@ context.strokeStyle = '#058'
 // 进行绘制
 context.stroke()
 ```
-![](img/clipboard.png)
-### 折线
+## 折线
 ```
 // 把笔尖移动到(100, 100)
 context.moveTo(100, 100)
@@ -45,8 +42,7 @@ context.strokeStyle = '#058'
 // 进行绘制
 context.stroke()
 ```
-![](img/clipboard%20(1).png)
-### 绘制不同颜色的折线
+## 绘制不同颜色的折线
 调用stroke()会将所有的状态绘制一遍,
 如果有beginPath()的话stroke()会检查beginPath()之后指定的状态进行绘制
 beginPath会开启一条新的路径
@@ -76,7 +72,7 @@ context.strokeStyle = 'blue'
 context.stroke()
 ```
 ![](img/clipboard%20(2).png)
-### 绘制封闭多边形
+## 绘制封闭多边形
 ```
 context.beginPath()
 context.moveTo(100, 350)
@@ -92,8 +88,7 @@ context.lineWidth = 10
 context.strokeStyle = 'blue'
 context.stroke()
 ```
-![](img/clipboard%20(3).png)
-### 为封闭的多边形填充颜色
+## 为封闭的多边形填充颜色
 ```
 context.beginPath()
 context.moveTo(100, 350)
@@ -113,7 +108,7 @@ context.stroke()
 ```
 ![](img/clipboard%20(4).png)
 
-## 绘制矩形
+# 绘制矩形
 
 ```
 context.beginPath()
@@ -139,12 +134,12 @@ context.strokeStyle = 'blue'
 context.strokeRect(0, 0, 100, 100)
 ```
 ![](img/clipboard%20(7).png)
-### 清空矩形区域
+## 清空矩形区域
 ```
 context.clearRect(x, y, width, height)
 ```
 
-## 设置线条两端的形状
+# 设置线条两端的形状
 
 lineCap
 * 取值: butt(默认), round, square
@@ -181,7 +176,9 @@ context.lineTo(700, 700)
 context.stroke()
 ```
 ![](img/clipboard%20(8).png)
-### 设置线条交点的形状
+
+# 设置线条交点的形状
+
 lineJoin
 * 取值: miter(默认), bevel, round
 ```

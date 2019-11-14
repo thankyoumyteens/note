@@ -1,0 +1,54 @@
+# 图形变换
+
+* 位移translate(x, y)
+* 旋转rotate(deg)
+* 缩放scale(sx, sy)
+
+canvas的图形变换函数是叠加的
+```
+context.fillStyle = 'red'
+context.translate(100, 100)
+context.fillRect(0, 0, 400, 400)
+context.fillStyle = 'green'
+context.translate(300, 300)
+context.fillRect(0, 0, 400, 400)
+```
+![](img/clipboard%20(15).png)
+* save(): 保存当前的图形状态
+* restore(): 恢复在save时的图形状态
+```
+context.save()
+context.fillStyle = 'red'
+context.translate(100, 100)
+context.fillRect(0, 0, 400, 400)
+context.restore()
+context.save()
+context.fillStyle = 'green'
+context.translate(300, 300)
+context.fillRect(0, 0, 400, 400)
+context.restore()
+```
+![](img/clipboard%20(16).png)
+* scale会把所有属性进行缩放(比如, 坐标和lineWidth)
+```
+context.lineWidth = 5
+context.save()
+context.scale(1, 1)
+context.strokeRect(50, 50, 200, 200)
+context.restore()
+context.save()
+context.scale(2, 2)
+context.strokeRect(50, 50, 200, 200)
+context.restore()
+context.save()
+context.scale(3, 3)
+context.strokeRect(50, 50, 200, 200)
+context.restore()
+```
+![](img/clipboard%20(17).png)
+
+# 变换矩阵
+
+* transform(a, b, c, d, e, f)
+
+![](img/clipboard%20(18).png)

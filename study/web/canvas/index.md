@@ -5,4 +5,3 @@
 - <a href="text.md">文字的渲染</a>
 - <a href="advance.md">高级内容</a>
 - <a href="imageBase.md">Canvas图像基础</a>
-- <a href="canvas01.md">离屏Canvas</a>
