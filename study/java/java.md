@@ -27,7 +27,7 @@ Java中的默认类型：整数类型是 int , 浮点类型是 double
 1. 定义一个测试类(测试用例)
     * 建议：
         * 测试类名：被测试的类名Test		CalculatorTest
-        * 包名：xxx.xxx.xx.test		cn.itcast.test
+        * 包名：xxx.xxx.xx.test		com.test.test
 
 2. 定义测试方法：可以独立运行
     * 建议：
@@ -171,7 +171,7 @@ Java中的默认类型：整数类型是 int , 浮点类型是 double
         //其实就是在内存中生成了一个该注解接口的子类实现对象
         public class ProImpl implements Pro{
             public String className(){
-                return "cn.itcast.annotation.Demo1";
+                return "com.test.annotation.Demo1";
             }
             public String methodName(){
                 return "show";

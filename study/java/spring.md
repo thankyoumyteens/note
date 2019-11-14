@@ -29,9 +29,9 @@ bean 标签的属性：
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 <!-- 配置 service --> 
-<bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"/>
+<bean id="accountService" class="com.test.service.impl.AccountServiceImpl"/>
 <!-- 配置 dao -->
-<bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl"/>
+<bean id="accountDao" class="com.test.dao.impl.AccountDaoImpl"/>
 
 </beans>
 ```
@@ -58,7 +58,7 @@ IAccountDao aDao = ac.getBean("accountDao", IAccountDao.class);
     -->
     <bean 
         id="accountService" 
-        class="com.itheima.service.impl.AccountServiceImpl"/>
+        class="com.test.service.impl.AccountServiceImpl"/>
     ```
 2. 使用其他类的静态方法创建对象
 
@@ -74,7 +74,7 @@ IAccountDao aDao = ac.getBean("accountDao", IAccountDao.class);
         并存入 spring 容器
     -->
     <bean id="accountService"
-        class="com.itheima.factory.StaticFactory"
+        class="com.test.factory.StaticFactory"
         factory-method="createAccountService"/>
     ```
 3. 使用其他对象的方法创建对象
@@ -89,7 +89,7 @@ IAccountDao aDao = ac.getBean("accountDao", IAccountDao.class);
         然后在使用工厂的 bean 来调用里面的方法
     -->
     <bean id="instancFactory" 
-        class="com.itheima.factory.InstanceFactory"/>
+        class="com.test.factory.InstanceFactory"/>
     <bean id="accountService"
         factory-bean="instancFactory"
         factory-method="createAccountService"/>
@@ -126,7 +126,7 @@ constructor-arg标签:
 * value:它能赋的值是基本数据类型和 String 类型
 * ref:它能赋的值是其他 bean 类型，也就是说，必须得是在配置文件中配置过的 bean
 ```
-<bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+<bean id="accountService" class="com.test.service.impl.AccountServiceImpl">
     <constructor-arg name="name" value="张三"/>
     <constructor-arg name="age" value="18"/>
     <constructor-arg name="birthday" ref="now"/>
@@ -154,7 +154,7 @@ property标签:
 * ref：给属性赋值是其他 bean 类型的
 * value：给属性赋值是基本数据类型和 string 类型的
 ```
-<bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+<bean id="accountService" class="com.test.service.impl.AccountServiceImpl">
     <property name="name" value="test"/>
     <property name="age" value="21"/>
     <property name="birthday" ref="now"/>
@@ -165,7 +165,7 @@ property标签:
 ## 注入集合
 
 ```
-<bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+<bean id="accountService" class="com.test.service.impl.AccountServiceImpl">
     <!-- 在注入集合数据时，只要结构相同，标签可以互换 -->
     <!-- 给数组注入数据 -->
     <property name="myStrs">
@@ -230,7 +230,7 @@ property标签:
         扫描指定包下的类，
         依据类中使用的注解创建对象，并存入容器中 
     -->
-    <context:component-scan base-package="com.itheima"/>
+    <context:component-scan base-package="com.test"/>
 </beans>
 ```
 
@@ -296,7 +296,7 @@ property标签:
         * value：它和basePackages的作用是一样的，都是用于指定创建容器时要扫描的包。
     * 我们使用此注解就等同于在xml中配置了:
         ```
-        <context:component-scan base-package="com.itheima"/>
+        <context:component-scan base-package="com.test"/>
         ```
 3. `@Bean`
     * 作用：用于把当前方法的返回值作为bean对象存入spring的ioc容器中
@@ -379,9 +379,9 @@ public class AccountServiceTest {
 
 * 关键字：execution(表达式)
 * 表达式：访问修饰符  返回值  包名.包名.包名...类名.方法名(参数列表)
-* 标准的表达式写法：`public void com.itheima.service.impl.AccountServiceImpl.saveAccount()`
-* 访问修饰符可以省略: `void com.itheima.service.impl.AccountServiceImpl.saveAccount()`
-* 返回值可以使用通配符，表示任意返回值: `* com.itheima.service.impl.AccountServiceImpl.saveAccount()`
+* 标准的表达式写法：`public void com.test.service.impl.AccountServiceImpl.saveAccount()`
+* 访问修饰符可以省略: `void com.test.service.impl.AccountServiceImpl.saveAccount()`
+* 返回值可以使用通配符，表示任意返回值: `* com.test.service.impl.AccountServiceImpl.saveAccount()`
 * 包名可以使用通配符，表示任意包。但是有几级包，就需要写几个*.: `* *.*.*.*.AccountServiceImpl.saveAccount())`
 * 包名可以使用..表示当前包及其子包: `* *..AccountServiceImpl.saveAccount()`
 * 类名和方法名都可以使用*来实现通配: `* *..*.*()`
@@ -392,7 +392,7 @@ public class AccountServiceTest {
     * 可以使用通配符表示任意类型，但是必须有参数
     * 可以使用..表示有无参数均可，有参数可以是任意类型
 * 全通配写法：`* *..*.*(..)`
-* 切到业务层实现类下的所有方法: `* com.itheima.service.impl.*.*(..)`
+* 切到业务层实现类下的所有方法: `* com.test.service.impl.*.*(..)`
 
 ## 配置AOP, 使service的每个方法调用之前都执行Logger的printLog方法
 
@@ -415,16 +415,16 @@ public class AccountServiceTest {
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!-- 配置srping的Ioc,把service对象配置进来-->
-    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+    <bean id="accountService" class="com.test.service.impl.AccountServiceImpl"></bean>
     <!-- 配置Logger类 -->
-    <bean id="logger" class="com.itheima.utils.Logger"></bean>
+    <bean id="logger" class="com.test.utils.Logger"></bean>
     
     <!--配置AOP-->
     <aop:config>
         <!--配置切面 -->
         <aop:aspect id="logAdvice" ref="logger">
             <!-- 配置通知的类型，并且建立通知方法和切入点方法的关联-->
-            <aop:before method="printLog" pointcut="execution(* com.itheima.service.impl.*.*(..))"></aop:before>
+            <aop:before method="printLog" pointcut="execution(* com.test.service.impl.*.*(..))"></aop:before>
         </aop:aspect>
     </aop:config>
 </beans>
@@ -448,9 +448,9 @@ public class AccountServiceTest {
     http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 <!-- 配置srping的Ioc,把service对象配置进来-->
-<bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl"></bean>
+<bean id="accountService" class="com.test.service.impl.AccountServiceImpl"></bean>
 <!-- 配置Logger类 -->
-<bean id="logger" class="com.itheima.utils.Logger"></bean>
+<bean id="logger" class="com.test.utils.Logger"></bean>
 
 <!--配置AOP-->
 <aop:config>
@@ -458,7 +458,7 @@ public class AccountServiceTest {
           此标签写在aop:aspect标签内部只能当前切面使用。
           它还可以写在aop:aspect外面，此时就变成了所有切面可用
       -->
-    <aop:pointcut id="pt1" expression="execution(* com.itheima.service.impl.*.*(..))"></aop:pointcut>
+    <aop:pointcut id="pt1" expression="execution(* com.test.service.impl.*.*(..))"></aop:pointcut>
     <!--配置切面 -->
     <aop:aspect id="logAdvice" ref="logger">
         <!-- 配置前置通知：在切入点方法执行之前执行
@@ -486,7 +486,7 @@ public class AccountServiceTest {
 ```
 <!--配置AOP-->
 <aop:config>
-    <aop:pointcut id="pt1" expression="execution(* com.itheima.service.impl.*.*(..))"></aop:pointcut>
+    <aop:pointcut id="pt1" expression="execution(* com.test.service.impl.*.*(..))"></aop:pointcut>
     <!--配置切面 -->
     <aop:aspect id="logAdvice" ref="logger">
         <!-- 配置环绕通知-->
@@ -496,7 +496,7 @@ public class AccountServiceTest {
 ```
 
 ```
-package com.itheima.utils;
+package com.test.utils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -622,12 +622,12 @@ public void transfer(String sourceName, String targetName, Float money) {
     http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 配置业务层-->
-    <bean id="accountService" class="com.itheima.service.impl.AccountServiceImpl">
+    <bean id="accountService" class="com.test.service.impl.AccountServiceImpl">
         <property name="accountDao" ref="accountDao"></property>
     </bean>
 
     <!-- 配置账户的持久层-->
-    <bean id="accountDao" class="com.itheima.dao.impl.AccountDaoImpl">
+    <bean id="accountDao" class="com.test.dao.impl.AccountDaoImpl">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
@@ -656,7 +656,7 @@ public void transfer(String sourceName, String targetName, Float money) {
     <!-- 配置aop-->
     <aop:config>
         <!-- 配置切入点表达式-->
-        <aop:pointcut id="pt1" expression="execution(* com.itheima.service.impl.*.*(..))"></aop:pointcut>
+        <aop:pointcut id="pt1" expression="execution(* com.test.service.impl.*.*(..))"></aop:pointcut>
         <!--建立切入点表达式和事务通知的对应关系 -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"></aop:advisor>
     </aop:config>

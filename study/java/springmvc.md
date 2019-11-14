@@ -49,7 +49,7 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
     
     <!-- 配置创建 spring 容器要扫描的包 -->
-    <context:component-scan base-package="com.itheima"></context:component-scan>
+    <context:component-scan base-package="com.test"></context:component-scan>
     
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -230,7 +230,7 @@ DispatcherServlet会拦截到所有的资源，导致一个问题就是静态资
         <property name="converters">
             <array>
                 <!-- 配置自定义类型转换器 -->
-                <bean class="com.itheima.web.converter.StringToDateConverter"></bean>
+                <bean class="com.test.web.converter.StringToDateConverter"></bean>
             </array>
         </property>
     </bean>
@@ -401,7 +401,7 @@ public class SysExceptionResolver implements HandlerExceptionResolver{
 ```
 配置异常处理器
 ```
-<bean id="sysExceptionResolver" class="cn.itcast.exception.SysExceptionResolver"/>
+<bean id="sysExceptionResolver" class="com.test.exception.SysExceptionResolver"/>
 ```
 
 # 拦截器
@@ -455,7 +455,7 @@ HandlerInterceptor接口中的方法：
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean id="handlerInterceptorDemo1" class="com.itheima.web.interceptor.HandlerInterceptorDemo1"></bean>
+            <bean id="handlerInterceptorDemo1" class="com.test.web.interceptor.HandlerInterceptorDemo1"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
     ```

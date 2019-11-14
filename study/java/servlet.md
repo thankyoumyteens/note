@@ -75,7 +75,7 @@
         <!--配置Servlet -->
         <servlet>
             <servlet-name>demo1</servlet-name>
-            <servlet-class>cn.itcast.web.servlet.ServletDemo1</servlet-class>
+            <servlet-class>com.test.web.servlet.ServletDemo1</servlet-class>
         </servlet>
     
         <servlet-mapping>
@@ -680,7 +680,7 @@
     1. web.xml配置	
         <filter>
             <filter-name>demo1</filter-name>
-            <filter-class>cn.itcast.web.filter.FilterDemo1</filter-class>
+            <filter-class>com.test.web.filter.FilterDemo1</filter-class>
         </filter>
         <filter-mapping>
             <filter-name>demo1</filter-name>
@@ -745,7 +745,7 @@
         3. 配置
             1. web.xml
                     <listener>
-                     <listener-class>cn.itcast.web.listener.ContextLoaderListener</listener-class>
+                     <listener-class>com.test.web.listener.ContextLoaderListener</listener-class>
                     </listener>
 
                     * 指定初始化参数<context-param>

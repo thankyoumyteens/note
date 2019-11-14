@@ -31,9 +31,9 @@
     <!DOCTYPE mapper 
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    <mapper namespace="com.itheima.dao.IUserDao">
+    <mapper namespace="com.test.dao.IUserDao">
         <!-- 配置查询所有操作 -->
-        <select id="findAll" resultType="com.itheima.domain.User">
+        <select id="findAll" resultType="com.test.domain.User">
             select * from user
         </select>
     </mapper>
@@ -62,7 +62,7 @@
         </environments>
         <!-- 告知 mybatis 映射配置的位置 -->
         <mappers>
-            <mapper resource="com/itheima/dao/IUserDao.xml"/>
+            <mapper resource="com.test/dao/IUserDao.xml"/>
         </mappers>
     </configuration>
     ```
@@ -98,7 +98,7 @@
     ```
     int saveUser(User user);
     
-    <insert id="saveUser" parameterType="com.itheima.domain.User">
+    <insert id="saveUser" parameterType="com.test.domain.User">
         insert into user(username,birthday,sex,address) 
         values(#{username},#{birthday},#{sex},#{address})
     </insert>
@@ -107,7 +107,7 @@
     ```
     int saveUser(User user);
     
-    <insert id="saveUser" parameterType="com.itheima.domain.User">
+    <insert id="saveUser" parameterType="com.test.domain.User">
         <!-- 获取插入的 id 并保存到传入的user对象中 -->
         <selectKey keyColumn="id" keyProperty="id" resultType="int">
             select last_insert_id();
@@ -128,7 +128,7 @@
     ```
     int updateUser(User user);
 
-    <update id="updateUser" parameterType="com.itheima.domain.User">
+    <update id="updateUser" parameterType="com.test.domain.User">
         update user set 
         username=#{username},
         birthday=#{birthday},
@@ -140,7 +140,7 @@
     ```
     User findById(Integer userId);
     
-    <select id="findById" resultType="com.itheima.domain.User" parameterType="int">
+    <select id="findById" resultType="com.test.domain.User" parameterType="int">
         select * from user where id = #{uid}
     </select>
     ```
@@ -165,7 +165,7 @@ ${}可以接收简单类型值或 pojo 属性值，如果 parameterType 传输�
 - column 属性：用于指定数据库列名
 - property 属性：用于指定实体类属性名称
 ```
-<resultMap type="com.itheima.domain.User" id="userMap">
+<resultMap type="com.test.domain.User" id="userMap">
     <id column="id" property="userId"/>
     <result column="username" property="userName"/>
     <result column="sex" property="userSex"/>
@@ -358,7 +358,7 @@ public class Account {
 ```
 List<Account> findAll();
 
-<mapper namespace="com.itheima.dao.IAccountDao">
+<mapper namespace="com.test.dao.IAccountDao">
     <!-- 建立对应关系 -->
     <resultMap type="account" id="accountMap">
         <id column="aid" property="id"/>
@@ -427,7 +427,7 @@ ofType="account"：指定关联查询的结果集中的对象类型即List中的
 ```
 List<User> findAll();
 
-<mapper namespace="com.itheima.dao.IUserDao">
+<mapper namespace="com.test.dao.IUserDao">
     <resultMap type="user" id="userMap">
         <id column="id" property="id"></id>
         <result column="username" property="username"/>
@@ -495,7 +495,7 @@ public class Role implements Serializable {
 ```
 List<Role> findAll();
 
-<mapper namespace="com.itheima.dao.IRoleDao">
+<mapper namespace="com.test.dao.IRoleDao">
     <!--定义 role 表的 ResultMap-->
     <resultMap id="roleMap" type="role">
         <id property="roleId" column="rid"></id>
@@ -574,7 +574,7 @@ SqlSessionFactory对象的缓存
     ```
 2. 配置要使用缓存的 Mapper 映射文件
     ```
-    <mapper namespace="com.itheima.dao.IUserDao">
+    <mapper namespace="com.test.dao.IUserDao">
         <!-- 开启二级缓存的支持 -->
         <cache/>
     </mapper>
@@ -614,7 +614,7 @@ SqlSessionFactory对象的缓存
 ```
 List<Account> findAll();
 
-<mapper namespace="com.itheima.dao.IAccountDao">
+<mapper namespace="com.test.dao.IAccountDao">
     <!-- 建立对应关系 -->
     <resultMap type="account" id="accountMap">
         <id column="aid" property="id"/>
@@ -624,7 +624,7 @@ List<Account> findAll();
         <!-- select： 填写我们要调用的 select 映射的 id  -->
         <!-- column ： 填写我们要传递给 select 映射的参数 -->
         <association property="user" javaType="user"
-            select="com.itheima.dao.IUserDao.findById"
+            select="com.test.dao.IUserDao.findById"
             column="uid"/>
     </resultMap>
     <select id="findAll" resultMap="accountMap">
@@ -632,11 +632,11 @@ List<Account> findAll();
     </select>
 </mapper>
 ```
-com.itheima.dao.IUserDao
+com.test.dao.IUserDao
 ```
 User findById(Integer userId);
 
-<mapper namespace="com.itheima.dao.IUserDao">
+<mapper namespace="com.test.dao.IUserDao">
     <!-- 根据 id 查询 -->
     <select id="findById" resultType="user" parameterType="int" >
         select * from user where id = #{uid}
@@ -670,7 +670,7 @@ List<User> findAll();
             个字段名了
         -->
         <collection property="accounts" ofType="account"
-            select="com.itheima.dao.IAccountDao.findByUid"
+            select="com.test.dao.IAccountDao.findByUid"
             column="id"/>
     </resultMap>
     <!-- 配置查询所有操作 -->
@@ -679,7 +679,7 @@ List<User> findAll();
     </select>
 </mapper>
 ```
-com.itheima.dao.IAccountDao
+com.test.dao.IAccountDao
 ```
 <!-- 根据用户 id 查询账户信息 -->
 <select id="findByUid" resultType="account" parameterType="int">

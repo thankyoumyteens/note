@@ -314,7 +314,7 @@ public void test() {
 	<!-- 2.配置entityManagerFactory -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="cn.itcast.entity" />
+		<property name="packagesToScan" value="com.test.entity" />
 		<property name="persistenceProvider">
 			<bean class="org.hibernate.jpa.HibernatePersistenceProvider" />
 		</property>
@@ -340,7 +340,7 @@ public void test() {
 	</bean>
 	
 	<!-- 整合spring data jpa-->
-	<jpa:repositories base-package="cn.itcast.dao"
+	<jpa:repositories base-package="com.test.dao"
 		transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory"></jpa:repositories>
 		
@@ -359,11 +359,11 @@ public void test() {
 	
 	<!-- 5.aop-->
 	<aop:config>
-		<aop:pointcut id="pointcut" expression="execution(* cn.itcast.service.*.*(..))" />
+		<aop:pointcut id="pointcut" expression="execution(* com.test.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut" />
 	</aop:config>
 	
-	<context:component-scan base-package="cn.itcast"></context:component-scan>
+	<context:component-scan base-package="com.test"></context:component-scan>
 		
 	<!--组装其它 配置文件-->
 	
