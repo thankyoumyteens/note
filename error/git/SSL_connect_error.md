@@ -2,7 +2,7 @@
 
 git push
 ``` 
-fatal: unable to access 'https://github.com/thankyoumyteens/note.git/': SSL connect error
+fatal: unable to access 'https://github.com/thankyoumyteens/note.git/': SSL connect error
 ```
 
 # fix

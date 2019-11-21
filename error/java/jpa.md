@@ -8,7 +8,7 @@ id为自增属性，直接添加@GeneratedValue报了如下错误
 ```
 
 解决方法 ：
-在 @GeneratedValue后加上strategy = GenerationType.IDENTITY
+在 @GeneratedValue后加上strategy = GenerationType.IDENTITY
 ```
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
