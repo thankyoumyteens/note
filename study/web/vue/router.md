@@ -63,3 +63,28 @@ eg:
 在服务端增加一个覆盖所有情况的候选资源：
 如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面，
 这个页面就是你 app 依赖的页面。
+
+# vue-router传递参数
+
+传递参数
+```
+this.$router.push({name: 'Home', params: {userId: 123}})
+```
+接收参数
+```
+let userId = this.$route.params.userId
+```
+
+## 查询参数
+查询参数其实就是在路由地址后面带上参数和传统的url参数一致的，
+传递参数使用query而且必须配合path来传递参数而不能用name，
+目标页面接收传递的参数使用query。
+传递参数
+```
+this.$router.push({path: '/home', query: {userId: 123}})
+```
+接收参数
+```
+let userId = this.$route.query.userId
+```
+   
