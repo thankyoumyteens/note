@@ -49,51 +49,51 @@ IAccountDao aDao = ac.getBean("accountDao", IAccountDao.class);
 
 # 实例化 Bean 的三种方式
 
-1. 使用默认无参构造函数
-    ```
-    <!--
-        在默认情况下：
-        它会根据默认无参构造函数来创建类对象。
-        如果 bean 中没有默认无参构造函数，将会创建失败。
-    -->
-    <bean 
-        id="accountService" 
-        class="com.test.service.impl.AccountServiceImpl"/>
-    ```
-2. 使用其他类的静态方法创建对象
+## 使用默认无参构造函数
+```
+<!--
+    在默认情况下：
+    它会根据默认无参构造函数来创建类对象。
+    如果 bean 中没有默认无参构造函数，将会创建失败。
+-->
+<bean 
+    id="accountService" 
+    class="com.test.service.impl.AccountServiceImpl"/>
+```
+## 使用其他类的静态方法创建对象
 
     bean 标签的属性:
     * id 属性：指定 bean 的 id，用于从容器中获取
     * class 属性：指定静态工厂的全限定类名
     * factory-method 属性：指定生产对象的静态方法
-    ```
-    <!-- 
-        此种方式是:
-        使用 StaticFactory 类中的
-        静态方法 createAccountService 创建对象，
-        并存入 spring 容器
-    -->
-    <bean id="accountService"
-        class="com.test.factory.StaticFactory"
-        factory-method="createAccountService"/>
-    ```
-3. 使用其他对象的方法创建对象
+```
+<!-- 
+    此种方式是:
+    使用 StaticFactory 类中的
+    静态方法 createAccountService 创建对象，
+    并存入 spring 容器
+-->
+<bean id="accountService"
+    class="com.test.factory.StaticFactory"
+    factory-method="createAccountService"/>
+```
+## 使用其他对象的方法创建对象
 
     bean 标签的属性:
     * factory-bean 属性：用于指定实例工厂 bean 的 id。
     * factory-method 属性：用于指定实例工厂中创建对象的方法。
-    ```
-    <!-- 
-        此种方式是：
-        先把工厂的创建交给 spring 来管理。
-        然后在使用工厂的 bean 来调用里面的方法
-    -->
-    <bean id="instancFactory" 
-        class="com.test.factory.InstanceFactory"/>
-    <bean id="accountService"
-        factory-bean="instancFactory"
-        factory-method="createAccountService"/>
-    ```
+```
+<!-- 
+    此种方式是：
+    先把工厂的创建交给 spring 来管理。
+    然后在使用工厂的 bean 来调用里面的方法
+-->
+<bean id="instancFactory" 
+    class="com.test.factory.InstanceFactory"/>
+<bean id="accountService"
+    factory-bean="instancFactory"
+    factory-method="createAccountService"/>
+```
 
 # 依赖注入(给bean注入数据)
 
@@ -235,7 +235,7 @@ property标签:
 ```
 
 ## 用于创建对象的
-他们的作用就和在XML配置文件中编写一个<bean>标签实现的功能是一样的
+他们的作用就和在XML配置文件中编写一个`<bean>`标签实现的功能是一样的
 
 
 1. `@Component`: 
@@ -250,7 +250,7 @@ property标签:
 他们三个是spring框架为我们提供明确的三层使用的注解，使我们的三层对象更加清晰
 
 ## 用于注入数据的
-他们的作用就和在xml配置文件中的bean标签中写一个<property>标签的作用是一样的
+他们的作用就和在xml配置文件中的bean标签中写一个`<property>`标签的作用是一样的
 
 1. `@Autowired`:
     * 作用：自动按照类型注入。只要容器中有唯一的一个bean对象类型和要注入的变量类型匹配，就可以注入成功

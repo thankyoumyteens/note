@@ -198,47 +198,46 @@ DispatcherServlet会拦截到所有的资源，导致一个问题就是静态资
 
 # 自定义类型转换器
 
-1. 定义一个类，实现 Converter 接口
-    ```
-    public class StringToDateConverter implements Converter<String, Date> {
-        /**
-        * 用于把 String 类型转成日期类型
-        */
-        @Override
-        public Date convert(String source) {
-            DateFormat format = null;
-            try {
-                if(StringUtils.isEmpty(source)) {
-                    throw new NullPointerException("请输入要转换的日期");
-                }
-                format = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = format.parse(source);
-                return date;
-            } catch (Exception e) {
-                throw new RuntimeException("输入日期有误");
+* 定义一个类，实现 Converter 接口
+```
+public class StringToDateConverter implements Converter<String, Date> {
+    /**
+    * 用于把 String 类型转成日期类型
+    */
+    @Override
+    public Date convert(String source) {
+        DateFormat format = null;
+        try {
+            if(StringUtils.isEmpty(source)) {
+                throw new NullPointerException("请输入要转换的日期");
             }
+            format = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = format.parse(source);
+            return date;
+        } catch (Exception e) {
+            throw new RuntimeException("输入日期有误");
         }
     }
+}
+```
+* 在 spring 配置文件中配置类型转换器
+```
+<!-- 配置类型转换器工厂 -->
+<bean id="converterService"
+    class="org.springframework.context.support.ConversionServiceFactoryBean">
+    <!-- 给工厂注入一个新的类型转换器 -->
+    <property name="converters">
+        <array>
+            <!-- 配置自定义类型转换器 -->
+            <bean class="com.test.web.converter.StringToDateConverter"></bean>
+        </array>
+    </property>
+</bean>
 
-    ```
-2. 在 spring 配置文件中配置类型转换器
-    ```
-    <!-- 配置类型转换器工厂 -->
-    <bean id="converterService"
-        class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <!-- 给工厂注入一个新的类型转换器 -->
-        <property name="converters">
-            <array>
-                <!-- 配置自定义类型转换器 -->
-                <bean class="com.test.web.converter.StringToDateConverter"></bean>
-            </array>
-        </property>
-    </bean>
-    
-    <!-- 引用自定义类型转换器 -->
-    <mvc:annotation-driven
-        conversion-service="converterService"></mvc:annotation-driven>
-    ```
+<!-- 引用自定义类型转换器 -->
+<mvc:annotation-driven
+    conversion-service="converterService"></mvc:annotation-driven>
+```
 
 # 使用 ServletAPI 对象作为方法参数
 
@@ -432,31 +431,30 @@ HandlerInterceptor接口中的方法：
 
 # 自定义拦截器的步骤
 
-1. 编写一个普通类实现 HandlerInterceptor 接口
-    ```
-    public class HandlerInterceptorDemo1 implements HandlerInterceptor {
-        @Override
-        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-            System.out.println("preHandle 拦截器拦截了");
-            return true;
-        }
-        @Override
-        public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-            System.out.println("postHandle 方法执行了");
-        }
-        @Override
-        public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-            System.out.println("afterCompletion 方法执行了");
-        }
+* 编写一个普通类实现 HandlerInterceptor 接口
+```
+public class HandlerInterceptorDemo1 implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        System.out.println("preHandle 拦截器拦截了");
+        return true;
     }
-    ```
-2. 配置拦截器
-    ```
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean id="handlerInterceptorDemo1" class="com.test.web.interceptor.HandlerInterceptorDemo1"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
-    ```
-
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        System.out.println("postHandle 方法执行了");
+    }
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("afterCompletion 方法执行了");
+    }
+}
+```
+* 配置拦截器
+```
+<mvc:interceptors>
+    <mvc:interceptor>
+        <mvc:mapping path="/**"/>
+        <bean id="handlerInterceptorDemo1" class="com.test.web.interceptor.HandlerInterceptorDemo1"></bean>
+    </mvc:interceptor>
+</mvc:interceptors>
+```

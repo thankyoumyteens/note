@@ -23,7 +23,7 @@
 决定上传到哪个宿主仓库，如果版本为 release 则上传到私服的 release 仓库，如果版本为
 snapshot 则上传到私服的 snapshot 仓库
 
-注意：pom.xml 这里<id> 和 settings.xml 配置 <id> 对应！
+注意：pom.xml 这里`<id>` 和 settings.xml 配置 `<id>` 对应！
 
 ```
 <distributionManagement>

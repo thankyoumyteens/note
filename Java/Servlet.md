@@ -45,7 +45,7 @@
                 * 简化部署：将项目打成一个war包，再将war包放置到webapps目录下。
                     * war包会自动解压缩
             2. 配置conf/server.xml文件
-                在<Host>标签体中配置
+                在`<Host>`标签体中配置
                 <Context docBase="D:\hello" path="/hehe" />
                 * docBase:项目存放的路径
                 * path：虚拟目录
@@ -72,21 +72,22 @@
     3. 实现接口中的抽象方法
     4. 配置Servlet
          在web.xml中配置：
-        <!--配置Servlet -->
-        <servlet>
-            <servlet-name>demo1</servlet-name>
-            <servlet-class>com.test.web.servlet.ServletDemo1</servlet-class>
-        </servlet>
-    
-        <servlet-mapping>
-            <servlet-name>demo1</servlet-name>
-            <url-pattern>/demo1</url-pattern>
-        </servlet-mapping>
+ ```
+<!--配置Servlet -->
+<servlet>
+    <servlet-name>demo1</servlet-name>
+    <servlet-class>com.test.web.servlet.ServletDemo1</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>demo1</servlet-name>
+    <url-pattern>/demo1</url-pattern>
+</servlet-mapping>
+ ```
 
 * 执行原理：
     1. 当服务器接受到客户端浏览器的请求后，会解析请求URL路径，获取访问的Servlet的资源路径
-    2. 查找web.xml文件，是否有对应的<url-pattern>标签体内容。
-    3. 如果有，则在找到对应的<servlet-class>全类名
+    2. 查找web.xml文件，是否有对应的`<url-pattern>`标签体内容。
+    3. 如果有，则在找到对应的`<servlet-class>`全类名
     4. tomcat会将字节码文件加载进内存，并且创建其对象
     5. 调用其方法
 
@@ -95,11 +96,11 @@
         * Servlet什么时候被创建？
             * 默认情况下，第一次被访问时，Servlet被创建
             * 可以配置执行Servlet的创建时机。
-                * 在<servlet>标签下配置
+                * 在`<servlet>`标签下配置
                     1. 第一次被访问时，创建
-                        * <load-on-startup>的值为负数
+                        * `<load-on-startup>`的值为负数
                     2. 在服务器启动时，创建
-                        * <load-on-startup>的值为0或正整数
+                        * `<load-on-startup>`的值为0或正整数
 
         * Servlet的init方法，只执行一次，说明一个Servlet在内存中只存在一个对象，Servlet是单例的
             * 多个用户同时访问时，可能存在线程安全问题。
@@ -120,36 +121,33 @@
         1. 创建JavaEE项目，选择Servlet的版本3.0以上，可以不创建web.xml
         2. 定义一个类，实现Servlet接口
         3. 复写方法
-        4. 在类上使用@WebServlet注解，进行配置
-            * @WebServlet("资源路径")
+        4. 在类上使用@WebServlet注解，进行配置: `@WebServlet("资源路径")`
+```
+@Target({ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface WebServlet {
+    String name() default "";//相当于<Servlet-name>
 
+    String[] value() default {};//代表urlPatterns()属性配置
 
-            @Target({ElementType.TYPE})
-            @Retention(RetentionPolicy.RUNTIME)
-            @Documented
-            public @interface WebServlet {
-                String name() default "";//相当于<Servlet-name>
-            
-                String[] value() default {};//代表urlPatterns()属性配置
-            
-                String[] urlPatterns() default {};//相当于<url-pattern>
-            
-                int loadOnStartup() default -1;//相当于<load-on-startup>
-            
-                WebInitParam[] initParams() default {};
-            
-                boolean asyncSupported() default false;
-            
-                String smallIcon() default "";
-            
-                String largeIcon() default "";
-            
-                String description() default "";
-            
-                String displayName() default "";
-            }
+    String[] urlPatterns() default {};//相当于<url-pattern>
 
+    int loadOnStartup() default -1;//相当于<load-on-startup>
 
+    WebInitParam[] initParams() default {};
+
+    boolean asyncSupported() default false;
+
+    String smallIcon() default "";
+
+    String largeIcon() default "";
+
+    String description() default "";
+
+    String displayName() default "";
+}
+```
 
 ## Servlet：
 1. 概念
@@ -283,7 +281,7 @@
         2. 获取请求头数据
             * 方法：
                 * (*)String getHeader(String name):通过请求头的名称获取请求头的值
-                * Enumeration<String> getHeaderNames():获取所有的请求头名称
+                * `Enumeration<String> getHeaderNames()`:获取所有的请求头名称
             
         3. 获取请求体数据:
             * 请求体：只有POST请求方式，才有请求体，在请求体中封装了POST请求的请求参数
@@ -299,8 +297,8 @@
         1. 获取请求参数通用方式：不论get还是post请求方式都可以使用下列方法来获取请求参数
             1. String getParameter(String name):根据参数名称获取参数值    username=zs&password=123
             2. String[] getParameterValues(String name):根据参数名称获取参数值的数组  hobby=xx&hobby=game
-            3. Enumeration<String> getParameterNames():获取所有请求的参数名称
-            4. Map<String,String[]> getParameterMap():获取所有参数的map集合
+            3. `Enumeration<String> getParameterNames()`:获取所有请求的参数名称
+            4. `Map<String,String[]> getParameterMap()`:获取所有参数的map集合
 
             * 中文乱码问题：
                 * get方式：tomcat 8 已经将get方式乱码问题解决了
@@ -365,6 +363,7 @@
         4. 响应体:传输的数据
 
     * 响应字符串格式
+```
         HTTP/1.1 200 OK
         Content-Type: text/html;charset=UTF-8
         Content-Length: 101
@@ -378,7 +377,7 @@
           hello , response
           </body>
         </html>
-
+```
 
 
 ## Response对象
@@ -437,7 +436,7 @@
                     * 规则：判断定义的路径是给谁用的？判断请求将来从哪儿发出
                         * 给客户端浏览器使用：需要加虚拟目录(项目的访问路径)
                             * 建议虚拟目录动态获取：request.getContextPath()
-                            * <a> , <form> 重定向...
+                            * `<a> , <form>` 重定向...
                         * 给服务器使用：不需要加虚拟目录
                             * 转发路径
                             
@@ -723,7 +722,7 @@
         * 过滤器先后顺序问题：
             1. 注解配置：按照类名的字符串比较规则比较，值小的先执行
                 * 如： AFilter 和 BFilter，AFilter就先执行了。
-            2. web.xml配置： <filter-mapping>谁定义在上边，谁先执行
+            2. web.xml配置： `<filter-mapping>`谁定义在上边，谁先执行
 
 
 ## Listener：监听器
