@@ -1,2 +1,0 @@
-- <a href="git/index.md">Git</a>
-- <a href="java/index.md">Java</a>
