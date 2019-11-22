@@ -1,3 +1,0 @@
-- <a href="base.md">基础</a>
-- <a href="center.md">居中</a>
-- <a href="css3.md">css3的新特性</a>
