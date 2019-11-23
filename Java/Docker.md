@@ -1,44 +1,174 @@
 # Docker安装与启动
 
-## 安装Docker 
+## Ubuntu 18.04 安装docker ce
 
-（1）yum 包更新到最新
+### 卸载老版本
+
+如果你安装了老版本，请卸载掉
 ```
-sudo yum update
-```
-（2）安装需要的软件包， yum-util 提供yum-config-manager功能，另外两个是devicemapper驱动依赖的
-```
-sudo yum install -y yum-utils device-mapper-persistent-data lvm2
-```
-（3）设置yum源为阿里云
-```
-sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-```
-（4）安装docker
-```
-sudo yum install docker-ce
-```
-（5）安装后查看docker版本
-```
-docker -v
+$ sudo apt-get remove docker docker-engine docker.io
 ```
 
-## 设置ustc的镜像 
+###安装
 
-ustc是老牌的linux镜像服务提供者了，还在遥远的ubuntu 5.04版本的时候就在用。ustc的docker镜像加速器速度很快。ustc docker mirror的优势之一就是不需要注册，是真正的公共服务。
+使用存储库安装
 
-编辑该文件：
+在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。
 
+一、设置存储库
+
+1.更新apt包索引
 ```
-vi /etc/docker/daemon.json  
+$ sudo apt-get update
+```
+2.安装包以允许通过HTTPS使用存储库：
+```
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+```
+3.添加Docker的官方GPG密钥：
+```
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+通过搜索指纹的最后8个字符，确认您现在拥有指纹9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88的密钥。
+```
+$ sudo apt-key fingerprint 0EBFCD88
+
+pub   4096R/0EBFCD88 2017-02-22
+      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid                  Docker Release (CE deb) <docker@docker.com>
+sub   4096R/F273FCD8 2017-02-22
+```
+4.使用以下命令设置稳定存储库。
+
+注意：下面的lsb_release -cs子命令返回Ubuntu发行版的名称，例如xenial。有时，在像Linux Mint这样的发行版中，您可能需要将$（lsb_release -cs）更改为您的父Ubuntu发行版。例如，如果您使用的是Linux Mint Rafaela，则可以使用trusty。
+```
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+```
+二、安装DOCKER CE
+
+1.更新apt包索引。
+```
+sudo apt-get update
+```
+2.安装最新版本的Docker CE，或转到下一步安装特定版本：
+```
+$ sudo apt-get install docker-ce
+```
+3.要安装特定版本的Docker CE，请列出repo中的可用版本，然后选择并安装：
+列出您的仓库中可用的版本：
+```
+$ apt-cache madison docker-ce
+
+docker-ce | 18.03.0~ce-0~ubuntu | https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+```
+通过其完全限定的包名称安装特定版本，即包名称（docker-ce）“=”版本字符串（第2列），例如，docker-ce = 18.03.0ce-0ubuntu。
+```
+$ sudo apt-get install docker-ce=<VERSION>
+```
+4.查看Docker CE 版本
+```
+docker -v 
+Docker version 18.06.1-ce, build e68fc7a
+```
+5.通过运行hello-world映像验证是否正确安装了Docker CE。
+```
+$ sudo docker run hello-world
+```
+出现下面这个表示你安装成功：
+```
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+```
+Docker CE已安装并正在运行。已创建docker组，但未向其添加任何用户。您需要使用sudo来运行Docker命令。继续Linux postinstall以允许非特权用户运行Docker命令和其他可选配置步骤。
+
+## CentOS 7.6 安装docker ce
+
+### 环境说明
+CentOS 7（Minimal Install）
+```
+$ cat /etc/redhat-release 
+CentOS Linux release 7.6.1810 (Core) 
 ```
 
-在该文件中输入如下内容：
+### 卸载旧版本
 
+旧版本的 Docker 被叫做 docker 或 docker-engine，如果您安装了旧版本的 Docker ，您需要卸载掉它。
 ```
-{
-"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
-}
+$ sudo yum remove docker \
+      docker-client \
+      docker-client-latest \
+      docker-common \
+      docker-latest \
+      docker-latest-logrotate \
+      docker-logrotate \
+      docker-engine
+```
+
+### 安装
+
+为了方便添加软件源，支持 devicemapper 存储类型，安装如下软件包
+```
+$ sudo yum update
+$ sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+```
+添加 Docker 稳定版本的 yum 软件源
+```
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+```
+更新一下 yum 软件源的缓存，并安装 Docker
+```
+$ sudo yum update
+$ sudo yum install docker-ce
+```
+如果弹出 GPG key 的接收提示，请确认是否为 060a 61c5 1b55 8a7f 742b 77aa c52f eb6b 621e 9f35，如果是，可以接受并继续安装。
+
+至此，Docker 已经安装完成了，Docker 服务是没有启动的，操作系统里的 docker 组被创建，但是没有用户在这个组里。
+
+默认的 docker 组是没有用户的（也就是说需要使用 sudo 才能使用 docker 命令）。
+您可以将用户添加到 docker 组中（此用户就可以直接使用 docker 命令了）。
+
+加入 docker 用户组命令
+```
+$ sudo usermod -aG docker USER_NAME
+```
+用户更新组信息后，重新登录系统即可生效。
+
+启动 docker 服务
+```
+$ sudo systemctl start docker
+```
+验证 Docker CE 安装是否正确，可以运行 hello-world 镜像
+```
+$ sudo docker run hello-world
 ```
 
 ## Docker的启动与停止
