@@ -171,37 +171,6 @@ $ sudo systemctl start docker
 $ sudo docker run hello-world
 ```
 
-## Docker的启动与停止
-
-启动docker：
-```
-systemctl start docker
-```
-停止docker：
-```
-systemctl stop docker
-```
-重启docker：
-```
-systemctl restart docker
-```
-查看docker状态：
-```
-systemctl status docker
-```
-开机启动：
-```
-systemctl enable docker
-```
-查看docker概要信息
-```
-docker info
-```
-查看docker帮助文档
-```
-docker --help
-```
-
 # 镜像相关命令
 
 ## 查看镜像
@@ -365,50 +334,35 @@ docker rm 容器名称（容器ID）
 
 ## MySQL部署
 
-（1）拉取mysql镜像
+### 拉取MySQL镜像
 ```
-docker pull centos/mysql-57-centos7
+docker pull mysql:5.7.19
 ```
-（2）创建容器
+### 运行MySQL
 ```
-docker run -di --name=tensquare_mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+docker run --name mysql_01 -e MYSQL_ROOT_PASSWORD=123456 -d -i -p 3306:3306 --restart=always  mysql:5.7.19
 ```
+以上参数的含义：
+* `--name mysql_01`  将容器命名为mysql_01，后面可以用这个name进行容器的启动暂停等操作
+* `-e MYSQL_ROOT_PASSWORD=123456` 设置MySQL密码为123456
+* `-d` 此容器在后台运行,并且返回容器的ID
+* `-i` 以交互模式运行容器
+* `-p` 进行端口映射，格式为主机(宿主)端口:容器端口
+* `--restart=always` 当docker重启时，该容器自动重启
 
-* -p 代表端口映射，格式为  宿主机映射端口:容器运行端口
-* -e 代表添加环境变量  MYSQL_ROOT_PASSWORD  是root用户的登陆密码
+## tomcat部署
 
- ## tomcat部署
-
-（1）拉取镜像
+### 拉取Tomcat镜像
 ```
-docker pull tomcat:7-jre7
+docker pull tomcat:7
 ```
-（2）创建容器
+### 运行Tomcat
 ```
-docker run -di --name=mytomcat -p 9000:8080 -v /usr/local/webapps:/usr/local/tomcat/webapps tomcat:7-jre7
+docker run --name tomcat_01 --privileged=true -v /tomcat_01/webapps:/usr/local/tomcat/webapps -d -i -p 8080:8080 --restart=always tomcat:7 
 ```
-
-## Nginx部署 
-
-（1）拉取镜像	
-```
-docker pull nginx
-```
-（2）创建Nginx容器
-```
-docker run -di --name=mynginx -p 80:80 nginx
-```
-
-## Redis部署
-
-（1）拉取镜像
-```
-docker pull redis
-```
-（2）创建容器
-```
-docker run -di --name=myredis -p 6379:6379 redis
-```
+以上参数的含义：
+* `-v`  是把/tomcat_01/webapps的目录挂载至容器的/usr/local/tomcat/webapps。 
+* `-–privileged=true` 是授予docker挂载的权限
 
 # 迁移与备份
 
