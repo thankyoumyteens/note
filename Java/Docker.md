@@ -377,11 +377,9 @@ mkdir -p /redis_01/data
 cp ./redis.conf /redis_01/redis.conf
 ```
 ### 修改配置文件
-
 * `bind 127.0.0.1` 改为 `# bind 127.0.0.1`
 * `protected-mode yes` 改为 `protected-mode no`
 * `# requirepass foobared` 改为 `requirepass 123456`
-
 ### 运行Redis
 ```
 docker run -d --privileged=true -p 6379:6379 -v /redis_01/redis.conf:/etc/redis/redis.conf -v /redis_01/data:/data --name redis_01 redis:latest redis-server /etc/redis/redis.conf --appendonly yes
