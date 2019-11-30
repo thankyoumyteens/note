@@ -350,7 +350,7 @@ docker run --name mysql_01 -e MYSQL_ROOT_PASSWORD=123456 -d -i -p 3306:3306 --re
 * `-p` 进行端口映射，格式为主机(宿主)端口:容器端口
 * `--restart=always` 当docker重启时，该容器自动重启
 
-## tomcat部署
+## Tomcat部署
 
 ### 拉取Tomcat镜像
 ```
@@ -363,6 +363,38 @@ docker run --name tomcat_01 --privileged=true -v /tomcat_01/webapps:/usr/local/t
 以上参数的含义：
 * `-v`  是把/tomcat_01/webapps的目录挂载至容器的/usr/local/tomcat/webapps。 
 * `-–privileged=true` 是授予docker挂载的权限
+
+## Redis部署
+
+### 拉取Redis镜像
+```
+docker pull redis
+```
+### 下载配置文件
+```
+wget http://download.redis.io/redis-stable/redis.conf
+mkdir -p /redis_01/data
+cp ./redis.conf /redis_01/redis.conf
+```
+### 修改配置文件
+
+* `bind 127.0.0.1` 改为 `# bind 127.0.0.1`
+* `protected-mode yes` 改为 `protected-mode no`
+* `# requirepass foobared` 改为 `requirepass 123456`
+
+### 运行Redis
+```
+docker run -d --privileged=true -p 6379:6379 -v /redis_01/redis.conf:/etc/redis/redis.conf -v /redis_01/data:/data --name redis_01 redis:latest redis-server /etc/redis/redis.conf --appendonly yes
+```
+以上参数的含义：
+* `-v /docker/redis/redis.conf:/etc/redis/redis.conf`：映射配置文件
+* `-v /docker/redis/data:/data`：映射数据目录
+* `redis-server /etc/redis/redis.conf`：指定配置文件启动redis-server进程
+* `--appendonly yes`：开启数据持久化
+### 测试连接
+```
+redis-cli -h 138.138.138.138 -p 6379 
+```
 
 # 迁移与备份
 
