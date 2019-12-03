@@ -19,7 +19,7 @@ Jedis: 一款java操作redis数据库的工具.
 字符串类型 string
 ```
 //1. 获取连接
-//如果使用空参构造，默认值 "localhost",6379端口
+//如果使用空参构造, 默认值 "localhost",6379端口
 Jedis jedis = new Jedis();
 //2. 操作
 //存储
@@ -29,7 +29,7 @@ String username = jedis.get("username");
 System.out.println(username);
 
 //可以使用setex()方法存储可以指定过期时间的 key value
-//将activecode：hehe键值对存入redis，并且20秒后自动删除该键值对
+//将activecode：hehe键值对存入redis, 并且20秒后自动删除该键值对
 jedis.setex("activecode",20,"hehe");
 
 //3. 关闭连接
@@ -110,7 +110,7 @@ System.out.println(myset);
 jedis.close();
 ```
 
-有序集合类型 sortedset：不允许重复元素，且元素有顺序
+有序集合类型 sortedset：不允许重复元素, 且元素有顺序
 ```
 //1. 获取连接
 Jedis jedis = new Jedis();

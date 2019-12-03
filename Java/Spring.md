@@ -12,13 +12,13 @@
 
 ## 在类的根路径下创建一个任意名称的 xml 文件
 
-bean 标签：用于配置让 spring 创建对象，并且存入 ioc 容器(Map结构)之中
+bean 标签：用于配置让 spring 创建对象, 并且存入 ioc 容器(Map结构)之中
 
 bean 标签的属性：
 1. id：给对象在容器中提供一个唯一标识。用于获取对象。
 2. class：指定类的全限定类名。用于反射创建对象。默认情况下调用无参构造函数。
 3. scope：指定对象的作用范围。
-    * singleton :默认值，单例的
+    * singleton :默认值, 单例的
     * prototype :多例的
 
 ```
@@ -54,7 +54,7 @@ IAccountDao aDao = ac.getBean("accountDao", IAccountDao.class);
 <!--
     在默认情况下：
     它会根据默认无参构造函数来创建类对象。
-    如果 bean 中没有默认无参构造函数，将会创建失败。
+    如果 bean 中没有默认无参构造函数, 将会创建失败。
 -->
 <bean 
     id="accountService" 
@@ -63,14 +63,14 @@ IAccountDao aDao = ac.getBean("accountDao", IAccountDao.class);
 ## 使用其他类的静态方法创建对象
 
     bean 标签的属性:
-    * id 属性：指定 bean 的 id，用于从容器中获取
+    * id 属性：指定 bean 的 id, 用于从容器中获取
     * class 属性：指定静态工厂的全限定类名
     * factory-method 属性：指定生产对象的静态方法
 ```
 <!-- 
     此种方式是:
     使用 StaticFactory 类中的
-    静态方法 createAccountService 创建对象，
+    静态方法 createAccountService 创建对象, 
     并存入 spring 容器
 -->
 <bean id="accountService"
@@ -124,7 +124,7 @@ constructor-arg标签:
 * index:指定参数在构造函数参数列表的索引位置
 * type:指定参数在构造函数中的数据类型name:指定参数在构造函数中的名称 用这个找给谁赋值
 * value:它能赋的值是基本数据类型和 String 类型
-* ref:它能赋的值是其他 bean 类型，也就是说，必须得是在配置文件中配置过的 bean
+* ref:它能赋的值是其他 bean 类型, 也就是说, 必须得是在配置文件中配置过的 bean
 ```
 <bean id="accountService" class="com.test.service.impl.AccountServiceImpl">
     <constructor-arg name="name" value="张三"/>
@@ -166,7 +166,7 @@ property标签:
 
 ```
 <bean id="accountService" class="com.test.service.impl.AccountServiceImpl">
-    <!-- 在注入集合数据时，只要结构相同，标签可以互换 -->
+    <!-- 在注入集合数据时, 只要结构相同, 标签可以互换 -->
     <!-- 给数组注入数据 -->
     <property name="myStrs">
         <set>
@@ -225,10 +225,10 @@ property标签:
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--
-        告知spring框架在，
-        读取配置文件，创建容器时，
-        扫描指定包下的类，
-        依据类中使用的注解创建对象，并存入容器中 
+        告知spring框架在, 
+        读取配置文件, 创建容器时, 
+        扫描指定包下的类, 
+        依据类中使用的注解创建对象, 并存入容器中 
     -->
     <context:component-scan base-package="com.test"/>
 </beans>
@@ -241,24 +241,24 @@ property标签:
 1. `@Component`: 
     * 作用: 用于把当前类对象存入spring容器中
     * 属性：
-        * value：用于指定bean的id。当我们不写时，它的默认值是当前类名，且首字母改成小写。
+        * value：用于指定bean的id。当我们不写时, 它的默认值是当前类名, 且首字母改成小写。
 * `@Controller`： 一般用在表现层
 * `@Service`： 一般用在业务层
 * `@Repository`： 一般用在持久层
 
 以上三个注解他们的作用和属性与Component是一模一样。
-他们三个是spring框架为我们提供明确的三层使用的注解，使我们的三层对象更加清晰
+他们三个是spring框架为我们提供明确的三层使用的注解, 使我们的三层对象更加清晰
 
 ## 用于注入数据的
 他们的作用就和在xml配置文件中的bean标签中写一个`<property>`标签的作用是一样的
 
 1. `@Autowired`:
-    * 作用：自动按照类型注入。只要容器中有唯一的一个bean对象类型和要注入的变量类型匹配，就可以注入成功
+    * 作用：自动按照类型注入。只要容器中有唯一的一个bean对象类型和要注入的变量类型匹配, 就可以注入成功
     * 属性: 无
-    * 如果ioc容器中没有任何bean的类型和要注入的变量类型匹配，则报错。
-    * 如果Ioc容器中有多个类型匹配时：如果存在和要注入的变量的同名的bean，则使用这个bean， 如果没有则报错
-    * 出现位置： 可以是变量上，也可以是方法上
-    * 细节： 在使用此注解注入时，不用写setter方法。
+    * 如果ioc容器中没有任何bean的类型和要注入的变量类型匹配, 则报错。
+    * 如果Ioc容器中有多个类型匹配时：如果存在和要注入的变量的同名的bean, 则使用这个bean,  如果没有则报错
+    * 出现位置： 可以是变量上, 也可以是方法上
+    * 细节： 在使用此注解注入时, 不用写setter方法。
 2. `@Qualifier`:
     * 作用：在按照类型注入的基础之上再按照名称注入。它在给类成员注入时不能单独使用。但是在给方法参数注入时可以
     * 属性：
@@ -268,9 +268,9 @@ property标签:
     * 属性：
         * name：用于指定bean的id。
 
-以上三个注入都只能注入其他bean类型的数据，而基本类型和String类型无法使用上述注解实现。
+以上三个注入都只能注入其他bean类型的数据, 而基本类型和String类型无法使用上述注解实现。
 
-另外，集合类型的注入只能通过XML来实现。
+另外, 集合类型的注入只能通过XML来实现。
 
 1. `@Value`: 
     * 作用：用于注入基本类型和String类型的数据
@@ -289,11 +289,11 @@ property标签:
 
 1. `@Configuration`
     * 作用：指定当前类是一个配置类
-    * 细节：当配置类作为AnnotationConfigApplicationContext对象创建的参数时，该注解可以不写。
+    * 细节：当配置类作为AnnotationConfigApplicationContext对象创建的参数时, 该注解可以不写。
 2. `@ComponentScan`
     * 作用：用于通过注解指定spring在创建容器时要扫描的包
     * 属性：
-        * value：它和basePackages的作用是一样的，都是用于指定创建容器时要扫描的包。
+        * value：它和basePackages的作用是一样的, 都是用于指定创建容器时要扫描的包。
     * 我们使用此注解就等同于在xml中配置了:
         ```
         <context:component-scan base-package="com.test"/>
@@ -301,8 +301,8 @@ property标签:
 3. `@Bean`
     * 作用：用于把当前方法的返回值作为bean对象存入spring的ioc容器中
     * 属性:
-        * name:用于指定bean的id。当不写时，默认值是当前方法的名称
-    * 细节： 当我们使用注解配置方法时，如果方法有参数，spring框架会去容器中查找有没有可用的bean对象。
+        * name:用于指定bean的id。当不写时, 默认值是当前方法的名称
+    * 细节： 当我们使用注解配置方法时, 如果方法有参数, spring框架会去容器中查找有没有可用的bean对象。
     查找的方式和Autowired注解的作用是一样的
 4. `@Import`
     * 作用：用于导入其他的配置类
@@ -311,7 +311,7 @@ property标签:
 5. `@PropertySource`
     * 作用：用于指定properties文件的位置
     * 属性：
-        * value：指定文件的名称和路径。关键字：classpath，表示类路径下
+        * value：指定文件的名称和路径。关键字：classpath, 表示类路径下
         
 # Spring 整合 Junit
 
@@ -381,16 +381,16 @@ public class AccountServiceTest {
 * 表达式：访问修饰符  返回值  包名.包名.包名...类名.方法名(参数列表)
 * 标准的表达式写法：`public void com.test.service.impl.AccountServiceImpl.saveAccount()`
 * 访问修饰符可以省略: `void com.test.service.impl.AccountServiceImpl.saveAccount()`
-* 返回值可以使用通配符，表示任意返回值: `* com.test.service.impl.AccountServiceImpl.saveAccount()`
-* 包名可以使用通配符，表示任意包。但是有几级包，就需要写几个*.: `* *.*.*.*.AccountServiceImpl.saveAccount())`
+* 返回值可以使用通配符, 表示任意返回值: `* com.test.service.impl.AccountServiceImpl.saveAccount()`
+* 包名可以使用通配符, 表示任意包。但是有几级包, 就需要写几个*.: `* *.*.*.*.AccountServiceImpl.saveAccount())`
 * 包名可以使用..表示当前包及其子包: `* *..AccountServiceImpl.saveAccount()`
 * 类名和方法名都可以使用*来实现通配: `* *..*.*()`
 * 参数列表：
     * 可以直接写数据类型：
         * 基本类型直接写名称: int
         * 引用类型写包名.类名的方式: java.lang.String
-    * 可以使用通配符表示任意类型，但是必须有参数
-    * 可以使用..表示有无参数均可，有参数可以是任意类型
+    * 可以使用通配符表示任意类型, 但是必须有参数
+    * 可以使用..表示有无参数均可, 有参数可以是任意类型
 * 全通配写法：`* *..*.*(..)`
 * 切到业务层实现类下的所有方法: `* com.test.service.impl.*.*(..)`
 
@@ -404,7 +404,7 @@ public class AccountServiceTest {
 4. 在aop:aspect标签的内部使用对应标签来配置通知的类型
     * aop:before：表示配置前置通知
         * method属性：用于指定Logger类中哪个方法是前置通知
-        * pointcut属性：用于指定切入点表达式，该表达式的含义指的是对业务层中哪些方法增强
+        * pointcut属性：用于指定切入点表达式, 该表达式的含义指的是对业务层中哪些方法增强
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -423,7 +423,7 @@ public class AccountServiceTest {
     <aop:config>
         <!--配置切面 -->
         <aop:aspect id="logAdvice" ref="logger">
-            <!-- 配置通知的类型，并且建立通知方法和切入点方法的关联-->
+            <!-- 配置通知的类型, 并且建立通知方法和切入点方法的关联-->
             <aop:before method="printLog" pointcut="execution(* com.test.service.impl.*.*(..))"></aop:before>
         </aop:aspect>
     </aop:config>
@@ -456,7 +456,7 @@ public class AccountServiceTest {
 <aop:config>
     <!-- 配置切入点表达式 id属性用于指定表达式的唯一标识。expression属性用于指定表达式内容
           此标签写在aop:aspect标签内部只能当前切面使用。
-          它还可以写在aop:aspect外面，此时就变成了所有切面可用
+          它还可以写在aop:aspect外面, 此时就变成了所有切面可用
       -->
     <aop:pointcut id="pt1" expression="execution(* com.test.service.impl.*.*(..))"></aop:pointcut>
     <!--配置切面 -->
@@ -477,10 +477,10 @@ public class AccountServiceTest {
 # 环绕通知
 
 环绕通知：
-* 问题：当我们配置了环绕通知之后，切入点方法没有执行，而通知方法执行了。
-* 分析：通过对比动态代理中的环绕通知代码，发现动态代理的环绕通知有明确的切入点方法调用，而我们的代码中没有。
-* 解决：Spring框架为我们提供了一个接口：ProceedingJoinPoint。该接口有一个方法proceed()，此方法就相当于明确调用切入点方法。
-该接口可以作为环绕通知的方法参数，在程序执行时，spring框架会为我们提供该接口的实现类供我们使用。
+* 问题：当我们配置了环绕通知之后, 切入点方法没有执行, 而通知方法执行了。
+* 分析：通过对比动态代理中的环绕通知代码, 发现动态代理的环绕通知有明确的切入点方法调用, 而我们的代码中没有。
+* 解决：Spring框架为我们提供了一个接口：ProceedingJoinPoint。该接口有一个方法proceed(), 此方法就相当于明确调用切入点方法。
+该接口可以作为环绕通知的方法参数, 在程序执行时, spring框架会为我们提供该接口的实现类供我们使用。
 * spring中的环绕通知：它是spring框架为我们提供的一种可以在代码中手动控制增强方法何时执行的方式。
 
 ```
@@ -501,7 +501,7 @@ package com.test.utils;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * 用于记录日志的工具类，它里面提供了公共的代码
+ * 用于记录日志的工具类, 它里面提供了公共的代码
  */
 public class Logger {
     public Object aroundPringLog(ProceedingJoinPoint pjp){
@@ -528,14 +528,14 @@ public class Logger {
 
 # 事务控制
 
-1. JavaEE 体系进行分层开发，事务处理位于业务层，Spring 提供了分层设计业务层的事务处理解决方案
+1. JavaEE 体系进行分层开发, 事务处理位于业务层, Spring 提供了分层设计业务层的事务处理解决方案
 2. spring 框架为我们提供了一组事务控制的接口。这组接口是在spring-tx-5.0.2.RELEASE.jar 中。
-3. spring 的事务控制都是基于 AOP 的，它既可以使用编程的方式实现，也可以使用配置的方式实现
+3. spring 的事务控制都是基于 AOP 的, 它既可以使用编程的方式实现, 也可以使用配置的方式实现
 
 事务的传播行为
 
-* REQUIRED:如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。一般的选择（默认值）
-* SUPPORTS:支持当前事务，如果当前没有事务，就以非事务方式执行（没有事务）
+* REQUIRED:如果当前没有事务, 就新建一个事务, 如果已经存在一个事务中, 加入到这个事务中。一般的选择（默认值）
+* SUPPORTS:支持当前事务, 如果当前没有事务, 就以非事务方式执行（没有事务）
 
 # 基于 XML 的声明式事务控制
 
@@ -600,12 +600,12 @@ public void transfer(String sourceName, String targetName, Float money) {
 4. 建立事务通知和切入点表达式的对应关系
 5. 配置事务的属性tx:attributes
    * 属性: 
-        * isolation：用于指定事务的隔离级别。默认值是DEFAULT，表示使用数据库的默认隔离级别。
-        * propagation：用于指定事务的传播行为。默认值是REQUIRED，表示一定会有事务，增删改的选择。查询方法可以选择SUPPORTS。
-        * read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false，表示读写。
-        * timeout：用于指定事务的超时时间，默认值是-1，表示永不超时。如果指定了数值，以秒为单位。
-        * rollback-for：用于指定一个异常，当产生该异常时，事务回滚，产生其他异常时，事务不回滚。没有默认值。表示任何异常都回滚。
-        * no-rollback-for：用于指定一个异常，当产生该异常时，事务不回滚，产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。
+        * isolation：用于指定事务的隔离级别。默认值是DEFAULT, 表示使用数据库的默认隔离级别。
+        * propagation：用于指定事务的传播行为。默认值是REQUIRED, 表示一定会有事务, 增删改的选择。查询方法可以选择SUPPORTS。
+        * read-only：用于指定事务是否只读。只有查询方法才能设置为true。默认值是false, 表示读写。
+        * timeout：用于指定事务的超时时间, 默认值是-1, 表示永不超时。如果指定了数值, 以秒为单位。
+        * rollback-for：用于指定一个异常, 当产生该异常时, 事务回滚, 产生其他异常时, 事务不回滚。没有默认值。表示任何异常都回滚。
+        * no-rollback-for：用于指定一个异常, 当产生该异常时, 事务不回滚, 产生其他异常时事务回滚。没有默认值。表示任何异常都回滚。
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>

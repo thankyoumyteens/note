@@ -2,7 +2,7 @@
 
 ## 卸载老版本
 
-如果你安装了老版本，请卸载掉
+如果你安装了老版本, 请卸载掉
 ```
 $ sudo apt-get remove docker docker-engine docker.io
 ```
@@ -25,7 +25,7 @@ $ sudo apt-get install \
 ```
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
-通过搜索指纹的最后8个字符，确认您现在拥有指纹9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88的密钥。
+通过搜索指纹的最后8个字符, 确认您现在拥有指纹9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88的密钥。
 ```
 $ sudo apt-key fingerprint 0EBFCD88
 
@@ -35,7 +35,7 @@ uid                  Docker Release (CE deb) <docker@docker.com>
 sub   4096R/F273FCD8 2017-02-22
 ```
 使用以下命令设置稳定存储库。
-* 注意：`lsb_release -cs`子命令返回Ubuntu发行版的名称，例如xenial
+* 注意：`lsb_release -cs`子命令返回Ubuntu发行版的名称, 例如xenial
 ```
 $ sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -48,7 +48,7 @@ $ sudo add-apt-repository \
 ```
 sudo apt-get update
 ```
-安装最新版本的Docker CE，或转到下一步安装特定版本：
+安装最新版本的Docker CE, 或转到下一步安装特定版本：
 ```
 $ sudo apt-get install docker-ce
 ```
@@ -89,7 +89,7 @@ For more examples and ideas, visit:
 
 ## 卸载旧版本
 
-旧版本的 Docker 被叫做 docker 或 docker-engine，如果您安装了旧版本的 Docker ，您需要卸载掉它。
+旧版本的 Docker 被叫做 docker 或 docker-engine, 如果您安装了旧版本的 Docker , 您需要卸载掉它。
 ```
 $ sudo yum remove docker \
       docker-client \
@@ -103,7 +103,7 @@ $ sudo yum remove docker \
 
 ## 安装
 
-为了方便添加软件源，支持 devicemapper 存储类型，安装如下软件包
+为了方便添加软件源, 支持 devicemapper 存储类型, 安装如下软件包
 ```
 $ sudo yum update
 $ sudo yum install -y yum-utils \
@@ -116,14 +116,14 @@ $ sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 ```
-更新一下 yum 软件源的缓存，并安装 Docker
+更新一下 yum 软件源的缓存, 并安装 Docker
 ```
 $ sudo yum update
 $ sudo yum install docker-ce
 ```
-如果弹出 GPG key 的接收提示，请确认是否为 060a 61c5 1b55 8a7f 742b 77aa c52f eb6b 621e 9f35，如果是，可以接受并继续安装。
+如果弹出 GPG key 的接收提示, 请确认是否为 060a 61c5 1b55 8a7f 742b 77aa c52f eb6b 621e 9f35, 如果是, 可以接受并继续安装。
 
-至此，Docker 已经安装完成了，Docker 服务是没有启动的，操作系统里的 docker 组被创建，但是没有用户在这个组里。
+至此, Docker 已经安装完成了, Docker 服务是没有启动的, 操作系统里的 docker 组被创建, 但是没有用户在这个组里。
 
 默认的 docker 组是没有用户的（也就是说需要使用 sudo 才能使用 docker 命令）。
 您可以将用户添加到 docker 组中（此用户就可以直接使用 docker 命令了）。
@@ -132,13 +132,13 @@ $ sudo yum install docker-ce
 ```
 $ sudo usermod -aG docker USER_NAME
 ```
-用户更新组信息后，重新登录系统即可生效。
+用户更新组信息后, 重新登录系统即可生效。
 
 启动 docker 服务
 ```
 $ sudo systemctl start docker
 ```
-验证 Docker CE 安装是否正确，可以运行 hello-world 镜像
+验证 Docker CE 安装是否正确, 可以运行 hello-world 镜像
 ```
 $ sudo docker run hello-world
 ```
@@ -161,7 +161,7 @@ docker images
 
 ## 搜索镜像
 
-如果你需要从网络中查找需要的镜像，可以通过以下命令搜索
+如果你需要从网络中查找需要的镜像, 可以通过以下命令搜索
 
 ```
 docker search 镜像名称
@@ -169,9 +169,9 @@ docker search 镜像名称
 
 * NAME：仓库名称
 * DESCRIPTION：镜像描述
-* STARS：用户评价，反应一个镜像的受欢迎程度
+* STARS：用户评价, 反应一个镜像的受欢迎程度
 * OFFICIAL：是否官方
-* AUTOMATED：自动构建，表示该镜像由Docker Hub自动构建流程创建的
+* AUTOMATED：自动构建, 表示该镜像由Docker Hub自动构建流程创建的
 
 ## 拉取镜像
 
@@ -180,7 +180,7 @@ docker search 镜像名称
 ```
 docker pull 镜像名称
 ```
-例如，下载centos7镜像
+例如, 下载centos7镜像
 ```
 docker pull centos:7
 ```
@@ -220,11 +220,11 @@ docker ps -f status=exited
 创建容器命令：`docker run`
 
 * -i：表示运行容器
-* -t：表示容器启动后会进入其命令行。加入这两个参数后，容器创建就能登录进去。即分配一个伪终端。
+* -t：表示容器启动后会进入其命令行。加入这两个参数后, 容器创建就能登录进去。即分配一个伪终端。
 * --name :为创建的容器命名。
-* -v：表示目录映射关系（前者是宿主机目录，后者是映射到宿主机上的目录），可以使用多个－v做多个目录或文件映射。注意：最好做目录映射，在宿主机上做修改，然后共享到容器上。
-* -d：在run后面加上-d参数,则会创建一个守护式容器在后台运行（这样创建容器后不会自动登录容器，如果只加-i -t两个参数，创建后就会自动进去容器）。
-* -p：表示端口映射，前者是宿主机端口，后者是容器内的映射端口。可以使用多个-p做多个端口映射
+* -v：表示目录映射关系（前者是宿主机目录, 后者是映射到宿主机上的目录）, 可以使用多个－v做多个目录或文件映射。注意：最好做目录映射, 在宿主机上做修改, 然后共享到容器上。
+* -d：在run后面加上-d参数,则会创建一个守护式容器在后台运行（这样创建容器后不会自动登录容器, 如果只加-i -t两个参数, 创建后就会自动进去容器）。
+* -p：表示端口映射, 前者是宿主机端口, 后者是容器内的映射端口。可以使用多个-p做多个端口映射
 
 交互式方式创建容器
 ```
@@ -275,15 +275,15 @@ docker cp 容器名称:容器目录 需要拷贝的文件或目录
 
 ## 目录挂载
 
-我们可以在创建容器的时候，将宿主机的目录与容器内的目录进行映射，这样我们就可以通过修改宿主机某个目录的文件从而去影响容器。
-创建容器 添加-v参数 后边为   宿主机目录:容器目录，例如：
+我们可以在创建容器的时候, 将宿主机的目录与容器内的目录进行映射, 这样我们就可以通过修改宿主机某个目录的文件从而去影响容器。
+创建容器 添加-v参数 后边为   宿主机目录:容器目录, 例如：
 ```
 docker run -di -v /usr/local/myhtml:/usr/local/myhtml --name=mycentos3 centos:7
 ```
 
-如果你共享的是多级的目录，可能会出现权限不足的提示。
+如果你共享的是多级的目录, 可能会出现权限不足的提示。
 
-这是因为CentOS7中的安全模块selinux把权限禁掉了，我们需要添加参数`--privileged=true`来解决挂载的目录没有权限的问题
+这是因为CentOS7中的安全模块selinux把权限禁掉了, 我们需要添加参数`--privileged=true`来解决挂载的目录没有权限的问题
 
 ## 查看容器IP地址
 
@@ -314,12 +314,12 @@ docker run \
     mysql:5.7.19
 ```
 以上参数的含义：
-* `--name mysql_01`  将容器命名为mysql_01，后面可以用这个name进行容器的启动暂停等操作
+* `--name mysql_01`  将容器命名为mysql_01, 后面可以用这个name进行容器的启动暂停等操作
 * `-e MYSQL_ROOT_PASSWORD=123456` 设置MySQL密码为123456
 * `-d` 此容器在后台运行,并且返回容器的ID
 * `-i` 以交互模式运行容器
-* `-p` 进行端口映射，格式为主机(宿主)端口:容器端口
-* `--restart=always` 当docker重启时，该容器自动重启
+* `-p` 进行端口映射, 格式为主机(宿主)端口:容器端口
+* `--restart=always` 当docker重启时, 该容器自动重启
 
 ## Tomcat部署
 
@@ -402,17 +402,17 @@ docker load -i mynginx.tar
 
 * -i 输入的文件
 
-执行后再次查看镜像，可以看到镜像已经恢复
+执行后再次查看镜像, 可以看到镜像已经恢复
 
 # Dockerfile
 
 ## 什么是Dockerfile
 
-Dockerfile是由一系列命令和参数构成的脚本，这些命令应用于基础镜像并最终创建一个新的镜像。
+Dockerfile是由一系列命令和参数构成的脚本, 这些命令应用于基础镜像并最终创建一个新的镜像。
 
 1. 对于开发人员：可以为开发团队提供一个完全一致的开发环境； 
 2. 对于测试人员：可以直接拿开发时所构建的镜像或者通过Dockerfile文件构建一个新的镜像开始工作了； 
-3. 对于运维人员：在部署时，可以实现应用的无缝移植。
+3. 对于运维人员：在部署时, 可以实现应用的无缝移植。
 
 ## 常用命令
 
@@ -422,8 +422,8 @@ Dockerfile是由一系列命令和参数构成的脚本，这些命令应用于�
 | MAINTAINER user_name               | 声明镜像的创建者                           |
 | ENV key value                      | 设置环境变量 (可以写多条)                     |
 | RUN command                        | 是Dockerfile的核心部分(可以写多条)            |
-| ADD source_dir/file dest_dir/file  | 将宿主机的文件复制到容器内，如果是一个压缩文件，将会在复制后自动解压 |
-| COPY source_dir/file dest_dir/file | 和ADD相似，但是如果有压缩文件并不能解压              |
+| ADD source_dir/file dest_dir/file  | 将宿主机的文件复制到容器内, 如果是一个压缩文件, 将会在复制后自动解压 |
+| COPY source_dir/file dest_dir/file | 和ADD相似, 但是如果有压缩文件并不能解压              |
 | WORKDIR path_dir                   | 设置工作目录                             |
 
 ## 使用脚本创建镜像
@@ -464,7 +464,7 @@ ENV PATH $JAVA_HOME/bin:$PATH
 docker build -t='jdk1.8' .
 ```
 
-注意后边的空格和点，不要省略
+注意后边的空格和点, 不要省略
 
 （5）查看镜像是否建立完成
 
@@ -496,7 +496,7 @@ docker run -di --name=registry -p 5000:5000 registry
 vi /etc/docker/daemon.json
 ```
 
-添加以下内容，保存退出。
+添加以下内容, 保存退出。
 
 ```json
 {"insecure-registries":["192.168.184.141:5000"]} 
@@ -538,7 +538,7 @@ docker push 192.168.184.141:5000/jdk1.8
 vi /etc/docker/daemon.json
 ```
 
-添加以下内容，保存退出。
+添加以下内容, 保存退出。
 
 ```json
 {"insecure-registries":["192.168.184.141:5000"]} 

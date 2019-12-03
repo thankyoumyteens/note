@@ -11,13 +11,13 @@ MySQL登录
 ## 什么是SQL？
 
 Structured Query Language：结构化查询语言
-其实就是定义了操作所有关系型数据库的规则。每一种数据库操作的方式存在不一样的地方，称为“方言”。
+其实就是定义了操作所有关系型数据库的规则。每一种数据库操作的方式存在不一样的地方, 称为“方言”。
 		
 ## SQL通用语法
 
-1. SQL 语句可以单行或多行书写，以分号结尾。
+1. SQL 语句可以单行或多行书写, 以分号结尾。
 2. 可使用空格和缩进来增强语句的可读性。
-3. MySQL 数据库的 SQL 语句不区分大小写，关键字建议使用大写。
+3. MySQL 数据库的 SQL 语句不区分大小写, 关键字建议使用大写。
 4. 3 种注释
     * 单行注释: -- 注释内容 或 # 注释内容(mysql 特有) 
     * 多行注释: /* 注释 */
@@ -25,13 +25,13 @@ Structured Query Language：结构化查询语言
 ## SQL分类
 
 1. DDL(Data Definition Language)数据定义语言
-用来定义数据库对象：数据库，表，列等。关键字：create, drop,alter 等
+用来定义数据库对象：数据库, 表, 列等。关键字：create, drop,alter 等
 2. DML(Data Manipulation Language)数据操作语言
 用来对数据库中表的数据进行增删改。关键字：insert, delete, update 等
 3. DQL(Data Query Language)数据查询语言
 用来查询数据库中表的记录(数据)。关键字：select, where 等
 4. DCL(Data Control Language)数据控制语言(了解)
-用来定义数据库的访问权限和安全级别，及创建用户。关键字：GRANT， REVOKE 等
+用来定义数据库的访问权限和安全级别, 及创建用户。关键字：GRANT,  REVOKE 等
 
 # DDL:操作数据库、表
 
@@ -42,11 +42,11 @@ Structured Query Language：结构化查询语言
     ```
     create database 数据库名称;
     ```
-* 创建数据库，判断不存在，再创建：
+* 创建数据库, 判断不存在, 再创建：
     ```
     create database if not exists 数据库名称;
     ```
-* 创建数据库，并指定字符集
+* 创建数据库, 并指定字符集
     ```
     create database 数据库名称 character set 字符集名;
     ```
@@ -69,7 +69,7 @@ Structured Query Language：结构化查询语言
     ```
     drop database 数据库名称;
     ```
-* 判断数据库存在，存在再删除
+* 判断数据库存在, 存在再删除
     ```    
     drop database if exists 数据库名称;
     ```
@@ -89,10 +89,10 @@ Structured Query Language：结构化查询语言
 数据库类型：
 1. int：整数类型: age int,
 2. double:小数类型: score double(5,2)
-3. date:日期，只包含年月日
-4. datetime:日期，包含年月日时分秒
-5. timestamp:时间戳类型，包含年月日时分秒
-    * 如果将来不给这个字段赋值，或赋值为null，则默认使用当前的系统时间，来自动赋值
+3. date:日期, 只包含年月日
+4. datetime:日期, 包含年月日时分秒
+5. timestamp:时间戳类型, 包含年月日时分秒
+    * 如果将来不给这个字段赋值, 或赋值为null, 则默认使用当前的系统时间, 来自动赋值
 6. varchar：字符串: name varchar(20):姓名最大20个字符
 
 * 创建表：
@@ -156,24 +156,24 @@ Structured Query Language：结构化查询语言
     ```
     注意：
     * 列名和值要一一对应。
-    * 如果表名后，不定义列名，则默认给所有列添加值
-    * 除了数字类型，其他类型需要使用引号引起来
+    * 如果表名后, 不定义列名, 则默认给所有列添加值
+    * 除了数字类型, 其他类型需要使用引号引起来
 2. 删除数据：
     ```
     delete from 表名 [where 条件]
     ```
     注意：
-    * 如果不加条件，则删除表中所有记录。
+    * 如果不加条件, 则删除表中所有记录。
     
     如果要删除所有记录
     1. `delete from 表名` 不推荐使用。有多少条记录就会执行多少次删除操作
-    2. `truncate table 表名` 推荐使用，效率更高 先删除表，然后再创建一张一样的表。
+    2. `truncate table 表名` 推荐使用, 效率更高 先删除表, 然后再创建一张一样的表。
 3. 修改数据：
     ```
     update 表名 set 列名1 = 值1, 列名2 = 值2,... [where 条件];
     ```
     注意：
-    * 如果不加任何条件，则会将表中所有记录全部修改。
+    * 如果不加任何条件, 则会将表中所有记录全部修改。
 
 # DQL：查询表中的记录
 
@@ -195,10 +195,10 @@ Structured Query Language：结构化查询语言
         分页限定
     ```
 2. 基础查询
-    * 多个字段的查询: `select 字段名1，字段名2... from 表名`
+    * 多个字段的查询: `select 字段名1, 字段名2... from 表名`
     * 去除重复: `distinct`
     * 计算列: 一般可以使用四则运算计算一些列的值
-    * `ifnull(表达式1,表达式2)`：null参与的运算，计算结果都为null
+    * `ifnull(表达式1,表达式2)`：null参与的运算, 计算结果都为null
         * 表达式1: 哪个字段需要判断是否为null
         * 表达式2: 如果该字段为null后的替换值。
     * 起别名：`as`, 可以省略
@@ -228,12 +228,12 @@ Structured Query Language：结构化查询语言
         ...
     ```
 * 排序方式：
-    * `ASC`：升序，默认的。
+    * `ASC`：升序, 默认的。
     * `DESC`：降序。
 * 注意：
-    * 如果有多个排序条件，则当前边的条件值一样时，才会判断第二条件。
+    * 如果有多个排序条件, 则当前边的条件值一样时, 才会判断第二条件。
 
-## 聚合函数：将一列数据作为一个整体，进行纵向的计算。
+## 聚合函数：将一列数据作为一个整体, 进行纵向的计算。
 1. `count`：计算个数
     * 一般选择非空的列：主键
     * count(*)
@@ -249,9 +249,9 @@ Structured Query Language：结构化查询语言
 2. 注意：
     * 分组之后能查询的字段：分组字段、聚合函数
 3. where 和 having 的区别？
-    * where 在分组之前进行限定，如果不满足条件，则不参与分组
-    * having在分组之后进行限定，如果不满足结果，则不会被查询出来
-    * where 后不可以跟聚合函数，having可以进行聚合函数的判断
+    * where 在分组之前进行限定, 如果不满足条件, 则不参与分组
+    * having在分组之后进行限定, 如果不满足结果, 则不会被查询出来
+    * where 后不可以跟聚合函数, having可以进行聚合函数的判断
    
 ```
 -- 按照性别分组。
@@ -277,7 +277,7 @@ GROUP BY
 
 -- 按照性别分组。
 -- 分别查询男女同学的平均分,人数 
--- 要求：分数低于70分的人，不参与分组
+-- 要求：分数低于70分的人, 不参与分组
 SELECT 
     sex,
     AVG(math),
@@ -291,7 +291,7 @@ GROUP BY
 
 -- 按照性别分组。
 -- 分别查询男女同学的平均分,人数 
--- 要求：分数低于70分的人，不参与分组,
+-- 要求：分数低于70分的人, 不参与分组,
 -- 分组之后。人数要大于2个人
 SELECT 
     sex, 
@@ -335,7 +335,7 @@ HAVING 人数 > 2;
 3. limit 是一个MySQL"方言"
 
 # 约束
-概念: 对表中的数据进行限定，保证数据的正确性、有效性和完整性。	
+概念: 对表中的数据进行限定, 保证数据的正确性、有效性和完整性。	
 
 分类：
 1. 主键约束：`primary key`
@@ -343,7 +343,7 @@ HAVING 人数 > 2;
 3. 唯一约束：`unique`
 4. 外键约束：`foreign key`
 
-## 非空约束：not null，值不能为null
+## 非空约束：not null, 值不能为null
 1. 创建表时添加约束
     ```
     CREATE TABLE stu(
@@ -351,7 +351,7 @@ HAVING 人数 > 2;
         name VARCHAR(20) NOT NULL
     );
     ```
-2. 创建表完后，添加非空约束
+2. 创建表完后, 添加非空约束
     ```
     ALTER TABLE stu MODIFY NAME VARCHAR(20) NOT NULL;
     ```
@@ -359,20 +359,20 @@ HAVING 人数 > 2;
     ```
     ALTER TABLE stu MODIFY NAME VARCHAR(20);
     ```
-## 唯一约束：unique，值不能重复
-1. 创建表时，添加唯一约束
+## 唯一约束：unique, 值不能重复
+1. 创建表时, 添加唯一约束
     ```
     CREATE TABLE stu(
         id INT,
         phone VARCHAR(20) UNIQUE
     );
     ```
-    * 注意: mysql中，唯一约束限定的列的值可以有多个null
+    * 注意: mysql中, 唯一约束限定的列的值可以有多个null
 2. 删除唯一约束
     ```
     ALTER TABLE stu DROP INDEX phone;
     ```
-3. 在创建表后，添加唯一约束
+3. 在创建表后, 添加唯一约束
     ```
     ALTER TABLE stu MODIFY phone VARCHAR(20) UNIQUE;
     ```
@@ -381,7 +381,7 @@ HAVING 人数 > 2;
     * 含义：非空且唯一
     * 一张表只能有一个字段为主键
     * 主键就是表中记录的唯一标识
-2. 在创建表时，添加主键约束
+2. 在创建表时, 添加主键约束
     ```
     create table stu(
         id int primary key,
@@ -392,14 +392,14 @@ HAVING 人数 > 2;
     ```
     ALTER TABLE stu DROP PRIMARY KEY;
     ```
-4. 创建完表后，添加主键
+4. 创建完表后, 添加主键
     ```
     ALTER TABLE stu MODIFY id INT PRIMARY KEY;
     ```
 
 自动增长：
-1. 概念：如果某一列是数值类型的，使用 auto_increment 可以来完成值得自动增长
-2. 在创建表时，添加主键约束，并且完成主键自增长
+1. 概念：如果某一列是数值类型的, 使用 auto_increment 可以来完成值得自动增长
+2. 在创建表时, 添加主键约束, 并且完成主键自增长
     ```
     create table stu(
         id int primary key auto_increment,
@@ -414,8 +414,8 @@ HAVING 人数 > 2;
     ```
     ALTER TABLE stu MODIFY id INT AUTO_INCREMENT;
     ```
-## 外键约束：foreign key,让表于表产生关系，从而保证数据的正确性
-1. 在创建表时，可以添加外键
+## 外键约束：foreign key,让表于表产生关系, 从而保证数据的正确性
+1. 在创建表时, 可以添加外键
     ```
     create table 表名(
         ....
@@ -427,7 +427,7 @@ HAVING 人数 > 2;
     ```
     ALTER TABLE 表名 DROP FOREIGN KEY 外键名称;
     ```
-3. 创建表之后，添加外键
+3. 创建表之后, 添加外键
     ```
     ALTER TABLE 表名 
     ADD CONSTRAINT 外键名称 
@@ -471,7 +471,7 @@ CREATE TABLE emp (
 ```
 笛卡尔积：
 * 有两个集合A,B .取这两个集合的所有组成情况。
-* 要完成多表查询，需要消除无用的数据
+* 要完成多表查询, 需要消除无用的数据
 
 多表查询的分类：
 1. 内连接查询：
@@ -502,9 +502,9 @@ CREATE TABLE emp (
 2. 外链接查询：
     1. 左外连接：查询的是左表所有数据以及其交集部分
         ```
-        -- 查询所有员工信息，
-        -- 如果员工有部门，则查询部门名称，
-        -- 没有部门，则不显示部门名称
+        -- 查询所有员工信息, 
+        -- 如果员工有部门, 则查询部门名称, 
+        -- 没有部门, 则不显示部门名称
         SELECT 	
             t1.*,
             t2.name 
@@ -530,7 +530,7 @@ CREATE TABLE emp (
     -- 查询工资最高的员工信息
     -- 1 查询最高的工资是多少 9000
     SELECT MAX(salary) FROM emp;
-    -- 2 查询员工信息，并且工资等于9000的
+    -- 2 查询员工信息, 并且工资等于9000的
     SELECT * FROM emp WHERE emp.`salary` = 9000;
     
     -- 一条sql就完成这个操作。子查询
@@ -542,7 +542,7 @@ CREATE TABLE emp (
 
 子查询的不同情况
 
-1. 子查询的结果是单行单列的：子查询可以作为条件，使用运算符去判断。
+1. 子查询的结果是单行单列的：子查询可以作为条件, 使用运算符去判断。
     ```
     -- 查询员工工资小于平均工资的人
     SELECT * 
@@ -550,7 +550,7 @@ CREATE TABLE emp (
     WHERE emp.salary < 
         (SELECT AVG(salary) FROM emp);
     ```
-2. 子查询的结果是多行单列的：子查询可以作为条件，使用运算符in来判断
+2. 子查询的结果是多行单列的：子查询可以作为条件, 使用运算符in来判断
     ```
     -- 查询'财务部'和'市场部'所有的员工信息
     SELECT * 
@@ -598,7 +598,7 @@ INSERT INTO dept(id,dname,loc) VALUES
 
 
 
--- 职务表，职务名称，职务描述
+-- 职务表, 职务名称, 职务描述
 CREATE TABLE job (
   id INT PRIMARY KEY,
   jname VARCHAR(20),
@@ -607,7 +607,7 @@ CREATE TABLE job (
 
 -- 添加4个职务
 INSERT INTO job (id, jname, description) VALUES
-(1, '董事长', '管理整个公司，接单'),
+(1, '董事长', '管理整个公司, 接单'),
 (2, '经理', '管理部门员工'),
 (3, '销售员', '向客人推销产品'),
 (4, '文员', '使用办公软件');
@@ -664,10 +664,10 @@ INSERT INTO salarygrade(grade,losalary,hisalary) VALUES
 
 -- 需求：
 
--- 1.查询所有员工信息。查询员工编号，员工姓名，工资，职务名称，职务描述
+-- 1.查询所有员工信息。查询员工编号, 员工姓名, 工资, 职务名称, 职务描述
 /*
     分析：
-        1.员工编号，员工姓名，工资，需要查询emp表  职务名称，职务描述 需要查询job表
+        1.员工编号, 员工姓名, 工资, 需要查询emp表  职务名称, 职务描述 需要查询job表
         2.查询条件 emp.job_id = job.id
 
 */
@@ -684,10 +684,10 @@ WHERE
 
 
 
--- 2.查询员工编号，员工姓名，工资，职务名称，职务描述，部门名称，部门位置
+-- 2.查询员工编号, 员工姓名, 工资, 职务名称, 职务描述, 部门名称, 部门位置
 /*
     分析：
-        1. 员工编号，员工姓名，工资 emp  职务名称，职务描述 job  部门名称，部门位置 dept
+        1. 员工编号, 员工姓名, 工资 emp  职务名称, 职务描述 job  部门名称, 部门位置 dept
         2. 条件： emp.job_id = job.id and emp.dept_id = dept.id
 */
 
@@ -704,10 +704,10 @@ FROM
 WHERE 
     t1.`job_id` = t2.`id` AND t1.`dept_id` = t3.`id`;
    
--- 3.查询员工姓名，工资，工资等级
+-- 3.查询员工姓名, 工资, 工资等级
 /*
     分析：
-        1.员工姓名，工资 emp  工资等级 salarygrade
+        1.员工姓名, 工资 emp  工资等级 salarygrade
         2.条件 emp.salary >= salarygrade.losalary and emp.salary <= salarygrade.hisalary
             emp.salary BETWEEN salarygrade.losalary and salarygrade.hisalary
 */
@@ -720,10 +720,10 @@ WHERE t1.`salary` BETWEEN t2.`losalary` AND t2.`hisalary`;
 
 
 
--- 4.查询员工姓名，工资，职务名称，职务描述，部门名称，部门位置，工资等级
+-- 4.查询员工姓名, 工资, 职务名称, 职务描述, 部门名称, 部门位置, 工资等级
 /*
     分析：
-        1. 员工姓名，工资 emp ， 职务名称，职务描述 job 部门名称，部门位置，dept  工资等级 salarygrade
+        1. 员工姓名, 工资 emp ,  职务名称, 职务描述 job 部门名称, 部门位置, dept  工资等级 salarygrade
         2. 条件： emp.job_id = job.id and emp.dept_id = dept.id and emp.salary BETWEEN salarygrade.losalary and salarygrade.hisalary
             
 */
@@ -749,7 +749,7 @@ WHERE
 /*
     分析：
         1.部门编号、部门名称、部门位置 dept 表。 部门人数 emp表
-        2.使用分组查询。按照emp.dept_id完成分组，查询count(id)
+        2.使用分组查询。按照emp.dept_id完成分组, 查询count(id)
         3.使用子查询将第2步的查询结果和dept表进行关联查询
         
 */
@@ -769,10 +769,10 @@ WHERE t1.`id` = t2.dept_id;
 
 /*
     分析：
-        1.姓名 emp， 直接上级的姓名 emp
+        1.姓名 emp,  直接上级的姓名 emp
             * emp表的id 和 mgr 是自关联
         2.条件 emp.id = emp.mgr
-        3.查询左表的所有数据，和 交集数据
+        3.查询左表的所有数据, 和 交集数据
             * 使用左外连接查询
     
 */
@@ -800,7 +800,7 @@ ON t1.`mgr` = t2.`id`;
 # 事务
 
 ## 事务的基本介绍
-1. 概念：如果一个包含多个步骤的业务操作，被事务管理，那么这些操作要么同时成功，要么同时失败。
+1. 概念：如果一个包含多个步骤的业务操作, 被事务管理, 那么这些操作要么同时成功, 要么同时失败。
 2. 操作：
     1. 开启事务：`start transaction`
     2. 回滚：`rollback`
@@ -831,10 +831,10 @@ ON t1.`mgr` = t2.`id`;
     UPDATE account SET balance = balance + 500 
     WHERE NAME = 'lisi';
     
-    -- 发现执行没有问题，提交事务
+    -- 发现执行没有问题, 提交事务
     COMMIT;
     
-    -- 发现出问题了，回滚事务
+    -- 发现出问题了, 回滚事务
     ROLLBACK;
     ```
 4. MySQL数据库中事务默认自动提交
@@ -844,21 +844,21 @@ ON t1.`mgr` = t2.`id`;
             * 一条DML(增删改)语句会自动提交一次事务。
         * 手动提交：
             * Oracle 数据库默认是手动提交事务
-            * 需要先开启事务，再提交
+            * 需要先开启事务, 再提交
     * 修改事务的默认提交方式：
         * 查看事务的默认提交方式：`SELECT @@autocommit`, 1 代表自动提交  0 代表手动提交
         * 修改默认提交方式： `set @@autocommit = 0`
 ## 事务的四大特征：
-1. 原子性：是不可分割的最小操作单位，要么同时成功，要么同时失败。
-2. 持久性：当事务提交或回滚后，数据库会持久化的保存数据。
+1. 原子性：是不可分割的最小操作单位, 要么同时成功, 要么同时失败。
+2. 持久性：当事务提交或回滚后, 数据库会持久化的保存数据。
 3. 隔离性：多个事务之间。相互独立。
-4. 一致性：事务操作前后，数据总量不变
+4. 一致性：事务操作前后, 数据总量不变
 ## 事务的隔离级别（了解）
-* 概念：多个事务之间隔离的，相互独立的。但是如果多个事务操作同一批数据，则会引发一些问题，设置不同的隔离级别就可以解决这些问题。
+* 概念：多个事务之间隔离的, 相互独立的。但是如果多个事务操作同一批数据, 则会引发一些问题, 设置不同的隔离级别就可以解决这些问题。
 * 存在问题：
-    1. 脏读：一个事务，读取到另一个事务中没有提交的数据
-    2. 不可重复读(虚读)：在同一个事务中，两次读取到的数据不一样。
-    3. 幻读：一个事务操作(DML)数据表中所有记录，另一个事务添加了一条数据，则第一个事务查询不到自己的修改。
+    1. 脏读：一个事务, 读取到另一个事务中没有提交的数据
+    2. 不可重复读(虚读)：在同一个事务中, 两次读取到的数据不一样。
+    3. 幻读：一个事务操作(DML)数据表中所有记录, 另一个事务添加了一条数据, 则第一个事务查询不到自己的修改。
 * 隔离级别：
     1. read uncommitted：读未提交
         * 产生的问题：脏读、不可重复读、幻读
@@ -868,14 +868,14 @@ ON t1.`mgr` = t2.`id`;
         * 产生的问题：幻读
     4. serializable：串行化
         * 可以解决所有的问题
-    * 注意：隔离级别从小到大安全性越来越高，但是效率越来越低
+    * 注意：隔离级别从小到大安全性越来越高, 但是效率越来越低
     * 数据库查询隔离级别：
         * select @@tx_isolation;
     * 数据库设置隔离级别：
         * set global transaction isolation level  级别字符串;
 
 # DCL：
-管理用户，授权
+管理用户, 授权
 1. 管理用户
     1. 添加用户：
         * 语法：CREATE USER '用户名'@'主机名' IDENTIFIED BY '密码';
@@ -891,11 +891,11 @@ ON t1.`mgr` = t2.`id`;
             1. cmd -- > net stop mysql 停止mysql服务
                 * 需要管理员运行该cmd
             2. 使用无验证方式启动mysql服务： mysqld --skip-grant-tables
-            3. 打开新的cmd窗口,直接输入mysql命令，敲回车。就可以登录成功
+            3. 打开新的cmd窗口,直接输入mysql命令, 敲回车。就可以登录成功
             4. use mysql;
             5. update user set password = password('你的新密码') where user = 'root';
             6. 关闭两个窗口
-            7. 打开任务管理器，手动结束mysqld.exe 的进程
+            7. 打开任务管理器, 手动结束mysqld.exe 的进程
             8. 启动mysql服务
             9. 使用新密码登录。
     4. 查询用户：
@@ -911,7 +911,7 @@ ON t1.`mgr` = t2.`id`;
     2. 授予权限：
         grant 权限列表 on 数据库名.表名 to '用户名'@'主机名';
         ```
-        -- 给张三用户授予所有权限，在任意数据库任意表上
+        -- 给张三用户授予所有权限, 在任意数据库任意表上
         GRANT ALL ON *.* TO 'zhangsan'@'localhost';
         ```
     3. 撤销权限：

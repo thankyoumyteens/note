@@ -103,7 +103,7 @@
         values(#{username},#{birthday},#{sex},#{address})
     </insert>
     ```
-2. 新增用户后，同时返回当前新增用户的 id
+2. 新增用户后, 同时返回当前新增用户的 id
     ```
     int saveUser(User user);
     
@@ -148,18 +148,18 @@
 # \#{}与${}的区别
 
 ## \#{}表示一个占位符号
-通过\#{}可以实现 preparedStatement 向占位符中设置值，自动进行 java 类型和 jdbc 类型转换，
+通过\#{}可以实现 preparedStatement 向占位符中设置值, 自动进行 java 类型和 jdbc 类型转换, 
 \#{}可以有效防止 sql 注入。 
-\#{}可以接收简单类型值或 pojo 属性值。 如果 parameterType 传输单个简单类型值，\#{}括号中可以是 value 或其它任意名称。
+\#{}可以接收简单类型值或 pojo 属性值。 如果 parameterType 传输单个简单类型值, \#{}括号中可以是 value 或其它任意名称。
 ## ${}表示拼接 sql 串
-通过${}可以将 parameterType 传入的内容拼接在 sql 中且不进行 jdbc 类型转换， 
-${}可以接收简单类型值或 pojo 属性值，如果 parameterType 传输单个简单类型值，${}括号中只能是 value。
+通过${}可以将 parameterType 传入的内容拼接在 sql 中且不进行 jdbc 类型转换,  
+${}可以接收简单类型值或 pojo 属性值, 如果 parameterType 传输单个简单类型值, ${}括号中只能是 value。
 
 # resultMap 定义实体类中的属性和数据库列名的对应关系
 
 建立 User 实体和数据库表的对应关系
 - type 属性：指定实体类的全限定类名
-- id 属性：给定一个唯一标识，是给查询 select 标签引用用的。
+- id 属性：给定一个唯一标识, 是给查询 select 标签引用用的。
 - id 标签：用于指定主键字段
 - result 标签：用于指定非主键字段
 - column 属性：用于指定数据库列名
@@ -184,7 +184,7 @@ ${}可以接收简单类型值或 pojo 属性值，如果 parameterType 传输�
 
 ## if 标签
    
-if标签通常用于WHERE语句、UPDATE语句、INSERT语句中，
+if标签通常用于WHERE语句、UPDATE语句、INSERT语句中, 
 通过判断参数值来决定是否使用某个查询条件、判断是否更新某一个字段、
 判断是否插入某个字段的值。
 
@@ -196,20 +196,20 @@ if标签通常用于WHERE语句、UPDATE语句、INSERT语句中，
 
 ## foreach 标签
 
-foreach标签主要用于构建in条件，可在sql中对集合进行迭代。
+foreach标签主要用于构建in条件, 可在sql中对集合进行迭代。
 也常用到批量删除、添加等操作中。
 
 属性介绍：
 
-- collection：collection属性的值有三个分别是list、array、map三种，分别对应的参数类型为：List、数组、map集合。
+- collection：collection属性的值有三个分别是list、array、map三种, 分别对应的参数类型为：List、数组、map集合。
 - item ：表示在迭代过程中每一个元素的别名
 - index ：表示在迭代过程中每次迭代到的位置（下标）
 - open ：前缀
 - close ：后缀
-- separator ：分隔符，表示迭代时每个元素之间以什么分隔
+- separator ：分隔符, 表示迭代时每个元素之间以什么分隔
 
 ```
-<!-- in查询所有，不分页 -->
+<!-- in查询所有, 不分页 -->
 <select id="selectIn" resultMap="BaseResultMap">
     select name,hobby from student where id in
     <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
@@ -220,8 +220,8 @@ foreach标签主要用于构建in条件，可在sql中对集合进行迭代。
 
 ## where标签
 
-where标签会知道如果它包含的标签中有返回值的话，它就插入一个‘where’。
-此外，如果标签返回的内容是以AND 或OR 开头的，则它会剔除掉。
+where标签会知道如果它包含的标签中有返回值的话, 它就插入一个‘where’。
+此外, 如果标签返回的内容是以AND 或OR 开头的, 则它会剔除掉。
 
 ```
 <select id="getStudentListWhere" parameterType="Object" resultMap="BaseResultMap">     
@@ -239,8 +239,8 @@ where标签会知道如果它包含的标签中有返回值的话，它就插入
 
 ## set标签
 
-当在update语句中使用if标签时，如果最后的if没有执行，则或导致逗号多余错误。
-使用set标签可以将动态的配置set关键字，和剔除追加到条件末尾的任何不相关的逗号。
+当在update语句中使用if标签时, 如果最后的if没有执行, 则或导致逗号多余错误。
+使用set标签可以将动态的配置set关键字, 和剔除追加到条件末尾的任何不相关的逗号。
 
 ```
 <update id="updateStudent" parameterType="Object">     
@@ -262,16 +262,16 @@ where标签会知道如果它包含的标签中有返回值的话，它就插入
 
 ## trim标签
 
-一般用于去除sql语句中多余的and关键字，逗号，或者给sql语句前拼接
-“where“、“set“以及“values(“ 等前缀，或者添加“)“等后缀，
+一般用于去除sql语句中多余的and关键字, 逗号, 或者给sql语句前拼接
+“where“、“set“以及“values(“ 等前缀, 或者添加“)“等后缀, 
 可用于选择性插入、更新、删除或者条件查询等操作。
 
 trim属性主要有以下四个
 
 - prefix：给sql语句拼接的前缀
 - suffix：给sql语句拼接的后缀
-- prefixOverrides：去除sql语句前面的关键字或者字符，该关键字或者字符由prefixOverrides属性指定，假设该属性指定为"AND"，当sql语句的开头为"AND"，trim标签将会去除该"AND"
-- suffixOverrides：去除sql语句后面的关键字或者字符，该关键字或者字符由suffixOverrides属性指定
+- prefixOverrides：去除sql语句前面的关键字或者字符, 该关键字或者字符由prefixOverrides属性指定, 假设该属性指定为"AND", 当sql语句的开头为"AND", trim标签将会去除该"AND"
+- suffixOverrides：去除sql语句后面的关键字或者字符, 该关键字或者字符由suffixOverrides属性指定
 
 ```
 <insert id="insert" parameterType="Object">
@@ -422,7 +422,7 @@ collection部分定义了用户关联的账户信息。表示关联查询结果�
 
 property="accList"：关联查询的结果集存储在 User 对象的上哪个属性。
 
-ofType="account"：指定关联查询的结果集中的对象类型即List中的对象类型。此处可以使用别名，也可以使用全限定名
+ofType="account"：指定关联查询的结果集中的对象类型即List中的对象类型。此处可以使用别名, 也可以使用全限定名
 
 ```
 List<User> findAll();
@@ -552,7 +552,7 @@ MyBatis会先去SqlSession中查询, 有的话直接拿来用
 
 一级缓存中保存的是Java对象, 查询缓存会取出相同的对象
 
-当调用 SqlSession 的修改, 添加, 删除, commit(), close()等方法时，就会清空一级缓存
+当调用 SqlSession 的修改, 添加, 删除, commit(), close()等方法时, 就会清空一级缓存
 
 ## MyBatis中的二级缓存
 
@@ -589,13 +589,13 @@ SqlSessionFactory对象的缓存
 
 ### 注意
 
-当我们在使用二级缓存时，所缓存的类一定要实现 java.io.Serializable 接口，这种就可以使用序列化
+当我们在使用二级缓存时, 所缓存的类一定要实现 java.io.Serializable 接口, 这种就可以使用序列化
 方式来保存对象
 
 # 延迟加载
 
-就是在需要用到数据时才进行加载，不需要用到数据时就不加载数据。延迟加载也称懒加载.
-好处：先从单表查询，需要时再从关联表去关联查询，大大提高数据库性能，因为查询单表要比关联查询多张表速
+就是在需要用到数据时才进行加载, 不需要用到数据时就不加载数据。延迟加载也称懒加载.
+好处：先从单表查询, 需要时再从关联表去关联查询, 大大提高数据库性能, 因为查询单表要比关联查询多张表速
 度要快
 
 ## 配置 SqlMapConfig.xml 文件打开延迟加载
@@ -664,9 +664,9 @@ List<User> findAll();
             collection标签：
             主要用于加载关联的集合对象
             select 属性：
-            用于指定查询 account 列表的 sql 语句，所以填写的是该 sql 映射的 id
+            用于指定查询 account 列表的 sql 语句, 所以填写的是该 sql 映射的 id
             column 属性：
-            用于指定 select 属性的 sql 语句的参数来源，上面的参数来自于 user 的 id 列，所以就写成 id 这一
+            用于指定 select 属性的 sql 语句的参数来源, 上面的参数来自于 user 的 id 列, 所以就写成 id 这一
             个字段名了
         -->
         <collection property="accounts" ofType="account"

@@ -1,12 +1,12 @@
 # ORM概述
 
-ORM（Object-Relational Mapping） 表示对象关系映射。在面向对象的软件开发中，通过ORM，就可以把对象映射到关系型数据库中。只要有一套程序能够做到建立对象与数据库的关联，操作对象就可以直接操作数据库数据，就可以说这套程序实现了ORM对象关系映射
+ORM（Object-Relational Mapping） 表示对象关系映射。在面向对象的软件开发中, 通过ORM, 就可以把对象映射到关系型数据库中。只要有一套程序能够做到建立对象与数据库的关联, 操作对象就可以直接操作数据库数据, 就可以说这套程序实现了ORM对象关系映射
 
-简单的说：ORM就是建立实体类和数据库表之间的关系，从而达到操作实体类就相当于操作数据库表的目的。
+简单的说：ORM就是建立实体类和数据库表之间的关系, 从而达到操作实体类就相当于操作数据库表的目的。
 
 # hibernate与JPA的概述
 
-JPA和Hibernate的关系就像JDBC和JDBC驱动的关系，JPA是规范，Hibernate除了作为ORM框架之外，它也是一种JPA实现。JPA怎么取代Hibernate呢？JDBC规范可以驱动底层数据库吗？答案是否定的，也就是说，如果使用JPA规范进行数据库操作，底层需要hibernate作为其实现类完成数据持久化工作。
+JPA和Hibernate的关系就像JDBC和JDBC驱动的关系, JPA是规范, Hibernate除了作为ORM框架之外, 它也是一种JPA实现。JPA怎么取代Hibernate呢？JDBC规范可以驱动底层数据库吗？答案是否定的, 也就是说, 如果使用JPA规范进行数据库操作, 底层需要hibernate作为其实现类完成数据持久化工作。
 
 # JPA快速入门
 
@@ -91,7 +91,7 @@ public class Customer {
 
 ## 配置JPA的核心配置文件
 
-在java工程的src路径下创建一个名为META-INF的文件夹，在此文件夹下创建一个名为persistence.xml的配置文件
+在java工程的src路径下创建一个名为META-INF的文件夹, 在此文件夹下创建一个名为persistence.xml的配置文件
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -118,7 +118,7 @@ public class Customer {
 			<!-- 数据库密码 -->
 			<property name="javax.persistence.jdbc.password" value="111111" />
 
-			<!--jpa提供者的可选配置：我们的JPA规范的提供者为hibernate，所以jpa的核心配置中兼容hibernate的配 -->
+			<!--jpa提供者的可选配置：我们的JPA规范的提供者为hibernate, 所以jpa的核心配置中兼容hibernate的配 -->
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="create" />
@@ -133,8 +133,8 @@ public class Customer {
 @Test
 public void test() {
     /**
-     * 创建实体管理类工厂，借助Persistence的静态方法获取
-     * 		其中传递的参数为持久化单元名称，需要jpa配置文件中指定
+     * 创建实体管理类工厂, 借助Persistence的静态方法获取
+     * 		其中传递的参数为持久化单元名称, 需要jpa配置文件中指定
      */
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("myJpa");
     //创建实体管理类
@@ -409,12 +409,12 @@ public class Customer {
 ```
 
 ## 编写符合Spring Data JPA规范的Dao层接口
-Spring Data JPA是spring提供的一款对于数据访问层（Dao层）的框架，使用Spring Data JPA，只需要按照框架的规范提供dao接口，不需要实现类就可以完成数据库的增删改查、分页查询等方法的定义，极大的简化了我们的开发过程。
-1. 创建一个Dao层接口，并实现JpaRepository和JpaSpecificationExecutor
+Spring Data JPA是spring提供的一款对于数据访问层（Dao层）的框架, 使用Spring Data JPA, 只需要按照框架的规范提供dao接口, 不需要实现类就可以完成数据库的增删改查、分页查询等方法的定义, 极大的简化了我们的开发过程。
+1. 创建一个Dao层接口, 并实现JpaRepository和JpaSpecificationExecutor
 2. 提供相应的泛型
 ```
 /**
- * JpaRepository<实体类类型，主键类型>：用来完成基本CRUD操作
+ * JpaRepository<实体类类型, 主键类型>：用来完成基本CRUD操作
  * JpaSpecificationExecutor<实体类类型>：用于复杂查询（分页等查询操作）
  */
 public interface CustomerDao extends JpaRepository<Customer, Long>, JpaSpecificationExecutor<Customer> {
@@ -442,8 +442,8 @@ public class CustomerDaoTest {
     
     /**
      * 修改客户：调用save(obj)方法
-     *      对于save方法的解释：如果执行此方法是对象中存在id属性，即为更新操作会先根据id查询，再更新    
-     *                      如果执行此方法中对象中不存在id属性，即为保存操作
+     *      对于save方法的解释：如果执行此方法是对象中存在id属性, 即为更新操作会先根据id查询, 再更新    
+     *                      如果执行此方法中对象中不存在id属性, 即为保存操作
      *          
      */
     @Test
@@ -483,7 +483,7 @@ public interface CustomerDao extends JpaRepository<Customer, Long>,JpaSpecificat
     @Query(value="from Customer")
     public List<Customer> findAllCustomer();
     
-    //@Query 使用jpql的方式查询。?1代表参数的占位符，其中1对应方法中的参数索引
+    //@Query 使用jpql的方式查询。?1代表参数的占位符, 其中1对应方法中的参数索引
     @Query(value="from Customer where custName = ?1")
     public Customer findCustomer(String custName);
 }
@@ -506,7 +506,7 @@ public interface CustomerDao extends JpaRepository<Customer, Long>,JpaSpecificat
     * targetEntityClass：指定一的一方实体类字节码
     * cascade：指定要使用的级联操作
     * fetch：指定是否采用延迟加载
-    * optional：关联是否可选。如果设置为false，则必须始终存在非空关系。
+    * optional：关联是否可选。如果设置为false, 则必须始终存在非空关系。
 
 @JoinColumn: 
 * 作用：用于定义主键字段和外键字段的对应关系。
@@ -588,7 +588,7 @@ public class LinkMan implements Serializable {
 	//多对一关系映射：多个联系人对应客户
 	@ManyToOne(targetEntity=Customer.class)
 	@JoinColumn(name="lkm_cust_id",referencedColumnName="cust_id")
-	private Customer customer;//用它的主键，对应联系人表中的外键
+	private Customer customer;//用它的主键, 对应联系人表中的外键
 }
 ```
 

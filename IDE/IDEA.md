@@ -17,10 +17,10 @@ spring配置文件中用到了dbcp2, 但是maven中没有它的依赖
 ```
 ## 解决
 
-1. 打开IDEA，打开project structure File->Project structure
+1. 打开IDEA, 打开project structure File->Project structure
 2. Modules->Dependencies
 3. 点击右边加号, 选择2 Library...
-4. 选择tomcat即可，然后Add Selected
+4. 选择tomcat即可, 然后Add Selected
 5. 此时idea虽然还会报错, 但是已经可以正常运行了
 
 # IDEA中SSH框架配置问题: 找不到hbm.xml映射文件
@@ -35,9 +35,9 @@ java.io.FileNotFoundException:
 ```
 如果加上 classpath:还是找不到
 
-是由于我们设定了src文件夹是存放代码的，
-resource文件夹是存放资源的，
-因此intellij在编译的时候会忽略src文件夹下面的xml文件，
+是由于我们设定了src文件夹是存放代码的, 
+resource文件夹是存放资源的, 
+因此intellij在编译的时候会忽略src文件夹下面的xml文件, 
 导致最后发布的文件夹下面丢失了这些映射文件。
 
 解决方法: 放到resources目录下,
@@ -57,7 +57,7 @@ Error:java: Compilation failed: internal java compiler error
 
 ## 错误原因
 
-导致这个错误的原因主要是因为jdk版本问题，此处有两个原因，一个是编译版本不匹配，一个是当前项目jdk版本不支持。
+导致这个错误的原因主要是因为jdk版本问题, 此处有两个原因, 一个是编译版本不匹配, 一个是当前项目jdk版本不支持。
 
 ## 查看项目的jdk
 
@@ -74,9 +74,9 @@ File ->Project Structure ->Project Settings ->Modules:
 File ->Settings ->Build, Execution, Deployment ->Compiler ->Java Compiler:
 
 导入java项目时此处处问题的概率比较多。
-针对此问题，重新打开或修改pom文件（maven项目）中的内容很可能导致jdk版本重新变为1.5。
+针对此问题, 重新打开或修改pom文件（maven项目）中的内容很可能导致jdk版本重新变为1.5。
 
-如果是maven项目，可在pom文件中指定jdk相关信息：
+如果是maven项目, 可在pom文件中指定jdk相关信息：
 ```
 <build>
     <plugins>
@@ -96,7 +96,7 @@ File ->Settings ->Build, Execution, Deployment ->Compiler ->Java Compiler:
 
 今天做代码优化时发现格式化代码快捷键不好使了
 
-各种找原因，最后发现是与网易云音乐快捷键冲突
+各种找原因, 最后发现是与网易云音乐快捷键冲突
 
 解决办法：
 1. 关闭网易云音乐   
@@ -104,10 +104,10 @@ File ->Settings ->Build, Execution, Deployment ->Compiler ->Java Compiler:
 
 # 解决IDEA调试时不显示list中为null的元素
 
-设置显示ArrayList中的null完整查看初始数组大小，扩容过程
+设置显示ArrayList中的null完整查看初始数组大小, 扩容过程
 
 * 老版本：Settings -> Debugger -> Data Views -> Arrays -> Hide null array elements
 * 新版本：Settings -> Debugger -> Data Views -> Java 取消Hide null elements in array and collections
 
-或者设置断点，开始调试后，在idea下方的提示信息区的Variables或Watches右键选择Customize Data Views,取消Hide null elements in array and collections
+或者设置断点, 开始调试后, 在idea下方的提示信息区的Variables或Watches右键选择Customize Data Views,取消Hide null elements in array and collections
 

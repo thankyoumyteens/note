@@ -5,3 +5,6 @@
 - <a href="05从远程仓库获取.md">从远程仓库获取</a>
 
 - <a href="windows中git重新输入密码.md">windows中git重新输入密码</a>
+- <a href="linux中git保存账户密码.md">linux中git保存账户密码</a>
+- <a href="SSH方式实现Git远程连接.md">SSH方式实现Git远程连接</a>
+- <a href="Git忽略文件不起作用解决方案.md">Git忽略文件不起作用解决方案</a>

@@ -1,22 +1,22 @@
 # redis的启动方式
 
-1. 直接启动: 进入redis根目录，执行命令:
+1. 直接启动: 进入redis根目录, 执行命令:
     ```
     # 加上‘&’号使redis以后台程序方式运行
     ./redis-server &
     ```
-2. 通过指定配置文件启动: 进入redis根目录，输入命令：
+2. 通过指定配置文件启动: 进入redis根目录, 输入命令：
     ```
     ./redis-server /etc/redis/6379.conf
     ```
-3. 如果更改了端口，使用`redis-cli`客户端连接时，也需要指定端口，例如：
+3. 如果更改了端口, 使用`redis-cli`客户端连接时, 也需要指定端口, 例如：
     ```
     redis-cli -p 6380
     ```
 
 # 设置redis访问（AUTH）密码
 
-需要永久配置密码的话就去redis.conf的配置文件中找到`requirepass`这个参数，如下配置：
+需要永久配置密码的话就去redis.conf的配置文件中找到`requirepass`这个参数, 如下配置：
 
 修改redis.conf配置文件　　
 ```
@@ -107,8 +107,8 @@ requirepass 123
     2) "a"
     3) "c"
     ```
-4. 删除列表最左边的元素，并将元素返回: `lpop key` 
-5. 删除列表最右边的元素，并将元素返回: `rpop key`
+4. 删除列表最左边的元素, 并将元素返回: `lpop key` 
+5. 删除列表最右边的元素, 并将元素返回: `rpop key`
 
 # 集合类型 set
 1. 存储：`sadd key value`
@@ -130,7 +130,7 @@ requirepass 123
     ```
 
 # 有序集合类型 sortedset
-不允许重复元素，且元素有顺序.每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。
+不允许重复元素, 且元素有顺序.每个元素都会关联一个double类型的分数。redis正是通过分数来为集合中的成员进行从小到大的排序。
 
 1. 存储：`zadd key score value`
     ```
