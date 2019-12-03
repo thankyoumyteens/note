@@ -1,27 +1,19 @@
-# Docker安装与启动
+# Ubuntu 18.04 安装docker ce
 
-## Ubuntu 18.04 安装docker ce
-
-### 卸载老版本
+## 卸载老版本
 
 如果你安装了老版本，请卸载掉
 ```
 $ sudo apt-get remove docker docker-engine docker.io
 ```
 
-###安装
+## 设置存储库
 
-使用存储库安装
-
-在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。
-
-一、设置存储库
-
-1.更新apt包索引
+更新apt包索引
 ```
 $ sudo apt-get update
 ```
-2.安装包以允许通过HTTPS使用存储库：
+安装包以允许通过HTTPS使用存储库：
 ```
 $ sudo apt-get install \
     apt-transport-https \
@@ -29,7 +21,7 @@ $ sudo apt-get install \
     curl \
     software-properties-common
 ```
-3.添加Docker的官方GPG密钥：
+添加Docker的官方GPG密钥：
 ```
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
@@ -42,42 +34,30 @@ pub   4096R/0EBFCD88 2017-02-22
 uid                  Docker Release (CE deb) <docker@docker.com>
 sub   4096R/F273FCD8 2017-02-22
 ```
-4.使用以下命令设置稳定存储库。
-
-注意：下面的lsb_release -cs子命令返回Ubuntu发行版的名称，例如xenial。有时，在像Linux Mint这样的发行版中，您可能需要将$（lsb_release -cs）更改为您的父Ubuntu发行版。例如，如果您使用的是Linux Mint Rafaela，则可以使用trusty。
+使用以下命令设置稳定存储库。
+* 注意：`lsb_release -cs`子命令返回Ubuntu发行版的名称，例如xenial
 ```
 $ sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
 ```
-二、安装DOCKER CE
+## 安装DOCKER CE
 
-1.更新apt包索引。
+更新apt包索引。
 ```
 sudo apt-get update
 ```
-2.安装最新版本的Docker CE，或转到下一步安装特定版本：
+安装最新版本的Docker CE，或转到下一步安装特定版本：
 ```
 $ sudo apt-get install docker-ce
 ```
-3.要安装特定版本的Docker CE，请列出repo中的可用版本，然后选择并安装：
-列出您的仓库中可用的版本：
-```
-$ apt-cache madison docker-ce
-
-docker-ce | 18.03.0~ce-0~ubuntu | https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
-```
-通过其完全限定的包名称安装特定版本，即包名称（docker-ce）“=”版本字符串（第2列），例如，docker-ce = 18.03.0ce-0ubuntu。
-```
-$ sudo apt-get install docker-ce=<VERSION>
-```
-4.查看Docker CE 版本
+查看Docker CE 版本
 ```
 docker -v 
 Docker version 18.06.1-ce, build e68fc7a
 ```
-5.通过运行hello-world映像验证是否正确安装了Docker CE。
+通过运行hello-world映像验证是否正确安装了Docker CE。
 ```
 $ sudo docker run hello-world
 ```
@@ -104,18 +84,10 @@ Share images, automate workflows, and more with a free Docker ID:
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
-Docker CE已安装并正在运行。已创建docker组，但未向其添加任何用户。您需要使用sudo来运行Docker命令。继续Linux postinstall以允许非特权用户运行Docker命令和其他可选配置步骤。
 
-## CentOS 7.6 安装docker ce
+# CentOS 7.6 安装docker ce
 
-### 环境说明
-CentOS 7（Minimal Install）
-```
-$ cat /etc/redhat-release 
-CentOS Linux release 7.6.1810 (Core) 
-```
-
-### 卸载旧版本
+## 卸载旧版本
 
 旧版本的 Docker 被叫做 docker 或 docker-engine，如果您安装了旧版本的 Docker ，您需要卸载掉它。
 ```
@@ -129,14 +101,14 @@ $ sudo yum remove docker \
       docker-engine
 ```
 
-### 安装
+## 安装
 
 为了方便添加软件源，支持 devicemapper 存储类型，安装如下软件包
 ```
 $ sudo yum update
 $ sudo yum install -y yum-utils \
-  device-mapper-persistent-data \
-  lvm2
+    device-mapper-persistent-data \
+    lvm2
 ```
 添加 Docker 稳定版本的 yum 软件源
 ```
@@ -219,10 +191,6 @@ docker pull centos:7
 ```
 docker rmi 镜像ID
 ```
-删除所有镜像
-```
-docker rmi `docker images -q`
-```
 
 # 容器相关命令
 
@@ -258,23 +226,28 @@ docker ps -f status=exited
 * -d：在run后面加上-d参数,则会创建一个守护式容器在后台运行（这样创建容器后不会自动登录容器，如果只加-i -t两个参数，创建后就会自动进去容器）。
 * -p：表示端口映射，前者是宿主机端口，后者是容器内的映射端口。可以使用多个-p做多个端口映射
 
-（1）交互式方式创建容器
+交互式方式创建容器
 ```
 docker run -it --name=容器名称 镜像名称:标签 /bin/bash
 ```
-这时我们通过ps命令查看，发现可以看到启动的容器，状态为启动状态  
-
 退出当前容器
 ```
 exit
 ```
-（2）守护式方式创建容器：
+守护式方式创建容器：
 ```
 docker run -di --name=容器名称 镜像名称:标签
 ```
 登录守护式容器方式：
 ```
 docker exec -it 容器名称 (或者容器ID)  /bin/bash
+```
+
+## 删除容器 
+
+删除指定的容器：
+```
+docker rm 容器名称（容器ID）
 ```
 
 ## 停止与启动容器
@@ -323,14 +296,7 @@ docker inspect 容器名称（容器ID）
 docker inspect --format='{{.NetworkSettings.IPAddress}}' 容器名称（容器ID）
 ```
 
-## 删除容器 
-
-删除指定的容器：
-```
-docker rm 容器名称（容器ID）
-```
-
-# 应用部署
+# 常用应用部署
 
 ## MySQL部署
 
@@ -340,7 +306,12 @@ docker pull mysql:5.7.19
 ```
 ### 运行MySQL
 ```
-docker run --name mysql_01 -e MYSQL_ROOT_PASSWORD=123456 -d -i -p 3306:3306 --restart=always  mysql:5.7.19
+docker run \
+    --name mysql_01 \
+    -e MYSQL_ROOT_PASSWORD=123456 \
+    -d -i -p 3306:3306 \
+    --restart=always \
+    mysql:5.7.19
 ```
 以上参数的含义：
 * `--name mysql_01`  将容器命名为mysql_01，后面可以用这个name进行容器的启动暂停等操作
@@ -358,7 +329,12 @@ docker pull tomcat:7
 ```
 ### 运行Tomcat
 ```
-docker run --name tomcat_01 --privileged=true -v /tomcat_01/webapps:/usr/local/tomcat/webapps -d -i -p 8080:8080 --restart=always tomcat:7 
+docker run \
+    --name tomcat_01 --privileged=true \
+    -v /tomcat_01/webapps:/usr/local/tomcat/webapps \
+    -d -i -p 8080:8080 \
+    --restart=always \
+    tomcat:7 
 ```
 以上参数的含义：
 * `-v`  是把/tomcat_01/webapps的目录挂载至容器的/usr/local/tomcat/webapps。 
@@ -382,7 +358,14 @@ cp ./redis.conf /redis_01/redis.conf
 * `# requirepass foobared` 改为 `requirepass 123456`
 ### 运行Redis
 ```
-docker run -d --privileged=true -p 6379:6379 -v /redis_01/redis.conf:/etc/redis/redis.conf -v /redis_01/data:/data --name redis_01 redis:latest redis-server /etc/redis/redis.conf --appendonly yes
+docker run -d \
+    --privileged=true -p 6379:6379 \
+    -v /redis_01/redis.conf:/etc/redis/redis.conf \
+    -v /redis_01/data:/data \
+    --name redis_01 \
+    redis:latest \
+    redis-server /etc/redis/redis.conf \
+    --appendonly yes
 ```
 以上参数的含义：
 * `-v /docker/redis/redis.conf:/etc/redis/redis.conf`：映射配置文件
