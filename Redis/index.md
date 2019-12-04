@@ -1,3 +1,2 @@
 - <a href="Redis基础.md">Redis基础</a>
-- <a href="在windows上使用Redis.md">在windows上使用Redis</a>
 - <a href="Jedis.md">Jedis</a>
