@@ -111,3 +111,9 @@ File ->Settings ->Build, Execution, Deployment ->Compiler ->Java Compiler:
 
 或者设置断点, 开始调试后, 在idea下方的提示信息区的Variables或Watches右键选择Customize Data Views,取消Hide null elements in array and collections
 
+# 一直卡在parsing java
+
+折腾了半天，原来是java9的问题。
+
+换回java8就没问题了!!
+
