@@ -3,6 +3,7 @@
 - <a href="IDE/index.md">IDE</a>
 - <a href="前端/index.md">前端</a>
 - <a href="Java/index.md">Java</a>
+- <a href="Python/index.md">Python</a>
 - <a href="Redis/index.md">Redis</a>
 - <a href="Docker/index.md">Docker</a>
 - <a href="Git/index.md">Git</a>
