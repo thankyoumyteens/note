@@ -1,3 +1,4 @@
 - <a href="IDEA.md">IntelliJ IDEA</a>
 - <a href="WebStorm.md">WebStorm</a>
+- <a href="PyCharm.md">PyCharm</a>
 - <a href="Eclipse.md">Eclipse</a>
