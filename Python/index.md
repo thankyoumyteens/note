@@ -1,3 +1,4 @@
 - <a href="兼容Python2/index.md">兼容Python2</a>
 - <a href="Python的IO操作/index.md">Python的IO操作</a>
+- <a href="正则表达式/index.md">正则表达式</a>
 - <a href="Python安装依赖包.md">Python安装依赖包</a>
