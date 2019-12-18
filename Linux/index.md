@@ -1,2 +1,5 @@
-- <a href="Linux命令.md">Linux命令</a>
+- <a href="Linux基础命令.md">Linux基础命令</a>
 - <a href="vim.md">Vim</a>
+- <a href="踢出登陆用户.md">踢出登陆用户</a>
+- <a href="将两个命令的输出作为另一个命令的输入.md">将两个命令的输出作为另一个命令的输入</a>
+- <a href="Linux连接wifi.md">Linux连接wifi</a>
