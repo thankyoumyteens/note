@@ -1,3 +1,4 @@
+- <a href="Linux安装Python3.md">Linux安装Python3</a>
 - <a href="兼容Python2.md">兼容Python2</a>
 - <a href="Python的IO操作/index.md">Python的IO操作</a>
 - <a href="正则表达式/index.md">正则表达式</a>
