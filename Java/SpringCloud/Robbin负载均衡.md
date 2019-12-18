@@ -1,35 +1,14 @@
-# 7.负载均衡Robbin
-
-在刚才的案例中, 我们启动了一个user-service, 然后通过DiscoveryClient来获取服务实例信息, 然后获取ip和端口来访问。
-
-但是实际环境中, 我们往往会开启很多个user-service的集群。此时我们获取的服务列表中就会有多个, 到底该访问哪一个呢？
-
-一般这种情况下我们就需要编写负载均衡算法, 在多个实例列表中进行选择。
-
-不过Eureka中已经帮我们集成了负载均衡组件: Ribbon, 简单修改代码即可使用。
-
-什么是Ribbon: 
-
-![1525619257397](img/1525619257397.png)
-
-
-
-接下来, 我们就来使用Ribbon实现负载均衡。
-
-
-
-## 7.1.启动两个服务实例
+# 负载均衡Robbin
 
 首先我们启动两个user-service实例, 一个8081, 一个8082。
 
 
-## 7.2.开启负载均衡
+## 开启负载均衡
 
 因为Eureka中已经集成了Ribbon, 所以我们无需引入新的依赖。直接修改代码: 
 
 在RestTemplate的配置方法上添加`@LoadBalanced`注解: 
-
-```
+```java
 @Bean
 @LoadBalanced
 public RestTemplate restTemplate() {
@@ -37,11 +16,8 @@ public RestTemplate restTemplate() {
 }
 ```
 
-
-
 修改调用方式, 不再手动获取ip和端口, 而是直接通过服务名称调用: 
-
-```
+```java
 @Service
 public class UserService {
 
@@ -70,15 +46,9 @@ public class UserService {
 }
 ```
 
-
-## 7.4.负载均衡策略
+## 负载均衡策略
 
 Ribbon默认的负载均衡策略是简单的轮询
-
-
-
-
-我们是否可以修改负载均衡的策略呢？
 
 SpringBoot帮我们提供了修改负载均衡规则的配置入口: 
 
@@ -92,7 +62,7 @@ user-service:
 
 再次测试, 发现结果变成了随机
 
-## 7.5.重试机制
+## 重试机制
 
 Eureka的服务治理强调了CAP原则中的AP, 即可用性和可靠性。它与Zookeeper这一类强调CP(一致性, 可靠性)的服务治理框架最大的区别在于: Eureka为了实现更高的服务可用性, 牺牲了一定的一致性, 极端情况下它宁愿接收故障实例也不愿丢掉健康实例, 正如我们上面所说的自我保护机制。
 

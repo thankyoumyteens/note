@@ -1,8 +1,7 @@
-# 2.Feign
+# Feign
 
-在前面的学习中, 我们使用了Ribbon的负载均衡功能, 大大简化了远程调用时的代码: 
-
-```
+我们使用了Ribbon的负载均衡功能, 大大简化了远程调用时的代码: 
+```java
 String baseUrl = "http://user-service/user/";
 User user = this.restTemplate.getForObject(baseUrl + id, User.class)
 ```
@@ -11,20 +10,13 @@ User user = this.restTemplate.getForObject(baseUrl + id, User.class)
 
 这就是我们接下来要学的Feign的功能了。
 
-## 2.1.简介
-
-
 为什么叫伪装？
 
 Feign可以把Rest的请求进行隐藏, 伪装成类似SpringMVC的Controller一样。你不用再自己拼接url, 拼接参数等等操作, 一切都交给Feign去做。
 
+## 快速入门
 
-
-![1525652009416](img/1525652009416.png)
-
-## 2.2.快速入门
-
-### 2.2.1.导入依赖
+### 导入依赖
 
 ```xml
 <dependency>
@@ -33,9 +25,9 @@ Feign可以把Rest的请求进行隐藏, 伪装成类似SpringMVC的Controller�
 </dependency>
 ```
 
-### 2.2.2.Feign的客户端
+### Feign的客户端
 
-```
+```java
 @FeignClient("user-service")
 public interface UserFeignClient {
 
@@ -49,8 +41,7 @@ public interface UserFeignClient {
 - 接口中的定义方法, 完全采用SpringMVC的注解, Feign会根据注解帮我们生成URL, 并访问获取结果
 
 改造原来的调用逻辑, 不再调用UserDao: 
-
-```
+```java
 @Service
 public class UserService {
 
@@ -68,11 +59,11 @@ public class UserService {
 }
 ```
 
-### 2.2.3.开启Feign功能
+### 开启Feign功能
 
 我们在启动类上, 添加注解, 开启Feign功能
 
-```
+```java
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableHystrix
@@ -86,14 +77,13 @@ public class UserConsumerDemoApplication {
 
 - 你会发现RestTemplate的注册被我删除了。Feign中已经自动集成了Ribbon负载均衡, 因此我们不需要自己定义RestTemplate了
 
-## 2.3.负载均衡
+## 负载均衡
 
 Feign中本身已经集成了Ribbon依赖和自动配置
 
-
 因此我们不需要额外引入依赖, 也不需要再注册`RestTemplate`对象。
 
-另外, 我们可以像上节课中讲的那样去配置Ribbon, 可以通过`ribbon.xx`来进行全局配置。也可以通过`服务名.ribbon.xx`来对指定服务配置: 
+另外, 可以通过`ribbon.xx`来进行全局配置。也可以通过`服务名.ribbon.xx`来对指定服务配置: 
 
 ```yaml
 user-service:
@@ -105,7 +95,7 @@ user-service:
     MaxAutoRetries: 1 # 同一实例的重试次数
 ```
 
-## 2.4.Hystrix支持
+## Hystrix支持
 
 Feign默认也有对Hystrix的集成
 
@@ -117,11 +107,10 @@ feign:
     enabled: true # 开启Feign的熔断功能
 ```
 
-但是, Feign中的Fallback配置不像Ribbon中那样简单了。
+## Fallback回滚
 
-1)首先, 我们要定义一个类, 实现刚才编写的UserFeignClient, 作为fallback的处理类
-
-```
+首先, 我们要定义一个类, 实现刚才编写的UserFeignClient, 作为fallback的处理类
+```java
 @Component
 public class UserFeignClientFallback implements UserFeignClient {
     @Override
@@ -132,17 +121,14 @@ public class UserFeignClientFallback implements UserFeignClient {
         return user;
     }
 }
-
 ```
 
-2)然后在UserFeignClient中, 指定刚才编写的实现类
-
-```
+然后在UserFeignClient中, 指定刚才编写的实现类
+```java
 @FeignClient(value = "user-service", fallback = UserFeignClientFallback.class)
 public interface UserFeignClient {
 
     @GetMapping("/user/{id}")
     User queryUserById(@PathVariable("id") Long id);
 }
-
 ```

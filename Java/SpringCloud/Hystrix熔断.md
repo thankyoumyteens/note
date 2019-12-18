@@ -1,17 +1,8 @@
 # 1.Hystrix
 
-## 1.1.简介
-
 Hystrix, 即熔断器。
 
 Hystrix是Netflix开源的一个延迟和容错库, 用于隔离访问远程服务、第三方库, 防止出现级联失败。
-
-![1525658562507](img/1525658562507.png)
-
-
-## 1.2.熔断器的工作机制: 
-
-![1525658640314](img/1525658640314.png)
 
 正常工作的情况下, 客户端请求调用服务API接口: 
 
@@ -21,16 +12,11 @@ Hystrix是Netflix开源的一个延迟和容错库, 用于隔离访问远程服�
 
 这就好比去买鱼, 平常超市买鱼会额外赠送杀鱼的服务。等到逢年过节, 超时繁忙时, 可能就不提供杀鱼服务了, 这就是服务的降级。
 
-系统特别繁忙时, 一些次要服务暂时中断, 优先保证主要服务的畅通, 一切资源优先让给主要服务来使用, 在双十一、618时, 京东天猫都会采用这样的策略。
+系统特别繁忙时, 一些次要服务暂时中断, 优先保证主要服务的畅通, 一切资源优先让给主要服务来使用。
 
-
-
-## 1.3.动手实践
-
-### 1.3.1.引入依赖
+## 引入依赖
 
 首先在user-consumer中引入Hystrix依赖: 
-
 ```xml
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -38,15 +24,23 @@ Hystrix是Netflix开源的一个延迟和容错库, 用于隔离访问远程服�
 </dependency>
 ```
 
-### 1.3.2.开启熔断
+## 开启熔断
 
+```java
+@SpringBootApplication
+@EnableDiscoveryClient
+@EnableHystrix // 开启Hystrix
+public class UserConsumerDemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(UserConsumerDemoApplication.class, args);
+    }
+}
+```
 
-
-### 1.3.2.改造消费者
+## 改造消费者
 
 我们改造user-consumer, 添加一个用来访问的user服务的DAO, 并且声明一个失败时的回滚处理函数: 
-
-```
+```java
 @Component
 public class UserDao {
 
@@ -80,7 +74,7 @@ public class UserDao {
 
 在原来的业务逻辑中调用这个DAO: 
 
-```
+```java
 @Service
 public class UserService {
 
@@ -98,11 +92,10 @@ public class UserService {
 }
 ```
 
-### 1.3.3.改造服务提供者
+## 改造服务提供者
 
 改造服务提供者, 随机休眠一段时间, 以触发熔断: 
-
-```
+```java
 @Service
 public class UserService {
 
@@ -118,9 +111,9 @@ public class UserService {
 
 ```
 
-### 1.3.5.优化
+## 优化
 
-虽然熔断实现了, 但是我们的重试机制似乎没有生效, 是这样吗？
+虽然熔断实现了, 但是我们的重试机制似乎没有生效
 
 其实这里是因为我们的Ribbon超时时间设置的是1000ms:
 
