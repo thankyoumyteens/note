@@ -7,8 +7,6 @@
 - <a href="Spring.md">Spring</a>
 - <a href="SpringMVC.md">SpringMVC</a>
 - <a href="SpringBoot.md">SpringBoot</a>
-- <a href="SpringCloud.md">SpringCloud</a>
+- <a href="SpringCloud/index.md">SpringCloud</a>
 - <a href="SpringDataJPA.md">SpringDataJPA</a>
 - <a href="Docker.md">Docker</a>
-
-
