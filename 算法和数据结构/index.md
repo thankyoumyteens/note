@@ -2,7 +2,7 @@
 
 - <a href="排序/index.md">排序</a>
 - <a href="二分查找.md">二分查找</a>
-- <a href="图.md">图</a>
+- <a href="图/index.md">图</a>
 
 # 数据结构
 
