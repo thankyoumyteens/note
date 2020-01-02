@@ -3,6 +3,7 @@
 - <a href="Python的IO操作/index.md">Python的IO操作</a>
 - <a href="正则表达式/index.md">正则表达式</a>
 - <a href="Python安装依赖包.md">Python安装依赖包</a>
+- <a href="Python离线安装依赖包.md">Python离线安装依赖包</a>
 - <a href="Python数字自动补零.md">Python数字自动补零</a>
 - <a href="Python获取日期.md">Python获取日期</a>
 - <a href="Python执行shell命令.md">Python执行shell命令</a>

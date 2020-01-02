@@ -1,8 +1,8 @@
-- <a href="Python中文件的读写操作.md">Python中文件的读写操作</a>
 - <a href="Python判断文件还是文件夹.md">Python判断文件还是文件夹</a>
 - <a href="Python判断文件是否存在.md">Python判断文件是否存在</a>
 - <a href="Python读取目录下所有文件.md">Python读取目录下所有文件</a>
 - <a href="Python操作文件夹.md">Python操作文件夹</a>
-- <a href="Python复制文件.md">Python复制文件</a>
+- <a href="Python操作文件.md">Python操作文件</a>
+- <a href="Python中文件的读写操作.md">Python中文件的读写操作</a>
 - <a href="Python路径拼接.md">Python路径拼接</a>
 - <a href="Python中不同操作系统的路径分隔符.md">Python中不同操作系统的路径分隔符</a>
