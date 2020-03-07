@@ -1,9 +1,0 @@
-- <a href="JavaScript数据类型.md">JavaScript数据类型</a>
-- <a href="事件.md">事件</a>
-- <a href="跨域.md">跨域</a>
-- <a href="ajax.md">ajax</a>
-- <a href="this.md">this</a>
-- <a href="内置函数.md">内置函数</a>
-- <a href="底层原理.md">底层原理</a>
-- <a href="Promise.md">Promise</a>
-- <a href="es6.md">ES6</a>

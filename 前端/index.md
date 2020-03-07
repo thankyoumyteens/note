@@ -1,4 +1,1 @@
-- <a href="css/index.md">CSS</a>
-- <a href="JavaScript/index.md">JavaScript</a>
 - <a href="canvas/index.md">canvas</a>
-- <a href="vue/index.md">Vue.js</a>
