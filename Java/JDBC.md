@@ -38,7 +38,7 @@ ResultSet executeQuery(String sql)
 // 遍历结果集
 // ResultSet rs
 while(rs.next()){
-    //获取数据
+	//获取数据
 	int id = rs.getInt(1);
 	String name = rs.getString("name");
 	double balance = rs.getDouble(3);
