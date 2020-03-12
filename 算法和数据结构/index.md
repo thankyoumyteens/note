@@ -9,4 +9,5 @@
 - <a href="最大堆.md">最大堆</a>
 - <a href="二分搜索树.md">二分搜索树</a>
 - <a href="AVL树.md">AVL树</a>
+- <a href="红黑树/index.md">红黑树</a>
 - <a href="并查集.md">并查集</a>
