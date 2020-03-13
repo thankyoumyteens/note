@@ -1,6 +1,6 @@
 # Python读取目录下所有文件或文件夹
 
-```
+```python
 import os
 
 path_array =  os.listdir(root_path)

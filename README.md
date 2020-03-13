@@ -72,8 +72,7 @@
 
 # Python
 - <a href="Python/Linux安装Python3.md">Linux安装Python3</a>
-- <a href="Python/兼容Python2.md">兼容Python2</a>
-- <a href="Python/Python安装依赖包.md">Python安装依赖包</a>
+- <a href="Python/Python依赖管理.md">Python依赖管理</a>
 - <a href="Python/Python离线安装依赖包.md">Python离线安装依赖包</a>
 - <a href="Python/Python数字自动补零.md">Python数字自动补零</a>
 - <a href="Python/Python获取日期.md">Python获取日期</a>

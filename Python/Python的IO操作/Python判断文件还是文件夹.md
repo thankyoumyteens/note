@@ -1,6 +1,6 @@
 # Python判断文件还是文件夹
 
-```
+```python
 import os
 
 if os.path.isdir(path):
