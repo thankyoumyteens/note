@@ -103,15 +103,18 @@
 - <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
 
 # Redis
-- <a href="Redis/Redis基础.md">Redis基础</a>
-- <a href="Redis/Jedis.md">Jedis</a>
+- <a href="Redis/redis的启动.md">redis的启动</a>
+- <a href="Redis/设置redis密码.md">设置redis密码</a>
+## Redis数据类型
+- <a href="Redis/字符串类型.md">字符串类型</a>
+- <a href="Redis/哈希类型.md">哈希类型</a>
+- <a href="Redis/列表类型.md">列表类型</a>
+- <a href="Redis/集合类型.md">集合类型</a>
+- <a href="Redis/有序集合类型.md">有序集合类型</a>
 
 # Docker
 - <a href="Docker/Ubuntu安装docker.md">Ubuntu 18.04 安装docker ce</a>
 - <a href="Docker/CentOS安装docker.md">CentOS 7.6 安装docker ce</a>
 - <a href="Docker/镜像相关命令.md">镜像相关命令</a>
-- <a href="Docker/容器相关命令.md">容器相关命令</a>
 - <a href="Docker/常用应用部署.md">常用应用部署</a>
 - <a href="Docker/迁移与备份.md">迁移与备份</a>
-- <a href="Docker/Dockerfile.md">Dockerfile</a>
-- <a href="Docker/Docker私有仓库.md">Docker私有仓库</a>
