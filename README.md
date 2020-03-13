@@ -9,7 +9,6 @@
 ## 排序
 - <a href="算法和数据结构/排序/选择排序.md">选择排序</a>
 - <a href="算法和数据结构/排序/插入排序.md">插入排序</a>
-- <a href="算法和数据结构/排序/堆排序.md">堆排序</a>
 - <a href="算法和数据结构/排序/归并排序.md">归并排序</a>
 - <a href="算法和数据结构/排序/快速排序.md">快速排序</a>
 - <a href="算法和数据结构/排序/三路快速排序.md">三路快速排序</a>
@@ -24,8 +23,6 @@
 - <a href="科普/穿越计算机的迷雾/04实现减法.md">实现减法</a>
 
 # Linux
-- <a href="Linux/Linux基础命令.md">Linux基础命令</a>
-- <a href="Linux/vim.md">Vim</a>
 - <a href="Linux/踢出登陆用户.md">踢出登陆用户</a>
 - <a href="Linux/Linux连接wifi.md">Linux连接wifi</a>
 
