@@ -7,33 +7,9 @@
 
 # 停止
 
-## 从容停止
-
-查看进程号
 ```
-[root@LinuxServer ~]# ps -ef|grep nginx
-```
-杀死进程
-```
-[root@LinuxServer ~]# kill -QUIT 2072
-```
-
-## 快速停止
-
-查看进程号
-```
-[root@LinuxServer ~]# ps -ef|grep nginx
-```
-杀死进程
-```
-[root@LinuxServer ~]# kill -TERM 2132
-# 或者
-[root@LinuxServer ~]# kill -INT 2132
-```
-
-## 强制停止
-```
-[root@LinuxServer ~]# pkill -9 nginx
+ps -ef|grep nginx
+kill -QUIT 2072
 ```
 
 # 重启
@@ -50,4 +26,7 @@ nginx.conf test is successful
 
 ## 重启Nginx服务
 
-进入nginx可执行目录sbin下, 输入命令`./nginx -s reload`即可
+进入nginx可执行目录sbin下
+```
+./nginx -s reload
+```

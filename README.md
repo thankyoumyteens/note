@@ -98,8 +98,8 @@
 - <a href="前端/canvas/index.md">canvas</a>
 
 # Nginx
-- <a href="Nginx/Ubuntu安装Nginx.md">Ubuntu安装Nginx</a>
-- <a href="Nginx/CentOS安装Nginx.md">CentOS安装Nginx</a>
+- <a href="Nginx/Ubuntu安装Nginx.md">Linux安装Nginx</a>
+- <a href="Nginx/配置Nginx.md">配置Nginx</a>
 - <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
 
 # Redis

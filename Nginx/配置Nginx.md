@@ -1,45 +1,4 @@
-# Ubuntu安装Nginx
-
-## 安装
-```
-// 更新包
-sudo apt-get update
-// 下载安装nginx
-sudo apt-get install nginx
-```
-
-## 测试安装
-```
-sudo nginx -t
-```
-窗口显示
-```
-nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
-nginx: configuration file /etc/nginx/nginx.conf test is successful
-```
-
-## 重启nginx
-```
-sudo service nginx restart
-```
-
-## 卸载
-```
-// 删除nginx，-purge包括配置文件
-sudo apt-get --purge remove nginx
-// 移除全部不使用的软件包
-sudo apt-get autoremove
-// 罗列出与nginx相关的软件并删除
-dpkg --get-selections|grep nginx
-sudo apt-get --purge remove nginx
-sudo apt-get --purge remove nginx-common
-sudo apt-get --purge remove nginx-core
-// 查看nginx正在运行的进程，如果有就kill掉
-ps -ef |grep nginx
-sudo kill -9 XXX
-```
-
-## 配置Nginx
+# 配置Nginx
 
 最新版本nginx配置是由4个文件构成: 
 1. `conf.d`: 用户自己定义的conf配置文件
