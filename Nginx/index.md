@@ -1,3 +1,0 @@
-- <a href="Ubuntu安装Nginx.md">Ubuntu安装Nginx</a>
-- <a href="CentOS安装Nginx.md">CentOS安装Nginx</a>
-- <a href="Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
