@@ -66,6 +66,12 @@
 - <a href="Java/Spring/使用注解实现IoC.md">使用注解实现IoC</a>
 - <a href="Java/Spring/使用注解注入数据.md">使用注解注入数据</a>
 - <a href="Java/Spring/使用注解替换xml配置文件.md">使用注解替换xml配置文件</a>
+- <a href="Java/Spring/基于XML的AOP配置.md">基于XML的AOP配置</a>
+- <a href="Java/Spring/切面的通知类型.md">切面的通知类型</a>
+- <a href="Java/Spring/环绕通知.md">环绕通知</a>
+- <a href="Java/Spring/使用注解实现AOP.md">使用注解实现AOP</a>
+- <a href="Java/Spring/基于XML的声明式事务控制.md">基于XML的声明式事务控制</a>
+- <a href="Java/Spring/基于注解的声明式事务控制.md">基于注解的声明式事务控制</a>
 - <a href="Java/Spring/Spring整合Junit.md">Spring整合Junit</a>
 ## MyBatis
 - <a href="Java/MyBatis/入门.md">入门</a>
