@@ -1,79 +1,139 @@
+# 问题
+给定一个二维数组, 只含有0和1两个字符。其中1代表陆地, 0代表水域。横向和纵向的陆地连接成岛屿, 被水域分隔开。问给出的地图中有多少岛屿?
 
+# 查找步骤
+```
+[
+	[1, 1, 1, 1, 0],
+	[1, 1, 0, 1, 0],
+	[1, 1, 0, 0, 0],
+	[0, 0, 0, 0, 0]
+]
+```
+- 从左上角(0,0)开始, 规定按上->右->下->左顺序查找1
+- 从(0,0)出发寻找
+- 先找上面, 上面没有元素跳过。再找右面, 右面是1
+- 从(0,1)出发寻找
+- 先找上面, 上面没有元素跳过。再找右面, 右面是1
+- 从(0,2)出发寻找
+- 先找上面, 上面没有元素跳过。再找右面, 右面是1
+- 从(0,3)出发寻找
+- 先找上面, 上面没有元素跳过。再找右面, 右面是0跳过。再找下面, 下面是1
+- 从(1,3)出发寻找
+- 先找上面, 上面已经访问过。再找右面, 右面是0跳过。再找下面, 下面是0跳过。再找左面, 左面是0跳过。四个方向都找过了, 回退到上一个点(0,3)
+- (0,3)还剩左面没有找过, 继续找左面, 左面已经访问过。四个方向都找过了, 回退到上一个点(0,2)
+- (0,2)还剩下面和左面没有找过, 继续找下面, 下面是0跳过。继续找左面, 左面已经访问过。四个方向都找过了, 回退到上一个点(0,1)
+- (0,1)还剩下面和左面没有找过, 继续找下面, 下面是1
+- 从(1,1)出发寻找
+- 先找上面, 上面已经访问过。再找右面, 右面是0跳过。再找下面, 下面是1
+- 从(2,1)出发寻找
+- 先找上面, 上面已经访问过。再找右面, 右面是0跳过。再找下面, 下面是0跳过。再找左面, 左面是1
+- 从(2,0)出发寻找
+- 先找上面, 上面是1
+- 从(1,0)出发寻找
+- (1，0)的四个方向都已经找过了, 回退到上一个点(2,0)
+- 以此类推, 逐步回退到起始点(0,0), 此时与(0,0)连接的所有1已经都找到了, 这个过程叫floodfill
+- 继续从下一个点(1,0)开始floodfill过程, 发现(1,0)已经找过了, 继续下一个点
+- 对这个二维数组的所有点都执行完floodfill之后, 整个查找过程结束
 
+# 坐标(0,0)的floodfill过程
+```
+1 1 1 1 0
+1 1 0 1 0
+1 1 0 0 0
+0 0 0 0 0
 
+1 -> 1 -> 1 -> 1
+
+1 -> 1 -> 1 -> 1
+               |
+               v
+               1
+
+1 -> 1 <- 1 <- 1
+               ^
+               |
+               1
+
+1 -> 1 <- 1 <- 1
+     |         ^
+     v         |
+     1         1
+
+1 -> 1 <- 1 <- 1
+     |         ^
+     v         |
+     1         1
+     |
+     v
+     1
+
+1 -> 1 <- 1 <- 1
+     |         ^
+     v         |
+     1         1
+     |
+     v
+1 <- 1
+
+1 -> 1 <- 1 <- 1
+     |         ^
+     v         |
+1    1         1
+^    |
+|    v
+1 <- 1
+
+1 <- 1 <- 1 <- 1
+     ^         ^
+     |         |
+1    1         1
+|    ^
+v    |
+1 -> 1
+
+```
+
+# 代码
 ```java
-/// 200. Number of Islands
-/// https://leetcode.com/problems/number-of-islands/description/
-/// 时间复杂度: O(n*m)
-/// 空间复杂度: O(n*m)
 class Solution {
+	// 用于向四个方向改变坐标
+	private int d[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+	private boolean visited[][];
+	// 入口
+	public int numIslands(char[][] grid) {
+		if(grid == null || grid.length == 0 || grid[0].length == 0)
+				return 0;
 
-    private int d[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    private int m, n;
-    private boolean visited[][];
+		visited = new boolean[m][n];
+		int res = 0; // 岛屿数
+		for(int i = 0 ; i < m ; i ++)
+			for(int j = 0 ; j < n ; j ++)
+				// 对每一个没被访问过的1元素
+				// 进行floodfill
+				if(grid[i][j] == '1' && !visited[i][j]){
+					dfs(grid, i, j);
+					res ++;
+				}
+		return res;
+	}
 
-    public int numIslands(char[][] grid) {
+	// 从grid[x][y]的位置开始,进行floodfill
+	// 保证(x,y)合法,且grid[x][y]是没有被访问过的陆地
+	private void dfs(char[][] grid, int x, int y) {
+			visited[x][y] = true;
+			for(int i = 0; i < 4; i ++) {
+					int newx = x + d[i][0];
+					int newy = y + d[i][1];
+					if(inArea(newx, newy) && !visited[newx][newy] && grid[newx][newy] == '1')
+							dfs(grid, newx, newy);
+			}
 
-        if(grid == null || grid.length == 0 || grid[0].length == 0)
-            return 0;
+			return;
+	}
 
-        m = grid.length;
-        n = grid[0].length;
-
-        visited = new boolean[m][n];
-
-        int res = 0;
-        for(int i = 0 ; i < m ; i ++)
-            for(int j = 0 ; j < n ; j ++)
-                if(grid[i][j] == '1' && !visited[i][j]){
-                    dfs(grid, i, j);
-                    res ++;
-                }
-
-        return res;
-    }
-
-    // 从grid[x][y]的位置开始,进行floodfill
-    // 保证(x,y)合法,且grid[x][y]是没有被访问过的陆地
-    private void dfs(char[][] grid, int x, int y){
-
-        //assert(inArea(x,y));
-        visited[x][y] = true;
-        for(int i = 0; i < 4; i ++){
-            int newx = x + d[i][0];
-            int newy = y + d[i][1];
-            if(inArea(newx, newy) && !visited[newx][newy] && grid[newx][newy] == '1')
-                dfs(grid, newx, newy);
-        }
-
-        return;
-    }
-
-    private boolean inArea(int x, int y){
-        return x >= 0 && x < m && y >= 0 && y < n;
-    }
-
-    public static void main(String[] args) {
-
-        char grid1[][] = {
-            {'1','1','1','1','0'},
-            {'1','1','0','1','0'},
-            {'1','1','0','0','0'},
-            {'0','0','0','0','0'}
-        };
-        System.out.println((new Solution()).numIslands(grid1));
-        // 1
-
-        // ---
-
-        char grid2[][] = {
-            {'1','1','0','0','0'},
-            {'1','1','0','0','0'},
-            {'0','0','1','0','0'},
-            {'0','0','0','1','1'}
-        };
-        System.out.println((new Solution()).numIslands(grid2));
-        // 3
-    }
+	private boolean inArea( int x , int y ){
+		// 判断索引是否越界
+	}
 }
 ```
