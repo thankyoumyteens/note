@@ -1,90 +1,55 @@
 # Feign
+Feign可以把Rest的请求进行隐藏, 伪装成类似SpringMVC的Controller一样。
+Feign中已经自动集成了Ribbon, 因此不需要自己定义RestTemplate
 
-我们使用了Ribbon的负载均衡功能, 大大简化了远程调用时的代码: 
-```java
-String baseUrl = "http://user-service/user/";
-User user = this.restTemplate.getForObject(baseUrl + id, User.class)
-```
-
-如果就学到这里, 你可能以后需要编写类似的大量重复代码, 格式基本相同, 无非参数不一样。有没有更优雅的方式, 来对这些代码再次优化呢？
-
-这就是我们接下来要学的Feign的功能了。
-
-为什么叫伪装？
-
-Feign可以把Rest的请求进行隐藏, 伪装成类似SpringMVC的Controller一样。你不用再自己拼接url, 拼接参数等等操作, 一切都交给Feign去做。
-
-## 快速入门
-
-### 导入依赖
-
+# 导入依赖
 ```xml
 <dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-openfeign</artifactId>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
 ```
 
-### Feign的客户端
-
+# Feign的客户端
+Feign会通过动态代理, 自动生成实现类
 ```java
+// 声明这是一个Feign客户端并指定服务名
 @FeignClient("user-service")
 public interface UserFeignClient {
-
-    @GetMapping("/user/{id}")
-    User queryUserById(@PathVariable("id") Long id);
+	@GetMapping("/user/{id}")
+	User queryUserById(@PathVariable("id") Long id);
 }
 ```
-
-- 首先这是一个接口, Feign会通过动态代理, 帮我们生成实现类。这点跟mybatis的mapper很像
-- `@FeignClient`, 声明这是一个Feign客户端, 类似`@Mapper`注解。同时通过`value`属性指定服务名称
-- 接口中的定义方法, 完全采用SpringMVC的注解, Feign会根据注解帮我们生成URL, 并访问获取结果
-
-改造原来的调用逻辑, 不再调用UserDao: 
+改造原来的调用逻辑
 ```java
 @Service
 public class UserService {
+	@Autowired
+	private UserFeignClient userFeignClient;
 
-    @Autowired
-    private UserFeignClient userFeignClient;
-
-    public List<User> queryUserByIds(List<Long> ids) {
-        List<User> users = new ArrayList<>();
-        ids.forEach(id -> {
-            // 我们测试多次查询, 
-            users.add(this.userFeignClient.queryUserById(id));
-        });
-        return users;
-    }
+	public List<User> queryUserById(Long id) {
+		List<User> users = new ArrayList<>();
+		return this.userFeignClient.queryUserById(id));
+	}
 }
 ```
 
-### 开启Feign功能
-
-我们在启动类上, 添加注解, 开启Feign功能
-
+# 开启Feign
+启动类
 ```java
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableHystrix
 @EnableFeignClients // 开启Feign功能
 public class UserConsumerDemoApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(UserConsumerDemoApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(UserConsumerDemoApplication.class, args);
+	}
 }
 ```
 
-- 你会发现RestTemplate的注册被我删除了。Feign中已经自动集成了Ribbon负载均衡, 因此我们不需要自己定义RestTemplate了
-
-## 负载均衡
-
+# 负载均衡
 Feign中本身已经集成了Ribbon依赖和自动配置
-
-因此我们不需要额外引入依赖, 也不需要再注册`RestTemplate`对象。
-
-另外, 可以通过`ribbon.xx`来进行全局配置。也可以通过`服务名.ribbon.xx`来对指定服务配置: 
-
 ```yaml
 user-service:
   ribbon:
@@ -96,39 +61,32 @@ user-service:
 ```
 
 ## Hystrix支持
-
 Feign默认也有对Hystrix的集成
-
-只不过, 默认情况下是关闭的。我们需要通过下面的参数来开启: 
-
 ```yaml
 feign:
   hystrix:
     enabled: true # 开启Feign的熔断功能
 ```
 
-## Fallback回滚
-
-首先, 我们要定义一个类, 实现刚才编写的UserFeignClient, 作为fallback的处理类
+## 熔断处理
+定义fallback
 ```java
 @Component
 public class UserFeignClientFallback implements UserFeignClient {
-    @Override
-    public User queryUserById(Long id) {
-        User user = new User();
-        user.setId(id);
-        user.setName("用户查询出现异常！");
-        return user;
-    }
+	@Override
+	public User queryUserById(Long id) {
+		User user = new User();
+		user.setId(id);
+		user.setName("用户查询出现异常！");
+		return user;
+	}
 }
 ```
-
-然后在UserFeignClient中, 指定刚才编写的实现类
+指定fallback
 ```java
 @FeignClient(value = "user-service", fallback = UserFeignClientFallback.class)
 public interface UserFeignClient {
-
-    @GetMapping("/user/{id}")
-    User queryUserById(@PathVariable("id") Long id);
+	@GetMapping("/user/{id}")
+	User queryUserById(@PathVariable("id") Long id);
 }
 ```
