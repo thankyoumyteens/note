@@ -42,14 +42,17 @@ Redis数据类型
 - <a href="科普/穿越计算机的迷雾/03二进制加法器.md">二进制加法器</a>
 - <a href="科普/穿越计算机的迷雾/04实现减法.md">实现减法</a>
 
-# Linux Windows
-- <a href="Linux/注册表脚本.md">注册表脚本</a>
+# Linux
 - <a href="Linux/踢出登陆用户.md">踢出登陆用户</a>
 - <a href="Linux/Linux连接wifi.md">Linux连接wifi</a>
 - <a href="Linux/ssh登陆环境变量失效.md">ssh登陆环境变量失效</a>
 - <a href="Linux/Chrome的SecureShell连接时出现异常.md">Chrome的SecureShell连接时出现异常</a>
 - <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
 - <a href="Linux/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
+
+# Windows
+- <a href="Windows/注册表脚本.md">注册表脚本</a>
+- <a href="Windows/修改环境变量.md">修改环境变量</a>
 
 # 前端
 - <a href="前端/canvas/index.md">canvas</a>
