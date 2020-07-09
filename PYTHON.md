@@ -18,3 +18,5 @@
 - <a href="Python/Python的IO操作/Python中文件的读写操作.md">Python中文件的读写操作</a>
 - <a href="Python/Python的IO操作/Python路径拼接.md">Python路径拼接</a>
 - <a href="Python/Python的IO操作/Python中不同操作系统的路径分隔符.md">Python中不同操作系统的路径分隔符</a>
+# Pyhon的Win32编程
+- <a href="Python/PythonWin32/使用python发送qq消息.md">使用python发送qq消息</a>
