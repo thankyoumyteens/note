@@ -49,6 +49,7 @@ Redis数据类型
 - <a href="Linux/ssh登陆环境变量失效.md">ssh登陆环境变量失效</a>
 - <a href="Linux/Chrome的SecureShell连接时出现异常.md">Chrome的SecureShell连接时出现异常</a>
 - <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
+- <a href="Linux/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
 
 # 前端
 - <a href="前端/canvas/index.md">canvas</a>
