@@ -49,6 +49,7 @@ Redis数据类型
 - <a href="Linux/Chrome的SecureShell连接时出现异常.md">Chrome的SecureShell连接时出现异常</a>
 - <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
 - <a href="Linux/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
+- <a href="Linux/frp内网穿透.md">frp内网穿透</a>
 
 # Windows
 - <a href="Windows/注册表脚本.md">注册表脚本</a>
