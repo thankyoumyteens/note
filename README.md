@@ -1,6 +1,9 @@
 # 算法和数据结构
 - <a href="ALGORITHM.md">目录</a>
 
+# C++
+- <a href="CPP.md">目录</a>
+
 # Java
 - <a href="JAVA.md">目录</a>
 
