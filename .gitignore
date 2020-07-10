@@ -16,3 +16,8 @@ selenium-debug.log
 *.njsproj
 *.sln
 *.iml
+
+# latex
+*.synctex.gz
+*.aux
+*.log
