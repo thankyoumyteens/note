@@ -9,7 +9,9 @@
 \begin{document}
 \begin{flushleft}
 	\fontsize{24pt}{30pt}\selectfont
+	
 	~\\ \textbf{定积分} \\~\\
+	
 	定积分是一个特殊的极限\\
 	$\int_{a}^{b}f(x)dx=\lim\limits_{\lambda\to 0}\sum_{i=1}^{n}f(\xi_i)\Delta x_i$\\
 	其中$\lambda = max\{\Delta x_1, \Delta x_2...\Delta x_n\}$\\
@@ -20,7 +22,9 @@
 	~\\
 	若$f(x)$在$[a,b]$上连续,则$f(x)$在$[a,b]$上可积\\
 	若$f(x)$在$[a,b]$上有界,且只有有限个间断点,则$f(x)$在$[a,b]$上可积\\
+	
 	~\\ \textbf{定积分的性质} \\~\\
+	
 	1.等式性质\\
 	\ \ $\int_{a}^{a}f(x)dx=0$\\
 	\ \ $\int_{a}^{b}f(x)dx=-\int_{b}^{a}f(x)dx$\\
@@ -35,7 +39,9 @@
 	设$f(x)$在$[a,b]$上连续,则$\exists \xi \in [a,b]$或$\exists \xi \in (a,b)$,使得$\int_{a}^{b}f(x)dx=f(\xi)(b-a)$\\
 	~\\
 	使用定积分定义求极限:$\int_{0}^{1}f(x)dx=\lim\limits_{x\to \infty}\frac{1}{n}\sum_{i=1}^{n}f(\frac{i}{n})$\\
+	
 	~\\ \textbf{微积分基本公式} \\~\\
+	
 	变上限积分函数:设$f(x)$在$[a,b]$上可积,$\forall x_0\in [a,b]$,$F(x)=\int_{x_0}^{x}f(t)dt,(a\le x\le b)$称为变上限积分函数\\
 	~\\
 	变上限积分函数的性质:\\
@@ -54,6 +60,83 @@
 	~\\
 	牛顿-莱布尼兹公式:\\
 	若$F(x)$是连续函数$f(x)$在$[a,b]$上的一个原函数,则$\int_{a}^{b}f(x)dx=F(b)-F(a)$\\
+	
+	~\\ \textbf{换元积分法} \\~\\
+	
+	设$f(x)$在$[a,b]$上连续,且$x=\phi(t)$满足:\\
+	\ \ 1.$\phi(\alpha)=a$且$\phi(\beta)=b$\\
+	\ \ 2.$\phi(t)$在$[\alpha,\beta]$或$[\beta,\alpha]$上有连续导数,且$a\le \phi(t)\le b$\\
+	则$\int_{a}^{b}f(x)dx=\int_{\alpha}^{\beta}f[\phi(t)]d\phi(t)=\int_{\alpha}^{\beta}f[\phi(t)]\phi^{'}(t)dt$\\
+	~\\
+	常用的换元:\\
+	$\frac{1}{x}dx=dlnx$\\
+	$\frac{1}{\sqrt{x}}dx=d2\sqrt{x}$\\
+	$\frac{1}{x^2}dx=d(-\frac{1}{x})$\\
+	~\\
+	如果被积函数都是由$\sin$或$\cos$组成,则:\\
+	1.若$f(-\sin x,\cos x)=-f(\sin x,\cos x)$,则凑$d\cos x$\\
+	2.若$f(\sin x,-\cos x)=-f(\sin x,\cos x)$,则凑$d\sin x$\\
+	3.若$f(-\sin x,-\cos x)=f(\sin x,\cos x)$,则凑$d\tan x$\\
+	~\\
+	三角代换\\
+	\ \ $\sqrt{a^2-x^2} \Rightarrow x=a\sin t, -\frac{\pi}{2}<t<\frac{\pi}{2}$\\
+	\ \ $\sqrt{a^2+x^2} \Rightarrow x=a\tan t, -\frac{\pi}{2}<t<\frac{\pi}{2}$\\
+	\ \ $\sqrt{x^2-a^2} \Rightarrow x=a\sec t, 0<t<\frac{\pi}{2}$\\
+	根式代换\\
+	\ \ $\sqrt[n]{ax+b} \Rightarrow t$\\
+	\ \ $\sqrt[n]{\frac{ax+b}{cx+d}} \Rightarrow t$\\
+	倒代换:若被积函数分母的次方比分子的次方高两次及以上,则代换为$x=\frac{1}{t}$\\
+	
+	~\\ \textbf{分部积分法} \\~\\
+	
+	$\int_{a}^{b}udv=uv|_b^a-\int_{a}^{b}vdu$\\
+	~\\
+	何时用?两类不同的函数相乘做积分\\
+	1.$P_n(x)$作$u \left\{
+	\begin{array}{lcl}
+	\int_{a}^{b} P_n(x)e^{ax}dx\\
+	\int_{a}^{b} P_n(x)\sin axdx\\
+	\int_{a}^{b} P_n(x)\cos axdx
+	\end{array} \right.$\\
+	2.$P_n(x)$作$v \left\{
+	\begin{array}{lcl}
+	\int_{a}^{b} P_n(x)lnxdx\\
+	\int_{a}^{b} P_n(x)\arcsin axdx\\
+	\int_{a}^{b} P_n(x)\arctan axdx
+	\end{array} \right.$\\
+	3.均可作$u \left\{
+	\begin{array}{lcl}
+	\int_{a}^{b} e^{ax}\sin \beta xdx\\
+	\int_{a}^{b} e^{ax}\cos \beta xdx
+	\end{array} \right.$\\
+	
+	~\\ \textbf{重要公式} \\~\\
+	
+	1.若$f(x)$在$[-a,a]$上连续,则$\int_{-a}^{a}f(x)dx=\int_{0}^{a}[f(x)+f(-x)]dx$\\
+	2.若$f(x)$在$[-a,a]$上连续,则$\int_{-a}^{a}f(x)dx=\left\{
+	\begin{array}{lcl}
+	2\int_{0}^{a}f(x)dx, & f(x)\mbox{为偶函数}\\
+	0, & f(x)\mbox{为奇函数}
+	\end{array} \right.$\\
+	3.若$f(x)$是连续函数且周期为T,则:\\
+	\ \ (1)$\int_{a}^{a+T}f(x)dx=\int_{-\frac{T}{2}}^{\frac{T}{2}}f(x)dx=\int_{0}^{T}f(x)dx$\\
+	\ \ (2)$\int_{a}^{a+nT}f(x)dx=n\int_{0}^{T}f(x)dx$\\
+	只要相差一个周期就相等\\
+	4.若$f(x)$在$[0,1]$上连续,则:\\
+	\ \ (1)$\int_{0}^{\frac{\pi}{2}}f(sinx)dx=\int_{0}^{\frac{\pi}{2}}f(cosx)dx$\\
+	\ \ (2)$\int_{0}^{\pi}xf(sinx)dx=\frac{\pi}{2}\int_{0}^{\pi}f(sinx)dx$\\
+	5.$\int_{a}^{b}\frac{1}{1+e^t}dt=\int_{a}^{b}(\frac{1}{1+e^t}\frac{e^{-t}}{e^{-t}})dt=-\int_{a}^{b}\frac{d(e^{-t}+1)}{e^{-t}+1}=-ln(e^{-t}+1)|_a^b$\\
+	6.华里氏公式:$\int_{0}^{\frac{\pi}{2}}sin^nxdx=\int_{0}^{\frac{\pi}{2}}cos^nxdx=\left\{
+	\begin{array}{lcl}
+	\frac{n-1}{n}\frac{n-3}{n-2}...\frac{2}{3}, & n\mbox{是大于1的奇数}\\
+	\frac{n-1}{n}\frac{n-3}{n-2}...\frac{1}{2}\frac{\pi}{2}, & n\mbox{是偶数}
+	\end{array} \right.$\\
+	示例:\\
+	\ \ $\int_{0}^{\frac{\pi}{2}}sin^5xdx=\frac{4}{5}\times\frac{2}{3}=\frac{8}{15}$\\
+	\ \ $\int_{0}^{\frac{\pi}{2}}cos^6xdx=\frac{5}{6}\times\frac{3}{4}\times\frac{1}{2}\times\frac{\pi}{2}=\frac{8}{15}$\\
+	
+	~\\ \textbf{反常积分} \\~\\
+	
 	
 \end{flushleft}
 \end{document}
