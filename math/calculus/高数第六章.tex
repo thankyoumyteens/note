@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{type1cm}
+\usepackage{geometry}
+\usepackage[bold-style=ISO]{unicode-math}
+\usepackage[heading=true]{ctex}%添加heading=true，使用中文版式
+\usepackage{graphicx}
+\geometry{a4paper,left=1cm,right=1cm,top=1cm,bottom=1cm}
+\begin{document}
+\begin{flushleft}
+	\fontsize{24pt}{30pt}\selectfont
+	
+	~\\ \textbf{平面图形的面积} \\~\\
+	
+	1.直角坐标\\
+	\ \ $A=\int_{a}^{b}f(x)dx$\\
+	\ \ $A=\int_{a}^{b}|f(x)-g(x)|dx$\\
+	2.极坐标\\
+	\ \ $A=\int_{\alpha}^{\beta}\frac{1}{2}r^2(\theta)d\theta$\\
+	\ \ $A=\int_{\alpha}^{\beta}\frac{1}{2}[r_2^2(\theta)-r_1^2(\theta)]d\theta$\\
+	
+	~\\ \textbf{旋转体体积} \\~\\
+	
+	1.绕x轴旋转\\
+	\ \ $V=\int_{a}^{b}\pi f^2(x)dx$\\
+	2.绕y轴旋转\\
+	\ \ $V=\int_{a}^{b}2\pi xf(x)dx$\\
+	
+	~\\ \textbf{平面曲线的弧长} \\~\\
+	
+	1.直角坐标\\
+	\ \ $L=\int_{a}^{b}\sqrt{1+y^{'2}}dx$\\
+	2.参数方程\\
+	\ \ $L=\int_{\alpha}^{\beta}\sqrt{x_t^{'2}+y_t^{'2}}dt, (\alpha \le t \le \beta)$\\
+	3.极坐标\\
+	\ \ $A=\int_{\alpha}^{\beta}\sqrt{r^2(\theta)+r^{'2}(\theta)}d\theta$\\
+	
+	~\\ \textbf{重要公式} \\~\\
+	
+	华里氏公式扩展\\
+	$\int_{0}^{\pi}sin^nxdx=2\int_{0}^{\frac{\pi}{2}}sin^nxdx$\\
+	$\int_{0}^{\pi}cos^nxdx=\left\{
+	\begin{array}{lcl}
+	0, & n\mbox{为奇数}\\
+	2\int_{0}^{\frac{\pi}{2}}cos^nxdx, & n\mbox{为偶数}
+	\end{array} \right.$\\
+	$\int_{0}^{2\pi}sin^nxdx=\left\{
+	\begin{array}{lcl}
+	0, & n\mbox{为奇数}\\
+	4\int_{0}^{\frac{\pi}{2}}sin^nxdx, & n\mbox{为偶数}
+	\end{array} \right.$\\
+	$\int_{0}^{2\pi}cos^nxdx=\left\{
+	\begin{array}{lcl}
+	0, & n\mbox{为奇数}\\
+	4\int_{0}^{\frac{\pi}{2}}sin^nxdx, & n\mbox{为偶数}
+	\end{array} \right.$\\
+	~\\
+	积分公式\\
+	$\int \sqrt{x^2+a^2}dx=\frac{x}{2}\sqrt{x^2+a^2}+\frac{a^2}{2}ln(x+\sqrt{x^2+a^2})+C$\\
+	$\int \sqrt{x^2-a^2}dx=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}ln(x+\sqrt{x^2-a^2})+C$\\
+	$\int \sqrt{a^2+x^2}dx=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}arcsin\frac{x}{a}+C$\\
+	
+\end{flushleft}
+\end{document}
