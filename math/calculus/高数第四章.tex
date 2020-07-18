@@ -4,13 +4,19 @@
 \usepackage{geometry}
 \usepackage[bold-style=ISO]{unicode-math}
 \usepackage[heading=true]{ctex}%添加heading=true，使用中文版式
-\usepackage{graphicx}
-\geometry{a4paper,left=1cm,right=1cm,top=1cm,bottom=1cm}
+\geometry{a4paper,left=1cm,right=1cm,top=3cm,bottom=3cm}
+\usepackage{titlesec} %自定义多级标题格式的宏包
+\titleformat{\section}[block]{\Huge\bfseries}{\arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{\huge\bfseries}{\arabic{section}.\arabic{subsection}}{1em}{}[]
+\titleformat{\paragraph}[block]{\huge\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
 \begin{document}
 \begin{flushleft}
-	\fontsize{24pt}{30pt}\selectfont
+	\huge
 	
-	~\\ \textbf{不定积分} \\~\\
+	\section{公式}
+	
+	\subsection{不定积分}
 	
 	若$F^{'}(x)=f(x)$,则$F(x)$叫原函数\\
 	~\\
@@ -18,7 +24,7 @@
 	~\\
 	不定积分:$\int f(x)dx=F(x)+C$\\
 	
-	~\\ \textbf{基本积分表} \\~\\
+	\subsection{基本积分表}
 	
 	$\int kdx=kx+C$\\
 	$\int x^udx=\frac{x^{u+1}}{u+1}+C$\\
@@ -45,7 +51,7 @@
 	$\int \frac{1}{\sqrt{x^2+a^2}}dx=ln(x+\sqrt{x^2+a^2})+C$\\
 	$\int \frac{1}{\sqrt{x^2-a^2}}dx=ln|x+\sqrt{x^2-a^2}|+C$\\
 	
-	~\\ \textbf{不定积分的性质} \\~\\
+	\subsection{不定积分的性质}
 	
 	$\frac{d}{dx}[\int f(x)dx]=f(x)$\\
 	$\int F^{'}(x)dx=F(x)$\\
@@ -56,7 +62,7 @@
 	~\\
 	$f(x)$是奇函数,则$\int f(x)dx$和$f^{'}(x)$是偶函数\\
 	
-	~\\ \textbf{换元积分法} \\~\\
+	\subsection{换元积分法}
 	
 	第一类换元法:设$\int f(x)dx=F(x)+C$,则$\int f[\phi(x)]\phi^{'}(x)dx=\int f[\phi(x)]d\phi(x)=F[\phi(x)]+C$\\
 	~\\
@@ -80,7 +86,7 @@
 	\ \ $\sqrt[n]{\frac{ax+b}{cx+d}} \Rightarrow t$\\
 	3.倒代换:若被积函数分母的次方比分子的次方高两次及以上,则代换为$x=\frac{1}{t}$\\
 	
-	~\\ \textbf{分部积分法} \\~\\
+	\subsection{分部积分法}
 	
 	$\int udv=uv-\int vdu$\\
 	~\\
@@ -103,7 +109,7 @@
 	\int e^{ax}\cos \beta xdx
 	\end{array} \right.$\\
 	
-	~\\ \textbf{有理函数积分法} \\~\\
+	\subsection{有理函数积分法}
 	
 	前提:$\frac{P(x)}{Q(x)}$,$P$和$Q$是多项式,$Q(x)$可以因式分解\\
 	1.若$Q(x)$中有一个因子$(x-a)^n$,则$\frac{P(x)}{Q(x)}$的分解式中有$\frac{A_1}{x-a}+\frac{A_2}{(x-a)^2}+...+\frac{A_n}{(x-a)^n}$\\

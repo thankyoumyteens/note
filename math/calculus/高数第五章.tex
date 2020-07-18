@@ -4,13 +4,19 @@
 \usepackage{geometry}
 \usepackage[bold-style=ISO]{unicode-math}
 \usepackage[heading=true]{ctex}%添加heading=true，使用中文版式
-\usepackage{graphicx}
-\geometry{a4paper,left=1cm,right=1cm,top=1cm,bottom=1cm}
+\geometry{a4paper,left=1cm,right=1cm,top=3cm,bottom=3cm}
+\usepackage{titlesec} %自定义多级标题格式的宏包
+\titleformat{\section}[block]{\Huge\bfseries}{\arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{\huge\bfseries}{\arabic{section}.\arabic{subsection}}{1em}{}[]
+\titleformat{\paragraph}[block]{\huge\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
 \begin{document}
 \begin{flushleft}
-	\fontsize{24pt}{30pt}\selectfont
+	\huge
 	
-	~\\ \textbf{定积分} \\~\\
+	\section{公式}
+	
+	\subsection{定积分}
 	
 	定积分是一个特殊的极限\\
 	$\int_{a}^{b}f(x)dx=\lim\limits_{\lambda\to 0}\sum_{i=1}^{n}f(\xi_i)\Delta x_i$\\
@@ -23,7 +29,7 @@
 	若$f(x)$在$[a,b]$上连续,则$f(x)$在$[a,b]$上可积\\
 	若$f(x)$在$[a,b]$上有界,且只有有限个间断点,则$f(x)$在$[a,b]$上可积\\
 	
-	~\\ \textbf{定积分的性质} \\~\\
+	\subsection{定积分的性质}
 	
 	1.等式性质\\
 	\ \ $\int_{a}^{a}f(x)dx=0$\\
@@ -40,7 +46,7 @@
 	~\\
 	使用定积分定义求极限:$\int_{0}^{1}f(x)dx=\lim\limits_{x\to \infty}\frac{1}{n}\sum_{i=1}^{n}f(\frac{i}{n})$\\
 	
-	~\\ \textbf{微积分基本公式} \\~\\
+	\subsection{微积分基本公式}
 	
 	变上限积分函数:设$f(x)$在$[a,b]$上可积,$\forall x_0\in [a,b]$,$F(x)=\int_{x_0}^{x}f(t)dt,(a\le x\le b)$称为变上限积分函数\\
 	~\\
@@ -61,7 +67,7 @@
 	牛顿-莱布尼兹公式:\\
 	若$F(x)$是连续函数$f(x)$在$[a,b]$上的一个原函数,则$\int_{a}^{b}f(x)dx=F(b)-F(a)$\\
 	
-	~\\ \textbf{换元积分法} \\~\\
+	\subsection{换元积分法}
 	
 	设$f(x)$在$[a,b]$上连续,且$x=\phi(t)$满足:\\
 	\ \ 1.$\phi(\alpha)=a$且$\phi(\beta)=b$\\
@@ -87,7 +93,7 @@
 	\ \ $\sqrt[n]{\frac{ax+b}{cx+d}} \Rightarrow t$\\
 	倒代换:若被积函数分母的次方比分子的次方高两次及以上,则代换为$x=\frac{1}{t}$\\
 	
-	~\\ \textbf{分部积分法} \\~\\
+	\subsection{分部积分法}
 	
 	$\int_{a}^{b}udv=uv|_b^a-\int_{a}^{b}vdu$\\
 	~\\
@@ -110,7 +116,7 @@
 	\int_{a}^{b} e^{ax}\cos \beta xdx
 	\end{array} \right.$\\
 	
-	~\\ \textbf{重要公式} \\~\\
+	\subsection{重要公式}
 	
 	1.若$f(x)$在$[-a,a]$上连续,则$\int_{-a}^{a}f(x)dx=\int_{0}^{a}[f(x)+f(-x)]dx$\\
 	2.若$f(x)$在$[-a,a]$上连续,则$\int_{-a}^{a}f(x)dx=\left\{
@@ -135,7 +141,7 @@
 	\ \ $\int_{0}^{\frac{\pi}{2}}sin^5xdx=\frac{4}{5}\times\frac{2}{3}=\frac{8}{15}$\\
 	\ \ $\int_{0}^{\frac{\pi}{2}}cos^6xdx=\frac{5}{6}\times\frac{3}{4}\times\frac{1}{2}\times\frac{\pi}{2}=\frac{8}{15}$\\
 	
-	~\\ \textbf{反常积分} \\~\\
+	\subsection{反常积分}
 	
 	设$F(x)$是$f(x)$在相应区间上的一个原函数:\\
 	1.$\int_{a}^{+\infty}f(x)dx=\lim\limits_{x\to+\infty}F(x)-F(a)$\\
@@ -155,7 +161,7 @@
 	~\\
 	瑕点:使$f(x)$无界的点\\
 	
-	~\\ \textbf{重要结论} \\~\\
+	\subsection{重要结论}
 	
 	1.$\int_{a}^{+\infty}\frac{dx}{x^p}\left\{
 	\begin{array}{lcl}
