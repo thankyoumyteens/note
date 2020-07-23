@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{fontspec}
+\usepackage{graphicx}
 \usepackage{type1cm}
 \usepackage{geometry}
 \usepackage[bold-style=ISO]{unicode-math}
@@ -15,18 +16,13 @@
 	\huge
 	
 	\section{公式}
+	
 	\subsection{函数}
 	
 	\paragraph{取整函数}
 	$y=[x]$ 向左取整: $x-1<[x]\leq x$\\
 	一般搭配夹逼准则\\
-	\paragraph{幂指函数}
-	$y=f(x)^{g(x)}$\\
-	~\\
-	定义域关于原点对称的函数,一定能写成奇函数+偶函数的形式\\
-	应用-积分公式:\\
-	$\int_{-a}^a f(x)dx=\int_0^a [f(x)+f(-x)]dx$\\
-	
+
 	\subsection{极限}
 	
 	\paragraph{要分左右极限的情况}
@@ -40,10 +36,9 @@
 	2.$\lim [f(x)g(x)]=AB$\\
 	3.$\lim \frac{f(x)}{g(x)} =\frac{A}{B},(B\neq 0)$\\
 	~\\
-	若$\lim f(x)$存在$\lim g(x)$不存在,则$\lim [f(x)\pm g(x)]$不存在\\
-	其他情况都没有结论\\
+	若$\lim f(x)$存在$\lim g(x)$不存在,则$\lim [f(x)\pm g(x)]$不存在, 其他情况都没有结论\\
 	~\\
-	\paragraph{$\frac{\mbox{多项式}}{\mbox{多项式}}$求极限}
+	\paragraph{多项式除多项式求极限}
 	$\lim\limits_{x\to \infty} \frac{a_0x^m+...+a_mx^0}{b_0x^n+...+b_nx^0}=
 	\left\{
 	\begin{array}{rcl}
@@ -145,5 +140,51 @@
 	1.无穷间断点:$x\to x_0^-$或$x\to x_0^+$时,$f(x)\to \infty$\\
 	2.振荡间断点:$x\to x_0^-$或$x\to x_0^+$时,$f(x)$上下振荡\\
 
+	\section{题目}
+	
+	\subsection{
+	设$f(x)=\left\{
+	\begin{array}{rcl}
+	1, & & |x|<1\\
+	0, & & |x|=1\\
+	-1, & & |x|>1
+	\end{array} \right.,g(x)=e^x$,\\
+	求$f[g(x)]$和$g[f(x)]$
+	}
+	所有的$x$都换成$g(x)$:\\
+	$f[g(x)]=\left\{
+	\begin{array}{rcl}
+	1, & & |e^x|<1,\mbox{即}x<0\\
+	0, & & |e^x|=1,\mbox{即}x=0\\
+	-1, & & |e^x|>1,\mbox{即}x>0
+	\end{array} \right.$\\
+	所有的$x$都换成$f(x)$:\\
+	$g[f(x)]=e^{f(x)}=\left\{
+	\begin{array}{rcl}
+	e, & & |x|<1\\
+	1, & & |x|=1\\
+	e^{-1}, & & |x|>1
+	\end{array} \right.$\\
+	
+	\subsection{
+	设$f(x)=\left\{
+	\begin{array}{rcl}
+	x-1, & & x<0\\
+	0, & & x=0\\
+	x+1, & & x>0
+	\end{array} \right.$,\\
+	证明当$x\to 0$时，$f(x)$的极限不存在
+	}
+	$\lim\limits_{x\to 0^-}f(x)=x-1=-1$\\
+	$\lim\limits_{x\to 0^+}f(x)=x+1=1$\\
+	由于左右极限不相等,所以极限不存在\\
+	
+	\subsection{
+	$y=xcosx$在$(-\infty,+\infty)$是否有界?\\
+	是否为$x\to +\infty$的无穷大?
+	}
+	取$x=2k\pi\in(-\infty,+\infty)$时,$y=2k\pi$大于任意的常数$M$,所以函数无界\\
+	取$x=\frac{\pi}{2}+2k\pi\in(x,+\infty)$时,$y=0$,所以不是无穷大\\
+	
 \end{flushleft}
 \end{document}
