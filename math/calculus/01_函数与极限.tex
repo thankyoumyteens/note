@@ -27,43 +27,43 @@
 	
 	\paragraph{要分左右极限的情况}
 	1.分段函数的分段点处\\
-	2.e的无穷大型,如$\lim\limits_{x\to 1} e^{\frac{1}{x-1}}$\\
-	3.$arctan\infty$型,如$\arctan{\frac{1}{x-1}}$\\
+	2.e的无穷大型，如$\lim\limits_{x\to 1} e^{\frac{1}{x-1}}$\\
+	3.$arctan\infty$型，如$\arctan{\frac{1}{x-1}}$\\
 	~\\
 	\paragraph{极限的四则运算}
-	设$\lim f(x)=A,\lim g(x)=B$,则:\\
+	设$\lim f(x)=A，\lim g(x)=B$，则:\\
 	1.$\lim [f(x)\pm g(x)]=A\pm B$\\
 	2.$\lim [f(x)g(x)]=AB$\\
-	3.$\lim \frac{f(x)}{g(x)} =\frac{A}{B},(B\neq 0)$\\
+	3.$\lim \frac{f(x)}{g(x)} =\frac{A}{B}，(B\neq 0)$\\
 	~\\
-	若$\lim f(x)$存在$\lim g(x)$不存在,则$\lim [f(x)\pm g(x)]$不存在, 其他情况都没有结论\\
+	若$\lim f(x)$存在$\lim g(x)$不存在，则$\lim [f(x)\pm g(x)]$不存在，其他情况都没有结论\\
 	~\\
 	\paragraph{多项式除多项式求极限}
 	$\lim\limits_{x\to \infty} \frac{a_0x^m+...+a_mx^0}{b_0x^n+...+b_nx^0}=
 	\left\{
 	\begin{array}{rcl}
-	\frac{a_0}{b_0}, & & {m=n}\\
-	0, & & {m<n}\\
-	\infty, & & {m>n}
+	\frac{a_0}{b_0}，& & {m=n}\\
+	0，& & {m<n}\\
+	\infty，& & {m>n}
 	\end{array} \right.$\\
 	例:\\
 	$\lim\limits_{x\to \infty} \frac{3x^3+4x^2+2}{7x^3+5x^2-3} = \frac{3}{7}$\\
 	~\\
 	\paragraph{复合函数求极限}
-	如果$f(x)$连续,且$g(x)$有极限A,则:\\
+	如果$f(x)$连续，且$g(x)$有极限A，则:\\
 	$\lim\limits_{x\to x_0} f[g(x)]=f[\lim\limits_{x\to x_0}g(x)]=f(A)$\\
 	例:\\
 	$\lim\limits_{x\to 3} \sqrt{\frac{x-3}{x^2-9}}= \sqrt{\lim\limits_{x\to 3} \frac{x-3}{x^2-9}}=\sqrt{\frac{1}{6}}$\\
 	~\\
 	\paragraph{幂指函数求极限}
-	若$\lim f(x)=A>0$且$\lim g(x)=B$,则:$\lim f(x)^{g(x)}=A^B$\\
+	若$\lim f(x)=A>0$且$\lim g(x)=B$，则:$\lim f(x)^{g(x)}=A^B$\\
 	
 	\subsection{重要极限}
 	
 	\paragraph{夹逼准则}
-	函数$A>B>C$, 函数$A$的极限是$X$,函数$C$的极限也是$X$,那么函数$B$的极限就一定是$X$\\
+	函数$A>B>C$，函数$A$的极限是$X$，函数$C$的极限也是$X$，那么函数$B$的极限就一定是$X$\\
 	\paragraph{单调有界准则}
-	单调递增且有上界,则有极限, 单调递减且有下界,则有极限\\
+	单调递增且有上界，则有极限，单调递减且有下界，则有极限\\
 	~\\
 	\paragraph{重要极限}
 	$\lim\limits_{x\to 0} \frac{\sin x}{x}=1$\\
@@ -74,11 +74,11 @@
 	
 	\subsection{无穷小}
 	
-	无穷小:极限为0,(0也是无穷小)\\
+	无穷小:极限为0，(0也是无穷小)\\
 	有界函数$\times$无穷小 仍是无穷小\\
 	~\\
-	设$\alpha$和$\beta$是无穷小,且$\alpha \neq 0$,
-	若$\lim \frac{\beta}{\alpha}=0$,则$\beta$是比$\alpha$的高阶无穷小,
+	设$\alpha$和$\beta$是无穷小，且$\alpha \neq 0$，
+	若$\lim \frac{\beta}{\alpha}=0$，则$\beta$是比$\alpha$的高阶无穷小，
 	记为:$\beta = o(\alpha)$\\
 	~\\
 	$o(x^2)\pm o(x^2)=o(x^2)$\\
@@ -89,46 +89,46 @@
 	
 	\subsection{常用的等价}
 	
-	若$\lim \frac{\beta}{\alpha}=1$,则$\beta$与$\alpha$是等价无穷小,
+	若$\lim \frac{\beta}{\alpha}=1$，则$\beta$与$\alpha$是等价无穷小，
 	记为:$\beta \sim \alpha$\\
 	~\\
 	$\beta \sim \alpha \Leftrightarrow \beta = \alpha + o(\alpha)$\\
 	$x$的高次方$\pm x$的低次方$\sim x$的低次方\\
 	\ \ 例:$x^3+3x\sim 3x$\\
 	~\\
-	若$\alpha \sim \alpha_1$且$\beta \sim \beta_1$,则$\lim \frac{\beta}{\alpha} = \lim \frac{\beta_1}{\alpha_1}$\\
+	若$\alpha \sim \alpha_1$且$\beta \sim \beta_1$，则$\lim \frac{\beta}{\alpha} = \lim \frac{\beta_1}{\alpha_1}$\\
 	~\\
-	当$x\to 0$时,$\sin x \sim x$\\
-	当$x\to 0$时,$\arcsin x \sim x$\\
-	当$x\to 0$时,$\tan x \sim x$\\
-	当$x\to 0$时,$\arctan x \sim x$\\
+	当$x\to 0$时，$\sin x \sim x$\\
+	当$x\to 0$时，$\arcsin x \sim x$\\
+	当$x\to 0$时，$\tan x \sim x$\\
+	当$x\to 0$时，$\arctan x \sim x$\\
 	~\\
-	当$x\to 0$时,$ln(1+x) \sim x$\\
-	当$x\to 0$时,$e^x-1 \sim x$\\
+	当$x\to 0$时，$ln(1+x) \sim x$\\
+	当$x\to 0$时，$e^x-1 \sim x$\\
 	~\\
-	当$x\to 0$时,$1-\cos x \sim \frac{1}{2} x^2$\\
-	当$x\to 0$时,$\sec x - 1 \sim \frac{1}{2} x^2$\\
+	当$x\to 0$时，$1-\cos x \sim \frac{1}{2} x^2$\\
+	当$x\to 0$时，$\sec x - 1 \sim \frac{1}{2} x^2$\\
 	~\\
-	当$x\to 0$时,$(1+\alpha x)^\beta -1 \sim \alpha\beta x$\\
+	当$x\to 0$时，$(1+\alpha x)^\beta -1 \sim \alpha\beta x$\\
 	~\\
-	当$x\to 0$时,$\alpha^x -1 \sim xln\alpha$\\
+	当$x\to 0$时，$\alpha^x -1 \sim xln\alpha$\\
 	
 	\subsection{连续}
 	
-	若$f(x)$在$x_0$处连续,则$\lim\limits_{x\to x_0} f(x)=f(x_0)$\\
+	若$f(x)$在$x_0$处连续，则$\lim\limits_{x\to x_0} f(x)=f(x_0)$\\
 	~\\
 	连续$\pm\times\div$连续$=$连续\\
 	连续$\pm$不连续$=$不连续\\
-	若$f(x)$连续$g(x)$也连续,则$f[g(x)]$连续\\
+	若$f(x)$连续$g(x)$也连续，则$f[g(x)]$连续\\
 	~\\
-	单调连续函数的反函数也连续,且单调性相同\\
+	单调连续函数的反函数也连续，且单调性相同\\
 	~\\
 	闭区间内连续函数必有界\\
 	推广:\\
-	$f(x)$在$(a,b)$内连续,且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x\to b^-} f(x)$都存在,则$f(x)$在$(a,b)$内有界\\
+	$f(x)$在$(a，b)$内连续，且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x\to b^-} f(x)$都存在，则$f(x)$在$(a，b)$内有界\\
 	~\\
 	\paragraph{零点定理}
-	$f(x)$在$(a,b)$内连续,且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x\to b^-} f(x)$异号,则$\exists \xi \in (a,b)$,使得$f(\xi)=0$\\
+	$f(x)$在$(a，b)$内连续，且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x\to b^-} f(x)$异号，则$\exists \xi \in (a，b)$，使得$f(\xi)=0$\\
 	
 	\subsection{间断点}
 	
@@ -137,54 +137,54 @@
 	2.跳跃间断点:左右极限均存在且不相等\\
 	\paragraph{第二类间断点}
 	左右极限至少一个不存在\\
-	1.无穷间断点:$x\to x_0^-$或$x\to x_0^+$时,$f(x)\to \infty$\\
-	2.振荡间断点:$x\to x_0^-$或$x\to x_0^+$时,$f(x)$上下振荡\\
+	1.无穷间断点:$x\to x_0^-$或$x\to x_0^+$时，$f(x)\to \infty$\\
+	2.振荡间断点:$x\to x_0^-$或$x\to x_0^+$时，$f(x)$上下振荡\\
 
 	\section{题目}
 	
 	\subsection{
 	设$f(x)=\left\{
 	\begin{array}{rcl}
-	1, & & |x|<1\\
-	0, & & |x|=1\\
-	-1, & & |x|>1
-	\end{array} \right.,g(x)=e^x$,\\
+	1，& & |x|<1\\
+	0，& & |x|=1\\
+	-1，& & |x|>1
+	\end{array} \right.，g(x)=e^x$，\\
 	求$f[g(x)]$和$g[f(x)]$
 	}
 	所有的$x$都换成$g(x)$:\\
 	$f[g(x)]=\left\{
 	\begin{array}{rcl}
-	1, & & |e^x|<1,\mbox{即}x<0\\
-	0, & & |e^x|=1,\mbox{即}x=0\\
-	-1, & & |e^x|>1,\mbox{即}x>0
+	1，& & |e^x|<1，\mbox{即}x<0\\
+	0，& & |e^x|=1，\mbox{即}x=0\\
+	-1，& & |e^x|>1，\mbox{即}x>0
 	\end{array} \right.$\\
 	所有的$x$都换成$f(x)$:\\
 	$g[f(x)]=e^{f(x)}=\left\{
 	\begin{array}{rcl}
-	e, & & |x|<1\\
-	1, & & |x|=1\\
-	e^{-1}, & & |x|>1
+	e，& & |x|<1\\
+	1，& & |x|=1\\
+	e^{-1}，& & |x|>1
 	\end{array} \right.$\\
 	
 	\subsection{
 	设$f(x)=\left\{
 	\begin{array}{rcl}
-	x-1, & & x<0\\
-	0, & & x=0\\
-	x+1, & & x>0
-	\end{array} \right.$,\\
+	x-1，& & x<0\\
+	0，& & x=0\\
+	x+1，& & x>0
+	\end{array} \right.$，\\
 	证明当$x\to 0$时，$f(x)$的极限不存在
 	}
 	$\lim\limits_{x\to 0^-}f(x)=x-1=-1$\\
 	$\lim\limits_{x\to 0^+}f(x)=x+1=1$\\
-	由于左右极限不相等,所以极限不存在\\
+	由于左右极限不相等，所以极限不存在\\
 	
 	\subsection{
-	$y=xcosx$在$(-\infty,+\infty)$是否有界?\\
+	$y=xcosx$在$(-\infty，+\infty)$是否有界?\\
 	是否为$x\to +\infty$的无穷大?
 	}
-	取$x=2k\pi\in(-\infty,+\infty)$时,$y=2k\pi$大于任意的常数$M$,所以函数无界\\
-	取$x=\frac{\pi}{2}+2k\pi\in(x,+\infty)$时,$y=0$,所以不是无穷大\\
+	取$x=2k\pi\in(-\infty，+\infty)$时，$y=2k\pi$大于任意的常数$M$，所以函数无界\\
+	取$x=\frac{\pi}{2}+2k\pi\in(x，+\infty)$时，$y=0$，所以不是无穷大\\
 	
 \end{flushleft}
 \end{document}
