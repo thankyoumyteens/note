@@ -13,12 +13,13 @@
 \begin{document}
 \begin{flushleft}
 	\LARGE
+	% \qquad 缩进两个字符
 	
 	\section{公式}
 	
 	\subsection{微分方程的基本概念}
 	
-	\paragraph{微分方程}
+	\paragraph{微分方程}\qquad 
 	表示未知函数，未知函数的导数与自变量之间的关系的方程\\
 	\paragraph{微分方程的阶}
 	未知函数最高阶导数的阶数\\
@@ -69,6 +70,35 @@
 	 
 	 \paragraph{二阶常系数齐次线性微分方程}
 	 定义：形如$y''+py'+qy=0$的方程\\
+	 解法：写出特征方程$r^2_pr+q=0$\\
+	 1、若特征方程有两个不相等实根$r_1\neq r_2$，\\
+	 则通解为$y=C_1e^{r_1x}+C_2e^{r_2x}$\\
+	 2、若特征方程有两个相等实根$r_1=r_2$，\\
+	 则通解为$y=(C_1+C_2x)e^{r_1x}$\\
+	 3、若特征方程有两个虚根$r_{1,2}=\alpha\pm\beta_i$，\\
+	 则通解为$y=e^{\alpha x}(C_1cos\beta x+C_2sin\beta x)$\\
+	 
+	 \paragraph{二阶常系数非齐次线性微分方程}
+	 定义：形如$y''+py'+qy=f(x)$的方程\\
+	 1、若$f(x)=e^{\lambda x}P_m(x)$，则特解为$y^*=e^{\lambda x}R_m(x)x^k$\\
+	 其中$R_m(x)$是$m$次一般多项式\\
+	 $k=\left\{
+	 \begin{array}{lcl}
+	 0,& & \lambda\mbox{不是特征方程的根}\\
+	 1,& & \lambda\mbox{是特征方程的单根}\\
+	 2,& & \lambda\mbox{是特征方程的重根}
+	 \end{array} \right.$\\
+	 2、若$f(x)=e^{\lambda x}[P_m(x)cos\omega x+Q_n(x)sin\omega x]$，则特解为$y^*=e^{\lambda x}[R_l(x)cos\omega x+S_l(x)sin\omega x]x^k$\\
+	 其中$R_l(x)$和$S_l(x)$是两个不同的$m$次一般多项式，且$l=max(m,n)$\\
+	 $k=\left\{
+	 \begin{array}{lcl}
+	 0,& & \lambda\pm\omega i\mbox{不是特征根}\\
+	 1,& & \lambda\pm\omega i\mbox{是特征根}
+	 \end{array} \right.$\\
+	 
+	 \paragraph{二阶欧拉方程}
+	 定义：形如$x^2y''+axy'+by=f(x)$的方程\\
+	 解法：令$x=e^t (x>0)$或$x=-e^t (x<0)$换元，化成二阶常系数线性微分方程\\
 	 
 \end{flushleft}
 \end{document}

@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{type1cm}
+\usepackage{geometry}
+\usepackage[bold-style=ISO]{unicode-math}
+\usepackage[heading=true]{ctex}%添加heading=true，使用中文版式
+\geometry{a4paper,left=1cm,right=1cm,top=3cm,bottom=3cm}
+\usepackage{titlesec} %自定义多级标题格式的宏包
+\titleformat{\section}[block]{\Huge\bfseries}{\arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{\huge\bfseries}{\arabic{section}.\arabic{subsection}}{1em}{}[]
+\titleformat{\paragraph}[block]{\LARGE\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+\begin{document}
+\begin{flushleft}
+	\LARGE
+	% \qquad 缩进两个字符
+	
+	\section{公式}
+
+	
+	
+\end{flushleft}
+\end{document}
