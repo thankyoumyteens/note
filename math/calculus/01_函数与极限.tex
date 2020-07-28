@@ -149,6 +149,20 @@ $f(x)$在$(a，b)$内连续，且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x
 \qquad $=\frac{(\sqrt{x^2}+1-x)(\sqrt{x^2}+1+x)}{\sqrt{x^2}+1+x}$\\
 \qquad $=\frac{x^2+1-x^2}{\sqrt{x^2}+1+x}=\frac{1}{\sqrt{x^2}+1+x}$\\
 
+\paragraph{立方差公式}
+$a^3-b^3=(a-b)(a^2+ab+b^2)$\\
+例：\\
+\qquad $\frac{1}{1-x}-\frac{3}{1-x^3}$\\
+\qquad $=\frac{1+x+x^2}{(1-x)(1+x+x^2)}-\frac{3}{1-x^3}$\\
+\qquad $=\frac{1+x+x^2-3}{1-x^3}$\\
+\qquad $=\frac{x+x^2-2}{1-x^3}$\\
+
+\paragraph{因式分解}
+$x^2+(a+b)x+ab=(x+a)(x+b)$\\
+例：\\
+\qquad $x^2-x-2$\\
+\qquad $=x^2+(2-1)x+(2\times(-1))=(x+2)(x-1)$\\
+
 
 \section{题目}
 
@@ -234,6 +248,18 @@ $=\lim\limits_{x\to \infty}\frac{x}{\sqrt{x^2+1}+x}$\\
 $=\lim\limits_{x\to \infty}\frac{x}{\sqrt{x^2}+x}
 =\lim\limits_{x\to \infty}\frac{x}{x+x}=\frac{1}{2}$\\
 
+\subsection{
+	求极限$\lim\limits_{x\to 1}(\frac{1}{1-x}-\frac{3}{1-x^3})$
+}
+代入极限发现这是$\infty-\infty$型的极限\\
+则需要先化成$\frac{0}{0}$或$\frac{\infty}{\infty}$型的极限，再继续求\\
+$\lim\limits_{x\to 1}(\frac{1}{1-x}-\frac{3}{1-x^3})$\\
+使用立方差公式化简\\
+$=\lim\limits_{x\to 1}\frac{x+x^2-2}{1-x^3}$\\
+此时已变成$\frac{0}{0}$型的极限\\
+因式分解\\
+$=\lim\limits_{x\to 1}\frac{(x+2)(x-1)}{(1-x)(1+x+x^2)}$\\
+$=-\frac{1+2}{1+1+1}=-1$\\
 
 
 \end{flushleft}
