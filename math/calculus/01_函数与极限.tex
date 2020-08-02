@@ -21,7 +21,7 @@
 
 \paragraph{取整函数}
 $y=[x]$ 向左取整： $x-1<[x]\leq x$\\
-一般搭配夹逼准则\\\huge
+一般搭配夹逼准则\\
 
 \subsection{极限}
 
@@ -214,7 +214,7 @@ $y=xcosx$在$(-\infty，+\infty)$是否有界?\\
 求极限$\lim\limits_{x\to 2}\frac{x^3-1}{x^2-5x+3}$
 }
 函数连续，则函数值与极限相等，直接代入极限\\
-$\lim\limits_{x\to 2}\frac{x^3-1}{x^2-5x+3}=\frac{2^3-1}{2^2-5\times2+3}=\frac{7}{-3}$\\
+$\lim\limits_{x\to 2}\frac{x^3-1}{x^2-5x+\sqrt3}=\frac{2^3-1}{2^2-5\times2+3}=\frac{7}{-3}$\\
 
 \subsection{
 求极限$\lim\limits_{x\to 3}\frac{x-3}{x^2-9}$
@@ -275,7 +275,61 @@ $=\sqrt{\frac{1}{6}}$\\
 $\lim\limits_{x\to \infty}\frac{sinx}{x}$\\
 $=\lim\limits_{x\to \infty}sinx\frac{1}{x}$\\
 有界函数$\times$无穷小$=$无穷小\\
-$=0$
+$=0$\\
+
+\subsection{
+求极限$\lim\limits_{x\to 0}(1+2x)^{\frac{3}{sinx}}$
+}
+代入极限发现这是$1^\infty$型的极限\\
+则需要凑重要极限\\
+凑$(1+x)^{\frac{1}{x}}$\\
+$\lim\limits_{x\to 0}(1+2x)^{\frac{3}{sinx}}$\\
+$=\lim\limits_{x\to 0}(1+2x)^{\frac{1}{2x}\frac{6x}{sinx}}$\\
+幂指函数求极限\\
+$=\lim\limits_{x\to 0}(1+2x)^{\frac{1}{2x}\lim\limits_{x\to 0}\frac{6x}{sinx}}$\\
+$=e^6$\\
+
+\subsection{
+	求极限$\lim\limits_{x\to 0^+}x[\frac{1}{x}]$
+}
+使用取整函数的性质$x-1<[x]\le x$\\
+$\Rightarrow \frac{1}{x}-1<[\frac{1}{x}]\le \frac{1}{x}$\\
+由于$x\to 0^+$，知$x>0$\\
+$\Rightarrow 1-x<x[\frac{1}{x}]\le 1$\\
+由于$\lim\limits_{x\to 0^+}(1-x)=1$，且$\lim\limits_{x\to 0^+}1=1$\\
+由夹逼准则可得\\
+$\lim\limits_{x\to 0^+}x[\frac{1}{x}]=1$\\
+
+\subsection{
+证明数列$\sqrt{2}, \sqrt{2+\sqrt{2}}, \sqrt{2+\sqrt{2+\sqrt{2}}}$有极限，并求极限
+}
+设$x_{n+1}=\sqrt{2+x_n}$，$x_1=\sqrt{2}$\\
+由$x_1<\sqrt{2}<2$，设$x_k<2$，则$x_{k+1}=\sqrt{2+x_k}<\sqrt{2+2}=2$\\
+可知$x_n<2$，即数列有上界$2$\\
+判断单调性：\\
+$x_{n+1}-x_n$\\
+$=\sqrt{2+x_n}-x_n$\\
+根式有理化\\
+$=\frac{x_n+2-x_n^2}{\sqrt{x_n+2}+x_n}$\\
+$=\frac{(2-x_n)(1+x_n)}{\sqrt{x_n+2}+x_n}$\\
+由于$1+x_n, \sqrt{x_n+2}, x_n$都大于0，此时整个式子的正负由$2-x_n$决定\\
+由于$x_n$的上界为$2$，则$2-x_n>0$\\
+$x_{n+1}-x_n>0$即$x_{n+1}>x_n$\\
+则数列单调递增\\
+由单调有界准则知，数列有极限\\
+~\\
+令$\lim\limits_{x\to\infty}x_n=A$\\
+在$x_{n+1}=\sqrt{2+x_n}$两端取极限\\
+$\lim\limits_{x\to\infty}x_{n+1}=\lim\limits_{x\to\infty}\sqrt{2+x_n}$\\
+$\lim\limits_{x\to\infty}x_{n+1}=\sqrt{2+A}$\\
+$x_{n+1}$可以看作是$x_n$的子列\\
+子列与数列极限相同，则$\lim\limits_{x\to\infty}x_{n+1}=A$\\
+即$A=\sqrt{2+A}$\\
+$A=2$或$A=-1$\\
+由于数列大于0，则$A=2$\\
+
+
+
 
 \end{flushleft}
 \end{document}
