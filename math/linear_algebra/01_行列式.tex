@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{type1cm}
+\usepackage{geometry}
+\usepackage[bold-style=ISO]{unicode-math}
+\usepackage[heading=true]{ctex}%添加heading=true，使用中文版式
+\geometry{a4paper,left=1cm,right=1cm,top=3cm,bottom=3cm}
+\usepackage{titlesec} %自定义多级标题格式的宏包
+\titleformat{\section}[block]{\Huge\bfseries}{\arabic{section}}{1em}{}[]
+\titleformat{\subsection}[block]{\huge\bfseries}{\arabic{section}.\arabic{subsection}}{1em}{}[]
+\titleformat{\paragraph}[block]{\LARGE\bfseries}{[\arabic{paragraph}]}{1em}{}[]
+
+\begin{document}
+\begin{flushleft}
+	\LARGE
+
+	\section{行列式}
+
+	\subsection{行列式定义}
+	二阶行列式$\left|\begin{array}{cccc} 
+	a_{11}&a_{12}\\ 
+	a_{21}&a_{22}
+	\end{array}\right|=a_{11}a_{22}-a_{12}a_{21}$\\
+	~\\
+	三阶行列式$\left|\begin{array}{cccc} 
+	a&b&c\\ 
+	d&e&f\\
+	g&h&i
+	\end{array}\right|=aei+bfg+cdh-ceg-fha-ibd$\\
+
+	\paragraph{逆序数}
+	在一个排列中，如果一对数的前后位置与大小顺序相反，即前面的数大于后面的数，那么它们就称为一个逆序。一个排列中逆序的总数就称为这个排列的逆序数。记为$\tau(i_1,i_2,...,i_n)$\\
+	例：求$\tau(32514)$\\
+	\qquad 3后面比它小的数有2个\\
+	\qquad 2后面比它小的数有1个\\
+	\qquad 5后面比它小的数有2个\\
+	\qquad 1后面比它小的数有0个\\
+	\qquad 4后面比它小的数有0个\\
+	\qquad 即$\tau(32514)=2+1+2+0+0=5$\\
+	
+	\subsection{行列式的性质}
+	1、行列互换，行列式的值不变\\
+	2、两行（列）互换，行列式的值变号\\
+	\qquad 推论：两行（列）相同，行列式的值为0\\
+	3、可以把某行（列）的公因子k提到行列式的外面\\
+	\qquad 推论：某行（列）为0，行列式的值为0\\
+	\qquad 推论：某两行（列）的元素对应成比例，行列式的值为0\\
+	4、$\left|\begin{array}{cccc} 
+	a_{11}+b&a_{12}+c&a_{13}+d\\ 
+	a_{21}&a_{22}&a_{23}\\
+	a_{31}&a_{32}&a_{33}
+	\end{array}\right|=\left|\begin{array}{cccc} 
+	a_{11}&a_{12}&a_{13}\\ 
+	a_{21}&a_{22}&a_{23}\\
+	a_{31}&a_{32}&a_{33}
+	\end{array}\right|+\left|\begin{array}{cccc} 
+	b&c&d\\ 
+	a_{21}&a_{22}&a_{23}\\
+	a_{31}&a_{32}&a_{33}
+	\end{array}\right|$\\
+	5、某行（列）的k倍加到另外一行（列）上，行列式的值不变\\
+	
+	\subsection{行列式按行（列）展开}
+	
+	\paragraph{余子式}
+	余子式$M_{ij}$为去掉第$i$行和第$j$列后，剩下的元素组成的行列式\\
+	$\left|\begin{array}{cccc} 
+	a_{11}&a_{12}&a_{13}\\ 
+	a_{21}&a_{22}&a_{23}\\
+	a_{31}&a_{32}&a_{33}
+	\end{array}\right|$的一个余子式$M_{22}=\left|\begin{array}{cccc} 
+	a_{11}&a_{13}\\
+	a_{31}&a_{33}
+	\end{array}\right|$\\
+	~\\
+	代数余子式$A_{ij}=(-1)^{i+j}M_{ij}$\\
+	
+		
+
+\end{flushleft}
+\end{document}
