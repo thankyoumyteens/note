@@ -14,10 +14,12 @@
 \begin{document}
 \begin{flushleft}
 	\LARGE
+	
+	%左斜三点
+	\newcommand{\udots}{\mathinner{\mskip1mu\raise1pt\vbox{\kern7pt\hbox{.}}  
+			\mskip2mu\raise4pt\hbox{.}\mskip2mu\raise7pt\hbox{.}\mskip1mu}} 
 
-	\section{行列式}
-
-	\subsection{行列式定义}
+	\section{行列式定义}
 	二阶行列式$\left|\begin{array}{cccc} 
 	a_{11}&a_{12}\\ 
 	a_{21}&a_{22}
@@ -29,7 +31,7 @@
 	g&h&i
 	\end{array}\right|=aei+bfg+cdh-ceg-fha-ibd$\\
 
-	\paragraph{逆序数}
+	\subsection{逆序数}
 	在一个排列中，如果一对数的前后位置与大小顺序相反，即前面的数大于后面的数，那么它们就称为一个逆序。一个排列中逆序的总数就称为这个排列的逆序数。记为$\tau(i_1,i_2,...,i_n)$\\
 	例：求$\tau(32514)$\\
 	\qquad 3后面比它小的数有2个\\
@@ -39,7 +41,7 @@
 	\qquad 4后面比它小的数有0个\\
 	\qquad 即$\tau(32514)=2+1+2+0+0=5$\\
 	
-	\subsection{行列式的性质}
+	\section{行列式的性质}
 	1、行列互换，行列式的值不变\\
 	2、两行（列）互换，行列式的值变号\\
 	\qquad 推论：两行（列）相同，行列式的值为0\\
@@ -61,9 +63,9 @@
 	\end{array}\right|$\\
 	5、某行（列）的k倍加到另外一行（列）上，行列式的值不变\\
 	
-	\subsection{行列式按行（列）展开}
+	\section{行列式按行（列）展开}
 	
-	\paragraph{余子式}
+	\subsection{余子式}
 	余子式$M_{ij}$为去掉第$i$行和第$j$列后，剩下的元素组成的行列式\\
 	$\left|\begin{array}{cccc} 
 	a_{11}&a_{12}&a_{13}\\ 
@@ -73,10 +75,49 @@
 	a_{11}&a_{13}\\
 	a_{31}&a_{33}
 	\end{array}\right|$\\
-	~\\
-	代数余子式$A_{ij}=(-1)^{i+j}M_{ij}$\\
 	
-		
+	\subsection{代数余子式}
+	$A_{ij}=(-1)^{i+j}M_{ij}$\\
+	
+	\subsection{行列式按行（列）展开公式}
+	行列式的值等于它的任意一行元素与其对应的代数余子式乘积之和
+	$|A|=a_{i1}A_{i1}+a_{i2}A_{i2}+...+a_{in}A_{in}$\\
+	
+	\section{重要行列式}
+	
+	\subsection{上（下）三角}
+	\paragraph{主对角线}
+	$\left|\begin{array}{cccc} 
+		a_{11}&a_{12}&\cdots&a_{1n}\\ 
+		0&a_{22}&\cdots&a_{2n}\\ 
+		\vdots&\vdots&\ddots&\vdots\\ 
+		0&0&\cdots&a_{nn}\\ 
+	\end{array}\right|=a_{11}a_{22}\cdots a_{nn}$\\
+	~\\
+	$\left|\begin{array}{cccc} 
+		a_{11}&0&\cdots&0\\ 
+		a_{21}&a_{22}&\cdots&0\\ 
+		\vdots&\vdots&\ddots&\vdots\\ 
+		a_{n1}&a_{n2}&\cdots&a_{nn}\\ 
+	\end{array}\right|=a_{11}a_{22}\cdots a_{nn}$\\
 
+	\paragraph{副对角线}
+	$\left|\begin{array}{cccc} 
+		a_{11}&\cdots&a_{1,n-1}&a_{1n}\\ 
+		a_{21}&\cdots&a_{2,n-1}&0\\ 
+		\vdots&\udots&\vdots&\vdots\\ 
+		a_{n1}&\cdots&0&0\\ 
+	\end{array}\right|=(-1)^{\frac{n(n-1)}{2}}a_{1n}a_{2,n-1}\cdots a_{n1}$\\
+	~\\
+	$\left|\begin{array}{cccc} 
+		0&\cdots&0&a_{1n}\\ 
+		0&\cdots&a_{2,n-1}&a_{2n}\\ 
+		\vdots&\udots&\vdots&\vdots\\ 
+		a_{n1}&\cdots&a_{n,n-1}&a_{nn}\\ 
+	\end{array}\right|=(-1)^{\frac{n(n-1)}{2}}a_{1n}a_{2,n-1}\cdots a_{n1}$\\
+
+	\subsection{拉普拉斯展开式}
+	
+	
 \end{flushleft}
 \end{document}
