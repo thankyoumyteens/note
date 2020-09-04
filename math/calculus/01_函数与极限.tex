@@ -15,39 +15,120 @@
 \begin{flushleft}
 	\LARGE
 	
-	\section{公式}
+	\section{高中基础}
 	
-	\subsection{函数}
+	\subsection{根式有理化}
+	若分母(或分子)是两个无理数相加(或相减)，则把分子和分母同乘这两个无理数的和(或差)，分母(或分子)就变成了有理数\\
+	例：\\
+	\qquad $\sqrt{x^2}+1-x=\frac{\sqrt{x^2}+1-x}{1}$\\
+	\qquad $=\frac{(\sqrt{x^2}+1-x)(\sqrt{x^2}+1+x)}{\sqrt{x^2}+1+x}$\\
+	\qquad $=\frac{x^2+1-x^2}{\sqrt{x^2}+1+x}=\frac{1}{\sqrt{x^2}+1+x}$\\
 	
-	\paragraph{取整函数}
+	\subsection{立方差公式}
+	$a^3-b^3=(a-b)(a^2+ab+b^2)$\\
+	例：\\
+	\qquad $\frac{1}{1-x}-\frac{3}{1-x^3}$\\
+	\qquad $=\frac{1+x+x^2}{(1-x)(1+x+x^2)}-\frac{3}{1-x^3}$\\
+	\qquad $=\frac{1+x+x^2-3}{1-x^3}$\\
+	\qquad $=\frac{x+x^2-2}{1-x^3}$\\
+	
+	\subsection{因式分解}
+	1、$x^2+(a+b)x+ab=(x+a)(x+b)$\\
+	例：\\
+	\qquad $x^2-x-2$\\
+	\qquad $=x^2+(2-1)x+(2\times(-1))=(x+2)(x-1)$\\
+	
+	\subsection{不等式}
+	1、$||a|-|b||\le |a-b|$\\
+	2、$|a\pm b|\le |a|+|b|$\\
+	
+	\subsection{对数函数}
+	1、$log_a(M\times N)=log_aM+log_aN$\\
+	2、$log_a\frac{M}{N}=log_aM-log_aN$\\
+	3、$log_aM^N=Nlog_aM$\\
+	4、$log_{a^N}M=\frac{1}{N}log_aM$\\
+	5、$ln1=0$\\
+	6、$lne=1$\\
+	7、$M^N=e^{ln(M^N)}=e^{NlnM}$\\
+	
+	
+	\section{函数}
+	
+	\subsection{取整函数}
 	$y=[x]$ 向左取整： $x-1<[x]\leq x$\\
 	一般搭配夹逼准则\\
 	
-	\paragraph{奇偶性}
+	\subsection{分段函数}
+	
+	\paragraph{例题}
+	设$f(x)=\left\{
+	\begin{array}{rcl}
+		1,& & |x|<1\\
+		0,& & |x|=1\\
+		-1,& & |x|>1
+	\end{array} \right.，g(x)=e^x$，\\
+	求$f[g(x)]$和$g[f(x)]$
+	\paragraph{解}
+	所有的$x$都换成$g(x)$：\\
+	$f[g(x)]=\left\{
+	\begin{array}{rcl}
+		1,& & |e^x|<1，\mbox{即}x<0\\
+		0,& & |e^x|=1，\mbox{即}x=0\\
+		-1,& & |e^x|>1，\mbox{即}x>0
+	\end{array} \right.$\\
+	所有的$x$都换成$f(x)$：\\
+	$g[f(x)]=e^{f(x)}=\left\{
+	\begin{array}{rcl}
+		e,& & |x|<1\\
+		1,& & |x|=1\\
+		e^{-1},& & |x|>1
+	\end{array} \right.$\\
+	
+	\subsection{奇偶性}
 	若$\forall x\in D$，有$f(-x)=-f(x)$，则$f(x)$为奇函数\\
 	若$\forall x\in D$，有$f(-x)=f(x)$，则$f(x)$为偶函数\\
 	
-	\paragraph{单调性}
+	\subsection{单调性}
 	若$\forall x_1,x_2\in D$且$x_1<x_2$，有$f(x_1)<f(x_2)$，则$f(x)$在$D$上单调递增\\
 	若$\forall x_1,x_2\in D$且$x_1<x_2$，有$f(x_1)>f(x_2)$，则$f(x)$在$D$上单调递减\\
 	
-	\paragraph{有界性}
+	\subsection{有界性}
 	若$\exists M>0$，对$\forall x\in D$，有$|f(x)|\le M$，则$f(x)$有界\\
 	\qquad 若$\forall x\in D$，有$f(x)\ge M_1$，则$f(x)$有下界\\
 	\qquad 若$\forall x\in D$，有$f(x)\le M_2$，则$f(x)$有上界\\
 	
-	\paragraph{周期性}
+	\paragraph{例题}
+	$y=xcosx$在$(-\infty，+\infty)$是否有界?\\
+	是否为$x\to +\infty$的无穷大?
+	\paragraph{解}
+	取$x=2k\pi\in(-\infty，+\infty)$时，$y=2k\pi$大于任意的常数$M$，所以函数无界\\
+	取$x=\frac{\pi}{2}+2k\pi\in(x，+\infty)$时，$y=0$，所以不是无穷大\\
+	
+	\subsection{周期性}
 	若$\exists T>0$，对$\forall x\in D$且$x+T\in D$，有$f(x+T)=f(x)$，则$f(x)$有周期$T$\\
 	
 	
-	\subsection{极限}
+	\section{极限}
 	
-	\paragraph{要分左右极限的情况}
+	\subsection{要分左右极限的情况}
 	1、分段函数的分段点处\\
 	2、e的无穷大型，如$\lim\limits_{x\to 1} e^{\frac{1}{x-1}}$\\
 	3、$arctan\infty$型，如$\arctan{\frac{1}{x-1}}$\\
-	~\\
-	\paragraph{极限的四则运算}
+	
+	\paragraph{例题}
+	设$f(x)=\left\{
+	\begin{array}{rcl}
+		x-1,& & x<0\\
+		0,& & x=0\\
+		x+1,& & x>0
+	\end{array} \right.$，\\
+	证明当$x\to 0$时，$f(x)$的极限不存在
+	\paragraph{解}
+	$\lim\limits_{x\to 0^-}f(x)=x-1=-1$\\
+	$\lim\limits_{x\to 0^+}f(x)=x+1=1$\\
+	由于左右极限不相等，所以极限不存在\\
+	
+	\subsection{极限的四则运算}
 	设$\lim f(x)=A，\lim g(x)=B$，则：\\
 	1、$\lim [f(x)\pm g(x)]=A\pm B$\\
 	2、$\lim [f(x)g(x)]=AB$\\
@@ -55,7 +136,7 @@
 	~\\
 	若$\lim f(x)$存在$\lim g(x)$不存在，则$\lim [f(x)\pm g(x)]$不存在，其他情况都没有结论\\
 	~\\
-	\paragraph{多项式除多项式求极限}
+	\subsection{多项式除多项式求极限}
 	$\lim\limits_{x\to \infty} \frac{a_0x^m+...+a_mx^0}{b_0x^n+...+b_nx^0}=
 	\left\{
 	\begin{array}{rcl}
@@ -66,23 +147,67 @@
 	例：\\
 	$\lim\limits_{x\to \infty} \frac{3x^3+4x^2+2}{7x^3+5x^2-3} = \frac{3}{7}$\\
 	~\\
-	\paragraph{复合函数求极限}
+	\subsection{复合函数求极限}
 	如果$f(x)$连续，且$g(x)$有极限A，则：\\
 	$\lim\limits_{x\to x_0} f[g(x)]=f[\lim\limits_{x\to x_0}g(x)]=f(A)$\\
-	例：\\
-	$\lim\limits_{x\to 3} \sqrt{\frac{x-3}{x^2-9}}= \sqrt{\lim\limits_{x\to 3} \frac{x-3}{x^2-9}}=\sqrt{\frac{1}{6}}$\\
-	~\\
-	\paragraph{幂指函数求极限}
+	
+	\paragraph{例题}
+	求极限$\lim\limits_{x\to 3}\sqrt{\frac{x-3}{x^2+9}}$
+	\paragraph{解}
+	$\lim\limits_{x\to 3}\sqrt{\frac{x-3}{x^2+9}}$\\
+	$f=\sqrt{u}$是连续函数，且$u=\frac{x-3}{x^2+9}$有极限，则\\
+	$=\sqrt{\lim\limits_{x\to 3}\frac{x-3}{x^2+9}}$\\
+	$=\sqrt{\frac{1}{6}}$\\
+	
+	\subsection{幂指函数求极限}
 	若$\lim f(x)=A>0$且$\lim g(x)=B$，则：$\lim f(x)^{g(x)}=A^B$\\
 	
-	\subsection{重要极限}
-	
-	\paragraph{夹逼准则}
+	\subsection{夹逼准则}
 	函数$A>B>C$，函数$A$的极限是$X$，函数$C$的极限也是$X$，那么函数$B$的极限就一定是$X$\\
-	\paragraph{单调有界准则}
+	
+	\paragraph{例题}
+	求极限$\lim\limits_{x\to 0^+}x[\frac{1}{x}]$
+	\paragraph{解}
+	使用取整函数的性质$x-1<[x]\le x$\\
+	$\Rightarrow \frac{1}{x}-1<[\frac{1}{x}]\le \frac{1}{x}$\\
+	由于$x\to 0^+$，知$x>0$\\
+	$\Rightarrow 1-x<x[\frac{1}{x}]\le 1$\\
+	由于$\lim\limits_{x\to 0^+}(1-x)=1$，且$\lim\limits_{x\to 0^+}1=1$\\
+	由夹逼准则可得\\
+	$\lim\limits_{x\to 0^+}x[\frac{1}{x}]=1$\\
+	
+	\subsection{单调有界准则}
 	单调递增且有上界，则有极限，单调递减且有下界，则有极限\\
+	
+	\paragraph{例题}
+	证明数列$\sqrt{2}, \sqrt{2+\sqrt{2}}, \sqrt{2+\sqrt{2+\sqrt{2}}}$有极限，并求极限
+	\paragraph{解}
+	设$x_{n+1}=\sqrt{2+x_n}$，$x_1=\sqrt{2}$\\
+	由$x_1<\sqrt{2}<2$，设$x_k<2$，则$x_{k+1}=\sqrt{2+x_k}<\sqrt{2+2}=2$\\
+	可知$x_n<2$，即数列有上界$2$\\
+	判断单调性：\\
+	$x_{n+1}-x_n$\\
+	$=\sqrt{2+x_n}-x_n$\\
+	根式有理化\\
+	$=\frac{x_n+2-x_n^2}{\sqrt{x_n+2}+x_n}$\\
+	$=\frac{(2-x_n)(1+x_n)}{\sqrt{x_n+2}+x_n}$\\
+	由于$1+x_n, \sqrt{x_n+2}, x_n$都大于0，此时整个式子的正负由$2-x_n$决定\\
+	由于$x_n$的上界为$2$，则$2-x_n>0$\\
+	$x_{n+1}-x_n>0$即$x_{n+1}>x_n$\\
+	则数列单调递增\\
+	由单调有界准则知，数列有极限\\
 	~\\
-	\paragraph{重要极限}
+	令$\lim\limits_{x\to\infty}x_n=A$\\
+	在$x_{n+1}=\sqrt{2+x_n}$两端取极限\\
+	$\lim\limits_{x\to\infty}x_{n+1}=\lim\limits_{x\to\infty}\sqrt{2+x_n}$\\
+	$\lim\limits_{x\to\infty}x_{n+1}=\sqrt{2+A}$\\
+	$x_{n+1}$可以看作是$x_n$的子列\\
+	子列与数列极限相同，则$\lim\limits_{x\to\infty}x_{n+1}=A$\\
+	即$A=\sqrt{2+A}$\\
+	$A=2$或$A=-1$\\
+	由于数列大于0，则$A=2$\\
+	
+	\subsection{重要极限}
 	1、$\lim\limits_{x\to 0} \frac{\sin x}{x}=1$\\
 	\qquad $\lim\limits_{x\to 0} \frac{\tan x}{x}=1$\\
 	\qquad $\lim\limits_{x\to 0} \frac{\arcsin x}{x}=1$\\
@@ -91,7 +216,7 @@
 	\qquad $\lim\limits_{x\to 0} (1+x)^{\frac{1}{x}}=e$\\
 	2、推广：$\lim (1+A)^{B}=e$，其中$A$和$B$为任意的表达式，且$A\to 0$，$B\to\infty$\\
 	
-	\subsection{无穷小}
+	\section{无穷小}
 	
 	无穷小：极限为0的函数，(0也是无穷小)\\
 	有界函数$\times$无穷小 仍是无穷小\\
@@ -105,6 +230,14 @@
 	$x^2 o(x^3)=o(x^5)$\\
 	$o(x^2) o(x^3)=o(x^5)$\\
 	$o(2x^2)=o(x^2)$\\
+	
+	\paragraph{例题}
+	求极限$\lim\limits_{x\to \infty}\frac{sinx}{x}$
+	\paragraph{解}
+	$\lim\limits_{x\to \infty}\frac{sinx}{x}$\\
+	$=\lim\limits_{x\to \infty}sinx\frac{1}{x}$\\
+	有界函数$\times$无穷小$=$无穷小\\
+	$=0$\\
 	
 	\subsection{常用的等价}
 	
@@ -132,7 +265,7 @@
 	~\\
 	当$x\to 0$时，$\alpha^x -1 \sim xln\alpha$\\
 	
-	\subsection{连续}
+	\section{连续}
 	
 	若$f(x)$在$x_0$处连续，则$\lim\limits_{x\to x_0} f(x)=f(x_0)$\\
 	~\\
@@ -145,10 +278,15 @@
 	初等函数在其定义域内都连续\\
 	~\\
 	闭区间内连续函数必有界\\
-	推广：\\
-	$f(x)$在$(a，b)$内连续，且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x\to b^-} f(x)$都存在，则$f(x)$在$(a，b)$内有界\\
-	~\\
-	\paragraph{零点定理}
+	推广：$f(x)$在$(a，b)$内连续，且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x\to b^-} f(x)$都存在，则$f(x)$在$(a，b)$内有界\\
+	
+	\paragraph{例题}
+	求极限$\lim\limits_{x\to 2}\frac{x^3-1}{x^2-5x+3}$
+	\paragraph{解}
+	函数连续，则函数值与极限相等，直接代入极限\\
+	$\lim\limits_{x\to 2}\frac{x^3-1}{x^2-5x+\sqrt3}=\frac{2^3-1}{2^2-5\times2+3}=\frac{7}{-3}$\\
+	
+	\subsection{零点定理}
 	$f(x)$在$(a，b)$内连续，且$\lim\limits_{x\to a^+} f(x)$和$\lim\limits_{x\to b^-} f(x)$异号，则$\exists \xi \in (a，b)$，使得$f(\xi)=0$\\
 	
 	\subsection{间断点}
@@ -161,112 +299,27 @@
 	1、无穷间断点：$x\to x_0^-$或$x\to x_0^+$时，$f(x)\to \infty$\\
 	2、振荡间断点：$x\to x_0^-$或$x\to x_0^+$时，$f(x)$上下振荡\\
 	
-	\subsection{常用极限}
+	\section{常用极限}
 	
 	1、当$a>1$时，$\lim\limits_{x\to-\infty}a^x=0$\\
 	\qquad 例：$\lim\limits_{x\to 0^-}e^{\frac{1}{x}}=0$\\
 	2、当$a>1$时，$\lim\limits_{x\to+\infty}a^x=+\infty$\\
 	\qquad 例：$\lim\limits_{x\to 0^+}e^{\frac{1}{x}}=+\infty$
 	
-	\subsection{高中基础}
 	
-	\paragraph{根式有理化}
-	若分母(或分子)是两个无理数相加(或相减)，则把分子和分母同乘这两个无理数的和(或差)，分母(或分子)就变成了有理数\\
-	例：\\
-	\qquad $\sqrt{x^2}+1-x=\frac{\sqrt{x^2}+1-x}{1}$\\
-	\qquad $=\frac{(\sqrt{x^2}+1-x)(\sqrt{x^2}+1+x)}{\sqrt{x^2}+1+x}$\\
-	\qquad $=\frac{x^2+1-x^2}{\sqrt{x^2}+1+x}=\frac{1}{\sqrt{x^2}+1+x}$\\
+	\section{各种类型的极限}
 	
-	\paragraph{立方差公式}
-	$a^3-b^3=(a-b)(a^2+ab+b^2)$\\
-	例：\\
-	\qquad $\frac{1}{1-x}-\frac{3}{1-x^3}$\\
-	\qquad $=\frac{1+x+x^2}{(1-x)(1+x+x^2)}-\frac{3}{1-x^3}$\\
-	\qquad $=\frac{1+x+x^2-3}{1-x^3}$\\
-	\qquad $=\frac{x+x^2-2}{1-x^3}$\\
-	
-	\paragraph{因式分解}
-	1、$x^2+(a+b)x+ab=(x+a)(x+b)$\\
-	例：\\
-	\qquad $x^2-x-2$\\
-	\qquad $=x^2+(2-1)x+(2\times(-1))=(x+2)(x-1)$\\
-	
-	\paragraph{不等式}
-	1、$||a|-|b||\le |a-b|$\\
-	2、$|a\pm b|\le |a|+|b|$\\
-	
-	\paragraph{对数函数}
-	1、$log_a(M\times N)=log_aM+log_aN$\\
-	2、$log_a\frac{M}{N}=log_aM-log_aN$\\
-	3、$log_aM^N=Nlog_aM$\\
-	4、$log_{a^N}M=\frac{1}{N}log_aM$\\
-	5、$ln1=0$\\
-	6、$lne=1$\\
-	7、$M^N=e^{ln(M^N)}=e^{NlnM}$\\
-	
-	
-	\section{题目}
-	
-	\subsection{
-	设$f(x)=\left\{
-	\begin{array}{rcl}
-	1,& & |x|<1\\
-	0,& & |x|=1\\
-	-1,& & |x|>1
-	\end{array} \right.，g(x)=e^x$，\\
-	求$f[g(x)]$和$g[f(x)]$
-	}
-	所有的$x$都换成$g(x)$：\\
-	$f[g(x)]=\left\{
-	\begin{array}{rcl}
-	1,& & |e^x|<1，\mbox{即}x<0\\
-	0,& & |e^x|=1，\mbox{即}x=0\\
-	-1,& & |e^x|>1，\mbox{即}x>0
-	\end{array} \right.$\\
-	所有的$x$都换成$f(x)$：\\
-	$g[f(x)]=e^{f(x)}=\left\{
-	\begin{array}{rcl}
-	e,& & |x|<1\\
-	1,& & |x|=1\\
-	e^{-1},& & |x|>1
-	\end{array} \right.$\\
-	
-	\subsection{
-	设$f(x)=\left\{
-	\begin{array}{rcl}
-	x-1,& & x<0\\
-	0,& & x=0\\
-	x+1,& & x>0
-	\end{array} \right.$，\\
-	证明当$x\to 0$时，$f(x)$的极限不存在
-	}
-	$\lim\limits_{x\to 0^-}f(x)=x-1=-1$\\
-	$\lim\limits_{x\to 0^+}f(x)=x+1=1$\\
-	由于左右极限不相等，所以极限不存在\\
-	
-	\subsection{
-	$y=xcosx$在$(-\infty，+\infty)$是否有界?\\
-	是否为$x\to +\infty$的无穷大?
-	}
-	取$x=2k\pi\in(-\infty，+\infty)$时，$y=2k\pi$大于任意的常数$M$，所以函数无界\\
-	取$x=\frac{\pi}{2}+2k\pi\in(x，+\infty)$时，$y=0$，所以不是无穷大\\
-	
-	\subsection{
-	求极限$\lim\limits_{x\to 2}\frac{x^3-1}{x^2-5x+3}$
-	}
-	函数连续，则函数值与极限相等，直接代入极限\\
-	$\lim\limits_{x\to 2}\frac{x^3-1}{x^2-5x+\sqrt3}=\frac{2^3-1}{2^2-5\times2+3}=\frac{7}{-3}$\\
-	
-	\subsection{
+	\paragraph{例题}
 	求极限$\lim\limits_{x\to 3}\frac{x-3}{x^2-9}$
-	}
+	\paragraph{解}
 	代入极限发现这是$\frac{0}{0}$型的极限\\
 	则需要先消去$0$因子，再代入极限\\
 	$\lim\limits_{x\to 3}\frac{x-3}{x^2-9}=\lim\limits_{x\to 3}\frac{x-3}{(x+3)(x-3)}=\lim\limits_{x\to 3}\frac{1}{x+3}=\frac{1}{3+3}=\frac{1}{6}$\\
 	
-	\subsection{
+
+	\paragraph{例题}
 	求极限$\lim\limits_{x\to \infty}\frac{3x^3+4x^2+2}{7x^3+5x^2-3}$
-	}
+	\paragraph{解}
 	代入极限发现这是$\frac{\infty}{\infty}$型的极限\\
 	则需要先消去$\infty$因子，再代入极限\\
 	$\lim\limits_{x\to \infty}\frac{3x^3+4x^2+2}{7x^3+5x^2-3}$\\
@@ -276,9 +329,9 @@
 	$=\frac{3+0+0}{7+0-0}=\frac{3}{7}$\\
 	由此可推出多项式除多项式求极限的公式\\
 	
-	\subsection{
+	\paragraph{例题}
 	求极限$\lim\limits_{x\to \infty}x(\sqrt{x^2+1}-x)$
-	}
+	\paragraph{解}
 	代入极限发现这是$0\cdot\infty$型的极限\\
 	则需要先化成$\frac{0}{0}$或$\frac{\infty}{\infty}$型的极限，再继续求\\
 	$\lim\limits_{x\to \infty}x(\sqrt{x^2+1}-x)$\\
@@ -289,9 +342,9 @@
 	$=\lim\limits_{x\to \infty}\frac{x}{\sqrt{x^2}+x}
 	=\lim\limits_{x\to \infty}\frac{x}{x+x}=\frac{1}{2}$\\
 	
-	\subsection{
-		求极限$\lim\limits_{x\to 1}(\frac{1}{1-x}-\frac{3}{1-x^3})$
-	}
+	\paragraph{例题}
+	求极限$\lim\limits_{x\to 1}(\frac{1}{1-x}-\frac{3}{1-x^3})$
+	\paragraph{解}
 	代入极限发现这是$\infty-\infty$型的极限\\
 	则需要先化成$\frac{0}{0}$或$\frac{\infty}{\infty}$型的极限，再继续求\\
 	$\lim\limits_{x\to 1}(\frac{1}{1-x}-\frac{3}{1-x^3})$\\
@@ -302,25 +355,9 @@
 	$=\lim\limits_{x\to 1}\frac{(x+2)(x-1)}{(1-x)(1+x+x^2)}$\\
 	$=-\frac{1+2}{1+1+1}=-1$\\
 	
-	\subsection{
-		求极限$\lim\limits_{x\to 3}\sqrt{\frac{x-3}{x^2+9}}$
-	}
-	$\lim\limits_{x\to 3}\sqrt{\frac{x-3}{x^2+9}}$\\
-	$f=\sqrt{u}$是连续函数，且$u=\frac{x-3}{x^2+9}$有极限，则\\
-	$=\sqrt{\lim\limits_{x\to 3}\frac{x-3}{x^2+9}}$\\
-	$=\sqrt{\frac{1}{6}}$\\
-	
-	\subsection{
-		求极限$\lim\limits_{x\to \infty}\frac{sinx}{x}$
-	}
-	$\lim\limits_{x\to \infty}\frac{sinx}{x}$\\
-	$=\lim\limits_{x\to \infty}sinx\frac{1}{x}$\\
-	有界函数$\times$无穷小$=$无穷小\\
-	$=0$\\
-	
-	\subsection{
+	\paragraph{例题}
 	求极限$\lim\limits_{x\to 0}(1+2x)^{\frac{3}{sinx}}$
-	}
+	\paragraph{解}
 	代入极限发现这是$1^\infty$型的极限\\
 	则需要凑重要极限2，即$(1+x)^{\frac{1}{x}}$\\
 	$\lim\limits_{x\to 0}(1+2x)^{\frac{3}{sinx}}$\\
@@ -328,48 +365,6 @@
 	幂指函数求极限\\
 	$=\lim\limits_{x\to 0}(1+2x)^{\frac{1}{2x}\lim\limits_{x\to 0}\frac{6x}{sinx}}$\\
 	$=e^6$\\
-	
-	\subsection{
-		求极限$\lim\limits_{x\to 0^+}x[\frac{1}{x}]$
-	}
-	使用取整函数的性质$x-1<[x]\le x$\\
-	$\Rightarrow \frac{1}{x}-1<[\frac{1}{x}]\le \frac{1}{x}$\\
-	由于$x\to 0^+$，知$x>0$\\
-	$\Rightarrow 1-x<x[\frac{1}{x}]\le 1$\\
-	由于$\lim\limits_{x\to 0^+}(1-x)=1$，且$\lim\limits_{x\to 0^+}1=1$\\
-	由夹逼准则可得\\
-	$\lim\limits_{x\to 0^+}x[\frac{1}{x}]=1$\\
-	
-	\subsection{
-	证明数列$\sqrt{2}, \sqrt{2+\sqrt{2}}, \sqrt{2+\sqrt{2+\sqrt{2}}}$有极限，并求极限
-	}
-	设$x_{n+1}=\sqrt{2+x_n}$，$x_1=\sqrt{2}$\\
-	由$x_1<\sqrt{2}<2$，设$x_k<2$，则$x_{k+1}=\sqrt{2+x_k}<\sqrt{2+2}=2$\\
-	可知$x_n<2$，即数列有上界$2$\\
-	判断单调性：\\
-	$x_{n+1}-x_n$\\
-	$=\sqrt{2+x_n}-x_n$\\
-	根式有理化\\
-	$=\frac{x_n+2-x_n^2}{\sqrt{x_n+2}+x_n}$\\
-	$=\frac{(2-x_n)(1+x_n)}{\sqrt{x_n+2}+x_n}$\\
-	由于$1+x_n, \sqrt{x_n+2}, x_n$都大于0，此时整个式子的正负由$2-x_n$决定\\
-	由于$x_n$的上界为$2$，则$2-x_n>0$\\
-	$x_{n+1}-x_n>0$即$x_{n+1}>x_n$\\
-	则数列单调递增\\
-	由单调有界准则知，数列有极限\\
-	~\\
-	令$\lim\limits_{x\to\infty}x_n=A$\\
-	在$x_{n+1}=\sqrt{2+x_n}$两端取极限\\
-	$\lim\limits_{x\to\infty}x_{n+1}=\lim\limits_{x\to\infty}\sqrt{2+x_n}$\\
-	$\lim\limits_{x\to\infty}x_{n+1}=\sqrt{2+A}$\\
-	$x_{n+1}$可以看作是$x_n$的子列\\
-	子列与数列极限相同，则$\lim\limits_{x\to\infty}x_{n+1}=A$\\
-	即$A=\sqrt{2+A}$\\
-	$A=2$或$A=-1$\\
-	由于数列大于0，则$A=2$\\
-
-
-
 
 \end{flushleft}
 \end{document}
