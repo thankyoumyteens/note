@@ -313,7 +313,7 @@
 	
 	\section{各种类型的极限}
 	
-	\paragraph{例题}
+	\paragraph{0比0型}
 	求极限$\lim\limits_{x\to 3}\frac{x-3}{x^2-9}$
 	\paragraph{解}
 	代入极限发现这是$\frac{0}{0}$型的极限\\
@@ -321,7 +321,7 @@
 	$\lim\limits_{x\to 3}\frac{x-3}{x^2-9}=\lim\limits_{x\to 3}\frac{x-3}{(x+3)(x-3)}=\lim\limits_{x\to 3}\frac{1}{x+3}=\frac{1}{3+3}=\frac{1}{6}$\\
 	
 
-	\paragraph{例题}
+	\paragraph{无穷比无穷型}
 	求极限$\lim\limits_{x\to \infty}\frac{3x^3+4x^2+2}{7x^3+5x^2-3}$
 	\paragraph{解}
 	代入极限发现这是$\frac{\infty}{\infty}$型的极限\\
@@ -333,7 +333,7 @@
 	$=\frac{3+0+0}{7+0-0}=\frac{3}{7}$\\
 	由此可推出多项式除多项式求极限的公式\\
 	
-	\paragraph{例题}
+	\paragraph{0乘无穷型}
 	求极限$\lim\limits_{x\to \infty}x(\sqrt{x^2+1}-x)$
 	\paragraph{解}
 	代入极限发现这是$0\cdot\infty$型的极限\\
@@ -346,7 +346,7 @@
 	$=\lim\limits_{x\to \infty}\frac{x}{\sqrt{x^2}+x}
 	=\lim\limits_{x\to \infty}\frac{x}{x+x}=\frac{1}{2}$\\
 	
-	\paragraph{例题}
+	\paragraph{无穷减无穷型}
 	求极限$\lim\limits_{x\to 1}(\frac{1}{1-x}-\frac{3}{1-x^3})$
 	\paragraph{解}
 	代入极限发现这是$\infty-\infty$型的极限\\
@@ -359,7 +359,7 @@
 	$=\lim\limits_{x\to 1}\frac{(x+2)(x-1)}{(1-x)(1+x+x^2)}$\\
 	$=-\frac{1+2}{1+1+1}=-1$\\
 	
-	\paragraph{例题}
+	\paragraph{1的无穷次方型}
 	求极限$\lim\limits_{x\to 0}(1+2x)^{\frac{3}{sinx}}$
 	\paragraph{解}
 	代入极限发现这是$1^\infty$型的极限\\
@@ -369,6 +369,24 @@
 	幂指函数求极限\\
 	$=\lim\limits_{x\to 0}(1+2x)^{\frac{1}{2x}\lim\limits_{x\to 0}\frac{6x}{sinx}}$\\
 	$=e^6$\\
+
+	\paragraph{0的0次方型}
+	求极限$\lim\limits_{x\to 0^+}x^{sinx}$
+	\paragraph{解}
+	代入极限发现这是$0^0$型的极限\\
+	则需要变形成$e^{ln}$的形式\\
+	$=\lim\limits_{x\to 0^+}e^{sinx\cdot lnx}$\\
+	此时变成了$0\cdot\infty$型的极限\\
+	所以继续化成$\frac{0}{0}$或$\frac{\infty}{\infty}$型的极限\\
+	将乘法变成除法：\\
+	$=e^{\lim\limits_{x\to 0^+}\frac{lnx}{\frac{1}{sinx}}}$\\
+	$=e^{\lim\limits_{x\to 0^+}\frac{lnx}{cscx}}$\\
+	用洛必达法则\\
+	$=e^{\lim\limits_{x\to 0^+}\frac{\frac{1}{x}}{-cscxcotx}}$\\
+	$=e^{-\lim\limits_{x\to 0^+}\frac{sinxtanx}{x}}$\\
+	$=e^{-\lim\limits_{x\to 0^+}\frac{x^2}{x}}$\\
+	$=e^0=1$\\
+	
 
 \end{flushleft}
 \end{document}
