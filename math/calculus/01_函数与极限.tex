@@ -37,10 +37,11 @@
 	例：\\
 	\qquad $x^2-x-2$\\
 	\qquad $=x^2+(2-1)x+(2\times(-1))=(x+2)(x-1)$\\
-	2、十字相乘法：这个方法的关键是把二次项系数a分解成两个因数a1和a2的积，把常数项c分解成两个因数c1和c2的积，并使$a1c2+a2c1$正好等于一次项的系数b。那么可以直接写成结果:\\
-	$ax^2+bx+c$\\
-	$=(a_1a_2)x^2+(a_1c_2+a_2c_1)x+(c_1c_2)$\\
-	$=(a_1x+c_1)(a_2x+c_2)$\\
+	2、十字相乘法：$ax^2+bx+c$把二次项系数$a$分解成两个因数$a_1$和$a_2$的积，把常数项$c$分解成两个因数$c_1$和$c_2$的积，并使$a_1c_2+a_2c_1$正好等于一次项的系数$b$。\\
+	即:\\
+	\qquad $ax^2+bx+c$\\
+	\qquad $=(a_1a_2)x^2+(a_1c_2+a_2c_1)x+(c_1c_2)$\\
+	\qquad $=(a_1x+c_1)(a_2x+c_2)$\\
 	
 	\subsection{不等式}
 	1、$||a|-|b||\le |a-b|$\\
@@ -176,13 +177,11 @@
 	\paragraph{例题}
 	求极限$\lim\limits_{x\to 0^+}x[\frac{1}{x}]$
 	\paragraph{解}
-	使用取整函数的性质$x-1<[x]\le x$\\
-	$\Rightarrow \frac{1}{x}-1<[\frac{1}{x}]\le \frac{1}{x}$\\
-	由于$x\to 0^+$，知$x>0$\\
-	$\Rightarrow 1-x<x[\frac{1}{x}]\le 1$\\
+	使用取整函数的性质$x-1<[x]\le x\Rightarrow \frac{1}{x}-1<[\frac{1}{x}]\le \frac{1}{x}$\\
+	由于$x\to 0^+$，所以$x>0$\\
+	则两边同乘$x$得：$1-x<x[\frac{1}{x}]\le 1$\\
 	由于$\lim\limits_{x\to 0^+}(1-x)=1$，且$\lim\limits_{x\to 0^+}1=1$\\
-	由夹逼准则可得\\
-	$\lim\limits_{x\to 0^+}x[\frac{1}{x}]=1$\\
+	由夹逼准则可得$\lim\limits_{x\to 0^+}x[\frac{1}{x}]=1$\\
 	
 	\subsection{单调有界准则}
 	单调递增且有上界，则有极限，单调递减且有下界，则有极限\\
@@ -191,19 +190,15 @@
 	证明数列$\sqrt{2}, \sqrt{2+\sqrt{2}}, \sqrt{2+\sqrt{2+\sqrt{2}}}$有极限，并求极限
 	\paragraph{解}
 	设$x_{n+1}=\sqrt{2+x_n}$，$x_1=\sqrt{2}$\\
-	由$x_1<\sqrt{2}<2$，设$x_k<2$，则$x_{k+1}=\sqrt{2+x_k}<\sqrt{2+2}=2$\\
-	可知$x_n<2$，即数列有上界$2$\\
+	由$x_1<\sqrt{2}<2$，设$x_k<2$，则$x_{k+1}=\sqrt{2+x_k}<\sqrt{2+2}=2$可知$x_n<2$，即数列有上界$2$\\
 	判断单调性：\\
-	$x_{n+1}-x_n$\\
-	$=\sqrt{2+x_n}-x_n$\\
+	$x_{n+1}-x_n=\sqrt{2+x_n}-x_n$\\
 	根式有理化\\
-	$=\frac{x_n+2-x_n^2}{\sqrt{x_n+2}+x_n}$\\
-	$=\frac{(2-x_n)(1+x_n)}{\sqrt{x_n+2}+x_n}$\\
-	由于$1+x_n, \sqrt{x_n+2}, x_n$都大于0，此时整个式子的正负由$2-x_n$决定\\
+	$=\frac{x_n+2-x_n^2}{\sqrt{x_n+2}+x_n}=\frac{(2-x_n)(1+x_n)}{\sqrt{x_n+2}+x_n}$\\
+	由于$1+x_n$和$\sqrt{x_n+2}, x_n$都大于0，此时整个式子的正负由$2-x_n$决定\\
 	由于$x_n$的上界为$2$，则$2-x_n>0$\\
-	$x_{n+1}-x_n>0$即$x_{n+1}>x_n$\\
-	则数列单调递增\\
-	由单调有界准则知，数列有极限\\
+	由于$x_{n+1}-x_n>0$即$x_{n+1}>x_n$，则数列单调递增\\
+	根据单调有界准则，数列有极限\\
 	~\\
 	令$\lim\limits_{x\to\infty}x_n=A$\\
 	在$x_{n+1}=\sqrt{2+x_n}$两端取极限\\
@@ -216,48 +211,49 @@
 	由于数列大于0，则$A=2$\\
 	
 	\subsection{重要极限}
-	1、$\lim\limits_{x\to 0} \frac{\sin x}{x}=1$\\
-	\qquad $\lim\limits_{x\to 0} \frac{\tan x}{x}=1$\\
-	\qquad $\lim\limits_{x\to 0} \frac{\arcsin x}{x}=1$\\
-	1、推广$\lim\limits_{A\to 0} \frac{\sin A}{A}=1$，其中$A$为任意的表达式\\
-	2、$\lim\limits_{x\to \infty} (1+\frac{1}{x})^x=e$\\
-	\qquad $\lim\limits_{x\to 0} (1+x)^{\frac{1}{x}}=e$\\
-	2、推广：$\lim (1+A)^{B}=e$，其中$A$和$B$为任意的表达式，且$A\to 0$，$B\to\infty$\\
+	1、$\lim\limits_{x\to 0} \frac{sin x}{x}=\lim\limits_{x\to 0} \frac{tan x}{x}=\lim\limits_{x\to 0} \frac{arcsin x}{x}=1$\\
+	\qquad 推广$\lim\limits_{A\to 0} \frac{\sin A}{A}=1$，其中$A$为任意的表达式\\
+	2、$\lim\limits_{x\to \infty} (1+\frac{1}{x})^x=\lim\limits_{x\to 0} (1+x)^{\frac{1}{x}}=e$\\
+	\qquad 推广：$\lim (1+A)^{B}=e$，其中$A$和$B$为任意的表达式，且$A\to 0$，$B\to\infty$\\
 	
 	\section{无穷小}
 	
 	无穷小：极限为0的函数，(0也是无穷小)\\
 	有界函数$\times$无穷小 仍是无穷小\\
-	~\\
-	设$\alpha$和$\beta$是无穷小，且$\alpha \neq 0$，
-	若$\lim \frac{\beta}{\alpha}=0$，则$\beta$是比$\alpha$的高阶无穷小，
-	记为：$\beta = o(\alpha)$\\
-	~\\
-	$o(x^2)\pm o(x^2)=o(x^2)$\\
-	$o(x^2)\pm o(x^3)=o(x^2)$\\
-	$x^2 o(x^3)=o(x^5)$\\
-	$o(x^2) o(x^3)=o(x^5)$\\
-	$o(2x^2)=o(x^2)$\\
 	
 	\paragraph{例题}
 	求极限$\lim\limits_{x\to \infty}\frac{sinx}{x}$
 	\paragraph{解}
 	$\lim\limits_{x\to \infty}\frac{sinx}{x}$\\
 	$=\lim\limits_{x\to \infty}sinx\frac{1}{x}$\\
-	有界函数$\times$无穷小$=$无穷小\\
+	由于有界函数$\times$无穷小$=$无穷小\\
 	$=0$\\
 	
-	\subsection{常用的等价}
+	\subsection{高阶无穷小}
+	设$\alpha$和$\beta$是无穷小，且$\alpha \neq 0$，
+	若$\lim \frac{\beta}{\alpha}=0$，则$\beta$是比$\alpha$的高阶无穷小，
+	记为：$\beta = o(\alpha)$\\
+	~\\
+	1、$o(x^2)\pm o(x^2)=o(x^2)$\\
+	2、$o(x^2)\pm o(x^3)=o(x^2)$\\
+	3、$x^2 o(x^3)=o(x^5)$\\
+	4、$o(x^2) o(x^3)=o(x^5)$\\
+	5、$o(2x^2)=o(x^2)$\\
+	
+	\subsection{等价无穷小}
 	
 	若$\lim \frac{\beta}{\alpha}=1$，则$\beta$与$\alpha$是等价无穷小，
 	记为：$\beta \sim \alpha$\\
 	~\\
 	$\beta \sim \alpha \Leftrightarrow \beta = \alpha + o(\alpha)$\\
+	~\\
 	$x$的高次方$\pm x$的低次方$\sim x$的低次方\\
 	\qquad 例：$x^3+3x\sim 3x$\\
 	~\\
 	若$\alpha \sim \alpha_1$且$\beta \sim \beta_1$，则$\lim \frac{\beta}{\alpha} = \lim \frac{\beta_1}{\alpha_1}$\\
-	~\\
+	
+	\section{常用的等价}
+	
 	当$x\to 0$时，$\sin x \sim x$\\
 	当$x\to 0$时，$\arcsin x \sim x$\\
 	当$x\to 0$时，$\tan x \sim x$\\
