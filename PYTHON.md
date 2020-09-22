@@ -20,3 +20,6 @@
 - <a href="Python/Python的IO操作/Python中不同操作系统的路径分隔符.md">Python中不同操作系统的路径分隔符</a>
 # Pyhon的Win32编程
 - <a href="Python/PythonWin32/使用python发送qq消息.md">使用python发送qq消息</a>
+- <a href="Python/PythonWin32/使用python获取窗口句柄.md">使用python获取窗口句柄</a>
+- <a href="Python/PythonWin32/使用python设置窗口焦点.md">使用python设置窗口焦点</a>
+- <a href="Python/PythonWin32/使用python控制鼠标.md">使用python控制鼠标</a>
