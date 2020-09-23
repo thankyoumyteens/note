@@ -42,3 +42,50 @@ subprocess.Popen(args,
 
 如果父进程在子进程之后终止，但子进程终止时父进程没有进行最后的回收工作，子进程残留的数据结构称为僵尸进程。大量僵尸进程将耗费系统资源，因此父进程及时等待和回收子进程是必要的，除非能够确认自己比子进程先终止，从而将回收工作过渡给 init 进程。
 
+# Popen 对象的属性
+
+## pid
+子进程的PID。
+
+## returncode
+该属性表示子进程的返回状态，returncode可能有多重情况：
+
+1. None: 子进程尚未结束；
+2. 0: 子进程正常退出；
+3. 大于 0: 子进程异常退出，returncode对应于出错码；
+4. 小于 0: 子进程被信号杀掉了。
+
+## stdin, stdout, stderr
+子进程对应的一些初始文件，如果调用Popen()的时候对应的参数是subprocess.PIPE，则这里对应的属性是一个包裹了这个管道的 file 对象
+
+# Popen 对象的方法
+
+## poll()
+检查子进程  p 是否已经终止，返回 p.returncode 属性
+
+## wait()
+等待子进程 p 终止，返回 p.returncode 属性；
+
+注意: wait() 立即阻塞父进程，直到子进程结束
+
+## communicate(input=None)
+和子进程 p 交流，将参数 input 中的数据发送到子进程的 stdin，同时从子进程的 stdout 和 stderr 读取数据，直到EOF。
+
+返回值: 二元组 (stdoutdata, stderrdata) 分别表示从标准输出和标准错误中读出的数据。
+
+父进程调用 p.communicate() 和子进程通信有以下限制：
+
+1. 只能通过管道和子进程通信，也就是说，只有调用 Popen() 创建子进程的时候参数 stdin=subprocess.PIPE，才能通过 p.communicate(input) 向子进程的 stdin 发送数据；只有参数 stout 和 stderr 也都为 subprocess.PIPE ，才能通过p.communicate() 从子进程接收数据，否则接收到的二元组中，对应的位置是None。
+2. 父进程从子进程读到的数据缓存在内存中，因此commucate()不适合与子进程交换过大的数据。
+
+注意: communicate() 立即阻塞父进程，直到子进程结束
+
+## send_signal(signal)
+向子进程发送信号 signal
+
+## terminate()
+终止子进程 p ，等于向子进程发送 SIGTERM 信号
+
+## kill()
+杀死子进程 p ，等于向子进程发送 SIGKILL 信号
+
