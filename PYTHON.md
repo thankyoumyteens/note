@@ -27,3 +27,6 @@
 - <a href="Python/PythonHTTP/python请求https.md">python请求https</a>
 # subprocess
 - <a href="Python/subprocess/Popen类.md">Popen类</a>
+- <a href="Python/subprocess/subprocess.call.md">subprocess.call</a>
+- <a href="Python/subprocess/subprocess.check_output.md">subprocess.check_output</a>
+- <a href="Python/subprocess/subprocess.CalledProcessError.md">subprocess.CalledProcessError</a>
