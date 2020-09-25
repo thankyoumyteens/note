@@ -42,6 +42,9 @@ Redis数据类型
 - <a href="Docker/常用应用部署.md">常用应用部署</a>
 - <a href="Docker/迁移与备份.md">迁移与备份</a>
 
+# Jenkins
+- <a href="Jenkins/CentOS安装Jenkins.md">CentOS安装Jenkins</a>
+
 # 科普
 - <a href="科普/穿越计算机的迷雾/01继电器.md">继电器</a>
 - <a href="科普/穿越计算机的迷雾/02门电路.md">门电路</a>
