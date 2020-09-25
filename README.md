@@ -11,6 +11,7 @@
 - <a href="PYTHON.md">目录</a>
 
 # Git
+- <a href="Git/Git源码安装.md">Git源码安装</a>
 - <a href="Git/windows中git重新输入密码.md">windows中git重新输入密码</a>
 - <a href="Git/linux中git保存账户密码.md">linux中git保存账户密码</a>
 - <a href="Git/SSH方式实现Git远程连接.md">SSH方式实现Git远程连接</a>
