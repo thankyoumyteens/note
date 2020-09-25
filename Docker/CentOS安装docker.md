@@ -23,10 +23,22 @@ sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
 ```
+使用国内源: 阿里云
+```
+sudo yum-config-manager \
+    --add-repo \
+    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+使用国内源: 腾讯云
+```
+sudo yum-config-manager \
+    --add-repo \
+    http://mirrors.cloud.tencent.com/docker-ce/linux/centos/docker-ce.repo
+```
 更新软件源的缓存, 并安装 Docker
 ```
 sudo yum update
-sudo yum install docker-ce
+sudo yum install docker-ce -y
 ```
 启动 docker 服务
 ```
