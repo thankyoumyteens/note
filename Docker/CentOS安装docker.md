@@ -1,4 +1,4 @@
-# CentOS 7.6 安装docker ce
+# CentOS 7 安装docker ce
 卸载旧版本
 ```
 sudo yum remove docker \
@@ -47,4 +47,8 @@ sudo systemctl start docker
 运行 hello-world
 ```
 sudo docker run hello-world
+```
+设置成开机启动
+```
+sudo systemctl enable docker
 ```
