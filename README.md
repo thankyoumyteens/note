@@ -46,17 +46,20 @@ Redis数据类型
 - <a href="Jenkins/CentOS安装Jenkins.md">CentOS安装Jenkins</a>
 
 # 科普
-- <a href="科普/穿越计算机的迷雾/01继电器.md">继电器</a>
+- <a href="科普/希腊字母表.md">希腊字母表</a>
+<!-- - <a href="科普/穿越计算机的迷雾/01继电器.md">继电器</a>
 - <a href="科普/穿越计算机的迷雾/02门电路.md">门电路</a>
 - <a href="科普/穿越计算机的迷雾/03二进制加法器.md">二进制加法器</a>
-- <a href="科普/穿越计算机的迷雾/04实现减法.md">实现减法</a>
+- <a href="科普/穿越计算机的迷雾/04实现减法.md">实现减法</a> -->
 
 # Linux
+- <a href="Linux/centos7开启ssh服务.md">centos7开启ssh服务</a>
 - <a href="Linux/踢出登陆用户.md">踢出登陆用户</a>
 - <a href="Linux/Linux连接wifi.md">Linux连接wifi</a>
 - <a href="Linux/ssh登陆环境变量失效.md">ssh登陆环境变量失效</a>
 - <a href="Linux/Chrome的SecureShell连接时出现异常.md">Chrome的SecureShell连接时出现异常</a>
 - <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
+- <a href="Linux/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a>
 - <a href="Linux/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
 - <a href="Linux/frp内网穿透.md">frp内网穿透</a>
 

@@ -52,3 +52,31 @@ sudo docker run hello-world
 ```
 sudo systemctl enable docker
 ```
+
+# 离线安装
+
+docker安装包下载：https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-18.09.8-3.el7.x86_64.rpm
+
+依赖包下载：
+
+containerd.io：https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.2-3.el7.x86_64.rpm
+
+docker-ce-cli：https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-cli-18.09.8-3.el7.x86_64.rpm
+
+container-selinux：https://pkgs.org/download/container-selinux
+
+安装
+```
+rpm -ivh docker-ce-cli-18.09.8-3.el7.x86_64.rpm
+rpm -ivh container-selinux-2.107-3.el7.noarch.rpm
+rpm -ivh containerd.io-1.2.2-3.el7.x86_64.rpm
+rpm -ivh docker-ce-18.09.8-3.el7.x86_64.rpm
+```
+启动
+```
+systemctl start docker 
+```
+查看状态
+```
+systemctl status docker 
+```
