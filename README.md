@@ -18,7 +18,7 @@
 - <a href="Git/Git忽略文件不起作用解决方案.md">Git忽略文件不起作用解决方案</a>
 
 # Nginx
-- <a href="Nginx/Ubuntu安装Nginx.md">Linux安装Nginx</a>
+- <a href="Nginx/Linux安装Nginx.md">Linux安装Nginx</a>
 - <a href="Nginx/配置Nginx.md">配置Nginx</a>
 - <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
 
