@@ -11,6 +11,7 @@
 - <a href="Java/Servlet/Filter.md">Filter</a>
 - <a href="Java/Servlet/Listener.md">Listener</a>
 # MySQL
+- <a href="Java/MySQL/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
 - <a href="Java/MySQL/DCL用户管理.md">DCL用户管理</a>
 - <a href="Java/MySQL/DDL操作数据库.md">DDL操作数据库</a>
 - <a href="Java/MySQL/DDL操作数据表.md">DDL操作数据表</a>
