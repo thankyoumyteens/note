@@ -59,10 +59,11 @@
 - <a href="Java/SpringCloud/Feign.md">Feign</a>
 - <a href="Java/SpringCloud/Zuul网关.md">Zuul网关</a>
 
-# 锁
+# 锁简介
 - <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
 - <a href="Java/锁/自旋锁.md">自旋锁</a>
 - <a href="Java/锁/synchronized锁的四种状态.md">synchronized锁的四种状态</a>
 - <a href="Java/锁/公平锁与非公平锁.md">公平锁与非公平锁</a>
 - <a href="Java/锁/可重入锁与非可重入锁.md">可重入锁与非可重入锁</a>
+- <a href="Java/锁/独享锁与共享锁.md">独享锁与共享锁</a>
 
