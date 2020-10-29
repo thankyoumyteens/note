@@ -62,3 +62,6 @@
 # 锁
 - <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
 - <a href="Java/锁/自旋锁.md">自旋锁</a>
+- <a href="Java/锁/synchronized锁的四种状态.md">synchronized锁的四种状态</a>
+- <a href="Java/锁/公平锁与非公平锁.md">公平锁与非公平锁</a>
+
