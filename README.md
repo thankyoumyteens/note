@@ -25,8 +25,7 @@
 # Redis
 - <a href="Redis/redis的启动.md">redis的启动</a>
 - <a href="Redis/设置redis密码.md">设置redis密码</a>
-
-Redis数据类型
+### Redis数据类型
 - <a href="Redis/字符串类型.md">字符串类型</a>
 - <a href="Redis/哈希类型.md">哈希类型</a>
 - <a href="Redis/列表类型.md">列表类型</a>
@@ -41,6 +40,14 @@ Redis数据类型
 - <a href="Docker/容器相关命令.md">容器相关命令</a>
 - <a href="Docker/常用应用部署.md">常用应用部署</a>
 - <a href="Docker/迁移与备份.md">迁移与备份</a>
+
+# MQ
+- <a href="RabbitMQ/消息队列简介.md">消息队列简介</a>
+### RabbitMQ
+- <a href="RabbitMQ/安装RabbitMQ.md">安装RabbitMQ</a>
+- <a href="RabbitMQ/RabbitMQ的交换机.md">RabbitMQ的交换机</a>
+- <a href="RabbitMQ/消息可靠性投递.md">消息可靠性投递</a>
+### Kafka
 
 # Jenkins
 - <a href="Jenkins/CentOS安装Jenkins.md">CentOS安装Jenkins</a>
