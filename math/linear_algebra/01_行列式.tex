@@ -23,20 +23,10 @@
 	\newcommand{\udots}{\mathinner{\mskip1mu\raise1pt\vbox{\kern7pt\hbox{.}}  
 			\mskip2mu\raise4pt\hbox{.}\mskip2mu\raise7pt\hbox{.}\mskip1mu}} 
 
-	\section{行列式定义}
-	二阶行列式$\left|\begin{array}{cccc} 
-	a_{11}&a_{12}\\ 
-	a_{21}&a_{22}
-	\end{array}\right|=a_{11}a_{22}-a_{12}a_{21}$\\
-	~\\
-	三阶行列式$\left|\begin{array}{cccc} 
-	a&b&c\\ 
-	d&e&f\\
-	g&h&i
-	\end{array}\right|=aei+bfg+cdh-ceg-fha-ibd$\\
 
-	\subsection{逆序数}
-	在一个排列中，如果一对数的前后位置与大小顺序相反，即前面的数大于后面的数，那么它们就称为一个逆序。一个排列中逆序的总数就称为这个排列的逆序数。记为$\tau(i_1,i_2,...,i_n)$\\
+	\section{逆序数}
+	在一个排列中，如果前面的数大于后面的数，那么它们就称为一个逆序。\\
+	一个排列中逆序的总数就称为这个排列的逆序数。记为$\tau(i_1,i_2,...,i_n)$\\
 	例：求$\tau(32514)$\\
 	\qquad 3后面比它小的数有2个\\
 	\qquad 2后面比它小的数有1个\\
@@ -44,6 +34,22 @@
 	\qquad 1后面比它小的数有0个\\
 	\qquad 4后面比它小的数有0个\\
 	\qquad 即$\tau(32514)=2+1+2+0+0=5$\\
+	
+	\section{行列式计算}
+	\paragraph{二阶行列式}
+	$\left|\begin{array}{cccc} 
+		a_{11}&a_{12}\\ 
+		a_{21}&a_{22}
+	\end{array}\right|=a_{11}a_{22}-a_{12}a_{21}$\\
+
+	\paragraph{三阶行列式}
+	$\left|\begin{array}{cccc} 
+		a_{11}&a_{12}&a_{13}\\ 
+		a_{21}&a_{22}&a_{23}\\
+		a_{31}&a_{32}&a_{33}
+	\end{array}\right|$\\
+
+	
 	
 	\section{行列式的性质}
 	1、行列互换，行列式的值不变\\
