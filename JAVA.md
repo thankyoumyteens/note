@@ -55,6 +55,9 @@
 - <a href="Java/MyBatis/一对多查询.md">一对多查询</a>
 - <a href="Java/MyBatis/多对多查询.md">多对多查询</a>
 - <a href="Java/MyBatis/缓存.md">缓存</a>
+
+# SpringBoot
+- <a href="Java/SpringCloud/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
 # SpringCloud
 - <a href="Java/SpringCloud/微服务.md">微服务</a>
 - <a href="Java/SpringCloud/Eureka注册中心.md">Eureka注册中心</a>
