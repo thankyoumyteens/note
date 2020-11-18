@@ -3,6 +3,9 @@
 - <a href="Java/Maven.md">Maven</a>
 - <a href="Java/JDBC.md">JDBC</a>
 - <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
+
+# IDEA
+- <a href="Java/idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
 # Servlet
 - <a href="Java/Servlet/Tomcat.md">Tomcat</a>
 - <a href="Java/Servlet/Servlet基础.md">Servlet基础</a>
