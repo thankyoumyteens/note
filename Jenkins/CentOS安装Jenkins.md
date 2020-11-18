@@ -62,3 +62,17 @@ Manage Jenkins -> Configure System -> Locale
 勾选："Ignore browser preference and force this language to all users" 并保存。
 
 浏览器地址栏输入 http://localhost:8080/restart 重启jenkins
+
+# 关闭和重启Jenkins
+
+### 关闭Jenkins
+在访问jenkins服务器的网址url地址后加上exit。
+
+例如我jenkins的地址http://localhost:8080/，那么我只需要在浏览器地址栏上敲下http://localhost:8080/exit，就能关闭jenkins服务
+
+### 重启Jenkies
+http://localhost:8080/restart
+
+### 重新加载配置信息
+http://localhost:8080/reload
+
