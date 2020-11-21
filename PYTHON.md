@@ -23,6 +23,7 @@
 - <a href="Python/PythonWin32/使用python获取窗口句柄.md">使用python获取窗口句柄</a>
 - <a href="Python/PythonWin32/使用python设置窗口焦点.md">使用python设置窗口焦点</a>
 - <a href="Python/PythonWin32/使用python控制鼠标.md">使用python控制鼠标</a>
+- <a href="Python/PythonWin32/使用python控制注册表.md">使用python控制注册表</a>
 # Pyhon的HTTP客户端
 - <a href="Python/PythonHTTP/python请求https.md">python请求https</a>
 - <a href="Python/PythonHTTP/urllib.md">urllib</a>
