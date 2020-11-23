@@ -70,6 +70,9 @@
 - <a href="Linux/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
 - <a href="Linux/frp内网穿透.md">frp内网穿透</a>
 
+# Vim
+- <a href="Linux/vim/vim搜索字符串.md">vim搜索字符串</a>
+
 # Windows
 - <a href="Windows/注册表脚本.md">注册表脚本</a>
 - <a href="Windows/修改环境变量.md">修改环境变量</a>
