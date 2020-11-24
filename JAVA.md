@@ -27,6 +27,7 @@
 - <a href="Java/MySQL/多表查询.md">多表查询</a>
 - <a href="Java/MySQL/约束.md">约束</a>
 - <a href="Java/MySQL/事务.md">事务</a>
+- <a href="Java/MySQL/自动更新时间字段.md">自动更新时间字段</a>
 # Spring
 - <a href="Java/Spring/使用XML实现IoC.md">使用XML实现IoC</a>
 - <a href="Java/Spring/实例化Bean的三种方式.md">实例化Bean的三种方式</a>
