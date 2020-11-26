@@ -79,6 +79,11 @@
 - <a href="Windows/修改环境变量.md">修改环境变量</a>
 - <a href="Windows/自定义协议从浏览器中启动本地应用程序.md">自定义协议从浏览器中启动本地应用程序</a>
 
+# LaTex
+- <a href="latex/点乘和向量.md">点乘和向量</a>
+- <a href="latex/行列式与矩阵.md">行列式与矩阵</a>
+- <a href="latex/方程组与分段函数.md">方程组与分段函数</a>
+
 # 前端
 - <a href="前端/canvas/index.md">canvas</a>
 
