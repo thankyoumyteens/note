@@ -80,6 +80,7 @@
 - <a href="Windows/自定义协议从浏览器中启动本地应用程序.md">自定义协议从浏览器中启动本地应用程序</a>
 
 # LaTex
+- <a href="latex/基本结构.md">基本结构</a>
 - <a href="latex/文章对齐方式.md">文章对齐方式</a>
 - <a href="latex/生成pdf中加入书签.md">生成pdf中加入书签</a>
 - <a href="latex/点乘和向量.md">点乘和向量</a>
