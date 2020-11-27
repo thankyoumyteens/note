@@ -7,6 +7,7 @@
 
 # IDEA
 - <a href="Java/idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
+- <a href="Java/idea/LiveTemplates.md">LiveTemplates</a>
 
 # ECLIPSE
 - <a href="Java/eclipse/导出导入eclipse的所有设置.md">导出导入eclipse的所有设置</a>
