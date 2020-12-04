@@ -86,6 +86,9 @@
 - <a href="latex/点乘和向量.md">点乘和向量</a>
 - <a href="latex/行列式与矩阵.md">行列式与矩阵</a>
 - <a href="latex/方程组与分段函数.md">方程组与分段函数</a>
+- <a href="latex/极限符号.md">极限符号</a>
+- <a href="latex/字体大小.md">字体大小</a>
+- <a href="latex/导数和偏导数.md">导数和偏导数</a>
 
 # 前端
 - <a href="前端/canvas/index.md">canvas</a>
