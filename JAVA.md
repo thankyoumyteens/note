@@ -7,6 +7,7 @@
 - <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
 
 # IDEA
+- <a href="Java/idea/自定义idea配置和插件的存放目录.md">自定义idea配置和插件的存放目录</a>
 - <a href="Java/idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
 - <a href="Java/idea/LiveTemplates.md">LiveTemplates</a>
 
