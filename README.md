@@ -17,6 +17,7 @@
 - <a href="Git/SSH方式实现Git远程连接.md">SSH方式实现Git远程连接</a>
 - <a href="Git/Git忽略文件不起作用解决方案.md">Git忽略文件不起作用解决方案</a>
 - <a href="Git/git基于某个分支创建分支.md">git基于某个分支创建分支</a>
+- <a href="Git/git恢复到指定版本.md">git恢复到指定版本</a>
 
 # Nginx
 - <a href="Nginx/Linux安装Nginx.md">Linux安装Nginx</a>
