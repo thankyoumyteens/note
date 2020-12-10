@@ -94,10 +94,7 @@
 - <a href="latex/导数和偏导数.md">导数和偏导数</a>
 
 # 前端
-- <a href="前端/canvas/index.md">canvas</a>
-
-# 安全
-- <a href="前端/secure/XSS.md">XSS</a>
+- <a href="fe/canvas/index.md">canvas</a>
 
 # CSAPP
 - <a href="CSAPP.md">目录</a>
