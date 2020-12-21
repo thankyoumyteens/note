@@ -57,6 +57,7 @@
 - <a href="Java/SpringMVC/文件上传.md">文件上传</a>
 - <a href="Java/SpringMVC/异常处理.md">异常处理</a>
 - <a href="Java/SpringMVC/拦截器.md">拦截器</a>
+- <a href="Java/SpringMVC/全局异常处理.md">全局异常处理</a>
 # MyBatis
 - <a href="Java/MyBatis/入门.md">入门</a>
 - <a href="Java/MyBatis/增删改查.md">增删改查</a>
