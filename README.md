@@ -24,6 +24,9 @@
 - <a href="Nginx/配置Nginx.md">配置Nginx</a>
 - <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
 
+# Zookeeper
+- <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>
+
 # Redis
 - <a href="Redis/redis的启动.md">redis的启动</a>
 - <a href="Redis/设置redis密码.md">设置redis密码</a>
