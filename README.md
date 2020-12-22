@@ -26,6 +26,7 @@
 
 # Zookeeper
 - <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>
+- <a href="Zookeeper/ZooKeeper应用场景.md">ZooKeeper应用场景</a>
 
 # Redis
 - <a href="Redis/redis的启动.md">redis的启动</a>
