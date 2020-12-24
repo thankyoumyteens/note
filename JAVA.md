@@ -70,6 +70,9 @@
 
 # SpringBoot
 - <a href="Java/SpringCloud/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
+- <a href="Java/SpringCloud/SpringBoot单元测试.md">SpringBoot单元测试</a>
+
+
 # SpringCloud
 - <a href="Java/SpringCloud/微服务.md">微服务</a>
 - <a href="Java/SpringCloud/Eureka注册中心.md">Eureka注册中心</a>
