@@ -72,6 +72,7 @@
 - <a href="Java/SpringCloud/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
 - <a href="Java/SpringCloud/SpringBoot单元测试.md">SpringBoot单元测试</a>
 - <a href="Java/SpringCloud/AOP配置.md">AOP配置</a>
+- <a href="Java/SpringCloud/创建命令行项目.md">创建命令行项目</a>
 
 
 # SpringCloud
