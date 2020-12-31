@@ -7,7 +7,7 @@
 - <a href="Python/Python执行shell命令.md">Python执行shell命令</a>
 # 正则表达式
 - <a href="Python/正则表达式/换行匹配.md">换行匹配</a>
-- <a href="Python/正则表达式/不包含某些字符串.md">不包含某些字符串</a>
+- <a href="Python/正则表达式/与或非.md">与或非</a>
 ## python语法
 - <a href="Python/正则表达式/分组.md">分组</a>
 - <a href="Python/正则表达式/查找.md">查找</a>
