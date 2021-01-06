@@ -5,6 +5,7 @@
 - <a href="Java/JDBC.md">JDBC</a>
 - <a href="Java/正则表达式.md">正则表达式</a>
 - <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
+- <a href="Java/try中有return时finally还会执行吗.md">try中有return时finally还会执行吗</a>
 
 # IDEA
 - <a href="Java/idea/自定义idea配置和插件的存放目录.md">自定义idea配置和插件的存放目录</a>
