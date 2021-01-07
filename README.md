@@ -1,4 +1,4 @@
-# 算法和数据结构
+# 算法
 - <a href="ALGORITHM.md">目录</a>
 
 # C++
