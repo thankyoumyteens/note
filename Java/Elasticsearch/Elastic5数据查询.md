@@ -141,3 +141,48 @@ $ curl 'localhost:9200/accounts/person/_search'  -d '
   }
 }'
 ```
+
+# URI搜索
+
+请求参数位于_search端点之后, 参数之间使用&分割, 例如: 
+```
+GET /_search?pretty&q=title:azure&explain=true&from=1&size=10&sort=title:asc&fields:user,title,content
+```
+
+## pretty参数
+
+默认情况下, API返回的JSON对象忽略换行符, 在请求中加上pretty参数, 使返回的结果集JSON可读。
+
+## q参数
+
+q参数用于指定查询条件, 例如: `q=title:azure`, 指定搜索title字段中包含azure关键字的文档
+
+- 一个字段包含多个关键字, 关键字之间使用空格或逗号分隔, 例如: `q=title:(azure,aws,cloud)`, 或 `q=title:(azure aws cloud)`, 指定搜索title字段中包含azure, aws或cloud的文档
+- 搜索短语使用双引号标识, 例如: q=title:"azure vs aws", 指定搜索title中包含短语“azure vs aws”的文档
+- 指定操作符: +或-, 操作符 + 用于指定返回的文档必须匹配查询条件；操作符 - 用于指定返回的文档不匹配查询条件；操作符之间以空格分隔, 操作符是位于查询条件=号右侧, 字段前面, 例如 `q=+title:azure -title:aws`, 指定搜索字段title中只能包含azure, 不能包含aws；
+
+## default_operator参数
+
+在API中可以包含多个查询条件q, 默认条件下, 多个查询条件之间的关系是or关系, 例如: `q=title:azure&q=content:azure`, 指定搜索title字段中包含azure关键字, 或者content字段中包含azure关键字的文档。
+
+查询条件之间的逻辑关系由default_operator参数指定, 默认值是or, 该属性可以设置为and 或 or:
+
+- 设置为or, 例如: `q=title:azure&q=content:azure&default_operator=or`
+- 设置为and, 例如: `q=title:azure&q=content:azure&default_operator=and`
+
+## fields参数
+
+默认情况下, 返回的每个文档都包括_index,_type,_id,_score和_source字段, fields 用于指定返回的字段列表。在查询时, 通过fields参数, 指定一个以逗号分隔的字段列表, 这些字段的store属性必须设置为true, 或存在于_source字段中。默认情况下, fields字段的参数值是_source。可以指定一个或多个字段, 字段之间以逗号分隔: 
+`fields=title`或`fields=title,user`
+
+## sort参数
+
+sort参数用于对结果进行排序, 使ElasticSearch按照指定的字段对结果进行排序, 值是`fieldName:asc/fieldName:desc`, 默认是升序排序, 可以有多个排序字段, 排序字段之间以逗号分割, 例如: `sort=field1:asc,field:desc`
+
+## 其他参数
+
+- explain参数: 设置为true时, ElasticSearch将在结果中的文档中包含额外的解释信息；
+- from参数: from参数指定结果从哪个记录开始返回, 默认值是0；
+- size参数: 定义了返回结果的最大文档数量, 默认值是10, 参数示例: from=10&size=15
+- lowercase_expanded_terms参数: 自动将词条转换成小写, 默认值是true；
+- analyze_wildcard参数: 通配符或前缀是否被分析, 默认值是false；
