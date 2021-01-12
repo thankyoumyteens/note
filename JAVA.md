@@ -87,11 +87,8 @@
 # Elasticsearch
 - <a href="Java/Elasticsearch/安装.md">安装</a>
 - <a href="Java/Elasticsearch/基本概念.md">基本概念</a>
-- <a href="Java/Elasticsearch/新建和删除Index.md">新建和删除Index</a>
-- <a href="Java/Elasticsearch/Elastic5中文分词设置.md">Elastic5中文分词设置</a>
-- <a href="Java/Elasticsearch/Elastic5数据操作.md">Elastic5数据操作</a>
-- <a href="Java/Elasticsearch/Elastic5数据查询.md">Elastic5数据查询</a>
-- <a href="Java/Elasticsearch/搜索API.md">搜索API</a>
+- <a href="Java/Elasticsearch/ES6Index基本操作.md">ES6Index基本操作.md</a>
+- <a href="Java/Elasticsearch/ES6Document基本操作.md">ES6Document基本操作.md</a>
 
 # 锁简介
 - <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
