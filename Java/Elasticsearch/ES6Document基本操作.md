@@ -1,104 +1,125 @@
-# 新建document
+# 文档Document
 
-在index为customer, type为_doc下新建一个id=1的document
-```
-curl -H 'Content-Type: application/json' -X PUT 'localhost:9200/customer/_doc/1?pretty' -d '
+## 插入文档
+
+系统定义```_id```
+
+```json
+curl -H 'Content-Type: application/json' -X POST 'http://localhost:9200/demo/example_type' -d '
 {
-  "name": "John Doe"
+    "created":1561135459000,
+    "message":"test1"
 }
 '
 ```
+
+ES响应：
 
 ```json
 {
-  "_index" : "customer",
-  "_type" : "_doc",
-  "_id" : "1",
-  "_version" : 1,
-  "result" : "created",
-  "_shards" : {
-    "total" : 2,
-    "successful" : 1,
-    "failed" : 0
-  },
-  "_seq_no" : 0,
-  "_primary_term" : 1
+    "_index": "demo",
+    "_type": "example_type",
+    "_id": "AWt67Ql_Tf0FgxupYlBX",
+    "_version": 1,
+    "result": "created",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    },
+    "created": true
 }
 ```
 
-# 获取document
+## 查询文档
 
-```
-curl -X GET 'localhost:9200/customer/_doc/1?pretty'
-```
+ElasticSearch的核心功能——搜索。
+
+```POST http://localhost:9200/demo/example_type/_search?pretty```
+
+ES响应：
 
 ```json
 {
-  "_index" : "customer",
-  "_type" : "_doc",
-  "_id" : "1",
-  "_version" : 1,
-  "found" : true,
-  "_source" : {
-    "name" : "John Doe"
-  }
+    "took": 183,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": 1,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "demo",
+                "_type": "example_type",
+                "_id": "AWt67Ql_Tf0FgxupYlBX",
+                "_score": 1,
+                "_source": {
+                    "created": 1561135459000,
+                    "message": "test1"
+                }
+            }
+        ]
+    }
 }
 ```
 
-# 修改document
+关于文档的查询是ElasticSearch的核心，后面的章节会详细介绍一些基本的简单查询和更为高级的复杂查询，此处仅作为对插入数据的验证，不做过多展开。
 
-Elasticsearch的更新是删除原文档后再创建新文档
+## 修改文档
 
-修改现有字段
-```
-curl -H 'Content-Type: application/json' -X POST 'localhost:9200/customer/_doc/1/_update?pretty' -d '
+根据文档```_id```修改
+
+```json
+POST http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX/_update
 {
-  "doc": { "name": "Jane Doe" }
+    "doc":{
+        "message":"updated"
+    }
 }
-'
 ```
 
-增加新字段
-```
-curl -H 'Content-Type: application/json' -X POST 'localhost:9200/customer/_doc/1/_update?pretty' -d '
+ES响应：
+
+```json
 {
-  "doc": { "name": "Jane Doe", "age": 20 }
+    "_index": "demo",
+    "_type": "example_type",
+    "_id": "AWt67Ql_Tf0FgxupYlBX",
+    "_version": 2,
+    "result": "updated",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    }
 }
-'
 ```
 
-使用脚本把age字段加5
-```
-curl -H 'Content-Type: application/json' -X POST 'localhost:9200/customer/_doc/1/_update?pretty' -d '
+## 删除文档
+
+删除`_id`为AWt67Ql\_Tf0FgxupYlBX的文档
+
+```DELETE http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX```
+
+ES的响应：
+
+```json
 {
-  "script" : "ctx._source.age += 5"
+    "found": true,
+    "_index": "demo",
+    "_type": "example_type",
+    "_id": "AWt67Ql_Tf0FgxupYlBX",
+    "_version": 2,
+    "result": "deleted",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    }
 }
-'
-```
-
-# 删除document
-
-```
-curl -X DELETE 'localhost:9200/customer/_doc/1?pretty'
-```
-
-# 批量操作
-
-一次请求创建两个文档(ID 1 - John Doe 和 ID 2 - Jane Doe)
-```
-curl -H 'Content-Type: application/json' -X POST 'localhost:9200/customer/_doc/_bulk?pretty' -d '
-{"index":{"_id":"1"}}
-{"name": "John Doe" }
-{"index":{"_id":"2"}}
-{"name": "Jane Doe" }
-'
-```
-
-一次请求更新ID1的文档并删除ID2的文档
-```
-curl -H 'Content-Type: application/json' -X POST 'localhost:9200/customer/_doc/_bulk?pretty' -d '
-{"update":{"_id":"1"}}
-{"doc": { "name": "John Doe becomes Jane Doe" } }
-{"delete":{"_id":"2"}}
-'
 ```
