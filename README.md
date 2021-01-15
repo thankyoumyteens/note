@@ -66,6 +66,11 @@
 - <a href="科普/穿越计算机的迷雾/03二进制加法器.md">二进制加法器</a>
 - <a href="科普/穿越计算机的迷雾/04实现减法.md">实现减法</a> -->
 
+# Windows
+- <a href="Windows/注册表脚本.md">注册表脚本</a>
+- <a href="Windows/修改环境变量.md">修改环境变量</a>
+- <a href="Windows/自定义协议从浏览器中启动本地应用程序.md">自定义协议从浏览器中启动本地应用程序</a>
+
 # Linux
 - <a href="Linux/centos7开启ssh服务.md">centos7开启ssh服务</a>
 - <a href="Linux/踢出登陆用户.md">踢出登陆用户</a>
@@ -82,21 +87,8 @@
 # Vim
 - <a href="Linux/vim/vim搜索字符串.md">vim搜索字符串</a>
 
-# Windows
-- <a href="Windows/注册表脚本.md">注册表脚本</a>
-- <a href="Windows/修改环境变量.md">修改环境变量</a>
-- <a href="Windows/自定义协议从浏览器中启动本地应用程序.md">自定义协议从浏览器中启动本地应用程序</a>
-
 # LaTex
-- <a href="latex/基本结构.md">基本结构</a>
-- <a href="latex/文章对齐方式.md">文章对齐方式</a>
-- <a href="latex/生成pdf中加入书签.md">生成pdf中加入书签</a>
-- <a href="latex/点乘和向量.md">点乘和向量</a>
-- <a href="latex/行列式与矩阵.md">行列式与矩阵</a>
-- <a href="latex/方程组与分段函数.md">方程组与分段函数</a>
-- <a href="latex/极限符号.md">极限符号</a>
-- <a href="latex/字体大小.md">字体大小</a>
-- <a href="latex/导数和偏导数.md">导数和偏导数</a>
+- <a href="LATEX.md">目录</a>
 
 # 前端
 - <a href="fe/canvas/index.md">canvas</a>
@@ -104,6 +96,3 @@
 
 # CSAPP
 - <a href="CSAPP.md">目录</a>
-
-# 高等数学
-- <a href="calculus.md">目录</a>
