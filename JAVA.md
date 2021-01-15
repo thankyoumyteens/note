@@ -99,6 +99,7 @@
 - <a href="Java/Elasticsearch/ES6搜索_范围搜索.md">ES6搜索_范围搜索</a>
 - <a href="Java/Elasticsearch/ES6搜索_存在搜索.md">ES6搜索_存在搜索</a>
 - <a href="Java/Elasticsearch/ES6搜索_分页搜索.md">ES6搜索_分页搜索</a>
+- <a href="Java/Elasticsearch/ES6父子关系.md">ES6父子关系</a>
 
 # 锁
 - <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
