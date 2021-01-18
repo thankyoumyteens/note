@@ -11,6 +11,7 @@
 - <a href="Java/idea/自定义idea配置和插件的存放目录.md">自定义idea配置和插件的存放目录</a>
 - <a href="Java/idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
 - <a href="Java/idea/LiveTemplates.md">LiveTemplates</a>
+- <a href="Java/idea/maven依赖全部红线问题.md">maven依赖全部红线问题</a>
 
 # ECLIPSE
 - <a href="Java/eclipse/导出导入eclipse的所有设置.md">导出导入eclipse的所有设置</a>
