@@ -12,6 +12,7 @@
 - <a href="Java/idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
 - <a href="Java/idea/LiveTemplates.md">LiveTemplates</a>
 - <a href="Java/idea/maven依赖全部红线问题.md">maven依赖全部红线问题</a>
+- <a href="Java/idea/拆分变量赋值和声明.md">拆分变量赋值和声明</a>
 
 # ECLIPSE
 - <a href="Java/eclipse/导出导入eclipse的所有设置.md">导出导入eclipse的所有设置</a>

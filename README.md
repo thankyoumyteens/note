@@ -32,12 +32,8 @@
 # Redis
 - <a href="Redis/redis的启动.md">redis的启动</a>
 - <a href="Redis/设置redis密码.md">设置redis密码</a>
-### Redis数据类型
-- <a href="Redis/字符串类型.md">字符串类型</a>
-- <a href="Redis/哈希类型.md">哈希类型</a>
-- <a href="Redis/列表类型.md">列表类型</a>
-- <a href="Redis/集合类型.md">集合类型</a>
-- <a href="Redis/有序集合类型.md">有序集合类型</a>
+- <a href="Redis/Redis数据类型.md">Redis数据类型</a>
+- <a href="Redis/Redis脚本.md">Redis脚本</a>
 
 # Docker
 - <a href="Docker/Ubuntu安装docker.md">Ubuntu 18.04 安装docker ce</a>
