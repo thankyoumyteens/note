@@ -23,6 +23,8 @@
 - <a href="Nginx/Linux安装Nginx.md">Linux安装Nginx</a>
 - <a href="Nginx/配置Nginx.md">配置Nginx</a>
 - <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
+- <a href="Nginx/nginx处理带下划线的header.md">nginx处理带下划线的header</a>
+- <a href="Nginx/nginx实现请求转发.md">nginx实现请求转发</a>
 
 # Zookeeper
 - <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>
@@ -78,7 +80,9 @@
 - <a href="Linux/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
 - <a href="Linux/frp内网穿透.md">frp内网穿透</a>
 - <a href="Linux/linux查看端口号占用.md">linux查看端口号占用</a>
-- <a href="Linux/grep参数.md">grep参数</a>
+- <a href="Linux/grep.md">grep</a>
+- <a href="Linux/sed.md">sed</a>
+- <a href="Linux/awk.md">awk</a>
 ### Vim
 - <a href="Linux/vim/vim搜索字符串.md">vim搜索字符串</a>
 
