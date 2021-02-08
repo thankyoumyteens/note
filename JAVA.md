@@ -47,6 +47,7 @@
 - <a href="Java/MySQL/自动更新时间字段.md">自动更新时间字段</a>
 - <a href="Java/MySQL/按指定规则排序_例如按132排序.md">按指定规则排序_例如按132排序</a>
 - <a href="Java/MySQL/SQL中的EXISTS.md">SQL中的EXISTS</a>
+- <a href="Java/MySQL/UPDATE_SELECT.md">UPDATE SELECT</a>
 - <a href="Java/MySQL/SELECT_INTO和INSERT_INTO_SELECT.md">SELECT INTO和INSERT INTO SELECT</a>
 
 # Spring
