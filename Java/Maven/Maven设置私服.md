@@ -1,0 +1,44 @@
+# 设置私服
+修改maven的配置文件settings.xml
+```xml
+<!-- 添加私服 -->
+<profiles>
+	<profile> 
+		<id>dev</id> 
+		<repositories>
+			<repository>
+				<id>public</id>
+				<url>http://xxx.com/content/repositories/public/</url> 
+				<releases> 
+					<enabled>true</enabled> 
+				</releases> 
+				<snapshots> 
+					<enabled>true</enabled> 
+				</snapshots> 
+			</repository> 
+		</repositories> 
+	</profile>
+</profiles>
+<!-- 激活私服 -->
+<activeProfiles>
+	<activeProfile>dev</activeProfile>
+</activeProfiles>
+```
+或者
+```xml
+<profile>
+	<activation>
+		<activeByDefault>
+			true
+		</activeByDefault>
+	</activation>
+	<repositories>
+		<repository>
+			<id>public</id>
+			<url>http://127.0.0.1:9000/content/groups/public/</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+	</repositories>
+</profile>
+```
