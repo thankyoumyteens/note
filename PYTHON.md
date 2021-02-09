@@ -4,7 +4,10 @@
 - <a href="Python/Python离线安装依赖包.md">Python离线安装依赖包</a>
 - <a href="Python/Python数字自动补零.md">Python数字自动补零</a>
 - <a href="Python/Python获取日期.md">Python获取日期</a>
+- <a href="Python/python中str和byte相互转化.md">python中str和byte相互转化</a>
+- <a href="Python/PythonBase64编解码.md">PythonBase64编解码</a>
 - <a href="Python/Python执行shell命令.md">Python执行shell命令</a>
+- <a href="Python/Non-ASCII_character.md">Non-ASCII character</a>
 # 正则表达式
 - <a href="Python/正则表达式/换行匹配.md">换行匹配</a>
 - <a href="Python/正则表达式/与或非.md">与或非</a>
