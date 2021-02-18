@@ -2,7 +2,7 @@
 
 ## 插入文档
 
-系统定义```_id```
+系统自动生成```_id```
 
 ```json
 curl -H 'Content-Type: application/json' -X POST 'http://localhost:9200/demo/example_type' -d '
@@ -68,8 +68,6 @@ ES响应：
 }
 ```
 
-关于文档的查询是ElasticSearch的核心，后面的章节会详细介绍一些基本的简单查询和更为高级的复杂查询，此处仅作为对插入数据的验证，不做过多展开。
-
 ## 修改文档
 
 根据文档```_id```修改
@@ -102,7 +100,7 @@ ES响应：
 
 ## 删除文档
 
-删除`_id`为AWt67Ql\_Tf0FgxupYlBX的文档
+删除`_id`为`AWt67Ql\_Tf0FgxupYlBX`的文档
 
 ```DELETE http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX```
 

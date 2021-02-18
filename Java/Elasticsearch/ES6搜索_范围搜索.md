@@ -17,23 +17,6 @@ POST http://localhost:9200/user/student/_search?pretty
 }
 ```
 
-
-## 查询age >= 21且age < 26的学生。
-
-```json
-POST http://localhost:9200/user/search/_search?pretty
-{
-  "query":{
-    "range":{
-      "age":{
-        "gte":21,
-        "lt":25
-      }
-    }
-  }
-}
-```
-
 ## 查询age >= 21 且 age < 26且name="kevin"的学生
 
 ```json

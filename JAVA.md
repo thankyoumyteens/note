@@ -105,7 +105,6 @@
 - <a href="Java/Elasticsearch/ES6Index基本操作.md">ES6Index基本操作</a>
 - <a href="Java/Elasticsearch/ES6Document基本操作.md">ES6Document基本操作</a>
 - <a href="Java/Elasticsearch/ES6分词.md">ES6分词</a>
-- <a href="Java/Elasticsearch/ES6搜索_数据准备.md">ES6搜索_数据准备</a>
 - <a href="Java/Elasticsearch/ES6搜索_单条件搜索.md">ES6搜索_单条件搜索</a>
 - <a href="Java/Elasticsearch/ES6搜索_多条件搜索.md">ES6搜索_多条件搜索</a>
 - <a href="Java/Elasticsearch/ES6搜索_范围搜索.md">ES6搜索_范围搜索</a>
