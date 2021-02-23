@@ -1,82 +1,76 @@
+# N 皇后问题
 
+在N×N格的国际象棋上摆放N个皇后，使其不能互相攻击，即任意两个皇后都不能处于同一行、同一列或同一斜线上，问有多少种摆法。
 
+这个问题本质上跟全排列问题差不多，决策树的每一层表示棋盘上的每一行；每个节点可以做出的选择是，在该行的任意一列放置一个皇后。
 
-```java
-/// 51. N-Queens
-/// https://leetcode.com/problems/n-queens/description/
-/// 时间复杂度: O(n^n)
-/// 空间复杂度: O(n)
-public class Solution {
+```c++
+vector<vector<string>> res;
 
-    private boolean[] col;
-    private boolean[] dia1;
-    private boolean[] dia2;
-    private ArrayList<List<String>> res;
+/* 输入棋盘边长 n，返回所有合法的放置 */
+vector<vector<string>> solveNQueens(int n) {
+    // '.' 表示空，'Q' 表示皇后
+    // 初始化一个空棋盘。
+    /*
+        例如一个3x3的棋盘
+        [
+            "...",
+            "...",
+            "..."
+        ]
+    */
+    vector<string> board(n, string(n, '.'));
+    backtrack(board, 0);
+    return res;
+}
 
-    public List<List<String>> solveNQueens(int n) {
-
-        res = new ArrayList<List<String>>();
-        col = new boolean[n];
-        dia1 = new boolean[2 * n - 1];
-        dia2 = new boolean[2 * n - 1];
-
-        LinkedList<Integer> row = new LinkedList<Integer>();
-        putQueen(n, 0, row);
-
-        return res;
-    }
-
-    // 尝试在一个n皇后问题中, 摆放第index行的皇后位置
-    private void putQueen(int n, int index, LinkedList<Integer> row){
-
-        if(index == n){
-            res.add(generateBoard(n, row));
-            return;
-        }
-
-        for(int i = 0 ; i < n ; i ++)
-            // 尝试将第index行的皇后摆放在第i列
-            if(!col[i] && !dia1[index + i] && !dia2[index - i + n - 1]){
-                row.addLast(i);
-                col[i] = true;
-                dia1[index + i] = true;
-                dia2[index - i + n - 1] = true;
-                putQueen(n, index + 1, row);
-                col[i] = false;
-                dia1[index + i] = false;
-                dia2[index - i + n - 1] = false;
-                row.removeLast();
-            }
-
+// 路径：board 中小于 row 的那些行都已经成功放置了皇后
+// 选择列表：第 row 行的所有列都是放置皇后的选择
+// 结束条件：row 超过 board 的最后一行
+void backtrack(vector<string>& board, int row) {
+    // 触发结束条件
+    if (row == board.size()) {
+        res.push_back(board);
         return;
     }
 
-    private List<String> generateBoard(int n, LinkedList<Integer> row){
-
-        assert row.size() == n;
-
-        ArrayList<String> board = new ArrayList<String>();
-        for(int i = 0 ; i < n ; i ++){
-            char[] charArray = new char[n];
-            Arrays.fill(charArray, '.');
-            charArray[row.get(i)] = 'Q';
-            board.add(new String(charArray));
-        }
-        return board;
+    int n = board[row].size();
+    // 尝试每一列
+    for (int col = 0; col < n; col++) {
+        // 排除不合法选择
+        if (!isValid(board, row, col)) 
+            continue;
+        // 做选择
+        board[row][col] = 'Q';
+        // 进入下一行决策
+        backtrack(board, row + 1);
+        // 撤销选择
+        board[row][col] = '.';
     }
-
-    private static void printBoard(List<String> board){
-        for(String s: board)
-            System.out.println(s);
-        System.out.println();
+}
+```
+isValid 函数
+```c++
+/* 是否可以在 board[row][col] 放置皇后？ */
+bool isValid(vector<string>& board, int row, int col) {
+    int n = board.size();
+    // 检查列是否有皇后互相冲突
+    for (int i = 0; i < n; i++) {
+        if (board[i][col] == 'Q')
+            return false;
     }
-
-    public static void main(String[] args) {
-
-        int n = 4;
-        List<List<String>> res = (new Solution()).solveNQueens(n);
-        for(List<String> board: res)
-            printBoard(board);
+    // 检查右上方是否有皇后互相冲突
+    for (int i = row - 1, j = col + 1; 
+            i >= 0 && j < n; i--, j++) {
+        if (board[i][j] == 'Q')
+            return false;
     }
+    // 检查左上方是否有皇后互相冲突
+    for (int i = row - 1, j = col - 1;
+            i >= 0 && j >= 0; i--, j--) {
+        if (board[i][j] == 'Q')
+            return false;
+    }
+    return true;
 }
 ```
