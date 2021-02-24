@@ -36,6 +36,9 @@
 - <a href="Redis/设置redis密码.md">设置redis密码</a>
 - <a href="Redis/Redis数据类型.md">Redis数据类型</a>
 - <a href="Redis/Redis脚本.md">Redis脚本</a>
+- <a href="Redis/缓存穿透.md">缓存穿透</a>
+- <a href="Redis/缓存击穿.md">缓存击穿</a>
+- <a href="Redis/缓存雪崩.md">缓存雪崩</a>
 
 # Docker
 - <a href="Docker/Ubuntu安装docker.md">Ubuntu 18.04 安装docker ce</a>
