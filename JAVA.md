@@ -49,6 +49,8 @@
 - <a href="Java/MySQL/SQL中的EXISTS.md">SQL中的EXISTS</a>
 - <a href="Java/MySQL/UPDATE_SELECT.md">UPDATE SELECT</a>
 - <a href="Java/MySQL/SELECT_INTO和INSERT_INTO_SELECT.md">SELECT INTO和INSERT INTO SELECT</a>
+- <a href="Java/MySQL/MySQL的覆盖索引与回表.md">MySQL的覆盖索引与回表</a>
+- <a href="Java/MySQL/深分页问题.md">深分页问题</a>
 
 # Spring
 - <a href="Java/Spring/使用XML实现IoC.md">使用XML实现IoC</a>
@@ -110,8 +112,8 @@
 - <a href="Java/Elasticsearch/ES6搜索_范围搜索.md">ES6搜索_范围搜索</a>
 - <a href="Java/Elasticsearch/ES6搜索_存在搜索.md">ES6搜索_存在搜索</a>
 - <a href="Java/Elasticsearch/ES6搜索_分页搜索.md">ES6搜索_分页搜索</a>
+- <a href="Java/Elasticsearch/ES深分页问题.md">ES深分页问题</a>
 - <a href="Java/Elasticsearch/ES6父子关系.md">ES6父子关系</a>
-- <a href="Java/Elasticsearch/ES6复杂搜索.md">ES6复杂搜索</a>
 
 # 锁
 - <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
