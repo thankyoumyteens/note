@@ -53,6 +53,7 @@
 - <a href="Java/MySQL/MySQL的覆盖索引与回表.md">MySQL的覆盖索引与回表</a>
 - <a href="Java/MySQL/深分页问题.md">深分页问题</a>
 - <a href="Java/MySQL/MySQL字符串函数.md">MySQL字符串函数</a>
+- <a href="Java/MySQL/delete多表删除.md">delete多表删除</a>
 
 # Spring
 - <a href="Java/Spring/使用XML实现IoC.md">使用XML实现IoC</a>
