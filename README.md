@@ -1,9 +1,5 @@
 # 基础
-- <a href="基础/十进制转二进制.md">十进制转二进制</a>
-- <a href="基础/补码.md">补码</a>
-- <a href="基础/定点数加减法.md">定点数加减法</a>
-- <a href="基础/定点数乘法.md">定点数乘法</a>
-- <a href="基础/定点数除法.md">定点数除法</a>
+- <a href="underlie.md">目录</a>
 
 # 算法
 - <a href="ALGORITHM.md">目录</a>
