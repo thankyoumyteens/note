@@ -9,6 +9,7 @@ mvn install:install-file -DgroupId="com.example" -DartifactId="common_util" -Dve
 - `Dversion=1.0.0`: 打包后的版本
 - `Dpackaging=jar`: 打包成什么类型
 - `DgeneratePom`: 是否生成pom文件，ture:生成，false：不生成
+- 注意: maven仓库中的jar包, 在同级目录下需要有和jar包同名的`.pom`文件才能正确导入依赖
 
 方法2
 ```xml
