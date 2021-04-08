@@ -12,6 +12,7 @@
 - <a href="Java/Maven/Maven安装本地jar包.md">Maven安装本地jar包</a>
 - <a href="Java/Maven/设置maven项目使用Java8.md">设置maven项目使用Java8</a>
 - <a href="Java/Maven/maven父子项目.md">maven父子项目</a>
+- <a href="Java/Maven/查看maven引入jar包的传递依赖.md">查看maven引入jar包的传递依赖</a>
 
 # IDEA
 - <a href="Java/idea/自定义idea配置和插件的存放目录.md">自定义idea配置和插件的存放目录</a>
