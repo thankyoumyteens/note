@@ -113,7 +113,7 @@
 - <a href="Java/Elasticsearch/安装.md">安装</a>
 - <a href="Java/Elasticsearch/基本概念.md">基本概念</a>
 - <a href="Java/Elasticsearch/ES6Index基本操作.md">ES6Index基本操作</a>
-- <a href="Java/Elasticsearch/ES6Document基本操作.md">ES6Document基本操作</a>
+- <a href="Java/Elasticsearch/ES6增删改.md">ES6增删改</a>
 - <a href="Java/Elasticsearch/ES6分词.md">ES6分词</a>
 - <a href="Java/Elasticsearch/ES6搜索_单条件搜索.md">ES6搜索_单条件搜索</a>
 - <a href="Java/Elasticsearch/ES6搜索_多条件搜索.md">ES6搜索_多条件搜索</a>
