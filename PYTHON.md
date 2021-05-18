@@ -1,7 +1,10 @@
+# pip
+- <a href="pip/pip常用命令.md">pip常用命令</a>
+- <a href="pip/Python离线安装依赖包.md">Python离线安装依赖包</a>
+- <a href="pip/Python依赖管理.md">Python依赖管理</a>
+
 # Python
 - <a href="Python/Linux安装Python3.md">Linux安装Python3</a>
-- <a href="Python/Python依赖管理.md">Python依赖管理</a>
-- <a href="Python/Python离线安装依赖包.md">Python离线安装依赖包</a>
 - <a href="Python/Python数字自动补零.md">Python数字自动补零</a>
 - <a href="Python/Python获取日期.md">Python获取日期</a>
 - <a href="Python/python中str和byte相互转化.md">python中str和byte相互转化</a>

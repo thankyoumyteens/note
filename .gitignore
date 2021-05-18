@@ -24,3 +24,5 @@ selenium-debug.log
 math/calculus/*.fdb_latexmk
 math/calculus/*.fls
 *.out
+
+.history/
