@@ -8,6 +8,10 @@ sed -n '100,200p' /logs/info.log
 ```bash
 sed -n '/\/student\/list/,+5p' /logs/info.log
 ```
+把`sources.list`文件的所有`aaa`都替换成`bbb`
+```bash
+sudo sed -i "s@aaa@bbb@g" /etc/apt/sources.list
+```
 
 # 语法格式
 
@@ -70,6 +74,7 @@ sed处理的文件既可以由标准输入重定向得到, 也可以当命令行
 ```
 [address1[,address2]]s/pattern/replacement/[flags]
 ```
+分隔符`/`可以换成`#`或者`@`
 
 ## flag
 
