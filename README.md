@@ -10,6 +10,9 @@
 # C++
 - <a href="CPP.md">目录</a>
 
+# MySQL
+- <a href="MySQL.md">目录</a>
+
 # Java
 - <a href="JAVA.md">目录</a>
 

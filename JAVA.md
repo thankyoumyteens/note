@@ -33,29 +33,6 @@
 - <a href="Java/Servlet/Filter.md">Filter</a>
 - <a href="Java/Servlet/Listener.md">Listener</a>
 
-# MySQL
-- <a href="Java/MySQL/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
-- <a href="Java/MySQL/DCL用户管理.md">DCL用户管理</a>
-- <a href="Java/MySQL/DDL操作数据库.md">DDL操作数据库</a>
-- <a href="Java/MySQL/DDL操作数据表.md">DDL操作数据表</a>
-- <a href="Java/MySQL/DML增删改.md">DML增删改</a>
-- <a href="Java/MySQL/DQL查.md">DQL查</a>
-- <a href="Java/MySQL/排序和分页.md">排序和分页</a>
-- <a href="Java/MySQL/分组查询.md">分组查询</a>
-- <a href="Java/MySQL/多表查询.md">多表查询</a>
-- <a href="Java/MySQL/约束.md">约束</a>
-- <a href="Java/MySQL/事务.md">事务</a>
-- <a href="Java/MySQL/存储过程.md">存储过程</a>
-- <a href="Java/MySQL/自动更新时间字段.md">自动更新时间字段</a>
-- <a href="Java/MySQL/case_when.md">CASE WHEN语句</a>
-- <a href="Java/MySQL/SQL中的EXISTS.md">SQL中的EXISTS</a>
-- <a href="Java/MySQL/UPDATE_SELECT.md">UPDATE SELECT</a>
-- <a href="Java/MySQL/SELECT_INTO和INSERT_INTO_SELECT.md">SELECT INTO和INSERT INTO SELECT</a>
-- <a href="Java/MySQL/MySQL的覆盖索引与回表.md">MySQL的覆盖索引与回表</a>
-- <a href="Java/MySQL/深分页问题.md">深分页问题</a>
-- <a href="Java/MySQL/MySQL字符串函数.md">MySQL字符串函数</a>
-- <a href="Java/MySQL/delete多表删除.md">delete多表删除</a>
-
 # Spring
 - <a href="Java/Spring/使用XML实现IoC.md">使用XML实现IoC</a>
 - <a href="Java/Spring/实例化Bean的三种方式.md">实例化Bean的三种方式</a>
