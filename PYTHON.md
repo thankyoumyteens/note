@@ -7,6 +7,7 @@
 - <a href="Python/Linux安装Python3.md">Linux安装Python3</a>
 - <a href="Python/Python数字自动补零.md">Python数字自动补零</a>
 - <a href="Python/Python获取日期.md">Python获取日期</a>
+- <a href="Python/python的编码.md">python的编码</a>
 - <a href="Python/python中str和byte相互转化.md">python中str和byte相互转化</a>
 - <a href="Python/PythonBase64编解码.md">PythonBase64编解码</a>
 - <a href="Python/Python执行shell命令.md">Python执行shell命令</a>
