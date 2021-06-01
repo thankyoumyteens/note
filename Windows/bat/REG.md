@@ -1,108 +1,75 @@
 # REG /?
-
+```bat
 REG Operation [Parameter List]
-
-  Operation  [ QUERY   | ADD    | DELETE  | COPY    |
-               SAVE    | LOAD   | UNLOAD  | RESTORE |
-               COMPARE | EXPORT | IMPORT  | FLAGS ]
+```
+Operation:
+- QUERY
+- ADD
+- DELETE
+- COPY
+- SAVE
+- LOAD
+- UNLOAD
+- RESTORE
+- COMPARE
+- EXPORT
+- IMPORT
+- FLAGS
 
 返回代码: (除了 REG COMPARE)
 
-  0 - 成功
-  1 - 失败
+- 0 成功
+- 1 失败
 
 要得到有关某个操作的帮助，请键入:
-
-  REG Operation /?
-
+```bat
+REG Operation /?
+```
 例如:
+```bat
+REG QUERY /?
+```
 
-  REG QUERY /?
-  REG ADD /?
-  REG DELETE /?
-  REG COPY /?
-  REG SAVE /?
-  REG RESTORE /?
-  REG LOAD /?
-  REG UNLOAD /?
-  REG COMPARE /?
-  REG EXPORT /?
-  REG IMPORT /?
-  REG FLAGS /?
-
-# REG QUERY /?
-
+# REG QUERY 查询注册表值
+```bat
 REG QUERY KeyName [/v [ValueName] | /ve] [/s]
           [/f Data [/k] [/d] [/c] [/e]] [/t Type] [/z] [/se Separator]
           [/reg:32 | /reg:64]
+```
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
-  KeyName  [\\Machine\]FullKey
-           Machine - 远程机器名称，省略当前机器的默认值。在远程机器上
-                     只有 HKLM 和 HKU 可用。
-           FullKey - 以 ROOTKEY\SubKey 名称形式
-                ROOTKEY - [ HKLM | HKCU | HKCR | HKU | HKCC ]
-                SubKey  - 在选择的 ROOTKEY 下的注册表项的全名
+- `Machine` - 远程机器名称，省略当前机器的默认值。在远程机器上, 只有 HKLM 和 HKU 可用。
+- `FullKey` - 以 `ROOTKEY\SubKey` 名称形式
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
 
-  /v       具体的注册表项值的查询。
-           如果省略，会查询该项的所有值。
+## 其他参数
+- `/v` 具体的注册表项值的查询。如果省略，会查询该项的所有值。只有与 /f 开关一起指定的情况下，此开关的参数才是可选的。它指定只在值名称中搜索。
+- `/ve` 查询默认值或空值名称(默认)。
+- `/s` 循环查询所有子项和值(如 dir /s)。
+- `/se` 为 `REG_MULTI_SZ` 在数据字符串中指定分隔符(长度只为 1 个字符)。默认分隔符为 "\0"。
+- `/f` 指定搜索的数据或模式。如果字符串包含空格，请使用双引号。默认为 "*"。
+- `/k` 指定只在项名称中搜索。
+- `/d` 指定只在数据中搜索。
+- `/c` 指定搜索时区分大小写。默认搜索为不区分大小写。
+- `/e` 指定只返回完全匹配。默认是返回所有匹配。
+- `/t` 指定注册表值数据类型。有效的类型是: REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ, REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE 默认为所有类型。
+- `/z` 详细: 显示值名称类型的数字等值。
+- `/reg:32` 指定应该使用 32 位注册表视图访问的注册表项。
+- `/reg:64` 指定应该使用 64 位注册表视图访问的注册表项。
 
-           只有与 /f 开关一起指定的情况下，此开关的参数才是可选的。它指定
-           只在值名称中搜索。
-
-  /ve      查询默认值或空值名称(默认)。
-
-  /s       循环查询所有子项和值(如 dir /s)。
-
-  /se      为 REG_MULTI_SZ 在数据字符串中指定分隔符(长度只为 1 个字符)。
-           默认分隔符为 "\0"。
-
-  /f       指定搜索的数据或模式。
-           如果字符串包含空格，请使用双引号。默认为 "*"。
-
-  /k       指定只在项名称中搜索。
-
-  /d       指定只在数据中搜索。
-
-  /c       指定搜索时区分大小写。
-           默认搜索为不区分大小写。
-
-  /e       指定只返回完全匹配。
-           默认是返回所有匹配。
-
-  /t       指定注册表值数据类型。
-           有效的类型是:
-             REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ,
-             REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE
-           默认为所有类型。
-
-  /z       详细: 显示值名称类型的数字等值。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-示例:
-
-  REG QUERY HKLM\Software\Microsoft\ResKit /v Version
-    显示注册表值 Version 的值
-
-  REG QUERY \\ABC\HKLM\Software\Microsoft\ResKit\Nt\Setup /s
-    显示远程机器 ABC 上的、在注册表项设置下的所有子项和值
-
-  REG QUERY HKLM\Software\Microsoft\ResKit\Nt\Setup /se #
-    用 "#" 作为分隔符，显示类型为 REG_MULTI_SZ 的所有值名称的所有
-    子项和值。
-
-  REG QUERY HKLM /f SYSTEM /t REG_SZ /c /e
-    以区分大小写的形式显示项、值和数据和数据类型 REG_SZ
-    的、在 HKLM 更目录下的、"SYSTEM" 出现的精确次数
-
-  REG QUERY HKCU /f 0F /d /t REG_BINARY
-    显示在 HKCU 根目录下、数据类型为 REG_BINARY 的数据的项、值和
-    数据的 "0F" 出现的次数。
-
-  REG QUERY HKLM\SOFTWARE /ve
-    显示在 HKLM\SOFTWARE 下的项、值和数据(默认)
+## 示例
+查询系统环境变量Path
+```bat
+REG QUERY "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v "Path"
+```
+查询用户环境变量Path
+```bat
+REG QUERY "HKCU\Environment" /v "Path"
+```
 
 # REG ADD /?
 
