@@ -4,6 +4,9 @@
 # 算法
 - <a href="ALGORITHM.md">目录</a>
 
+# Linux
+- <a href="LINUX.md">目录</a>
+
 # 数据库
 - <a href="DB.md">目录</a>
 
@@ -85,21 +88,6 @@
 - <a href="Windows/修改环境变量.md">修改环境变量</a>
 - <a href="Windows/自定义协议从浏览器中启动本地应用程序.md">自定义协议从浏览器中启动本地应用程序</a>
 
-# Linux
-- <a href="Linux/centos7开启ssh服务.md">centos7开启ssh服务</a>
-- <a href="Linux/踢出登陆用户.md">踢出登陆用户</a>
-- <a href="Linux/Linux连接wifi.md">Linux连接wifi</a>
-- <a href="Linux/ssh登陆环境变量失效.md">ssh登陆环境变量失效</a>
-- <a href="Linux/Chrome的SecureShell连接时出现异常.md">Chrome的SecureShell连接时出现异常</a>
-- <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
-- <a href="Linux/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a>
-- <a href="Linux/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
-- <a href="Linux/frp内网穿透.md">frp内网穿透</a>
-- <a href="Linux/linux查看端口号占用.md">linux查看端口号占用</a>
-- <a href="Linux/grep.md">grep</a>
-- <a href="Linux/sed.md">sed</a>
-- <a href="Linux/awk.md">awk</a>
-- <a href="Linux/tcpdump.md">tcpdump</a>
 ### Vim
 - <a href="Linux/vim/vim搜索字符串.md">vim搜索字符串</a>
 
