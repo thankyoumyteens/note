@@ -25,4 +25,4 @@
 - <a href="Linux/shell/创建和执行脚本.md">创建和执行脚本</a>
 - <a href="Linux/shell/变量.md">变量</a>
 - <a href="Linux/shell/数学运算.md">数学运算</a>
-- <a href="Linux/shell/条件判断.md">条件判断</a>
+- <a href="Linux/shell/if.md">if</a>
