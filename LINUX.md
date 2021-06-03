@@ -26,3 +26,5 @@
 - <a href="Linux/shell/变量.md">变量</a>
 - <a href="Linux/shell/数学运算.md">数学运算</a>
 - <a href="Linux/shell/if.md">if</a>
+- <a href="Linux/shell/case.md">case</a>
+- <a href="Linux/shell/循环.md">循环</a>
