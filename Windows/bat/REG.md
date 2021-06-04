@@ -71,64 +71,55 @@ REG QUERY "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v
 REG QUERY "HKCU\Environment" /v "Path"
 ```
 
-# REG ADD /?
+# REG ADD 添加/修改注册表值
 
+```
 REG ADD KeyName [/v ValueName | /ve] [/t Type] [/s Separator] [/d Data] [/f]
         [/reg:32 | /reg:64]
+```
 
-  KeyName  [\\Machine\]FullKey
-           Machine  远程机器名 - 忽略默认到当前机器。远程机器上
-                    只有 HKLM 和 HKU 可用。
-           FullKey  ROOTKEY\SubKey
-           ROOTKEY  [ HKLM | HKCU | HKCR | HKU | HKCC ]
-           SubKey   所选 ROOTKEY 下注册表项的完整名称。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
-  /v       所选项之下要添加的值名称。
+- `Machine` - 远程机器名称，省略当前机器的默认值。在远程机器上, 只有 HKLM 和 HKU 可用。
+- `FullKey` - 以 `ROOTKEY\SubKey` 名称形式
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
 
-  /ve      为注册表项添加空白值名称(默认)。
-
-  /t       RegKey 数据类型
-           [ REG_SZ    | REG_MULTI_SZ | REG_EXPAND_SZ |
-             REG_DWORD | REG_QWORD    | REG_BINARY    | REG_NONE ]
-           如果忽略，则采用 REG_SZ。
-
-  /s       指定一个在 REG_MULTI_SZ 数据字符串中用作分隔符的字符
-           如果忽略，则将 "\0" 用作分隔符。
-
-  /d       要分配给添加的注册表 ValueName 的数据。
-
-  /f       不用提示就强行覆盖现有注册表项。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
+## 其他参数
+- `/v` 所选项之下要添加的值名称。
+- `/ve` 为注册表项添加空白值名称(默认)。
+- `/t` RegKey 数据类型, REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ, REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE, 如果忽略，则采用 REG_SZ。
+- `/s` 指定一个在 REG_MULTI_SZ 数据字符串中用作分隔符的字符, 如果忽略，则将 "\0" 用作分隔符。
+- `/d` 要分配给添加的注册表 ValueName 的数据。
+- `/f` 不用提示就强行覆盖现有注册表项。
+- `/reg:32` 指定应该使用 32 位注册表视图访问的注册表项。
+- `/reg:64` 指定应该使用 64 位注册表视图访问的注册表项。
 
 例如:
 
-  REG ADD \\ABC\HKLM\Software\MyCo
-    添加远程机器 ABC 上的一个注册表项 HKLM\Software\MyCo
-
-  REG ADD HKLM\Software\MyCo /v Data /t REG_BINARY /d fe340ead
-    添加一个值(名称: Data，类型: REG_BINARY，数据: fe340ead)
-
-  REG ADD HKLM\Software\MyCo /v MRU /t REG_MULTI_SZ /d fax\0mail
-    添加一个值(名称: MRU，类型: REG_MULTI_SZ，数据: fax\0mail\0\0)
-
-  REG ADD HKLM\Software\MyCo /v Path /t REG_EXPAND_SZ /d ^%systemroot^%
-    添加一个值(名称: Path，类型: REG_EXPAND_SZ，数据: %systemroot%)
-    注意: 在扩充字符串中使用插入符号 ( ^ )
+设置用户环境变量Path
+```bat
+REG ADD "HKCU\Environment" /v "Path" /t REG_EXPAND_SZ /d "%PATH%;D:\AppFolder" /f
+```
 
 # REG DELETE /?
 
 REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
 
-  KeyName    [\\Machine\]FullKey
-    远程机器名 - 如果省略，默认情况下将使用当前机器。
-             远程机器上只有 HKLM 和 HKU 可用。
-    FullKey  ROOTKEY\SubKey
-    ROOTKEY  [ HKLM | HKCU | HKCR | HKU | HKCC ]
-    SubKey   所选 ROOTKEY 下面的注册表项的全名。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `Machine` - 远程机器名称，省略当前机器的默认值。在远程机器上, 只有 HKLM 和 HKU 可用。
+- `FullKey` - 以 `ROOTKEY\SubKey` 名称形式
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
   ValueName  所选项下面的要删除的值名称。
              如果省略，则删除该项下面的所有子项和值。
 
@@ -156,13 +147,17 @@ REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
 
 REG COPY KeyName1 KeyName2 [/s] [/f] [/reg:32 | /reg:64]
 
-  KeyName    [\\Machine\]FullKey
-    Machine  远程机器名 - 如果省略，默认情况下将使用当前机器。
-             远程机器上只有 HKLM 和 HKU 可用。
-    FullKey  ROOTKEY\SubKey
-    ROOTKEY  [ HKLM | HKCU | HKCR | HKU | HKCC ]
-    SubKey   所选 ROOTKEY 下的注册表项的全名。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `Machine` - 远程机器名称，省略当前机器的默认值。在远程机器上, 只有 HKLM 和 HKU 可用。
+- `FullKey` - 以 `ROOTKEY\SubKey` 名称形式
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
   /s         复制所有子项和值。
 
   /f         不用提示，强制复制。
@@ -184,10 +179,15 @@ REG COPY KeyName1 KeyName2 [/s] [/f] [/reg:32 | /reg:64]
 
 REG SAVE KeyName FileName [/y] [/reg:32 | /reg:64]
 
-  KeyName    ROOTKEY\SubKey
-    ROOTKEY  [ HKLM | HKCU | HKCR | HKU | HKCC ]
-    SubKey   所选 ROOTKEY 下的注册表项的全名。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
   FileName   要保存的磁盘文件名。如果没有指定路径，文件会在调用进程的
              当前文件夹中得到创建。
 
@@ -206,11 +206,15 @@ REG SAVE KeyName FileName [/y] [/reg:32 | /reg:64]
 
 REG RESTORE KeyName FileName [/reg:32 | /reg:64]
 
-  KeyName    ROOTKEY\SubKey (只是本地机器)
-    ROOTKEY  [ HKLM | HKCU | HKCR | HKU | HKCC ]
-    SubKey   要将配置单元文件还原到的注册表项全名。
-             覆盖现有项的值和子项。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
   FileName   要还原的配置单元文件名。
              你必须使用 REG SAVE 来创建这个文件。
 
@@ -227,10 +231,15 @@ REG RESTORE KeyName FileName [/reg:32 | /reg:64]
 
 REG LOAD KeyName FileName [/reg:32 | /reg:64]
 
-   KeyName    ROOTKEY\SubKey (只是本地机器)
-    ROOTKEY  [ HKLM | HKU ]
-    SubKey   要将配置单元文件加载进的注册表项名称。创建一个新的注册表项。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
   FileName   要加载的配置单元文件名。
              你必须使用 REG SAVE 来创建这个文件。
 
@@ -247,10 +256,15 @@ REG LOAD KeyName FileName [/reg:32 | /reg:64]
 
 REG UNLOAD KeyName
 
-  KeyName    ROOTKEY\SubKey (只是本地机器)
-    ROOTKEY  [ HKLM | HKU ]
-    SubKey   要卸载的配置单元的注册表项名称。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
 例如:
 
   REG UNLOAD HKLM\TempHive
@@ -261,14 +275,17 @@ REG UNLOAD KeyName
 REG COMPARE KeyName1 KeyName2 [/v ValueName | /ve] [Output] [/s]
             [/reg:32 | /reg:64]
 
-  KeyName    [\\Machine\]FullKey
-    Machine  远程机器名 - 如果省略，默认情况下将使用当前机器。
-             远程机器上只有 HKLM 和 HKU 可用。
-    FullKey  ROOTKEY\SubKey
-             如果没有指定 FullKey2，FullKey2 则跟 FullKey1 相同。
-    ROOTKEY  [ HKLM | HKCU | HKCR | HKU | HKCC ]
-    SubKey   所选 ROOTKEY 下的注册表项的全名。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `Machine` - 远程机器名称，省略当前机器的默认值。在远程机器上, 只有 HKLM 和 HKU 可用。
+- `FullKey` - 以 `ROOTKEY\SubKey` 名称形式
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
   ValueName  所选注册表项下的要比较的值的名称。
              省略时，该项下的所有值都会得到比较。
 
@@ -315,10 +332,15 @@ REG COMPARE KeyName1 KeyName2 [/v ValueName | /ve] [Output] [/s]
 
 REG EXPORT KeyName FileName [/y] [/reg:32 | /reg:64]
 
-  Keyname    ROOTKEY[\SubKey] (只是本地机器)。
-    ROOTKEY  [ HKLM | HKCU | HKCR | HKU | HKCC ]
-    SubKey   所选 ROOTKEY 下的注册表项的全名。
+## KeyName
+```bat
+[\\Machine\]FullKey
+```
 
+- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
+- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
+
+## 其他参数
   FileName   要导出的磁盘文件名。
 
   /y       不用提示就强行覆盖现有文件。
