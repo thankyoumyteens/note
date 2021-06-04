@@ -98,7 +98,7 @@ REG ADD KeyName [/v ValueName | /ve] [/t Type] [/s Separator] [/d Data] [/f]
 - `/reg:32` 指定应该使用 32 位注册表视图访问的注册表项。
 - `/reg:64` 指定应该使用 64 位注册表视图访问的注册表项。
 
-例如:
+## 示例
 
 设置用户环境变量Path
 ```bat
@@ -107,7 +107,9 @@ REG ADD "HKCU\Environment" /v "Path" /t REG_EXPAND_SZ /d "%PATH%;D:\AppFolder" /
 
 # REG DELETE /?
 
+```bat
 REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
+```
 
 ## KeyName
 ```bat
@@ -120,275 +122,17 @@ REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
 - `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
 
 ## 其他参数
-  ValueName  所选项下面的要删除的值名称。
-             如果省略，则删除该项下面的所有子项和值。
 
-  /ve        删除空值名称的值(默认)。
+- `/v ValueName` 所选项下面的要删除的值名称。如果省略，则删除该项下面的所有子项和值。
+- `/ve` 删除空值名称的值(默认)。
+- `/va` 删除该项下面的所有值。
+- `/f` 不用提示，强制删除。
+- `/reg:32` 指定应该使用 32 位注册表视图访问的注册表项。
+- `/reg:64` 指定应该使用 64 位注册表视图访问的注册表项。
 
-  /va        删除该项下面的所有值。
+## 示例
 
-  /f         不用提示，强制删除。
-
-  /reg:32    指定应使用 32 位注册表视图访问
-             注册表项。
-
-  /reg:64    指定应使用 64 位注册表视图访问
-             注册表项。
-
-示例:
-
-  REG DELETE HKLM\Software\MyCo\MyApp\Timeout
-    删除注册表项 Timeout 及其所有子项和值
-
-  REG DELETE \\ZODIAC\HKLM\Software\MyCo /v MTU
-    删除 ZODIAC 上的 MyCo 下面的注册表值 MTU
-
-# REG COPY /?
-
-REG COPY KeyName1 KeyName2 [/s] [/f] [/reg:32 | /reg:64]
-
-## KeyName
+删除主机 ZODIAC 上的 MyCo 下面的注册表值 MTU
 ```bat
-[\\Machine\]FullKey
+REG DELETE "\\ZODIAC\HKLM\Software\MyCo" /v "MTU"
 ```
-
-- `Machine` - 远程机器名称，省略当前机器的默认值。在远程机器上, 只有 HKLM 和 HKU 可用。
-- `FullKey` - 以 `ROOTKEY\SubKey` 名称形式
-- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
-- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
-
-## 其他参数
-  /s         复制所有子项和值。
-
-  /f         不用提示，强制复制。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-例如:
-
-  REG COPY HKLM\Software\MyCo\MyApp HKLM\Software\MyCo\SaveMyApp /s
-    将注册表项 MyApp 下的所有子项和值复制到注册表项 SaveMyApp
-
-  REG COPY \\ZODIAC\HKLM\Software\MyCo HKLM\Software\MyCo1
-    将 ZODIAC 上注册表项 MyCo 下的所有值复制到当前机器上的
-    注册表项 MyCo1
-
-# REG SAVE /?
-
-REG SAVE KeyName FileName [/y] [/reg:32 | /reg:64]
-
-## KeyName
-```bat
-[\\Machine\]FullKey
-```
-
-- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
-- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
-
-## 其他参数
-  FileName   要保存的磁盘文件名。如果没有指定路径，文件会在调用进程的
-             当前文件夹中得到创建。
-
-  /y         不用提示就强行覆盖现有文件。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-例如:
-
-  REG SAVE HKLM\Software\MyCo\MyApp AppBkUp.hiv
-    将配置单元 MyApp 保存到当前文件夹中的文件 AppBkUp.hiv
-
-# REG RESTORE /?
-
-REG RESTORE KeyName FileName [/reg:32 | /reg:64]
-
-## KeyName
-```bat
-[\\Machine\]FullKey
-```
-
-- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
-- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
-
-## 其他参数
-  FileName   要还原的配置单元文件名。
-             你必须使用 REG SAVE 来创建这个文件。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-例如:
-
-  REG RESTORE HKLM\Software\Microsoft\ResKit NTRKBkUp.hiv
-    还原文件 NTRKBkUp.hiv，覆盖注册表项 ResKit
-
-# REG LOAD /?
-
-REG LOAD KeyName FileName [/reg:32 | /reg:64]
-
-## KeyName
-```bat
-[\\Machine\]FullKey
-```
-
-- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
-- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
-
-## 其他参数
-  FileName   要加载的配置单元文件名。
-             你必须使用 REG SAVE 来创建这个文件。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-例如:
-
-  REG LOAD HKLM\TempHive TempHive.hiv
-    将文件 TempHive.hiv 加载到注册表项 HKLM\TempHive
-
-# REG UNLOAD /?
-
-REG UNLOAD KeyName
-
-## KeyName
-```bat
-[\\Machine\]FullKey
-```
-
-- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
-- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
-
-## 其他参数
-例如:
-
-  REG UNLOAD HKLM\TempHive
-    卸载 HKLM 中的配置单元 TempHive
-
-# REG COMPARE /?
-
-REG COMPARE KeyName1 KeyName2 [/v ValueName | /ve] [Output] [/s]
-            [/reg:32 | /reg:64]
-
-## KeyName
-```bat
-[\\Machine\]FullKey
-```
-
-- `Machine` - 远程机器名称，省略当前机器的默认值。在远程机器上, 只有 HKLM 和 HKU 可用。
-- `FullKey` - 以 `ROOTKEY\SubKey` 名称形式
-- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
-- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
-
-## 其他参数
-  ValueName  所选注册表项下的要比较的值的名称。
-             省略时，该项下的所有值都会得到比较。
-
-  /ve        比较空白值名称的值(默认)。
-
-  /s         比较所有子项和值。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-  Output     [/oa | /od | /os | /on]
-             省略时，只显示不同的结果。
-    /oa      显示所有不同和匹配结果。
-    /od      只显示不同的结果。
-    /os      只显示匹配结果。
-    /on      不显示结果。
-
-返回代码:
-
-  0 - 成功，比较的结果相同
-  1 - 失败
-  2 - 成功，比较的结果不同
-
-注意:
-  每个输出行前面显示的符号定义为:
-  = 表示 FullKey1 等于 FullKey2 数据
-  < 指的是 FullKey1 数据，与 FullKey2 数据不同
-  > 指的是 FullKey2 数据，与 Fullkey1 数据不同
-
-例如:
-
-  REG COMPARE HKLM\Software\MyCo\MyApp HKLM\Software\MyCo\SaveMyApp
-    将注册表项 MyApp 下的所有值跟 SaveMyApp 比较
-
-  REG COMPARE HKLM\Software\MyCo HKLM\Software\MyCo1 /v Version
-    比较注册表项 MyCo 和 MyCo1 下的值 Version
-
-  REG COMPARE \\ZODIAC\HKLM\Software\MyCo \\. /s
-    将 ZODIAC 上 HKLM\Software\MyCo 下的所有子项和值和当前机器上
-    的相同项比较
-
-# REG EXPORT /?
-
-REG EXPORT KeyName FileName [/y] [/reg:32 | /reg:64]
-
-## KeyName
-```bat
-[\\Machine\]FullKey
-```
-
-- `ROOTKEY` - 取值: `HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC`
-- `SubKey`  - 在选择的 `ROOTKEY` 下的注册表项的全名
-
-## 其他参数
-  FileName   要导出的磁盘文件名。
-
-  /y       不用提示就强行覆盖现有文件。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-例如:
-
-  REG EXPORT HKLM\Software\MyCo\MyApp AppBkUp.reg
-    将注册表项 MyApp 的所有子项和值导出到文件 AppBkUp.reg
-
-# REG IMPORT /?
-
-REG IMPORT FileName[/reg:32 | /reg:64]
-
-  FileName  要导入的磁盘文件名(只是本地机器)。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-例如:
-
-  REG IMPORT AppBkUp.reg
-    从文件 AppBkUp.reg 导入注册表项
-
-# REG FLAGS /?
-
-REG FLAGS KeyName [QUERY |
-                   SET [DONT_VIRTUALIZE] [DONT_SILENT_FAIL] [RECURSE_FLAG]]
-                  [/reg:32 | /reg:64]
-
-  Keyname    "HKLM\Software"[\SubKey] (仅限本地计算机上的这些密钥)。
-    SubKey   HKLM\Software 下注册表项的全名。
-  DONT_VIRTUALIZE DONT_SILENT_FAIL RECURSE_FLAG
-   与 SET 一起使用；将设置在命令行上指定的标志，同时将清除没有指定的标志。
-
- /reg:32  指定应该使用 32 位注册表视图访问的注册表项。
-
- /reg:64  指定应该使用 64 位注册表视图访问的注册表项。
-
-示例:
-
-  REG FLAGS HKLM\Software\MyCo\MyApp QUERY
-    显示密钥 MyApp 的当前标志。
-
-  REG FLAGS HKLM\Software\MyCo\MyApp SET DONT_VIRTUALIZE /s
-    设置 MyApp 及其所有子密钥上的 DONT_VIRTUALIZE 标志
-    (并清除 DONT_SILENT_FAIL 和 RECURSE_FLAG)
