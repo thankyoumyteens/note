@@ -29,3 +29,4 @@
 - <a href="Linux/shell/case.md">case</a>
 - <a href="Linux/shell/循环.md">循环</a>
 - <a href="Linux/shell/控制台输入.md">控制台输入</a>
+- <a href="Linux/shell/函数.md">函数</a>
