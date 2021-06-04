@@ -15,10 +15,10 @@
 - <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
 
 # 工具
-- <a href="Linux/grep.md">grep</a>
-- <a href="Linux/sed.md">sed</a>
-- <a href="Linux/awk.md">awk</a>
-- <a href="Linux/tcpdump.md">tcpdump</a>
+- <a href="Linux/工具/grep.md">grep</a>
+- <a href="Linux/工具/sed.md">sed</a>
+- <a href="Linux/工具/awk.md">awk</a>
+- <a href="Linux/工具/tcpdump.md">tcpdump</a>
 
 # Shell
 
