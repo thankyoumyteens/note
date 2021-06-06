@@ -7,14 +7,14 @@
 # Linux
 - <a href="LINUX.md">目录</a>
 
+# Windows
+- <a href="WINDOWS.md">目录</a>
+
 # 数据库
 - <a href="DB.md">目录</a>
 
 # C++
 - <a href="CPP.md">目录</a>
-
-# MySQL
-- <a href="MySQL.md">目录</a>
 
 # Java
 - <a href="JAVA.md">目录</a>
@@ -22,14 +22,11 @@
 # Python
 - <a href="PYTHON.md">目录</a>
 
+# 前端
+- <a href="FRONTEND.md">目录</a>
+
 # Git
-- <a href="Git/Git源码安装.md">Git源码安装</a>
-- <a href="Git/windows中git重新输入密码.md">windows中git重新输入密码</a>
-- <a href="Git/linux中git保存账户密码.md">linux中git保存账户密码</a>
-- <a href="Git/SSH方式实现Git远程连接.md">SSH方式实现Git远程连接</a>
-- <a href="Git/Git忽略文件不起作用解决方案.md">Git忽略文件不起作用解决方案</a>
-- <a href="Git/git基于某个分支创建分支.md">git基于某个分支创建分支</a>
-- <a href="Git/git恢复到指定版本.md">git恢复到指定版本</a>
+- <a href="Git.md">目录</a>
 
 # Nginx
 - <a href="Nginx/Linux安装Nginx.md">Linux安装Nginx</a>
@@ -53,17 +50,7 @@
 - <a href="Redis/缓存雪崩.md">缓存雪崩</a>
 
 # Docker
-- <a href="Docker/Ubuntu安装docker.md">Ubuntu 18.04 安装docker ce</a>
-- <a href="Docker/CentOS安装docker.md">CentOS 7.6 安装docker ce</a>
-- <a href="Docker/Windows10安装docker.md">Windows10 安装docker ce</a>
-- <a href="Docker/DockerHub加速.md">DockerHub加速</a>
-- <a href="Docker/基本命令.md">基本命令</a>
-- <a href="Docker/镜像相关命令.md">镜像相关命令</a>
-- <a href="Docker/容器相关命令.md">容器相关命令</a>
-- <a href="Docker/常用应用部署.md">常用应用部署</a>
-- <a href="Docker/迁移与备份.md">迁移与备份</a>
-- <a href="Docker/Dockerfile相关指令.md">Dockerfile相关指令</a>
-- <a href="Docker/Dockerfile构建.md">Dockerfile构建</a>
+- <a href="Docker.md">目录</a>
 
 # MQ
 - <a href="RabbitMQ/消息队列简介.md">消息队列简介</a>
@@ -83,22 +70,11 @@
 - <a href="科普/穿越计算机的迷雾/03二进制加法器.md">二进制加法器</a>
 - <a href="科普/穿越计算机的迷雾/04实现减法.md">实现减法</a> -->
 
-# Windows
-- <a href="Windows/注册表脚本.md">注册表脚本</a>
-- <a href="Windows/修改环境变量.md">修改环境变量</a>
-- <a href="Windows/自定义协议从浏览器中启动本地应用程序.md">自定义协议从浏览器中启动本地应用程序</a>
-
-### Vim
-- <a href="Linux/vim/vim搜索字符串.md">vim搜索字符串</a>
-
 # Charles
 - <a href="Charles/windows安装证书.md">windows安装证书</a>
 
 # LaTex
 - <a href="LATEX.md">目录</a>
-
-# 前端
-- <a href="FRONTEND.md">目录</a>
 
 # CSAPP
 - <a href="CSAPP.md">目录</a>
