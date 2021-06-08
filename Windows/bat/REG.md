@@ -1,35 +1,3 @@
-# REG /?
-```bat
-REG Operation [Parameter List]
-```
-Operation:
-- QUERY
-- ADD
-- DELETE
-- COPY
-- SAVE
-- LOAD
-- UNLOAD
-- RESTORE
-- COMPARE
-- EXPORT
-- IMPORT
-- FLAGS
-
-返回代码: (除了 REG COMPARE)
-
-- 0 成功
-- 1 失败
-
-要得到有关某个操作的帮助，请键入:
-```bat
-REG Operation /?
-```
-例如:
-```bat
-REG QUERY /?
-```
-
 # REG QUERY 查询注册表值
 ```bat
 REG QUERY KeyName [/v [ValueName] | /ve] [/s]
@@ -71,7 +39,7 @@ REG QUERY "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v
 REG QUERY "HKCU\Environment" /v "Path"
 ```
 
-# REG ADD 添加/修改注册表值
+# REG ADD 添加/修改注册表键值
 
 ```
 REG ADD KeyName [/v ValueName | /ve] [/t Type] [/s Separator] [/d Data] [/f]
@@ -105,7 +73,7 @@ REG ADD KeyName [/v ValueName | /ve] [/t Type] [/s Separator] [/d Data] [/f]
 REG ADD "HKCU\Environment" /v "Path" /t REG_EXPAND_SZ /d "%PATH%;D:\AppFolder" /f
 ```
 
-# REG DELETE /?
+# REG DELETE 删除注册表键值
 
 ```bat
 REG DELETE KeyName [/v ValueName | /ve | /va] [/f] [/reg:32 | /reg:64]
