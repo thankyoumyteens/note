@@ -52,6 +52,6 @@ f.close()
 # 写
 
 * `write(string)`: 将string写入缓冲区
-* `write(string, encoding("utf-8"))`: 将string写入缓冲区(指定编码)
+* `write(string.encode("utf-8"))`: 将string写入缓冲区(指定编码)
 * `flush()`: 将缓冲区的内容写入文件
 
