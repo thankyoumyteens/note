@@ -1,16 +1,26 @@
 # 常用
 
-打印第100到200行的内容
+### 打印第100到200行的内容
 ```bash
 sed -n '100,200p' /logs/info.log
 ```
-打印有`/student/list`内容的行及其之后5行的的内容
+### 打印有`/student/list`内容的行及其之后5行的的内容
 ```bash
 sed -n '/\/student\/list/,+5p' /logs/info.log
 ```
-把`sources.list`文件的所有`aaa`都替换成`bbb`
+### 把`sources.list`文件的所有`aaa`都替换成`bbb`
 ```bash
 sudo sed -i "s@aaa@bbb@g" /etc/apt/sources.list
+```
+### 打印奇数行
+```sh
+sed -n '1~2p' test.file
+```
+### sed处理多个文件
+```sh
+# 用ls + awk组合生成脚本文件
+# \047 表示单引号
+ls | awk '{print "sed -n \047/^<p/w ../"$1"\047 "$1}' > sed.sh
 ```
 
 # 语法格式
