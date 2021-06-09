@@ -9,22 +9,15 @@ sudo apt-get update
 ```
 安装包以允许通过HTTPS使用存储库：
 ```
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
+sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 ```
-添加Docker的官方GPG密钥：
+添加Docker的GPG密钥：
 ```
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+curl -fsSL https://repo.huaweicloud.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 ```
-设置稳定存储库
+对于amd64架构的计算机，添加软件仓库
 ```
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+sudo add-apt-repository "deb [arch=amd64] https://repo.huaweicloud.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 ```
 更新apt包索引
 ```
