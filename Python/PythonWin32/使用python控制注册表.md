@@ -20,7 +20,7 @@ def is_admin():
         return False
 
 if is_admin():
-    # TODO
+    #
 else:
     if sys.version_info[0] == 3:
         # python3
