@@ -1,5 +1,7 @@
 # 通过props传递组件/html标签
 
+this.props.children 属性表示组件的所有子节点
+
 使用props.children引用传来的组件/html标签
 
 ```jsx

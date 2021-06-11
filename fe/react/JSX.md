@@ -1,3 +1,9 @@
+# JSX 
+
+JSX 允许 HTML 与 JavaScript 混写
+
+遇到 HTML 标签（以 `<` 开头），就用 HTML 规则解析；遇到代码块（以 `{` 开头），就用 JavaScript 规则解析。
+
 # 在 JSX 中嵌入表达式
 
 可以在大括号内放置任何有效的 JavaScript 表达式。例如, `2 + 2`, `user.firstName` 或 `formatName(user)` 都是有效的 JavaScript 表达式。
