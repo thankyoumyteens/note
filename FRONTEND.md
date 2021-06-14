@@ -7,6 +7,9 @@
 - <a href="fe/react/虚拟DOM.md">虚拟DOM</a>
 - <a href="fe/react/JSX.md">JSX</a>
 - <a href="fe/react/组件.md">组件</a>
+- <a href="fe/react/props.md">props</a>
+- <a href="fe/react/state.md">state</a>
+- <a href="fe/react/refs.md">refs</a>
 - <a href="fe/react/事件.md">事件</a>
 - <a href="fe/react/列表.md">列表</a>
 - <a href="fe/react/表单.md">表单</a>
