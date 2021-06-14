@@ -4,11 +4,18 @@ JSX 允许 HTML 与 JavaScript 混写
 
 遇到 HTML 标签（以 `<` 开头），就用 HTML 规则解析；遇到代码块（以 `{` 开头），就用 JavaScript 规则解析。
 
-# 在 JSX 中嵌入表达式
+# jsx语法规则
 
-可以在大括号内放置任何有效的 JavaScript 表达式。例如, `2 + 2`, `user.firstName` 或 `formatName(user)` 都是有效的 JavaScript 表达式。
+1. 定义虚拟DOM时，不要写引号。
+2. 标签中混入JS表达式时要用`{}`。
+3. 样式的类名指定不要用`class`，要用`className`。
+4. 内联样式，要用`style={{key:value}}`的形式去写。
+5. 只有一个根标签
+6. 标签必须闭合
+7. 若标签首字母以小写字母开头，则将该标签转为html中同名元素，若html中无该标签对应的同名元素，则报错。
+8. 若标签首字母以大写字母开头，react就去渲染对应的组件，若组件没有定义，则报错。
 
-建议将jsx内容包裹在括号中, 但不必须
+## 在 JSX 中嵌入表达式
 
 ```jsx
 function formatName(user) {
@@ -32,55 +39,10 @@ ReactDOM.render(
 );
 ```
 
-# 使用JSX表达式
-
-可以在 if 语句和 for 循环的代码块中使用 JSX, 将 JSX 赋值给变量, 把 JSX 当作参数传入, 以及从函数中返回 JSX: 
-
-```jsx
-function getGreeting(user) {
-  if (user) {
-    return <h1>Hello, {formatName(user)}!</h1>;
-  }
-  return <h1>Hello, Stranger.</h1>;
-}
-```
-
-# 给属性赋值
-
-可以通过使用引号, 来将属性值指定为字符串字面量。也可以使用大括号, 来在属性值中插入一个 JavaScript 表达式
+## 给属性赋值
 
 ```jsx
 const element = <div tabIndex="0"></div>;
 const element = <img src={user.avatarUrl}/>;
 ```
-
 注意: 大括号和引号不能同时出现
-
-# 
-
-Babel 会把 JSX 转译成一个名为 React.createElement() 函数调用。
-
-```jsx
-const element = (
-  <h1 className="greeting">
-    Hello, world!
-  </h1>
-);
-// 等价于:
-const element = React.createElement(
-  'h1',
-  {className: 'greeting'},
-  'Hello, world!'
-);
-```
-React.createElement() 会预先执行一些检查, 它实际上创建了一个这样的对象: 
-```jsx
-// 注意: 这是简化过的结构
-const element = {
-  type: 'h1',
-  props: {
-    className: 'greeting',
-    children: 'Hello, world!'
-  }
-};
-```
