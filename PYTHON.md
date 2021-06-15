@@ -42,3 +42,5 @@
 - <a href="Python/subprocess/subprocess.call.md">subprocess.call</a>
 - <a href="Python/subprocess/subprocess.check_output.md">subprocess.check_output</a>
 - <a href="Python/subprocess/subprocess.CalledProcessError.md">subprocess.CalledProcessError</a>
+# selenium
+- <a href="Python/selenium/安装selenium.md">安装selenium</a>
