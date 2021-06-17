@@ -1,4 +1,5 @@
 # Java
+- <a href="Java/linux配置jdk环境变量.md">linux配置jdk环境变量</a>
 - <a href="Java/JDK11生成jre目录的方法.md">JDK11生成jre目录的方法</a>
 - <a href="Java/反射.md">反射</a>
 - <a href="Java/JDBC.md">JDBC</a>

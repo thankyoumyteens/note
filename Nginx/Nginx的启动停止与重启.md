@@ -2,13 +2,17 @@
 
 启动代码格式：`nginx安装目录地址 -c nginx配置文件地址`
 ```
-[root@LinuxServer sbin]# /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+```
+或者
+```
+/usr/sbin/nginx -c /etc/nginx/nginx.conf
 ```
 
 # 停止
 
 ```
-ps -ef|grep nginx
+ps -ef | grep nginx
 kill -QUIT 2072
 ```
 

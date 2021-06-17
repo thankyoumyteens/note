@@ -1,12 +1,11 @@
 # nginx根据url实现请求转发
 
-当在一台主机上部署了多个不同的web服务器，并且需要能在80端口同时访问这些web服务器时，可以使用 nginx 的反向代理功能: 用 nginx 在80端口监听所有请求，并依据转发规则(比较常见的是以 URI 来转发)转发到对应的web服务器上。
 
-例如有 webmail , webcom 以及 webdefault 三个服务器分别运行在 portmail , portcom , portdefault 端口，
-
-要实现从80端口同时访问这三个web服务器，则可以在80端口运行 nginx， 然后将 /mail 下的请求转发到 webmail 服务器， 将 /com下的请求转发到 webcom 服务器， 将其他所有请求转发到 webdefault 服务器。
-
-假设服务器域名为example.com，则对应的 nginx http配置如下：
+打开配置文件
+```
+vim /etc/nginx/sites-enabled/default
+```
+修改配置
 ```
 http {
     server {
@@ -17,7 +16,7 @@ http {
             }
 
             location /com/ {
-                    proxy_pass http://example.com:portcom/main/;
+                    proxy_pass http://127.0.0.1:8080/main/;
             }
 
             location / {
