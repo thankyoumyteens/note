@@ -6,3 +6,4 @@
 - <a href="Git/Git忽略文件不起作用解决方案.md">Git忽略文件不起作用解决方案</a>
 - <a href="Git/git基于某个分支创建分支.md">git基于某个分支创建分支</a>
 - <a href="Git/git恢复到指定版本.md">git恢复到指定版本</a>
+- <a href="Git/git设置代理.md">git设置代理</a>
