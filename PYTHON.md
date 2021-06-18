@@ -53,3 +53,8 @@
 - <a href="Python/selenium/控制滚动条.md">控制滚动条</a>
 - <a href="Python/selenium/切换到内嵌页面.md">切换到内嵌页面</a>
 - <a href="Python/selenium/多窗口切换.md">多窗口切换</a>
+- <a href="Python/selenium/警告框处理.md">警告框处理</a>
+- <a href="Python/selenium/下拉框选择.md">下拉框选择</a>
+- <a href="Python/selenium/文件上传.md">文件上传</a>
+- <a href="Python/selenium/cookie操作.md">cookie操作</a>
+- <a href="Python/selenium/窗口截图.md">窗口截图</a>
