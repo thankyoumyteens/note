@@ -51,3 +51,5 @@
 - <a href="Python/selenium/鼠标事件.md">鼠标事件</a>
 - <a href="Python/selenium/键盘事件.md">键盘事件</a>
 - <a href="Python/selenium/控制滚动条.md">控制滚动条</a>
+- <a href="Python/selenium/切换到内嵌页面.md">切换到内嵌页面</a>
+- <a href="Python/selenium/多窗口切换.md">多窗口切换</a>
