@@ -30,3 +30,4 @@
 - <a href="基础/存储器/主存和Cache的地址映射.md">主存和Cache的地址映射</a>
 - <a href="基础/存储器/Cache字块替换算法.md">Cache字块替换算法</a>
 - <a href="基础/存储器/Cache的写策略.md">Cache的写策略</a>
+- <a href="基础/存储器/虚拟存储器.md">虚拟存储器</a>
