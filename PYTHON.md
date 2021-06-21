@@ -15,7 +15,6 @@
 # 正则表达式
 - <a href="Python/正则表达式/换行匹配.md">换行匹配</a>
 - <a href="Python/正则表达式/与或非.md">与或非</a>
-## python语法
 - <a href="Python/正则表达式/分组.md">分组</a>
 - <a href="Python/正则表达式/查找.md">查找</a>
 - <a href="Python/正则表达式/替换.md">替换</a>
@@ -58,3 +57,8 @@
 - <a href="Python/selenium/文件上传.md">文件上传</a>
 - <a href="Python/selenium/cookie操作.md">cookie操作</a>
 - <a href="Python/selenium/窗口截图.md">窗口截图</a>
+# PyMySQL
+- <a href="Python/PyMySQL/安装PyMySQL.md">安装PyMySQL</a>
+- <a href="Python/PyMySQL/连接数据库.md">连接数据库</a>
+- <a href="Python/PyMySQL/增删改.md">增删改</a>
+- <a href="Python/PyMySQL/查.md">查</a>
