@@ -31,3 +31,7 @@
 - <a href="基础/存储器/Cache字块替换算法.md">Cache字块替换算法</a>
 - <a href="基础/存储器/Cache的写策略.md">Cache的写策略</a>
 - <a href="基础/存储器/虚拟存储器.md">虚拟存储器</a>
+
+# 指令
+- <a href="基础/指令/指令格式.md">指令格式</a>
+- <a href="基础/指令/CISC和RISC.md">CISC和RISC</a>
