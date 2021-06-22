@@ -34,6 +34,7 @@
 - <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
 - <a href="Nginx/nginx处理带下划线的header.md">nginx处理带下划线的header</a>
 - <a href="Nginx/nginx根据url实现请求转发.md">nginx根据url实现请求转发</a>
+- <a href="Nginx/二级域名转发.md">二级域名转发</a>
 
 # Zookeeper
 - <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>

@@ -6,6 +6,7 @@
 - <a href="Linux/common/SSH断开后进程在后台继续运行.md">SSH断开后进程在后台继续运行</a>
 - <a href="Linux/common/frp内网穿透.md">frp内网穿透</a>
 - <a href="Linux/common/linux查看端口号占用.md">linux查看端口号占用</a>
+- <a href="Linux/common/为ls命令设置颜色.md">为ls命令设置颜色</a>
 
 # CentOS
 - <a href="Linux/centos7开启ssh服务.md">centos7开启ssh服务</a>
