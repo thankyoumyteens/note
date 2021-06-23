@@ -34,4 +34,5 @@
 
 # 指令
 - <a href="基础/指令/指令格式.md">指令格式</a>
+- <a href="基础/指令/寻址方式.md">寻址方式</a>
 - <a href="基础/指令/CISC和RISC.md">CISC和RISC</a>
