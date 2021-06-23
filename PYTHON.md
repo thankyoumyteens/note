@@ -19,6 +19,7 @@
 - <a href="Python/正则表达式/分组.md">分组</a>
 - <a href="Python/正则表达式/查找.md">查找</a>
 - <a href="Python/正则表达式/替换.md">替换</a>
+- <a href="Python/正则表达式/正则表达式手册.md">正则表达式手册</a>
 # Python的IO操作
 - <a href="Python/Python的IO操作/Python判断文件还是文件夹.md">Python判断文件还是文件夹</a>
 - <a href="Python/Python的IO操作/Python判断文件是否存在.md">Python判断文件是否存在</a>
