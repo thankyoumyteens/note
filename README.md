@@ -76,6 +76,7 @@
 
 # FFmpeg
 - <a href="FFmpeg/视频文件.md">视频文件</a>
+- <a href="FFmpeg/FFmpeg用法.md">FFmpeg用法</a>
 
 # LaTex
 - <a href="LATEX.md">目录</a>
