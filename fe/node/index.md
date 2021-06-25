@@ -1,1 +1,2 @@
-- <a href="Ubuntu18安装最新版nodejs.md">Ubuntu18安装最新版nodejs</a>
+- <a href="Ubuntu安装nodejs.md.md">Ubuntu安装nodejs.md</a>
+- <a href="Ubuntu中源码安装Nodejs和npm.md">Ubuntu中源码安装Nodejs和npm</a>

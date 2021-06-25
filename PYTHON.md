@@ -1,4 +1,5 @@
 # pip
+- <a href="pip/pip软件源配置.md">pip软件源配置</a>
 - <a href="pip/pip常用命令.md">pip常用命令</a>
 - <a href="pip/Python离线安装依赖包.md">Python离线安装依赖包</a>
 - <a href="pip/Python依赖管理.md">Python依赖管理</a>

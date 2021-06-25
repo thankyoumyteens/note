@@ -9,10 +9,12 @@
 - <a href="Linux/common/为ls命令设置颜色.md">为ls命令设置颜色</a>
 
 # CentOS
+- <a href="Linux/centos软件源配置.md">centos软件源配置</a>
 - <a href="Linux/centos7开启ssh服务.md">centos7开启ssh服务</a>
 - <a href="Linux/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a>
 
 # Ubuntu
+- <a href="Linux/ubuntu软件源配置.md">ubuntu软件源配置</a>
 - <a href="Linux/ubuntu开启ssh服务.md">ubuntu开启ssh服务</a>
 - <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
 
