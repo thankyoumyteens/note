@@ -26,6 +26,7 @@
 # 存储器
 - <a href="ComputerOrganization/存储器/基本概念.md">基本概念</a>
 - <a href="ComputerOrganization/存储器/存储芯片的字扩展和位扩展.md">存储芯片的字扩展和位扩展</a>
+- <a href="ComputerOrganization/存储器/ROM介绍.md">ROM介绍</a>
 - <a href="ComputerOrganization/存储器/多模块存储器.md">多模块存储器</a>
 - <a href="ComputerOrganization/存储器/主存和Cache的地址映射.md">主存和Cache的地址映射</a>
 - <a href="ComputerOrganization/存储器/Cache字块替换算法.md">Cache字块替换算法</a>
