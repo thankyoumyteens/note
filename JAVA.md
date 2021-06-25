@@ -74,6 +74,7 @@
 - <a href="Java/SpringBoot/AOP配置.md">AOP配置</a>
 - <a href="Java/SpringBoot/创建命令行项目.md">创建命令行项目</a>
 - <a href="Java/SpringBoot/springboot获取运行Jar包的目录.md">springboot获取运行Jar包的目录</a>
+- <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
 
 # SpringCloud
 - <a href="Java/SpringCloud/微服务.md">微服务</a>
