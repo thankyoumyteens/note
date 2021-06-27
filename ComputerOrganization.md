@@ -33,12 +33,14 @@
 - <a href="ComputerOrganization/存储器/多模块存储器.md">多模块存储器</a>
 
 ## Cache
+- <a href="ComputerOrganization/存储器/程序局部性原理.md">程序局部性原理</a>
 - <a href="ComputerOrganization/存储器/Cache的效率.md">Cache的效率</a>
 - <a href="ComputerOrganization/存储器/主存和Cache的地址映射.md">主存和Cache的地址映射</a>
 - <a href="ComputerOrganization/存储器/Cache字块替换算法.md">Cache字块替换算法</a>
 - <a href="ComputerOrganization/存储器/Cache的写策略.md">Cache的写策略</a>
 
 ## 虚拟存储器
+- <a href="ComputerOrganization/存储器/页式存储器.md">页式存储器</a>
 - <a href="ComputerOrganization/存储器/虚拟存储器.md">虚拟存储器</a>
 
 # 指令系统
