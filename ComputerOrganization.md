@@ -45,5 +45,6 @@
 
 # 指令系统
 - <a href="ComputerOrganization/指令/指令格式.md">指令格式</a>
-- <a href="ComputerOrganization/指令/寻址方式.md">寻址方式</a>
+- <a href="ComputerOrganization/指令/指令寻址.md">指令寻址</a>
+- <a href="ComputerOrganization/指令/数据寻址.md">数据寻址</a>
 - <a href="ComputerOrganization/指令/CISC和RISC.md">CISC和RISC</a>
