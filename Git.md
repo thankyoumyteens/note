@@ -7,3 +7,4 @@
 - <a href="Git/git基于某个分支创建分支.md">git基于某个分支创建分支</a>
 - <a href="Git/git恢复到指定版本.md">git恢复到指定版本</a>
 - <a href="Git/git设置代理.md">git设置代理</a>
+- <a href="Git/Git修改commit提交信息.md">Git修改commit提交信息</a>
