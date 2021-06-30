@@ -48,3 +48,8 @@
 - <a href="ComputerOrganization/指令/指令寻址.md">指令寻址</a>
 - <a href="ComputerOrganization/指令/数据寻址.md">数据寻址</a>
 - <a href="ComputerOrganization/指令/CISC和RISC.md">CISC和RISC</a>
+
+# 中央处理器
+- <a href="ComputerOrganization/CPU/计算机的工作过程.md">计算机的工作过程</a>
+- <a href="ComputerOrganization/CPU/CPU的基本组成.md">CPU的基本组成</a>
+- <a href="ComputerOrganization/CPU/CPU的功能.md">CPU的功能</a>
