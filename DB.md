@@ -1,4 +1,6 @@
 # MySQL
+- <a href="MySQL/Windows安装MySQL.md">Windows安装MySQL</a>
+- <a href="MySQL/Ununtu安装MySQL.md">Ununtu安装MySQL</a>
 - <a href="MySQL/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
 - <a href="MySQL/DCL用户管理.md">DCL用户管理</a>
 - <a href="MySQL/DDL操作数据库.md">DDL操作数据库</a>
