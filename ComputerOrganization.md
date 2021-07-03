@@ -53,3 +53,4 @@
 - <a href="ComputerOrganization/CPU/计算机的工作过程.md">计算机的工作过程</a>
 - <a href="ComputerOrganization/CPU/CPU的基本组成.md">CPU的基本组成</a>
 - <a href="ComputerOrganization/CPU/CPU的功能.md">CPU的功能</a>
+- <a href="ComputerOrganization/CPU/CPU的基本结构.md">CPU的基本结构</a>
