@@ -54,3 +54,5 @@
 - <a href="ComputerOrganization/CPU/CPU的基本组成.md">CPU的基本组成</a>
 - <a href="ComputerOrganization/CPU/CPU的功能.md">CPU的功能</a>
 - <a href="ComputerOrganization/CPU/CPU的基本结构.md">CPU的基本结构</a>
+## 指令的执行过程
+- <a href="ComputerOrganization/CPU/指令周期.md">指令周期</a>
