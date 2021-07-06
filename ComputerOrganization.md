@@ -56,3 +56,7 @@
 - <a href="ComputerOrganization/CPU/CPU的基本结构.md">CPU的基本结构</a>
 ## 指令的执行过程
 - <a href="ComputerOrganization/CPU/指令周期.md">指令周期</a>
+- <a href="ComputerOrganization/CPU/取指周期.md">取指周期</a>
+- <a href="ComputerOrganization/CPU/间址周期.md">间址周期</a>
+- <a href="ComputerOrganization/CPU/中断周期.md">中断周期</a>
+- <a href="ComputerOrganization/CPU/指令执行方案.md">指令执行方案</a>
