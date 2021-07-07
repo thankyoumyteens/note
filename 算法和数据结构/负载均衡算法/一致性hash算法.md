@@ -24,3 +24,47 @@
 
 ![](img/y5.png)
 
+# 数据倾斜问题
+
+在一致性Hash算法服务节点太少的情况下，容易因为节点分布不均匀面造成数据倾斜（客户端大部分访问到某一台服务器上）问题
+
+![](img/y6.png)
+
+为了解决数据倾斜问题，一致性Hash算法引入了虚拟节点机制，即对每一个服务器节点计算多个哈希，每个计算结果位置都放置一个此服务节点，称为虚拟节点。
+
+具体操作可以为服务器IP或主机名后加入编号来实现。
+
+![](img/y7.png)
+
+# 代码
+
+```java
+//每个服务器ip的虚拟结点数量为100
+private static final Integer VIRTUAL_NODES = 100;
+
+public static void main(String[] args) {
+
+    // key: 虚拟节点 value: 服务器ip
+    TreeMap<Integer, String> nodeMap = new TreeMap<Integer, String>();
+    // 遍历服务器ip，生成对应的虚拟结点
+    for (String serverIp : SERVER_IP_LIST) {
+        for (int i = 0; i < VIRTUAL_NODES; i++) {
+            nodeMap.put(getHash(serverIp + "VN" + i), serverIp);
+        }
+    }
+
+    for (String clientIp : CLIENT_IP_LIST) {
+        SortedMap<Integer, String> subMap = nodeMap.tailMap(getHash(clientIp));
+        Integer firstKey = null;
+        try {
+            firstKey = subMap.firstKey();
+        } catch (Exception e) {
+        }
+
+        if (firstKey == null) {
+            firstKey = nodeMap.firstKey();
+        }
+        System.out.println("请求的服务器ip为" + nodeMap.get(firstKey));
+    }
+}
+```
