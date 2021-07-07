@@ -60,3 +60,7 @@
 - <a href="ComputerOrganization/CPU/间址周期.md">间址周期</a>
 - <a href="ComputerOrganization/CPU/中断周期.md">中断周期</a>
 - <a href="ComputerOrganization/CPU/指令执行方案.md">指令执行方案</a>
+## 数据通路
+- <a href="ComputerOrganization/CPU/CPU内部单总线方式.md">CPU内部单总线方式</a>
+- <a href="ComputerOrganization/CPU/专用数据通路方式.md">专用数据通路方式</a>
+
