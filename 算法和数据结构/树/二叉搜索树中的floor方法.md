@@ -22,18 +22,20 @@ public Key floor(Key key){
  
 private Node floor(Node node, Key key){
     if(node == null) return null;
-    //如果该node的key和key相等，就是本身
+    // 如果该node的key和key相等，就是本身
     if(node.key.compareTo(key) == 0){
         return node;
     }
-    //如果该node比key要大的话
+    // 如果该node比key要大的话, 去node的左子树寻找
     if(node.key.compareTo(key) > 0){
         return floor(node.left, key);
     }
-    //如果node比key小，可能是，也能是不是
+    // 如果node比key小，可能是，也能是不是
+    // 先去node的右子树寻找
     Node tempNode = floor(node.right, key);
     if(tempNode != null)
         return tempNode;
+    // node的右子树没找到, 则node是key的floor节点
     return node;   
 }
 ```
