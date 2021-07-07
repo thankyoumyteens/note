@@ -4,6 +4,8 @@
 
 源地址hash算法的思路就是对客户端的ip进行hash，然后用hash值与服务器的数量进行取模，得到需要访问的服务器的ip。只要客户端ip不变，那hash后的值就是固定的
 
+`hash(客户端ip) % 服务器总数`
+
 ```java
 int index = Math.abs(getHash(clientIp)) % SERVER_IP_LIST.size();
 String serverIp = SERVER_IP_LIST.get(index);
