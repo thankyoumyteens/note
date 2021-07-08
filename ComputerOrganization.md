@@ -63,6 +63,7 @@
 ## 数据通路
 - <a href="ComputerOrganization/CPU/CPU内部单总线方式.md">CPU内部单总线方式</a>
 - <a href="ComputerOrganization/CPU/专用数据通路方式.md">专用数据通路方式</a>
-## 硬布线控制器
+## 控制器设计
 - <a href="ComputerOrganization/CPU/微命令.md">微命令</a>
+- <a href="ComputerOrganization/CPU/硬布线控制器.md">硬布线控制器</a>
 
