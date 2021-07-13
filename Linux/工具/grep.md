@@ -17,7 +17,7 @@ grep [option] pattern file
 - -C 显示的行数 除了显示符合样式的那一行之外，并显示该行之前后的内容。
 - -r 逐层遍历目录查找
 - -a 让二进制文件等价于文本(解决报错 Binary file xxx.log matches)
-- -P 启用perl正则
+- -P 启用perl正则, 支持`\d`等语法
 - -z 跨行匹配
 - -o 仅显示匹配到的字符串
 - --color 匹配到的内容高亮显示
@@ -25,7 +25,7 @@ grep [option] pattern file
 - --exclude 过滤不需要匹配的文件类型
 - -c 统计匹配的行数
 - -e 实现多个选项间的逻辑or 关系
-- -E 启用POSIX扩展正则表达式
+- -E 启用POSIX扩展正则表达式, 不支持`\d`等语法
 - -f FILE 从FILE获取PATTERN匹配
 - -F 相当于fgrep
 - -i 忽略字符大小写的差别。
