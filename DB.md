@@ -1,7 +1,9 @@
 # MySQL
+## 安装
 - <a href="MySQL/Windows安装MySQL.md">Windows安装MySQL</a>
 - <a href="MySQL/Ununtu安装MySQL.md">Ununtu安装MySQL</a>
 - <a href="MySQL/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
+- ## 基础
 - <a href="MySQL/DCL用户管理.md">DCL用户管理</a>
 - <a href="MySQL/DDL操作数据库.md">DDL操作数据库</a>
 - <a href="MySQL/DDL操作数据表.md">DDL操作数据表</a>
@@ -13,6 +15,7 @@
 - <a href="MySQL/约束.md">约束</a>
 - <a href="MySQL/事务.md">事务</a>
 - <a href="MySQL/存储过程.md">存储过程</a>
+- ## 常用
 - <a href="MySQL/自动更新时间字段.md">自动更新时间字段</a>
 - <a href="MySQL/case_when.md">CASE WHEN语句</a>
 - <a href="MySQL/SQL中的EXISTS.md">SQL中的EXISTS</a>
