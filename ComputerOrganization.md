@@ -72,4 +72,5 @@
 - <a href="ComputerOrganization/CPU/指令流水.md">指令流水</a>
 
 # 总线
-
+- <a href="ComputerOrganization/总线/基本概念.md">基本概念</a>
+- <a href="ComputerOrganization/总线/系统总线的结构.md">系统总线的结构</a>
