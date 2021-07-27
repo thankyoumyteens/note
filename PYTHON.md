@@ -25,8 +25,9 @@
 - <a href="Python/Python的IO操作/判断文件和文件夹.md">判断文件和文件夹</a>
 - <a href="Python/Python的IO操作/拼接路径.md">拼接路径</a>
 - <a href="Python/Python的IO操作/拆分路径.md">拆分路径</a>
+- <a href="Python/Python的IO操作/列出目录下所有文件.md">列出目录下所有文件</a>
+- <a href="Python/Python的IO操作/获取当前文件路径.md">获取当前文件路径</a>
 - <a href="Python/Python的IO操作/Python判断文件是否存在.md">Python判断文件是否存在</a>
-- <a href="Python/Python的IO操作/Python读取目录下所有文件.md">Python读取目录下所有文件</a>
 - <a href="Python/Python的IO操作/Python操作文件夹.md">Python操作文件夹</a>
 - <a href="Python/Python的IO操作/Python操作文件.md">Python操作文件</a>
 - <a href="Python/Python的IO操作/Python中文件的读写操作.md">Python中文件的读写操作</a>
