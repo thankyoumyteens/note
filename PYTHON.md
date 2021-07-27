@@ -22,14 +22,15 @@
 - <a href="Python/正则表达式/替换.md">替换</a>
 - <a href="Python/正则表达式/正则表达式手册.md">正则表达式手册</a>
 # Python的IO操作
-- <a href="Python/Python的IO操作/Python判断文件还是文件夹.md">Python判断文件还是文件夹</a>
+- <a href="Python/Python的IO操作/判断文件和文件夹.md">判断文件和文件夹</a>
+- <a href="Python/Python的IO操作/拼接路径.md">拼接路径</a>
+- <a href="Python/Python的IO操作/拆分路径.md">拆分路径</a>
 - <a href="Python/Python的IO操作/Python判断文件是否存在.md">Python判断文件是否存在</a>
 - <a href="Python/Python的IO操作/Python读取目录下所有文件.md">Python读取目录下所有文件</a>
 - <a href="Python/Python的IO操作/Python操作文件夹.md">Python操作文件夹</a>
 - <a href="Python/Python的IO操作/Python操作文件.md">Python操作文件</a>
 - <a href="Python/Python的IO操作/Python中文件的读写操作.md">Python中文件的读写操作</a>
 - <a href="Python/Python的IO操作/Python路径拼接.md">Python路径拼接</a>
-- <a href="Python/Python的IO操作/Python中不同操作系统的路径分隔符.md">Python中不同操作系统的路径分隔符</a>
 # Pyhon的Win32编程
 - <a href="Python/PythonWin32/获取Windows管理员权限.md">获取Windows管理员权限</a>
 - <a href="Python/PythonWin32/使用python发送qq消息.md">使用python发送qq消息</a>
