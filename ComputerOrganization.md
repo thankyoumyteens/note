@@ -76,3 +76,4 @@
 - <a href="ComputerOrganization/总线/系统总线的结构.md">系统总线的结构</a>
 - <a href="ComputerOrganization/总线/总线的性能指标.md">总线的性能指标</a>
 - <a href="ComputerOrganization/总线/串行总线与并行总线.md">串行总线与并行总线</a>
+- <a href="ComputerOrganization/总线/总线仲裁.md">总线仲裁</a>
