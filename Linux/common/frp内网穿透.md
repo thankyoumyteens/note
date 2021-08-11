@@ -42,6 +42,7 @@ custom_domains = www.456.com
 ./frpc -c frpc.ini
 ```
 此时访问 http://www.123.com:1180 或 https://www.456.com:11443 就可以打开本地的项目了
+
 # 没有域名的配置
 
 ## frps.ini服务端配置
