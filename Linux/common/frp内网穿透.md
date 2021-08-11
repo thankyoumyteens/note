@@ -1,6 +1,8 @@
-# 自己有域名的配置
+# http
 
-## frps.ini服务端配置
+## 自己有域名
+
+### frps.ini服务端配置
 ```conf
 [common]
 bind_addr = 0.0.0.0
@@ -18,7 +20,7 @@ vhost_https_port = 11443
 nohup ./frps -c frps.ini &
 ```
 
-## frpc.ini客户端配置
+### frpc.ini客户端配置
 ```conf
 [common]
 server_addr = 服务端IP
@@ -43,9 +45,9 @@ custom_domains = www.456.com
 ```
 此时访问 http://www.123.com:1180 或 https://www.456.com:11443 就可以打开本地的项目了
 
-# 没有域名的配置
+## 没有域名的配置
 
-## frps.ini服务端配置
+### frps.ini服务端配置
 ```conf
 [common]
 bind_addr = 0.0.0.0
@@ -53,7 +55,7 @@ bind_port = 7000
 privilege_token = 12345678
 ```
 
-## frpc.ini客户端配置
+### frpc.ini客户端配置
 ```conf
 [common]
 server_addr = 服务端IP
@@ -67,13 +69,13 @@ local_ip = 127.0.0.1
 remote_port = 8080
 ```
 
-# 二级域名内网穿透
+## 二级域名内网穿透
 
-## 在域名解析后台配置子域名
+### 在域名解析后台配置子域名
 登录域名的解析后台，在123.com下增加A记录: test,记录值为部署frp服务端的公网服务器的ip。
 
 
-## frps.ini服务端配置
+### frps.ini服务端配置
 ```conf
 [common]
 # frp监听的端口，用作服务端和客户端通信
@@ -94,7 +96,7 @@ subdomain_host = test.123.com
 nohup ./frps -c frps.ini &
 ```
 
-## nginx反向代理实现二级域名转发
+### nginx反向代理实现二级域名转发
 ```conf
 server {
     listen 80;
@@ -116,7 +118,7 @@ server {
 }
 ```
 
-## frpc.ini客户端配置
+### frpc.ini客户端配置
 ```conf
 [common]
 server_addr = 服务端IP
@@ -134,3 +136,4 @@ custom_domains = test.123.com
 ./frpc -c frpc.ini
 ```
 此时访问 http://test.123.com 就可以打开本地的项目了,访问 http://123.com 仍是服务器原本的项目
+
