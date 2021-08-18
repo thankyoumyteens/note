@@ -5,7 +5,9 @@
 - <a href="Java/正则表达式.md">正则表达式</a>
 - <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
 - <a href="Java/try中有return时finally还会执行吗.md">try中有return时finally还会执行吗</a>
-- <a href="Java/接口幂等性.md">接口幂等性</a>
+
+# Web
+- <a href="Java/Web/接口幂等性.md">接口幂等性</a>
 
 # Maven
 - <a href="Java/Maven/Maven国内源.md">Maven国内源</a>
