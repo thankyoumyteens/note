@@ -1,10 +1,49 @@
 # Java
 - <a href="Java/linux配置jdk环境变量.md">linux配置jdk环境变量</a>
 - <a href="Java/JDK11生成jre目录的方法.md">JDK11生成jre目录的方法</a>
-- <a href="Java/JDBC.md">JDBC</a>
 - <a href="Java/正则表达式.md">正则表达式</a>
 - <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
 - <a href="Java/try中有return时finally还会执行吗.md">try中有return时finally还会执行吗</a>
+
+# 数据库
+- <a href="DB.md">目录</a>
+
+# Nginx
+- <a href="Nginx/Linux安装Nginx.md">Linux安装Nginx</a>
+- <a href="Nginx/nginx配置目录结构.md">nginx配置目录结构</a>
+- <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
+- <a href="Nginx/nginx处理带下划线的header.md">nginx处理带下划线的header</a>
+- <a href="Nginx/nginx根据url实现请求转发.md">nginx根据url实现请求转发</a>
+- <a href="Nginx/二级域名转发.md">二级域名转发</a>
+- <a href="Nginx/Nginx和Tomcat搭建集群.md">Nginx和Tomcat搭建集群</a>
+
+# Zookeeper
+- <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>
+- <a href="Zookeeper/ZooKeeper应用场景.md">ZooKeeper应用场景</a>
+- <a href="Zookeeper/使用客户端命令操作zookeeper.md">使用客户端命令操作zookeeper</a>
+
+# Redis
+- <a href="Redis/redis的启动.md">redis的启动</a>
+- <a href="Redis/设置redis密码.md">设置redis密码</a>
+- <a href="Redis/Redis数据类型.md">Redis数据类型</a>
+- <a href="Redis/Redis脚本.md">Redis脚本</a>
+- <a href="Redis/缓存穿透.md">缓存穿透</a>
+- <a href="Redis/缓存击穿.md">缓存击穿</a>
+- <a href="Redis/缓存雪崩.md">缓存雪崩</a>
+
+# Docker
+- <a href="Docker.md">目录</a>
+
+# MQ
+- <a href="RabbitMQ/消息队列简介.md">消息队列简介</a>
+### RabbitMQ
+- <a href="RabbitMQ/安装RabbitMQ.md">安装RabbitMQ</a>
+- <a href="RabbitMQ/RabbitMQ的交换机.md">RabbitMQ的交换机</a>
+- <a href="RabbitMQ/消息可靠性投递.md">消息可靠性投递</a>
+### Kafka
+
+# Jenkins
+- <a href="Jenkins/CentOS安装Jenkins.md">CentOS安装Jenkins</a>
 
 # Web
 - <a href="Java/Web/接口幂等性.md">接口幂等性</a>
@@ -28,29 +67,10 @@
 # ECLIPSE
 - <a href="Java/eclipse/导出导入eclipse的所有设置.md">导出导入eclipse的所有设置</a>
 
-# Servlet
-- <a href="Java/Servlet/Tomcat.md">Tomcat</a>
-- <a href="Java/Servlet/Servlet基础.md">Servlet基础</a>
-- <a href="Java/Servlet/request对象.md">request对象</a>
-- <a href="Java/Servlet/Response对象.md">Response对象</a>
-- <a href="Java/Servlet/获取文件的真实路径.md">获取文件的真实路径</a>
-- <a href="Java/Servlet/Filter.md">Filter</a>
-- <a href="Java/Servlet/Listener.md">Listener</a>
-
 # Spring
-- <a href="Java/Spring/使用XML实现IoC.md">使用XML实现IoC</a>
-- <a href="Java/Spring/实例化Bean的三种方式.md">实例化Bean的三种方式</a>
-- <a href="Java/Spring/依赖注入.md">依赖注入</a>
-- <a href="Java/Spring/使用注解实现IoC.md">使用注解实现IoC</a>
-- <a href="Java/Spring/使用注解注入数据.md">使用注解注入数据</a>
 - <a href="Java/Spring/使用注解替换xml配置文件.md">使用注解替换xml配置文件</a>
-- <a href="Java/Spring/基于XML的AOP配置.md">基于XML的AOP配置</a>
-- <a href="Java/Spring/切面的通知类型.md">切面的通知类型</a>
-- <a href="Java/Spring/环绕通知.md">环绕通知</a>
 - <a href="Java/Spring/使用注解实现AOP.md">使用注解实现AOP</a>
 - <a href="Java/Spring/Spring中的事务传播行为.md">Spring中的事务传播行为</a>
-- <a href="Java/Spring/基于XML的声明式事务控制.md">基于XML的声明式事务控制</a>
-- <a href="Java/Spring/基于注解的声明式事务控制.md">基于注解的声明式事务控制</a>
 - <a href="Java/Spring/Spring整合Junit.md">Spring整合Junit</a>
 
 # SpringMVC

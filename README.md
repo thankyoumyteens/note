@@ -13,9 +13,6 @@
 # Windows
 - <a href="WINDOWS.md">目录</a>
 
-# 数据库
-- <a href="DB.md">目录</a>
-
 # C++
 - <a href="CPP.md">目录</a>
 
@@ -30,43 +27,6 @@
 
 # Git
 - <a href="Git.md">目录</a>
-
-# Nginx
-- <a href="Nginx/Linux安装Nginx.md">Linux安装Nginx</a>
-- <a href="Nginx/nginx配置目录结构.md">nginx配置目录结构</a>
-- <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
-- <a href="Nginx/nginx处理带下划线的header.md">nginx处理带下划线的header</a>
-- <a href="Nginx/nginx根据url实现请求转发.md">nginx根据url实现请求转发</a>
-- <a href="Nginx/二级域名转发.md">二级域名转发</a>
-- <a href="Nginx/Nginx和Tomcat搭建集群.md">Nginx和Tomcat搭建集群</a>
-
-# Zookeeper
-- <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>
-- <a href="Zookeeper/ZooKeeper应用场景.md">ZooKeeper应用场景</a>
-- <a href="Zookeeper/使用客户端命令操作zookeeper.md">使用客户端命令操作zookeeper</a>
-
-# Redis
-- <a href="Redis/redis的启动.md">redis的启动</a>
-- <a href="Redis/设置redis密码.md">设置redis密码</a>
-- <a href="Redis/Redis数据类型.md">Redis数据类型</a>
-- <a href="Redis/Redis脚本.md">Redis脚本</a>
-- <a href="Redis/缓存穿透.md">缓存穿透</a>
-- <a href="Redis/缓存击穿.md">缓存击穿</a>
-- <a href="Redis/缓存雪崩.md">缓存雪崩</a>
-
-# Docker
-- <a href="Docker.md">目录</a>
-
-# MQ
-- <a href="RabbitMQ/消息队列简介.md">消息队列简介</a>
-### RabbitMQ
-- <a href="RabbitMQ/安装RabbitMQ.md">安装RabbitMQ</a>
-- <a href="RabbitMQ/RabbitMQ的交换机.md">RabbitMQ的交换机</a>
-- <a href="RabbitMQ/消息可靠性投递.md">消息可靠性投递</a>
-### Kafka
-
-# Jenkins
-- <a href="Jenkins/CentOS安装Jenkins.md">CentOS安装Jenkins</a>
 
 # 科普
 - <a href="科普/希腊字母表.md">希腊字母表</a>

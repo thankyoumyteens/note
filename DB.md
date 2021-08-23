@@ -6,7 +6,6 @@
 - <a href="MySQL/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
 
 ## 基础
-- <a href="MySQL/mysql用户管理.md">mysql用户管理</a>
 - <a href="MySQL/操作数据库和表.md">操作数据库和表</a>
 - <a href="MySQL/分组查询.md">分组查询</a>
 - <a href="MySQL/多表查询.md">多表查询</a>
