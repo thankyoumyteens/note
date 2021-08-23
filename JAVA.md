@@ -96,9 +96,7 @@
 # SpringBoot
 - <a href="Java/SpringBoot/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
 - <a href="Java/SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
-- <a href="Java/SpringBoot/AOP配置.md">AOP配置</a>
 - <a href="Java/SpringBoot/创建命令行项目.md">创建命令行项目</a>
-- <a href="Java/SpringBoot/springboot获取运行Jar包的目录.md">springboot获取运行Jar包的目录</a>
 - <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
 
 ## Nacos
