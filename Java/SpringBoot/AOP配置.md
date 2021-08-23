@@ -41,9 +41,7 @@ public @interface MyAnnotation {
 @Aspect
 @Component
 public class TestAspect {
-    // 在controller包下，只有加上@MyAnnotation注解的方法切面方法才会起作用
-    @Pointcut("execution(public * com.example.demo.controller.*.*(..)) " + 
-              "&& @annotation(com.example.demo.controller.MyAnnotation)" )
+    @Pointcut("@annotation(com.example.demo.controller.MyAnnotation)" )
     public void addAdvice(){}  
     @Around("addAdvice()")
     public Object Interceptor(ProceedingJoinPoint pjp){

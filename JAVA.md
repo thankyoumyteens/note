@@ -74,21 +74,14 @@
 - <a href="Java/Spring/Spring整合Junit.md">Spring整合Junit</a>
 
 # SpringMVC
-- <a href="Java/SpringMVC/入门.md">入门</a>
-- <a href="Java/SpringMVC/请求参数.md">请求参数</a>
 - <a href="Java/SpringMVC/文件上传.md">文件上传</a>
-- <a href="Java/SpringMVC/异常处理.md">异常处理</a>
 - <a href="Java/SpringMVC/拦截器.md">拦截器</a>
 - <a href="Java/SpringMVC/全局异常处理.md">全局异常处理</a>
 
 # MyBatis
-- <a href="Java/MyBatis/入门.md">入门</a>
-- <a href="Java/MyBatis/增删改查.md">增删改查</a>
-- <a href="Java/MyBatis/resultMap.md">resultMap</a>
-- <a href="Java/MyBatis/常用标签.md">常用标签</a>
+- <a href="Java/MyBatis/新增后返回生成的主键.md">新增后返回生成的主键</a>
 - <a href="Java/MyBatis/一对一查询.md">一对一查询</a>
 - <a href="Java/MyBatis/一对多查询.md">一对多查询</a>
-- <a href="Java/MyBatis/多对多查询.md">多对多查询</a>
 - <a href="Java/MyBatis/缓存.md">缓存</a>
 
 # SpringBoot
