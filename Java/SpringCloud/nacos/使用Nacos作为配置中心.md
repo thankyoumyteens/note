@@ -93,11 +93,42 @@ public class TestController {
 ```
 
 创建配置文件bootstrap.properties，并配置服务名称和Nacos地址
-```conf
-server.port=9004
+```yml
+spring:
+  application:
+    name: alibaba-nacos-config-client
+  profiles:
+    active: dev
+
 # spring.application.name值必须和Nacos配置中 Data ID 相同
-spring.application.name=alibaba-nacos-config-client
-spring.cloud.nacos.config.server-addr=127.0.0.1:8848
+spring:
+  cloud:
+    nacos:
+      config:
+        group: team1
+        namespace: dev
+        server-addr: 127.0.0.1:8848 # nacos的服务端地址
+        file-extension: yml # 配置文件格式
+        shared-configs[0]:
+          group: team1
+          data-id: team1-baseconfig.yml
+          refresh: true
+  profiles: dev
+
+spring:
+  cloud:
+    nacos:
+      config:
+        group: team1
+        namespace: qa
+        server-addr: 127.0.0.1:8848 # nacos的服务端地址
+        file-extension: yml # 配置文件格式
+        shared-configs[0]:
+          group: team1
+          data-id: team1-baseconfig.yml
+          refresh: true
+  profiles: qa
+
 ```
 
 启动应用

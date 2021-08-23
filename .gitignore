@@ -26,3 +26,4 @@ math/calculus/*.fls
 *.out
 
 .history/
+.favorites.json

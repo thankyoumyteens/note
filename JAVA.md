@@ -5,6 +5,15 @@
 - <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
 - <a href="Java/try中有return时finally还会执行吗.md">try中有return时finally还会执行吗</a>
 
+
+# 锁
+- <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
+- <a href="Java/锁/自旋锁.md">自旋锁</a>
+- <a href="Java/锁/synchronized锁的四种状态.md">synchronized锁的四种状态</a>
+- <a href="Java/锁/公平锁与非公平锁.md">公平锁与非公平锁</a>
+- <a href="Java/锁/可重入锁与非可重入锁.md">可重入锁与非可重入锁</a>
+- <a href="Java/锁/独享锁与共享锁.md">独享锁与共享锁</a>
+
 # 数据库
 - <a href="DB.md">目录</a>
 
@@ -92,17 +101,8 @@
 - <a href="Java/SpringBoot/springboot获取运行Jar包的目录.md">springboot获取运行Jar包的目录</a>
 - <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
 
-# SpringCloud
-- <a href="Java/SpringCloud/微服务.md">微服务</a>
-- <a href="Java/SpringCloud/Eureka注册中心.md">Eureka注册中心</a>
-- <a href="Java/SpringCloud/Robbin负载均衡.md">Robbin负载均衡</a>
-- <a href="Java/SpringCloud/Hystrix熔断.md">Hystrix熔断</a>
-- <a href="Java/SpringCloud/Feign.md">Feign</a>
-- <a href="Java/SpringCloud/Zuul网关.md">Zuul网关</a>
-
 ## Nacos
 - <a href="Java/SpringCloud/nacos/使用Nacos作为配置中心.md">使用Nacos作为配置中心</a>
-
 
 # Elasticsearch
 - <a href="Java/Elasticsearch/安装.md">安装</a>
@@ -117,12 +117,3 @@
 - <a href="Java/Elasticsearch/ES6搜索_分页搜索.md">ES6搜索_分页搜索</a>
 - <a href="Java/Elasticsearch/ES深分页问题.md">ES深分页问题</a>
 - <a href="Java/Elasticsearch/ES6父子关系.md">ES6父子关系</a>
-
-# 锁
-- <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
-- <a href="Java/锁/自旋锁.md">自旋锁</a>
-- <a href="Java/锁/synchronized锁的四种状态.md">synchronized锁的四种状态</a>
-- <a href="Java/锁/公平锁与非公平锁.md">公平锁与非公平锁</a>
-- <a href="Java/锁/可重入锁与非可重入锁.md">可重入锁与非可重入锁</a>
-- <a href="Java/锁/独享锁与共享锁.md">独享锁与共享锁</a>
-
