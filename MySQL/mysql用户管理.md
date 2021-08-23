@@ -1,5 +1,5 @@
-# DCL 管理用户, 授权
-## 管理用户
+# 管理用户
+
 添加用户
 ```sql
 CREATE USER '用户名'@'主机名' IDENTIFIED BY '密码';
@@ -19,7 +19,8 @@ USE myql;
 SELECT * FROM USER;
 ```
 
-## 权限管理
+# 权限管理
+
 查询权限
 ```sql
 SHOW GRANTS FOR '用户名'@'主机名';
