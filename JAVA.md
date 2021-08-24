@@ -25,6 +25,7 @@
 - <a href="Nginx/nginx根据url实现请求转发.md">nginx根据url实现请求转发</a>
 - <a href="Nginx/二级域名转发.md">二级域名转发</a>
 - <a href="Nginx/Nginx和Tomcat搭建集群.md">Nginx和Tomcat搭建集群</a>
+- <a href="Nginx/nginx配置https证书.md">nginx配置https证书</a>
 
 # Zookeeper
 - <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>
