@@ -30,6 +30,7 @@
 # keepalived
 - <a href="keepalived/VRRP协议.md">VRRP协议</a>
 - <a href="keepalived/安装keepalived.md">安装keepalived</a>
+- <a href="keepalived/Keepalived实现Nginx高可用.md">Keepalived实现Nginx高可用</a>
 
 
 # Zookeeper
