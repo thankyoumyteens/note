@@ -39,7 +39,8 @@
 - <a href="Zookeeper/使用客户端命令操作zookeeper.md">使用客户端命令操作zookeeper</a>
 
 # Redis
-- <a href="Redis/redis的启动.md">redis的启动</a>
+- <a href="Redis/linux安装redis.md">linux安装redis</a>
+- <a href="Redis/redis的三种启动方式.md">redis的三种启动方式</a>
 - <a href="Redis/设置redis密码.md">设置redis密码</a>
 - <a href="Redis/Redis数据类型.md">Redis数据类型</a>
 - <a href="Redis/Redis脚本.md">Redis脚本</a>
