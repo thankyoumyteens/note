@@ -1,23 +1,55 @@
-# Nacos
+# 开启认证
 
-Nacos 支持基于 DNS 和基于 RPC 的服务发现（可以作为springcloud的注册中心）、动态配置服务（可以做配置中心）、动态 DNS 服务。
+```
+vim /nacos/conf/application.properties
+```
 
-# 创建配置
+```conf
+### If turn on auth system:
+nacos.core.auth.enabled=true
+```
 
-进入Nacos的控制页面，在配置列表功能页面中，单击右上角的+按钮，进入新建配置页面，填写配置信息
+认证账号密码为nacos的登录账号密码
 
-其中：
-- Data ID： 填入 alibaba-nacos-config-client.properties
-- Group： 使用默认值 DEFAULT_GROUP
-- 描述：可不填
-- 配置格式： 选择 Properties
-- 配置内容： 应用要加载的配置内容，比如： username=wolf
+# 创建命名空间
 
-# 创建应用
+菜单: 命名空间, 单击右上角的"新建命名空间"按钮
 
-创建一个Spring Boot应用,命名为：alibaba-nacos-config-client
+# 创建开发环境配置
 
-编辑pom.xml, 加入必要的依赖配置：
+配置管理->配置列表，单击右上角的+按钮，进入新建配置页面，填写配置信息
+
+其中:
+- Data ID: 填入 nacos-demo-dev.yml
+- Group: 填入 team1
+- 描述: 不填
+- 配置内容: 要加载的配置内容，比如: username=wolf
+
+# 创建测试环境配置
+
+配置管理->配置列表，单击右上角的+按钮，进入新建配置页面，填写配置信息
+
+其中:
+- Data ID: 填入 nacos-demo-qa.yml
+- Group: 填入 team1
+- 描述: 不填
+- 配置内容: 要加载的配置内容
+
+# 创建共享配置
+
+配置管理->配置列表，单击右上角的+按钮，进入新建配置页面，填写配置信息
+
+其中:
+- Data ID: 填入 team1-baseconfig.yml
+- Group: 填入 team1
+- 描述: 不填
+- 配置内容: 要加载的配置内容
+
+# 创建Java应用
+
+创建一个Spring Boot应用
+
+编辑pom.xml, 加入必要的依赖配置: 
 ```xml
 <parent>
     <groupId>org.springframework.boot</groupId>
@@ -92,55 +124,71 @@ public class TestController {
 }
 ```
 
-创建配置文件bootstrap.properties，并配置服务名称和Nacos地址
+创建配置文件bootstrap.yml, 并配置服务名称和Nacos地址
 ```yml
 spring:
   application:
-    name: alibaba-nacos-config-client
+    name: nacos-demo
   profiles:
     active: dev
 
-# spring.application.name值必须和Nacos配置中 Data ID 相同
+# 使用Nacos配置 nacos-demo-dev.yml
 spring:
   cloud:
     nacos:
       config:
+        # 配置对应的分组
         group: team1
+        # 命名空间
         namespace: dev
-        server-addr: 127.0.0.1:8848 # nacos的服务端地址
-        file-extension: yml # 配置文件格式
+        # nacos的服务端地址
+        server-addr: 127.0.0.1:8848
+        # 配置文件格式
+        file-extension: yml
+        # Nacos 认证用户
+        username: nacos
+        # Nacos 认证密码
+        password: 123456
+        # 支持多个共享的配置
         shared-configs[0]:
           group: team1
           data-id: team1-baseconfig.yml
+          # 是否动态刷新，默认为false
           refresh: true
+  # 与spring.profiles.active匹配时启用
   profiles: dev
 
+# 使用Nacos配置 nacos-demo-qa.yml
 spring:
   cloud:
     nacos:
       config:
         group: team1
         namespace: qa
-        server-addr: 127.0.0.1:8848 # nacos的服务端地址
-        file-extension: yml # 配置文件格式
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
         shared-configs[0]:
           group: team1
           data-id: team1-baseconfig.yml
           refresh: true
+        shared-configs[1]:
+          group: team2
+          data-id: team2-baseconfig.yml
+          refresh: true
   profiles: qa
-
 ```
 
 启动应用
 
 # Nacos配置加载规则
 
-在Nacos Spring Cloud 中， dataID的完成格式如下：
+在Nacos Spring Cloud 中, dataID的格式如下: 
 ```
 ${prefix}-${spring.profile.active}.${file-extension}
 ```
-- prefix：默认为 spring.application.name的值，也可以通过配置项 spring.cloud.nacos.config.prefix来配置。
-- spring.profile.active：即当前环境对应的profile。
-- 当 spring.profile.active 为空时，对应的连接符 - 也将不存在，dataId的拼接格式变成：${prefix}.${file-extension}
-- file-extension： 为配置文件的数据格式，可以通过设置项spring.cloud.nacos.config.file-extension来配置，默认值：properties。目前只支持 properties 和 yaml 类型。
-- Group的值默认 DEFAULT_GROUP: 可以通过设置项 spring.cloud.nacos.config.group来配置，默认值： DEFAULT_GROUP
+
+- prefix: 默认为 spring.application.name的值，也可以通过配置项 spring.cloud.nacos.config.prefix来配置。
+- spring.profile.active: 即当前环境对应的profile。
+- 当 spring.profile.active 为空时，对应的连接符 - 也将不存在，dataId的拼接格式变成: ${prefix}.${file-extension}
+- file-extension:  为配置文件的数据格式，可以通过设置项spring.cloud.nacos.config.file-extension来配置，默认值: properties。目前只支持 properties 和 yaml 类型。
+- Group的值默认 DEFAULT_GROUP: 可以通过设置项 spring.cloud.nacos.config.group来配置，默认值:  DEFAULT_GROUP
