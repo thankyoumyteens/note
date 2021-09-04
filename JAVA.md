@@ -106,6 +106,7 @@
 - <a href="Java/SpringBoot/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
 - <a href="Java/SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
 - <a href="Java/SpringBoot/创建命令行项目.md">创建命令行项目</a>
+- <a href="Java/SpringBoot/SpringBoot整合Redis.md">SpringBoot整合Redis</a>
 - <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
 
 # FeignClient
