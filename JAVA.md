@@ -45,6 +45,8 @@
 - <a href="Redis/Redis数据类型.md">Redis数据类型</a>
 - <a href="Redis/Redis基本命令.md">Redis基本命令</a>
 - <a href="Redis/RDB.md">RDB</a>
+- <a href="Redis/AOF.md">AOF</a>
+- <a href="Redis/Redis读写分离.md">Redis读写分离</a>
 - <a href="Redis/Redis脚本.md">Redis脚本</a>
 - <a href="Redis/缓存穿透.md">缓存穿透</a>
 - <a href="Redis/缓存击穿.md">缓存击穿</a>
