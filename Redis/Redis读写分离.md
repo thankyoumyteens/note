@@ -18,3 +18,18 @@ masterauth 主节点的密码
 # 默认yes 表示从节点只读
 replica-read-only yes
 ```
+
+# 无磁盘化传输
+
+在使用Redis主从复制的时候，数据传输是通过master节点启动一个进程生成RDB文件然后把这个文件通过网络传输给slave节点
+
+磁盘化传输: Redis主进程创建一个编写RDB的新进程放入磁盘文件。稍后，文件由父进程传输进程以增量的方式传递给从进程
+
+无磁盘化传输: master会创建一个新的进程生成RDB文件，并且通过socket传输给slave节点，不会经过磁盘
+
+## 开启无磁盘化传输
+
+```conf
+# 默认no
+repl-diskless-sync yes
+```

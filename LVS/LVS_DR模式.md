@@ -44,6 +44,7 @@ rs2=172.16.100.30
 ```
 ipvsadm -ln -t 10.211.102.47:8088
 ```
+输出
 ```
 Prot LocalAddress:Port Scheduler Flags
 -> RemoteAddress:Port Forward Weight ActiveConn InActConn
