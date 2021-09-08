@@ -49,6 +49,7 @@
 - <a href="Redis/AOF.md">AOF</a>
 - <a href="Redis/Redis缓存过期处理与内存淘汰机制.md">Redis缓存过期处理与内存淘汰机制</a>
 - <a href="Redis/Redis读写分离.md">Redis读写分离</a>
+- <a href="Redis/Redis哨兵.md">Redis哨兵</a>
 - <a href="Redis/Redis脚本.md">Redis脚本</a>
 - <a href="Redis/缓存穿透.md">缓存穿透</a>
 - <a href="Redis/缓存击穿.md">缓存击穿</a>
@@ -112,6 +113,7 @@
 - <a href="Java/SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
 - <a href="Java/SpringBoot/创建命令行项目.md">创建命令行项目</a>
 - <a href="Java/SpringBoot/SpringBoot整合Redis.md">SpringBoot整合Redis</a>
+- <a href="Java/SpringBoot/SpringBoot整合Redis哨兵.md">SpringBoot整合Redis哨兵</a>
 - <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
 
 # FeignClient
