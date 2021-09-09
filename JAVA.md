@@ -50,6 +50,7 @@
 - <a href="Redis/Redis缓存过期处理与内存淘汰机制.md">Redis缓存过期处理与内存淘汰机制</a>
 - <a href="Redis/Redis读写分离.md">Redis读写分离</a>
 - <a href="Redis/Redis哨兵.md">Redis哨兵</a>
+- <a href="Redis/redis集群.md">redis集群</a>
 - <a href="Redis/Redis脚本.md">Redis脚本</a>
 - <a href="Redis/缓存穿透.md">缓存穿透</a>
 - <a href="Redis/缓存击穿.md">缓存击穿</a>
