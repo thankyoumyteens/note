@@ -5,7 +5,6 @@
 - <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
 - <a href="Java/try中有return时finally还会执行吗.md">try中有return时finally还会执行吗</a>
 
-
 # 锁
 - <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
 - <a href="Java/锁/自旋锁.md">自旋锁</a>
@@ -51,7 +50,6 @@
 - <a href="Redis/Redis读写分离.md">Redis读写分离</a>
 - <a href="Redis/Redis哨兵.md">Redis哨兵</a>
 - <a href="Redis/redis集群.md">redis集群</a>
-- <a href="Redis/Redis脚本.md">Redis脚本</a>
 - <a href="Redis/缓存穿透.md">缓存穿透</a>
 - <a href="Redis/缓存击穿.md">缓存击穿</a>
 - <a href="Redis/缓存雪崩.md">缓存雪崩</a>
