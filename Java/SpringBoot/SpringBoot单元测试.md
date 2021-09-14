@@ -18,13 +18,13 @@
 测试类
 ```java
 @SpringBootTest
-class DemoApplicationTests {
+public class DemoApplicationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
 }
 ```
@@ -44,13 +44,13 @@ class DemoApplicationTests {
 ```java
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class DemoApplicationTests {
+public class DemoApplicationTests {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     @Test
-    void contextLoads() {
+    public void contextLoads() {
     }
 }
 ```
