@@ -117,6 +117,7 @@
 - <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
 
 # FeignClient
+- <a href="Java/SpringCloud/FeignClient/FeignClient注解.md">FeignClient注解</a>
 - <a href="Java/SpringCloud/FeignClient/FeignClient打印请求日志.md">FeignClient打印请求日志</a>
 - <a href="Java/SpringCloud/FeignClient/重写FeignClient输出日志.md">重写FeignClient输出日志</a>
 
