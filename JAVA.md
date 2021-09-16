@@ -121,6 +121,7 @@
 - <a href="Java/FeignClient/重写FeignClient输出日志.md">重写FeignClient输出日志</a>
 
 ## Nacos
+- <a href="Java/SpringCloud/nacos/使用Nacos作为注册中心.md">使用Nacos作为注册中心</a>
 - <a href="Java/SpringCloud/nacos/使用Nacos作为配置中心.md">使用Nacos作为配置中心</a>
 
 # Elasticsearch

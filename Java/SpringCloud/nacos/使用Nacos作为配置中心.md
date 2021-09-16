@@ -125,6 +125,9 @@ public class TestController {
 ```
 
 创建配置文件bootstrap.yml, 并配置服务名称和Nacos地址
+
+作为配置中心时，必须要使用bootstrap.yml，因为bootstrap.yml加载顺序优先于application.yml
+
 ```yml
 spring:
   application:
