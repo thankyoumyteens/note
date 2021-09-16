@@ -14,6 +14,26 @@ FeignClient注解的作用目标在接口上
 
 # 使用FeignClient
 
+依赖
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+    <version>2.0.2.RELEASE</version>
+</dependency>
+<dependency>
+    <groupId>io.github.openfeign</groupId>
+    <artifactId>feign-core</artifactId>
+    <version>9.7.0</version>
+</dependency>
+<dependency>
+    <groupId>io.github.openfeign</groupId>
+    <artifactId>feign-slf4j</artifactId>
+    <version>9.7.0</version>
+</dependency>
+```
+
 添加FeignClients启用注解
 
 ```java
