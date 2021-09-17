@@ -77,4 +77,4 @@
 - <a href="ComputerOrganization/总线/总线的性能指标.md">总线的性能指标</a>
 - <a href="ComputerOrganization/总线/串行总线与并行总线.md">串行总线与并行总线</a>
 - <a href="ComputerOrganization/总线/总线仲裁.md">总线仲裁</a>
-- <a href="ComputerOrganization/总线/总线定时.md">总线定时</a>
+- <a href="ComputerOrganization/总线/总线通信.md">总线通信</a>
