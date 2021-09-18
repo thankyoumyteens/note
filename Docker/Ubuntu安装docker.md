@@ -35,3 +35,18 @@ docker -v
 ```
 sudo docker run hello-world
 ```
+
+# 修改Ubuntu的apt-get源中docker为国内镜像源
+
+查看版本信息
+```
+lsb_release -cs
+```
+修改apt-get源
+```
+sudo vim /etc/apt/sources.list
+```
+
+```
+deb [arch=amd64] https://repo.huaweicloud.com/docker-ce/linux/ubuntu 上面查出的版本信息 stable
+```
