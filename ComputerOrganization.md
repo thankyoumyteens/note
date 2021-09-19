@@ -79,3 +79,7 @@
 - <a href="ComputerOrganization/总线/总线仲裁.md">总线仲裁</a>
 - <a href="ComputerOrganization/总线/总线通信.md">总线通信</a>
 - <a href="ComputerOrganization/总线/总线标准.md">总线标准</a>
+
+# IO系统
+- <a href="ComputerOrganization/IO/IO接口.md">IO接口</a>
+- <a href="ComputerOrganization/IO/IO控制方式.md">IO控制方式</a>
