@@ -1,30 +1,24 @@
 # Java
-- <a href="Java/linux配置jdk环境变量.md">linux配置jdk环境变量</a>
-- <a href="Java/JDK11生成jre目录的方法.md">JDK11生成jre目录的方法</a>
-- <a href="Java/正则表达式.md">正则表达式</a>
-- <a href="Java/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
-- <a href="Java/try中有return时finally还会执行吗.md">try中有return时finally还会执行吗</a>
-
-# 锁
-- <a href="Java/锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
-- <a href="Java/锁/自旋锁.md">自旋锁</a>
-- <a href="Java/锁/synchronized锁的四种状态.md">synchronized锁的四种状态</a>
-- <a href="Java/锁/公平锁与非公平锁.md">公平锁与非公平锁</a>
-- <a href="Java/锁/可重入锁与非可重入锁.md">可重入锁与非可重入锁</a>
-- <a href="Java/锁/独享锁与共享锁.md">独享锁与共享锁</a>
+- <a href="java/content/base.md">目录</a>
 
 # 数据库
-- <a href="DB.md">目录</a>
+- <a href="java/content/db.md">目录</a>
+
+# SSM
+- <a href="java/content/ssm.md">目录</a>
+
+# SpringCloud
+- <a href="java/content/springcloud.md">目录</a>
 
 # Nginx
-- <a href="Nginx/Linux安装Nginx.md">Linux安装Nginx</a>
-- <a href="Nginx/nginx配置目录结构.md">nginx配置目录结构</a>
-- <a href="Nginx/Nginx的启动停止与重启.md">Nginx的启动停止与重启</a>
-- <a href="Nginx/nginx处理带下划线的header.md">nginx处理带下划线的header</a>
-- <a href="Nginx/nginx根据url实现请求转发.md">nginx根据url实现请求转发</a>
-- <a href="Nginx/二级域名转发.md">二级域名转发</a>
-- <a href="Nginx/Nginx和Tomcat搭建集群.md">Nginx和Tomcat搭建集群</a>
-- <a href="Nginx/nginx配置https证书.md">nginx配置https证书</a>
+- <a href="java/content/nginx.md">目录</a>
+
+# Redis
+- <a href="java/content/redis.md">目录</a>
+
+# MQ
+- <a href="java/content/mq.md">目录</a>
+
 
 # LVS
 - <a href="LVS/VRRP协议.md">VRRP协议</a>
@@ -38,38 +32,8 @@
 - <a href="Zookeeper/ZooKeeper应用场景.md">ZooKeeper应用场景</a>
 - <a href="Zookeeper/使用客户端命令操作zookeeper.md">使用客户端命令操作zookeeper</a>
 
-# Redis
-- <a href="Redis/linux安装redis.md">linux安装redis</a>
-- <a href="Redis/redis的三种启动方式.md">redis的三种启动方式</a>
-- <a href="Redis/设置redis密码.md">设置redis密码</a>
-- <a href="Redis/Redis数据类型.md">Redis数据类型</a>
-- <a href="Redis/Redis基本命令.md">Redis基本命令</a>
-- <a href="Redis/RDB.md">RDB</a>
-- <a href="Redis/AOF.md">AOF</a>
-- <a href="Redis/Redis缓存过期处理与内存淘汰机制.md">Redis缓存过期处理与内存淘汰机制</a>
-- <a href="Redis/Redis读写分离.md">Redis读写分离</a>
-- <a href="Redis/Redis哨兵.md">Redis哨兵</a>
-- <a href="Redis/redis集群.md">redis集群</a>
-- <a href="Redis/缓存穿透.md">缓存穿透</a>
-- <a href="Redis/缓存击穿.md">缓存击穿</a>
-- <a href="Redis/缓存雪崩.md">缓存雪崩</a>
-
-# Docker
-- <a href="Docker.md">目录</a>
-
-# MQ
-- <a href="RabbitMQ/消息队列简介.md">消息队列简介</a>
-### RabbitMQ
-- <a href="RabbitMQ/安装RabbitMQ.md">安装RabbitMQ</a>
-- <a href="RabbitMQ/RabbitMQ的交换机.md">RabbitMQ的交换机</a>
-- <a href="RabbitMQ/消息可靠性投递.md">消息可靠性投递</a>
-### Kafka
-
 # Jenkins
 - <a href="Jenkins/CentOS安装Jenkins.md">CentOS安装Jenkins</a>
-
-# Web
-- <a href="Java/Web/接口幂等性.md">接口幂等性</a>
 
 # Maven
 - <a href="Java/Maven/Maven国内源.md">Maven国内源</a>
@@ -90,40 +54,7 @@
 # ECLIPSE
 - <a href="Java/eclipse/导出导入eclipse的所有设置.md">导出导入eclipse的所有设置</a>
 
-# Spring
-- <a href="Java/Spring/使用注解替换xml配置文件.md">使用注解替换xml配置文件</a>
-- <a href="Java/Spring/使用注解实现AOP.md">使用注解实现AOP</a>
-- <a href="Java/Spring/Spring中的事务传播行为.md">Spring中的事务传播行为</a>
-- <a href="Java/Spring/Spring整合Junit.md">Spring整合Junit</a>
 
-# SpringMVC
-- <a href="Java/SpringMVC/文件上传.md">文件上传</a>
-- <a href="Java/SpringMVC/拦截器.md">拦截器</a>
-- <a href="Java/SpringMVC/全局异常处理.md">全局异常处理</a>
-
-# MyBatis
-- <a href="Java/MyBatis/新增后返回生成的主键.md">新增后返回生成的主键</a>
-- <a href="Java/MyBatis/一对一查询.md">一对一查询</a>
-- <a href="Java/MyBatis/一对多查询.md">一对多查询</a>
-- <a href="Java/MyBatis/缓存.md">缓存</a>
-
-# SpringBoot
-- <a href="Java/SpringBoot/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
-- <a href="Java/SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
-- <a href="Java/SpringBoot/创建命令行项目.md">创建命令行项目</a>
-- <a href="Java/SpringBoot/SpringBoot整合Redis.md">SpringBoot整合Redis</a>
-- <a href="Java/SpringBoot/SpringBoot整合Redis哨兵.md">SpringBoot整合Redis哨兵</a>
-- <a href="Java/SpringBoot/SpringBoot整合Redis集群.md">SpringBoot整合Redis集群</a>
-- <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
-
-# FeignClient
-- <a href="Java/SpringCloud/FeignClient/FeignClient注解.md">FeignClient注解</a>
-- <a href="Java/SpringCloud/FeignClient/FeignClient打印请求日志.md">FeignClient打印请求日志</a>
-- <a href="Java/SpringCloud/FeignClient/重写FeignClient输出日志.md">重写FeignClient输出日志</a>
-
-## Nacos
-- <a href="Java/SpringCloud/nacos/使用Nacos作为注册中心.md">使用Nacos作为注册中心</a>
-- <a href="Java/SpringCloud/nacos/使用Nacos作为配置中心.md">使用Nacos作为配置中心</a>
 
 # Elasticsearch
 - <a href="Java/Elasticsearch/安装.md">安装</a>
@@ -138,3 +69,4 @@
 - <a href="Java/Elasticsearch/ES6搜索_分页搜索.md">ES6搜索_分页搜索</a>
 - <a href="Java/Elasticsearch/ES深分页问题.md">ES深分页问题</a>
 - <a href="Java/Elasticsearch/ES6父子关系.md">ES6父子关系</a>
+
