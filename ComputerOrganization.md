@@ -81,5 +81,7 @@
 - <a href="ComputerOrganization/总线/总线标准.md">总线标准</a>
 
 # IO系统
-- <a href="ComputerOrganization/IO/IO接口.md">IO接口</a>
+- <a href="ComputerOrganization/IO/IO系统基本组成.md">IO系统基本组成</a>
 - <a href="ComputerOrganization/IO/IO控制方式.md">IO控制方式</a>
+## IO设备
+- <a href="ComputerOrganization/IO/输入设备.md">输入设备</a>
