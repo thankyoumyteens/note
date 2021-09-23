@@ -7,8 +7,20 @@ JJWT是JWT的一种JAVA实现
 ```xml
 <dependency>
     <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt</artifactId>
-    <version>0.9.0</version>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.2</version>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.11.2</version>
+    <scope>runtime</scope>
+</dependency>
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId>
+    <version>0.11.2</version>
+    <scope>runtime</scope>
 </dependency>
 ```
 
