@@ -5,6 +5,7 @@
 - <a href="Java/SpringBoot/SpringBoot整合Redis.md">SpringBoot整合Redis</a>
 - <a href="Java/SpringBoot/SpringBoot整合Redis哨兵.md">SpringBoot整合Redis哨兵</a>
 - <a href="Java/SpringBoot/SpringBoot整合Redis集群.md">SpringBoot整合Redis集群</a>
+- <a href="Java/SpringBoot/SpringBoot整合RabbitMQ.md">SpringBoot整合RabbitMQ</a>
 - <a href="Java/SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
 
 # SpringCloud
