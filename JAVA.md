@@ -1,23 +1,23 @@
 # Java
-- <a href="java/content/base.md">目录</a>
+- <a href="Java/content/base.md">目录</a>
 
 # 数据库
-- <a href="java/content/db.md">目录</a>
+- <a href="Java/content/db.md">目录</a>
 
 # SSM
-- <a href="java/content/ssm.md">目录</a>
+- <a href="Java/content/ssm.md">目录</a>
 
 # SpringCloud
-- <a href="java/content/springcloud.md">目录</a>
+- <a href="Java/content/springcloud.md">目录</a>
 
 # Nginx
-- <a href="java/content/nginx.md">目录</a>
+- <a href="Java/content/nginx.md">目录</a>
 
 # Redis
-- <a href="java/content/redis.md">目录</a>
+- <a href="Java/content/redis.md">目录</a>
 
 # MQ
-- <a href="java/content/mq.md">目录</a>
+- <a href="Java/content/mq.md">目录</a>
 
 
 # LVS
