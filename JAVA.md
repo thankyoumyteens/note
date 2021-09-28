@@ -21,12 +21,7 @@
 
 
 # LVS
-- <a href="LVS/VRRP协议.md">VRRP协议</a>
-- <a href="LVS/安装keepalived.md">安装keepalived</a>
-- <a href="LVS/Keepalived实现Nginx高可用.md">Keepalived实现Nginx高可用</a>
-- <a href="LVS/LVS_DR模式.md">LVS DR模式</a>
-- <a href="LVS/LVS_NAT模式.md">LVS NAT模式</a>
-- <a href="LVS/LVS_Tunnel模式.md">LVS Tunnel模式</a>
+- <a href="Java/content/lvs.md">目录</a>
 
 # Zookeeper
 - <a href="Zookeeper/ZooKeeper安装.md">ZooKeeper安装</a>
