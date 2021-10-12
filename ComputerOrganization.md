@@ -85,3 +85,4 @@
 - <a href="ComputerOrganization/IO/IO控制方式.md">IO控制方式</a>
 ## IO设备
 - <a href="ComputerOrganization/IO/输入输出设备.md">输入输出设备</a>
+- <a href="ComputerOrganization/IO/外存储器.md">外存储器</a>
