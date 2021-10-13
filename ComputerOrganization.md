@@ -82,7 +82,8 @@
 
 # IO系统
 - <a href="ComputerOrganization/IO/IO系统基本组成.md">IO系统基本组成</a>
-- <a href="ComputerOrganization/IO/IO控制方式.md">IO控制方式</a>
 - <a href="ComputerOrganization/IO/输入输出设备.md">输入输出设备</a>
 - <a href="ComputerOrganization/IO/外存储器.md">外存储器</a>
 - <a href="ComputerOrganization/IO/IO接口.md">IO接口</a>
+- <a href="ComputerOrganization/IO/IO控制方式.md">IO控制方式</a>
+- <a href="ComputerOrganization/IO/中断.md">中断</a>
