@@ -23,6 +23,7 @@
 - <a href="Linux/工具/sed.md">sed</a>
 - <a href="Linux/工具/awk.md">awk</a>
 - <a href="Linux/工具/tcpdump.md">tcpdump</a>
+- <a href="Linux/工具/rz命令与sz命令.md">rz命令与sz命令</a>
 - <a href="Linux/vim/vim搜索字符串.md">vim搜索字符串</a>
 
 # Shell

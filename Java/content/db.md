@@ -28,3 +28,7 @@
 - <a href="../MySQL/MySQL字符串函数.md">MySQL字符串函数</a>
 - <a href="../MySQL/delete多表删除.md">delete多表删除</a>
 - <a href="../MySQL/锁表.md">锁表</a>
+
+# 分库分表
+- <a href="../分库分表/数据切分.md">数据切分</a>
+
