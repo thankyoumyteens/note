@@ -7,6 +7,4 @@
 - <a href="../锁/reentrantlock.md">reentrantlock</a>
 - <a href="../锁/基于数据库实现的分布式锁.md">基于数据库实现的分布式锁</a>
 - <a href="../锁/基于redis实现的分布式锁.md">基于redis实现的分布式锁</a>
-- <a href="../锁/基于redisson实现的分布式锁.md">基于redisson实现的分布式锁</a>
 - <a href="../锁/基于zookeeper实现的分布式锁.md">基于zookeeper实现的分布式锁</a>
-- <a href="../锁/基于zookeeper实现的分布式锁.md">基于curator实现的分布式锁</a>
