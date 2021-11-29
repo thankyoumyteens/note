@@ -6,3 +6,6 @@
 
 # 编译原理
 - <a href="Compiler/Compiler.md">目录</a>
+
+# 算法和数据结构
+- <a href="Algorithm/ALGORITHM.md">目录</a>
