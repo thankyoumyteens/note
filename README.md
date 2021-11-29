@@ -4,9 +4,6 @@
 # 英语
 - <a href="english.md">目录</a>
 
-# 算法
-- <a href="ALGORITHM.md">目录</a>
-
 # Linux
 - <a href="LINUX.md">目录</a>
 
