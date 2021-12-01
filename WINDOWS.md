@@ -6,5 +6,6 @@
 - <a href="Windows/设置IP与DNS.md">设置IP与DNS</a>
 
 # 批处理
+- <a href="Windows/bat/语法.md">语法</a>
 - <a href="Windows/bat/操作注册表.md">操作注册表</a>
 - <a href="Windows/bat/操作环境变量.md">操作环境变量</a>
