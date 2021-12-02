@@ -1,3 +1,6 @@
+# 数学
+- <a href="math/math.md">目录</a>
+
 # 计算机组成
 - <a href="ComputerOrganization/ComputerOrganization.md">目录</a>
 

@@ -1,1 +1,0 @@
-- <a href="cpp/string.md">string</a>

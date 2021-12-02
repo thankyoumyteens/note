@@ -10,12 +10,6 @@
 # Windows
 - <a href="WINDOWS.md">目录</a>
 
-# Docker
-- <a href="Docker.md">目录</a>
-
-# C++
-- <a href="CPP.md">目录</a>
-
 # Java
 - <a href="JAVA.md">目录</a>
 
