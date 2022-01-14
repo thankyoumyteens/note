@@ -1,26 +1,14 @@
-# 基础
-- <a href="underlie.md">目录</a>
-
-# 英语
-- <a href="english.md">目录</a>
-
-# Linux
-- <a href="LINUX.md">目录</a>
-
-# Windows
-- <a href="WINDOWS.md">目录</a>
-
-# Java
-- <a href="JAVA.md">目录</a>
-
-# Python
-- <a href="PYTHON.md">目录</a>
-
-# 前端
-- <a href="FRONTEND.md">目录</a>
-
-# Git
-- <a href="Git.md">目录</a>
+- <a href="underlie.md">基础</a>
+- <a href="english.md">英语</a>
+- <a href="os/linux.md">Linux</a>
+- <a href="os/windows.md">Windows</a>
+- <a href="JAVA.md">Java</a>
+- <a href="Python/python.md">Python</a>
+- <a href="fe/frontend.md">前端</a>
+- <a href="Git/git.md">Git</a>
+- <a href="LATEX.md">LaTex</a>
+- <a href="CSAPP.md">CSAPP</a>
+- <a href="secure.md">安全</a>
 
 # 科普
 - <a href="科普/希腊字母表.md">希腊字母表</a>
@@ -36,11 +24,3 @@
 - <a href="FFmpeg/视频文件.md">视频文件</a>
 - <a href="FFmpeg/FFmpeg用法.md">FFmpeg用法</a>
 
-# LaTex
-- <a href="LATEX.md">目录</a>
-
-# CSAPP
-- <a href="CSAPP.md">目录</a>
-
-# 安全
-- <a href="secure.md">目录</a>
