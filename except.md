@@ -298,3 +298,74 @@ tcp 粘包可能发生在发送端或者接收端，分别来看两端各种产�
 
 利用script标签的 src 连接可以访问不同源的特性，加载远程返回的“JS 函数”来执行的。
 
+# 说一下你熟悉的设计模式？
+
+- 单例模式：保证被创建一次，节省系统开销。
+- 工厂模式（简单工厂、抽象工厂）：解耦代码。
+- 观察者模式：定义了对象之间的一对多的依赖，这样一来，当一个对象改变时，它的所有的依赖者都会收到通知并自动更新。
+- 外观模式：提供一个统一的接口，用来访问子系统中的一群接口，外观定义了一个高层的接口，让子系统更容易使用。
+- 模版方法模式：定义了一个算法的骨架，而将一些步骤延迟到子类中，模版方法使得子类可以在不改变算法结构的情况下，重新定义算法的步骤。
+- 状态模式：允许对象在内部状态改变时改变它的行为，对象看起来好像修改了它的类。
+
+# 观察者模式
+
+发布者发布信息，订阅者获取信息，订阅了就能收到信息，没订阅就收不到信息。
+
+```java
+/**
+ * 抽象被观察者接口
+ * 声明了添加、删除、通知观察者方法
+ */
+public interface Observerable {
+    void registerObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObserver();
+}
+/**
+ * 抽象观察者
+ * 当被观察者调用notifyObserver()方法时，观察者的update()方法会被回调。
+ */
+public interface Observer {
+    public void update(String message);
+}
+/**
+ * 被观察者实现
+ */
+public class WechatServer implements Observerable {
+    
+    private List<Observer> list;
+    private String message;
+    
+    public WechatServer() {
+        list = new ArrayList<Observer>();
+    }
+    
+    @Override
+    public void registerObserver(Observer o) {
+        list.add(o);
+    }
+    
+    @Override
+    public void removeObserver(Observer o) {
+        if(!list.isEmpty())
+            list.remove(o);
+    }
+
+    @Override
+    public void notifyObserver() {
+        for(int i = 0; i < list.size(); i++) {
+            Observer oserver = list.get(i);
+            oserver.update(this.message);
+        }
+    }
+    
+    public void setInfomation(String s) {
+        this.message = s;
+        // 消息更新，通知所有观察者
+        notifyObserver();
+    }
+}
+```
+
+# 外观模式
+
