@@ -369,3 +369,109 @@ public class WechatServer implements Observerable {
 
 # 外观模式
 
+外观模式可以很好地解决让子系统外部的客户端在使用子系统的时候，既能简单地使用这些子系统内部的模块，而又不用客户端去与子系统内部的多个模块交互。
+
+外观模式的目的不是给子系统添加新的功能接口，而是为了让外部减少与子系统内多个模块的交互，松散耦合，从而能让外部更简单的使用子系统。
+
+因为外观是当做子系统对外的接口出现的，虽然也可以定义一些子系统没有的功能，但是不建议这么做。外观应该是包装已有的功能，它主要负责组合已有功能来实现客户需要，而不是添加新的实现。
+
+```java
+/**
+ * 子系统
+ */
+public class DrinkableWater {
+    public void facadeWater(){
+        System.out.println("煮水");
+    }
+}
+/**
+ * 子系统
+ */
+public class Tea {
+    public void facadeTea(){
+        System.out.println("取茶");
+    }
+}
+/**
+ * 子系统
+ */
+public class TeaCup {
+    public void facadeTeaCup(){
+        System.out.println("泡茶");
+    }
+}
+/**
+ * 外观对象
+ */
+public class Waiter {
+    // 示意方法，满足客户需要的功能
+    public void getTea(){
+        // 内部实现会调用多个子系统
+        DrinkableWater drinkableWater = new DrinkableWater();
+        TeaCup teaCup = new TeaCup();
+        Tea tea = new Tea();
+        tea.facadeTea();
+        drinkableWater.facadeWater();
+        teaCup.facadeTeaCup(tea);
+    }
+}
+/**
+ * 客户端
+ */
+public class Customer {
+    public static void main(String[] args) {
+        new Waiter().getTea();
+    }
+}
+```
+
+# 模版方法模式
+
+定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。子类可以置换掉父类的可变部分，但是子类却不可以改变模板方法所代表的顶级逻辑。
+
+```java
+// 抽象模板角色类
+public abstract class AbstractTemplate {
+    // 模板方法, 可以有任意多个
+    public void templateMethod(){
+        //调用基本方法
+        abstractMethod();
+        hookMethod();
+        concreteMethod();
+    }
+    // 抽象方法, 由具体子类实现
+    protected abstract void abstractMethod();
+    // 钩子方法(空方法), 子类可选择实现，不是必须实现
+    protected void hookMethod(){}
+    // 具体方法, 由抽象类声明并实现，而子类并不实现或置换
+    private final void concreteMethod(){
+        // ...
+    }
+}
+
+// 具体模板角色类，实现了父类所声明的基本方法
+public class ConcreteTemplate extends AbstractTemplate{
+    // 基本方法的实现
+    @Override
+    public void abstractMethod() {
+        // ...
+    }
+    // 重写父类的方法
+    @Override
+    public void hookMethod() {
+        // ...
+    }
+}
+```
+
+### 应用
+
+Servlet
+
+HttpServlet担任抽象模板角色
+- 由service()方法担任模板方法。
+- Servlet并非完全按照模板方法定义的那样，而是做了变通，提供了默认doGet、doPost的实现
+
+自己实现的TestServlet担任具体模板角色
+- TestServlet置换掉了父类HttpServlet中七个基本方法中的其中两个，分别是doGet和doPost
+
