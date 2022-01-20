@@ -24,6 +24,21 @@ try中有return, 会先将值暂存，无论finally语句中对该值做什么�
 
 # 接口幂等性
 
+# JWT令牌结构
+
+一个JWT由三部分组成：
+- Header（头部）: base64编码的Json字符串，Header通常由两部分组成：令牌的类型，即JWT，以及使用的签名算法，例如HMAC SHA256或RSA。
+- Payload（载荷） : base64编码的Json字符串，payload是有效载荷，其中包含声明（ claims）。声明包含实体（通常是用户）和其他自定义信息。
+- Signature（签名）: 使用指定算法，通过Header和Payload加盐计算的字符串, 保证token在传输的过程中没有被篡改或者损坏
+
+各部分以`.`分割
+
+# JWT工作原理
+
+客户端通过请求将用户名和密码传给服务端，服务端将用户名和密码进行核对，核对成功后将用户id等其他信息作为jwt的有效载荷（payload）与头部进行base64编码形成jwt（字符串），后端将这段字符串作为登陆成功的返回结果返回给前端。前端将其保存在localstroage或sessionstroage里，退出登录时，删除JWT字符串就可以。
+
+每次请求，前端都会把JWT作为authorization请求头传给后端，后端进行检查。
+
 #  == 和 equals 的区别是什么
 
 == 对基本类型是值比较，对引用类型是引用比较。equals 默认情况下是引用比较，只是 String、Integer 等类重写了 equals 方法，把它变成了值比较，所以一般情况下 equals 比较的是值是否相等。
