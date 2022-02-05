@@ -47,12 +47,14 @@ StringBuffer 是线程安全的，而 StringBuilder 是非线程安全的，但 
 
 或者对撞指针
 ```java
-void reverseString(char[] s) {
+String reverseString(String str) {
+    char [] s = str.toCharArray(); 
     int l = 0;
     int r = s.length - 1;
     while (l < r) {
         swap(s, l++, r--);
     }
+    return new String(s);
 }
 void swap(char[] arr, int i, int j){
     char t = arr[i];
