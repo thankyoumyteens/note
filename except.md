@@ -29,10 +29,6 @@ try中有return, 会先将值暂存，无论finally语句中对该值做什么�
 
 `==`对基本类型是值比较，对引用类型是引用比较。equals默认继承Object类使用`==`比较，但是可以重写。
 
-# Math.round(-1.5) 等于多少
-
-等于-1，因为在数轴上取值时是向右取整
-
 # StringBuffer 和 StringBuilder 区别
 
 StringBuffer 是线程安全的，而 StringBuilder 是非线程安全的，但 StringBuilder 的性能却高于 StringBuffer（因为stringbuffer加锁了），所以在单线程环境下推荐使用 StringBuilder，多线程环境下推荐使用 StringBuffer。
@@ -69,14 +65,6 @@ void swap(char[] arr, int i, int j){
 - Hashtable是线程安全的，而HashMap是非线程安全的。
 - Hashtable是保留类不建议使用。推荐使用HashMap和ConcurrentHashMap替代。
 
-# 说一下 HashMap 的实现原理
-
-当传入key时，HashMap会根据key的`hashCode()`方法计算出hash值，根据hash值将键值对保存在数组里。当计算出的hash值相同时，HashMap用链表和红黑树存储相同hash值的键值对。当hash冲突的个数比较少时使用链表，否则使用红黑树。
-
-# 说一下 HashSet 的实现原理
-
-HashSet是基于HashMap实现的，HashSet底层使用HashMap来保存所有元素
-
 # ArrayList 和 Vector 的区别是什么？
 
 - Vector使用了Synchronized实现线程同步，是线程安全的。而ArrayList是非线程安全的。
@@ -101,14 +89,6 @@ HashSet是基于HashMap实现的，HashSet底层使用HashMap来保存所有元�
 # runnable 和 callable 有什么区别？
 
 runnable没有返回值，callable可以拿到返回值和捕获异常
-
-# 线程的5种状态
-
-- 新建(NEW)：新创建了一个线程对象。
-- 可运行(RUNNABLE)：线程对象创建后，其他线程调用了该对象的start()方法。该状态的线程等待被线程调度选中，获取cpu的使用权。
-- 运行(RUNNING)：可运行状态的线程获得了cpu时间片 ，执行程序代码。
-- 阻塞(BLOCKED)：阻塞状态是指线程因为某种原因放弃了cpu使用权，暂时停止运行。直到线程进入可运行状态，才有机会再次获得cpu时间片，转到运行状态。
-- 死亡(DEAD)：线程run()、main()方法执行结束，或者因异常退出了run()方法，则该线程结束生命周期。死亡的线程不可再次复生。
 
 # sleep() 和 wait() 有什么区别？
 
@@ -166,26 +146,16 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 
 使用volatile修饰共享变量后，当线程操作变量副本并写回主内存后，会通过CPU总线嗅探机制告知其他线程该变量副本已经失效，需要重新从主内存中读取。
 
-# synchronized 和 Lock 有什么区别？
+# synchronized 和 lock 有什么区别？
 
-- synchronized 可以给类、方法、代码块加锁；而 lock 只能给代码块加锁。
-- synchronized 不需要手动获取锁和释放锁，使用简单，发生异常会自动释放锁，不会造成死锁；而 lock 需要自己加锁和释放锁，如果使用不当没有 unLock()去释放锁就会造成死锁。
-- 通过 Lock 可以知道有没有成功获取锁，而 synchronized 却无法办到。
-
-# synchronized 和 ReentrantLock 区别是什么？
-
-- ReentrantLock 使用起来比较灵活，但是必须有释放锁的配合动作；
-- ReentrantLock 必须手动获取与释放锁，而 synchronized 不需要手动释放和开启锁；
-- ReentrantLock 只适用于代码块锁，而 synchronized 可用于修饰方法、代码块等。
-
-# 说一下 atomic 的原理？
-
-atomic 主要利用 CAS (Compare And Wwap) 和 volatile 和 native 方法来保证原子操作，从而避免 synchronized 的高开销，执行效率大为提升。
+- synchronized可以给类、方法、代码块加锁。而lock只能给代码块加锁。
+- synchronized不需要手动获取锁和释放锁，发生异常会自动释放锁，不会造成死锁。而lock需要自己加锁和释放锁，如果没有释放锁就可能造成死锁。
+- 通过lock可以知道有没有成功获取锁，而synchronized不能。
 
 # 如何实现对象克隆？
 
-- 实现 Cloneable 接口并重写 Object 类中的 clone() 方法。
-- 实现 Serializable 接口，通过对象的序列化和反序列化实现克隆，可以实现真正的深度克隆。
+- 实现Cloneable接口并重写Object类中的clone()方法。
+- 实现Serializable接口，通过对象的序列化和反序列化实现克隆，可以实现真正的深度克隆。
 
 # 深拷贝和浅拷贝区别是什么？
 
@@ -194,78 +164,65 @@ atomic 主要利用 CAS (Compare And Wwap) 和 volatile 和 native 方法来保�
 
 # session 和 cookie 有什么区别？
 
-- 存储位置不同：session 存储在服务器端；cookie 存储在浏览器端。
-- 安全性不同：cookie 安全性一般，在浏览器存储，可以被伪造和修改。
-- 容量和个数限制：cookie 有容量限制，每个站点下的 cookie 也有个数限制。
-- 存储的多样性：session 可以存储在 Redis 中、数据库中、应用程序中；而 cookie 只能存储在浏览器中。
+- session存储在服务器端。cookie存储在浏览器端。
+- cookie在浏览器存储，可以被伪造和修改。
+- cookie有容量限制，每个站点下的cookie也有个数限制。
+- session可以存储在Redis、数据库、应用程序中。而cookie只能存储在浏览器中。
 
 # 说一下 session 的工作原理？
 
-session 的工作原理是客户端登录完成之后，服务器会创建对应的 session，session 创建完之后，会把 session 的 id 发送给客户端，客户端再存储到浏览器中。这样客户端每次访问服务器时，都会带着 sessionid，服务器拿到 sessionid 之后，在内存找到与之对应的 session 这样就可以正常工作了。
+客户端完成登录后，服务器会创建对应的session，并把sessionId发送给客户端，客户端再存储到浏览器中。客户端每次访问服务器时，都会带着sessionId，服务器拿到sessionId之后，在内存找到与之对应的session。
 
 # 如果客户端禁止 cookie 能实现 session 还能用吗？
 
-可以用，session 只是依赖 cookie 存储 sessionid，如果 cookie 被禁用了，可以使用 url 中添加 sessionid 的方式保证 session 能正常使用。
+可以用，sessionId不是只能存储在cookie中。
 
 # 如何避免 SQL 注入？
 
-使用预处理 PreparedStatement。
-使用正则表达式过滤掉字符中的特殊字符。
+- 使用PreparedStatement。
+- 使用正则表达式过滤掉特殊字符。
 
 # 什么是 XSS 攻击，如何避免？
 
-XSS 攻击：即跨站脚本攻击，它是 Web 程序中常见的漏洞。原理是攻击者往 Web 页面里插入恶意的脚本代码（css 代码、Javascript 代码等），当用户浏览该页面时，嵌入其中的脚本代码会被执行，从而达到恶意攻击用户的目的，如盗取用户 cookie、破坏页面结构、重定向到其他网站等。
+跨站脚本攻击，攻击者往Web页面里插入恶意的脚本代码，当用户浏览该页面时，嵌入其中的脚本代码会被执行，从而达到恶意攻击用户的目的，如盗取用户 cookie、破坏页面结构、重定向到其他网站等。
 
-预防 XSS 的核心是必须对输入的数据做过滤处理。
+预防XSS的核心是必须对输入的数据做过滤处理。
 
 # 什么是 CSRF 攻击，如何避免？
 
-CSRF：Cross-Site Request Forgery（中文：跨站请求伪造），可以理解为攻击者盗用了你的身份，以你的名义发送恶意请求。
+跨站请求伪造，攻击者盗用了你的身份，以你的名义发送恶意请求。
 
 防御手段：
 
 - 验证请求来源地址；
 - 关键操作添加验证码；
-- 在请求地址添加 token 并验证。
-
-# 说一下 tcp 粘包是怎么产生的？
-
-tcp 粘包可能发生在发送端或者接收端，分别来看两端各种产生粘包的原因：
-
-- 发送端粘包：发送端需要等缓冲区满才发送出去，造成粘包；
-- 接收方粘包：接收方不及时接收缓冲区的包，造成多个包接收。
+- 在请求添加token并验证。
 
 # OSI 的七层模型都有哪些？
 
-1. 物理层：利用传输介质为数据链路层提供物理连接，实现比特流的透明传输。
-1. 数据链路层：负责建立和管理节点间的链路。
-1. 网络层：通过路由选择算法，为报文或分组通过通信子网选择最适当的路径。
-1. 传输层：向用户提供可靠的端到端的差错和流量控制，保证报文的正确传输。
-1. 会话层：向两个实体的表示层提供建立和使用连接的方法。
-1. 表示层：处理用户信息的表示问题，如编码、数据格式转换和加密解密等。
-1. 应用层：直接向用户提供服务，完成用户希望在网络上完成的各种工作。
+物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。
 
 # get 和 post 请求有哪些区别？
 
-- get 请求会被浏览器主动缓存，而 post 不会。
-- get 传递参数有大小限制，而 post 没有。
-- post 参数传输更安全，get 的参数会明文显示在 url 上，post 不会。
+- get请求会被浏览器主动缓存，而post不会。
+- get传递参数有大小限制，而post没有。
+- get的参数会明文显示在url上，post不会。
 
 # 如何实现跨域？
 
-- 服务器端设置 CORS 等于 *；
-- 在单个接口使用注解 @CrossOrigin 运行跨域；
-- 使用 jsonp 跨域；
+- 服务器端设置响应头中的`Access-Control-Allow-Origin`。
+- 在Controller中使用`@CrossOrigin`注解。
+- 使用jsonp。
 
 # 说一下 JSONP 实现原理？
 
-利用script标签的 src 连接可以访问不同源的特性，加载远程返回的“JS 函数”来执行的。
+利用script标签的src属性可以访问不同源的特性，加载远程返回的JS函数来执行。
 
 # 说一下你熟悉的设计模式？
 
 - 单例模式：保证被创建一次，节省系统开销。
-- 工厂模式（简单工厂、抽象工厂）：解耦代码。
-- 观察者模式：定义了对象之间的一对多的依赖，这样一来，当一个对象改变时，它的所有的依赖者都会收到通知并自动更新。
+- 工厂模式：解耦代码。
+- 观察者模式：定义了对象之间的一对多的依赖，当一个对象改变时，它的所有的依赖者都会收到通知并自动更新。
 - 外观模式：提供一个统一的接口，用来访问子系统中的一群接口，外观定义了一个高层的接口，让子系统更容易使用。
 - 模版方法模式：定义了一个算法的骨架，而将一些步骤延迟到子类中，模版方法使得子类可以在不改变算法结构的情况下，重新定义算法的步骤。
 
