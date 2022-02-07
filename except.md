@@ -173,7 +173,7 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 
 客户端完成登录后，服务器会创建对应的session，并把sessionId发送给客户端，客户端再存储到浏览器中。客户端每次访问服务器时，都会带着sessionId，服务器拿到sessionId之后，在内存找到与之对应的session。
 
-# 如果客户端禁止 cookie 能实现 session 还能用吗？
+# 如果客户端禁止 cookie， session 还能用吗？
 
 可以用，sessionId不是只能存储在cookie中。
 
@@ -228,21 +228,24 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 
 # 观察者模式
 
-发布者发布信息，订阅者获取信息，订阅了就能收到信息，没订阅就收不到信息。
+发布者发布信息，订阅者获取信息。定义了对象之间的一对多的依赖，当一个对象改变时，它的所有的依赖者都会收到通知并自动更新。
 
 ```java
 /**
- * 抽象被观察者接口
- * 声明了添加、删除、通知观察者方法
+ * 被观察者接口
  */
 public interface Observerable {
+    // 订阅
     void registerObserver(Observer o);
+    // 取消订阅
     void removeObserver(Observer o);
+    // 通知观察者
     void notifyObserver();
 }
 /**
- * 抽象观察者
- * 当被观察者调用notifyObserver()方法时，观察者的update()方法会被回调。
+ * 观察者接口
+ * 当被观察者调用notifyObserver()方法时，
+ * 观察者的update()方法会被回调。
  */
 public interface Observer {
     public void update(String message);
@@ -252,12 +255,8 @@ public interface Observer {
  */
 public class WechatServer implements Observerable {
     
-    private List<Observer> list;
+    private List<Observer> list = new ArrayList<Observer>();
     private String message;
-    
-    public WechatServer() {
-        list = new ArrayList<Observer>();
-    }
     
     @Override
     public void registerObserver(Observer o) {
@@ -272,8 +271,7 @@ public class WechatServer implements Observerable {
 
     @Override
     public void notifyObserver() {
-        for(int i = 0; i < list.size(); i++) {
-            Observer oserver = list.get(i);
+        for(Observer oserver : this.list) {
             oserver.update(this.message);
         }
     }
@@ -288,34 +286,30 @@ public class WechatServer implements Observerable {
 
 # 外观模式
 
-外观模式可以很好地解决让子系统外部的客户端在使用子系统的时候，既能简单地使用这些子系统内部的模块，而又不用客户端去与子系统内部的多个模块交互。
-
-外观模式的目的不是给子系统添加新的功能接口，而是为了让外部减少与子系统内多个模块的交互，松散耦合，从而能让外部更简单的使用子系统。
-
-因为外观是当做子系统对外的接口出现的，虽然也可以定义一些子系统没有的功能，但是不建议这么做。外观应该是包装已有的功能，它主要负责组合已有功能来实现客户需要，而不是添加新的实现。
+外观模式提供一个统一的接口，用来访问子系统中的一群接口，外观定义了一个高层的接口，让子系统更容易使用。
 
 ```java
 /**
- * 子系统
+ * 子系统1
  */
 public class DrinkableWater {
-    public void facadeWater(){
+    public void getWater(){
         System.out.println("煮水");
     }
 }
 /**
- * 子系统
+ * 子系统2
  */
 public class Tea {
-    public void facadeTea(){
+    public void getTea(){
         System.out.println("取茶");
     }
 }
 /**
- * 子系统
+ * 子系统3
  */
 public class TeaCup {
-    public void facadeTeaCup(){
+    public void getTeaCup(){
         System.out.println("泡茶");
     }
 }
@@ -323,15 +317,12 @@ public class TeaCup {
  * 外观对象
  */
 public class Waiter {
-    // 示意方法，满足客户需要的功能
+    // 对外的统一接口
     public void getTea(){
         // 内部实现会调用多个子系统
-        DrinkableWater drinkableWater = new DrinkableWater();
-        TeaCup teaCup = new TeaCup();
-        Tea tea = new Tea();
-        tea.facadeTea();
-        drinkableWater.facadeWater();
-        teaCup.facadeTeaCup(tea);
+        new DrinkableWater().getWater();
+        new TeaCup().getTeaCup();
+        new Tea().getTea();
     }
 }
 /**
@@ -349,7 +340,7 @@ public class Customer {
 定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。子类可以置换掉父类的可变部分，但是子类却不可以改变模板方法所代表的顶级逻辑。
 
 ```java
-// 抽象模板角色类
+// 抽象模板类
 public abstract class AbstractTemplate {
     // 模板方法, 可以有任意多个
     public void templateMethod(){
@@ -362,23 +353,23 @@ public abstract class AbstractTemplate {
     protected abstract void abstractMethod();
     // 钩子方法(空方法), 子类可选择实现，不是必须实现
     protected void hookMethod(){}
-    // 具体方法, 由抽象类声明并实现，而子类并不实现或置换
+    // 具体方法, 由抽象类声明并实现
     private final void concreteMethod(){
-        // ...
+        System.out.println("do");
     }
 }
 
-// 具体模板角色类，实现了父类所声明的基本方法
+// 具体模板类，实现了父类所声明的基本方法
 public class ConcreteTemplate extends AbstractTemplate{
     // 基本方法的实现
     @Override
     public void abstractMethod() {
-        // ...
+        System.out.println("do1");
     }
     // 重写父类的方法
     @Override
     public void hookMethod() {
-        // ...
+        System.out.println("do2");
     }
 }
 ```
@@ -387,11 +378,11 @@ public class ConcreteTemplate extends AbstractTemplate{
 
 Servlet
 
-HttpServlet担任抽象模板角色
+HttpServlet是抽象模板
 - 由service()方法担任模板方法。
 - Servlet并非完全按照模板方法定义的那样，而是做了变通，提供了默认doGet、doPost的实现
 
-自己实现的TestServlet担任具体模板角色
+自己实现的TestServlet是具体模板
 - TestServlet置换掉了父类HttpServlet中七个基本方法中的其中两个，分别是doGet和doPost
 
 # 解释一下什么是 aop
