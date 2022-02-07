@@ -395,20 +395,19 @@ aop 是面向切面编程，通过动态代理实现统一处理某一类问题�
 
 # spring 中的 bean 是线程安全的吗
 
-spring 中的 bean 默认是单例模式，spring 框架并没有对单例 bean 进行多线程的封装处理。
-实际上大部分时候 spring bean 无状态的（不会保存数据），所以某种程度上来说 bean 也是安全的，但如果 bean 有状态的话（比如 view model 对象），那就要开发者自己去保证线程安全了，最简单的就是改变 bean 的作用域，把“singleton”变更为“prototype”，这样请求 bean 相当于 new Bean()了，所以就可以保证线程安全了。
+spring并没有对单例的bean做线程安全的处理，但是大部分时候bean不会保存数据，所以某种程度上来说bean也是安全的。但如果bean保存了数据的话（比如 view model对象），那就要开发者自己去保证线程安全，最简单的就是把singleton变更为prototype，这样请求bean相当于new Bean()，所以就可以保证线程安全。
 
 # 说一下 spring 的事务隔离级别
 
-- ISOLATION_DEFAULT（默认值）：用底层数据库的设置隔离级别
-- ISOLATION_READ_UNCOMMITTED：未提交读，最低隔离级别、事务未提交前，就可被其他事务读取（会出现幻读、脏读、不可重复读）
-- ISOLATION_READ_COMMITTED：提交读，一个事务提交后才能被其他事务读取到（会造成幻读、不可重复读），SQL server 的默认级别
-- ISOLATION_REPEATABLE_READ：可重复读，保证多次读取同一个数据时，其值都和事务开始时候的内容是一致，禁止读取到别的事务未提交的数据（会造成幻读），MySQL 的默认级别
-- ISOLATION_SERIALIZABLE：序列化，代价最高最可靠的隔离级别，该隔离级别能防止脏读、不可重复读、幻读
+- ISOLATION_DEFAULT（默认值）：用底层数据库的设置隔离级别。
+- ISOLATION_READ_UNCOMMITTED：未提交读，事务未提交前，就可被其他事务读取（会出现幻读、脏读、不可重复读）。
+- ISOLATION_READ_COMMITTED：已提交读，事务提交后才能被其他事务读取到（会造成幻读、不可重复读）。
+- ISOLATION_REPEATABLE_READ：可重复读，保证多次读取同一个数据时，其值都和事务开始时候的内容是一致，禁止读取到别的事务未提交的数据（会造成幻读），MySQL 的默认级别。
+- ISOLATION_SERIALIZABLE：序列化，代价最高最可靠的隔离级别，该隔离级别能防止脏读、不可重复读、幻读。
 
-- 脏读：表示一个事务能够读取另一个事务中还未提交或回滚的数据。比如事务B执行过程中修改了数据X，在未提交前，事务A读取了X，而事务B却回滚了，这样事务A就形成了脏读
-- 不可重复读：事务A首先读取了一条数据，然后执行逻辑的时候，事务B将这条数据改变了，然后事务A再次读取的时候，发现数据不匹配了
-- 幻读：当前事务第一次取到的数据和后来读取到数据条目不同。比如事务A首先根据条件索引得到N条数据，然后事务B改变了这N条数据之外的M条或者增添了M条符合事务A搜索条件的数据，导致事务A再次搜索发现有N+M条数据了，就产生了幻读
+- 脏读：表示一个事务读到了另一个事务中还未提交或回滚的数据。
+- 不可重复读：事务A首先读取了一条数据，然后执行逻辑的时候，事务B将这条数据改变了，然后事务A再次读取的时候，发现数据不匹配了。
+- 幻读：当前事务第一次取到的数据和后来读取到数据条目不同。比如事务A首先根据条件索引得到N条数据，然后事务B改变了这N条数据之外的M条或者增添了M条符合事务A搜索条件的数据，导致事务A再次搜索发现有N+M条数据了，就产生了幻读。
 
 # Spring中的事务传播行为
 
@@ -422,8 +421,8 @@ spring 中的 bean 默认是单例模式，spring 框架并没有对单例 bean 
 
 # spring boot 核心配置文件是什么
 
-- bootstrap (. yml 或者 . properties)：boostrap 由父 ApplicationContext 加载的，比 applicaton 优先加载，且 boostrap 里面的属性不能被覆盖；
-- application (. yml 或者 . properties)：用于 spring boot 项目的自动化配置。
+- bootstrap.yml（或者properties）：boostrap比applicaton优先加载，且boostrap里面的属性不能被覆盖；
+- application.yml（或者properties）：用于spring boot项目的自动化配置。
 
 # spring cloud 的核心组件有哪些
 
@@ -435,7 +434,7 @@ spring 中的 bean 默认是单例模式，spring 框架并没有对单例 bean 
 
 # MyBatis延迟加载的原理是什么
 
-调用的时候触发加载，而不是在初始化的时候就加载信息。比如调用 a. getB(). getName()，这个时候发现 a. getB() 的值为 null，此时会单独触发事先保存好的关联 B 对象的 SQL，先查询出来 B，然后再调用 a. setB(b)，而这时候再调用 a. getB(). getName() 就有值了
+调用的时候触发加载，而不是在初始化的时候就加载信息。比如调用a.getB()时发现a.getB()的值为null，此时会单独触发事先保存好的关联B对象的SQL，先查询出来B，然后再调用a.setB(b)，而这时候再调用a.getB()就有值了。
 
 # MyBatis 的一级缓存和二级缓存
 
