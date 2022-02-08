@@ -7,6 +7,7 @@
 - <a href="../RabbitMQ/消息可靠性投递.md">消息可靠性投递</a>
 - <a href="../RabbitMQ/消息超时.md">消息超时</a>
 - <a href="../RabbitMQ/死信队列.md">死信队列</a>
+- <a href="../RabbitMQ/延迟队列.md">延迟队列</a>
 
 # Kafka
 - <a href="../kafka/kafka高性能的原因.md">kafka高性能的原因</a>
