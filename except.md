@@ -17,9 +17,7 @@
 
 # JWT工作原理
 
-客户端将用户名和密码传给服务端进行登陆，服务端核对成功后将用户信息作为jwt的payload生成jwt字符串，后端将这段字符串作为登陆成功的返回结果返回给前端。前端将其保存，退出登录时，删除JWT字符串就可以。
-
-每次请求，前端都会把JWT作为请求头传给后端进行检查。
+客户端将用户名和密码传给服务端进行登陆，服务端核对成功后将用户信息作为jwt的payload生成jwt字符串，后端将这段字符串作为登陆成功的返回结果返回给前端。前端将其保存，每次请求，前端都会把JWT作为请求头传给后端进行检查。退出登录时，删除JWT字符串就可以。
 
 # try中有return时finally还会执行吗
 
@@ -70,10 +68,6 @@ void swap(char[] arr, int i, int j){
 - Vector使用了Synchronized实现线程同步，是线程安全的。而ArrayList是非线程安全的。
 - ArrayList在性能方面要优于Vector。（因为Synchronized）
 - Vector扩容每次会增加1倍，而ArrayList只会增加50%。
-
-# 怎么确保一个集合不能被修改
-
-可以使用`Collections.unmodifiableCollection(Collection c)`方法来创建一个只读集合，这样改变集合的任何操作都会抛出异常。
 
 # 并行和并发有什么区别
 
