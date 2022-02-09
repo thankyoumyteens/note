@@ -140,7 +140,7 @@ notifyAll()会唤醒所有的线程，notify()只会唤醒一个线程，具体�
 
 # 怎么防止死锁
 
-- 尽量使用ReentrantLock、ReentrantReadWriteLock，设置超时时间。
+- 尽量使用Lock接口的`tryLock(long time , TimeUnit unit)`方法，设置超时时间。
 - 尽量使用`java.util.concurrent`中的并发类代替自己手写锁。
 - 尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。
 - 尽量减少同步的代码块。
