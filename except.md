@@ -97,7 +97,7 @@ public class ThreadTest implements Runnable {
 new Thread(new ThreadTest()).start();
 ```
 
-通过Callable和Future实现
+通过Callable、ExecutorService和Future实现
 ```java
 public class ThreadTest implements Callable<Integer> {
     @Override
