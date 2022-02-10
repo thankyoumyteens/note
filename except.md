@@ -194,11 +194,7 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 
 # 说一下 session 的工作原理？
 
-客户端完成登录后，服务器会创建对应的session，并把sessionId发送给客户端，客户端再存储到浏览器中。客户端每次访问服务器时，都会带着sessionId，服务器拿到sessionId之后，在内存找到与之对应的session。
-
-# 如果客户端禁止 cookie， session 还能用吗？
-
-可以用，sessionId不是只能存储在cookie中。
+客户端完成登录后，服务器会创建对应的session，并把sessionId发送给客户端，客户端再存储到浏览器（不一定是cookie）中。客户端每次访问服务器时，都会带着sessionId，服务器拿到sessionId之后，在内存找到与之对应的session。
 
 # 如何避免 SQL 注入？
 
@@ -213,12 +209,14 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 
 # 什么是 CSRF 攻击，如何避免？
 
-跨站请求伪造，攻击者盗用了你的身份，以你的名义发送恶意请求。
+跨站请求伪造，攻击者盗用了用户的身份来发送恶意请求。
+
+用户登录了A网站，认证信息保存在cookie中。在用户未退出网站A之前，在同一浏览器中，打开一个TAB页访问攻击者创建的B网站时，攻击者通过在B网站发送一个伪造的请求提交到A网站服务器上，此时浏览器会自动携带cookie访问A网站的这个地址，A网站的服务器就会误以为请求来自于自己的网站。
 
 防御手段：
 
-- 验证请求来源地址；
-- 关键操作添加验证码；
+- 验证请求来源地址。
+- 关键操作添加验证码。
 - 在请求添加token并验证。
 
 # OSI 的七层模型都有哪些？
@@ -236,10 +234,6 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 - 服务器端设置响应头中的`Access-Control-Allow-Origin`。
 - 在Controller中使用`@CrossOrigin`注解。
 - 使用jsonp。
-
-# 说一下 JSONP 实现原理？
-
-利用script标签的src属性可以访问不同源的特性，加载远程返回的JS函数来执行。
 
 # 说一下你熟悉的设计模式？
 
@@ -285,20 +279,17 @@ public class WechatServer implements Observerable {
     public void registerObserver(Observer o) {
         list.add(o);
     }
-    
     @Override
     public void removeObserver(Observer o) {
         if(!list.isEmpty())
             list.remove(o);
     }
-
     @Override
     public void notifyObserver() {
         for(Observer oserver : this.list) {
             oserver.update(this.message);
         }
     }
-    
     public void setInfomation(String s) {
         this.message = s;
         // 消息更新，通知所有观察者
@@ -410,15 +401,15 @@ HttpServlet是抽象模板
 
 # 解释一下什么是 aop
 
-aop 是面向切面编程，通过动态代理实现统一处理某一类问题的编程思想，比如统一处理日志、异常等。
+aop是面向切面编程，通过动态代理实现统一处理某一类问题的编程思想，比如统一处理日志、异常等。
 
 # 解释一下什么是 ioc
 
-对于 spring 框架来说，就是由 spring 来负责控制对象的生命周期和对象间的关系。控制反转指的是，这种控制权不由当前对象管理了，由第三方容器来管理。
+由spring来负责控制对象的生命周期和对象间的关系。控制反转指的是，这种控制权不由当前对象管理了，由第三方容器来管理。
 
 # spring 中的 bean 是线程安全的吗
 
-spring并没有对单例的bean做线程安全的处理，但是大部分时候bean不会保存数据，所以某种程度上来说bean也是安全的。但如果bean保存了数据的话（比如 view model对象），那就要开发者自己去保证线程安全，最简单的就是把singleton变更为prototype，这样请求bean相当于new Bean()，所以就可以保证线程安全。
+spring并没有对bean做线程安全的处理，但是大部分时候bean不会保存数据，所以某种程度上来说bean也是安全的。但如果bean保存了数据的话（比如 view model对象），那就要开发者自己去保证线程安全，最简单的就是把bean的作用域从singleton变为prototype，这样请求bean相当于new Bean()，所以就可以保证线程安全。
 
 # 说一下 spring 的事务隔离级别
 
