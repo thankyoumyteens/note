@@ -38,6 +38,21 @@ select CONCAT('My', 'S', 'QL');
 -- 输出: 'MySQL'
 ```
 
+# GROUP_CONCAT()
+
+把查询结果拼接成字符串
+
+语法
+```sql
+GROUP_CONCAT([distinct] 要连接的字段 [order by 排序字段 asc/desc ] [separator '分隔符'] )
+```
+
+示例
+```sql
+select GROUP_CONCAT(concat('"',role_id,'"') separator ',') from role_info;
+-- 输出: "123","456","789","111"
+```
+
 # CONCAT_WS()
 
 CONCAT With Separator ，是CONCAT()的特殊形式。第一个参数是其它参数的分隔符。分隔符的位置放在要连接的两个字符串之间。分隔符可以是一个字符串，也可以是其它参数。
