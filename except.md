@@ -64,7 +64,7 @@ void swap(char[] arr, int i, int j){
 
 - HashMap允许key和value为null，而Hashtable不允许。
 - Hashtable是线程安全的，而HashMap是非线程安全的。
-- Hashtable是保留类不建议使用。推荐使用HashMap和ConcurrentHashMap替代。
+- Hashtable已被淘汰。推荐使用HashMap和ConcurrentHashMap替代。
 
 # ArrayList 和 Vector 的区别是什么？
 
