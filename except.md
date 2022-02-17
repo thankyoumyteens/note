@@ -26,10 +26,6 @@ try中有return时会先将返回值暂存，无论finally语句中对该值做�
 
 当try与finally中均有return时，会忽略try中的return。
 
-#  == 和 equals 的区别是什么
-
-`==`对基本类型是值比较，对引用类型是引用比较。equals默认继承Object类使用`==`比较，子类可以重写。
-
 # StringBuffer 和 StringBuilder 区别
 
 StringBuffer是线程安全的，而StringBuilder是非线程安全的。StringBuilder的性能高于StringBuffer（因为stringbuffer加锁了）。所以在单线程环境下推荐使用StringBuilder，多线程环境下推荐使用StringBuffer。
@@ -71,11 +67,6 @@ void swap(char[] arr, int i, int j){
 - Vector是线程安全的。ArrayList是非线程安全的。
 - ArrayList性能优于Vector（因为加锁了）。
 - Vector每次扩容会增加一倍，ArrayList会增加一半。
-
-# 并行和并发有什么区别
-
-- 并行：多个处理器同时处理多个任务。
-- 并发：一个处理器按时间片轮流执行多个任务，从逻辑上来看那些任务是同时执行。
 
 # 创建线程有哪几种方式？
 
@@ -831,31 +822,37 @@ string（字符串）、list（列表）、hash（字典）、set（集合）、
 
 java基础
 
-# java流操作比循环高效的原因
-
-# jvm垃圾回收时机
-
-# 避免hash冲突过多的方法
-
-# aqs
-
-# 双亲委派
-
-# jvm方法区
-
-# 监听器
-
 # springboot启动过程
 
 # 主键索引和普通索引区别
 
-# 快排
+# 快速排序
+
+选中第一个元素v, 调整数组使得v左边的元素小于v, 右边的元素大于v, 使v分割原数组为左右两个数组, 不断重复这个操作, 直到分割后的所有数组长度都等于1, 此时排序已经完成
 
 # linux用端口查pid
 
-# 二叉树 层级遍历
+```
+lsof -i:80
+netstat -nlp | grep :80
+ps -ef | grep 80
+```
 
 # redis为什么并发性能高
 
 # 两个栈实现一个队列
+
+把需要存放的元素插入到栈1中，把栈1中的元素依次插入到栈2中，此时栈2的栈顶元素就是需要出队列的元素
+
+# 连接池
+
+# 线程池
+
+# spring用到的设计模式
+
+# redis内存淘汰机制
+
+# mq保证消息顺序
+
+# mq消息积压怎么处理
 
