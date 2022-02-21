@@ -1,9 +1,9 @@
 # JWT令牌结构
 
 一个JWT由三部分组成：
-- Header（头部）: base64编码的Json字符串
-- Payload（载荷） : base64编码的Json字符串
-- Signature（签名）: 使用指定算法，通过Header和Payload加盐计算的字符串
+- Header: base64编码的Json字符串，Header通常由两部分组成：令牌的类型，即JWT，以及使用的签名算法，例如HMAC、SHA256或RSA。
+- Payload: base64编码的Json字符串，payload由声明（claims）组成。声明就是保存的数据。
+- Signature: 使用指定算法对Header和Payload加盐计算得到的字符串，保证token在传输的过程中没有被篡改或者损坏。
 
 各部分以`.`分割，如：`eyJhbGciOiJIUzUxMiJ9.eyJjcnQiOjE1MjgzNDM4OTgyNjgsImV4cCI6MTUyODM0MzkxOCwidXNlcm5hbWUiOiJ0b20ifQ.E-0jxKxLICWgcFEwNwQ4pfhdMzchcHmsd8G_BTsWgkUmVwPzDd7jJlf94cAdtbwTLMm27ouYYzTTxMXq7W1jvQ`
 

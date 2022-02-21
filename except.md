@@ -1,3 +1,7 @@
+# 快速排序
+
+选中第一个元素v, 调整数组使得v左边的元素小于v, 右边的元素大于v, 使v分割原数组为左右两个数组, 不断重复这个操作, 直到分割后的所有数组长度都等于1, 此时排序已经完成
+
 # 接口幂等性
 
 接口任意多次调用所产生的影响均与一次调用的影响相同。
@@ -8,23 +12,9 @@
 2. 调用方传递唯一ID: 请求时携带一个短时间内唯一的ID，服务器收到请求后拿该ID到Redis中查询是否存在，如果存在就是重复执行；如果不存在就把这个ID存储到Redis中。
 3. 数据库乐观锁: 在对应的表中多添加一个版本号字段。每次调用都会传递版本号，并将该版本号作为where条件，如果重复执行SQL语句，会因为版本不一致而不生效。
 
-# JWT
-
-一个JWT由三部分组成，各部分以`.`分割
-
-- Header: base64编码的Json字符串，Header通常由两部分组成：令牌的类型，即JWT，以及使用的签名算法，例如HMAC、SHA256或RSA。
-- Payload: base64编码的Json字符串，payload由声明（claims）组成。声明就是保存的数据。
-- Signature: 使用指定算法对Header和Payload加盐计算得到的字符串，保证token在传输的过程中没有被篡改或者损坏。
-
-JWT工作原理
+# JWT工作原理
 
 客户端将用户名和密码传给服务端进行登陆，服务端核对成功后将用户信息作为jwt的payload生成jwt字符串，并返回给客户端。客户端将其保存，每次请求时都会携带JWT字符串。退出登录时，删除JWT字符串就可以。
-
-# try中有return时finally还会执行吗
-
-try中有return时会先将返回值暂存，无论finally语句中对该值做什么处理，最终返回的都是try语句中的暂存值。
-
-当try与finally中均有return时，会忽略try中的return。
 
 # StringBuffer 和 StringBuilder 区别
 
@@ -56,11 +46,15 @@ void swap(char[] arr, int i, int j){
 }
 ```
 
-# HashMap 和 Hashtable 有什么区别？
+# ConcurrentHashMap
 
-- HashMap允许key和value为null，而Hashtable不允许。
-- Hashtable是线程安全的，而HashMap是非线程安全的。
-- Hashtable已被淘汰。推荐使用HashMap和ConcurrentHashMap替代。
+ConcurrentHashMap由Segment数组组成，每个Segment又包含一个HashEntry数组，数组中的每一个HashEntry既是一个键值对，也是一个链表的头节点。
+
+ConcurrentHashMap定位一个元素的过程需要进行两次Hash操作。第一次Hash定位到Segment，第二次Hash定位到元素所在的链表的头部。
+
+ConcurrentHashMap使用分段锁技术，将数据分成一段一段的存储（Segment数组），然后给每一段数据配一把锁（ReentrantLock），当一个线程占用锁访问其中一个段的时候，其他段的数据也能被其他线程访问，在保证线程安全的同时降低了锁的粒度，让并发操作效率更高。
+
+![](Java/base/img/cmap1.png)
 
 # ArrayList 和 Vector 的区别是什么？
 
@@ -70,49 +64,13 @@ void swap(char[] arr, int i, int j){
 
 # 创建线程有哪几种方式？
 
-继承Thread类，重写run方法
-```java
-public class ThreadTest extends Thread {
-    @Override
-    public void run() {}
-}
-new ThreadTest().start();
-```
-
-实现Runnable接口，重写run方法
-```java
-public class ThreadTest implements Runnable {
-    @Override
-    public void run() {}
-}
-new Thread(new ThreadTest()).start();
-```
-
-通过Callable、ExecutorService和Future实现
-```java
-public class ThreadTest implements Callable<Integer> {
-    @Override
-    public Integer call() throws Exception {}
-}
-ExecutorService executor = Executors.newCachedThreadPool();
-Future<Integer> result = executor.submit(new ThreadTest());
-// get()方法用来获取执行结果，这个方法会产生阻塞到任务执行完毕才返回
-System.out.println(result.get());
-```
+- 继承Thread类，重写run方法
+- 实现Runnable接口，重写run方法
+- 通过Callable、ExecutorService和Future实现
 
 # runnable 和 callable 有什么区别？
 
 runnable没有返回值，callable可以拿到返回值和捕获异常
-
-# sleep() 和 wait() 有什么区别？
-
-- sleep()来自Thread。wait()来自Object。
-- sleep()只让出了CPU，而并不会释放资源的同步锁。wait()会释放锁。
-- sleep()时间到会自动恢复。wait()只能使用notify()或notifyAll()唤醒。
-
-# notify()和 notifyAll()有什么区别？
-
-notifyAll()会唤醒所有的线程，notify()只会唤醒一个线程，具体唤醒哪一个线程由虚拟机控制。
 
 # 什么是死锁
 
@@ -124,12 +82,6 @@ notifyAll()会唤醒所有的线程，notify()只会唤醒一个线程，具体�
 - 尽量使用`java.util.concurrent`中的并发类代替自己手写锁。
 - 尽量降低锁的使用粒度，尽量不要几个功能用同一把锁。
 - 尽量减少同步的代码块。
-
-# ThreadLocal 是什么？有哪些使用场景？
-
-ThreadLocal为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的副本，而不会影响其它线程所对应的副本。
-
-ThreadLocal的经典使用场景是数据库连接和session管理等。
 
 # synchronized 锁升级的原理
 
@@ -166,22 +118,13 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 - synchronized不需要手动获取锁和释放锁，发生异常会自动释放锁，不会造成死锁。而lock需要自己加锁和释放锁，如果没有释放锁就可能造成死锁。
 - 通过lock可以知道有没有成功获取锁，而synchronized不能。
 
-# 如何实现对象克隆？
+# Chrome中cookie的容量限制
 
-- 实现Cloneable接口并重写Object类中的clone()方法。
-- 实现Serializable接口，通过对象的序列化和反序列化实现克隆，可以实现真正的深度克隆。
+一般是4k
 
-# 深拷贝和浅拷贝区别是什么？
+# Chrome中cookie的个数限制
 
-- 浅拷贝：当对象被复制时只复制它本身和其中包含的值类型的成员变量，而引用类型的成员对象并没有复制。
-- 深拷贝：除了对象本身被复制外，对象所包含的所有成员变量也将复制。
-
-# session 和 cookie 有什么区别？
-
-- session存储在服务器端。cookie存储在浏览器端。
-- cookie在浏览器存储，可以被伪造和修改。
-- cookie有容量限制，每个站点下的cookie也有个数限制。
-- session可以存储在Redis、数据库、应用程序中。而cookie只能存储在浏览器中。
+每个域为53个
 
 # 说一下 session 的工作原理？
 
@@ -209,22 +152,6 @@ Java 内存模型规定所有的共享变量都存储于主内存。每一个线
 - 验证请求来源地址。
 - 关键操作添加验证码。
 - 在请求添加token并验证。
-
-# OSI 的七层模型都有哪些？
-
-物理层、数据链路层、网络层、传输层、会话层、表示层、应用层。
-
-# get 和 post 请求有哪些区别？
-
-- get请求会被浏览器主动缓存，而post不会。
-- get传递参数有大小限制，而post没有。
-- get的参数会明文显示在url上，post不会。
-
-# 如何实现跨域？
-
-- 服务器端设置响应头中的`Access-Control-Allow-Origin`。
-- 在Controller中使用`@CrossOrigin`注解。
-- 使用jsonp。
 
 # 说一下你熟悉的设计模式？
 
@@ -402,13 +329,12 @@ aop是面向切面编程，通过动态代理实现统一处理某一类问题�
 
 spring并没有对bean做线程安全的处理，但是大部分时候bean不会保存数据，所以某种程度上来说bean也是安全的。但如果bean保存了数据的话（比如 view model对象），那就要开发者自己去保证线程安全，最简单的就是把bean的作用域从singleton变为prototype，这样请求bean相当于new Bean()，所以就可以保证线程安全。
 
-# 说一下 spring 的事务隔离级别
+# 数据库的事务隔离级别
 
-- ISOLATION_DEFAULT（默认值）：用底层数据库的设置隔离级别。
-- ISOLATION_READ_UNCOMMITTED：未提交读，事务未提交前，就可被其他事务读取（会出现幻读、脏读、不可重复读）。
-- ISOLATION_READ_COMMITTED：已提交读，事务提交后才能被其他事务读取到（会造成幻读、不可重复读）。
-- ISOLATION_REPEATABLE_READ：可重复读，保证多次读取同一个数据时，其值都和事务开始时候的内容是一致，禁止读取到别的事务未提交的数据（会造成幻读），MySQL 的默认级别。
-- ISOLATION_SERIALIZABLE：序列化，代价最高最可靠的隔离级别，该隔离级别能防止脏读、不可重复读、幻读。
+- READ_UNCOMMITTED：未提交读，事务未提交前，就可被其他事务读取（会出现幻读、脏读、不可重复读）。
+- READ_COMMITTED：已提交读，事务提交后才能被其他事务读取到（会造成幻读、不可重复读）。
+- REPEATABLE_READ（MySQL默认）：可重复读，保证多次读取同一个数据时，其值都和事务开始时候的内容是一致，禁止读取到别的事务未提交的数据（会造成幻读）。
+- SERIALIZABLE：序列化，一个个事务排成序列的形式。事务一个挨一个执行，等待前一个事务执行完，后面的事务才可以顺序执行。代价最高最可靠的隔离级别，该隔离级别能防止脏读、不可重复读、幻读。
 
 - 脏读：表示一个事务读到了另一个事务中还未提交或回滚的数据。
 - 不可重复读：事务A首先读取了一条数据，然后执行逻辑的时候，事务B将这条数据改变了，然后事务A再次读取的时候，发现数据不匹配了。
@@ -423,11 +349,6 @@ spring并没有对bean做线程安全的处理，但是大部分时候bean不会
 - Propagation.NOT_SUPPORTED: 以非事务的方式运行, 如果当前存在事务, 暂停当前的事务。
 - Propagation.NEVER: 以非事务的方式运行, 如果当前存在事务, 则抛出异常。
 - Propagation.NESTED: 如果没有, 就新建一个事务；如果有, 就在当前事务中嵌套其他事务。
-
-# spring boot 核心配置文件是什么
-
-- bootstrap.yml（或者properties）：boostrap比applicaton优先加载，且boostrap里面的属性不能被覆盖；
-- application.yml（或者properties）：用于spring boot项目的自动化配置。
 
 # spring cloud 的核心组件有哪些
 
@@ -507,41 +428,6 @@ Topic类型的Exchange与Direct相比，都是可以根据RoutingKey把消息路
 7. Callback 服务收到生产者的延迟消息后去检查数据库中是否存在消费者发送的确认消息，如果存在，则不需要做任何处理。如果不存在或者消费失败了，那么Callback 服务就需要通知生产者需要重新发送，生产者收到信息后就会重新查询业务数据然后将消息发送出去。
 
 这种方案不一定能保障百分百投递成功，主要目的是为了减少数据库操作，提高并发量
-
-# kafka 可以脱离 zookeeper 单独使用吗
-
-kafka 不能脱离 zookeeper 单独使用，因为 kafka 使用 zookeeper 管理和协调 kafka 的节点服务器。
-
-# kafka 有几种数据保留的策略
-
-kafka 有两种数据保存策略：按照过期时间保留和按照存储的消息大小保留。 kafka 同时设置了 7 天和 10G 清除数据，到第五天的时候消息达到了 10G，这个时候 kafka会执行数据清除工作，时间和大小不论那个满足条件，都会清空数据。
-
-# 什么情况会导致 kafka 运行变慢
-
-- cpu 性能瓶颈
-- 磁盘读写瓶颈
-- 网络瓶颈
-
-# 使用 kafka 集群需要注意什么
-
-集群的数量不是越多越好，最好不要超过 7 个，因为节点越多，消息复制需要的时间就越长，整个群组的吞吐量就越低。
-集群数量最好是单数，因为超过一半故障集群就不能用了，设置为单数容错率更高。
-
-# zookeeper 都有哪些功能
-
-- 集群管理：监控节点存活状态、运行请求等。
-- 主节点选举：主节点挂掉了之后可以从备用的节点开始新一轮选主
-- 分布式锁：zookeeper 提供两种锁：独占锁、共享锁。独占锁即一次只能有一个线程使用资源，共享锁是可以有多个线程同时读同一个资源，如果要使用写锁也只能有一个线程使用。
-- 命名服务：在分布式系统中，通过使用命名服务，客户端应用能够根据指定名字来获取资源或服务的地址，提供者等信息。
-
-# 说一下 zookeeper 的通知机制
-
-Zookeeper维护一个类似文件系统的树形数据结，树的节点称为znode，对Zookeeper的操作主要是对znode的操作。客户端会对某个 znode 建立一个 watcher 事件，当该 znode 发生变化时，这些客户端会收到 zookeeper 的通知，然后客户端可以根据 znode 变化来做出业务上的改变。
-
-# 一张自增表里面总共有 7 条数据，删除了最后 2 条数据，重启 MySQL 数据库，又插入了一条数据，此时 id 是几
-
-- 表类型如果是 MyISAM ，那 id 就是 8。
-- 表类型如果是 InnoDB，那 id 就是 6。InnoDB 表只会把自增主键的最大 id 记录在内存中，所以重启之后会导致最大 id 丢失。
 
 # B树
 
@@ -746,8 +632,7 @@ explain select * from table where id=1
 
 - 为搜索字段创建索引。
 - 避免使用 select *，列出需要查询的字段。
-- 垂直分割分表。
-- 选择正确的存储引擎。
+- 垂直分割分表，并选择正确的存储引擎。
 
 # mysql水平切割和垂直切割
 
@@ -762,11 +647,6 @@ explain select * from table where id=1
 # Redis 为什么是单线程的
 
 因为 cpu 不是 Redis 的瓶颈，Redis 的瓶颈最有可能是机器内存或者网络带宽。既然单线程容易实现，而且 cpu 又不会成为瓶颈，那就顺理成章地采用单线程的方案了。
-
-# jedis 和 Redisson 有哪些区别
-
-- jedis：提供了比较全面的 Redis 命令的支持。
-- Redisson：实现了分布式和可扩展的 Java 数据结构，与 jedis 相比 Redisson 的功能相对简单，不支持排序、事务、管道、分区等 Redis 特性。
 
 # Redis 持久化有几种方式
 
@@ -799,10 +679,6 @@ ex 是用来设置超时时间的，而 nx 是 not exists 的意思，用来判�
 
 Redis 分布式锁不能解决超时的问题，分布式锁有一个超时时间，程序的执行时间如果超出了锁的超时时间就会出现问题。
 
-# Redis 如何做内存优化
-
-尽量使用 Redis 的散列表，把相关的信息放到散列表里面存储，而不是把每个字段单独存储，这样可以有效的减少内存使用。比如将 Web 系统的用户对象，应该放到散列表里面再整体存储到 Redis，而不是把用户的姓名、年龄、密码、邮箱等字段分别设置 key 进行存储。
-
 # Redis数据类型
 
 string（字符串）、list（列表）、hash（字典）、set（集合）、zset（有序集合）。
@@ -818,6 +694,29 @@ string（字符串）、list（列表）、hash（字典）、set（集合）、
 - 缓存击穿: 用户大量请求缓存中没有但数据库中有的数据（一般是缓存时间到期），导致数据库压力过大。解决方案: 1、直接将缓存设置为不过期，然后由定时任务去异步加载数据，更新缓存。2、加互斥锁。在并发的多个请求中，只有第一个请求线程能拿到锁并执行数据库查询操作，等到第一个线程将数据写入缓存后，其他的线程直接走缓存。
 - 缓存雪崩: 缓存中不同的数据大批过期，导致数据库压力过大。解决方案: 1、过期时间设置随机。2、设置热点数据永远不过期。
 
+# Redis清除过期Key的方式
+
+- 定时检查删除：对于每一个设置了过期时间的key都会创建一个定时器，一旦达到过期时间都会删除。这种方式立即清除过期数据，对内存比较好，但是占用了大量CPU的资源去处理过期数据，会影响redis的吞吐量和响应时间。
+- 惰性检查删除：当访问一个key的时候，才会判断该key是否过期，如果过期就删除。该方式能最大限度节省 CPU 的资源。但是会占用较多的内存。
+- 定期检查删除：每隔一段时间，就对一些key进行检查，删除里面过期的key。可以通过限制删除操作执行的时长和频率来减少删除操作对CPU的影响。定期删除也能有效释放过期key占用的内存，但是难以确定删除操作执行的时长和频率。可以通过修改配置文件redis.conf的hz选项来调整这个次数。
+
+Redis的过期删除策略是：惰性删除和定期删除两种策略配合使用。
+
+# Redis内存淘汰机制
+
+- no-eviction：当内存不足以容纳新写入数据时，新的写入操作会报错
+- allkeys-lru：当内存不足以容纳新写入数据时，移除最近最少使用的key（这个是最常用的）
+- allkeys-random：当内存不足以容纳新写入数据时，随机移除某个key
+- volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的key中，移除最近最少使用的key
+- volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的key中，随机移除某个key
+- volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的key中，有更早过期时间的key优先移除
+
+# Redis为什么并发性能高
+
+- redis是基于内存的，内存的读写速度非常快
+- redis是单线程的，省去了切换线程的时间，不存在加锁释放锁操作
+- 使用多路复用技术，非阻塞IO
+
 # 竞争力
 
 java基础
@@ -826,33 +725,15 @@ java基础
 
 # 主键索引和普通索引区别
 
-# 快速排序
-
-选中第一个元素v, 调整数组使得v左边的元素小于v, 右边的元素大于v, 使v分割原数组为左右两个数组, 不断重复这个操作, 直到分割后的所有数组长度都等于1, 此时排序已经完成
-
-# linux用端口查pid
-
-```
-lsof -i:80
-netstat -nlp | grep :80
-ps -ef | grep 80
-```
-
-# redis为什么并发性能高
-
-# 两个栈实现一个队列
-
-把需要存放的元素插入到栈1中，把栈1中的元素依次插入到栈2中，此时栈2的栈顶元素就是需要出队列的元素
-
 # 连接池
 
 # 线程池
 
 # spring用到的设计模式
 
-# redis内存淘汰机制
-
 # mq保证消息顺序
 
 # mq消息积压怎么处理
+
+# 红黑树
 
