@@ -93,10 +93,6 @@ synchronized底层是通过monitor对象的monitorenter和monitorexit指令实�
 
 一般是4k，每个域为53个
 
-# 说一下session的工作原理？
-
-客户端完成登录后，服务器会创建对应的session，并把sessionId发送给客户端，客户端再存储到浏览器（不一定是cookie）中。客户端每次访问服务器时，都会带着sessionId，服务器拿到sessionId之后，在内存找到与之对应的session。
-
 # 说一下你熟悉的设计模式？
 
 - 单例模式：保证被创建一次，节省系统开销。
