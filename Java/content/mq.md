@@ -10,4 +10,5 @@
 - <a href="../RabbitMQ/延迟队列.md">延迟队列</a>
 
 # Kafka
+- <a href="../kafka/kafka架构.md">kafka架构</a>
 - <a href="../kafka/kafka高性能的原因.md">kafka高性能的原因</a>

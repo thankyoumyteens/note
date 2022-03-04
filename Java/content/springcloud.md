@@ -7,6 +7,7 @@
 - <a href="../SpringBoot/SpringBoot整合Redis集群.md">SpringBoot整合Redis集群</a>
 - <a href="../SpringBoot/SpringBoot整合RabbitMQ.md">SpringBoot整合RabbitMQ</a>
 - <a href="../SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
+- <a href="../SpringBoot/springboot集成Kafka.md">springboot集成Kafka</a>
 
 # SpringCloud
 
