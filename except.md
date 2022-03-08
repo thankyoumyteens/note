@@ -57,7 +57,9 @@ y.left = T3
 - 如果小于V，就把i指向的元素和j+1指向的元素交换，i++，j++
 - 如果等于V，i++
 - 以此类推，直到i和k相等。最后把V和j指向的元素交换
-- 此时：`[left,j-1]<V`，`[k+1,right]>V`，`[j,k]==V`
+- 此时：`[left,j-1]<V`，
+- `[k+1,right]>V`，
+- `[j,k]==V`
 
 ![](Algorithm/img/qs1.png)
 
