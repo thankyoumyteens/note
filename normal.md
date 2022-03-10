@@ -2,7 +2,7 @@
 - <a href="english.md">英语</a>
 - <a href="os/linux.md">Linux</a>
 - <a href="os/windows.md">Windows</a>
-- <a href="JAVA.md">Java</a>
+- <a href="Java/JAVA.md">Java</a>
 - <a href="Python/python.md">Python</a>
 - <a href="fe/frontend.md">前端</a>
 - <a href="Git/git.md">Git</a>
