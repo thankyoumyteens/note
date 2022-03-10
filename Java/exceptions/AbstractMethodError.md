@@ -1,7 +1,7 @@
 # AbstractMethodError
 
 ```
-org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.AbstractMethodError: Method com/sobot/cti/sms/event/EventSignStatusChanged.getAgentUUID()Ljava/lang/String; is abstract
+org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.AbstractMethodError: Method com/xxx/event/EventSignStatusChanged.getAgentUUID()Ljava/lang/String; is abstract
         at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1055)
         at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
         at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
@@ -14,7 +14,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
         at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
         at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
         at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
-        at com.sobot.boss.base.boot.request.BossRequestFilter.doFilter(BossRequestFilter.java:34)
+        at com.xxx.boss.base.boot.request.BossRequestFilter.doFilter(BossRequestFilter.java:34)
         at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:61)
         at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
         at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
@@ -43,7 +43,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 
 ```java
 // 本地的
-package com.sobot.cti;
+package com.xxx.cti;
 
 import java.util.Map;
 
@@ -60,7 +60,7 @@ public interface Event extends Message {
 
 ```java
 // 线上的
-package com.sobot.cti;
+package com.xxx.cti;
 
 import java.util.Map;
 
