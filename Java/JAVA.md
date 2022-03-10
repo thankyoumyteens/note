@@ -51,3 +51,6 @@
 
 # JVM
 - <a href="content/jvm.md">目录</a>
+
+# 异常
+- <a href="content/exceptions.md">目录</a>
