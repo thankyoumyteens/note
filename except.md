@@ -258,3 +258,41 @@ Redis的过期删除策略是：惰性删除和定期删除两种策略配合使
 - main线程终止，不能决定JVM是否退出。
 - 若想在main线程退出后，全部其余线程也退出，那么可以把其余线程都设置为守护线程
 
+# 一个对象的两个方法加synchronized，一个线程访问其中一个方法，另一个线程可以进入另一个方法吗？
+
+不能
+
+无论synchronized修饰的是方法还是代码块，对应的锁都是一个对象，同一个对象中多个方法都加了synchronized关键字的时候，调用任意加锁的方法后，所有线程都需等该方法执行完成才能调用其他方法。
+
+# SpringBoot自动配置原理
+
+启动类中有@SpringBootApplication注解，@SpringBootApplication注解中有@EnableAutoConfiguration注解，@EnableAutoConfiguration注解中有@Import(AutoConfigurationImportSelector.class)注解。
+
+AutoConfigurationImportSelector这个类中的getCandidateConfigurations()方法里面通过SpringFactoriesLoader.loadFactoryNames()扫描所有具有META-INF/spring.factories文件的jar包。
+
+spring-boot-autoconfigure-版本号.jar中的spring.factories文件指定了redis、mq等springboot内置的配置类。
+
+getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类和在@SpringBootApplication(exclude = {})中指定的配置类。
+
+在剩下的配置类中实例化@Conditional注解为true的bean。@Conditional注解（如：@ConditionalOnBean：当容器里有指定Bean的条件下）可以组合使用。
+
+## spring.factories例子
+
+```ini
+# 多个类名逗号分隔,而\表示忽略换行
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.demo.Demo1AutoConfiguration,\
+org.demo.Demo2AutoConfiguration
+```
+
+## 配置类例子
+
+```java
+@Bean
+// 当SpringIoc容器内不存在指定Bean的条件
+@ConditionalOnMissingBean
+public DemoBean demoBean(t) {
+   return new DemoBean();
+}
+```
+
