@@ -1,3 +1,3 @@
 - <a href="normal.md">normal</a>
-- <a href="leetcode.md">leetcode</a>
+- <a href="Algorithm/leetcode.md">leetcode</a>
 - <a href="except.md">except</a>
