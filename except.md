@@ -204,6 +204,27 @@ aop是面向切面编程，通过动态代理实现统一处理某一类问题�
 
 string（字符串）、list（列表）、hash（字典）、set（集合）、zset（有序集合）。
 
+# redis常用的方法
+
+## string
+
+1. redisTemplate.opsForValue().set(key,value)); 设置指定键的值。SET key value
+2. redisTemplate.opsForValue().get(key)); 获取指定键的值。GET key
+3. redisTemplate.opsForValue().getAndSet(key, value); 设置键的字符串值并返回其旧值。GETSET key value
+4. redisTemplate.opsForValue().set(key, value, timeout, unit); 设置值和到期时间。SETEX key seconds value
+5. redisTemplate.opsForValue().setIfAbsent(key, value); 设置键的值，仅当键不存在时。SETNX key value
+6. redisTemplate.opsForValue().getOperations().delete(key); 删除键。DEL key
+
+## hash
+
+1. redisTemplate.opsForHash().delete(key, hashKeys); 删除一个或多个哈希字段。HDEL key field1 field2 ...
+2. redisTemplate.opsForHash().hasKey(key, hashKey)；判断字段是否存在。HEXISTS key field
+3. redisTemplate.opsForHash().get(key, hashKey)；获取指定键的哈希字段的值。HGET key field
+4. redisTemplate.opsForHash().entries(key); 获取指定键的所有字段和值。HGETALL key
+5. redisTemplate.opsForHash().keys(key)；获取指定键的所有字段。HKEYS key
+6. redisTemplate.opsForHash().put(key, hashKey, value); 设置字段的值。HSET key field value
+7. redisTemplate.opsForHash().putIfAbsent(key, hashKey, value)；仅当字段不存在时，才设置字段的值。	HSETNX key field value
+
 # Redis缓存穿透缓存击穿缓存雪崩
 
 - 缓存穿透: 用户不断请求缓存和数据库中都没有的数据，导致数据库压力过大。解决方案: 将数据库中没有取到的key缓存为null
