@@ -334,3 +334,28 @@ public DemoBean demoBean(t) {
 }
 ```
 
+# 实现线程同步
+
+通过阻塞队列ArrayBlockingQueue实现
+
+BlockingQueue的put()方法和take()方法在返回前都会阻塞当前线程
+
+```java
+// 容量为3的队列
+ArrayBlockingQueue queue = new ArrayBlockingQueue<Integer>(3);
+// 线程1
+public void t1() {
+   int i = 0;
+   while (true) {
+      // 队列满了会被阻塞
+      queue.put(i++);
+   }
+}
+// 线程2
+public void t2() {
+   while (true) {
+      // 队列空了会被阻塞
+      int num = (int) queue.take();
+   }
+}
+```
