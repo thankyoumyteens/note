@@ -1,25 +1,118 @@
-# Redis 怎么实现分布式锁
+# SETNX + EXPIRE
 
-使用setnx（set if not exists）
+SETNX 是SET IF NOT EXISTS的简写，只在key不存在的情况下，才将键key的值设置为value。如果 key不存在，则SETNX成功返回1，如果这个key已经存在了，则返回0。
+
+```java
+// 加锁，lock_value是uuid
+if（jedis.setnx(key_resource_id, lock_value) == 1) {
+   // 设置过期时间
+   expire(key_resource_id，100);
+   try {
+      // do something
+   } catch() {
+   } finally {
+      // 释放锁
+      // 避免锁过期释放了，业务还没执行完，删了别的线程的锁
+      if (lock_value.equals(jedis.get(key_resource_id))) {
+         jedis.del(key_resource_id);
+      }
+   }
+}
 ```
-setnx lock true
-# 逻辑处理
-del lock
+问题：如果执行完setnx加锁，还没执行expire设置过期时间时，进程终止了，那么这个锁就不会被释放了
+
+# Lua脚本 + SETNX + EXPIRE
+
+Redis采用同一个Lua解释器去运行所有命令，所以Lua脚本的执行是原子性的。
+
+```java
+String lua_scripts = "if redis.call('setnx',KEYS[1],ARGV[1]) == 1 then" +
+            " redis.call('expire',KEYS[1],ARGV[2]) return 1 else return 0 end";   
+Object result = jedis.eval(lua_scripts, Collections.singletonList(key_resource_id), Collections.singletonList(values));
+//判断是否成功
+return result.equals(1L);
 ```
-当执行 setnx 命令之后返回值为 1 的话，则表示创建锁成功，否则就是失败
 
-但是以上代码有一个问题，就是没有设置锁的超时时间，因此如果出现异常情况，会导致锁未被释放，而其他线程又在排队等待此锁就会导致程序不可用。
+# SET指令扩展参数
 
-而`setnx lock true` 和 `expire lock 30` 命令是两条命令，也就是一个执行完另一个才能执行。但如果在 setnx 命令执行完之后，发生了异常情况，那么就会导致 expire 命令不会执行，因此依然没有解决死锁的问题。
-
-这个问题在 Redis 2.6.12 版本中得到了有效的处理。
-
-在 Redis 2.6.12 中我们可以使用一条 set 命令来执行键值存储，并且可以判断键是否存在以及设置超时时间
+用一条SET代替SETNX + EXPIRE两条命令
 ```
-set lock true ex 30 nx
+SET key value[EX seconds][PX milliseconds][NX|XX]
 ```
-ex 是用来设置超时时间的，而 nx 是 not exists 的意思，用来判断键是否存在。如果返回的结果为“OK”则表示创建锁成功，否则表示此锁有人在使用。
 
-# Redis 分布式锁有什么缺陷
+- NX：key不存在的时候，才能set成功
+- XX：key存在的时候，才能set成功
+- EX seconds：设定key的过期时间，时间单位是秒。
+- PX milliseconds：设定key的过期时间，单位为毫秒
 
-Redis 分布式锁不能解决超时的问题，分布式锁有一个超时时间，程序的执行时间如果超出了锁的超时时间就会出现问题。
+```java
+// 加锁，lock_value是uuid
+if（jedis.set(key_resource_id, lock_value, "NX", "EX", 100) == 1) {
+   try {
+      // do something
+   }catch() {
+   }
+   finally {
+      // 避免锁过期释放了，业务还没执行完，删了别的线程的锁
+      // 为了更严谨，一般也是用lua脚本代替
+      if (lock_value.equals(jedis.get(key_resource_id))) {
+         jedis.del(key_resource_id);
+      }
+   }
+}
+```
+
+# Redisson分布式锁
+
+上面集中方案都有锁过期释放，业务没执行完的问题。
+
+解决方法：给获得锁的线程，开启一个定时守护线程，每隔一段时间检查锁是否还存在，存在则对锁的过期时间延长，防止锁过期提前释放。
+
+只要线程一加锁成功，Redisson就会启动一个watch dog，它是一个后台线程，会每隔10秒检查一下，如果线程1还持有锁，那么就会不断的延长锁key的生存时间。
+
+## 单机模式
+
+```java
+// 构造redisson实现分布式锁必要的Config
+Config config = new Config();
+config.useSingleServer()
+    .setAddress("redis://172.29.1.180:5379")
+    .setPassword("a123456")
+    .setDatabase(0);
+// 构造RedissonClient
+RedissonClient redissonClient = Redisson.create(config);
+// 设置锁定资源名称
+RLock disLock = redissonClient.getLock("DISLOCK");
+boolean isLock;
+try {
+    //尝试获取分布式锁
+    isLock = disLock.tryLock(500, 15000, TimeUnit.MILLISECONDS);
+    if (isLock) {
+        //if get lock success, do something;
+    }
+} catch (Exception e) {
+} finally {
+    // 解锁
+    disLock.unlock();
+}
+```
+
+## 哨兵模式
+
+```java
+Config config = new Config();
+config.useSentinelServers().addSentinelAddress(
+        "redis://172.29.3.245:26378","redis://172.29.3.245:26379", "redis://172.29.3.245:26380")
+        .setMasterName("mymaster")
+        .setPassword("a123456").setDatabase(0);
+```
+
+## 集群模式
+
+```java
+Config config = new Config();
+config.useClusterServers().addNodeAddress(
+        "redis://172.29.3.245:6375","redis://172.29.3.245:6376", "redis://172.29.3.245:6377",
+        "redis://172.29.3.245:6378","redis://172.29.3.245:6379", "redis://172.29.3.245:6380")
+        .setPassword("a123456").setScanInterval(5000);
+```

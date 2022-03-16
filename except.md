@@ -1,9 +1,3 @@
-# JWT+RefreshToken
-
-客户端将用户名和密码传给服务端进行登陆，服务端核对成功后将用户信息作为jwt的payload生成有效时间较短的JWT字符串作为AccessToken，并生成有效时间较长的RefreshToken，一起返回给客户端。客户端将其保存，每次请求时都会携带AccessToken，如果AccessToken过期，则客户端使用RefreshToken向刷新接口申请新的AccessToken。退出登录时，删除JWT字符串就可以。
-
-由于RefreshToken不会在客户端请求业务接口时验证，所以将RefreshToken存储在数据库中，不会对业务接口的响应时间造成影响。当用户需要登出或禁用用户时，只需要将服务端的RefreshToken禁用或删除，用户就会在AccessToken过期后无法访问需要认证的接口。这样的方式虽然会有一定的窗口期，但是结合用户登出时客户端删除AccessToken的操作，基本上可以适应常规情况下对用户认证鉴权的精度要求。
-
 # 红黑树和AVL树对比
 
 - 红黑树只保证黑色节点是绝对平衡的，算上红色节点的话平衡因子（节点左右子树的高度差）可能大于1
@@ -99,6 +93,12 @@ Node数组使用来存放树或者链表的头结点，当一个链表中的数�
 
 自旋: 循环等待，然后不断的判断锁是否能够被成功获取，直到获取到锁才会退出循环。
 
+# 一个对象的两个方法加synchronized，一个线程访问其中一个方法，另一个线程可以进入另一个方法吗？
+
+不能
+
+无论synchronized修饰的是方法还是代码块，对应的锁都是一个对象，同一个对象中多个方法都加了synchronized关键字的时候，调用任意加锁的方法后，所有线程都需等该方法执行完成才能调用其他方法。
+
 # 说一下你熟悉的设计模式？
 
 - 单例模式：保证被创建一次，节省系统开销。
@@ -106,14 +106,6 @@ Node数组使用来存放树或者链表的头结点，当一个链表中的数�
 - 观察者模式：定义了对象之间的一对多的依赖，当一个对象改变时，它的所有的依赖者都会收到通知并自动更新。
 - 外观模式：提供一个统一的接口，用来访问子系统中的一群接口，让子系统更容易使用。
 - 模版方法模式：定义了一个算法的骨架，而将一些步骤延迟到子类中，模版方法使得子类可以在不改变算法结构的情况下，重新定义算法的步骤。应用：Servlet。
-
-# 解释一下什么是aop
-
-aop是面向切面编程，通过动态代理实现统一处理某一类问题的编程思想，比如统一处理日志、异常等。
-
-# 解释一下什么是ioc
-
-由spring来负责控制对象的生命周期和对象间的关系。控制反转指的是，这种控制权不由当前对象管理了，由第三方容器来管理。
 
 # Spring中的事务传播行为
 
@@ -125,13 +117,51 @@ aop是面向切面编程，通过动态代理实现统一处理某一类问题�
 - Propagation.NEVER: 以非事务的方式运行，如果当前存在事务，则抛出异常。
 - Propagation.NESTED: 如果没有，就新建一个事务；如果有，就在当前事务中嵌套其他事务。
 
-# spring cloud的核心组件有哪些
+# SpringBoot自动配置原理
 
-- Eureka：服务注册与发现。
-- Feign：基于动态代理机制，根据注解和选择的机器，拼接url地址，发起请求。
-- Ribbon：实现负载均衡，从一个服务的多台机器中选择一台。
-- Hystrix：资源隔离，为每个接口设置单独的线程池，当该接口的线程池被占满时，只是该接口收到影响，而不会对其他接口造成影响。断路器机制，当后端服务失败数量超过一定比例，断路器会切换到开路状态. 这时所有请求会直接失败而不会发送到后端服务，断路器有自我检测并恢复的能力。降级操作，当请求后端服务出现异常的时候，可以使用自定义的fallback方法返回的值。
-- Zuul：网关管理，由Zuul网关转发请求给对应的服务。
+启动类中有@SpringBootApplication注解，@SpringBootApplication注解中有@EnableAutoConfiguration注解，@EnableAutoConfiguration注解中有@Import(AutoConfigurationImportSelector.class)注解。
+
+AutoConfigurationImportSelector这个类中的getCandidateConfigurations()方法里面通过SpringFactoriesLoader.loadFactoryNames()扫描所有具有META-INF/spring.factories文件的jar包。
+
+spring-boot-autoconfigure-版本号.jar中的spring.factories文件指定了redis、mq等springboot内置的配置类。
+
+getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类和在@SpringBootApplication(exclude = {})中指定的配置类。
+
+在剩下的配置类中实例化@Conditional注解为true的bean。@Conditional注解（如：@ConditionalOnBean：当容器里有指定Bean的条件下）可以组合使用。
+
+## spring.factories例子
+
+```ini
+# 多个类名逗号分隔,而\表示忽略换行
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.demo.Demo1AutoConfiguration,\
+org.demo.Demo2AutoConfiguration
+```
+
+## 配置类例子
+
+```java
+@Bean
+// 当SpringIoc容器内不存在指定Bean的条件
+@ConditionalOnMissingBean
+public DemoBean demoBean(t) {
+   return new DemoBean();
+}
+```
+
+# bean的生命周期
+
+1. 实例化一个Bean，也就是new一个对象
+2. 设置bean的属性，依赖注入
+3. 如果这个Bean实现了BeanNameAware接口，会调用它实现的setBeanName()方法，传入Bean的ID
+4. 如果这个Bean实现了BeanFactoryAware接口，会调用它实现的setBeanFactory()，传入Spring工厂（可以用这个工厂获取到其他Bean）
+5. 如果这个Bean实现了ApplicationContextAware接口，会调用setApplicationContext()方法，传入Spring上下文，ApplicationContext是BeanFactory的子接口，有更多的实现方法
+6. 如果设置了后置处理器（通过实现BeanPostProcessor接口并注入到spring中），将会调用postProcessBeforeInitialization()方法，进行一些自定义的处理
+7. 如果这个Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法
+8. 如果设置了后置处理器，将会调用postProcessAfterInitialzation()方法，进行一些自定义的处理
+9. 以上工作完成以后就可以用这个Bean了
+10. 当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean接口，会调用其实现的destroy方法
+11. 最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法
 
 # RabbitMQ的使用场景有哪些
 
@@ -160,7 +190,7 @@ aop是面向切面编程，通过动态代理实现统一处理某一类问题�
 # MQ消息积压怎么处理
 
 1. 临时将queue资源和consumer资源扩大10倍，以正常速度的10倍来消费消息。新增原先数量10倍的queue，将现有consumer都停掉，用一个临时分发消息的consumer，消费之后不做耗时处理，直接均匀轮询写入临时建好分10倍数量的queue里面。等快速消费完了之后，恢复原来的部署架构，重新用原来的consumer机器来消费消息。
-2. 临时写个程序，连接到mq里面消费数据，收到消息之后直接将其丢弃，快速消费掉积压的消息，降低MQ的压力，然后找时间去手动查询重导丢失的这部分数据。
+2. 将临时的consumer连接到mq里面消费数据，收到消息之后直接将其丢弃，快速消费掉积压的消息，降低MQ的压力，然后找时间去手动查询重导丢失的这部分数据。
 
 # 说一下MySQL常用的引擎
 
@@ -174,10 +204,6 @@ aop是面向切面编程，通过动态代理实现统一处理某一类问题�
 - REPEATABLE_READ（MySQL默认）：可重复读，进入事务时，相当于做了一个快照，在事务中，不能读取到别的事务提交的数据（会造成幻读）。
 - SERIALIZABLE：序列化，事务串行执行，等待前一个事务执行完，后面的事务才可以顺序执行。代价最高最可靠的隔离级别，该隔离级别能防止脏读、不可重复读、幻读。
 
-- 脏读：表示一个事务读到了另一个事务中还未提交或回滚的数据。
-- 不可重复读：事务A首先读取了一条数据，然后执行逻辑的时候，事务B将这条数据改变了，然后事务A再次读取的时候，发现数据不匹配了。
-- 幻读：当前事务第一次取到的数据和后来读取到数据条目不同。比如事务A首先根据条件索引得到N条数据，然后事务B改变了这N条数据之外的M条或者增添了M条符合事务A搜索条件的数据，导致事务A再次搜索发现有N+M条数据了，就产生了幻读。
-
 # 如何做MySQL的性能优化
 
 - 为搜索字段创建索引。
@@ -190,6 +216,14 @@ aop是面向切面编程，通过动态代理实现统一处理某一类问题�
 - delete可以条件删除数据，而truncate只能删除表的所有数据
 - delete效率低于truncate。delete是一行一行地删除，truncate会重建表结构
 - truncate是DDL语句，不能够回滚，delete是DML语句，可以使用rollback回滚
+
+# MySQL索引失效的情况
+
+1. like查询以%开头，如，like '%abc%'。解决：左面不加%，如，like 'abc%'。
+2. or条件中用到了没加索引的字段。解决：要想使用or，又想让索引生效，只能将or条件中的每个列都加上索引。
+3. 字符串条件没有使用引号，如，name=abc。解决：name='abc'。
+4. 索引字段没有添加 not null 约束。
+5. 索引字段作为函数的参数或是表达式的一部分，如，substring(name,1,3)='luc'，salary+1000=6000。
 
 # 主键索引和普通索引区别
 
@@ -271,6 +305,69 @@ Redis的过期删除策略是：惰性删除和定期删除两种策略配合使
 - redis是单线程的，省去了切换线程的时间，不存在加锁释放锁操作
 - 使用多路复用技术，非阻塞IO
 
+# Redis实现分布式锁
+
+SETNX key value：只在key不存在的情况下，才将键key的值设置为value。如果 key不存在，则SETNX成功返回1，如果这个key已经存在了，则返回0。
+
+## SETNX + EXPIRE
+
+```java
+// 加锁，lock_value是uuid
+if（jedis.setnx(key_resource_id, lock_value) == 1) {
+   // 设置过期时间
+   expire(key_resource_id，100);
+   try {
+      // do something
+   } catch() {
+   } finally {
+      // 释放锁
+      // 避免锁过期释放了，业务还没执行完，删了别的线程的锁
+      if (lock_value.equals(jedis.get(key_resource_id))) {
+         jedis.del(key_resource_id);
+      }
+   }
+}
+```
+问题：如果执行完setnx加锁，还没执行expire设置过期时间时，进程终止了，那么这个锁就不会被释放了
+
+## Lua脚本 + SETNX + EXPIRE
+
+Redis采用同一个Lua解释器去运行所有命令，所以Lua脚本的执行是原子性的。
+
+```java
+String lua_scripts = "if redis.call('setnx',KEYS[1],ARGV[1]) == 1 then" +
+            " redis.call('expire',KEYS[1],ARGV[2]) return 1 else return 0 end";   
+Object result = jedis.eval(lua_scripts, Collections.singletonList(key_resource_id), Collections.singletonList(values));
+//判断是否成功
+return result.equals(1L);
+```
+
+## SET指令扩展参数
+
+```
+SET key value[EX seconds][PX milliseconds][NX|XX]
+```
+
+- NX：key不存在的时候，才能set成功
+- XX：key存在的时候，才能set成功
+- EX seconds：设定key的过期时间，时间单位是秒。
+- PX milliseconds：设定key的过期时间，单位为毫秒
+
+```java
+if（jedis.set(key_resource_id, lock_value, "NX", "EX", 100) == 1) {
+   try {
+      // do something
+   }catch() {
+   }
+   finally {
+      // 避免锁过期释放了，业务还没执行完，删了别的线程的锁
+      if (lock_value.equals(jedis.get(key_resource_id))) {
+         jedis.del(key_resource_id);
+      }
+   }
+}
+```
+
 # 静态代码块什么时候执行
 
 在类的初始化阶段执行。
@@ -295,44 +392,6 @@ Redis的过期删除策略是：惰性删除和定期删除两种策略配合使
 - main其实也是一个普通的用户线程，只不过一些其余的线程都是由main启动的
 - main线程终止，不能决定JVM是否退出。
 - 若想在main线程退出后，全部其余线程也退出，那么可以把其余线程都设置为守护线程
-
-# 一个对象的两个方法加synchronized，一个线程访问其中一个方法，另一个线程可以进入另一个方法吗？
-
-不能
-
-无论synchronized修饰的是方法还是代码块，对应的锁都是一个对象，同一个对象中多个方法都加了synchronized关键字的时候，调用任意加锁的方法后，所有线程都需等该方法执行完成才能调用其他方法。
-
-# SpringBoot自动配置原理
-
-启动类中有@SpringBootApplication注解，@SpringBootApplication注解中有@EnableAutoConfiguration注解，@EnableAutoConfiguration注解中有@Import(AutoConfigurationImportSelector.class)注解。
-
-AutoConfigurationImportSelector这个类中的getCandidateConfigurations()方法里面通过SpringFactoriesLoader.loadFactoryNames()扫描所有具有META-INF/spring.factories文件的jar包。
-
-spring-boot-autoconfigure-版本号.jar中的spring.factories文件指定了redis、mq等springboot内置的配置类。
-
-getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类和在@SpringBootApplication(exclude = {})中指定的配置类。
-
-在剩下的配置类中实例化@Conditional注解为true的bean。@Conditional注解（如：@ConditionalOnBean：当容器里有指定Bean的条件下）可以组合使用。
-
-## spring.factories例子
-
-```ini
-# 多个类名逗号分隔,而\表示忽略换行
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.demo.Demo1AutoConfiguration,\
-org.demo.Demo2AutoConfiguration
-```
-
-## 配置类例子
-
-```java
-@Bean
-// 当SpringIoc容器内不存在指定Bean的条件
-@ConditionalOnMissingBean
-public DemoBean demoBean(t) {
-   return new DemoBean();
-}
-```
 
 # 实现线程同步
 
