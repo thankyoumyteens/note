@@ -337,7 +337,7 @@ Redis采用同一个Lua解释器去运行所有命令，所以Lua脚本的执行
 ```java
 String lua_scripts = "if redis.call('setnx',KEYS[1],ARGV[1]) == 1 then" +
             " redis.call('expire',KEYS[1],ARGV[2]) return 1 else return 0 end";   
-Object result = jedis.eval(lua_scripts, Collections.singletonList(key_resource_id), Collections.singletonList(values));
+Object result = jedis.eval(lua_scripts, Collections.singletonList(key_resource_id), Arrays.asList(lock_value, end_time));
 //判断是否成功
 return result.equals(1L);
 ```
