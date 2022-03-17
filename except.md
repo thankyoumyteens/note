@@ -418,3 +418,11 @@ public void t2() {
    }
 }
 ```
+
+# Java程序占用CPU过高怎么排查
+
+- 使用 top 命令找到占用CPU最高的Java进程pid。如：占用CPU最高的进程pid为13731。
+- 用 top -Hp pid 命令查看占用CPU最高的线程id。top -Hp 13731，看到占用CPU最高的那个线程id为13756
+- 然后将线程id转换为16进制。13756 -> 0x35bc
+- 使用 jstack pid 查看当前Java程序的所有线程信息。jstack 13731 > thread_stack.log
+- jstack命令生成的信息包含了JVM中所有存活的线程及其所在的java文件，在输出结果中每个线程都有一个nid（16进制），使用之前得到的16进制找到对应的nid即可
