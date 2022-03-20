@@ -1,3 +1,44 @@
+# synchronized
+
+synchronized属于独占式的悲观锁，同时属于可重入锁。
+
+Java中的每个对象都有个monitor对象，加锁就是在竞争monitor对象。对代码块加锁是通过在前后分别加上monitorenter和monitorexit指令实现的，对方法是否加锁是通过一个标记位来判断的。
+
+# synchronized的作用范围
+
+- synchronized作用于成员变量和非静态方法时，锁住的是对象的实例，即this对象。
+- synchronized作用于静态方法时，锁住的是Class实例，因为静态方法属于Class而不属于对象。
+- synchronized作用于一个代码块时，锁住的是所有代码块中配置的对象。
+
+# synchronized的实现原理
+
+在synchronized内部包括ContentionList、EntryList、WaitSet、OnDeck、Owner、!Owner这6个区域，每个区域的数据都代表锁的不同状态。
+
+- ContentionList：锁竞争队列，所有请求锁的线程都被放在竞争队列中。
+- EntryList：竞争候选列表，在Contention List中有资格成为候选者来竞争锁资源的线程被移动到了Entry List中。
+- WaitSet：等待集合，调用wait方法后被阻塞的线程将被放在WaitSet中。
+- OnDeck：竞争候选者，在同一时刻最多只有一个线程在竞争锁资源，该线程的状态被称为OnDeck。
+- Owner：竞争到锁资源的线程被称为Owner状态线程。
+- !Owner：在Owner线程释放锁后，会从Owner的状态变成!Owner。
+
+synchronized在收到新的锁请求时首先自旋，如果通过自旋也没有获取锁资源，则将被放入锁竞争队列ContentionList中。
+
+为了防止锁竞争时ContentionList尾部的元素被大量的并发线程进行CAS访问而影响性能，Owner线程会在释放锁资源时将ContentionList中的部分线程移动到EntryList中，并指定EntryList中的某个线程（一般是最先进入的线程）为OnDeck线程。
+
+Owner线程并没有直接把锁传递给OnDeck线程，而是把锁竞争的权利交给OnDeck，让OnDeck线程重新竞争锁。在Java中把该行为称为“竞争切换”，该行为牺牲了公平性，但提高了性能。
+
+获取到锁资源的OnDeck线程会变为Owner线程，而未获取到锁资源的线程仍然停留在EntryList中。
+
+Owner线程在被wait方法阻塞后，会被转移到WaitSet队列中，直到某个时刻被notify方法或者notifyAll方法唤醒，会再次进入EntryList中。 ContentionList、EntryList、WaitSet中的线程均为阻塞状态，该阻塞是由操作系统来完成的（在Linux内核下是采用pthread_mutex_lock内核函数实现的）。
+
+Owner线程在执行完毕后会释放锁的资源并变为!Owner状态。
+
+在synchronized中，在线程进入ContentionList之前，等待的线程会先尝试以自旋的方式获取锁，如果获取不到就进入ContentionList，该做法对于已经进入队列的线程是不公平的，因此synchronized是非公平锁。另外，自旋获取锁的线程也可以直接抢占OnDeck线程的锁资源。
+
+synchronized是一个重量级操作，需要调用操作系统的相关接口，性能较低，给线程加锁的时间有可能超过获取锁后具体逻辑代码的操作时间。
+
+JDK 1.6对synchronized做了很多优化，引入了适应自旋、锁消除、锁粗化、轻量级锁及偏向锁等以提高锁的效率。锁可以从偏向锁升级到轻量级锁，再升级到重量级锁。这种升级过程叫作锁膨胀。在JDK 1.6中默认开启了偏向锁和轻量级锁，可以通过-XX:UseBiasedLocking禁用偏向锁。
+
 # Java对象头
 由于Java面向对象的思想，在JVM中需要大量存储对象，存储时为了实现一些额外的功能，需要在对象中添加一些标记字段用于增强对象功能，这些标记字段组成了对象头。
 
