@@ -1,11 +1,12 @@
 - <a href="../锁/乐观锁与悲观锁.md">乐观锁与悲观锁</a>
-- <a href="../锁/CAS.md">CAS</a>
 - <a href="../锁/自旋锁.md">自旋锁</a>
-- <a href="../锁/synchronized.md">synchronized</a>
-- <a href="../锁/reentrantlock.md">reentrantlock</a>
 - <a href="../锁/公平锁与非公平锁.md">公平锁与非公平锁</a>
 - <a href="../锁/可重入锁与非可重入锁.md">可重入锁与非可重入锁</a>
 - <a href="../锁/独享锁与共享锁.md">独享锁与共享锁</a>
+- <a href="../锁/CAS.md">CAS</a>
+- <a href="../锁/Synchronized.md">Synchronized</a>
+- <a href="../锁/ReentrantLock.md">ReentrantLock</a>
+- <a href="../锁/Semaphore.md">Semaphore</a>
 - <a href="../锁/基于数据库实现的分布式锁.md">基于数据库实现的分布式锁</a>
 - <a href="../锁/基于redis实现的分布式锁.md">基于redis实现的分布式锁</a>
 - <a href="../锁/基于zookeeper实现的分布式锁.md">基于zookeeper实现的分布式锁</a>
