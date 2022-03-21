@@ -2,6 +2,8 @@
 
 SETNX 是SET IF NOT EXISTS的简写，只在key不存在的情况下，才将键key的值设置为value。如果 key不存在，则SETNX成功返回1，如果这个key已经存在了，则返回0。
 
+lock_value是uuid，释放锁时要判断lock_value是否为当前线程设置的uuid值，避免锁过期释放了，业务还没执行完，删了别的线程的锁
+
 ```java
 // 加锁，lock_value是uuid
 if（jedis.setnx(key_resource_id, lock_value) == 1) {
@@ -54,12 +56,22 @@ if（jedis.set(key_resource_id, lock_value, "NX", "EX", 100) == 1) {
    }
    finally {
       // 避免锁过期释放了，业务还没执行完，删了别的线程的锁
-      // 为了更严谨，一般也是用lua脚本代替
       if (lock_value.equals(jedis.get(key_resource_id))) {
          jedis.del(key_resource_id);
       }
    }
 }
+```
+
+为了更严谨，释放锁也是用lua脚本代替
+```java
+String lua_scripts = "if redis.call('get',KEYS[1]) == ARGV[1] then" +
+         " redis.call('del',KEYS[1]) return 1 else return 0 end";
+Object result = jedis.eval(lua_scripts, 
+         Collections.singletonList(key_resource_id), 
+         Arrays.asList(lock_value, end_time));
+//判断是否成功
+return result.equals(1L);
 ```
 
 # Redisson分布式锁

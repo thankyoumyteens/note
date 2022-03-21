@@ -477,3 +477,24 @@ aop是面向切面编程，通过动态代理实现统一处理某一类问题�
 - 脏读：表示一个事务读到了另一个事务中还未提交或回滚的数据。
 - 不可重复读：事务A首先读取了一条数据，然后执行逻辑的时候，事务B将这条数据改变了，然后事务A再次读取的时候，发现数据不匹配了。
 - 幻读：当前事务第一次取到的数据和后来读取到数据条目不同。比如事务A首先根据条件索引得到N条数据，然后事务B改变了这N条数据之外的M条或者增添了M条符合事务A搜索条件的数据，导致事务A再次搜索发现有N+M条数据了，就产生了幻读。
+
+# redis常用的方法
+
+## string
+
+1. redisTemplate.opsForValue().set(key,value)); 设置指定键的值。SET key value
+2. redisTemplate.opsForValue().get(key)); 获取指定键的值。GET key
+3. redisTemplate.opsForValue().getAndSet(key, value); 设置键的字符串值并返回其旧值。GETSET key value
+4. redisTemplate.opsForValue().set(key, value, timeout, unit); 设置值和到期时间。SETEX key seconds value
+5. redisTemplate.opsForValue().setIfAbsent(key, value); 设置键的值，仅当键不存在时。SETNX key value
+6. redisTemplate.opsForValue().getOperations().delete(key); 删除键。DEL key
+
+## hash
+
+1. redisTemplate.opsForHash().delete(key, hashKeys); 删除一个或多个哈希字段。HDEL key field1 field2 ...
+2. redisTemplate.opsForHash().hasKey(key, hashKey)；判断字段是否存在。HEXISTS key field
+3. redisTemplate.opsForHash().get(key, hashKey)；获取指定键的哈希字段的值。HGET key field
+4. redisTemplate.opsForHash().entries(key); 获取指定键的所有字段和值。HGETALL key
+5. redisTemplate.opsForHash().keys(key)；获取指定键的所有字段。HKEYS key
+6. redisTemplate.opsForHash().put(key, hashKey, value); 设置字段的值。HSET key field value
+7. redisTemplate.opsForHash().putIfAbsent(key, hashKey, value)；仅当字段不存在时，才设置字段的值。	HSETNX key field value

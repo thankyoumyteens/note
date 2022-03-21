@@ -1,4 +1,5 @@
 # SpringBoot
+- <a href="../SpringBoot/SpringBoot自动配置原理.md">SpringBoot自动配置原理</a>
 - <a href="../SpringBoot/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
 - <a href="../SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
 - <a href="../SpringBoot/创建命令行项目.md">创建命令行项目</a>

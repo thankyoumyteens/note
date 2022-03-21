@@ -5,36 +5,6 @@
 - AVL树查询占优势
 - 红黑树增删改查综合性能更好
 
-## 左旋转
-
-x的左节点连接到y，y的右节点连接到x的左节点
-```
-x.left = y
-y.right = T2
-   y                 x
-  / \              /   \
- T1  x            y     z
-    / \          / \   / \
-   T2  z        T1 T2 T3 T4
-      / \      
-     T3 T4     
-```
-
-## 右旋转
-
-x的右节点连接到y，y的左节点连接到x的右节点
-```
-x.right = y
-y.left = T3
-       y             x
-      / \          /   \
-     x  T4        z     y
-    / \          / \   / \
-   z  T3        T1 T2 T3 T4
-  / \          
- T1 T2         
-```
-
 # 快速排序
 
 选中第一个元素v，调整数组使得左边的元素小于v，中间的元素等于v，右边的元素大于v，使v所在的中间部分将原数组在逻辑上分割为左右两个子数组，
@@ -55,8 +25,6 @@ y.left = T3
 - `[k+1,right]>V`，
 - `[j,k]==V`
 
-![](Algorithm/img/qs1.png)
-
 # CAS
 
 CAS操作包含三个操作数：内存位置（V）、预期原值（A）和新值(B)。 如果内存位置的值与预期原值相匹配，那么将该位置的值更新为新值。否则，说明已经有其他线程做了更改，不做任何操作。最后，CAS返回当前内存位置的值。
@@ -69,7 +37,7 @@ CAS操作包含三个操作数：内存位置（V）、预期原值（A）和新
 
 # ConcurrentHashMap
 
-## JDK1.7
+## JDK1.7及以前
 
 ConcurrentHashMap由Segment数组组成，每个Segment又包含一个HashEntry数组，数组中的每一个HashEntry既是一个键值对，也是一个链表的头节点。
 
@@ -91,8 +59,6 @@ Node数组使用来存放树或者链表的头结点，当一个链表中的数�
 
 锁的升级的目的：为了降低锁带来的性能消耗。
 
-自旋: 循环等待，然后不断的判断锁是否能够被成功获取，直到获取到锁才会退出循环。
-
 # 同一个对象的两个方法加synchronized，一个线程访问其中一个方法，另一个线程可以进入另一个方法吗？
 
 不能
@@ -100,6 +66,21 @@ Node数组使用来存放树或者链表的头结点，当一个链表中的数�
 - synchronized作用于成员变量和非静态方法时，锁住的是对象的实例，即this对象。
 - synchronized作用于静态方法时，锁住的是Class实例，因为静态方法属于Class而不属于对象。
 - synchronized作用于一个代码块时，锁住的是所有代码块中配置的对象。
+
+# 线程池核心参数
+
+1. 最大线程数maximumPoolSize
+2. 核心线程数corePoolSize
+3. 空闲线程存活时间keepAliveTime
+4. 阻塞队列workQueue
+5. 拒绝策略RejectedExecutionHandler
+
+# 线程池原理
+
+1. 当我们提交任务，线程池会根据corePoolSize大小创建若干任务数量线程执行任务
+2. 当任务的数量超过corePoolSize数量，后续的任务将会进入阻塞队列阻塞排队
+3. 当阻塞队列也满了之后，那么将会继续创建maximumPoolSize-corePoolSize个数量的线程来执行任务，如果任务处理完成，maximumPoolSize-corePoolSize额外创建的线程等待keepAliveTime之后被自动销毁
+4. 如果达到maximumPoolSize，阻塞队列还是满的状态，那么将根据不同的拒绝策略对应处理
 
 # 说一下你熟悉的设计模式？
 
@@ -129,27 +110,7 @@ spring-boot-autoconfigure-版本号.jar中的spring.factories文件指定了redi
 
 getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类和在@SpringBootApplication(exclude = {})中指定的配置类。
 
-在剩下的配置类中实例化@Conditional注解为true的bean。@Conditional注解（如：@ConditionalOnBean：当容器里有指定Bean的条件下）可以组合使用。
-
-## spring.factories例子
-
-```ini
-# 多个类名逗号分隔,而\表示忽略换行
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.demo.Demo1AutoConfiguration,\
-org.demo.Demo2AutoConfiguration
-```
-
-## 配置类例子
-
-```java
-@Bean
-// 当SpringIoc容器内不存在指定Bean的条件
-@ConditionalOnMissingBean
-public DemoBean demoBean(t) {
-   return new DemoBean();
-}
-```
+在剩下的配置类中实例化@ConditionalXXX注解为true的bean。@ConditionalXXX注解（如：@ConditionalOnMissingBean：当容器里不存在指定Bean的条件下）可以组合使用。
 
 # bean的生命周期
 
@@ -211,7 +172,6 @@ public DemoBean demoBean(t) {
 - 为搜索字段创建索引。
 - 尽量使用多表连接查询，避免子查询。
 - 避免使用select *，列出需要查询的字段。
-- 垂直分割分表，并选择正确的存储引擎。
 
 # mysql truncate和delete的区别
 
@@ -257,27 +217,6 @@ public DemoBean demoBean(t) {
 
 string（字符串）、list（列表）、hash（字典）、set（集合）、zset（有序集合）。
 
-# redis常用的方法
-
-## string
-
-1. redisTemplate.opsForValue().set(key,value)); 设置指定键的值。SET key value
-2. redisTemplate.opsForValue().get(key)); 获取指定键的值。GET key
-3. redisTemplate.opsForValue().getAndSet(key, value); 设置键的字符串值并返回其旧值。GETSET key value
-4. redisTemplate.opsForValue().set(key, value, timeout, unit); 设置值和到期时间。SETEX key seconds value
-5. redisTemplate.opsForValue().setIfAbsent(key, value); 设置键的值，仅当键不存在时。SETNX key value
-6. redisTemplate.opsForValue().getOperations().delete(key); 删除键。DEL key
-
-## hash
-
-1. redisTemplate.opsForHash().delete(key, hashKeys); 删除一个或多个哈希字段。HDEL key field1 field2 ...
-2. redisTemplate.opsForHash().hasKey(key, hashKey)；判断字段是否存在。HEXISTS key field
-3. redisTemplate.opsForHash().get(key, hashKey)；获取指定键的哈希字段的值。HGET key field
-4. redisTemplate.opsForHash().entries(key); 获取指定键的所有字段和值。HGETALL key
-5. redisTemplate.opsForHash().keys(key)；获取指定键的所有字段。HKEYS key
-6. redisTemplate.opsForHash().put(key, hashKey, value); 设置字段的值。HSET key field value
-7. redisTemplate.opsForHash().putIfAbsent(key, hashKey, value)；仅当字段不存在时，才设置字段的值。	HSETNX key field value
-
 # Redis缓存穿透缓存击穿缓存雪崩
 
 - 缓存穿透: 用户不断请求缓存和数据库中都没有的数据，导致数据库压力过大。解决方案: 将数据库中没有取到的key缓存为null
@@ -286,7 +225,6 @@ string（字符串）、list（列表）、hash（字典）、set（集合）、
 
 # Redis清除过期Key的方式
 
-- 定时检查删除：对于每一个设置了过期时间的key都会创建一个定时器，一旦达到过期时间会直接删除。这种方式立即清除过期数据，对内存比较好，但是占用了大量CPU的资源去处理过期数据，会影响redis的吞吐量和响应时间。
 - 惰性检查删除：当访问一个key的时候，才会判断该key是否过期，如果过期就删除。该方式能最大限度节省 CPU 的资源。但是会占用较多的内存。
 - 定期检查删除：每隔一段时间，就对部分key进行检查，删除里面过期的key。可以通过限制删除操作执行的时长和频率来减少删除操作对CPU的影响。定期删除也能有效释放过期key占用的内存，但是难以确定删除操作执行的时长和频率。可以通过修改配置文件redis.conf的hz选项来调整这个次数。
 
@@ -309,39 +247,46 @@ Redis的过期删除策略是：惰性删除和定期删除两种策略配合使
 
 # Redis实现分布式锁
 
+## Lua脚本 + SETNX + EXPIRE
+
 SETNX key value：只在key不存在的情况下，才将键key的值设置为value。如果 key不存在，则SETNX成功返回1，如果这个key已经存在了，则返回0。
 
-## SETNX + EXPIRE
+Redis采用同一个Lua解释器去运行所有命令，所以Lua脚本的执行是原子性的。可以避免执行完setnx加锁，还没执行expire设置过期时间时，进程终止了，导致这个锁就不会被释放的问题。
 
+lock_value是uuid，释放锁时要判断lock_value是否为当前线程设置的uuid值，避免锁过期释放了，业务还没执行完，删了别的线程的锁
 ```java
-// 加锁，lock_value是uuid
-if（jedis.setnx(key_resource_id, lock_value) == 1) {
-   // 设置过期时间
-   expire(key_resource_id，100);
+public boolean lock() {
+   String lua_scripts = "if redis.call('setnx',KEYS[1],ARGV[1]) == 1 then" +
+            " redis.call('expire',KEYS[1],ARGV[2]) return 1 else return 0 end";
+   Object result = jedis.eval(lua_scripts, 
+            Collections.singletonList(key_resource_id), 
+            Arrays.asList(lock_value, end_time));
+   //判断是否成功
+   return result.equals(1L);
+}
+
+public boolean unlock() {
+   // if (uni_request_id.equals(jedis.get(key_resource_id))) jedis.del(lockKey);
+   String lua_scripts = "if redis.call('get',KEYS[1]) == ARGV[1] then" +
+            " redis.call('del',KEYS[1]) return 1 else return 0 end";
+   Object result = jedis.eval(lua_scripts, 
+            Collections.singletonList(key_resource_id), 
+            Arrays.asList(lock_value, end_time));
+   //判断是否成功
+   return result.equals(1L);
+}
+
+// 加锁
+if（lock()) {
    try {
       // do something
    } catch() {
+      // do something
    } finally {
       // 释放锁
-      // 避免锁过期释放了，业务还没执行完，删了别的线程的锁
-      if (lock_value.equals(jedis.get(key_resource_id))) {
-         jedis.del(key_resource_id);
-      }
+      unlock();
    }
 }
-```
-问题：如果执行完setnx加锁，还没执行expire设置过期时间时，进程终止了，那么这个锁就不会被释放了
-
-## Lua脚本 + SETNX + EXPIRE
-
-Redis采用同一个Lua解释器去运行所有命令，所以Lua脚本的执行是原子性的。
-
-```java
-String lua_scripts = "if redis.call('setnx',KEYS[1],ARGV[1]) == 1 then" +
-            " redis.call('expire',KEYS[1],ARGV[2]) return 1 else return 0 end";   
-Object result = jedis.eval(lua_scripts, Collections.singletonList(key_resource_id), Arrays.asList(lock_value, end_time));
-//判断是否成功
-return result.equals(1L);
 ```
 
 ## SET指令扩展参数
@@ -374,18 +319,17 @@ if（jedis.set(key_resource_id, lock_value, "NX", "EX", 100) == 1) {
 
 ## 两阶段提交（2PC）
 
-引入一个事务协调者来协调管理各参与者的提交和回滚，分为准备和提交两个阶段。准备阶段协调者会给各参与者发送准备命令。等待所有参与者都返回准备成功之后就进入提交阶段（提交阶段不一定是提交事务，也可能是回滚事务），协调者向所有参与者发送提交事务命令，然后等待所有事务都提交成功之后，返回事务执行成功。
+引入一个事务协调者来协调管理各参与者的提交和回滚，分为准备和提交两个阶段。
 
-- RM（Resource Manager）：用于直接执行本地事务的提交和回滚。在分布式集群中，一台MySQL服务器就是一个RM。
-- TM（Transaction Manager）：TM是分布式事务的核心管理者。事务管理器与每个RM进行通信，协调并完成分布式事务的处理。发起一个分布式事务的MySQL客户端就是一个TM。
-- 阶段一为准备（prepare）阶段。即所有的RM锁住需要的资源，在本地执行这个事务（执行sql，写redo/undo log等），但不提交，然后向Transaction Manager报告已准备就绪。
-- 阶段二为提交阶段（commit）。当Transaction Manager确认所有参与者都ready后，向所有参与者发送commit命令。
+准备阶段协调者会给各参与者发送准备命令，等待所有参与者都返回准备成功之后就进入提交阶段。
 
-![](Java/Web/img/tpc.jpg)
+协调者向所有参与者发送提交事务命令，然后等待所有事务都提交成功之后，返回事务执行成功。
 
 假如在第一阶段参与者返回失败，那么协调者就会向所有参与者发送回滚事务的请求，即分布式事务执行失败。
 
 假如在第二阶段参与者返回失败，那么协调者就会不断重试，直到所有参与者都成功，否则会一直阻塞。
+
+![](Java/Web/img/tpc.jpg)
 
 存在的问题
 
