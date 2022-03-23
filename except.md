@@ -51,8 +51,6 @@ ConcurrentHashMap使用分段锁技术，将数据分成一段一段的存储（
 
 去除Segment+HashEntry的实现，改为Synchronized+CAS+Node数组的实现。用Synchronized+CAS代替Segment，这样锁的粒度更小了，并且不是每次都要加锁，只有CAS尝试失败了再加锁。
 
-Node数组使用来存放树或者链表的头结点，当一个链表中的数量到达一个数目时，会使查询速率降低，所以到达一定阈值时，会将一个链表转换为一个红黑树，提高查询的速率。
-
 # synchronized锁升级的原理
 
 在对象的对象头里有一个ThreadId字段，在第一次被线程访问的时候ThreadId为空，jvm让其持有偏向锁，并将ThreadId设置为访问的线程id。之后有线程再次访问的时候会先判断ThreadId是否与这个线程id一致，如果一致则可以直接使用此对象。如果不一致则升级偏向锁为轻量级锁，访问的线程通过自旋一定次数来获取锁。当一定时间内通过自旋的方式无法获取到锁，或者一个线程在持有锁，一个在自旋，又有第三个来访时，就会把锁升级为重量级锁，此时等待锁的线程都会进入阻塞状态。
@@ -104,13 +102,11 @@ Node数组使用来存放树或者链表的头结点，当一个链表中的数�
 
 启动类中有@SpringBootApplication注解，@SpringBootApplication注解中有@EnableAutoConfiguration注解，@EnableAutoConfiguration注解中有@Import(AutoConfigurationImportSelector.class)注解。
 
-AutoConfigurationImportSelector这个类中的getCandidateConfigurations()方法里面通过SpringFactoriesLoader.loadFactoryNames()扫描所有具有META-INF/spring.factories文件的jar包。
+AutoConfigurationImportSelector会扫描所有具有META-INF/spring.factories文件的jar包，加载factories文件中的配置类。过滤掉重复的配置类和在@SpringBootApplication(exclude = {})中手动排除的配置类。在剩下的配置类中实例化@ConditionalXXX注解为true的bean。
+
+@ConditionalXXX注解（如：@ConditionalOnMissingBean：当容器里不存在指定Bean的条件下）可以组合使用。
 
 spring-boot-autoconfigure-版本号.jar中的spring.factories文件指定了redis、mq等springboot内置的配置类。
-
-getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类和在@SpringBootApplication(exclude = {})中指定的配置类。
-
-在剩下的配置类中实例化@ConditionalXXX注解为true的bean。@ConditionalXXX注解（如：@ConditionalOnMissingBean：当容器里不存在指定Bean的条件下）可以组合使用。
 
 # bean的生命周期
 
@@ -152,28 +148,40 @@ getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类�
 
 # MQ消息积压怎么处理
 
-1. 临时将queue资源和consumer资源扩大10倍，以正常速度的10倍来消费消息。新增原先数量10倍的queue，将现有consumer都停掉，用一个临时分发消息的consumer，消费之后不做耗时处理，直接均匀轮询写入临时建好分10倍数量的queue里面。等快速消费完了之后，恢复原来的部署架构，重新用原来的consumer机器来消费消息。
+1. 临时紧急扩容：临时将queue资源和consumer资源扩大10倍，以正常速度的10倍来消费消息。新增原先数量10倍的queue，将现有consumer都停掉，用一个临时分发消息的consumer，消费之后不做耗时处理，直接均匀轮询写入临时建好分10倍数量的queue里面。等快速消费完了之后，恢复原来的部署架构，重新用原来的consumer机器来消费消息。
 2. 将临时的consumer连接到mq里面消费数据，收到消息之后直接将其丢弃，快速消费掉积压的消息，降低MQ的压力，然后找时间去手动查询重导丢失的这部分数据。
 
-# 说一下MySQL常用的引擎
+# 说InnoDB与MyISAM的区别
 
-- InnoDB：mysql 5.1后默认的数据库引擎，提供了事务的支持，并且还提供了行级锁和外键的约束。不支持全文搜索，它不会保存表的行数，所以当进行select count(*)时，需要进行扫描全表。由于锁的粒度小，写操作不会锁定全表，所以在并发度较高的场景下使用会提升效率。
-- MyISAM：不提供事务的支持，也不支持行级锁和外键。因此当执行写操作的时候需要锁定整个表，所以效率较低。不过MyISAM保存了表的行数，所以当进行select count(*)时，可以直接读取而不需要进行扫描全表。所以，如果表的读操作远远多于写操作时，并且不需要事务的支持，可以将MyISAM作为数据库引擎的首选。
+1. InnoDB支持事务，MyISAM不支持。InnoDB每一条SQL语言都默认封装成事务，自动提交，会影响速度。
+2. InnoDB支持外键，MyISAM不支持。
+3. InnoDB是聚集索引，数据文件是和索引绑在一起的，必须要有主键，通过主键索引效率很高。但是普通索引需要两次查询，先查询到主键，然后再通过主键查询到数据。MyISAM是非聚集索引，数据文件是分离的，索引保存的是数据文件的指针。主键索引和普通索引是独立的。
+4. InnoDB不保存表的具体行数，执行select count(*) from table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快。
+5. Innodb不支持全文索引，而MyISAM支持全文索引，查询效率上MyISAM要高。
 
 # 数据库的事务隔离级别
 
 - READ_UNCOMMITTED：未提交读，事务未提交前，就可被其他事务读取（会出现幻读、脏读、不可重复读）。
 - READ_COMMITTED：已提交读，在事务中，可以读到其他事务提交的数据（会造成幻读、不可重复读）。
 - REPEATABLE_READ（MySQL默认）：可重复读，进入事务时，相当于做了一个快照，在事务中，不能读取到别的事务提交的数据（会造成幻读）。
-- SERIALIZABLE：序列化，事务串行执行，等待前一个事务执行完，后面的事务才可以顺序执行。代价最高最可靠的隔离级别，该隔离级别能防止脏读、不可重复读、幻读。
+- SERIALIZABLE：序列化，事务串行执行。代价最高最可靠的隔离级别，该隔离级别能防止脏读、不可重复读、幻读。
 
-# 如何做MySQL的性能优化
+# SQL优化
 
-- 为搜索字段创建索引。
-- 尽量使用多表连接查询，避免子查询。
-- 避免使用select *，列出需要查询的字段。
+1. 查询语句中不要使用select *
+2. 尽量减少子查询，使用关联查询（left join,right join,inner join）替代
+3. 减少使用IN或者NOT IN ,使用exists，not exists或者关联查询语句替代
+4. or的查询尽量用union或者union all代替
+5. 应尽量避免在where子句中使用!=或<>操作符，否则将引擎放弃使用索引而进行全表扫描。
+6. 应尽量避免在where子句中对字段进行null值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：select id from t where num is null 可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：select id from t where num=0
 
-# mysql truncate和delete的区别
+# union和union all的区别
+
+- Union：对两个结果集进行并集操作，不包括重复行，同时进行默认规则的排序
+- Union All：对两个结果集进行并集操作，包括重复行，不进行排序
+- select id,name from student where id<4 union select id,name from student where id>2 and id<6
+
+# truncate和delete的区别
 
 - delete可以条件删除数据，而truncate只能删除表的所有数据
 - delete效率低于truncate。delete是一行一行地删除，truncate会重建表结构
@@ -187,16 +195,6 @@ getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类�
 4. 索引字段没有添加 not null 约束。
 5. 索引字段作为函数的参数或是表达式的一部分，如，substring(name,1,3)='luc'，salary+1000=6000。
 
-# 主键索引和普通索引区别
-
-- 普通索引是最基本的索引类型，没有任何限制，值可以为空，仅加速查询。普通索引是可以重复的，一个表中可以有多个普通索引。
-- 主键索引是一种特殊的唯一索引，一个表只能有一个主键，不允许有空值；索引列的所有值必须唯一。
-
-# 说一下乐观锁和悲观锁
-
-- 乐观锁：每次去拿数据的时候都认为别人不会修改，所以不会上锁，但是在提交更新的时候会判断一下在此期间别人有没有去更新这个数据。
-- 悲观锁：每次去拿数据的时候都认为别人会修改，所以每次在拿数据的时候都会上锁，这样别人想拿这个数据就会阻止，直到这个锁被释放。
-
 # Redis持久化有几种方式
 
 ## RDB（Redis Database）
@@ -204,14 +202,14 @@ getCandidateConfigurations()方法加载完成后，过滤掉重复的配置类�
 用指定的时间间隔对数据进行快照存储。
 
 - 优点：因为是数据快照，所以生成的文件内容紧凑占用磁盘空间小，重启恢复到内存速度也较快，持久化的频率一般也会配置得比较低，并且执行过程交给子进程，对服务性能影响小。
-- 缺点：因为是保存整个内存的数据，所以执行的整个过程会相对较长；因为间隔较长，会丢失较多的数据，在间隔期内服务进程终止的话上一次创建快照到终止那一刻对 Redis 数据的改动都会丢失。
+- 缺点：文件大。数据安全性低，RDB是间隔一段时间进行持久化，如果持久化之间Redis发生故障，会发生数据丢失。所以这种方式更适合数据要求不严谨的时候
 
 ## AOF（Append Only File）
 
 每一个收到的写命令都追加到文件中。
 
 - 优点：因为追加写指令执行的频率高、间隔短，所以间隔期内进程停止丢失的数据较少，数据比较完整。
-- 缺点：也是因为执行频率高，影响服务性能；写指令跟数据本身比占用空间较大，导致落到磁盘上的文件也很大，重启恢复的时间长。
+- 缺点：AOF文件比RDB文件大，且恢复速度慢。数据集大的时候，比RDB启动效率低。
 
 # Redis数据类型
 
@@ -254,40 +252,6 @@ SETNX key value：只在key不存在的情况下，才将键key的值设置为va
 Redis采用同一个Lua解释器去运行所有命令，所以Lua脚本的执行是原子性的。可以避免执行完setnx加锁，还没执行expire设置过期时间时，进程终止了，导致这个锁就不会被释放的问题。
 
 lock_value是uuid，释放锁时要判断lock_value是否为当前线程设置的uuid值，避免锁过期释放了，业务还没执行完，删了别的线程的锁
-```java
-public boolean lock() {
-   String lua_scripts = "if redis.call('setnx',KEYS[1],ARGV[1]) == 1 then" +
-            " redis.call('expire',KEYS[1],ARGV[2]) return 1 else return 0 end";
-   Object result = jedis.eval(lua_scripts, 
-            Collections.singletonList(key_resource_id), 
-            Arrays.asList(lock_value, end_time));
-   //判断是否成功
-   return result.equals(1L);
-}
-
-public boolean unlock() {
-   // if (uni_request_id.equals(jedis.get(key_resource_id))) jedis.del(lockKey);
-   String lua_scripts = "if redis.call('get',KEYS[1]) == ARGV[1] then" +
-            " redis.call('del',KEYS[1]) return 1 else return 0 end";
-   Object result = jedis.eval(lua_scripts, 
-            Collections.singletonList(key_resource_id), 
-            Arrays.asList(lock_value, end_time));
-   //判断是否成功
-   return result.equals(1L);
-}
-
-// 加锁
-if（lock()) {
-   try {
-      // do something
-   } catch() {
-      // do something
-   } finally {
-      // 释放锁
-      unlock();
-   }
-}
-```
 
 ## SET指令扩展参数
 
@@ -299,21 +263,6 @@ SET key value[EX seconds][PX milliseconds][NX|XX]
 - XX：key存在的时候，才能set成功
 - EX seconds：设定key的过期时间，时间单位是秒。
 - PX milliseconds：设定key的过期时间，单位为毫秒
-
-```java
-if（jedis.set(key_resource_id, lock_value, "NX", "EX", 100) == 1) {
-   try {
-      // do something
-   }catch() {
-   }
-   finally {
-      // 避免锁过期释放了，业务还没执行完，删了别的线程的锁
-      if (lock_value.equals(jedis.get(key_resource_id))) {
-         jedis.del(key_resource_id);
-      }
-   }
-}
-```
 
 # 分布式事务
 
