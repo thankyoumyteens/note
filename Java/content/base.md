@@ -4,10 +4,6 @@
 - <a href="../base/正则表达式.md">正则表达式</a>
 - <a href="../base/BufferedWriter中文乱码的解决办法.md">BufferedWriter中文乱码的解决办法</a>
 
-## 多线程
-- <a href="../base/Callable实现多线程.md">Callable实现多线程</a>
-- <a href="../base/Java线程池的线程复用实现.md">Java线程池的线程复用实现</a>
-
 # Web
 - <a href="../Web/接口幂等性.md">接口幂等性</a>
 - <a href="../Web/数据库幂等性.md">数据库幂等性</a>
