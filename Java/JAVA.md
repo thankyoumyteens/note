@@ -4,6 +4,7 @@
 
 # JVM
 - <a href="content/jvm/jvm.md">JVM</a>
+- <a href="content/jvm/gc.md">垃圾回收</a>
 
 # Java Web
 - <a href="content/JavaWeb/db.md">数据库</a>
