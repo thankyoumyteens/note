@@ -159,8 +159,8 @@ spring-boot-autoconfigure-版本号.jar中的spring.factories文件指定了redi
 
 1. 查询语句中不要使用select *
 2. 尽量减少子查询，使用关联查询（left join,right join,inner join）替代
-3. 减少使用IN或者NOT IN ,使用exists，not exists或者关联查询语句替代
-4. or的查询尽量用union或者union all代替
+3. 减少使用IN或者NOT IN，使用exists，not exists或者关联查询语句替代
+4. or的查询尽量用union或者union all代替（只查询非索引字段时，还是要用or，因为非索引字段本来要全表扫描而union all只会成倍增加表扫描的次数）
 5. 应尽量避免在where子句中使用!=或<>操作符，否则将引擎放弃使用索引而进行全表扫描。
 6. 应尽量避免在where子句中对字段进行null值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：select id from t where num is null 可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：select id from t where num=0
 
