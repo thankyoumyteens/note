@@ -9,6 +9,3 @@
 - <a href="../../pages/concurrent/lock/Semaphore.md">Semaphore</a>
 - <a href="../../pages/concurrent/lock/AtomicInteger.md">AtomicInteger</a>
 - <a href="../../pages/concurrent/lock/ReadWriteLock.md">ReadWriteLock</a>
-- <a href="../../pages/concurrent/lock/基于数据库实现的分布式锁.md">基于数据库实现的分布式锁</a>
-- <a href="../../pages/concurrent/lock/基于redis实现的分布式锁.md">基于redis实现的分布式锁</a>
-- <a href="../../pages/concurrent/lock/基于zookeeper实现的分布式锁.md">基于zookeeper实现的分布式锁</a>
