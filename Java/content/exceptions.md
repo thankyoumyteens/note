@@ -1,1 +1,2 @@
 - <a href="../exceptions/AbstractMethodError.md">AbstractMethodError</a>
+- <a href="../exceptions/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
