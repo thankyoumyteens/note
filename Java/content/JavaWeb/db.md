@@ -1,8 +1,8 @@
 # MySQL
 
 ## 安装
-- <a href="../../pages/db/MySQL/Windows安装MySQL.md">Windows安装MySQL</a>
-- <a href="../../pages/db/MySQL/Ununtu安装MySQL.md">Ununtu安装MySQL</a>
+- <a href="../../pages/db/MySQL/安装/Windows安装MySQL.md">Windows安装MySQL</a>
+- <a href="../../pages/db/MySQL/安装/Ununtu安装MySQL.md">Ununtu安装MySQL</a>
 
 ## 语法
 - <a href="../../pages/db/MySQL/语法/分组查询.md">分组查询</a>

@@ -1,5 +1,5 @@
 # JVM
-- <a href="content/jvm/jvm.md">JVM</a>
+- <a href="content/jvm/Java内存布局.md">Java内存布局</a>
 - <a href="content/jvm/gc.md">垃圾回收</a>
 
 # 并发编程
