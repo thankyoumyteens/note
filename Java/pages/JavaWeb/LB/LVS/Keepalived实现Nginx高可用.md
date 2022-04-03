@@ -6,8 +6,7 @@
 
 # keepalived主
 
-```conf
-
+```ini
 ! Configuration File for keepalived
 global_defs {
     router_id lb02 #标识信息，一个名字而已；
