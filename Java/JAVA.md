@@ -20,6 +20,7 @@
 - <a href="content/exceptions.md">目录</a>
 
 # 开发工具
+- <a href="content/utils/软件安装.md">软件安装</a>
 - <a href="content/utils/idea.md">IDEA</a>
 - <a href="content/utils/eclipse.md">ECLIPSE</a>
 - <a href="content/utils/maven.md">Maven</a>

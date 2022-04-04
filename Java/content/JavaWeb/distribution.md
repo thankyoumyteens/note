@@ -11,8 +11,6 @@
 
 # 分布式缓存
 ## Redis
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/linux安装redis.md">linux安装redis</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/设置redis密码.md">设置redis密码</a>
 - <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis数据类型.md">Redis数据类型</a>
 - <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis持久化.md">Redis持久化</a>
 - <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis缓存过期处理与内存淘汰机制.md">Redis缓存过期处理与内存淘汰机制</a>

@@ -1,9 +1,5 @@
 # MySQL
 
-## 安装
-- <a href="../../pages/db/MySQL/安装/Windows安装MySQL.md">Windows安装MySQL</a>
-- <a href="../../pages/db/MySQL/安装/Ununtu安装MySQL.md">Ununtu安装MySQL</a>
-
 ## 语法
 - <a href="../../pages/db/MySQL/语法/分组查询.md">分组查询</a>
 - <a href="../../pages/db/MySQL/语法/事务.md">事务</a>
@@ -27,4 +23,3 @@
 
 # 分库分表
 - <a href="../../pages/db/分库分表/数据切分.md">数据切分</a>
-- <a href="../../pages/db/分库分表/MyCat安装.md">MyCat安装</a>
