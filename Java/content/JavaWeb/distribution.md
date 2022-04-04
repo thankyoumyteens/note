@@ -1,22 +1,24 @@
-# SpringBoot
-- <a href="../SpringBoot/SpringBoot自动配置原理.md">SpringBoot自动配置原理</a>
-- <a href="../SpringBoot/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
-- <a href="../SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
-- <a href="../SpringBoot/创建命令行项目.md">创建命令行项目</a>
-- <a href="../SpringBoot/SpringBoot整合Redis.md">SpringBoot整合Redis</a>
-- <a href="../SpringBoot/SpringBoot整合Redis哨兵.md">SpringBoot整合Redis哨兵</a>
-- <a href="../SpringBoot/SpringBoot整合Redis集群.md">SpringBoot整合Redis集群</a>
-- <a href="../SpringBoot/SpringBoot整合RabbitMQ.md">SpringBoot整合RabbitMQ</a>
-- <a href="../SpringBoot/springboot实现i18n.md">springboot实现i18n</a>
-- <a href="../SpringBoot/springboot集成Kafka.md">springboot集成Kafka</a>
+# 分布式锁
+- <a href="../../pages/JavaWeb/distribution/lock/Redis分布式锁.md">Redis分布式锁</a>
 
-# SpringCloud
+# 分布式事务
+- <a href="../../pages/JavaWeb/distribution/transaction/两阶段提交.md">两阶段提交</a>
+- <a href="../../pages/JavaWeb/distribution/transaction/三阶段提交.md">三阶段提交</a>
+- <a href="../../pages/JavaWeb/distribution/transaction/TCC.md">TCC</a>
+- <a href="../../pages/JavaWeb/distribution/transaction/本地消息表.md">本地消息表</a>
+- <a href="../../pages/JavaWeb/distribution/transaction/RocketMQ消息事务.md">RocketMQ消息事务</a>
+- <a href="../../pages/JavaWeb/distribution/transaction/最大努力通知.md">最大努力通知</a>
 
-## FeignClient
-- <a href="../SpringCloud/FeignClient/FeignClient注解.md">FeignClient注解</a>
-- <a href="../SpringCloud/FeignClient/FeignClient打印请求日志.md">FeignClient打印请求日志</a>
-- <a href="../SpringCloud/FeignClient/重写FeignClient输出日志.md">重写FeignClient输出日志</a>
-
-## Nacos
-- <a href="../SpringCloud/nacos/使用Nacos作为注册中心.md">使用Nacos作为注册中心</a>
-- <a href="../SpringCloud/nacos/使用Nacos作为配置中心.md">使用Nacos作为配置中心</a>
+# 分布式缓存
+## Redis
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/linux安装redis.md">linux安装redis</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/设置redis密码.md">设置redis密码</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis数据类型.md">Redis数据类型</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis持久化.md">Redis持久化</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis缓存过期处理与内存淘汰机制.md">Redis缓存过期处理与内存淘汰机制</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis读写分离.md">Redis读写分离</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis哨兵.md">Redis哨兵</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/redis集群.md">redis集群</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/缓存穿透.md">缓存穿透</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/缓存击穿.md">缓存击穿</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/缓存雪崩.md">缓存雪崩</a>
