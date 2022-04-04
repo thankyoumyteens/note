@@ -6,7 +6,7 @@ lock_value是uuid，释放锁时要判断lock_value是否为当前线程设置�
 
 ```java
 // 加锁，lock_value是uuid
-if（jedis.setnx(key_resource_id, lock_value) == 1) {
+if (jedis.setnx(key_resource_id, lock_value) == 1) {
    // 设置过期时间
    expire(key_resource_id，100);
    try {
@@ -49,7 +49,7 @@ SET key value[EX seconds][PX milliseconds][NX|XX]
 
 ```java
 // 加锁，lock_value是uuid
-if（jedis.set(key_resource_id, lock_value, "NX", "EX", 100) == 1) {
+if (jedis.set(key_resource_id, lock_value, "NX", "EX", 100) == 1) {
    try {
       // do something
    }catch() {
