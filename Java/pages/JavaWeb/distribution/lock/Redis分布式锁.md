@@ -8,7 +8,7 @@ lock_value是uuid，释放锁时要判断lock_value是否为当前线程设置�
 // 加锁，lock_value是uuid
 if (jedis.setnx(key_resource_id, lock_value) == 1) {
    // 设置过期时间
-   expire(key_resource_id，100);
+   expire(key_resource_id, 100);
    try {
       // do something
    } catch() {
