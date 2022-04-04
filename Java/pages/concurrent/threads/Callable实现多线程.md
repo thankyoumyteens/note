@@ -4,17 +4,13 @@ Callable位于java.util.concurrent包下
 
 ```java
 public interface Callable<V> {
-    /**
-     * Computes a result, or throws an exception if unable to do so.
-     *
-     * @return computed result
-     * @throws Exception if unable to compute a result
-     */
     V call() throws Exception;
 }
 ```
 
-一般情况下是配合ExecutorService来使用的，在ExecutorService接口中声明了若干个submit方法的重载版本
+Callable一般是配合ExecutorService来使用的
+
+ExecutorService接口中声明了若干个submit方法的重载版本
 
 ```java
 <T> Future<T> submit(Callable<T> task);

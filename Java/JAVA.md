@@ -3,7 +3,7 @@
 - <a href="content/jvm/gc.md">垃圾回收</a>
 
 # 并发编程
-- <a href="content/concurrent/threads.md">多线程</a>
+- <a href="content/concurrent/threads.md">线程</a>
 - <a href="content/concurrent/lock.md">锁</a>
 
 # Java Web
