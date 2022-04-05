@@ -11,12 +11,9 @@
 
 # 分布式缓存
 ## Redis
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis数据类型.md">Redis数据类型</a>
 - <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis持久化.md">Redis持久化</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis缓存过期处理与内存淘汰机制.md">Redis缓存过期处理与内存淘汰机制</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis读写分离.md">Redis读写分离</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis哨兵.md">Redis哨兵</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/redis集群.md">redis集群</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/缓存穿透.md">缓存穿透</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/缓存击穿.md">缓存击穿</a>
-- <a href="../../pages/JavaWeb/distribution/cache/Redis/缓存雪崩.md">缓存雪崩</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis缓存过期处理.md">Redis缓存过期处理</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis内存淘汰机制.md">Redis内存淘汰机制</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis集群方式.md">Redis集群方式</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/Redis集群数据复制原理.md">Redis集群数据复制原理</a>
+- <a href="../../pages/JavaWeb/distribution/cache/Redis/缓存穿透击穿雪崩.md">缓存穿透击穿雪崩</a>
