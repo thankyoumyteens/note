@@ -1,2 +1,3 @@
-- <a href="../exceptions/AbstractMethodError.md">AbstractMethodError</a>
-- <a href="../exceptions/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
+- <a href="../pages/exceptions/AbstractMethodError.md">AbstractMethodError</a>
+- <a href="../pages/exceptions/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
+- <a href="../pages/exceptions/Navicat连接Oracle时报错ORA-28547.md">Navicat连接Oracle时报错ORA-28547</a>
