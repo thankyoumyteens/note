@@ -1,6 +1,6 @@
-- <a href="../idea/常用设置.md">常用设置</a>
-- <a href="../idea/自定义idea配置和插件的存放目录.md">自定义idea配置和插件的存放目录</a>
-- <a href="../idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
-- <a href="../idea/LiveTemplates.md">LiveTemplates</a>
-- <a href="../idea/maven依赖全部红线问题.md">maven依赖全部红线问题</a>
-- <a href="../idea/拆分变量赋值和声明.md">拆分变量赋值和声明</a>
+- <a href="../../pages/utils/idea/常用设置.md">常用设置</a>
+- <a href="../../pages/utils/idea/自定义idea配置和插件的存放目录.md">自定义idea配置和插件的存放目录</a>
+- <a href="../../pages/utils/idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
+- <a href="../../pages/utils/idea/LiveTemplates.md">LiveTemplates</a>
+- <a href="../../pages/utils/idea/maven依赖全部红线问题.md">maven依赖全部红线问题</a>
+- <a href="../../pages/utils/idea/拆分变量赋值和声明.md">拆分变量赋值和声明</a>

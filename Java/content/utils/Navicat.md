@@ -1,0 +1,2 @@
+- <a href="../../pages/utils/Navicat/Windows10中Navicat卡顿问题.md">Windows10中Navicat卡顿问题</a>
+- <a href="../../pages/utils/Navicat/Navicat连接Oracle时报错ORA-28547.md">Navicat连接Oracle时报错ORA-28547</a>
