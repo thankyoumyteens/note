@@ -5,27 +5,55 @@
 vim /etc/nginx/sites-enabled/default
 ```
 修改配置
-```
+```conf
 http {
     server {
             server_name example.com;
 
-            location /mail/ {
-                    proxy_pass http://example.com:protmail;
+            location /a/ {
+                proxy_pass http://127.0.0.1:8080/;
+                proxy_cookie_path / /;
+                proxy_set_header host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header referer "-";
+                proxy_redirect default;
+                proxy_connect_timeout 90;
+                proxy_send_timeout 90;
+                proxy_read_timeout 90;
             }
-
-            location /com/ {
-                    proxy_pass http://127.0.0.1:8080/main;
+            location /b/ {
+                proxy_pass http://127.0.0.1:9090/;
             }
-
-            location / {
-                    proxy_pass http://example.com:portdefault;
+            location /ui/a {
+                alias   /home/html/app/;
+                try_files $uri $uri/ /index.html /;
+                index  index.html; 
             }
     }
 }
 ```
 
-# proxy_pass的注意事项
+# proxy_set_header host $host
+
+把源请求头中的host值放到转发的请求
+
+# proxy_cookie_path
+
+解决反向代理 cookie 丢失的问题
+
+cookie 的 path 与地址栏上的 path 不一致浏览器就不会接受这个 cookie，无法传入 JSESSIONID 的 cookie，导致登录验证失败
+
+```
+proxy_cookie_path source target;
+```
+- source 源路径
+- target 目标路径
+
+
+# proxy_pass
+
+该指令是用来设置代理服务器的地址，可以是主机名称，IP地址加端口号等形式
 
 proxy_pass分为两种类型
 
