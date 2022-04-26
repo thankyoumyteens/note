@@ -1,3 +1,11 @@
+# 优先级
+
+nacos配置大于本地jar中的application.properties配置，在nacos配置的参数肯定会覆盖jar配置，但一旦nacos不配置参数或参数被注释掉，本地jar的配置会生效。
+
+nacos中微服务配置大于nacos中共享配置，比如s1微服务在nacos中配置的s1.properties与nacos共享配置有相同的参数，微服务只加载s1.properties中的参数，共享配置的相同参数会被覆盖。
+
+nacos共享配置也大于本地jar中的application.properties配置，在本地jar的application.properties配置了和nacos共享配置相同的参数，微服务只加载nacos的共享配置。
+
 # 开启认证
 
 ```
