@@ -1,3 +1,16 @@
+# PageHelper不生效的情况
+
+调用PageHelper.startPage后，紧跟在这个方法后的第一个MyBatis查询方法会被进行分页。
+
+```java
+PageHelper.startPage(pageNum, pageSize, true);
+if (isOpen) {
+    userService.getUser()
+}
+// 当isOpen为true时分页失效
+mapper.selectByParams(params);
+```
+
 # PageHelper用法
 
 pom.xml
