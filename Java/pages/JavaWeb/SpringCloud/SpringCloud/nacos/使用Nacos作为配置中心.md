@@ -166,6 +166,10 @@ spring:
           data-id: team1-baseconfig.yml
           # 是否动态刷新，默认为false
           refresh: true
+        shared-configs[1]:
+          group: team2
+          data-id: team2-baseconfig.yml
+          refresh: true
   # 与spring.profiles.active匹配时启用
   profiles: dev
 
@@ -190,6 +194,20 @@ spring:
 ```
 
 启动应用
+
+# 共享配置简写
+
+```yaml
+spring:
+  cloud:
+    nacos:
+      config:
+        # 直接写配置名称 记得加后缀 多个以逗号分割
+        # shared-dataids 组别默认是 DEFAULT_GROUP
+        shared-dataids: cfg1-dev.yaml,cfg2-dev.yaml
+        # 需要自动刷新的配置文件
+        refreshable-dataids: cfg1-dev.yaml
+```
 
 # Nacos配置加载规则
 
