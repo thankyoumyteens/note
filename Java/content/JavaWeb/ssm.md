@@ -16,4 +16,5 @@
 - <a href="../../pages/JavaWeb/SSM/MyBatis/一对一查询.md">一对一查询</a>
 - <a href="../../pages/JavaWeb/SSM/MyBatis/一对多查询.md">一对多查询</a>
 - <a href="../../pages/JavaWeb/SSM/MyBatis/缓存.md">缓存</a>
+- <a href="../../pages/JavaWeb/SSM/MyBatis/MyBatis日志打印SQL语句.md">MyBatis日志打印SQL语句</a>
 - <a href="../../pages/JavaWeb/SSM/MyBatis/PageHelper.md">PageHelper</a>
