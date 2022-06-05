@@ -45,8 +45,6 @@ ConcurrentHashMap定位一个元素的过程需要进行两次Hash操作。第�
 
 ConcurrentHashMap使用分段锁技术，将数据分成一段一段的存储（Segment数组），然后给每一段数据配一把锁（ReentrantLock），当一个线程占用锁访问其中一个段的时候，其他段的数据也能被其他线程访问，在保证线程安全的同时降低了锁的粒度，让并发操作效率更高。
 
-![](Java/base/img/cmap1.png)
-
 ## JDK1.8
 
 去除Segment+HashEntry的实现，改为Synchronized+CAS+Node数组的实现。用Synchronized+CAS代替Segment，这样锁的粒度更小了，并且不是每次都要加锁，只有CAS尝试失败了再加锁。
@@ -89,7 +87,6 @@ ConcurrentHashMap使用分段锁技术，将数据分成一段一段的存储（
 - 核心线程数为0，最大线程数几乎无限大，一旦线程无限增长，会导致内存溢出
 - 采用SynchronousQueue，这个阻塞队列没有存储空间，只要有请求到来，就必须要找到一条工作线程处理他，如果当前没有空闲的线程，那么就会再创建一条新的线程
 
-
 ## newFixedThreadPool
 
 - 它是一种固定线程数量的线程池，无法扩展
@@ -109,6 +106,21 @@ ConcurrentHashMap使用分段锁技术，将数据分成一段一段的存储（
 
 - 上述线程池的底层都是通过它来创建的
 - 更加明确线程池的运行规则，规避资源耗尽的风险
+
+# 常用的阻塞队列
+
+- ArrayBlockingQueue: 基于数组实现的有界阻塞队列，按照先进先出原则对元素进行排序。ArrayBlockingQueue对生产者端和消费者端使用同一个锁来控制数据同步。
+- LinkedBlockingQueue: 基于链表实现的有界阻塞队列，但大小默认值为integer.MAX_VALUE，是一个非常大的值，也可以认为是无界队列。LinkedBlockingQueue对生产者端和消费者端分别采用了两个独立的锁来控制数据同步，队列的并发性能较高。
+- PriorityBlockingQueue: 支持优先级的无界队列，元素在默认情况下采用自然顺序升序排列。可以自定义实现compareTo方法来指定元素的排序规则。
+- SynchronousQueue: 不存储元素的阻塞队列。每个put操作都必须等待一个take操作完成，否则不能继续添加元素。
+- DelayQueue: 支持延时获取元素的无界阻塞队列。
+
+# 常用的拒绝策略
+
+- CallerRunsPolicy: 哪个线程添加的任务，哪个线程自己去运行这个任务
+- AbortPolicy: 丢弃任务，并抛出RejectedExecutionException异常
+- DiscardPolicy: 直接丢弃，不做任何操作
+- DiscardOldestPolicy: 丢弃阻塞队列中最老的一个任务，并将新任务加入
 
 # 说一下你熟悉的设计模式？
 
@@ -157,6 +169,14 @@ spring-boot-autoconfigure-版本号.jar中的spring.factories文件指定了redi
 - 削峰，在访问量剧增的情况下，防止系统崩塌。
 - 延迟消息，把消息发送给MQ，MQ并不立即处理。
 - 解耦系统，对于新增的功能可以单独写模块扩展，只需要订阅对应的消息队列即可。
+
+# RabbitMQ的消息模型
+
+- 基本消息模型: 生产者向消息队列中投递消息，消费者从其中取出消息
+- work消息模型: 两个消费者共同消费同一个队列中的消息，但是一个消息只能被一个消费者获取。work模型通过手动确认机制实现能者多劳
+- 发布-订阅模型 广播: 交换机把消息发送给绑定的所有队列，实现一条消息被多个消费者消费
+- 发布-订阅模型 Direct: 生产者向交换机发送消息时，会指定一个routing key。交换机把生产者的消息交给与routing key完全匹配的队列
+- 发布-订阅模型 Topic: Topic类型可以让队列在绑定routing key的时候使用通配符
 
 # 消息可靠性投递
 
@@ -262,26 +282,13 @@ Redis的过期删除策略是：惰性删除和定期删除两种策略配合使
 - redis是单线程的，省去了切换线程的时间，不存在加锁释放锁操作
 - 使用多路复用技术，非阻塞IO
 
-# Redis实现分布式锁
-
-## Lua脚本 + SETNX + EXPIRE
+# Redis实现分布式锁 - Lua脚本 + SETNX + EXPIRE
 
 SETNX key value：只在key不存在的情况下，才将键key的值设置为value。如果 key不存在，则SETNX成功返回1，如果这个key已经存在了，则返回0。
 
 Redis采用同一个Lua解释器去运行所有命令，所以Lua脚本的执行是原子性的。可以避免执行完setnx加锁，还没执行expire设置过期时间时，进程终止了，导致这个锁就不会被释放的问题。
 
 lock_value是uuid，释放锁时要判断lock_value是否为当前线程设置的uuid值，避免锁过期释放了，业务还没执行完，删了别的线程的锁
-
-## SET指令扩展参数
-
-```
-SET key value[EX seconds][PX milliseconds][NX|XX]
-```
-
-- NX：key不存在的时候，才能set成功
-- XX：key存在的时候，才能set成功
-- EX seconds：设定key的过期时间，时间单位是秒。
-- PX milliseconds：设定key的过期时间，单位为毫秒
 
 # 分布式事务
 
@@ -297,8 +304,6 @@ SET key value[EX seconds][PX milliseconds][NX|XX]
 
 假如在第二阶段参与者返回失败，那么协调者就会不断重试，直到所有参与者都成功，否则会一直阻塞。
 
-![](Java/Web/img/tpc.jpg)
-
 存在的问题
 
 - 所有事务参与者在等待其它参与者响应的时候都处于同步阻塞状态，无法进行其它操作。
@@ -313,8 +318,6 @@ SET key value[EX seconds][PX milliseconds][NX|XX]
 - A收到确认消息后将本地消息表的消息状态改为“已发送”，此时分布式事务完成。
 - 设置一个定时任务检查本地消息表，重发状态为“发送中”的消息。
 
-![](Java/Web/img/bdxxb.png)
-
 一种非常经典的实现，实现了最终一致性。
 
 # 静态代码块什么时候执行
@@ -327,7 +330,7 @@ SET key value[EX seconds][PX milliseconds][NX|XX]
 - 当调用某个类的静态方法时
 - 当使用某个类或接口的静态字段时
 
-# deamon线程
+# 守护线程线程
 
 在Java中有两类线程：用户线程 (User Thread)、守护线程 (Daemon Thread)。 
 
@@ -341,32 +344,6 @@ SET key value[EX seconds][PX milliseconds][NX|XX]
 - main其实也是一个普通的用户线程，只不过一些其余的线程都是由main启动的
 - main线程终止，不能决定JVM是否退出。
 - 若想在main线程退出后，全部其余线程也退出，那么可以把其余线程都设置为守护线程
-
-# 实现线程同步
-
-通过阻塞队列ArrayBlockingQueue实现
-
-BlockingQueue的put()方法和take()方法在返回前都会阻塞当前线程
-
-```java
-// 容量为3的队列
-ArrayBlockingQueue queue = new ArrayBlockingQueue<Integer>(3);
-// 线程1
-public void t1() {
-   int i = 0;
-   while (true) {
-      // 队列满了会被阻塞
-      queue.put(i++);
-   }
-}
-// 线程2
-public void t2() {
-   while (true) {
-      // 队列空了会被阻塞
-      int num = (int) queue.take();
-   }
-}
-```
 
 # Java程序占用CPU过高怎么排查
 
