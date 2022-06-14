@@ -5,6 +5,7 @@
 - <a href="../../pages/JavaWeb/SSM/Spring/Transactional注解失效的场景.md">Transactional注解失效的场景</a>
 - <a href="../../pages/JavaWeb/SSM/Spring/Spring整合Junit.md">Spring整合Junit</a>
 - <a href="../../pages/JavaWeb/SSM/Spring/RequestContextHolder.md">RequestContextHolder</a>
+- <a href="../../pages/JavaWeb/SSM/Spring/bean的生命周期.md">bean的生命周期</a>
 
 # SpringMVC
 - <a href="../../pages/JavaWeb/SSM/SpringMVC/文件上传.md">文件上传</a>
