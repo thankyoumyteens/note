@@ -7,6 +7,7 @@
 - <a href="Linux/common/frp内网穿透.md">frp内网穿透</a>
 - <a href="Linux/common/linux查看端口号占用.md">linux查看端口号占用</a>
 - <a href="Linux/common/为ls命令设置颜色.md">为ls命令设置颜色</a>
+- <a href="Linux/common/配置环境变量.md">配置环境变量</a>
 
 # CentOS
 - <a href="Linux/centos软件源配置.md">centos软件源配置</a>
