@@ -11,6 +11,7 @@
 - <a href="Python获取日期.md">Python获取日期</a>
 - <a href="python的编码.md">python的编码</a>
 - <a href="python中str和byte相互转化.md">python中str和byte相互转化</a>
+- <a href="python中时间戳和日期相互转化.md">python中时间戳和日期相互转化</a>
 - <a href="PythonBase64编解码.md">PythonBase64编解码</a>
 - <a href="Python执行shell命令.md">Python执行shell命令</a>
 - <a href="Non-ASCII_character.md">Non-ASCII character</a>
@@ -22,16 +23,16 @@
 - <a href="正则表达式/替换.md">替换</a>
 - <a href="正则表达式/正则表达式手册.md">正则表达式手册</a>
 # Python的IO操作
-- <a href="Python的IO操作/判断文件和文件夹.md">判断文件和文件夹</a>
-- <a href="Python的IO操作/拼接路径.md">拼接路径</a>
-- <a href="Python的IO操作/拆分路径.md">拆分路径</a>
-- <a href="Python的IO操作/列出目录下所有文件.md">列出目录下所有文件</a>
-- <a href="Python的IO操作/获取当前目录.md">获取当前目录</a>
-- <a href="Python的IO操作/创建文件夹.md">创建文件夹</a>
-- <a href="Python的IO操作/删除文件和文件夹.md">删除文件和文件夹</a>
-- <a href="Python的IO操作/重命名文件和文件夹.md">重命名文件和文件夹</a>
-- <a href="Python的IO操作/复制和移动.md">复制和移动</a>
-- <a href="Python的IO操作/Python中文件的读写操作.md">Python中文件的读写操作</a>
+- <a href="文件操作/判断文件和文件夹.md">判断文件和文件夹</a>
+- <a href="文件操作/拼接路径.md">拼接路径</a>
+- <a href="文件操作/拆分路径.md">拆分路径</a>
+- <a href="文件操作/列出目录下所有文件.md">列出目录下所有文件</a>
+- <a href="文件操作/获取当前目录.md">获取当前目录</a>
+- <a href="文件操作/创建文件夹.md">创建文件夹</a>
+- <a href="文件操作/删除文件和文件夹.md">删除文件和文件夹</a>
+- <a href="文件操作/重命名文件和文件夹.md">重命名文件和文件夹</a>
+- <a href="文件操作/复制和移动.md">复制和移动</a>
+- <a href="文件操作/Python中文件的读写操作.md">Python中文件的读写操作</a>
 # Pyhon的Win32编程
 - <a href="PythonWin32/获取Windows管理员权限.md">获取Windows管理员权限</a>
 - <a href="PythonWin32/使用python发送qq消息.md">使用python发送qq消息</a>
