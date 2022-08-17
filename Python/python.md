@@ -13,7 +13,6 @@
 - <a href="python中str和byte相互转化.md">python中str和byte相互转化</a>
 - <a href="python中时间戳和日期相互转化.md">python中时间戳和日期相互转化</a>
 - <a href="PythonBase64编解码.md">PythonBase64编解码</a>
-- <a href="Python执行shell命令.md">Python执行shell命令</a>
 - <a href="Non-ASCII_character.md">Non-ASCII character</a>
 # 正则表达式
 - <a href="正则表达式/换行匹配.md">换行匹配</a>
@@ -44,6 +43,7 @@
 - <a href="PythonHTTP/python请求https.md">python请求https</a>
 - <a href="PythonHTTP/urllib.md">urllib</a>
 # subprocess
+- <a href="subprocess/Python执行shell命令.md">Python执行shell命令</a>
 - <a href="subprocess/Popen类.md">Popen类</a>
 - <a href="subprocess/subprocess.call.md">subprocess.call</a>
 - <a href="subprocess/subprocess.check_output.md">subprocess.check_output</a>
