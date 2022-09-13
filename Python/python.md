@@ -1,12 +1,23 @@
 # pip
-- <a href="pip/pip软件源配置.md">pip软件源配置</a>
-- <a href="pip/pip常用命令.md">pip常用命令</a>
-- <a href="pip/Python离线安装依赖包.md">Python离线安装依赖包</a>
-- <a href="pip/Python依赖管理.md">Python依赖管理</a>
+- <a href="links/pip.md">目录</a>
+
+# 环境配置
+- <a href="links/环境配置.md">目录</a>
+
+# 正则表达式
+- <a href="links/正则表达式.md">目录</a>
+
+# 文件操作
+- <a href="links/文件操作.md">目录</a>
+
+# requests
+- <a href="links/requests.md">目录</a>
+
+# 压缩文件
+- <a href="links/压缩文件.md">目录</a>
+
 
 # Python
-- <a href="Linux安装Python3.md">Linux安装Python3</a>
-- <a href="virtualenv.md">virtualenv</a>
 - <a href="Python数字自动补零.md">Python数字自动补零</a>
 - <a href="Python获取日期.md">Python获取日期</a>
 - <a href="python的编码.md">python的编码</a>
@@ -14,24 +25,8 @@
 - <a href="python中时间戳和日期相互转化.md">python中时间戳和日期相互转化</a>
 - <a href="PythonBase64编解码.md">PythonBase64编解码</a>
 - <a href="Non-ASCII_character.md">Non-ASCII character</a>
-# 正则表达式
-- <a href="正则表达式/换行匹配.md">换行匹配</a>
-- <a href="正则表达式/与或非.md">与或非</a>
-- <a href="正则表达式/分组.md">分组</a>
-- <a href="正则表达式/查找.md">查找</a>
-- <a href="正则表达式/替换.md">替换</a>
-- <a href="正则表达式/正则表达式手册.md">正则表达式手册</a>
-# Python的IO操作
-- <a href="文件操作/判断文件和文件夹.md">判断文件和文件夹</a>
-- <a href="文件操作/拼接路径.md">拼接路径</a>
-- <a href="文件操作/拆分路径.md">拆分路径</a>
-- <a href="文件操作/列出目录下所有文件.md">列出目录下所有文件</a>
-- <a href="文件操作/获取当前目录.md">获取当前目录</a>
-- <a href="文件操作/创建文件夹.md">创建文件夹</a>
-- <a href="文件操作/删除文件和文件夹.md">删除文件和文件夹</a>
-- <a href="文件操作/重命名文件和文件夹.md">重命名文件和文件夹</a>
-- <a href="文件操作/复制和移动.md">复制和移动</a>
-- <a href="文件操作/Python中文件的读写操作.md">Python中文件的读写操作</a>
+
+
 # Pyhon的Win32编程
 - <a href="PythonWin32/获取Windows管理员权限.md">获取Windows管理员权限</a>
 - <a href="PythonWin32/使用python发送qq消息.md">使用python发送qq消息</a>
@@ -39,9 +34,6 @@
 - <a href="PythonWin32/使用python设置窗口焦点.md">使用python设置窗口焦点</a>
 - <a href="PythonWin32/使用python控制鼠标.md">使用python控制鼠标</a>
 - <a href="PythonWin32/使用python控制注册表.md">使用python控制注册表</a>
-# Pyhon的HTTP客户端
-- <a href="PythonHTTP/python请求https.md">python请求https</a>
-- <a href="PythonHTTP/urllib.md">urllib</a>
 # subprocess
 - <a href="subprocess/Python执行shell命令.md">Python执行shell命令</a>
 - <a href="subprocess/Popen类.md">Popen类</a>
@@ -69,5 +61,3 @@
 - <a href="PyMySQL/连接数据库.md">连接数据库</a>
 - <a href="PyMySQL/增删改.md">增删改</a>
 - <a href="PyMySQL/查.md">查</a>
-# ZipFile
-- <a href="ZipFile.md">ZipFile</a>
