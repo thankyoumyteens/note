@@ -1,0 +1,15 @@
+- <a href="../pages/selenium/安装selenium.md">安装selenium</a>
+- <a href="../pages/selenium/配置Chrome启动参数.md">配置Chrome启动参数</a>
+- <a href="../pages/selenium/控制浏览器.md">控制浏览器</a>
+- <a href="../pages/selenium/定位元素.md">定位元素</a>
+- <a href="../pages/selenium/控制元素.md">控制元素</a>
+- <a href="../pages/selenium/鼠标事件.md">鼠标事件</a>
+- <a href="../pages/selenium/键盘事件.md">键盘事件</a>
+- <a href="../pages/selenium/控制滚动条.md">控制滚动条</a>
+- <a href="../pages/selenium/切换到内嵌页面.md">切换到内嵌页面</a>
+- <a href="../pages/selenium/多窗口切换.md">多窗口切换</a>
+- <a href="../pages/selenium/警告框处理.md">警告框处理</a>
+- <a href="../pages/selenium/下拉框选择.md">下拉框选择</a>
+- <a href="../pages/selenium/文件上传.md">文件上传</a>
+- <a href="../pages/selenium/cookie操作.md">cookie操作</a>
+- <a href="../pages/selenium/窗口截图.md">窗口截图</a>
