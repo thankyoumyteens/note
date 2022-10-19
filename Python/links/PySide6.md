@@ -1,0 +1,3 @@
+- <a href="../pages/pyside/安装Pyside6.md">安装Pyside6</a>
+- <a href="../pages/pyside/创建主窗口.md">创建主窗口</a>
+- <a href="../pages/pyside/建立菜单栏.md">建立菜单栏</a>

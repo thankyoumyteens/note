@@ -28,6 +28,9 @@
 # subprocess
 - <a href="links/subprocess.md">目录</a>
 
+# PySide6
+- <a href="links/PySide6.md">目录</a>
+
 # PythonWin32
 - <a href="links/PythonWin32.md">目录</a>
 
