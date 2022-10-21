@@ -3,3 +3,4 @@
 - <a href="../pages/pyside/建立菜单栏.md">建立菜单栏</a>
 - <a href="../pages/pyside/建立工具栏.md">建立工具栏</a>
 - <a href="../pages/pyside/建立信号与槽的连接.md">建立信号与槽的连接</a>
+- <a href="../pages/pyside/布局.md">布局</a>
