@@ -10,14 +10,14 @@
 - <a href="Linux/common/配置环境变量.md">配置环境变量</a>
 
 # CentOS
-- <a href="Linux/centos软件源配置.md">centos软件源配置</a>
-- <a href="Linux/centos7开启ssh服务.md">centos7开启ssh服务</a>
-- <a href="Linux/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a>
+- <a href="Linux/CentOS/centos软件源配置.md">centos软件源配置</a>
+- <a href="Linux/CentOS/centos7开启ssh服务.md">centos7开启ssh服务</a>
+- <a href="Linux/CentOS/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a>
 
 # Ubuntu
-- <a href="Linux/ubuntu软件源配置.md">ubuntu软件源配置</a>
-- <a href="Linux/ubuntu开启ssh服务.md">ubuntu开启ssh服务</a>
-- <a href="Linux/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
+- <a href="Linux/Ubuntu/ubuntu软件源配置.md">ubuntu软件源配置</a>
+- <a href="Linux/Ubuntu/ubuntu开启ssh服务.md">ubuntu开启ssh服务</a>
+- <a href="Linux/Ubuntu/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
 
 # 工具
 - <a href="Linux/工具/grep.md">grep</a>
