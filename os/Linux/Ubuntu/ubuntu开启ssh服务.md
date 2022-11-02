@@ -16,22 +16,23 @@ sudo apt-get install openssh-server
 sudo apt-get install openssh-client
 ```
 
-# 开启ssh服务
+# 允许密码登录
 
 ```
-sudo systemctl start ssh
+sudo vim /etc/ssh/sshd_config
+# 搜索关键字 PasswordAuthentication
+# 将PasswordAuthentication no改为yes
+# 保存
 ```
-或者
+
+# 开启ssh服务
+
 ```
 sudo /etc/init.d/ssh start
 ```
 
 # 关闭ssh服务
 
-```
-sudo systemctl stop ssh
-```
-或者
 ```
 sudo /etc/init.d/ssh stop
 ```
