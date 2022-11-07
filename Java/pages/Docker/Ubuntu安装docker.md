@@ -1,52 +1,23 @@
-# Ubuntu 18.04 安装docker ce
-卸载老版本
+# Ubuntu安装docker ce
+
 ```
 sudo apt-get remove docker docker-engine docker.io
-```
-更新apt包索引
-```
 sudo apt-get update
-```
-安装包以允许通过HTTPS使用存储库：
-```
 sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
-```
-添加Docker的GPG密钥：
-```
-curl -fsSL https://repo.huaweicloud.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
-```
-对于amd64架构的计算机，添加软件仓库
-```
-sudo add-apt-repository "deb [arch=amd64] https://repo.huaweicloud.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-```
-更新apt包索引
-```
+curl -fsSL https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get update
-```
-安装最新版本的Docker CE
-```
-sudo apt-get install docker-ce
-```
-查看Docker CE 版本
-```
-docker -v 
-```
-运行hello-world
-```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+docker -v
+sudo service docker start
+systemctl enable docker.service
 sudo docker run hello-world
 ```
 
-# 修改Ubuntu的apt-get源中docker为国内镜像源
-
-查看版本信息
-```
-lsb_release -cs
-```
-修改apt-get源
-```
-sudo vim /etc/apt/sources.list
-```
+# 卸载
 
 ```
-deb [arch=amd64] https://repo.huaweicloud.com/docker-ce/linux/ubuntu 上面查出的版本信息 stable
+sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
 ```
