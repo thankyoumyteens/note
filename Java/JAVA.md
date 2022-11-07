@@ -15,6 +15,7 @@
 - <a href="content/JavaWeb/SpringCloud.md">SpringCloud</a>
 - <a href="content/JavaWeb/zookeeper.md">Zookeeper</a>
 - <a href="content/JavaWeb/scheduler.md">定时任务</a>
+- <a href="content/JavaWeb/encrypt.md">加密解密</a>
 
 # 异常
 - <a href="content/exceptions.md">目录</a>
