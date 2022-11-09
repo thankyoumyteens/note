@@ -2,6 +2,7 @@
 - <a href="english.md">英语</a>
 - <a href="os/linux.md">Linux</a>
 - <a href="os/windows.md">Windows</a>
+- <a href="FFmpeg/FFmpeg.md">FFmpeg</a>
 - <a href="Java/JAVA.md">Java</a>
 - <a href="Python/python.md">Python</a>
 - <a href="fe/frontend.md">前端</a>
@@ -19,8 +20,3 @@
 
 # Charles
 - <a href="Charles/windows安装证书.md">windows安装证书</a>
-
-# FFmpeg
-- <a href="FFmpeg/视频文件.md">视频文件</a>
-- <a href="FFmpeg/FFmpeg用法.md">FFmpeg用法</a>
-
