@@ -89,3 +89,14 @@ subprocess.Popen(args,
 ## kill()
 杀死子进程 p ，等于向子进程发送 SIGKILL 信号
 
+## 持续获取返回值
+
+```py
+import subprocess
+
+p = subprocess.Popen('adb logcat', shell=True, stdout=subprocess.PIPE)
+for i in iter(p.stdout.readline, 'b'):
+    print(i.decode())  # 打印结果
+    if p.poll() is not None:
+        break
+```

@@ -1,6 +1,4 @@
-# ZipFile对象
-
-## 打开一个ZIP文件
+# 打开ZIP文件
 
 ```py
 class zipfile.ZipFile(file, mode='r', compression=ZIP_STORED, allowZip64=True)
@@ -12,20 +10,20 @@ class zipfile.ZipFile(file, mode='r', compression=ZIP_STORED, allowZip64=True)
 - 在w/x/a模式下，如果没有写入任何数据就close了，则会生成空的ZIP文件。
 - ZipFile也是一种上下文管理器，同样支持with语句
 
-## 关闭ZIP文件
+# 关闭ZIP文件
 
 ```py
 ZipFile.close()
 ```
 
-## 压缩格式
+# 压缩格式
 
 - `zipfile.ZIP_STORED` 不压缩
 - `zipfile.ZIP_DEFLATED` 常用的ZIP压缩方法
 - `zipfile.ZIP_BZIP2` BZIP2压缩方法
 - `zipfile.ZIP_LZMA` LZMA压缩方法
 
-## 读取zip文档内指定文件
+# 读取zip文档内指定文件
 
 ```py
 ZipFile.read(filename, pwd=None)
@@ -33,7 +31,7 @@ ZipFile.read(filename, pwd=None)
 
 - 返回指定文件的二进制数据
 
-## 往ZIP文件里添加新文件
+# 往ZIP文件里添加新文件
 
 ```py
 ZipFile.write(filename, arcname=None, compress_type=None)
@@ -43,13 +41,34 @@ ZipFile.write(filename, arcname=None, compress_type=None)
 - 如果指定arcname参数，则在ZIP文件内部将原来的filename改成arcname
 - compress_type表示压缩格式
 
-## 获取zip文档内文件的信息
+# 获取zip文档内文件的信息
 
 - `ZipFile.getinfo(name)` 获取zip文档内指定文件的信息。返回一个zipfile.ZipInfo对象，它包括文件的详细信息。
 - `ZipFile.infolist()` 获取zip文档内所有文件的信息，返回一个zipfile.ZipInfo的列表。
 - `ZipFile.namelist()` 获取zip文档内所有文件的名称列表。
 
-## 解压
+# 压缩文件夹
+
+```py
+def zipDir(source_dir, output_filename):
+    """
+    压缩指定文件夹
+    :param source_dir: 目标文件夹路径
+    :param output_filename: 压缩文件保存路径+xxxx.zip
+    :return: 无
+    """
+    if os.path.exists(source_dir):
+        zipf = zipfile.ZipFile(file=output_filename, mode='w', compression=zipfile.ZIP_DEFLATED)
+        pre_len = len(os.path.dirname(source_dir))
+        for parent, dirnames, filenames in os.walk(source_dir):
+            for filename in filenames:
+                pathfile = os.path.join(parent, filename)
+                arcname = pathfile[pre_len:].strip(os.path.sep)
+                zipf.write(pathfile, arcname)
+        zipf.close()
+```
+
+# 解压
 
 解压单个文件
 ```py
