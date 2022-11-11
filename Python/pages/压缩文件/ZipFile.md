@@ -50,21 +50,21 @@ ZipFile.write(filename, arcname=None, compress_type=None)
 # 压缩文件夹
 
 ```py
-def zipDir(source_dir, output_filename):
+def zip_dir(source_dir, output_filename, prefix):
     """
     压缩指定文件夹
-    :param source_dir: 目标文件夹路径
-    :param output_filename: 压缩文件保存路径+xxxx.zip
-    :return: 无
+    :param source_dir: 要压缩的文件夹
+    :param output_filename: 压缩文件存放路径
+    :param prefix: 压缩文件内的文件夹名
     """
     if os.path.exists(source_dir):
         zipf = zipfile.ZipFile(file=output_filename, mode='w', compression=zipfile.ZIP_DEFLATED)
         pre_len = len(os.path.dirname(source_dir))
-        for parent, dirnames, filenames in os.walk(source_dir):
+        for parent, dir_names, filenames in os.walk(source_dir):
             for filename in filenames:
-                pathfile = os.path.join(parent, filename)
-                arcname = pathfile[pre_len:].strip(os.path.sep)
-                zipf.write(pathfile, arcname)
+                absolute_path = os.path.join(parent, filename)
+                relative_path = prefix + absolute_path[pre_len:].strip(os.path.sep)
+                zipf.write(absolute_path, relative_path)
         zipf.close()
 ```
 
