@@ -4,6 +4,7 @@
 # CMD
 - <a href="Windows/windows查看端口号占用.md">windows查看端口号占用</a>
 - <a href="Windows/设置IP与DNS.md">设置IP与DNS</a>
+- <a href="Windows/修改命令行窗口为UTF8编码.md">修改命令行窗口为UTF8编码</a>
 
 # 批处理
 - <a href="Windows/bat/语法.md">语法</a>
