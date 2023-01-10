@@ -10,7 +10,6 @@
 - <a href="content/JavaWeb/db.md">数据库</a>
 - <a href="content/JavaWeb/LB.md">负载均衡</a>
 - <a href="content/JavaWeb/distribution.md">分布式</a>
-- <a href="content/JavaWeb/ssm.md">SSM</a>
 - <a href="content/JavaWeb/mq.md">MQ</a>
 - <a href="content/JavaWeb/SpringCloud.md">SpringCloud</a>
 - <a href="content/JavaWeb/zookeeper.md">Zookeeper</a>
