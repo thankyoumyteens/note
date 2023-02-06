@@ -1,18 +1,44 @@
+# 配置别名
+
+```conf
+location /img/ {
+    alias /var/www/image/;
+}
+```
+
+## alias和root的区别
+
+若用alias的话，则访问/img/目录里面的文件时，ningx会自动去/var/www/image/目录找文件，
+
+比如：http://localhost/img/a.png 则是对应到服务器下的 /var/www/image/a.png
+
+```conf
+location /img/ {
+    alias /var/www/image/;
+}
+```
+
+若用root的话，则访问/img/目录下的文件时，nginx会去/var/www/image/img/目录下找文件,
+
+比如：http://localhost/img/a.png 则是对应服务器下的 /var/www/image/img/a.png
+
+```conf
+location /img/ {
+    root /var/www/image;
+}
+```
+
 # nginx根据url实现请求转发
 
-打开配置文件
-```
-vim /etc/nginx/sites-enabled/default
-```
-修改配置
 ```conf
 http {
     server {
-            server_name example.com;
-
             location /a/ {
+                # 设置代理服务器的地址
                 proxy_pass http://127.0.0.1:8080/;
+                # 解决反向代理cookie丢失的问题
                 proxy_cookie_path / /;
+                # 把源请求头中的host值放到转发的请求头中
                 proxy_set_header host $host;
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header X-Real-IP $remote_addr;
@@ -34,15 +60,9 @@ http {
 }
 ```
 
-# proxy_set_header host $host
-
-把源请求头中的host值放到转发的请求
-
 # proxy_cookie_path
 
-解决反向代理 cookie 丢失的问题
-
-cookie 的 path 与地址栏上的 path 不一致浏览器就不会接受这个 cookie，无法传入 JSESSIONID 的 cookie，导致登录验证失败
+反向代理cookie丢失问题: cookie的path与地址栏上的path不一致时，浏览器就不会接受这个cookie，无法传入JSESSIONID，导致登录验证失败
 
 ```
 proxy_cookie_path source target;
@@ -50,39 +70,40 @@ proxy_cookie_path source target;
 - source 源路径
 - target 目标路径
 
-
 # proxy_pass
 
-该指令是用来设置代理服务器的地址，可以是主机名称，IP地址加端口号等形式
+该指令是用来设置代理服务器的地址
 
-proxy_pass分为两种类型
-
-1. 一种是只包含IP和端口号的 如`proxy_pass http://localhost:8080` 这种方式称为不带URI方式
-2. 另一种是在端口号之后有其他路径的 如`proxy_pass http://localhost:8080/` 或 `proxy_pass http://localhost:8080/abc`  这种方式称为带URI方式
-
-## 对于不带URI方式
+## 不带URI参数
 
 nginx将会保留location中路径部分，比如：
-```
+
+```conf
 location /api1/ {
     proxy_pass http://localhost:8080;
 }
 ```
+
 在访问`http://localhost/api1/1.jpg`时，会代理到`http://localhost:8080/api1/1.jpg`
 
-## 对于带URI方式
+## 带URI参数
 
 nginx将对URL进行替换，比如：
-```
+
+```conf
 location /api2/ {
+    # URI参数: /
     proxy_pass http://localhost:8080/;
 }
 ```
+
 当访问`http://localhost/api2/1.jpg`时，会代理到`http://localhost:8080/1.jpg`
 
 又比如：
-```
+
+```conf
 location /api5/ {
+    # URI参数: /haha
     proxy_pass http://localhost:8080/haha;
 }
 ```
