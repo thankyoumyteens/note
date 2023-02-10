@@ -17,6 +17,12 @@
 
 - <a href="../../pages/JavaWeb/db/SQL/优化慢sql.md">优化慢sql</a>
 
+# Elasticsearch7
+
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/索引.md">索引</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/映射.md">映射</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/文档.md">文档</a>
+
 
 # 分库分表
 
