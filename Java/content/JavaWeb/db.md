@@ -22,7 +22,12 @@
 - <a href="../../pages/JavaWeb/db/Elasticsearch/es7/索引.md">索引</a>
 - <a href="../../pages/JavaWeb/db/Elasticsearch/es7/映射.md">映射</a>
 - <a href="../../pages/JavaWeb/db/Elasticsearch/es7/文档.md">文档</a>
-- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/搜索.md">搜索</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/term和match查询.md">term和match查询</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/非空数据查询.md">非空数据查询</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/模糊查询.md">模糊查询</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/正则表达式查询.md">正则表达式查询</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/通过id批量查询.md">通过id批量查询</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/范围查询.md">范围查询</a>
 
 # 分库分表
 
