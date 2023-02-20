@@ -28,6 +28,7 @@
 - <a href="../../pages/JavaWeb/db/Elasticsearch/es7/正则表达式查询.md">正则表达式查询</a>
 - <a href="../../pages/JavaWeb/db/Elasticsearch/es7/通过id批量查询.md">通过id批量查询</a>
 - <a href="../../pages/JavaWeb/db/Elasticsearch/es7/范围查询.md">范围查询</a>
+- <a href="../../pages/JavaWeb/db/Elasticsearch/es7/布尔查询.md">布尔查询</a>
 
 # 分库分表
 
