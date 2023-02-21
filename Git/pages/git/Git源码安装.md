@@ -1,4 +1,5 @@
 # 安装前置工具
+
 centos
 ```
 sudo yum install -y wget
@@ -13,6 +14,7 @@ sudo apt install -y zlib-devel perl-ExtUtils-MakeMaker
 ```
 
 # 下载编译源码
+
 ```
 wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.28.0.tar.gz
 tar -zxvf git-2.28.0.tar.gz 
@@ -23,6 +25,7 @@ sudo make install
 ```
 
 # 配置环境变量
+
 ```
 vim /etc/profile
 ```
@@ -37,10 +40,13 @@ source /etc/profile
 ```
 
 # 查看git版本
+
 ```
 git --version
 ```
+
 # 初始化git
+
 ```
 git config --global user.name "Name"
 git config --global user.email "email@example.com"

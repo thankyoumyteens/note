@@ -10,6 +10,8 @@ git clone git@git地址
 git checkout -b yourbranchname origin/oldbranchname
 ```
 
+- -b: 创建并且切换到该分支
+
 3、推送到git
 ```
 git push origin yourbranchname 
