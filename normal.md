@@ -12,8 +12,9 @@
 
 # 软件
 
-- <a href="software/Git/git.md">Git</a>
-- <a href="software/FFmpeg/FFmpeg.md">FFmpeg</a>
+- <a href="software/Git/content/git.md">Git</a>
+- <a href="software/FFmpeg/content/FFmpeg.md">FFmpeg</a>
+- <a href="software/frp/content/frp.md">frp</a>
 - <a href="software/Charles/Charles.md">Charles</a>
 
 # 其他

@@ -1,0 +1,3 @@
+- <a href="../pages/node/Ubuntu安装nodejs.md.md">Ubuntu安装nodejs.md</a>
+- <a href="../pages/node/Ubuntu中源码安装Nodejs和npm.md">Ubuntu中源码安装Nodejs和npm</a>
+- <a href="../pages/node/安装nvm.md">安装nvm</a>
