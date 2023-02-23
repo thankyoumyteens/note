@@ -15,34 +15,35 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 
 [https://github.com/coreybutler/nvm-windows/releases](https://github.com/coreybutler/nvm-windows/releases)
 
-# 使用
+# 设置镜像
 
-安装最新版 Node.js
-```
-nvm install node
-```
+在nvm的安装目录，修改settings.txt
 
-安装 LTS 版
 ```
-nvm install --lts
+nvm npm_mirror https://npmmirror.com/mirrors/npm/
+nvm node_mirror https://npmmirror.com/mirrors/node/
 ```
 
-安装指定版本
+# 查看当前电脑上的node版本
+
 ```
-nvm install 14
+nvm list
 ```
 
-使用最新版本
+# 安装nodejs不同版本
+
 ```
-nvm use node
+nvm install 16.8.0
 ```
 
-使用指定版本
+# 切换node版本
+
 ```
-nvm use 14
+nvm use 16.8.0
 ```
 
-设置别名
+# 卸载
+
 ```
-nvm alias 6 v6.9.5
+nvm uninstall 16.8.0
 ```
