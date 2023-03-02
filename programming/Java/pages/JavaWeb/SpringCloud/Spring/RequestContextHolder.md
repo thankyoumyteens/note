@@ -1,4 +1,4 @@
-解决的问题：在service获取request和response
+解决的问题：在service类中获取request和response
 
 RequestContextHolder这个类里面有两个ThreadLocal保存当前线程下的request和response
 

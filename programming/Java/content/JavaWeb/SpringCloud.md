@@ -14,7 +14,6 @@
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot自动配置原理.md">SpringBoot自动配置原理</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
-- <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/创建命令行项目.md">创建命令行项目</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/获取spring.profiles.active的值.md">获取spring.profiles.active的值</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/一个接口的多个实现类动态选择.md">一个接口的多个实现类动态选择</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot整合Redis.md">SpringBoot整合Redis</a>
@@ -32,6 +31,9 @@
 - <a href="../../pages/JavaWeb/SpringCloud/MyBatis/缓存.md">缓存</a>
 - <a href="../../pages/JavaWeb/SpringCloud/MyBatis/MyBatis日志打印SQL语句.md">MyBatis日志打印SQL语句</a>
 - <a href="../../pages/JavaWeb/SpringCloud/MyBatis/PageHelper.md">PageHelper</a>
+
+# Hibernate
+- <a href="../../pages/JavaWeb/SpringCloud/Hibernate/HibernateValidator.md">Hibernate Validator</a>
 
 # SpringCloud
 
