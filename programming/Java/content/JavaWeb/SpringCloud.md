@@ -16,6 +16,10 @@
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot单元测试.md">SpringBoot单元测试</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/获取spring.profiles.active的值.md">获取spring.profiles.active的值</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/一个接口的多个实现类动态选择.md">一个接口的多个实现类动态选择</a>
+- <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/屏蔽掉返回数据中的某个字段.md">屏蔽掉返回数据中的某个字段</a>
+
+# SpringBoot集成
+
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot整合Redis.md">SpringBoot整合Redis</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot整合Redis哨兵.md">SpringBoot整合Redis哨兵</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot整合Redis集群.md">SpringBoot整合Redis集群</a>
