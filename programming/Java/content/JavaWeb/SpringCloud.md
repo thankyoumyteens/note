@@ -45,6 +45,7 @@
 - <a href="../../pages/JavaWeb/SpringCloud/SpringCloud/FeignClient/FeignClient注解.md">FeignClient注解</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringCloud/FeignClient/FeignClient打印请求日志.md">FeignClient打印请求日志</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringCloud/FeignClient/重写FeignClient输出日志.md">重写FeignClient输出日志</a>
+- <a href="../../pages/JavaWeb/SpringCloud/SpringCloud/FeignClient/FeignClient避免开发调试时服务乱跳.md">FeignClient避免开发调试时服务乱跳</a>
 
 ## Nacos
 - <a href="../../pages/JavaWeb/SpringCloud/SpringCloud/nacos/使用Nacos作为注册中心.md">使用Nacos作为注册中心</a>
