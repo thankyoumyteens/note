@@ -10,6 +10,7 @@
 # SpringBoot
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/全局异常处理.md">全局异常处理</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/文件上传.md">文件上传</a>
+- <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/下载Excel模板文件损坏.md">下载Excel模板文件损坏</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/拦截器.md">拦截器</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot自动配置原理.md">SpringBoot自动配置原理</a>
 - <a href="../../pages/JavaWeb/SpringCloud/SpringBoot/SpringBoot多模块依赖注入失败.md">SpringBoot多模块依赖注入失败</a>
