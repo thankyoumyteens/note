@@ -3,12 +3,10 @@
 
 # 分布式事务
 - <a href="../../pages/JavaWeb/distribution/transaction/两阶段提交.md">两阶段提交</a>
-- <a href="../../pages/JavaWeb/distribution/transaction/三阶段提交.md">三阶段提交</a>
 - <a href="../../pages/JavaWeb/distribution/transaction/TCC.md">TCC</a>
 - <a href="../../pages/JavaWeb/distribution/transaction/本地消息表.md">本地消息表</a>
 - <a href="../../pages/JavaWeb/distribution/transaction/RocketMQ消息事务.md">RocketMQ消息事务</a>
 - <a href="../../pages/JavaWeb/distribution/transaction/最大努力通知.md">最大努力通知</a>
-- <a href="../../pages/JavaWeb/distribution/transaction/Seata.md">Seata XA模式</a>
 - <a href="../../pages/JavaWeb/distribution/transaction/Seata.md">Seata AT模式</a>
 
 # 分布式缓存
