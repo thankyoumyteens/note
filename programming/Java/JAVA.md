@@ -29,7 +29,6 @@
 - <a href="content/utils/Navicat.md">Navicat</a>
 - <a href="content/utils/TortoiseSVN.md">TortoiseSVN</a>
 - <a href="content/utils/Postman.md">Postman</a>
-- <a href="content/utils/elk.md">ELK</a>
 
 # 容器化
 - <a href="content/container/docker.md">Docker</a>
