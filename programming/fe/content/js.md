@@ -1,2 +1,1 @@
 - <a href="../pages/js/splice函数.md">splice函数</a>
-- <a href="../pages/js/ajax下载文件.md">ajax下载文件</a>

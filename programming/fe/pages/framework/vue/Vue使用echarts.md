@@ -1,23 +1,23 @@
-安装echarts
+# 安装echarts
 
 ```
 npm install echarts --save
 ```
 
-在 main.js 中全局引入 echarts
+# 在 main.js 中全局引入 echarts
 
 ```js
 import echarts from "echarts";
 Vue.prototype.$echarts = echarts;
 ```
 
-创建echarts容器
+# 创建echarts容器
 
 ```html
 <div id="main" style="width: 600px; height: 400px"></div>
 ```
 
-绘图
+# 绘图
 
 ```js
 drawChart() {

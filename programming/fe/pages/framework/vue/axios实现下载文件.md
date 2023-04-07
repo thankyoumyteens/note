@@ -1,3 +1,5 @@
+# 实现方式
+
 服务端以 content-type: ‘application/octet-stream’ 的格式返回前端，前端接收到数据后使用 Blob 来接收数据，并且创建a标签进行下载。
 
 # 后端
@@ -49,3 +51,9 @@ axios.post(url, {...params}, {responseType: 'blob'})
         window.URL.revokeObjectURL(url)
     }).catch((err) => {})
 ```
+
+# 下载Excel报格式错误而且乱码问题
+
+原因：使用了mockjs，导致了Request类型被封装，mock会拦截所有的请求，匹配规则的就使用模拟数据，不匹配的也会使用封装后的request请求后台
+
+解决：测试下载文件时去掉mock引入
