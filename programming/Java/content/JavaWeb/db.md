@@ -8,6 +8,7 @@
 - <a href="../../pages/JavaWeb/db/MySQL/自动更新时间字段.md">自动更新时间字段</a>
 - <a href="../../pages/JavaWeb/db/MySQL/深分页问题.md">深分页问题</a>
 - <a href="../../pages/JavaWeb/db/MySQL/复杂排序.md">复杂排序</a>
+- <a href="../../pages/JavaWeb/db/MySQL/数据去重.md">数据去重</a>
 
 # Oracle
 
