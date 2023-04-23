@@ -3,5 +3,4 @@
 - <a href="../../pages/utils/idea/idea添加模块到项目中.md">idea添加模块到项目中</a>
 - <a href="../../pages/utils/idea/LiveTemplates.md">LiveTemplates</a>
 - <a href="../../pages/utils/idea/maven依赖全部红线问题.md">maven依赖全部红线问题</a>
-- <a href="../../pages/utils/idea/拆分变量赋值和声明.md">拆分变量赋值和声明</a>
 - <a href="../../pages/utils/idea/IDEA使用Tomcat控制台中文乱码问题.md">IDEA使用Tomcat控制台中文乱码问题</a>
