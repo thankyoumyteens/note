@@ -1,6 +1,5 @@
 # JVM
-- <a href="content/jvm/Java内存布局.md">Java内存布局</a>
-- <a href="content/jvm/gc.md">垃圾回收</a>
+- <a href="content/jvm/classloader.md">类加载器</a>
 
 # 并发编程
 - <a href="content/concurrent/threads.md">线程</a>
