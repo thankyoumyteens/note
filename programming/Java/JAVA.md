@@ -1,7 +1,5 @@
 # JVM
-- <a href="content/jvm/overview.md">JVM概览</a>
-- <a href="content/jvm/classloader.md">类加载器</a>
-- <a href="content/jvm/memory.md">运行时数据区</a>
+- <a href="md/jvm/src/SUMMARY.md">目录</a>
 
 # 并发编程
 - <a href="content/concurrent/threads.md">线程</a>

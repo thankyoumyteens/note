@@ -27,3 +27,5 @@ math/calculus/*.fls
 
 .history/
 .favorites.json
+# mdbook
+book/
