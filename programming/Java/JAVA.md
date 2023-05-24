@@ -1,5 +1,5 @@
 # JVM
-- <a href="md/jvm/src/SUMMARY.md">目录</a>
+- [JVM](./md/jvm/src/SUMMARY.md)
 
 # 并发编程
 - <a href="content/concurrent/threads.md">线程</a>
