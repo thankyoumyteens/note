@@ -10,4 +10,6 @@
     - [Java栈](./memory/Java栈.md)
         - [局部变量表](./memory/局部变量表.md)
         - [操作数栈](./memory/操作数栈.md)
+        - [动态链接](./memory/动态链接.md)
+    - [方法调用](./memory/方法调用.md)
 
