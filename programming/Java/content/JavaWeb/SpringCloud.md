@@ -1,5 +1,4 @@
 # Spring
-- <a href="../../pages/JavaWeb/SpringCloud/Spring/使用注解替换xml配置文件.md">使用注解替换xml配置文件</a>
 - <a href="../../pages/JavaWeb/SpringCloud/Spring/使用注解实现AOP.md">使用注解实现AOP</a>
 - <a href="../../pages/JavaWeb/SpringCloud/Spring/Spring中的事务传播行为.md">Spring中的事务传播行为</a>
 - <a href="../../pages/JavaWeb/SpringCloud/Spring/Transactional注解失效的场景.md">Transactional注解失效的场景</a>
