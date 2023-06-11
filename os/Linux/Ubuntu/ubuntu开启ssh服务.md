@@ -20,10 +20,11 @@ sudo apt-get install openssh-client
 
 ```
 sudo vim /etc/ssh/sshd_config
-# 搜索关键字 PasswordAuthentication
-# 将PasswordAuthentication no改为yes
-# 保存
 ```
+
+- 搜索关键字 PasswordAuthentication
+- 将PasswordAuthentication no 改为 yes
+- 保存文件
 
 # 开启ssh服务
 

@@ -15,9 +15,9 @@
 - <a href="Linux/CentOS/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a>
 
 # Ubuntu
-- <a href="Linux/Ubuntu/ubuntu软件源配置.md">ubuntu软件源配置</a>
-- <a href="Linux/Ubuntu/ubuntu开启ssh服务.md">ubuntu开启ssh服务</a>
-- <a href="Linux/Ubuntu/ubuntu不支持ll命令解决方法.md">ubuntu不支持ll命令解决方法</a>
+- [ubuntu软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
+- [ubuntu开启ssh服务](./Linux/Ubuntu/ubuntu开启ssh服务.md)
+- [ubuntu修改DNS](./Linux/Ubuntu/ubuntu修改DNS.md)
 
 # 工具
 - <a href="Linux/工具/grep.md">grep</a>
