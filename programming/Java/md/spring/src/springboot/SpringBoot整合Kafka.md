@@ -63,8 +63,6 @@ spring:
 # Kafka生产者
 
 ```java
-package com.sgcc.ami.ms005.marketing.kafka;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -143,8 +141,6 @@ spring:
 # Kafka消费者
 
 ```java
-package com.sgcc.ami.ms005.marketing.kafka;
-
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.TopicPartition;
