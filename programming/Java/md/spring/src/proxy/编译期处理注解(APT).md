@@ -8,14 +8,106 @@
 - 编译时编译器会检查AbstractProcessor的子类
 - 然后将添加了注解的所有元素都传递到该类的process函数中，使得开发人员可以在编译器进行相应的处理，比如动态生成代码
 
-# 引入依赖
+# POM
+
+注意：不要将AbstractProcessor和使用该AbstractProcessor的类写在同一个项目中，会因为AbstractProcessor没有预编译导致报错，必须另外创建一个Maven项目写注解处理器再`mvn install`到本地供其他项目使用
+
+父模块
 
 ```xml
-<dependency>
-    <groupId>com.google.auto.service</groupId>
-    <artifactId>auto-service</artifactId>
-    <version>1.0-rc7</version>
-</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>untitled3</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>untitled3</name>
+  <url>http://maven.apache.org</url>
+  <modules>
+    <module>m1</module>
+    <module>m2</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+  </dependencies>
+</project>
+```
+
+子模块1
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.example</groupId>
+    <artifactId>untitled3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>m1</artifactId>
+  <packaging>jar</packaging>
+
+  <name>m1</name>
+  <!-- 没有这个配置编译时会报错:提示服务配置文件不正确, 或构造处理程序对象 Processor not found -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <!-- 避免编译时使用自身的DemoProcessor，因为自定义的DemoProcessor还没被编译生成 -->
+          <compilerArgument>-proc:none</compilerArgument>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+```
+
+子模块2
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.example</groupId>
+    <artifactId>untitled3</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>m2</artifactId>
+  <packaging>jar</packaging>
+
+  <name>m2</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.example</groupId>
+      <artifactId>m1</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+</project>
 ```
 
 # 创建一个注解
@@ -28,8 +120,6 @@ public @interface M1A {
 ```
 
 # 创建对应的注解处理器
-
-注意：不要将AbstractProcessor和使用该AbstractProcessor的类写在同一个项目中，会因为AbstractProcessor没有预编译导致报错
 
 ```java
 package org.m1;
@@ -45,7 +135,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Set;
 
-@AutoService(Processor.class)
 // 指定可以处理的注解
 @SupportedAnnotationTypes({"org.m1.M1A"})
 // jdk版本
@@ -110,7 +199,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class App {
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    public static void main(String[] args) throws Exception {
         Class<?> aClass = Class.forName("org.ex.m1.GeneratedClass");
         Method getMessage = aClass.getMethod("getMessage");
         Constructor<?> constructor = aClass.getConstructor();
@@ -120,6 +209,19 @@ public class App {
 }
 ```
 
+# 增加配置文件
+
+1. 在m1模块的main目录下，创建resources目录
+2. 在resources目录下创建META-INF目录
+3. 在META-INF目录下创建services目录
+4. 在services目录下创建名为javax.annotation.processing.Processor的文件
+
+在文件内容中指定注解处理器：
+
+```
+org.m1.DemoProcessor
+```
+
 # 编译
 
 编译器会缓存上一次生成的类文件，所以需要每次都mvn clean
@@ -127,3 +229,29 @@ public class App {
 mvn clean -> mvn install -> 运行main
 
 在target目录下就会自动生成一个org.ex.m1.GeneratedClass类
+
+# 使用@AutoService自动生成javax.annotation.processing.Processor文件
+
+## 添加依赖
+
+```xml
+<dependency>
+  <groupId>com.google.auto.service</groupId>
+  <artifactId>auto-service</artifactId>
+  <version>1.0-rc7</version>
+</dependency>
+```
+
+## 修改DemoProcessor
+
+```java
+// 用来自动注册APT文件
+@AutoService(Processor.class)
+@SupportedAnnotationTypes({"org.m1.M1A"})
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
+public class DemoProcessor extends AbstractProcessor {
+  //
+}
+```
+
+使用AutoService后，自己的javax.annotation.processing.Processor文件可以删除了，m1模块的pom中maven-jar-plugin插件也可以删除了
