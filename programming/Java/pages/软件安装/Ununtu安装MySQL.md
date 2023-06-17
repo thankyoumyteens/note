@@ -2,8 +2,8 @@
 
 下载解压
 ```sh
-wget https://cdn.mysql.com//Downloads/MySQL-5.7/mysql-server_5.7.34-1ubuntu18.04_amd64.deb-bundle.tar
-tar -xvf mysql-server_5.7.34-1ubuntu18.04_amd64.deb-bundle.tar
+wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
+tar -xvf mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
 ```
 
 预配置MySQL服务器软件包：
@@ -42,7 +42,7 @@ sudo service mysql status
 ```
 连接数据库
 ```
-mysql -h 127.0.0.1 -P 3306 -uroot -phonglang
+mysql -h 127.0.0.1 -P 3306 -uroot -p123456
 ```
 
 # 卸载
