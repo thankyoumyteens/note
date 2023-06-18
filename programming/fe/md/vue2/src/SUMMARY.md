@@ -1,6 +1,7 @@
 - [Vue语法]()
     - [Vue.$set与响应式](./syntax/Vue.$set与响应式.md)
     - [动态组件](./syntax/动态组件.md)
+    - [keep-alive](./syntax/keep-alive.md)
 
 - [axios]()
     - [封装axios](./axios/封装axios.md)
