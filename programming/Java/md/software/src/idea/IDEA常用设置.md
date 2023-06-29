@@ -26,3 +26,12 @@ Ctrl+鼠标滚轮修改字体大小：File -> Settings -> Editor -> General : Mo
 
 忽略代码提示大小写：File -> Settings -> Editor -> General -> Code Completion : Match case
 
+---
+
+多行显示编辑器标签页：File -> Settings -> Editor -> General -> Editor Tabs : Show tabs in one row
+
+---
+
+自动编译：File -> Settings -> Build,Execution,Deployment -> Compiler : Build project automatically
+
+并行编译独立模块：File -> Settings -> Build,Execution,Deployment -> Compiler : Compile independent modules in parallel
