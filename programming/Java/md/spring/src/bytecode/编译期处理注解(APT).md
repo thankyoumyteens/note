@@ -1,4 +1,4 @@
-# 编译期注解
+# 编译期处理注解(APT)
 
 按照处理时期，注解分为两种类型，一种是运行时注解，另一种是编译时注解
 
@@ -10,7 +10,7 @@
 
 # POM
 
-注意：不要将AbstractProcessor和使用该AbstractProcessor的类写在同一个项目中，会因为AbstractProcessor没有预编译导致报错，必须另外创建一个Maven项目写注解处理器再`mvn install`到本地供其他项目使用
+注意：不能将AbstractProcessor和使用该AbstractProcessor的类写在同一个项目中，会因为AbstractProcessor没有预编译导致报错。
 
 父模块
 
@@ -26,7 +26,6 @@
   <packaging>pom</packaging>
 
   <name>untitled3</name>
-  <url>http://maven.apache.org</url>
   <modules>
     <module>m1</module>
     <module>m2</module>
@@ -43,7 +42,7 @@
 </project>
 ```
 
-子模块1
+子模块1：定义编译时注解处理器
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -82,7 +81,7 @@
 </project>
 ```
 
-子模块2
+子模块2：使用编译时注解
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
