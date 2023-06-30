@@ -39,3 +39,17 @@ pyinstaller -w -F tools_main.py
 ```
 pyinstaller -w -F tools_main.py --upx-dir="C:\upx-4.0.2-win64"
 ```
+
+# 报错ModuleNotFoundError: No module named 'xxx'解决
+
+安装依赖
+
+```
+pip install xxx
+```
+
+重新打包
+
+```
+pyinstaller -w -F tools_main.py --hidden-import xxx
+```
