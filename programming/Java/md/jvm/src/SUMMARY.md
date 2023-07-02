@@ -19,3 +19,4 @@
         - [TLAB](./heap/TLAB.md)
         - [堆空间常用JVM参数](./heap/堆空间常用JVM参数.md)
         - [逃逸分析](./heap/逃逸分析.md)
+    - [方法区]()
