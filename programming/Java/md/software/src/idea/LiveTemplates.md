@@ -1,4 +1,6 @@
-# 自定义 Template
+# LiveTemplates
+
+## 自定义 Template
 
 打开 File -> Settings -> Editor -> Live Templates
 
@@ -6,7 +8,7 @@
 
 比如在Abbreviation填`sout`, Template text填`System.out.println($END$)`。点击ok就可以在java代码中输入sout生成代码了。
 
-# Live Templates实现方法注释
+## Live Templates实现方法注释
 
 打开 File -> Settings -> Editor -> Live Templates
 

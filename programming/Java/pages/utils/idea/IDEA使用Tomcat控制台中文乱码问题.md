@@ -1,4 +1,0 @@
-- 上方导航栏“Run→Edit Configurations…”进入配置页面，修改当前 Web 项目 Tomcat Server 的虚拟机输出选项 VM options 添加 -Dfile.encoding=UTF-8 。
-- 上方导航栏“File→Settings…”进入配置页面，在“Editor”中下滑找到“File Encodings”，分别将 Global Encoding、Project Encoding、Default encoding for properties - files 都设置为 UTF-8。
-- 上方导航栏“Help→Etit Custom VM Options…”进入自定义虚拟机选项页面。在 idea64.exe.vmoptions 文件尾加上-Dfile.encoding=UTF-8。
-- 重启idea
