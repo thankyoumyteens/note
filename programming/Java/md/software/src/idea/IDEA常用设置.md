@@ -35,3 +35,7 @@ Ctrl+鼠标滚轮修改字体大小：File -> Settings -> Editor -> General : Mo
 自动编译：File -> Settings -> Build,Execution,Deployment -> Compiler : Build project automatically
 
 并行编译独立模块：File -> Settings -> Build,Execution,Deployment -> Compiler : Compile independent modules in parallel
+
+---
+
+显示文件扩展名：File -> Settings -> Editor -> General -> Editor Tabs : 勾选Show file extension
