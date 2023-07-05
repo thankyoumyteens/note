@@ -20,5 +20,4 @@
         - [TLAB](./memory/heap/TLAB.md)
         - [堆空间常用JVM参数](./memory/heap/堆空间常用JVM参数.md)
         - [逃逸分析](./memory/heap/逃逸分析.md)
-    - [方法区]()
-        - [方法区的结构](./memory/method_area/方法区的结构.md)
+    - [方法区](./memory/method_area/方法区.md)
