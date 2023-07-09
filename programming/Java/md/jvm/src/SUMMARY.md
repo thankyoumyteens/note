@@ -1,17 +1,13 @@
 - [JVM概览](./overview/JVM概览.md)
 
-- [类加载器]()
-    - [类加载过程](./classloader/类加载过程.md)
-    - [类加载器](./classloader/类加载器.md)
-
 - [运行时数据区]()
-    - [运行时数据区](./memory/运行时数据区.md)
+    - [运行时数据区划分](./memory/运行时数据区划分.md)
     - [程序计数器](./memory/程序计数器.md)
-    - [Java栈]()
+    - [Java虚拟机栈]()
         - [栈和栈帧](./memory/stack/栈和栈帧.md)
         - [局部变量表](./memory/stack/局部变量表.md)
         - [操作数栈](./memory/stack/操作数栈.md)
-        - [动态链接](./memory/stack/动态链接.md)
+        - [动态连接](./memory/stack/动态连接.md)
         - [方法返回地址](./memory/stack/方法返回地址.md)
     - [方法调用](./memory/方法调用.md)
     - [Java堆]()
@@ -19,5 +15,12 @@
         - [内存分配与垃圾回收](./memory/heap/内存分配与垃圾回收.md)
         - [TLAB](./memory/heap/TLAB.md)
         - [堆空间常用JVM参数](./memory/heap/堆空间常用JVM参数.md)
-        - [逃逸分析](./memory/heap/逃逸分析.md)
-    - [方法区](./memory/method_area/方法区.md)
+    - [方法区](./memory/方法区.md)
+    - [HotSpot虚拟机的对象操作]()
+        - [对象的创建](./memory/object/对象的创建.md)
+
+- [类加载器]()
+    - [类加载过程](./classloader/类加载过程.md)
+    - [类加载器](./classloader/类加载器.md)
+
+<!-- - [逃逸分析](./memory/heap/逃逸分析.md) -->
