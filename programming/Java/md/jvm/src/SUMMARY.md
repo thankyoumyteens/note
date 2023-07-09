@@ -18,6 +18,7 @@
     - [方法区](./memory/方法区.md)
     - [HotSpot虚拟机的对象操作]()
         - [对象的创建](./memory/object/对象的创建.md)
+        - [对象的内存布局](./memory/object/对象的内存布局.md)
 
 - [类加载器]()
     - [类加载过程](./classloader/类加载过程.md)
