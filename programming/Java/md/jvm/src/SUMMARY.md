@@ -19,6 +19,11 @@
     - [HotSpot虚拟机的对象操作]()
         - [对象的创建](./memory/object/对象的创建.md)
         - [对象的内存布局](./memory/object/对象的内存布局.md)
+        - [对象的访问定位](./memory/object/对象的访问定位.md)
+
+- [垃圾收集]()
+    - [对象是否存活的判断方法]()
+        - [引用计数算法](./garbage_collection/引用计数算法.md)
 
 - [类加载器]()
     - [类加载过程](./classloader/类加载过程.md)
