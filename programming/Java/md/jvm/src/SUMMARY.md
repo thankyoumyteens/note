@@ -24,6 +24,7 @@
 - [垃圾收集]()
     - [对象是否存活的判断方法]()
         - [引用计数算法](./garbage_collection/引用计数算法.md)
+        - [可达性分析算法](./garbage_collection/可达性分析算法.md)
 
 - [类加载器]()
     - [类加载过程](./classloader/类加载过程.md)
