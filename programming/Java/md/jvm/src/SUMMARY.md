@@ -28,6 +28,9 @@
     - [垃圾收集算法](./garbage_collection/垃圾收集算法.md)
         - [分代收集理论](./garbage_collection/分代收集理论.md)
         - [标记清除算法](./garbage_collection/标记清除算法.md)
+        - [标记复制算法](./garbage_collection/标记复制算法.md)
+        - [标记整理算法](./garbage_collection/标记整理算法.md)
+    - [垃圾收集器](./garbage_collector/垃圾收集器.md)
 
 - [类加载器]()
     - [类加载过程](./classloader/类加载过程.md)
