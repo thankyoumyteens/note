@@ -37,6 +37,7 @@
         - [SerialOld收集器](./garbage_collector/SerialOld收集器.md)
         - [ParallelOld收集器](./garbage_collector/ParallelOld收集器.md)
         - [CMS收集器](./garbage_collector/CMS收集器.md)
+        - [GarbageFirst收集器](./garbage_collector/GarbageFirst收集器.md)
 
 - [类加载器]()
     - [类加载过程](./classloader/类加载过程.md)
