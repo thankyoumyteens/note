@@ -30,6 +30,9 @@
         - [标记清除算法](./garbage_collection/标记清除算法.md)
         - [标记复制算法](./garbage_collection/标记复制算法.md)
         - [标记整理算法](./garbage_collection/标记整理算法.md)
+        <!-- - [根节点枚举](./garbage_collection/根节点枚举.md) -->
+        <!-- - [安全点](./garbage_collection/安全点.md) -->
+        <!-- TODO -->
     - [垃圾收集器](./garbage_collection/garbage_collector/垃圾收集器.md)
         - [Serial收集器](./garbage_collection/garbage_collector/Serial收集器.md)
         - [ParNew收集器](./garbage_collection/garbage_collector/ParNew收集器.md)
@@ -37,10 +40,15 @@
         - [SerialOld收集器](./garbage_collection/garbage_collector/SerialOld收集器.md)
         - [ParallelOld收集器](./garbage_collection/garbage_collector/ParallelOld收集器.md)
         - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
-        - [GarbageFirst收集器](./garbage_collection/garbage_collector/GarbageFirst收集器.md)
+        <!-- - [GarbageFirst收集器](./garbage_collection/garbage_collector/GarbageFirst收集器.md) -->
+        <!-- TODO -->
+<!-- - [虚拟机性能监控、故障处理工具]() -->
+<!-- - [调优]() -->
 
-- [类加载器]()
-    - [类加载过程](./classloader/类加载过程.md)
-    - [类加载器](./classloader/类加载器.md)
+- [类的加载](./load_class/类的加载.md)
+    - [类文件结构](./load_class/class_file/类文件结构.md)
+        - [常量池](./load_class/class_file/常量池.md)
+<!-- - [类加载过程](./load_class/classloader/类加载过程.md) -->
+<!-- - [类加载器](./load_class/classloader/类加载器.md) -->
 
 <!-- - [逃逸分析](./memory/heap/逃逸分析.md) -->
