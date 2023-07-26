@@ -51,6 +51,8 @@
         - [访问标志](./load_class/class_file/访问标志.md)
         - [索引](./load_class/class_file/索引.md)
         - [字段](./load_class/class_file/字段.md)
+        - [方法](./load_class/class_file/方法.md)
+        - [属性表](./load_class/class_file/属性表.md)
 <!-- - [类加载过程](./load_class/classloader/类加载过程.md) -->
 <!-- - [类加载器](./load_class/classloader/类加载器.md) -->
 
