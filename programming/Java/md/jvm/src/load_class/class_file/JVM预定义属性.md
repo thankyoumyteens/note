@@ -81,3 +81,19 @@ debug_extension存储的就是额外的调试信息，是一组通过变长UTF-8
 
 # ConstantValue
 
+ConstantValue属性的作用是通知虚拟机自动为静态变量赋值。只有被static关键字修饰的变量才可以使用这项属性。对非static类型的变量的赋值是在实例构造器`<init>()`方法中进行的。而对于类变量，则有两种方式可以选择：在类构造器`<clinit>()`方法中或者使用ConstantValue属性。
+
+目前Oracle公司实现的Javac编译器的选择是，如果同时使用final和static来修饰一个变量，并且这个变量的数据类型是基本类型或者java.lang.String的话，就将会生成ConstantValue属性来进行初始化。如果这个变量没有被final修饰，或者并非基本类型及字符串，则将会选择在`<clinit>()`方法中进行初始化。
+
+| 类型 | 名称               | 数量 |
+| ---- | -------------------- | ---- |
+| u2   | attribute_name_index | 1    |
+| u4   | attribute_length     | 1    |
+| u2   | constantvalue_index  | 1    |
+
+constantvalue_index数据项代表了常量池中一个字面量常量的引用，根据字段类型的不同，字面量可以是CONSTANT_Long_info、CONSTANT_Float_info、CONSTANT_Double_info、CONSTANT_Integer_info和CONSTANT_String_info常量中的一种。
+
+# InnerClasses
+
+InnerClasses属性用于记录内部类与宿主类之间的关联。如果一个类中定义了内部类，那编译器将会为它以及它所包含的内部类生成InnerClasses属性。
+

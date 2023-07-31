@@ -55,6 +55,8 @@
         - [属性表](./load_class/class_file/属性表.md)
         - [异常](./load_class/class_file/异常.md)
         - [JVM预定义属性](./load_class/class_file/JVM预定义属性.md)
+    - [字节码指令](./load_class/bytecode_instructions/字节码指令.md)
+        - [加载和存储指令](./load_class/bytecode_instructions/加载和存储指令.md)
 <!-- - [类加载过程](./load_class/classloader/类加载过程.md) -->
 <!-- - [类加载器](./load_class/classloader/类加载器.md) -->
 
