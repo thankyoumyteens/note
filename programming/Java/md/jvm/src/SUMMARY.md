@@ -56,8 +56,9 @@
         - [异常](./load_class/class_file/异常.md)
         - [JVM预定义属性](./load_class/class_file/JVM预定义属性.md)
     - [字节码指令](./load_class/bytecode_instructions/字节码指令.md)
-        - [加载和存储指令](./load_class/bytecode_instructions/加载和存储指令.md)
-<!-- - [类加载过程](./load_class/classloader/类加载过程.md) -->
+        - [虚拟机字节码指令表](./load_class/bytecode_instructions/虚拟机字节码指令表.md)
+    - [类加载的时机](./load_class/类加载的时机.md)
+    - [类加载的过程](./load_class/类加载的过程.md)
 <!-- - [类加载器](./load_class/classloader/类加载器.md) -->
 
 <!-- - [逃逸分析](./memory/heap/逃逸分析.md) -->
