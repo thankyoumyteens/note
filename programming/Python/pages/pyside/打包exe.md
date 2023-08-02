@@ -46,10 +46,11 @@ pyinstaller -w -F tools_main.py --upx-dir="C:\upx-4.0.2-win64"
 
 ```
 pip install xxx
+pip install yyy
 ```
 
 重新打包
 
 ```
-pyinstaller -w -F tools_main.py --hidden-import xxx
+pyinstaller -w -F tools_main.py --hidden-import xxx --hidden-import yyy
 ```
