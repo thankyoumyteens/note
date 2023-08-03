@@ -165,7 +165,10 @@ public class DemoProcessor extends AbstractProcessor {
             writer.write(builder.toString());
             writer.flush();
             writer.close();
+            // 注解处理器的日志都要使用Messager发送，最终会以编译结果的形式呈现出来
+            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "生成成功");
         } catch (IOException e) {
+            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.toString());
         }
         return true;
     }
@@ -175,7 +178,7 @@ public class DemoProcessor extends AbstractProcessor {
 # 使用注解
 
 ```java
-package org.example;
+package org.m2;
 
 import org.m1.M1A;
 
@@ -191,7 +194,7 @@ public class Test {
 # 使用动态生成的类
 
 ```java
-package org.example;
+package org.m2;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -223,7 +226,7 @@ org.m1.DemoProcessor
 
 # 编译
 
-编译器会缓存上一次生成的类文件，所以需要每次都mvn clean
+IDE会缓存上一次生成的类文件，所以需要每次都mvn clean
 
 mvn clean -> mvn install -> 运行main
 
