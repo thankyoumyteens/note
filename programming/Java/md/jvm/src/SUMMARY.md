@@ -58,11 +58,12 @@
     - [字节码指令](./load_class/bytecode_instructions/字节码指令.md)
         - [虚拟机字节码指令表](./load_class/bytecode_instructions/虚拟机字节码指令表.md)
     - [类加载的时机](./load_class/类加载的时机.md)
-    - [类加载的过程](./load_class/类加载的过程.md)
-        - [加载](./load_class/加载.md)
-        - [验证](./load_class/验证.md)
-        - [准备](./load_class/准备.md)
-        - [解析](./load_class/解析.md)
-<!-- - [类加载器](./load_class/classloader/类加载器.md) -->
+    - [类加载的过程](./load_class/class_load/类加载的过程.md)
+        - [加载](./load_class/class_load/加载.md)
+        - [验证](./load_class/class_load/验证.md)
+        - [准备](./load_class/class_load/准备.md)
+        - [解析](./load_class/class_load/解析.md)
+        - [初始化](./load_class/class_load/初始化.md)
+    - [类加载器](./load_class/类加载器.md)
 
 <!-- - [逃逸分析](./memory/heap/逃逸分析.md) -->
