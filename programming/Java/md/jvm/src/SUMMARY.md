@@ -4,7 +4,7 @@
     - [运行时数据区划分](./memory/运行时数据区划分.md)
     - [程序计数器](./memory/程序计数器.md)
     - [Java虚拟机栈](./memory/stack/Java虚拟机栈.md)
-        - [栈和栈帧](./memory/stack/栈和栈帧.md)
+        - [栈帧](./memory/stack/栈帧.md)
         - [局部变量表](./memory/stack/局部变量表.md)
         - [操作数栈](./memory/stack/操作数栈.md)
         - [动态连接](./memory/stack/动态连接.md)
@@ -65,5 +65,6 @@
         - [解析](./load_class/class_load/解析.md)
         - [初始化](./load_class/class_load/初始化.md)
     - [类加载器](./load_class/类加载器.md)
+    - [Java模块化系统](./load_class/Java模块化系统.md)
 
 <!-- - [逃逸分析](./memory/heap/逃逸分析.md) -->
