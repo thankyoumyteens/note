@@ -10,6 +10,7 @@
         - [动态连接](./memory/stack/动态连接.md)
         - [方法返回地址](./memory/stack/方法返回地址.md)
     - [方法调用](./memory/方法调用.md)
+    - [动态类型语言](./memory/动态类型语言.md)
     - [Java堆](./memory/heap/Java堆.md)
         - [堆空间划分](./memory/heap/堆空间划分.md)
         - [内存分配与垃圾回收](./memory/heap/内存分配与垃圾回收.md)
