@@ -11,6 +11,7 @@
         - [方法返回地址](./memory/stack/方法返回地址.md)
     - [方法调用](./memory/方法调用.md)
     - [动态类型语言](./memory/动态类型语言.md)
+    - [基于栈的指令集](./memory/基于栈的指令集.md)
     - [Java堆](./memory/heap/Java堆.md)
         - [堆空间划分](./memory/heap/堆空间划分.md)
         - [内存分配与垃圾回收](./memory/heap/内存分配与垃圾回收.md)
@@ -67,5 +68,8 @@
         - [初始化](./load_class/class_load/初始化.md)
     - [类加载器](./load_class/类加载器.md)
     - [Java模块化系统](./load_class/Java模块化系统.md)
+
+- [编译与优化](./java_compile/编译与优化.md)
+    - [前端编译与优化](./java_compile/前端编译与优化.md)
 
 <!-- - [逃逸分析](./memory/heap/逃逸分析.md) -->
