@@ -76,4 +76,4 @@
     - [后端编译与优化](./java_compile/后端编译与优化.md)
         - [即时编译器](./java_compile/即时编译器.md)
 
-<!-- - [逃逸分析](./memory/heap/逃逸分析.md) -->
+<!-- - [逃逸分析](./java_compile/逃逸分析.md) -->
