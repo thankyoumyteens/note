@@ -80,3 +80,5 @@
         - [逃逸分析](./java_compile/逃逸分析.md)
         - [公共子表达式消除](./java_compile/公共子表达式消除.md)
         - [数组边界检查消除](./java_compile/数组边界检查消除.md)
+- [并发](./concurrency/并发.md)
+    - [Java内存模型](./concurrency/Java内存模型.md)
