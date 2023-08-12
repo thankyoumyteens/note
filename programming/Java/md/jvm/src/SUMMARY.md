@@ -82,3 +82,5 @@
         - [数组边界检查消除](./java_compile/数组边界检查消除.md)
 - [并发](./concurrency/并发.md)
     - [Java内存模型](./concurrency/Java内存模型.md)
+    - [关键字volatile](./concurrency/关键字volatile.md)
+    - [先行发生原则](./concurrency/先行发生原则.md)
