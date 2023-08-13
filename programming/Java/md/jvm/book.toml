@@ -4,3 +4,7 @@ language = "en"
 multilingual = false
 src = "src"
 title = "《深入理解Java虚拟机：JVM高级特性与最佳实践（第3版）周志明》读书笔记"
+
+# https://doc.rust-lang.org/cargo/getting-started/installation.html
+# cargo install mdbook-epub
+[output.epub]

@@ -57,7 +57,7 @@ public class ClassFileDemo {
 
 字节码文件内容:
 
-![](./img/class_file10.png)
+![](../../img/class_file10.png)
 
 方法表结束后，紧接着的attributes_count`0x0001`，表示字节码文件的属性有1个。
 
@@ -65,7 +65,7 @@ attribute_name_index为`0x0010`，指向常量池中索引为16的值`SourceFile
 
 使用`javap -verbose ClassFileDemo.class`命令解析class文件：
 
-![](./img/javap9.png)
+![](../../img/javap9.png)
 
 # SourceDebugExtension
 
