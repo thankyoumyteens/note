@@ -23,7 +23,7 @@
         - [对象的访问定位](./memory/object/对象的访问定位.md)
 
 - [垃圾收集](./garbage_collection/垃圾收集.md)
-    - [对象是否存活的判断方法](./garbage_collection/对象是否存活的判断方法.md)
+    - [判断对象是否存活](./garbage_collection/判断对象是否存活.md)
         - [引用计数算法](./garbage_collection/引用计数算法.md)
         - [可达性分析算法](./garbage_collection/可达性分析算法.md)
     - [垃圾收集算法](./garbage_collection/垃圾收集算法.md)
