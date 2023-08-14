@@ -11,3 +11,4 @@
 - -XX:+PrintGCDetaiIs 输出详细的GC处理日志
 - -XX:+PrintGC 打印GC简要信息
 - -XX:Hand1epromotionFai1ure 是否设置空间分配担保
+- -XX:+UseTLAB 开启TLAB，默认开启
