@@ -35,13 +35,9 @@
         <!-- - [安全点](./garbage_collection/安全点.md) -->
         <!-- TODO -->
     - [垃圾收集器](./garbage_collection/garbage_collector/垃圾收集器.md)
-        - [Serial收集器](./garbage_collection/garbage_collector/Serial收集器.md)
-        - [ParNew收集器](./garbage_collection/garbage_collector/ParNew收集器.md)
-        - [ParallelScavenge收集器](./garbage_collection/garbage_collector/ParallelScavenge收集器.md)
-        - [SerialOld收集器](./garbage_collection/garbage_collector/SerialOld收集器.md)
-        - [ParallelOld收集器](./garbage_collection/garbage_collector/ParallelOld收集器.md)
-        - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
-        <!-- - [GarbageFirst收集器](./garbage_collection/garbage_collector/GarbageFirst收集器.md) -->
+        - [经典垃圾收集器](./garbage_collection/garbage_collector/经典垃圾收集器.md)
+            - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
+            - [GarbageFirst收集器](./garbage_collection/garbage_collector/GarbageFirst收集器.md)
         <!-- TODO -->
 <!-- - [虚拟机性能监控、故障处理工具]() -->
 <!-- - [调优]() -->
