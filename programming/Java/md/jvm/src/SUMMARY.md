@@ -33,8 +33,8 @@
         - [标记整理算法](./garbage_collection/标记整理算法.md)
     - [垃圾收集器](./garbage_collection/garbage_collector/垃圾收集器.md)
         - [HotSpot的算法细节](./garbage_collection/garbage_collector/HotSpot的算法细节.md)
-            - [根节点枚举](./garbage_collection/根节点枚举.md)
-            - [安全点](./garbage_collection/安全点.md)
+            - [根节点枚举](./garbage_collection/garbage_collector/根节点枚举.md)
+            - [安全点和安全区域](./garbage_collection/garbage_collector/安全点和安全区域.md)
             <!-- TODO -->
         - [经典垃圾收集器](./garbage_collection/garbage_collector/经典垃圾收集器.md)
             - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
