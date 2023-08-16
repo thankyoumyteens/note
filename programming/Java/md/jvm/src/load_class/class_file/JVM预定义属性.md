@@ -31,43 +31,7 @@
 | NestHost | 类 | JDK11中新增的属性，用于支持嵌套类(Java中的内部类)的反射和访问控制的API，一个内部类通过该属性得知自己的宿主类 |
 | NestMembers | 类 | JDK11中新增的属性，用于支持嵌套类(Java中的内部类)的反射和访问控制的API，一个宿主类通过该属性得知自己有哪些内部类 |
 
-# SourceFile
-
-SourceFile属性用于记录生成这个Class文件的源码文件名称，这个属性也是可选的。在Java中，对于大多数的类来说，类名和文件名是一致的，但是有一些特殊情况(如内部类)例外。如果不生成这项属性，当抛出异常时，堆栈中将不会显示出错代码所属的文件名。
-
-| 类型 | 名称               | 数量 |
-| ---- | -------------------- | ---- |
-| u2   | attribute_name_index | 1    |
-| u4   | attribute_length     | 1    |
-| u2   | sourcefile_index     | 1    |
-
-sourcefile_index数据项是指向常量池中CONSTANT_Utf8_info型常量的索引，常量值是源码文件的文件名。
-
----
-
-```java
-public class ClassFileDemo {
-    int num;
-
-    public int getNum() {
-        return this.num;
-    }
-}
-```
-
-字节码文件内容:
-
-![](../../img/class_file10.png)
-
-方法表结束后，紧接着的attributes_count`0x0001`，表示字节码文件的属性有1个。
-
-attribute_name_index为`0x0010`，指向常量池中索引为16的值`SourceFile`，说明此属性是这个Class文件的源码文件名称。attribute_length为`0x00000002`。sourcefile_index为`0x0011`，指向常量池中索引为17的值`ClassFileDemo.java`。
-
-使用`javap -verbose ClassFileDemo.class`命令解析class文件：
-
-![](../../img/javap9.png)
-
-# SourceDebugExtension
+## SourceDebugExtension
 
 为了方便在编译器和动态生成的Class中加入供程序员使用的自定义内容，在JDK 5时，新增了SourceDebugExtension属性用于存储额外的代码调试信息。典型的场景是在进行JSP文件调试时，无法通过Java堆栈来定位到JSP文件的行号。JSR 45提案为这些非Java语言编写，却需要编译成字节码并运行在Java虚拟机中的程序提供了一个进行调试的标准机制，使用SourceDebugExtension属性就可以用于存储这个标准所新加入的调试信息，比如让程序员能够快速从异常堆栈中定位出原始JSP中出现问题的行号。
 
@@ -79,7 +43,7 @@ attribute_name_index为`0x0010`，指向常量池中索引为16的值`SourceFile
 
 debug_extension存储的就是额外的调试信息，是一组通过变长UTF-8格式来表示的字符串。一个类中最多只允许存在一个SourceDebugExtension属性。
 
-# ConstantValue
+## ConstantValue
 
 ConstantValue属性的作用是通知虚拟机自动为静态变量赋值。只有被static关键字修饰的变量才可以使用这项属性。对非static类型的变量的赋值是在实例构造器`<init>()`方法中进行的。而对于类变量，则有两种方式可以选择：在类构造器`<clinit>()`方法中或者使用ConstantValue属性。
 
@@ -93,7 +57,7 @@ ConstantValue属性的作用是通知虚拟机自动为静态变量赋值。只�
 
 constantvalue_index数据项代表了常量池中一个字面量常量的引用，根据字段类型的不同，字面量可以是CONSTANT_Long_info、CONSTANT_Float_info、CONSTANT_Double_info、CONSTANT_Integer_info和CONSTANT_String_info常量中的一种。
 
-# InnerClasses
+## InnerClasses
 
 InnerClasses属性用于记录内部类与宿主类之间的关联。如果一个类中定义了内部类，那编译器将会为它以及它所包含的内部类生成InnerClasses属性。
 

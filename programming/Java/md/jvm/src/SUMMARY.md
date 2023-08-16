@@ -51,7 +51,7 @@
         - [字段](./load_class/class_file/字段.md)
         - [方法](./load_class/class_file/方法.md)
         - [属性表](./load_class/class_file/属性表.md)
-        - [异常](./load_class/class_file/异常.md)
+        - [显式异常处理表](./load_class/class_file/显式异常处理表.md)
         - [JVM预定义属性](./load_class/class_file/JVM预定义属性.md)
     - [字节码指令](./load_class/bytecode_instructions/字节码指令.md)
         - [动态类型语言](./load_class/bytecode_instructions/动态类型语言.md)
