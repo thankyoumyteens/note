@@ -35,6 +35,8 @@
         - [HotSpot的算法细节](./garbage_collection/garbage_collector/HotSpot的算法细节.md)
             - [根节点枚举](./garbage_collection/garbage_collector/根节点枚举.md)
             - [安全点和安全区域](./garbage_collection/garbage_collector/安全点和安全区域.md)
+            - [记忆集与卡表](./garbage_collection/garbage_collector/记忆集与卡表.md)
+            - [写屏障](./garbage_collection/garbage_collector/写屏障.md)
             <!-- TODO -->
         - [经典垃圾收集器](./garbage_collection/garbage_collector/经典垃圾收集器.md)
             - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
