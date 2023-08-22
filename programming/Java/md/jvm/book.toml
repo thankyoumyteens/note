@@ -8,3 +8,4 @@ title = "《深入理解Java虚拟机（第3版）》学习记录"
 # https://doc.rust-lang.org/cargo/getting-started/installation.html
 # cargo install mdbook-epub
 [output.epub]
+[output.html]
