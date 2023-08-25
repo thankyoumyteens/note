@@ -17,7 +17,7 @@
         - [TLAB](./memory/heap/TLAB.md)
         - [堆空间常用JVM参数](./memory/heap/堆空间常用JVM参数.md)
     - [方法区](./memory/方法区.md)
-    - [HotSpot虚拟机的对象操作](./memory/object/HotSpot虚拟机的对象操作.md)
+    - [对象](./memory/object/对象.md)
         - [对象的创建](./memory/object/对象的创建.md)
         - [对象的内存布局](./memory/object/对象的内存布局.md)
         - [对象的访问定位](./memory/object/对象的访问定位.md)
@@ -42,6 +42,8 @@
             - [GarbageFirst收集器](./garbage_collection/garbage_collector/GarbageFirst收集器.md)
         - [低延迟垃圾收集器](./garbage_collection/garbage_collector/低延迟垃圾收集器.md)
             - [ZGC收集器](./garbage_collection/garbage_collector/ZGC收集器.md)
+
+- [调优](./performance/调优.md)
 
 - [类的加载](./load_class/类的加载.md)
     - [类文件结构](./load_class/class_file/类文件结构_img.md)
