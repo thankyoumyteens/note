@@ -43,6 +43,16 @@
         - [低延迟垃圾收集器](./garbage_collection/garbage_collector/低延迟垃圾收集器.md)
             - [ZGC收集器](./garbage_collection/garbage_collector/ZGC收集器.md)
 
+- [虚拟机监控工具](./tools/虚拟机监控工具.md)
+    - [命令行工具](./tools/命令行工具.md)
+        - [jps](./tools/jps.md)
+        - [jstat](./tools/jstat.md)
+        - [jinfo](./tools/jinfo.md)
+        - [jmap](./tools/jmap.md)
+        - [jhat](./tools/jhat.md)
+        - [jstack](./tools/jstack.md)
+    - [可视化工具](./tools/可视化工具.md)
+
 - [调优](./performance/调优.md)
 
 - [类的加载](./load_class/类的加载.md)
