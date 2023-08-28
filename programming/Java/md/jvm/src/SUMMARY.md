@@ -19,7 +19,9 @@
         - [解析](./load_class/class_load/解析.md)
         - [初始化](./load_class/class_load/初始化.md)
     - [类加载器](./load_class/类加载器.md)
-    - [Java模块化系统](./load_class/Java模块化系统.md)
+    - [Java模块化系统](./load_class/module/Java模块化系统.md)
+        - [模块路径](./load_class/module/模块路径.md)
+        - [类加载器的改动](./load_class/module/类加载器的改动.md)
 
 - [运行时数据区](./memory/运行时数据区.md)
     - [程序计数器](./memory/程序计数器.md)
