@@ -10,15 +10,7 @@ access_flags中一共有16个标志位可以使用，当前只定义了其中9�
 
 ---
 
-```java
-public class ClassFileDemo {
-    int num;
-
-    public int getNum() {
-        return this.num;
-    }
-}
-```
+![](../../img/class_demo_code.png)
 
 字节码文件内容:
 

@@ -21,15 +21,7 @@ Java代码在进行编译的时候，并不像C和C++那样有链接这一步骤
 
 ---
 
-```java
-public class ClassFileDemo {
-    int num;
-
-    public int getNum() {
-        return this.num;
-    }
-}
-```
+![](../../img/class_demo_code.png)
 
 字节码文件内容:
 

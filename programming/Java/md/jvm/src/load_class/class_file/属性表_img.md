@@ -23,15 +23,7 @@ Code属性表是一种用来存储方法体(即方法中的实际代码)的属�
 
 ---
 
-```java
-public class ClassFileDemo {
-    int num;
-
-    public int getNum() {
-        return this.num;
-    }
-}
-```
+![](../../img/class_demo_code.png)
 
 字节码文件内容:
 

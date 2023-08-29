@@ -26,15 +26,7 @@
 
 ---
 
-```java
-public class ClassFileDemo {
-    int num;
-
-    public int getNum() {
-        return this.num;
-    }
-}
-```
+![](../../img/class_demo_code.png)
 
 字节码文件内容:
 

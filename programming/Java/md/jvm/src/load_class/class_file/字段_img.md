@@ -28,15 +28,7 @@ name_index和descriptor_index都是对常量池项的引用，分别代表着字
 
 ---
 
-```java
-public class ClassFileDemo {
-    int num;
-
-    public int getNum() {
-        return this.num;
-    }
-}
-```
+![](../../img/class_demo_code.png)
 
 字节码文件内容:
 

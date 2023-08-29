@@ -4,11 +4,11 @@
 
 在JDK 9之前，Java是通过不同的package和jar来做功能的区分和隔离的：
 
-![](../img/java_no_module.png)
+![](../../img/java_no_module.png)
 
 从JDK 9开始，原有的Java标准库已经由一个单一巨大的rt.jar分拆成了几十个模块(如java.base、java.compiler等模块)，这些模块以.jmod扩展名标识，每个模块都包含了一个描述模块的module-info.class文件，这个文件由项目根目录中的源代码文件module-info.java编译而来。
 
-![](../img/java_module.png)
+![](../../img/java_module.png)
 
 java.base模块比较特殊，它并不依赖于其他任何模块，并且java.base是其他模块的基础，所以在其他模块中并不需要显式引用java.base。
 
@@ -16,7 +16,7 @@ java.base模块比较特殊，它并不依赖于其他任何模块，并且java.
 
 创建一个JDK 9模块，只需要创建一个module-info.java文件，并将其放在项目的根目录中：
 
-![](../img/java_module_demo.png)
+![](../../img/java_module_demo.png)
 
 ```java
 // service模块的module-info.java

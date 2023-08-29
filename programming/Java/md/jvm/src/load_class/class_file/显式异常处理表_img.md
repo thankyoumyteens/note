@@ -10,22 +10,7 @@ catch_type为指向一个CONSTANT_Class_info型常量的索引。
 
 如果当字节码从第start_pc行到第end_pc行之间(不含第end_pc行)出现了类型为catch_type或者其子类的异常，则转到第handler_pc行继续处理。当catch_type的值为0时，代表任意异常情况都需要转到handler_pc处进行处理。
 
-```java
-public class ExceptionTableDemo {
-    public int inc() {
-        int x;
-        try {
-            x = 1;
-            return x;
-        } catch (Exception e) {
-            x = 2;
-            return x;
-        } finally {
-            x = 3;
-        }
-    }
-}
-```
+![](../../img/ex_table_code.png)
 
 如果没有出现异常，返回值是1。如果出现了Exception异常，返回值是2。如果出现了Exception以外的异常，方法非正常退出，没有返回值。
 
