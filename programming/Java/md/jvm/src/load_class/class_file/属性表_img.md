@@ -40,7 +40,7 @@ max_stack的值为`0x0001`，max_locals的值也是`0x0001`。code_length为`0x0
 
 exception_table_length为`0x0000`，由于没有exception_table，所以紧接着是attributes_count`0x0002`，表示Code属性表中又包含了两个属性。
 
-使用`javap -verbose ClassFileDemo.class`命令解析class文件：
+使用 javap -verbose ClassFileDemo.class 命令解析class文件：
 
 ![](../../img/javap6.png)
 
@@ -76,7 +76,7 @@ Code属性表中的第一个属性：attribute_name_index为`0x000A`，指向常
 
 Code属性表中的第二个属性：attribute_name_index为`0x000B`，指向常量池中索引为11的值`LocalVariableTable`。attribute_length为`0x0000000C`，local_variable_table_length为`0x0001`。local_variable_info中的start_pc为`0x0000`，length为`0x0005`，name_index为`0x000C`，指向常量池中索引为12的值`this`，descriptor_index为`0x000D`，指向常量池中索引为13的值`LClassFileDemo;`，index为`0x0000`。
 
-使用`javap -verbose ClassFileDemo.class`命令解析class文件：
+使用 javap -verbose ClassFileDemo.class 命令解析class文件：
 
 ![](../../img/javap7.png)
 
@@ -96,6 +96,6 @@ sourcefile_index数据项是指向常量池中CONSTANT_Utf8_info型常量的索�
 
 attribute_name_index为`0x0010`，指向常量池中索引为16的值`SourceFile`，说明此属性是这个Class文件的源码文件名称。attribute_length为`0x00000002`。sourcefile_index为`0x0011`，指向常量池中索引为17的值`ClassFileDemo.java`。
 
-使用`javap -verbose ClassFileDemo.class`命令解析class文件：
+使用 javap -verbose ClassFileDemo.class 命令解析class文件：
 
 ![](../../img/javap9.png)

@@ -36,7 +36,7 @@
 
 第一个方法：access_flags为`0x0001`，表示修饰符为`ACC_PUBLIC`。name_index为`0x0007`，指向常量池中索引为7的值`<init>`。descriptor_index为`0x0008`，指向常量池中索引为8的值`()V`。attributes_count为`0x0001`，表示此方法的属性表集合有1项属性，紧接着的是attribute_info，其中的属性名称的索引值为`0x0009`，指向常量池中索引为9的值`Code`，说明此属性是方法的字节码描述。后面的4个字节`0x0000002F`表示属性`Code`的长度，即十进制的47。
 
-使用`javap -verbose ClassFileDemo.class`命令解析class文件，可以对应上方法的内容：
+使用 javap -verbose ClassFileDemo.class 命令解析class文件，可以对应上方法的内容：
 
 ![](../../img/javap5.png)
 
@@ -48,6 +48,6 @@
 
 第二个方法：access_flags为`0x0001`，表示修饰符为`ACC_PUBLIC`。name_index为`0x000E`，指向常量池中索引为14的值`getNum`。descriptor_index为`0x000F`，指向常量池中索引为15的值`()I`。attributes_count为`0x0001`，表示此方法的属性表集合有1项属性，紧接着的是attribute_info，其中的属性名称的索引值为`0x0009`，指向常量池中索引为9的值`Code`，说明此属性是方法的字节码描述。后面的4个字节`0x0000002F`表示属性`Code`的长度，即十进制的47。
 
-使用`javap -verbose ClassFileDemo.class`命令解析class文件：
+使用 javap -verbose ClassFileDemo.class 命令解析class文件：
 
 ![](../../img/javap8.png)
