@@ -14,29 +14,51 @@ java.base模块比较特殊，它并不依赖于其他任何模块，并且java.
 
 ## 创建模块
 
+一个jar包中可以有多个模块，一个模块中可以有多个package。
+
 创建一个JDK 9模块，只需要创建一个module-info.java文件，并将其放在项目的根目录中：
 
 ![](../../img/java_module_demo.png)
 
+service模块的module-info.java：
+
 ```java
-// service模块的module-info.java
-module service {
+// 声明该模块的名称
+module org.xxx.service {
     // 使用exports声明该模块要对外暴露的包
     exports org.example.service;
 }
 ```
 
+controller模块的module-info.java：
+
 ```java
-// controller模块的module-info.java
-module controller {
-    // 使用requires依赖其他模块暴露的包
-    requires service;
+// 声明该模块的名称
+module org.xxx.controller {
+    // 使用requires依赖其他模块
+    requires org.xxx.service;
+}
+```
+
+在controller中使用service模块：
+
+```java
+package org.example.controller;
+
+// 使用org.xxx.service模块中暴露的包
+import org.example.service.DemoService;
+
+public class DemoController {
+
+    public static void main(String[] args) {
+        DemoService service = new DemoService();
+        service.test();
+    }
 }
 ```
 
 ## 运行
 
 ```
-mvn compile
-java --module-path controller\target;service\target --module controller/org.example.controller.DemoController
+java --module-path controller\target;service\target --module org.xxx.controller/org.example.controller.DemoController
 ```
