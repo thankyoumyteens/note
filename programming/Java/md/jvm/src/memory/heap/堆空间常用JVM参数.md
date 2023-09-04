@@ -12,3 +12,4 @@
 - -XX:+PrintGC 打印GC简要信息
 - -XX:Hand1epromotionFai1ure 是否设置空间分配担保
 - -XX:+UseTLAB 开启TLAB，默认开启
+- -XX:PretenureSizeThreshold 指定大于该设置值的对象直接在老年代分配，只对Serial和ParNew两款新生代收集器有效
