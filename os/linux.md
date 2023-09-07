@@ -1,4 +1,4 @@
-# 通用
+<!-- # 通用
 - <a href="Linux/common/踢出登陆用户.md">踢出登陆用户</a>
 - <a href="Linux/common/Linux连接wifi.md">Linux连接wifi</a>
 - <a href="Linux/common/ssh登陆环境变量失效.md">ssh登陆环境变量失效</a>
@@ -12,13 +12,16 @@
 # CentOS
 - <a href="Linux/CentOS/centos软件源配置.md">centos软件源配置</a>
 - <a href="Linux/CentOS/centos7开启ssh服务.md">centos7开启ssh服务</a>
-- <a href="Linux/CentOS/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a>
+- <a href="Linux/CentOS/centos7没有ifconfig命令解决办法.md">centos7没有ifconfig命令解决办法</a> -->
 
 # Ubuntu
+- [ubuntu安装git](./Linux/Ubuntu/ubuntu安装git.md)
+- [ubuntu配置jdk17](./Linux/Ubuntu/ubuntu配置jdk17.md)
 - [ubuntu软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
 - [ubuntu开启ssh服务](./Linux/Ubuntu/ubuntu开启ssh服务.md)
 - [ubuntu修改DNS](./Linux/Ubuntu/ubuntu修改DNS.md)
 
+<!-- 
 # 工具
 - <a href="Linux/工具/grep.md">grep</a>
 - <a href="Linux/工具/sed.md">sed</a>
@@ -35,4 +38,4 @@
 - <a href="Linux/shell/case.md">case</a>
 - <a href="Linux/shell/循环.md">循环</a>
 - <a href="Linux/shell/控制台输入.md">控制台输入</a>
-- <a href="Linux/shell/函数.md">函数</a>
+- <a href="Linux/shell/函数.md">函数</a> -->
