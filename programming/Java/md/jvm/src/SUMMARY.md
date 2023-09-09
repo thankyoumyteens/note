@@ -75,8 +75,10 @@
         - [jhat](./tools/jhat.md)
         - [jstack](./tools/jstack.md)
     - [可视化工具](./tools/可视化工具.md)
+        - [JConsole](./tools/JConsole.md)
 
 - [调优](./performance/调优.md)
+    - [JVM启动参数](./performance/JVM启动参数.md)
 
 - [编译与优化](./java_compile/编译与优化.md)
     - [前端编译与优化](./java_compile/前端编译与优化.md)

@@ -19,6 +19,7 @@ jps常用选项：
 
 ```
 jps -l
+
 2388 D:\Develop\glassfish\bin\..\modules\admin-cli.jar
 2764 com.sun.enterprise.glassfish.bootstrap.ASMain
 3788 sun.tools.jps.Jps
