@@ -64,6 +64,7 @@
             - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
             - [GarbageFirst收集器](./garbage_collection/garbage_collector/GarbageFirst收集器.md)
         - [低延迟垃圾收集器](./garbage_collection/garbage_collector/低延迟垃圾收集器.md)
+            - [Shenandoah收集器](./garbage_collection/garbage_collector/Shenandoah收集器.md)
             - [ZGC收集器](./garbage_collection/garbage_collector/ZGC收集器.md)
 
 - [虚拟机监控工具](./tools/虚拟机监控工具.md)
