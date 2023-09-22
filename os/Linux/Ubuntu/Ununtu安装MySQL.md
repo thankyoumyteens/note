@@ -1,27 +1,32 @@
-# 安装
+# 下载解压
 
-下载解压
 ```sh
+cd ~/src_pack
+mkdir mysql
+cd mysql
 wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
 tar -xvf mysql-server_5.7.42-1ubuntu18.04_amd64.deb-bundle.tar
 ```
 
-预配置MySQL服务器软件包：
+# 预配置MySQL服务器软件包
+
 ```sh
+# 设置mysql密码
 sudo dpkg-preconfigure mysql-community-server_*.deb
-```
-对于MySQL服务器的基本安装，请安装数据库公用文件包，客户端包，客户端元包，服务器包和服务器元包（按此顺序）; 可以使用单个命令来执行此操作：
-```sh
+# 安装
 sudo dpkg -i mysql-common_*.deb
 sudo dpkg -i mysql-community-client_*.deb
 sudo dpkg -i mysql-client_*.deb
 sudo dpkg -i mysql-community-server_*.deb
 sudo dpkg -i mysql-server_*.deb
 ```
+
 如果中途被dpkg警告未满足的依赖关系 ，可以使用apt-get来修复它们，然后再运行中断的命令
+
 ```sh
 sudo apt-get -f install -y
 ```
+
 通过这种方式安装好之后开机自启动都已经配置好，和命令行上的环境变量，无需手动配置
 
 服务启动后端口查询

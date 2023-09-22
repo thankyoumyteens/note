@@ -16,6 +16,9 @@
 
 # Ubuntu
 - [ubuntu安装git](./Linux/Ubuntu/ubuntu安装git.md)
+- [ubuntu安装nginx](./Linux/Ubuntu/ubuntu安装nginx.md)
+- [ubuntu安装redis](./Linux/Ubuntu/ubuntu安装redis.md)
+- [ununtu安装mariadb](./Linux/Ubuntu/ununtu安装mariadb.md)
 - [ubuntu配置jdk17](./Linux/Ubuntu/ubuntu配置jdk17.md)
 - [ubuntu软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
 - [ubuntu开启ssh服务](./Linux/Ubuntu/ubuntu开启ssh服务.md)

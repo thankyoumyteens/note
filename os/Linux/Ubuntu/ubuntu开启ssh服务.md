@@ -40,13 +40,12 @@ sudo /etc/init.d/ssh stop
 
 # 开机自动启动ssh
 
-
-```
+```sh
 sudo systemctl enable ssh
 ```
 
 # 关闭ssh开机自动启动
 
-```
+```sh
 sudo systemctl disable ssh
 ```

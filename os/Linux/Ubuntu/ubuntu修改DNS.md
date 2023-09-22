@@ -1,8 +1,6 @@
-# ubuntu修改DNS
+# 临时修改
 
-## 临时修改
-
-```
+```sh
 vim /etc/resolv.conf
 ```
 
