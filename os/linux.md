@@ -20,6 +20,7 @@
 - [ubuntu安装redis](./Linux/Ubuntu/ubuntu安装redis.md)
 - [ununtu安装mariadb](./Linux/Ubuntu/ununtu安装mariadb.md)
 - [ubuntu配置jdk17](./Linux/Ubuntu/ubuntu配置jdk17.md)
+- [ubuntu配置maven](./Linux/Ubuntu/ubuntu配置maven.md)
 - [ubuntu软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
 - [ubuntu开启ssh服务](./Linux/Ubuntu/ubuntu开启ssh服务.md)
 - [ubuntu修改DNS](./Linux/Ubuntu/ubuntu修改DNS.md)

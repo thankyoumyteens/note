@@ -1,6 +1,7 @@
 # 下载JDK 17
 
 ```sh
+cd ~/src_pack
 wget https://github.com/dragonwell-project/dragonwell17/releases/download/dragonwell-standard-17.0.8.0.8%2B7_jdk-17.0.8-ga/Alibaba_Dragonwell_Standard_17.0.8.0.8.7_x64_linux.tar.gz
 tar -zxvf Alibaba_Dragonwell_Standard_17.0.8.0.8.7_x64_linux.tar.gz
 ```
