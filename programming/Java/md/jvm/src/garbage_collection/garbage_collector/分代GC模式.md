@@ -9,7 +9,11 @@ G1中存在纯G1模式(pure garbage-first mode)和分代G1模式(generational ga
 
 在分代G1模式中，Region被分为新生代Region和老年代Region两类。和其他收集器一样，分代的对象也保存了自身在各次转移中存活下来的次数(年龄)。新生代Region用来存放新生代对象，老年代Region用来存放老年代对象。
 
-G1中的新生代GC称为Yong GC，老年代GC称为Mixed GC。Yong GC和Mixed GC的主要区别在于CSet的选择。Yong GC将所有新生代Region选入CSet，而Mixed GC将所有新生代Region，以及一部分老年代Region选入CSet。
+G1中的新生代GC称为Yong GC，老年代GC称为Mixed GC。Yong GC和Mixed GC的主要区别在于CSet的选择。Yong GC将所有新生代Region选入CSet，而Mixed GC将所有新生代Region，以及一部分并发标记统计出的收集收益高的老年代Region选入CSet。
+
+分代GC模式的正常工作流程就是在Young GC与Mixed GC之间视情况切换，背后定期做做全局并发标记。初始标记阶段默认会在Young GC的暂停时顺便执行。当全局并发标记正在工作时，G1不会选择做Mixed GC，反之如果有Mixed GC正在进行中G1也不会启动初始标记阶段。在正常工作流程中没有Full GC的概念，老年代Region的收集全靠Mixed GC来完成。
+
+如果Mixed GC实在无法跟上程序分配内存的速度，导致老年代填满无法继续进行Mixed GC，就会切换到G1之外的Serial Old GC来收集整个Java堆，这才是真正的Full GC。进入这种状态的G1就跟-XX:+UseSerialGC的Full GC一样，背后的核心代码是两者共用的。
 
 ## 新生代Region
 
