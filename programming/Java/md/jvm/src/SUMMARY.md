@@ -70,20 +70,6 @@
         - [Shenandoah收集器](./garbage_collection/garbage_collector/Shenandoah收集器.md)
         - [ZGC收集器](./garbage_collection/garbage_collector/ZGC收集器.md)
 
-- [虚拟机监控工具](./tools/虚拟机监控工具.md)
-    - [命令行工具](./tools/命令行工具.md)
-        - [jps](./tools/jps.md)
-        - [jstat](./tools/jstat.md)
-        - [jinfo](./tools/jinfo.md)
-        - [jmap](./tools/jmap.md)
-        - [jhat](./tools/jhat.md)
-        - [jstack](./tools/jstack.md)
-    - [可视化工具](./tools/可视化工具.md)
-        - [JConsole](./tools/JConsole.md)
-
-- [调优](./performance/调优.md)
-    - [JVM启动参数](./performance/JVM启动参数.md)
-
 - [编译与优化](./java_compile/编译与优化.md)
     - [前端编译与优化](./java_compile/前端编译与优化.md)
         - [Javac编译器](./java_compile/Javac编译器.md)
@@ -104,6 +90,20 @@
     - [协程](./concurrency/协程.md)
     - [线程安全](./concurrency/线程安全.md)
     - [锁优化](./concurrency/锁优化.md)
+
+- [虚拟机监控工具](./tools/虚拟机监控工具.md)
+    - [命令行工具](./tools/命令行工具.md)
+        - [jps](./tools/jps.md)
+        - [jstat](./tools/jstat.md)
+        - [jinfo](./tools/jinfo.md)
+        - [jmap](./tools/jmap.md)
+        - [jhat](./tools/jhat.md)
+        - [jstack](./tools/jstack.md)
+    - [可视化工具](./tools/可视化工具.md)
+        - [JConsole](./tools/JConsole.md)
+
+- [调优](./performance/调优.md)
+    - [JVM启动参数](./performance/JVM启动参数.md)
 
 - [附录](./overview/附录.md)
     - [JVM预定义属性](./load_class/class_file/JVM预定义属性.md)
