@@ -1,4 +1,0 @@
-- <a href="../pages/pip/pip软件源配置.md">pip软件源配置</a>
-- <a href="../pages/pip/pip常用命令.md">pip常用命令</a>
-- <a href="../pages/pip/Python离线安装依赖包.md">Python离线安装依赖包</a>
-- <a href="../pages/pip/Python依赖管理.md">Python依赖管理</a>

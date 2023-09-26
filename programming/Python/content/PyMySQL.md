@@ -1,4 +1,0 @@
-- <a href="../pages/PyMySQL/安装PyMySQL.md">安装PyMySQL</a>
-- <a href="../pages/PyMySQL/连接数据库.md">连接数据库</a>
-- <a href="../pages/PyMySQL/增删改.md">增删改</a>
-- <a href="../pages/PyMySQL/查.md">查</a>

@@ -1,5 +1,0 @@
-- <a href="../pages/subprocess/Python执行shell命令.md">Python执行shell命令</a>
-- <a href="../pages/subprocess/Popen类.md">Popen类</a>
-- <a href="../pages/subprocess/subprocess.call.md">subprocess.call</a>
-- <a href="../pages/subprocess/subprocess.check_output.md">subprocess.check_output</a>
-- <a href="../pages/subprocess/subprocess.CalledProcessError.md">subprocess.CalledProcessError</a>

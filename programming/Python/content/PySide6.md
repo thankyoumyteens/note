@@ -1,7 +1,0 @@
-- <a href="../pages/pyside/安装Pyside6.md">安装Pyside6</a>
-- <a href="../pages/pyside/打包exe.md">打包exe</a>
-- <a href="../pages/pyside/创建主窗口.md">创建主窗口</a>
-- <a href="../pages/pyside/建立菜单栏.md">建立菜单栏</a>
-- <a href="../pages/pyside/建立工具栏.md">建立工具栏</a>
-- <a href="../pages/pyside/建立信号与槽的连接.md">建立信号与槽的连接</a>
-- <a href="../pages/pyside/布局.md">布局</a>

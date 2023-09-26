@@ -1,1 +1,0 @@
-- <a href="../pages/SSH/paramiko.md">paramiko</a>
