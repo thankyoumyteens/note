@@ -99,3 +99,4 @@ java -XX:+UseG1GC -XX:NewRatio=3 -XX:MaxNewSize=64g -jar myapp.jar
 
 G1会维护一个新生代分区列表，当新生代需要扩大时，G1会把空闲的Region加入到新生代分区列表中，如果没有空闲的Region，G1会分配新的Region然后把它加入到新生代分区列表中。
 
+参数-XX:GCTimeRatio用于设置程序运行时间与GC执行时间之间的比率，计算方式为：100*(1/(1+GCTimeRatio))。GCTimeRatio的默认值为9，即GC时间占比超过10%的时候才需要扩展内存空间。
