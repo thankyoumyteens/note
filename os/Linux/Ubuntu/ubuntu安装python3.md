@@ -14,4 +14,5 @@ sudo make install
 ln -s /usr/local/python3/bin/python3.7 /usr/bin/python37
 ln -s /usr/local/python3/bin/pip3.7 /usr/bin/pip37
 python37 -V
+pip37 -V
 ```
