@@ -1,11 +1,21 @@
 - [文件](./io/io.md)
     - [路径操作](./io/路径操作.md)
     - [文件操作](./io/文件操作.md)
+
 - [正则表达式](./regex/regex.md)
     - [查找](./regex/查找.md)
     - [分组](./regex/分组.md)
     - [换行匹配](./regex/换行匹配.md)
     - [与或非](./regex/与或非.md)
     - [替换](./regex/替换.md)
+
 - [压缩解压](./zip/压缩解压.md)
     - [ZipFile](./zip/ZipFile.md)
+
+- [PySide6](./pyside/PySide6.md)
+    - [安装Pyside6](./pyside/安装Pyside6.md)
+    - [创建主窗口](./pyside/创建主窗口.md)
+    - [布局](./pyside/布局.md)
+    - [菜单](./pyside/菜单.md)
+    - [建立信号与槽的连接](./pyside/建立信号与槽的连接.md)
+    - [打包exe](./pyside/打包exe.md)
