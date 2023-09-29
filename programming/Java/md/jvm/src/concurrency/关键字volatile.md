@@ -35,42 +35,119 @@ public void doWork() {
 }
 ```
 
-## 禁止指令重排序优化
+## 指令重排序
 
-指令重排序(Instruction Reordering)是编译器和处理器为了提高程序执行效率而进行的一种优化技术。它指的是在不改变程序的语义和结果的前提下，重新安排指令的执行顺序。
+指令重排序(Instruction Reordering)是编译器和处理器为了提高程序执行效率而进行的一种优化技术。它指的是在不改变单线程程序执行结果的前提下，重新安排指令的执行顺序。
 
-普通的变量仅会保证在该方法的执行过程中所有依赖赋值结果的地方都能获取到正确的结果，而不能保证变量赋值操作的顺序与程序代码中的执行顺序一致。而volatile关键字则具有禁止指令重排序的特性，可以保证volatile变量的读写操作按照程序的顺序执行。
+基础的饱汉式单例模式，在多线程环境下，可能会出现多个实例：
 
 ```java
-// 线程共享变量
-Map configOptions;
-volatile boolean initialized = false;
+public class SingletonObj {
+    private static SingletonObj singleton = null;
 
-// 假设以下代码在线程A中执行
-// 模拟读取配置信息，当读取完成后
-// 将initialized设置为true,通知其他线程配置可用
-void threadA() {
-    configOptions = loadFromConfig();
-    initialized = true;
-}
+    private Singleton1() {}
 
-// 假设以下代码在线程B中执行
-// 等待initialized为true，代表线程A已经把配置信息初始化完成
-void threadB() {
-    while (!initialized) {
-        sleep();
+    public static SingletonObj getInstance() {
+        if (singleton == null) {
+            singleton = new SingletonObj();
+        }
+        return singleton;
     }
-    // 使用线程A中初始化好的配置信息
-    doSomethingWithConfig();
 }
 ```
 
-如果定义initialized变量时没有使用volatile修饰，就可能会由于指令重排序的优化，导致位于线程A中最后一条代码`initialized=true`被提前执行(重排序优化是机器级的优化操作，提前执行是指这条语句对应的汇编代码被提前执行)，这样在线程B中使用配置信息的代码就可能出现错误，而volatile关键字则可以避免此类情况的发生。
+如果给方法getInstance()加一个synchronized关键字，虽然可以保证线程安全，但是这样会导致性能极差。一个优化的方案是在创建对象时使用syncronized，而不是加到方法上：
 
----
+```java
+// 通过双重检查锁DCL(double checked locking)的机制实现单例
+public class SingletonObj {
+    private static SingletonObj singleton = null;
 
-假定T表示一个线程，V和W分别表示两个volatile型变量，那么在进行read、load、use、assign、store和write操作时需要满足如下规则：
+    private Singleton1() {}
 
-- 只有当线程T对变量V执行的前一个动作是load的时候，线程T才能对变量V执行use动作。并且，只有当线程T对变量V执行的后一个动作是use的时候，线程T才能对变量V执行load动作。线程T对变量V的use动作可以认为是和线程T对变量V的load、read动作相关联的，必须连续且一起出现。这条规则要求在工作内存中，每次使用V前都必须先从主内存刷新最新的值，用于保证能看见其他线程对变量V所做的修改。
-- 只有当线程T对变量V执行的前一个动作是assign的时候，线程T才能对变量V执行store动作。并且，只有当线程T对变量V执行的后一个动作是store的时候，线程T才能对变量V执行assign动作。线程T对变量V的assign动作可以认为是和线程T对变量V的store、write动作相关联的，必须连续且一起出现。这条规则要求在工作内存中，每次修改V后都必须立刻同步回主内存中，用于保证其他线程可以看到自己对变量V所做的修改。
-- 假定动作A是线程T对变量V实施的use或assign动作，动作B是线程T对变量W实施的use或assign动作。假定动作P是对变量V的read或write动作，动作Q是对变量W的read或write动作。如果A先于B，那么P先于Q。这条规则要求volatile修饰的变量不会被指令重排序优化，从而保证代码的执行顺序与程序的顺序相同。
+    public static SingletonObj getInstance() {
+        if (singleton == null) {
+            syncronized (SingletonObj.class) {
+                // 可能会被其他线程抢先进入syncronized创建对象
+                // 所以需要再判断一次
+                if (singleton == null) {
+                    singleton = new SingletonObj();
+                }
+            }
+        }
+        return singleton;
+    }
+}
+```
+
+这种方式也存在问题，问题出现在创建对象的语句singleton = new SingletonObj()上。Java创建对象的操作分为3步，而且不具有原子性：
+
+1. 分配内存空间
+2. 调用`<init>()`方法初始化对象
+3. 将对象内存空间的地址赋值给对应的引用类型变量
+
+在指令重排序之后的执行顺序可能是这样的：
+
+1. 分配内存空间
+2. 将对象内存空间的地址赋值给对应的引用类型变量
+3. 调用`<init>()`方法初始化对象
+
+时间 | 线程A | 线程B
+--|--|--
+t1 | 分配内存空间 | 
+t2 | 将对象内存空间的地址赋值给singleton变量 |
+t3 |  | 判断singleton是否为空
+t4 |  | 由于singleton不为null，线程B将访问singleton指向的对象
+t5 | 调用`<init>()`方法初始化对象 | 
+
+按照这样的顺序执行，线程B将会获得一个未初始化的对象。
+
+## 禁止指令重排序
+
+普通的变量仅会保证在该方法的执行过程中所有依赖赋值结果的地方都能获取到正确的结果，而不能保证变量赋值操作的顺序与程序代码中的执行顺序一致。而volatile关键字则具有禁止指令重排序的特性，可以保证volatile变量的读写操作按照程序的顺序执行。
+
+把singleton变量设置成volatile，就可以禁止指令重排序，把Java创建对象3步固定为下面的顺序：
+
+1. 分配内存空间
+2. 调用`<init>()`方法初始化对象
+3. 将对象内存空间的地址赋值给对应的引用类型变量
+
+```java
+public class SingletonObj {
+    // 禁止指令重排序
+    private static volatile SingletonObj singleton = null;
+
+    private Singleton1() {}
+
+    public static SingletonObj getInstance() {
+        if (singleton == null) {
+            syncronized (SingletonObj.class) {
+                if (singleton == null) {
+                    singleton = new SingletonObj();
+                }
+            }
+        }
+        return singleton;
+    }
+}
+```
+
+## 内存屏障
+
+内存屏障是CPU或编译器在对内存随机访问的操作中的一个同步点，使得此点之前的所有读写操作都执行后才可以开始执行此点之后的操作。它能防止屏障之前的操作与屏障之后的操作交换执行顺序。比如把一个内存屏障插入到两个读操作之间，那这两个读操作的相对顺序就不会被改变了，后面的读绝不会先于前面的读执行。
+
+内存屏障可以分为以下几种类型：
+
+1. LoadLoad屏障：对于这样的语句Load1; LoadLoad; Load2，在Load2及后续读取操作要读取的数据被访问前，保证Load1要读取的数据被读取完毕，并且Load2会重新将数据从主内存刷新到工作内存
+2. StoreStore屏障：对于这样的语句Store1; StoreStore; Store2，在Store2及后续写入操作执行前，保证Store1的写入操作会强制将数据从工作内存刷新回主内存
+3. LoadStore屏障：对于这样的语句Load1; LoadStore; Store2，在Store2及后续写入操作被刷出前，保证Load1要读取的数据被读取完毕，这条指令只起到禁止重排序的作用，因为Load屏障是加在读操作之前强制从主内存读取数据，Store屏障加在写操作之后强制将数据写回主内存，而这里恰好反过来，所以只起到重排序的作用
+4. StoreLoad屏障：对于这样的语句Store1; StoreLoad; Load2，在Load2及后续所有读取操作执行前，保证Store1的写入操作会强制将数据从工作内存刷新回主内存。它的开销是四种屏障中最大的，他会把据从工作内存刷新回主内存，也会把数据从主内存刷新到工作内存
+
+这些屏障指令并不是处理器真实的CPU指令，他们只是JMM定义出来的指令。因为不同硬件实现内存屏障的方式并不相同，JMM为了屏蔽这种底层硬件平台的不同，抽象出了这些内存屏障指令，在运行的时候，由JVM来为不同的平台生成相应的机器码。
+
+为了实现volatile的语义，编译器在生成字节码时，会在指令序列中插入内存屏障来禁止特定类型的处理器重排序。对于编译器来说，发现一个最优布置来最小化插入屏障的总数几乎不可能。为此，JMM采取保守策略：
+
+1. 在每个volatile写操作的前面插入一个StoreStore屏障
+2. 在每个volatile写操作的后面插入一个StoreLoad屏障
+3. 在每个volatile读操作的前面插入一个LoadLoad屏障
+4. 在每个volatile读操作的后面插入一个LoadStore屏障
