@@ -4,7 +4,7 @@ Java堆(Java Heap)是Java虚拟机运行时内存的一部分，用于存储对�
 
 ## 堆空间划分
 
-JVM内存划分为堆内存和非堆内存，堆内存分为新生代(Young Generation)，老年代(Old Generation)。非堆内存为永久代(Permanent Generation)。
+JVM内存划分为堆内存和非堆内存，堆内存的划分由JVM使用哪个垃圾回收器决定，一般分为新生代(Young Generation)和老年代(Old Generation)。非堆内存为永久代(Permanent Generation)。
 
 新生代与老年代的默认比例是2:1。
 
