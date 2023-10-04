@@ -64,11 +64,12 @@
         - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
         - [GarbageFirst收集器](./garbage_collection/garbage_collector/GarbageFirst收集器.md)
             - [Region](./garbage_collection/garbage_collector/Region.md)
+            - [对象分配](./garbage_collection/garbage_collector/对象分配.md)
+                - [TLAB](./garbage_collection/garbage_collector/TLAB.md)
             - [并发标记](./garbage_collection/garbage_collector/并发标记.md)
             - [转移](./garbage_collection/garbage_collector/转移.md)
             - [分代GC模式](./garbage_collection/garbage_collector/分代GC模式.md)
     - [低延迟垃圾收集器](./garbage_collection/garbage_collector/低延迟垃圾收集器.md)
-        - [Shenandoah收集器](./garbage_collection/garbage_collector/Shenandoah收集器.md)
         - [ZGC收集器](./garbage_collection/garbage_collector/ZGC收集器.md)
 
 - [编译与优化](./java_compile/编译与优化.md)
