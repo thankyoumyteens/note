@@ -150,3 +150,193 @@ size_t ThreadLocalAllocBuffer::initial_desired_size() {
   return init_sz;
 }
 ```
+
+## 分配一个新的TLAB
+
+> jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
+
+```cpp
+// 分配一个新的TLAB
+HeapWord* G1CollectedHeap::allocate_new_tlab(size_t word_size) {
+  assert_heap_not_locked_and_not_at_safepoint();
+  assert(!isHumongous(word_size), "we do not allow humongous TLABs");
+
+  uint dummy_gc_count_before;
+  uint dummy_gclocker_retry_count = 0;
+  return attempt_allocation(word_size, &dummy_gc_count_before, &dummy_gclocker_retry_count);
+}
+```
+
+attempt_allocation()方法会先使用CAS分配TLAB，如果失败，则开始慢速分配。
+
+> jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.inline.hpp
+
+```cpp
+inline HeapWord* G1CollectedHeap::attempt_allocation(size_t word_size,
+                                                     uint* gc_count_before_ret,
+                                                     uint* gclocker_retry_count_ret) {
+  // TLAB中不分配大对象
+  assert_heap_not_locked_and_not_at_safepoint();
+  assert(!isHumongous(word_size), "attempt_allocation() should not "
+         "be called for humongous allocation requests");
+
+  AllocationContext_t context = AllocationContext::current();
+  // 使用CAS分配
+  HeapWord* result = _allocator->mutator_alloc_region(context)->attempt_allocation(word_size,
+                                                                                   false /* bot_updates */);
+  // 使用CAS分配失败
+  if (result == NULL) {
+    result = attempt_allocation_slow(word_size,
+                                     context,
+                                     gc_count_before_ret,
+                                     gclocker_retry_count_ret);
+  }
+  assert_heap_not_locked();
+  if (result != NULL) {
+    dirty_young_block(result, word_size);
+  }
+  return result;
+}
+```
+
+> jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegion.inline.hpp
+
+```cpp
+// _allocator->mutator_alloc_region(context)->attempt_allocation()
+// 会调用
+// G1OffsetTableContigSpace::par_allocate_impl()方法
+inline HeapWord* G1OffsetTableContigSpace::par_allocate_impl(size_t size,
+                                                    HeapWord* const end_value) {
+  // 使用CAS分配
+  do {
+    HeapWord* obj = top();
+    if (pointer_delta(end_value, obj) >= size) {
+      HeapWord* new_top = obj + size;
+      HeapWord* result = (HeapWord*)Atomic::cmpxchg_ptr(new_top, top_addr(), obj);
+      if (result == obj) {
+        assert(is_aligned(obj) && is_aligned(new_top), "checking alignment");
+        return obj;
+      }
+    } else {
+      return NULL;
+    }
+  } while (true);
+}
+```
+
+慢速分配的过程：
+
+1. 首先尝试对堆分区进行加锁分配，成功则返回，在attempt_allocation_locked完成
+2. 不成功，则判定是否可以对新生代分区进行扩展，如果可以扩展则扩展后再分配TLAB，成功则返回，在attempt_allocation_force完成
+3. 不成功，判定是否可以进行垃圾回收，如果可以进行垃圾回收后再分配，成功则返回，在do_collection_pause完成
+4. 不成功，如果尝试分配次数达到阈值（默认值是2次）则返回失败
+5. 如果还可以继续尝试，再次判定是否进行快速分配，如果成功则返回
+6. 不成功则通过for循环重新再尝试一次流程，直到成功或者达到阈值失败
+
+> jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
+
+```cpp
+// 慢速分配
+HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size,
+                                                   AllocationContext_t context,
+                                                   uint* gc_count_before_ret,
+                                                   uint* gclocker_retry_count_ret) {
+
+  // TLAB中不分配大对象
+  assert_heap_not_locked_and_not_at_safepoint();
+  assert(!isHumongous(word_size), "attempt_allocation_slow() should not "
+         "be called for humongous allocation requests");
+
+  HeapWord* result = NULL;
+  for (int try_count = 1; /* we'll return */; try_count += 1) {
+    bool should_try_gc;
+    uint gc_count_before;
+
+    {
+      // 加锁分配
+      MutexLockerEx x(Heap_lock);
+      result = _allocator->mutator_alloc_region(context)->attempt_allocation_locked(word_size,
+                                                                                    false /* bot_updates */);
+      if (result != NULL) {
+        return result;
+      }
+
+      // 加锁分配失败
+      assert(_allocator->mutator_alloc_region(context)->get() == NULL, "only way to get here");
+
+      if (GC_locker::is_active_and_needs_gc()) {
+        // 判断是否可以对新生代进行扩展
+        if (g1_policy()->can_expand_young_list()) {
+          // 扩大新生代后再分配
+          result = _allocator->mutator_alloc_region(context)->attempt_allocation_force(word_size,
+                                                                                       false /* bot_updates */);
+          if (result != NULL) {
+            return result;
+          }
+        }
+        should_try_gc = false;
+      } else {
+        // 在访问JNI代码时，JNI代码可能会进入临界区，
+        // 为了防止GC导致JNI代码出问题，需要利用GC_locker加锁，保证临界区代码的正确执行
+        // 如果在此时需要发生GC，那么此次GC就会被阻止，并将needs_gc置为true，在临界区代码执行完毕后，
+        // 再次触发GC操作，之后将_needs_gc重新复位为false
+        if (GC_locker::needs_gc()) {
+          should_try_gc = false;
+        } else {
+          gc_count_before = total_collections();
+          should_try_gc = true;
+        }
+      }
+    }
+
+    if (should_try_gc) {
+      // 垃圾回收后再分配
+      bool succeeded;
+      result = do_collection_pause(word_size, gc_count_before, &succeeded,
+                                   GCCause::_g1_inc_collection_pause);
+      if (result != NULL) {
+        assert(succeeded, "only way to get back a non-NULL result");
+        return result;
+      }
+
+      if (succeeded) {
+        // 分配失败
+        MutexLockerEx x(Heap_lock);
+        // 记录发生gc的次数
+        *gc_count_before_ret = total_collections();
+        return NULL;
+      }
+    } else {
+      // 不需要尝试GC
+      if (*gclocker_retry_count_ret > GCLockerRetryAllocationCount) {
+        // 达到分配次数，分配失败
+        MutexLockerEx x(Heap_lock);
+        *gc_count_before_ret = total_collections();
+        return NULL;
+      }
+      // GCLocker处于活动状态，或者尚未执行GCLocker启动的GC
+      // 运行到这里会循环wait，直到GCLocker中的_needs_gc被重新置为false，然后重试分配。
+      GC_locker::stall_until_clear();
+      // 每执行一次就将分配次数加1
+      (*gclocker_retry_count_ret) += 1;
+    }
+
+    // 有可能其他线程正在分配TLAB或者GCLocker正被竞争使用，再尝试一次CAS分配
+    result = _allocator->mutator_alloc_region(context)->attempt_allocation(word_size,
+                                                                           false /* bot_updates */);
+    if (result != NULL) {
+      return result;
+    }
+
+    // Give a warning if we seem to be looping forever.
+    if ((QueuedAllocationWarningCount > 0) &&
+        (try_count % QueuedAllocationWarningCount == 0)) {
+      warning("G1CollectedHeap::attempt_allocation_slow() "
+              "retries %d times", try_count);
+    }
+  }
+
+  ShouldNotReachHere();
+  return NULL;
+}
+```
