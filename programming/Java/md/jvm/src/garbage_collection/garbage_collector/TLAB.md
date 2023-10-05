@@ -56,7 +56,7 @@ JVM还提供了一个参数-XX:TLABWasteIncrement，默认值为4个字，用于
 
 TLAB慢速分配具体有以下两种情况：
 
-1. 如果TLAB的剩余空间过小，那么就对老TLAB进行填充一个dummy对象(没有任何实际的功能，只是用来填充)，然后去申请一个新的TLAB
+1. 如果TLAB的剩余空间过小，那么就对老TLAB进行填充一个dummy对象，然后去申请一个新的TLAB。G1在扫描时，当遇到对象时会一整个跳过，而遇到空白区域时则需要一个字一个字的来扫描，这势必影响效率，为此，G1通过为这些空白区域也分配一个空对象，即dummy对象，从而让扫描变得更快
 2. 如果TLAB的剩余空间并不小，那么就更新refill_waste_limit的值，然后不使用TLAB进行分配，直接返回NULL，让JVM去堆中分配
 
 > jdk8u60-master\hotspot\src\share\vm\gc_interface\collectedHeap.cpp
@@ -172,10 +172,11 @@ attempt_allocation()方法会先使用CAS分配TLAB，如果失败，则开始�
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.inline.hpp
 
 ```cpp
+// 分配一块内存空间
 inline HeapWord* G1CollectedHeap::attempt_allocation(size_t word_size,
                                                      uint* gc_count_before_ret,
                                                      uint* gclocker_retry_count_ret) {
-  // TLAB中不分配大对象
+  // 不分配大对象
   assert_heap_not_locked_and_not_at_safepoint();
   assert(!isHumongous(word_size), "attempt_allocation() should not "
          "be called for humongous allocation requests");

@@ -66,6 +66,7 @@
             - [Region](./garbage_collection/garbage_collector/Region.md)
             - [对象分配](./garbage_collection/garbage_collector/对象分配.md)
                 - [TLAB](./garbage_collection/garbage_collector/TLAB.md)
+                - [慢速分配](./garbage_collection/garbage_collector/慢速分配.md)
             - [并发标记](./garbage_collection/garbage_collector/并发标记.md)
             - [转移](./garbage_collection/garbage_collector/转移.md)
             - [分代GC模式](./garbage_collection/garbage_collector/分代GC模式.md)
