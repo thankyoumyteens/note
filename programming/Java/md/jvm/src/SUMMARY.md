@@ -63,9 +63,6 @@
     - [经典垃圾收集器](./garbage_collection/garbage_collector/经典垃圾收集器.md)
         - [CMS收集器](./garbage_collection/garbage_collector/CMS收集器.md)
         - [G1收集器](./garbage_collection/garbage_collector/G1收集器.md)
-            - [并发标记](./garbage_collection/garbage_collector/并发标记.md)
-            - [转移](./garbage_collection/garbage_collector/转移.md)
-            - [分代GC模式](./garbage_collection/garbage_collector/分代GC模式.md)
     - [低延迟垃圾收集器](./garbage_collection/garbage_collector/低延迟垃圾收集器.md)
         - [ZGC收集器](./garbage_collection/garbage_collector/ZGC收集器.md)
 
