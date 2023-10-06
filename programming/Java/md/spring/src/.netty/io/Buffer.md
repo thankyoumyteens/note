@@ -1,0 +1,4 @@
+# Buffer
+
+Java的Buffer类是一个抽象类，对应于Java的主要数据类型，在NIO中有8种Buffer冲区类：ByteBuffer、CharBuffer、DoubleBuffer、FloatBuffer、IntBuffer、LongBuffer、ShortBuffer、MappedByteBuffe。前7种Buffer类型，覆盖了能在IO中传输的所有的Java基本数据类型。第8种类型MappedByteBuffer是专门用于内存映射的一种ByteBuffer类型。Buffer类是一个非线程安全类。
+
