@@ -80,6 +80,7 @@
         - [数组边界检查消除](./java_compile/数组边界检查消除.md)
 
 - [并发](./concurrency/并发.md)
+    - [缓存一致性](./concurrency/缓存一致性.md)
     - [Java内存模型](./concurrency/Java内存模型.md)
     - [关键字volatile](./concurrency/关键字volatile.md)
     - [线程](./concurrency/线程.md)
