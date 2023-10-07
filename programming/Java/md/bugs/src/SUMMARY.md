@@ -9,3 +9,4 @@
 
 - [mybatis](./mybatis/mybatis.md)
     - [java.sql.SQLException: 无效的列类型: 1111](./mybatis/无效的列类型1111.md)
+    - [Error querying database. Cause: java.lang.NumberFormatException: For input string](./mybatis/java.lang.NumberFormatException.md)
