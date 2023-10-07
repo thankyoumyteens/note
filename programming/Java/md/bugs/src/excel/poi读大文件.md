@@ -1,7 +1,5 @@
 # org.apache.poi.util.RecordFormatException: Tried to allocate an array of length 4276190, but 1000000 is the maximum for this record type
 
-POI有一些缺陷，操作都是在内存中完成的，内存消耗很大。poi在处理之前使用IOUtils里面的方法校验了下数据的字节长度，当超过常量配置的长度后会抛出上面的异常，如果不做限制就会导致内存不足。
-
 ```java
 // 原来的写法
 try (XSSFWorkbook wb = new XSSFWorkbook(file.getInputStream())) {
@@ -45,7 +43,11 @@ try (XSSFWorkbook wb = new XSSFWorkbook(file.getInputStream())) {
 }
 ```
 
-## 解决方案
+## 原因
+
+POI有一些缺陷，操作都是在内存中完成的，内存消耗很大。poi在处理之前使用IOUtils里面的方法校验了下数据的字节长度，当超过常量配置的长度后会抛出上面的异常，如果不做限制就会导致内存不足。
+
+## 解决
 
 使用EasyExcel
 
