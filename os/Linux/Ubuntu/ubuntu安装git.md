@@ -1,7 +1,7 @@
 # 安装前置工具
 
 ```sh
-sudo apt install -y wget gcc g++ zlib1g.dev tcl build-essential tk gettext
+sudo apt install -y wget gcc g++ zlib1g.dev tcl build-essential tk gettext libcurl4-openssl-dev
 ```
 
 # 卸载旧版本
