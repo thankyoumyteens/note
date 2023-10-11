@@ -19,3 +19,12 @@
     - [菜单](./pyside/菜单.md)
     - [建立信号与槽的连接](./pyside/建立信号与槽的连接.md)
     - [打包exe](./pyside/打包exe.md)
+
+- [Requests](./requests/requests.md)
+    - [GET请求](./requests/get请求.md)
+    - [POST请求](./requests/post请求.md)
+    - [上传文件](./requests/上传文件.md)
+    - [设置请求头](./requests/设置请求头.md)
+    - [获取响应头](./requests/响应头.md)
+    - [Cookie](./requests/cookie.md)
+    - [使用代理](./requests/代理.md)
