@@ -8,5 +8,4 @@ title = "spring"
 # https://doc.rust-lang.org/cargo/getting-started/installation.html
 # cargo install mdbook
 # cargo install mdbook-epub
-[output.epub]
 [output.html]
