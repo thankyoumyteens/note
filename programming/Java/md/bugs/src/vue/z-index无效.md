@@ -63,6 +63,10 @@ export default {
     // 将当前组件挂载到body下的最后
     _dom.insertBefore(this.$el, _dom.lastChild);
   },
+  beforeDestroy() {
+    // 从body中移除当前组件
+    this.$el.remove();
+  },
   methods: {
     openDrawer() {
       this.$emit('openDrawer');
