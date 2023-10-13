@@ -1,8 +1,8 @@
 # RSet
 
-为解决对象跨代引用所带来的问题，G1用记忆集(RSet)记录从非收集部分指向收集部分的指针的集合。
+G1使用记忆集(RSet)记录从非收集部分指向收集部分的指针的集合。
 
-通常有两种方法记录引用关系：Point Out 和 Point in，G1使用了Point In的方法。
+有两种方法记录引用关系：Point out 和 Point in，G1使用了Point in的方法。
 
 - Point out：比如objA.field = objB，Point out会在objA的RSet中记录objB的地址
 - Point in：比如objA.field = objB，Point in会在objB的RSet中记录objA的地址，Point in相当于一种反向引用
