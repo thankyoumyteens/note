@@ -11,5 +11,13 @@
     - [java.sql.SQLException: 无效的列类型: 1111](./mybatis/无效的列类型1111.md)
     - [Error querying database. Cause: java.lang.NumberFormatException: For input string](./mybatis/java.lang.NumberFormatException.md)
 
+- [数据库](./db/db.md)
+    - [oracle](./db/oracle/oracle.md)
+        - [ORA-00904: "ID": 标识符无效](./db/oracle/标识符无效.md)
+        - [ORA-01795: 列表中的最大表达式数为 1000](./db/oracle/in语句不能超过1000.md)
+
+- [SpringBoot](./springboot/springboot.md)
+    - [java.lang.AbstractMethodError](./springboot/AbstractMethodError.md)
+
 - [Vue.js](./vue/vue.md)
     - [z-index无效](./vue/z-index无效.md)
