@@ -8,6 +8,7 @@ Region是G1堆和操作系统交互的最小管理单位。G1的Region分为4类
 4. 大对象Region(Humongous Heap Region)，大对象可能1个Region放不下，所以分为Starts Region和Continues Region两种，Starts存放大对象的开始，Continues继续存放Starts没存下的部分
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionType.hpp
+
 ```cpp
 // 0000 0 [ 0] Free
 //
@@ -22,11 +23,14 @@ Region是G1堆和操作系统交互的最小管理单位。G1的Region分为4类
 // 01000 [ 8] Old
 ```
 
+## Region的大小
+
 在G1中每个Region的大小都是相同的。Region的大小会影响G1的运行效率，如果Region过大，一个Region可以分配更多的对象，但回收就会花费更长的时间。如果Region过小，就会导致对象的分配效率过于低下。
 
 可以通过参数 -XX:G1HeapRegionSize 来设置Region的大小，它的默认值为0。如果不指定Region的大小，G1就会自己推断出Region的合适大小。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegion.cpp
+
 ```cpp
 // 推断Region的大小
 // initial_heap_size：初始内存，对应-XX:InitialHeapSize参数的值，等价于-Xms，默认为0
