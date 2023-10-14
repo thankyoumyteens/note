@@ -57,7 +57,7 @@ class OtherRegionsTable VALUE_OBJ_CLASS_SPEC {
   // 粗粒度位图
   BitMap      _coarse_map;
   // ...
-  // 细粒度PRT
+  // 细粒度PRT，PerRegionTable*的数组
   PerRegionTable** _fine_grain_regions;
   // ...
   // 稀疏PRT

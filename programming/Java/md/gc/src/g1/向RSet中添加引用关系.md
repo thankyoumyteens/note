@@ -68,10 +68,11 @@ void OtherRegionsTable::add_reference(OopOrNarrowOopStar from, int tid) {
       }
       // 稀疏PRT满了，继续执行
       if (_n_fine_entries == _max_fine_entries) {
-        // 细粒度PRT已经满了
-        // 删除所有的PRT，然后引用关系都放入粗粒度位图中
+        // 细粒度PRT已经满了，调用delete_region_table()函数
+        // 把细粒度PRT数组中最大的一个细粒度PRT元素迁移到粗粒度位图中，
+        // 并返回该元素
         prt = delete_region_table();
-        // 重新初始化稀疏PRT，即清空
+        // 重新初始化该元素，即清空内容
         prt->init(from_hr, false);
       } else {
         // 细粒度PRT没满，分配一个新的细粒度PRT来存储
