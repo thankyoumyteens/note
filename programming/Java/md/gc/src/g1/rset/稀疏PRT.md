@@ -2,7 +2,7 @@
 
 稀疏PRT通过哈希表的方式来存储，默认长度为4。key是region_index，value是SparsePRTEntry，SparsePRTEntry中存储一个_cards数组，数组的元素对应全局卡表中的卡片索引。
 
-![](../img/SparsePRT.png)
+![](../../img/SparsePRT.png)
 
 稀疏PRT的定义：
 

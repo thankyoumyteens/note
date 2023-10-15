@@ -1,0 +1,6 @@
+# Refine线程
+
+Refine线程是G1新引入的并发线程池，线程默认数目为G1ConcRefinementThreads+1，它分为两大功能：
+
+1. 用于处理新生代region的抽样，并且在满足响应时间的这个指标下，控制新生代region的数量。通常有一个线程来处理
+2. 管理RSet，这是Refine最主要的功能。RSet的更新并不是同步完成的，G1会把所有的引用关系的变化都先放入到一个队列中，称为dirty card queue（DCQ），然后使用线程来消费这个队列以完成更新。正常来说有G1ConcRefinementThreads个线程处理。实际上除了Refine线程更新RSet之外，GC线程或者用户线程也可能会更新RSet，DCQ通过Dirty Card Queue Set（DCQS）来管理，为了能够并发地处理，每个Refine线程只负责DCQS中的某几个DCQ
