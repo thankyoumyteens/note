@@ -2,7 +2,7 @@
 
 ```sql
 select
-    LPAD(level, 2, 0) || '月' as MONTH
+    lpad(level, 2, 0) || '月' as PER_MONTH
 from
     DUAL
 connect by
