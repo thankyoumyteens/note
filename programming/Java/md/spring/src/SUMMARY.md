@@ -17,6 +17,9 @@
     - [容器基本用法](./spring/container/容器基本用法.md)
     - [ClassPathResource](./spring/container/ClassPathResource.md)
     - [XmlBeanFactory](./spring/container/XmlBeanFactory.md)
+      - [XML的验证模式](./spring/container/XML的验证模式.md)
+      - [解析XML配置文件](./spring/container/解析XML配置文件.md)
+      - [注册Bean](./spring/container/注册Bean.md)
 
 - [SpringBoot](./springboot/springboot.md)
   - [多环境配置](./springboot/多环境配置.md)
