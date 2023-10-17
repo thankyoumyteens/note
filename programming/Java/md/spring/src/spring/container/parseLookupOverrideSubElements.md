@@ -7,8 +7,6 @@ lookup-method是一种特殊的方法注入，它把一个方法声明为返回�
 1. 创建一个父类：
 
 ```java
-package test.lookup.bean;
-
 public class User {
     public void showMe() {
         System.out.printf("i am user");
@@ -19,8 +17,6 @@ public class User {
 2. 创建一个子类，并覆盖showMe()方法：
 
 ```java
-package test.lookup.bean;
-
 public class Teacher extends User {
     public void showMe() {
         System.out.printf("i am teacher");
@@ -31,8 +27,6 @@ public class Teacher extends User {
 3. 创建调用方法：
 
 ```java
-package test.lookup.app;
-
 public abstract class GetBeanTest {
 
     // 这里的抽象方法不需要实现
