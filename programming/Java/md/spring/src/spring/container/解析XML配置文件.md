@@ -2,8 +2,6 @@
 
 XmlBeanDefinitionReader中通过loadDocument()方法解析XML文件：
 
-> spring-framework-5.0.x\spring-beans\src\main\java\org\springframework\beans\factory\xml\DefaultDocumentLoader.java
-
 ```java
 public class DefaultDocumentLoader implements DocumentLoader {
 

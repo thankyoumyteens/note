@@ -61,8 +61,6 @@ public interface InputStreamSource {
 
 对于getInputStream()方法，ClassPathResource中的实现方式便是通过class或者classLoader提供的底层方法进行调用：
 
-> spring-framework-5.0.x\spring-core\src\main\java\org\springframework\core\io\ClassPathResource.java
-
 ```java
     @Override
     public InputStream getInputStream() throws IOException {

@@ -14,8 +14,6 @@ XML结构定义(XML Schema Definition，XSD)描述了XML文档的结构。可以
 
 Spring通过getValidationModeForResource()方法获取XML文件的验证模式。
 
-> spring-framework-5.0.x\spring-beans\src\main\java\org\springframework\beans\factory\xml\XmlBeanDefinitionReader.java
-
 ```java
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
@@ -71,8 +69,6 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 ```
 
 detectValidationMode()方法中调用了XmlValidationModeDetector::detectValidationMode()方法检测XML验证模式：
-
-> spring-framework-5.0.x\spring-core\src\main\java\org\springframework\util\xml\XmlValidationModeDetector.java
 
 ```java
 public class XmlValidationModeDetector {

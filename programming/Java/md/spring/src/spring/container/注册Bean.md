@@ -2,8 +2,6 @@
 
 通过SAX解析完xml配置文件后，就会调用了XregisterBeanDefinitions()方法去注册bean：
 
-> spring-framework-5.0.x\spring-beans\src\main\java\org\springframework\beans\factory\xml\XmlBeanDefinitionReader.java
-
 ```java
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     
@@ -23,8 +21,6 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 ```
 
 ## 加载及注册bean
-
-> spring-framework-5.0.x\spring-beans\src\main\java\org\springframework\beans\factory\xml\DefaultBeanDefinitionDocumentReader.java
 
 ```java
 public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocumentReader {

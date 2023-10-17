@@ -29,8 +29,6 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 
 XmlBeanFactory()方法中的super(parentBeanFactory)方法最终会调用到到AbstractAutowireCapableBeanFactory类的构造方法：
 
-> spring-framework-5.0.x\spring-beans\src\main\java\org\springframework\beans\factory\support\AbstractAutowireCapableBeanFactory.java
-
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory
         implements AutowireCapableBeanFactory {
@@ -56,8 +54,6 @@ ignoreDependencyInterface()方法的主要功能是忽略给定接口的自动�
 ## 加载Bean
 
 XmlBeanFactory调用了XmlBeanDefinitionReader::loadBeanDefinitions()方法去加载bean：
-
-> spring-framework-5.0.x\spring-beans\src\main\java\org\springframework\beans\factory\xml\XmlBeanDefinitionReader.java
 
 ```java
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {

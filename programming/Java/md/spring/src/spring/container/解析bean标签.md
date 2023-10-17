@@ -115,6 +115,7 @@ public class BeanDefinitionParserDelegate {
         }
 
         try {
+            // 创建BeanDefinition
             AbstractBeanDefinition bd = createBeanDefinition(className, parent);
             // 解析bean的singleton、scope、abstract等属性
             parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
@@ -157,9 +158,3 @@ public class BeanDefinitionParserDelegate {
     }
 }
 ```
-
-## BeanDefinition
-
-BeanDefinition是一个接口，在Spring中存在三种实现：RootBeanDefinition、ChildBean­Definition以及GenericBeanDefinition，三种实现均继承了AbstractBeanDefiniton。BeanDefinition是bean标签在容器中的内部表示形式。
-
-

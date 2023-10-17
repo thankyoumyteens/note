@@ -22,6 +22,11 @@
       - [注册Bean](./spring/container/注册Bean.md)
         - [解析默认标签](./spring/container/解析默认标签.md)
           - [解析bean标签](./spring/container/解析bean标签.md)
+            - [BeanDefinition](./spring/container/BeanDefinition.md)
+            - [parseBeanDefinitionAttributes](./spring/container/parseBeanDefinitionAttributes.md)
+            - [parseMetaElements](./spring/container/parseMetaElements.md)
+            - [parseLookupOverrideSubElements](./spring/container/parseLookupOverrideSubElements.md)
+            - [parseReplacedMethodSubElements](./spring/container/parseReplacedMethodSubElements.md)
 
 - [SpringBoot](./springboot/springboot.md)
   - [多环境配置](./springboot/多环境配置.md)
