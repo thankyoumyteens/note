@@ -62,5 +62,67 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 
         this.delegate = parent;
     }
+
+    protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
+        if (delegate.isDefaultNamespace(root)) {
+            NodeList nl = root.getChildNodes();
+            for (int i = 0; i < nl.getLength(); i++) {
+                Node node = nl.item(i);
+                if (node instanceof Element) {
+                    Element ele = (Element) node;
+                    if (delegate.isDefaultNamespace(ele)) {
+                        // 解析默认命名空间的标签
+                        // 比如：<bean id="myTestBean" class="bean.MyTestBean">
+                        parseDefaultElement(ele, delegate);
+                    }
+                    else {
+                        // 解析自定义命名空间的标签
+                        // 比如：<tx:annotation-driven />
+                        delegate.parseCustomElement(ele);
+                    }
+                }
+            }
+        }
+        else {
+            // 解析自定义命名空间的标签
+            delegate.parseCustomElement(root);
+        }
+    }
 }
+```
+
+在Spring框架中，命名空间主要分为默认命名空间和自定义命名空间。
+
+默认命名空间包括"import", "alias", "bean"以及"beans"等标签。
+
+另一方面，自定义命名空间是Spring的一个重要设计，它为第三方应用提供了充分的拓展空间。例如，常见的各种集成框架如dubbo、mybatis等，就会有自己的命名空间。
+
+Spring在解析这些命名空间时，会调用对应的方法进行解析。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 启用spring mvc 注解，使用的是自定义命名空间：context -->
+    <context:annotation-config />
+
+    <!-- 设置使用注解的类所在的jar包，使用的是自定义命名空间：context -->
+    <context:component-scan base-package="controller"></context:component-scan>
+
+    <!-- 完成请求和注解POJO的映射，使用的是默认命名空间 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+　　
+    <!-- 对转向页面的路径解析，使用的是默认命名空间 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/jsp/" p:suffix=".jsp" />
+</beans>
 ```

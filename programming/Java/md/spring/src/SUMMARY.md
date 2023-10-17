@@ -20,6 +20,8 @@
       - [XML的验证模式](./spring/container/XML的验证模式.md)
       - [解析XML配置文件](./spring/container/解析XML配置文件.md)
       - [注册Bean](./spring/container/注册Bean.md)
+        - [解析默认标签](./spring/container/解析默认标签.md)
+          - [解析bean标签](./spring/container/解析bean标签.md)
 
 - [SpringBoot](./springboot/springboot.md)
   - [多环境配置](./springboot/多环境配置.md)
