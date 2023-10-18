@@ -36,6 +36,7 @@
           - [解析alias标签](./spring/container/解析alias标签.md)
           - [解析import标签](./spring/container/解析import标签.md)
         - [解析自定义标签](./spring/container/解析自定义标签.md)
+    - [getBean](./spring/container/getBean.md)
 
 - [SpringBoot](./springboot/springboot.md)
   - [多环境配置](./springboot/多环境配置.md)
