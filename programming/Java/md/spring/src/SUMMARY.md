@@ -33,6 +33,9 @@
               - [parseQualifierElements](./spring/container/parseQualifierElements.md)
             - [解析bean标签下的自定义标签](./spring/container/解析bean标签下的自定义标签.md)
             - [注册BeanDefinition](./spring/container/注册BeanDefinition.md)
+          - [解析alias标签](./spring/container/解析alias标签.md)
+          - [解析import标签](./spring/container/解析import标签.md)
+        - [解析自定义标签](./spring/container/解析自定义标签.md)
 
 - [SpringBoot](./springboot/springboot.md)
   - [多环境配置](./springboot/多环境配置.md)
