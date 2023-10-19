@@ -20,7 +20,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         Object sharedInstance = getSingleton(beanName);
         if (sharedInstance != null && args == null) {
             // 如果 sharedInstance 是普通的 Bean 实例，则下面的方法会直接返回
-            // 如果 sharedInstance 是FactoryBean类型，则需要获取 getObject 方法
+            // 如果 sharedInstance 是FactoryBean类型，则需要调用它的getObject()方法获取bean
             bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
         } else {
             // 用于判断prototype模式下有没有循环依赖
@@ -53,7 +53,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
             }
 
             try {
-                // 从map： mergedBeanDefinitions 中获取 beanName 对应的 GenericBeanDefinition，并转换为 RootBeanDefinition
+                // 从DefaultListableBeanFactory的BeanDefinition缓存中获取beanName对应的 GenericBeanDefinition，并转换为 RootBeanDefinition
                 RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
                 // 检查当前创建的 bean 定义是否为抽象 bean 定义
                 checkMergedBeanDefinition(mbd, beanName, args);
@@ -93,7 +93,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
                         }
                     });
                     // 如果 sharedInstance 是普通的 Bean 实例，则下面的方法会直接返回
-                    // 如果 sharedInstance 是FactoryBean类型，则需要获取 getObject 方法
+                    // 如果 sharedInstance 是FactoryBean类型，则需要调用它的getObject()方法获取bean
                     bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
                 } else if (mbd.isPrototype()) {
                     // prototype模式
@@ -108,10 +108,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
                         afterPrototypeCreation(beanName);
                     }
                     // 如果 sharedInstance 是普通的 Bean 实例，则下面的方法会直接返回
-                    // 如果 sharedInstance 是FactoryBean类型，则需要获取 getObject 方法
+                    // 如果 sharedInstance 是FactoryBean类型，则需要调用它的getObject()方法获取bean
                     bean = getObjectForBeanInstance(prototypeInstance, name, beanName, mbd);
                 } else {
-                    // 指定的scope上实例化 bean
+                    // 指定的scope上实例化bean
                     String scopeName = mbd.getScope();
                     if (!StringUtils.hasLength(scopeName)) {
                         throw new IllegalStateException("No scope name defined for bean ´" + beanName + "'");

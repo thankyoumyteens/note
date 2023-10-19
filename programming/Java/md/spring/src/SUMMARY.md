@@ -36,7 +36,8 @@
         - [解析import标签](./spring/container/解析import标签.md)
       - [解析自定义标签](./spring/container/解析自定义标签.md)
   - [getBean](./spring/container/getBean.md)
-    - [FactoryBean](./spring/container/FactoryBean.md)
+    - [getSingleton](./spring/container/getSingleton.md)
+    - [getObjectForBeanInstance](./spring/container/getObjectForBeanInstance.md)
     - [prototype模式下的循环依赖](./spring/container/prototype模式下的循环依赖.md)
 
 - [SpringBoot](./springboot/springboot.md)
