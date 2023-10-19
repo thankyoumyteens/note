@@ -15,11 +15,11 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
     private final XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this);
 
     public XmlBeanFactory(Resource resource) throws BeansException {
-        // 调用另一个构造方法
         this(resource, null);
     }
 
     public XmlBeanFactory(Resource resource, BeanFactory parentBeanFactory) throws BeansException {
+        // 忽略给定接口的自动装配功能
         super(parentBeanFactory);
         // 加载Bean
         this.reader.loadBeanDefinitions(resource);
@@ -27,7 +27,9 @@ public class XmlBeanFactory extends DefaultListableBeanFactory {
 }
 ```
 
-XmlBeanFactory()方法中的super(parentBeanFactory)方法最终会调用到到AbstractAutowireCapableBeanFactory类的构造方法：
+## 忽略给定接口的自动装配功能
+
+XmlBeanFactory()方法中的super(parentBeanFactory)方法会调用祖先类AbstractAutowireCapableBeanFactory的构造方法：
 
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory
