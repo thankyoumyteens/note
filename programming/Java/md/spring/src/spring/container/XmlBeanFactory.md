@@ -43,7 +43,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     public AbstractAutowireCapableBeanFactory() {
         super();
-        // 忽略给定接口的自动装配功能
+        // 关闭这些接口的自动装配功能
         ignoreDependencyInterface(BeanNameAware.class);
         ignoreDependencyInterface(BeanFactoryAware.class);
         ignoreDependencyInterface(BeanClassLoaderAware.class);
@@ -51,9 +51,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 }
 ```
 
-ignoreDependencyInterface()方法的主要功能是忽略给定接口的自动装配功能，比如，当ClassA中有字段fieldB，那么当 Spring在获取ClassA的Bean时如果其字段fieldB还没有初始化，那么Spring会自动初始化fieldB。但是当fieldB指向的bean实现了BeanNameAware、BeanFactoryAware、BeanClassLoaderAware其中的一个接口时，Spring就不会自动初始化fieldB了。
-
 ## 加载Bean
+
+1. 解析xml配置文件
+2. 注册bean
 
 XmlBeanFactory调用了XmlBeanDefinitionReader::loadBeanDefinitions()方法去加载bean：
 
@@ -120,27 +121,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             return registerBeanDefinitions(doc, resource);
         }
         catch (BeanDefinitionStoreException ex) {
-            throw ex;
-        }
-        catch (SAXParseException ex) {
-            throw new XmlBeanDefinitionStoreException(resource.getDescription(),
-                    "Line " + ex.getLineNumber() + " in XML document from " + resource + " is invalid", ex);
-        }
-        catch (SAXException ex) {
-            throw new XmlBeanDefinitionStoreException(resource.getDescription(),
-                    "XML document from " + resource + " is invalid", ex);
-        }
-        catch (ParserConfigurationException ex) {
-            throw new BeanDefinitionStoreException(resource.getDescription(),
-                    "Parser configuration exception parsing XML from " + resource, ex);
-        }
-        catch (IOException ex) {
-            throw new BeanDefinitionStoreException(resource.getDescription(),
-                    "IOException parsing XML document from " + resource, ex);
-        }
-        catch (Throwable ex) {
-            throw new BeanDefinitionStoreException(resource.getDescription(),
-                    "Unexpected exception parsing XML document from " + resource, ex);
+            // ...
         }
     }
 

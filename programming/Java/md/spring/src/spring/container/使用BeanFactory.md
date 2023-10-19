@@ -1,4 +1,4 @@
-# 容器基本用法
+# 使用BeanFactory
 
 maven依赖：
 
