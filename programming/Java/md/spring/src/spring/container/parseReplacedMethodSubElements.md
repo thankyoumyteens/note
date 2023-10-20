@@ -1,4 +1,4 @@
-# parseReplacedMethodSubElements
+# 解析replaced-method子标签
 
 replaced-method可以在运行时用新的方法替换现有的方法。
 
@@ -62,7 +62,7 @@ public static void main(String[] args) {
 替换原有的方法
 ```
 
-## 解析replaced-method子标签
+## 解析replaced-method标签
 
 parseReplacedMethodSubElements()方法会解析bean的replaced-method子标签。
 

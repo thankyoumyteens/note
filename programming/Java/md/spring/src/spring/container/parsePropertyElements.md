@@ -1,4 +1,4 @@
-# parsePropertyElements
+# 解析property子标签
 
 parsePropertyElements()方法会解析bean的property子标签。
 

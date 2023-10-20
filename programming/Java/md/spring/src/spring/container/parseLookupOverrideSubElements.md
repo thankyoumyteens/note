@@ -1,4 +1,4 @@
-# parseLookupOverrideSubElements
+# 解析lookup-method子标签
 
 lookup-method是一种特殊的方法注入，它把一个方法声明为返回某种类型的bean，但实际要返回的bean是在配置文件里面配置的。
 
@@ -74,9 +74,7 @@ public static void main(String[] args) {
 i am teacher
 ```
 
-## 解析lookup-method子标签
-
-parseLookupOverrideSubElements()方法会解析bean的lookup-method子标签。
+## 解析lookup-method标签
 
 ```java
 public class BeanDefinitionParserDelegate {

@@ -1,4 +1,4 @@
-# parseMetaElements
+# 解析meta子标签
 
 meta标签是一个额外的声明，当需要使用里面的信息的时候可以通过BeanDefinition的getAttribute(key)方法进行获取。
 
@@ -8,7 +8,7 @@ meta标签是一个额外的声明，当需要使用里面的信息的时候可�
 </bean>
 ```
 
-parseMetaElements()方法会解析bean的meta子标签。
+解析meta标签，并存储到BeanDefinition中。
 
 ```java
 public class BeanDefinitionParserDelegate {

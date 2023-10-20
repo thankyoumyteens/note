@@ -1,4 +1,4 @@
-# parseQualifierElements
+# 解析qualifier子标签
 
 qualifier用于在有多个相同类型bean的时候指定bean的名称以消除歧义：
 
