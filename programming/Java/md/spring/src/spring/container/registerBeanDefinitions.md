@@ -44,7 +44,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
         this.delegate = createDelegate(getReaderContext(), root, parent);
 
         if (this.delegate.isDefaultNamespace(root)) {
-            // 处理profile属性，profile属性用于配置不同的环境来适用于生产环境和开发环境
+            // 处理profile属性，profile属性用于配置不同的环境，比如：生产环境和开发环境
             String profileSpec = root.getAttribute(PROFILE_ATTRIBUTE);
             if (StringUtils.hasText(profileSpec)) {
                 String[] specifiedProfiles = StringUtils.tokenizeToStringArray(
