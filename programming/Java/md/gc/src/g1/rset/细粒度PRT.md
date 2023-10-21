@@ -33,13 +33,17 @@ class PerRegionTable: public CHeapObj<mtGC> {
 ```cpp
 class PerRegionTable: public CHeapObj<mtGC> {
 public:
-  // 入口
+  /**
+   * 入口
+   */
   void add_reference(OopOrNarrowOopStar from) {
     add_reference_work(from, true);
   }
 
 protected:
-  // par表示是否并发执行
+  /**
+   * par表示是否并发执行
+   */
   void add_reference_work(OopOrNarrowOopStar from, bool par) {
     // HeapRegion* hr() const { return _hr; }
     HeapRegion* loc_hr = hr();

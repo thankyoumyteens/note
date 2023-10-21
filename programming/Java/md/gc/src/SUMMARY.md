@@ -12,3 +12,5 @@
         - [粗粒度位图](./g1/rset/粗粒度位图.md)
     - [Refine线程](./g1/refine/Refine线程.md)
         - [抽样线程](./g1/refine/抽样线程.md)
+        - [管理RSet](./g1/refine/管理RSet.md)
+            - [Refine线程的工作过程](./g1/refine/Refine线程的工作过程.md)

@@ -26,7 +26,9 @@ add_reference()函数的处理：
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionRemSet.cpp
 
 ```cpp
-// 向RSet中添加引用关系
+/**
+ * 向RSet中添加引用关系
+ */
 void OtherRegionsTable::add_reference(OopOrNarrowOopStar from, int tid) {
   uint cur_hrm_ind = hr()->hrm_index();
   // 计算引用者所在的card

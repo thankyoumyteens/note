@@ -27,8 +27,10 @@ JVM使用指针碰撞的方法在TLAB中分配对象，在TLAB中保存一个top
 
 > jdk8u60-master\hotspot\src\share\vm\memory\threadLocalAllocBuffer.inline.hpp
 ```cpp
-// 在TLAB中快速分配
-// size时待分配对象的大小
+/**
+ * 在TLAB中快速分配
+ * size：待分配对象的大小
+ */
 inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
   // 校验top指针是否在start和end的范围内
   invariants();
@@ -107,7 +109,9 @@ HeapWord* CollectedHeap::allocate_from_tlab_slow(KlassHandle klass, Thread* thre
 > jdk8u60-master\hotspot\src\share\vm\memory\threadLocalAllocBuffer.cpp
 
 ```cpp
-// 初始化TLAB
+/**
+ * 初始化TLAB
+ */
 void ThreadLocalAllocBuffer::initialize() {
   initialize(NULL,                    // start
              NULL,                    // top
@@ -127,7 +131,9 @@ void ThreadLocalAllocBuffer::initialize() {
   initialize_statistics();
 }
 
-// 设置TLAB的大小
+/**
+ * 设置TLAB的大小
+ */
 size_t ThreadLocalAllocBuffer::initial_desired_size() {
   size_t init_sz = 0;
 
@@ -156,7 +162,9 @@ size_t ThreadLocalAllocBuffer::initial_desired_size() {
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 
 ```cpp
-// 分配一个新的TLAB
+/**
+ * 分配一个新的TLAB
+ */
 HeapWord* G1CollectedHeap::allocate_new_tlab(size_t word_size) {
   assert_heap_not_locked_and_not_at_safepoint();
   assert(!isHumongous(word_size), "we do not allow humongous TLABs");
@@ -172,7 +180,9 @@ attempt_allocation()方法会先使用CAS分配TLAB，如果失败，则开始�
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.inline.hpp
 
 ```cpp
-// 分配一块内存空间
+/**
+ * 分配一块内存空间
+ */
 inline HeapWord* G1CollectedHeap::attempt_allocation(size_t word_size,
                                                      uint* gc_count_before_ret,
                                                      uint* gclocker_retry_count_ret) {
@@ -203,9 +213,11 @@ inline HeapWord* G1CollectedHeap::attempt_allocation(size_t word_size,
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegion.inline.hpp
 
 ```cpp
-// _allocator->mutator_alloc_region(context)->attempt_allocation()
-// 会调用
-// G1OffsetTableContigSpace::par_allocate_impl()方法
+/**
+ * 使用CAS分配
+ * _allocator->mutator_alloc_region(context)->attempt_allocation()
+ * 会调用到这里
+ */
 inline HeapWord* G1OffsetTableContigSpace::par_allocate_impl(size_t size,
                                                     HeapWord* const end_value) {
   // 使用CAS分配
@@ -237,7 +249,9 @@ inline HeapWord* G1OffsetTableContigSpace::par_allocate_impl(size_t size,
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 
 ```cpp
-// 慢速分配
+/**
+ * 慢速分配
+ */
 HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size,
                                                    AllocationContext_t context,
                                                    uint* gc_count_before_ret,

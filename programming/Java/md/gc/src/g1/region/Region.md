@@ -32,9 +32,11 @@ Region是G1堆和操作系统交互的最小管理单位。G1的Region分为4类
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegion.cpp
 
 ```cpp
-// 推断Region的大小
-// initial_heap_size：初始内存，对应-XX:InitialHeapSize参数的值，等价于-Xms，默认为0
-// max_heap_size：最大分配内存，对应-XX:MaxHeapSize参数的值，等价于-Xmx，默认为96MB
+/**
+ * 推断Region的大小
+ * initial_heap_size：初始内存，对应-XX:InitialHeapSize参数的值，等价于-Xms，默认为0
+ * max_heap_size：最大分配内存，对应-XX:MaxHeapSize参数的值，等价于-Xmx，默认为96MB
+ */
 void HeapRegion::setup_heap_region_size(size_t initial_heap_size, size_t max_heap_size) {
   uintx region_size = G1HeapRegionSize;
   // 是否设置了-XX:G1HeapRegionSize

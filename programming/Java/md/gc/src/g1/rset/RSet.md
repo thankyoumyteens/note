@@ -29,7 +29,9 @@ Region之间有5种引用关系：
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegion.hpp
 
 ```cpp
-// Region
+/**
+ * Region
+ */
 class HeapRegion: public G1OffsetTableContigSpace {
   friend class VMStructs;
  private:
@@ -42,7 +44,9 @@ class HeapRegion: public G1OffsetTableContigSpace {
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionRemSet.hpp
 
 ```cpp
-// RSet
+/**
+ * RSet
+ */
 class HeapRegionRemSet : public CHeapObj<mtGC> {
 // ...
 private:
@@ -51,7 +55,9 @@ private:
   // ...
 }
 
-// OtherRegionsTable
+/**
+ * OtherRegionsTable
+ */
 class OtherRegionsTable VALUE_OBJ_CLASS_SPEC {
   // ...
   // 粗粒度位图
