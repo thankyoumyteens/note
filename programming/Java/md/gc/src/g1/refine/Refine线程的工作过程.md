@@ -217,11 +217,14 @@ bool G1RemSet::refine_card(jbyte* card_ptr, uint worker_i,
   if (check_for_refs_into_cset) {
     oops_in_heap_closure = _cset_rs_update_cl[worker_i];
   }
+  // G1UpdateRSOrPushRefOopClosure用来更新RSet
   G1UpdateRSOrPushRefOopClosure update_rs_oop_cl(_g1,
                                                  _g1->g1_rem_set(),
                                                  oops_in_heap_closure,
                                                  check_for_refs_into_cset,
                                                  worker_i);
+  // 把引用方region设置到G1UpdateRSOrPushRefOopClosure内部的_from变量
+  // 给后面的do_oop_nv()函数使用
   update_rs_oop_cl.set_from(r);
 
   G1TriggerClosure trigger_cl;
@@ -280,7 +283,7 @@ HeapWord* HeapRegion::oops_on_card_seq_iterate_careful(MemRegion mr,
   // 获取Java堆
   G1CollectedHeap* g1h = G1CollectedHeap::heap();
 
-  // 判断你是否处于stop the world的GC
+  // 判断是否处于stop the world的GC
   // TODO 没懂
   if (g1h->is_gc_active()) {
     mr = mr.intersection(MemRegion(bottom(), scan_top()));
@@ -388,40 +391,14 @@ inline void G1UpdateRSOrPushRefOopClosure::do_oop_nv(T* p) {
     // 引用方和被引用方在同一个region里
     return;
   }
-  // The _record_refs_into_cset flag is true during the RSet
-  // updating part of an evacuation pause. It is false at all
-  // other times:
-  //  * rebuilding the remembered sets after a full GC
-  //  * during concurrent refinement.
-  //  * updating the remembered sets of regions in the collection
-  //    set in the event of an evacuation failure (when deferred
-  //    updates are enabled).
-
+ 
+  // Young GC时也会更新Rset，此时传入的是true，
+  // 如果引用的对象在CSet中则放入G1ParScanThreadState队列中处理
   if (_record_refs_into_cset && to->in_collection_set()) {
-    // We are recording references that point into the collection
-    // set and this particular reference does exactly that...
-    // If the referenced object has already been forwarded
-    // to itself, we are handling an evacuation failure and
-    // we have already visited/tried to copy this object
-    // there is no need to retry.
     if (!self_forwarded(obj)) {
-      assert(_push_ref_cl != NULL, "should not be null");
-      // Push the reference in the refs queue of the G1ParScanThreadState
-      // instance for this worker thread.
       _push_ref_cl->do_oop(p);
      }
-
-    // Deferred updates to the CSet are either discarded (in the normal case),
-    // or processed (if an evacuation failure occurs) at the end
-    // of the collection.
-    // See G1RemSet::cleanup_after_oops_into_collection_set_do().
   } else {
-    // We either don't care about pushing references that point into the
-    // collection set (i.e. we're not during an evacuation pause) _or_
-    // the reference doesn't point into the collection set. Either way
-    // we add the reference directly to the RSet of the region containing
-    // the referenced object.
-    assert(to->rem_set() != NULL, "Need per-region 'into' remsets.");
     // 更新被引用方的RSet
     to->rem_set()->add_reference(p, _worker_i);
   }
