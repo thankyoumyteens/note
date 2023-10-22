@@ -58,8 +58,7 @@ public class BeanDefinitionParserDelegate {
                 if (decorated != null) {
                     return decorated;
                 }
-            }
-            else if (namespaceUri.startsWith("http://www.springframework.org/")) {
+            } else if (namespaceUri.startsWith("http://www.springframework.org/")) {
                 error("Unable to locate Spring NamespaceHandler for XML schema namespace [" + namespaceUri + "]", node);
             }
         }

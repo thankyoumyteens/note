@@ -39,41 +39,38 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
         boolean absoluteLocation = false;
         try {
             absoluteLocation = ResourcePatternUtils.isUrl(location) || ResourceUtils.toURI(location).isAbsolute();
-        }
-        catch (URISyntaxException ex) {
-        }
+        } catch (URISyntaxException ex) {}
 
         if (absoluteLocation) {
             try {
                 // 使用绝对路径解析xml
+                // 与XmlBeanFactory()一样，
+                // 调用AbstractBeanDefinitionReader::loadBeanDefinitions()
+                // 去加载BeanDefinition：
+                // 1. 解析xml配置文件
+                // 2. 注册BeanDefinition
                 int importCount = getReaderContext().getReader().loadBeanDefinitions(location, actualResources);
-            }
-            catch (BeanDefinitionStoreException ex) {
+            } catch (BeanDefinitionStoreException ex) {
                 getReaderContext().error(
                         "Failed to import bean definitions from URL location [" + location + "]", ele, ex);
             }
-        }
-        else {
+        } else {
             try {
                 // 使用相对路径解析xml
                 int importCount;
                 Resource relativeResource = getReaderContext().getResource().createRelative(location);
                 if (relativeResource.exists()) {
+                    // 加载BeanDefinition
                     importCount = getReaderContext().getReader().loadBeanDefinitions(relativeResource);
                     actualResources.add(relativeResource);
-                }
-                else {
+                } else {
                     String baseLocation = getReaderContext().getResource().getURL().toString();
+                    // 加载BeanDefinition
                     importCount = getReaderContext().getReader().loadBeanDefinitions(
                             StringUtils.applyRelativePath(baseLocation, location), actualResources);
                 }
-            }
-            catch (IOException ex) {
-                getReaderContext().error("Failed to resolve current resource location", ele, ex);
-            }
-            catch (BeanDefinitionStoreException ex) {
-                getReaderContext().error("Failed to import bean definitions from relative location [" + location + "]",
-                        ele, ex);
+            } catch (IOException ex) {
+                // ...
             }
         }
         Resource[] actResArray = actualResources.toArray(new Resource[0]);

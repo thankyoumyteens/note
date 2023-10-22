@@ -22,6 +22,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
             processBeanDefinition(ele, delegate);
         } else if (delegate.nodeNameEquals(ele, NESTED_BEANS_ELEMENT)) {
             // 解析beans标签
+            // 递归去调用DefaultBeanDefinitionDocumentReader::doRegisterBeanDefinitions()
             doRegisterBeanDefinitions(ele);
         }
     }

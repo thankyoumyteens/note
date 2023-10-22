@@ -1,10 +1,17 @@
 # 注册BeanDefinition
 
-bean标签解析完成后会使用BeanDefinitionReaderUtils.registerBeanDefinition()方法进行注册。
+bean标签解析完成后，spring会把解析好的BeanDefinition对象注册到BeanDefinitionRegistry中。
+
+BeanDefinitionRegistry是一个注册中心，所有的BeanDefinition都会注册到它上面。想要获取BeanDefinition的时候，就可以通过beanName从这个注册中心获取。
+
 
 ```java
 public class BeanDefinitionReaderUtils {
 
+    /**
+     * 注册BeanDefinition
+     * 这里传入的registry是BeanDefinitionRegistry的实现类：DefaultListableBeanFactory
+     */
     public static void registerBeanDefinition(
             BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry registry)
             throws BeanDefinitionStoreException {
@@ -40,8 +47,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
                 // 校验methodOverrides是否与工厂方法并存
                 // 或者methodOverrides对应的方法根本不存在
                 ((AbstractBeanDefinition) beanDefinition).validate();
-            }
-            catch (BeanDefinitionValidationException ex) {
+            } catch (BeanDefinitionValidationException ex) {
                 throw new BeanDefinitionStoreException(beanDefinition.getResourceDescription(), beanName,
                         "Validation of bean definition failed", ex);
             }
@@ -111,7 +117,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
             } else {
                 String registeredName = this.aliasMap.get(alias);
                 if (registeredName != null) {
-                    // 这个bean已经注册过别名了
+                    // 这个bean已经注册过这个别名了
                     if (registeredName.equals(name)) {
                         return;
                     }
