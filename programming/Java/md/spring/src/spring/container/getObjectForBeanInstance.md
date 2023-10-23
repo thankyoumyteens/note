@@ -1,8 +1,6 @@
-# getObjectForBeanInstance
+# FactoryBean
 
 getObjectForBeanInstance()方法会根据传入的sharedInstance做不同的处理。如果 sharedInstance 是普通的 Bean 实例，则会直接返回，如果 sharedInstance 是FactoryBean类型，则需要调用FactoryBean的getObject()方法获取bean，再返回。
-
-## FactoryBean
 
 FactoryBean通常是用来创建比较复杂的bean，一般的bean直接用xml配置即可，但如果一个bean的创建过程中涉及到很多其他的bean和复杂的逻辑，用xml配置比较困难，这时可以考虑用FactoryBean。
 

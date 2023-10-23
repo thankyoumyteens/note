@@ -21,12 +21,12 @@ TestA a = (TestA) bf.getBean("testA");
 1. 检查prototypesCurrentlyInCreation中是否记录了testA，由于testA是第一次创建，所以没有记录
 2. 把testA记录到prototypesCurrentlyInCreation中
 2. 创建testA，并执行依赖注入
-3. spring发现testA中依赖了testB，spring会调用getBean()方法获取testB
+3. spring发现testA中依赖了testB，会调用getBean()方法获取testB
 4. 由于testB没有创建，所以也会开始执行创建过程
 5. 首先检查prototypesCurrentlyInCreation中是否记录了testB，由于testB是第一次创建，所以没有记录
 6. 把testB记录到prototypesCurrentlyInCreation中
 7. 创建testB，并执行依赖注入
-8. 这时，spring发现testB中依赖了testA，spring会调用getBean()方法获取testA
+8. 这时，spring发现testB中依赖了testA，会调用getBean()方法获取testA
 9. testA此时还没创建玩，getBean()获取不到testA，会执行新的创建过程
 10. 检查prototypesCurrentlyInCreation中是否记录了testA，此时testA已经被记录，spring发现这时循环引用，抛出异常
 

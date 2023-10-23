@@ -1,17 +1,33 @@
 # getBean
 
-XmlBeanFactory的getBean()方法，调用的是祖先类AbstractBeanFactory中的方法。
+getBean()的执行过程：
+
+1. 把参数name转换成beanName
+    - name如果是别名，就根据别名获取beanName
+    - name如果是&+beanName，就直接返回beanName(&+beanName是获取FactoryBean的写法)
+2. 从缓存中获取单例bean
+    - 如果获取到的是bean的实例，直接返回
+    - 如果获取到的是FactoryBean的实例，则需要调用它的getObject()方法获取bean，再把bean返回
+3. 如果缓存中没有，那么会先去父bean中查找有没有这个bean，如果有，就调用父bean的getBean()方法获取bean
+4. 如果父bean中没有，那么会在自己的缓存中查找BeanDefinition
+5. 如果这个bean依赖于其他的bean，则需要先实例化它依赖的bean
+6. 实例化bean
+7. 如果需要类型转换，就进行类型转换操作
+8. 返回bean
 
 ```java
 public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {
 
+    /**
+     * XmlBeanFactory的getBean()方法，调用的是祖先类AbstractBeanFactory中的方法
+     */
     public Object getBean(String name) throws BeansException {
         return doGetBean(name, null, null, false);
     }
 
     protected <T> T doGetBean(String name, @Nullable Class<T> requiredType, @Nullable Object[] args, boolean typeCheckOnly)
             throws BeansException {
-        // 获取beanName，name有可能传入别名
+        // 获取beanName，name有可能传入别名或&+beanName
         String beanName = transformedBeanName(name);
         // bean的实例
         Object bean;
@@ -53,7 +69,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
             }
 
             try {
-                // 从DefaultListableBeanFactory的BeanDefinition缓存中获取beanName对应的 GenericBeanDefinition，并转换为 RootBeanDefinition
+                // 从DefaultListableBeanFactory的BeanDefinition注册中心中获取beanName对应的 GenericBeanDefinition，并转换为 RootBeanDefinition
                 RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
                 // 检查当前创建的 bean 定义是否为抽象 bean 定义
                 checkMergedBeanDefinition(mbd, beanName, args);
@@ -70,7 +86,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
                         // 注册依赖记录
                         registerDependentBean(dep, beanName);
                         try {
-                            // 先加载依赖的 bean
+                            // 先加载依赖的bean
                             getBean(dep);
                         } catch (NoSuchBeanDefinitionException ex) {
                             throw new BeanCreationException(mbd.getResourceDescription(), beanName,

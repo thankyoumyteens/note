@@ -33,8 +33,9 @@
             - [解析import标签](./spring/container/importBeanDefinitionResource.md)
             - [解析自定义标签](./spring/container/parseCustomElement.md)
         - [getBean](./spring/container/getBean.md)
-            - [getSingleton](./spring/container/getSingleton.md)
-            - [getObjectForBeanInstance](./spring/container/getObjectForBeanInstance.md)
+            - [从缓存中获取单例bean](./spring/container/getSingleton.md)
+            - [singleton模式下的循环依赖](./spring/container/singleton模式下的循环依赖.md)
+            - [FactoryBean](./spring/container/getObjectForBeanInstance.md)
             - [prototype模式下的循环依赖](./spring/container/prototype模式下的循环依赖.md)
 
 - [SpringBoot](./springboot/springboot.md)
@@ -48,4 +49,5 @@
         - [Buffer](.netty/io/Buffer.md)
 
 - [Oracle](./oracle/oracle.md)
-    - [Oracle生成12个月月份](./oracle/Oracle生成12个月月份.md)
+    - [生成12个月月份](./oracle/生成12个月月份.md)
+    - [递归查询所有下级](./oracle/递归查询所有下级.md)
