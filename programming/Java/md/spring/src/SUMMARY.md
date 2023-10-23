@@ -36,6 +36,7 @@
             - [从缓存中获取单例bean](./spring/container/getSingleton.md)
             - [singleton模式下的循环依赖](./spring/container/singleton模式下的循环依赖.md)
             - [FactoryBean](./spring/container/getObjectForBeanInstance.md)
+            - [创建单例bean](./spring/container/创建单例bean.md)
             - [prototype模式下的循环依赖](./spring/container/prototype模式下的循环依赖.md)
 
 - [SpringBoot](./springboot/springboot.md)

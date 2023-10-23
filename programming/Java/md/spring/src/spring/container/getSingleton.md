@@ -14,12 +14,11 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
         Object singletonObject = this.singletonObjects.get(beanName);
         // 缓存里没有，isSingletonCurrentlyInCreation()用于解决循环依赖
         if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
+            // 下面的代码用于解决循环依赖
             synchronized (this.singletonObjects) {
-                // 获取一个创建中的Bean
                 singletonObject = this.earlySingletonObjects.get(beanName);
-                // allowEarlyReference为true表示需要解决循环依赖
                 if (singletonObject == null && allowEarlyReference) {
-                    // 下面的代码用于解决循环依赖
+                    
                     ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
                     if (singletonFactory != null) {
                         singletonObject = singletonFactory.getObject();

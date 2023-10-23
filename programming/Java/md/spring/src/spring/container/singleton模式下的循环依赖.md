@@ -1,10 +1,11 @@
 # singleton模式下的循环依赖
 
-spring利用了三级缓存来解决循环依赖：
+spring解决循环依赖的过程中用到的Map缓存：
 
 1. singletonObjects：一级缓存，这里面保存的是已经完成依赖注入的完整的bean
-2. earlySingletonObjects：二级缓存，这个里面保存的是一个已经初始化，尚未依赖注入的对象
-3. singletonFactories：三级缓存，这里面保存了一个对象生成的ObjectFactory，它可以返回一个对象的引用
+2. earlySingletonObjects：二级缓存，这个里面保存的是一个已经创建了对象，尚未依赖注入的bean
+3. singletonFactories：三级缓存，这里面保存了一个ObjectFactory，它可以返回一个bean对象的引用
+4. singletonsCurrentlyInCreation：创建中的beanName缓存，这个里面保存的是一个已经创建了对象，尚未依赖注入的bean的beanName
 
 ```java
 public class TestA {
@@ -47,34 +48,27 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         String beanName = transformedBeanName(name);
         Object bean;
 
-        // 从缓存中获取
+        // 先从单例缓存中获取
         Object sharedInstance = getSingleton(beanName);
         if (sharedInstance != null && args == null) {
             bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
         } else {
             // ...
-            try {
-                // ...
-                // 实例化bean
-                if (mbd.isSingleton()) {
-                    // 单例模式
-                    sharedInstance = getSingleton(beanName, () -> {
-                        try {
-                            // 创建 bean
-                            return createBean(beanName, mbd, args);
-                        } catch (BeansException ex) {
-                            // 创建失败则销毁
-                            destroySingleton(beanName);
-                            throw ex;
-                        }
-                    });
-                    bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
-                }
-            // ...
-            } catch (BeansException ex) {
-                cleanupAfterBeanCreationFailure(beanName);
-                throw ex;
+            // 单例模式实例化bean
+            if (mbd.isSingleton()) {
+                sharedInstance = getSingleton(beanName, () -> {
+                    try {
+                        // 创建bean
+                        return createBean(beanName, mbd, args);
+                    } catch (BeansException ex) {
+                        // 创建失败则清理这个bean留下的数据，比如已经添加的缓存
+                        destroySingleton(beanName);
+                        throw ex;
+                    }
+                });
+                bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
             }
+            // ...
         }
 
         return (T) bean;
@@ -93,27 +87,37 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
     protected Object getSingleton(String beanName, boolean allowEarlyReference) {
         // singletonObjects就是单例缓存
         Object singletonObject = this.singletonObjects.get(beanName);
-        // 缓存里没有，查找beanName在不在singletonsCurrentlyInCreation缓存中
+        // 缓存里没有，根据beanName判断bean是否已经创建了对象，但还没有依赖注入
         if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
             synchronized (this.singletonObjects) {
-                // 从earlySingletonObjects缓存中获取一个创建中的Bean
+                // 从earlySingletonObjects缓存中获取一个创建中的bean
                 singletonObject = this.earlySingletonObjects.get(beanName);
-                // allowEarlyReference为true表示需要解决循环依赖
+                // allowEarlyReference为true表示需要解决循环依赖，允许返回一个没有创建完成的bean
                 if (singletonObject == null && allowEarlyReference) {
-                    // singletonFactory：单例工厂，返回一个在创建中的Bean的引用
+                    // singletonFactory：单例工厂，返回一个创建中的bean的引用
                     ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
                     if (singletonFactory != null) {
-                        // 获取创建中的Bean的引用
+                        // 获取创建中的bean的引用
+                        // getObject()并不会创建bean，只是找到对应的bean并返回
                         singletonObject = singletonFactory.getObject();
                         // 缓存这个引用
                         this.earlySingletonObjects.put(beanName, singletonObject);
-                        // 这个工厂用完了，删除
+                        // 这个工厂用完了不会再用，删除
                         this.singletonFactories.remove(beanName);
                     }
                 }
             }
         }
         return singletonObject;
+    }
+
+    /**
+     * 创建中的beanName缓存
+     */
+    public boolean isSingletonCurrentlyInCreation(String beanName) {
+        // 把一个已经创建了对象，尚未依赖注入的bean的beanName
+        // 保存到singletonsCurrentlyInCreation中
+        return this.singletonsCurrentlyInCreation.contains(beanName);
     }
 
     /**
