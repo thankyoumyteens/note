@@ -33,10 +33,11 @@
             - [解析import标签](./spring/container/importBeanDefinitionResource.md)
             - [解析自定义标签](./spring/container/parseCustomElement.md)
         - [getBean](./spring/container/getBean.md)
-            - [从缓存中获取单例bean](./spring/container/getSingleton.md)
             - [singleton模式下的循环依赖](./spring/container/singleton模式下的循环依赖.md)
+            - [从缓存中获取单例bean](./spring/container/getSingleton.md)
             - [FactoryBean](./spring/container/getObjectForBeanInstance.md)
             - [创建单例bean](./spring/container/创建单例bean.md)
+            - [创建bean](./spring/container/createBean.md)
             - [prototype模式下的循环依赖](./spring/container/prototype模式下的循环依赖.md)
 
 - [SpringBoot](./springboot/springboot.md)

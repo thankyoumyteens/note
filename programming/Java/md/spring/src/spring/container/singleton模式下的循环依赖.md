@@ -112,11 +112,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
     }
 
     /**
-     * 创建中的beanName缓存
+     * 判断beanName是否在创建中的beanName缓存
      */
     public boolean isSingletonCurrentlyInCreation(String beanName) {
-        // 把一个已经创建了对象，尚未依赖注入的bean的beanName
-        // 保存到singletonsCurrentlyInCreation中
         return this.singletonsCurrentlyInCreation.contains(beanName);
     }
 
@@ -136,8 +134,6 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
                     // 在这里会给singletonFactories赋值
                     // addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
                     singletonObject = singletonFactory.getObject();
-                    newSingleton = true;
-                } catch (IllegalStateException ex) {
                     // ...
                 } finally {
                     // bean对象创建完成，从singletonsCurrentlyInCreation缓存中移除
