@@ -1,5 +1,7 @@
 # singleton模式下的循环依赖
 
+Spring只能解决singleton模式下，通过setter注入的循环依赖。通过构造方法注入或prototype模式下的循环依赖，Spring无法解决。
+
 spring解决循环依赖的过程中用到的Map缓存：
 
 1. singletonObjects：一级缓存，这里面保存的是已经完成依赖注入的完整的bean

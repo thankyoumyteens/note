@@ -26,7 +26,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         try {
-            // bean的后置处理器(如果有的话)在这里返回代理对象，来代替bean对象
+            // 处理Spring的后置处理器
             Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
             if (bean != null) {
                 return bean;
@@ -36,7 +36,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         try {
-            // 创建bean
+            // 实际创建bean
             Object beanInstance = doCreateBean(beanName, mbdToUse, args);
             return beanInstance;
         } catch (BeanCreationException | ImplicitlyAppearedSingletonException ex) {
@@ -46,6 +46,36 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
     }
 }
+
+public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccessor
+        implements BeanDefinition, Cloneable {
+
+    /**
+     * 验证lookup-method/replaced-method配置的替换方法
+     */
+    public void prepareMethodOverrides() throws BeanDefinitionValidationException {
+        // 判断methodOverrides缓存中是否有值
+        if (hasMethodOverrides()) {
+            // 遍历methodOverrides中的方法，每个方法都放到prepareMethodOverride()方法中处理一下
+            getMethodOverrides().getOverrides().forEach(this::prepareMethodOverride);
+        }
+    }
+
+    protected void prepareMethodOverride(MethodOverride mo) throws BeanDefinitionValidationException {
+        // 判断bean中是否有要被替换的方法
+        // mo.getMethodName()返回lookup-method/replaced-method中配置的要被替换的方法
+        int count = ClassUtils.getMethodCountForName(getBeanClass(), mo.getMethodName());
+        if (count == 0) {
+            // 方法不存在
+            throw new BeanDefinitionValidationException(
+                    "Invalid method override: no method with name '" + mo.getMethodName() +
+                            "' on class [" + getBeanClassName() + "]");
+        } else if (count == 1) {
+            // 这个方法没有重载版本，
+            // 设置标记，这样在后续调用的时候便可以直接使用找到的方法，
+            // 而不需要进行方法的参数匹配验证
+            mo.setOverloaded(false);
+        }
+    }
+}
 ```
-
-

@@ -10,7 +10,7 @@
 - [Servlet](./servlet/servlet.md)
     - [使用包装类改请求和响应数据](./servlet/使用包装类改请求和响应数据.md)
 
-- [Spring](./spring/spring.md)
+- [Spring源码分析](./spring/Spring源码分析.md)
     - [Spring整体架构](./spring/Spring整体架构.md)
     - [使用BeanFactory](./spring/container/使用BeanFactory.md)
         - [ClassPathResource](./spring/container/ClassPathResource.md)
@@ -34,11 +34,13 @@
             - [解析自定义标签](./spring/container/parseCustomElement.md)
         - [getBean](./spring/container/getBean.md)
             - [singleton模式下的循环依赖](./spring/container/singleton模式下的循环依赖.md)
+            - [prototype模式下的循环依赖](./spring/container/prototype模式下的循环依赖.md)
             - [从缓存中获取单例bean](./spring/container/getSingleton.md)
             - [FactoryBean](./spring/container/getObjectForBeanInstance.md)
             - [创建单例bean](./spring/container/创建单例bean.md)
             - [创建bean](./spring/container/createBean.md)
-            - [prototype模式下的循环依赖](./spring/container/prototype模式下的循环依赖.md)
+            - [Spring的后置处理器](./spring/container/resolveBeforeInstantiation.md)
+            - [常规创建bean](./spring/container/doCreateBean.md)
 
 - [SpringBoot](./springboot/springboot.md)
     - [多环境配置](./springboot/多环境配置.md)
