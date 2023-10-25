@@ -36,7 +36,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         try {
-            // 实际创建bean
+            // 常规创建bean
             Object beanInstance = doCreateBean(beanName, mbdToUse, args);
             return beanInstance;
         } catch (BeanCreationException | ImplicitlyAppearedSingletonException ex) {

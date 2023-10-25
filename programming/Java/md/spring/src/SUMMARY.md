@@ -10,6 +10,9 @@
 - [Servlet](./servlet/servlet.md)
     - [使用包装类改请求和响应数据](./servlet/使用包装类改请求和响应数据.md)
 
+- [Spring](./spring/spring.md)
+    - [自动装配](./spring/use/自动装配.md)
+
 - [Spring源码分析](./spring/Spring源码分析.md)
     - [Spring整体架构](./spring/Spring整体架构.md)
     - [使用BeanFactory](./spring/container/使用BeanFactory.md)
@@ -41,6 +44,7 @@
             - [创建bean](./spring/container/createBean.md)
             - [Spring的后置处理器](./spring/container/resolveBeforeInstantiation.md)
             - [常规创建bean](./spring/container/doCreateBean.md)
+                - [创建bean对象](./spring/container/createBeanInstance.md)
 
 - [SpringBoot](./springboot/springboot.md)
     - [多环境配置](./springboot/多环境配置.md)
