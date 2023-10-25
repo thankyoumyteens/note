@@ -1,6 +1,6 @@
 # Spring的后置处理器
 
-Spring的后置处理器可以让用户在bean初始化前和初始化后的瞬间，添加一些自定义处理。
+Spring的后置处理器InstantiationAwareBeanPostProcessor可以让用户在bean初始化前和初始化后的瞬间，添加一些自定义处理。
 
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
