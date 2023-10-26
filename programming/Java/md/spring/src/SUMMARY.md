@@ -45,6 +45,7 @@
             - [Spring的后置处理器](./spring/container/resolveBeforeInstantiation.md)
             - [常规创建bean](./spring/container/doCreateBean.md)
                 - [创建bean对象](./spring/container/createBeanInstance.md)
+                - [使用工厂创建bean](./spring/container/instantiateUsingFactoryMethod.md)
 
 - [SpringBoot](./springboot/springboot.md)
     - [多环境配置](./springboot/多环境配置.md)

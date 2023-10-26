@@ -67,5 +67,41 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         // 使用默认构造方法创建bean
         return instantiateBean(beanName, mbd);
     }
+
+    /**
+     * 使用Supplier创建bean
+     */
+    protected BeanWrapper obtainFromSupplier(Supplier<?> instanceSupplier, String beanName) {
+        Object instance;
+        // 把当前正在创建的beanNeame存储到ThreadLocal中，用于标记
+        String outerBean = this.currentlyCreatedBean.get();
+        this.currentlyCreatedBean.set(beanName);
+        try {
+            // 使用Supplier获取bean
+            // Supplier是JDK 8提供的函数式接口
+            /*
+                @FunctionalInterface
+                public interface Supplier<T> {
+                    T get();
+                }
+            */
+            instance = instanceSupplier.get();
+        } finally {
+            if (outerBean != null) {
+                this.currentlyCreatedBean.set(outerBean);
+            } else {
+                this.currentlyCreatedBean.remove();
+            }
+        }
+
+        if (instance == null) {
+            instance = new NullBean();
+        }
+        // 把bean放进包装类
+        BeanWrapper bw = new BeanWrapperImpl(instance);
+        // 初始化bean的包装类
+        initBeanWrapper(bw);
+        return bw;
+    }
 }
 ```
