@@ -139,7 +139,6 @@ class ConstructorResolver {
                             }
                         }
                         // 把候选者的参数列表封装到argsHolder对象里
-                        // TODO
                         argsHolder = createArgumentArray(beanName, mbd, resolvedValues, bw, paramTypes, paramNames,
                                 getUserDeclaredConstructor(candidate), autowiring);
                     } catch (UnsatisfiedDependencyException ex) {
@@ -158,10 +157,11 @@ class ConstructorResolver {
                     // 使用传进来的参数
                     argsHolder = new ArgumentsHolder(explicitArgs);
                 }
-
+                // 计算权重
+                // isLenientConstructorResolution()：判断解析构造方法使用宽松模式还是严格模式，默认为宽松模式
                 int typeDiffWeight = (mbd.isLenientConstructorResolution() ?
                         argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes));
-                // Choose this constructor if it represents the closest match.
+                // 根据权重找到最合适的构造方法
                 if (typeDiffWeight < minTypeDiffWeight) {
                     constructorToUse = candidate;
                     argsHolderToUse = argsHolder;
@@ -169,6 +169,8 @@ class ConstructorResolver {
                     minTypeDiffWeight = typeDiffWeight;
                     ambiguousConstructors = null;
                 } else if (constructorToUse != null && typeDiffWeight == minTypeDiffWeight) {
+                    // 权重相同，找到多个构造方法，不知道该用哪个，
+                    // 记录下来，后面用于抛异常
                     if (ambiguousConstructors == null) {
                         ambiguousConstructors = new LinkedHashSet<>();
                         ambiguousConstructors.add(constructorToUse);
@@ -197,6 +199,7 @@ class ConstructorResolver {
             }
 
             if (explicitArgs == null) {
+                // 添加到构造方法参数缓存
                 argsHolderToUse.storeCache(mbd, constructorToUse);
             }
         }
