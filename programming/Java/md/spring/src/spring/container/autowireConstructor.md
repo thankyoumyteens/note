@@ -1,4 +1,4 @@
-# autowireConstructor
+# 自动装配构造方法
 
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory

@@ -45,7 +45,7 @@
             - [Spring的后置处理器](./spring/container/resolveBeforeInstantiation.md)
             - [常规创建bean](./spring/container/doCreateBean.md)
                 - [创建bean对象](./spring/container/createBeanInstance.md)
-                - [autowireConstructor](./spring/container/autowireConstructor.md)
+                - [自动装配构造方法](./spring/container/autowireConstructor.md)
                 - [使用工厂创建bean](./spring/container/instantiateUsingFactoryMethod.md)
 
 - [SpringBoot](./springboot/springboot.md)
@@ -62,3 +62,6 @@
     - [生成12个月月份](./oracle/生成12个月月份.md)
     - [生成指定时间范围内的每一天日期](./oracle/生成指定时间范围内的每一天日期.md)
     - [递归查询所有下级](./oracle/递归查询所有下级.md)
+
+- [Excel](./excel/excel.md)
+    - [EasyExcel导出表头合并](./excel/EasyExcel导出表头合并.md)
