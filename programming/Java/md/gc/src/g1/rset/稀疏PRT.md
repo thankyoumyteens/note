@@ -1,10 +1,10 @@
-# 稀疏PRT
+# 稀疏 PRT
 
-稀疏PRT通过哈希表的方式来存储，默认长度为4。key是region_index，value是SparsePRTEntry，SparsePRTEntry中存储一个_cards数组，数组的元素对应全局卡表中的卡片索引。
+稀疏 PRT 通过哈希表的方式来存储，默认长度为 4。key 是 region_index，value 是 SparsePRTEntry，SparsePRTEntry 中存储一个\_cards 数组，数组的元素对应全局卡表中的卡片索引。
 
 ![](../../img/SparsePRT.png)
 
-稀疏PRT的定义：
+稀疏 PRT 的定义：
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\sparsePRT.hpp
 
@@ -37,7 +37,7 @@ class SparsePRTEntry: public CHeapObj<mtGC> {
 };
 ```
 
-## 添加card
+## 添加 card
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\sparsePRT.cpp
 
@@ -74,7 +74,7 @@ SparsePRTEntry::AddCardResult SparsePRTEntry::add_card(CardIdx_t card_index) {
     if (c == card_index) {
       return found;
     }
-    if (c == NullEntry) { 
+    if (c == NullEntry) {
       _cards[i] = card_index;
       return added;
     }

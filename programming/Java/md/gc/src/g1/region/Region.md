@@ -1,11 +1,11 @@
 # Region
 
-Region是G1堆和操作系统交互的最小管理单位。G1的Region分为4类：
+Region 是 G1 堆和操作系统交互的最小管理单位。G1 的 Region 分为 4 类：
 
-1. 空闲Region(Free Heap Region)
-2. 新生代Region(Young Heap Region)，新生代Region又可以分为Eden和Survivor
-3. 老年代Region(Old Heap Region)
-4. 大对象Region(Humongous Heap Region)，大对象可能1个Region放不下，所以分为Starts Region和Continues Region两种，Starts存放大对象的开始，Continues继续存放Starts没存下的部分
+1. 空闲 Region(Free Heap Region)
+2. 新生代 Region(Young Heap Region)，新生代 Region 又可以分为 Eden 和 Survivor
+3. 老年代 Region(Old Heap Region)
+4. 大对象 Region(Humongous Heap Region)，大对象可能 1 个 Region 放不下，所以分为 Starts Region 和 Continues Region 两种，Starts 存放大对象的开始，Continues 继续存放 Starts 没存下的部分
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionType.hpp
 
@@ -23,11 +23,11 @@ Region是G1堆和操作系统交互的最小管理单位。G1的Region分为4类
 // 01000 [ 8] Old
 ```
 
-## Region的大小
+## Region 的大小
 
-在G1中每个Region的大小都是相同的。Region的大小会影响G1的运行效率，如果Region过大，一个Region可以分配更多的对象，但回收就会花费更长的时间。如果Region过小，就会导致对象的分配效率过于低下。
+在 G1 中每个 Region 的大小都是相同的。Region 的大小会影响 G1 的运行效率，如果 Region 过大，一个 Region 可以分配更多的对象，但回收就会花费更长的时间。如果 Region 过小，就会导致对象的分配效率过于低下。
 
-可以通过参数 -XX:G1HeapRegionSize 来设置Region的大小，它的默认值为0。如果不指定Region的大小，G1就会自己推断出Region的合适大小。
+可以通过参数 -XX:G1HeapRegionSize 来设置 Region 的大小，它的默认值为 0。如果不指定 Region 的大小，G1 就会自己推断出 Region 的合适大小。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegion.cpp
 
@@ -68,41 +68,43 @@ void HeapRegion::setup_heap_region_size(size_t initial_heap_size, size_t max_hea
 }
 ```
 
-## 新生代的Region个数
+## 新生代的 Region 个数
 
-G1会先计算出整个新生代的所占用内存空间，然后除以每个Region的大小，得到新生代需要多少个Region。
+G1 会先计算出整个新生代的所占用内存空间，然后除以每个 Region 的大小，得到新生代需要多少个 Region。
 
-在G1中，新生代的内存空间大小一般是动态变化的，可以通过以下参数来设置新生代的大小：
+在 G1 中，新生代的内存空间大小一般是动态变化的，可以通过以下参数来设置新生代的大小：
 
 - -XX:NewSize：用于设置新生代的初始大小
 - -XX:MaxNewSize：用于设置新生代的最大大小
-- -Xmn：用于设置新生代的大小，等价于设置了NewSize和MaxNewSize，且NewSize=MaxNewSize
+- -Xmn：用于设置新生代的大小，等价于设置了 NewSize 和 MaxNewSize，且 NewSize=MaxNewSize
 
-例如，以下命令将新生代的初始大小设置为256MB，最大大小设置为1024MB：
+例如，以下命令将新生代的初始大小设置为 256MB，最大大小设置为 1024MB：
+
 ```sh
 java -XX:+UseG1GC -XX:NewSize=256m -XX:MaxNewSize=1024m -jar myapp.jar
 ```
 
-如果设置了NewSize和MaxNewSize，G1会根据它们来计算新生代Region的个数。
+如果设置了 NewSize 和 MaxNewSize，G1 会根据它们来计算新生代 Region 的个数。
 
 - -XX:NewRatio：用于设置新生代占整个堆内存的比例
 
-这个参数通常与 -XX:MaxNewSize 一起使用，以控制新生代占用的内存空间范围。例如，以下命令将新生代的初始大小设置为堆内存的30%，最大大小为64GB：
+这个参数通常与 -XX:MaxNewSize 一起使用，以控制新生代占用的内存空间范围。例如，以下命令将新生代的初始大小设置为堆内存的 30%，最大大小为 64GB：
+
 ```sh
 java -XX:+UseG1GC -XX:NewRatio=3 -XX:MaxNewSize=64g -jar myapp.jar
 ```
 
-如果设置了NewSize和MaxNewSize，G1会忽略NewRatio。如果只设置了NewRatio，则NewSize=MaxNewSize=堆内存/(NewRatio+1)。
+如果设置了 NewSize 和 MaxNewSize，G1 会忽略 NewRatio。如果只设置了 NewRatio，则 NewSize=MaxNewSize=堆内存/(NewRatio+1)。
 
-- -XX:G1NewSizePercent：用于设置年新生代的初始大小占整个堆内存大小的百分比，默认为5
-- -XX:G1MaxNewSizePercent：用于设置年新生代的最大大小占整个堆内存大小的百分比，默认为60
+- -XX:G1NewSizePercent：用于设置年新生代的初始大小占整个堆内存大小的百分比，默认为 5
+- -XX:G1MaxNewSizePercent：用于设置年新生代的最大大小占整个堆内存大小的百分比，默认为 60
 
-如果没有设置NewSize和MaxNewSize，或只设置了其中的一个，G1会根据G1NewSizePercent和G1MaxNewSizePercent来计算新生代内存的最大值和最小值。
+如果没有设置 NewSize 和 MaxNewSize，或只设置了其中的一个，G1 会根据 G1NewSizePercent 和 G1MaxNewSizePercent 来计算新生代内存的最大值和最小值。
 
-如果新生代内存的最大值和最小值相等，则说明新生代的大小不会动态变化，这意味着G1在后续对新生代进行GC的时候可能满足不了用户期望的暂停时间。
+如果新生代内存的最大值和最小值相等，则说明新生代的大小不会动态变化，这意味着 G1 在后续对新生代进行 GC 的时候可能满足不了用户期望的暂停时间。
 
 ## 新生代分区列表
 
-G1会维护一个新生代分区列表，当新生代需要扩大时，G1会把空闲的Region加入到新生代分区列表中，如果没有空闲的Region，G1会分配新的Region然后把它加入到新生代分区列表中。
+G1 会维护一个新生代分区列表，当新生代需要扩大时，G1 会把空闲的 Region 加入到新生代分区列表中，如果没有空闲的 Region，G1 会分配新的 Region 然后把它加入到新生代分区列表中。
 
-参数-XX:GCTimeRatio用于设置程序运行时间与GC执行时间之间的比率，计算方式为：100*(1/(1+GCTimeRatio))。GCTimeRatio的默认值为9，即GC时间占比超过10%的时候才需要扩展内存空间。
+参数-XX:GCTimeRatio 用于设置程序运行时间与 GC 执行时间之间的比率，计算方式为：100\*(1/(1+GCTimeRatio))。GCTimeRatio 的默认值为 9，即 GC 时间占比超过 10%的时候才需要扩展内存空间。

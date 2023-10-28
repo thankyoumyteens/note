@@ -1,13 +1,13 @@
-# 管理RSet
+# 管理 RSet
 
-JVM在每次给引用类型的字段赋值时，会通过写屏障把引用者对象在全局卡表中所在的card插入到dirty card queue(DCQ)中。DCQ分为两种：
+JVM 在每次给引用类型的字段赋值时，会通过写屏障把引用者对象在全局卡表中所在的 card 插入到 dirty card queue(DCQ)中。DCQ 分为两种：
 
-1. 每个用户线程都有一个自己的DCQ，DCQ的大小由参数-XX:G1UpdateBufferSize设置，默认值是256，表示最多可以存放256个引用关系
-2. JVM有一个全局的DCQ，所有用户线程共享这个DCQ
+1. 每个用户线程都有一个自己的 DCQ，DCQ 的大小由参数-XX:G1UpdateBufferSize 设置，默认值是 256，表示最多可以存放 256 个引用关系
+2. JVM 有一个全局的 DCQ，所有用户线程共享这个 DCQ
 
-JVM中有一个全局的dirty card queue set(DCQS)用于存放已经满了的DCQ。当DCQ已放满256个引用关系时，用户线程会把这个DCQ添加到DCQS中。如果在添加时发现DCQS已经满了，那么说明引用变更太多了，Refine线程已经处理不过来了，用户线程就不会继续往DCQS里添加了，并且这个用户线程会暂停其他代码执行，替代Refine线程来更新RSet。
+JVM 中有一个全局的 dirty card queue set(DCQS)用于存放已经满了的 DCQ。当 DCQ 已放满 256 个引用关系时，用户线程会把这个 DCQ 添加到 DCQS 中。如果在添加时发现 DCQS 已经满了，那么说明引用变更太多了，Refine 线程已经处理不过来了，用户线程就不会继续往 DCQS 里添加了，并且这个用户线程会暂停其他代码执行，替代 Refine 线程来更新 RSet。
 
-把对象加入到DCQ的代码：
+把对象加入到 DCQ 的代码：
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\ptrQueue.hpp
 

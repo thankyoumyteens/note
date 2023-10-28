@@ -16,3 +16,6 @@
             - [Refine线程的工作过程](./g1/refine/Refine线程的工作过程.md)
             - [DCQS分区](./g1/refine/DCQS分区.md)
     - [Young GC](./g1/ygc/ygc.md)
+        - [并行任务处理](./g1/ygc/并行任务处理.md)
+            - [Oop-Klass对象模型](./g1/ygc/Oop-Klass对象模型.md)
+            - [根处理](./g1/ygc/根处理.md)

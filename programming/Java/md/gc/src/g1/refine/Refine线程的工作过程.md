@@ -1,8 +1,8 @@
-# Refine线程的工作过程
+# Refine 线程的工作过程
 
-如果没有足够多的引用关系变更，大部分的Refine线程都是空转，所以需要一个机制能动态激活和冻结线程，JVM通过wait和notify机制来实现。假设有n个Refine线程，从0到n-1号线程都是由前一个线程发现自己太忙，激活后一个，后一个线程发现自己太闲的时候则主动冻结自己。第0个线程是由正在运行的Java线程来激活的，当Java线程尝试把修改的引用放入到DCQ时，如果0号线程还没激活，则发送notify信号激活它。0号线程可能会由任意一个用户线程来通知，而1号到n-1号线程只能由前一个Refine线程通知。因为0号线程可以由任意用户线程通知，所以0号线程由一个全局的Monitor通知，而1号到n-1号线程中的Monitor则是局部变量。
+如果没有足够多的引用关系变更，大部分的 Refine 线程都是空转，所以需要一个机制能动态激活和冻结线程，JVM 通过 wait 和 notify 机制来实现。假设有 n 个 Refine 线程，从 0 到 n-1 号线程都是由前一个线程发现自己太忙，激活后一个，后一个线程发现自己太闲的时候则主动冻结自己。第 0 个线程是由正在运行的 Java 线程来激活的，当 Java 线程尝试把修改的引用放入到 DCQ 时，如果 0 号线程还没激活，则发送 notify 信号激活它。0 号线程可能会由任意一个用户线程来通知，而 1 号到 n-1 号线程只能由前一个 Refine 线程通知。因为 0 号线程可以由任意用户线程通知，所以 0 号线程由一个全局的 Monitor 通知，而 1 号到 n-1 号线程中的 Monitor 则是局部变量。
 
-Refine线程的工作就是根据DCQ中的引用者找到被引用者，然后在被引用者所在region的RSet中记录引用关系。因为在Refine线程执行的过程中并不会发生GC，也不会发生对象的移动，即对象地址都是固定的，所以不用考虑在执行过程中被引用者的地址发生变化的情况。
+Refine 线程的工作就是根据 DCQ 中的引用者找到被引用者，然后在被引用者所在 region 的 RSet 中记录引用关系。因为在 Refine 线程执行的过程中并不会发生 GC，也不会发生对象的移动，即对象地址都是固定的，所以不用考虑在执行过程中被引用者的地址发生变化的情况。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\concurrentG1RefineThread.cpp
 
@@ -391,7 +391,7 @@ inline void G1UpdateRSOrPushRefOopClosure::do_oop_nv(T* p) {
     // 引用方和被引用方在同一个region里
     return;
   }
- 
+
   // Young GC时也会更新Rset，此时传入的是true，
   // 如果引用的对象在CSet中则放入G1ParScanThreadState队列中处理
   if (_record_refs_into_cset && to->in_collection_set()) {

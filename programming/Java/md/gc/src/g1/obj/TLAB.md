@@ -1,6 +1,6 @@
 # TLAB
 
-线程本地分配缓冲区(Thread Local Allocation Buffer，TLAB)产生的目的就是为了进行内存快速分配。从JVM堆空间分配对象时，必须锁定整个堆，以便不会被其他线程中断和影响。为了解决这个问题，TLAB通过为每个线程分配一个缓冲区来避免和减少使用锁。
+线程本地分配缓冲区(Thread Local Allocation Buffer，TLAB)产生的目的就是为了进行内存快速分配。从 JVM 堆空间分配对象时，必须锁定整个堆，以便不会被其他线程中断和影响。为了解决这个问题，TLAB 通过为每个线程分配一个缓冲区来避免和减少使用锁。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_interface\collectedHeap.inline.hpp
 
@@ -17,15 +17,16 @@ HeapWord* CollectedHeap::allocate_from_tlab(KlassHandle klass, Thread* thread, s
 }
 ```
 
-## TLAB快速分配
+## TLAB 快速分配
 
-TLAB是Eden中的一块内存，不同线程的TLAB都位于Eden区，所有的TLAB内存对所有的线程都是可见的，只不过每个线程有一个TLAB的数据结构，用于保存待分配内存区间的起始地址（start）和结束地址（end），在分配的时候只在这个区间做分配，从而达到无锁分配。另外，虽然TLAB在分配对象空间的时候是无锁分配，但是TLAB空间本身在分配的时候还是需要锁的，G1中使用CAS来分配TLAB空间，一个Region中可能存在多个TLAB，但是一个TLAB是不能跨Region的。
+TLAB 是 Eden 中的一块内存，不同线程的 TLAB 都位于 Eden 区，所有的 TLAB 内存对所有的线程都是可见的，只不过每个线程有一个 TLAB 的数据结构，用于保存待分配内存区间的起始地址（start）和结束地址（end），在分配的时候只在这个区间做分配，从而达到无锁分配。另外，虽然 TLAB 在分配对象空间的时候是无锁分配，但是 TLAB 空间本身在分配的时候还是需要锁的，G1 中使用 CAS 来分配 TLAB 空间，一个 Region 中可能存在多个 TLAB，但是一个 TLAB 是不能跨 Region 的。
 
-JVM使用指针碰撞的方法在TLAB中分配对象，在TLAB中保存一个top指针用于标记当前已分配和未分配的空间的分界点，如果剩余空间(end-top)大于待分配的对象大小，则直接分配，并将top的新值修改为top+对象的大小。
+JVM 使用指针碰撞的方法在 TLAB 中分配对象，在 TLAB 中保存一个 top 指针用于标记当前已分配和未分配的空间的分界点，如果剩余空间(end-top)大于待分配的对象大小，则直接分配，并将 top 的新值修改为 top+对象的大小。
 
 ![](../../img/g1gc17.png)
 
 > jdk8u60-master\hotspot\src\share\vm\memory\threadLocalAllocBuffer.inline.hpp
+
 ```cpp
 /**
  * 在TLAB中快速分配
@@ -48,18 +49,18 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
 }
 ```
 
-## TLAB慢速分配
+## TLAB 慢速分配
 
-当待分配对象大于TLAB中的剩余空间时，就会导致TLAB分配失败，开始TLAB慢速分配。
+当待分配对象大于 TLAB 中的剩余空间时，就会导致 TLAB 分配失败，开始 TLAB 慢速分配。
 
-虚拟机内部会维护一个叫做refill_waste_limit的值，当TLAB剩余空间大于refill_waste_limit时，说明TLAB剩余的空间还能满足很多对象的分配，此时会选择在堆中分配这个比较大的对象。若TLAB剩余空间小于refill_waste_limit时，则会废弃当前TLAB，新建一个新的TLAB来分配对象。refill_waste_limit的值可以使用参数-XX:TLABRefillWasteFraction来调整，默认值为64，表示1/64的TLAB空间可以浪费，成为内存碎片。老的TLAB不用处理，在垃圾回收的时候，垃圾收集器不会特殊处理TLAB，而是把Eden空间当作一个整体来回收里面的对象。在垃圾回收结束之后，每个Java线程又会重新从Eden分配自己的TLAB。
+虚拟机内部会维护一个叫做 refill_waste_limit 的值，当 TLAB 剩余空间大于 refill_waste_limit 时，说明 TLAB 剩余的空间还能满足很多对象的分配，此时会选择在堆中分配这个比较大的对象。若 TLAB 剩余空间小于 refill_waste_limit 时，则会废弃当前 TLAB，新建一个新的 TLAB 来分配对象。refill_waste_limit 的值可以使用参数-XX:TLABRefillWasteFraction 来调整，默认值为 64，表示 1/64 的 TLAB 空间可以浪费，成为内存碎片。老的 TLAB 不用处理，在垃圾回收的时候，垃圾收集器不会特殊处理 TLAB，而是把 Eden 空间当作一个整体来回收里面的对象。在垃圾回收结束之后，每个 Java 线程又会重新从 Eden 分配自己的 TLAB。
 
-JVM还提供了一个参数-XX:TLABWasteIncrement，默认值为4个字，用于动态增加这个refill_waste_limit的值。默认情况下，TLAB大小和refill_waste_limit都会在运行时不断调整，使系统的运行状态达到最优。在动态调整的过程中，也不能无限制变更，所以JVM提供了-XX:MinTLABSize，默认值2K，用于控制TLAB的最小值，对于G1来说，由于大对象都不在新生代，所以TLAB也不能分配大对象，Region大小的一半就会被认定为大对象，所以TLAB肯定不会超过Region大小的一半。可以使用-XX:-ResizeTLAB禁止自动调整TLAB的大小。-XX:+PrintTLAB可以跟踪TLAB的使用情况。
+JVM 还提供了一个参数-XX:TLABWasteIncrement，默认值为 4 个字，用于动态增加这个 refill_waste_limit 的值。默认情况下，TLAB 大小和 refill_waste_limit 都会在运行时不断调整，使系统的运行状态达到最优。在动态调整的过程中，也不能无限制变更，所以 JVM 提供了-XX:MinTLABSize，默认值 2K，用于控制 TLAB 的最小值，对于 G1 来说，由于大对象都不在新生代，所以 TLAB 也不能分配大对象，Region 大小的一半就会被认定为大对象，所以 TLAB 肯定不会超过 Region 大小的一半。可以使用-XX:-ResizeTLAB 禁止自动调整 TLAB 的大小。-XX:+PrintTLAB 可以跟踪 TLAB 的使用情况。
 
-TLAB慢速分配具体有以下两种情况：
+TLAB 慢速分配具体有以下两种情况：
 
-1. 如果TLAB的剩余空间过小，那么就对老TLAB进行填充一个dummy对象，然后去申请一个新的TLAB。G1在扫描时，当遇到对象时会一整个跳过，而遇到空白区域时则需要一个字一个字的来扫描，这势必影响效率，为此，G1通过为这些空白区域也分配一个空对象，即dummy对象，从而让扫描变得更快
-2. 如果TLAB的剩余空间并不小，那么就更新refill_waste_limit的值，然后不使用TLAB进行分配，直接返回NULL，让JVM去堆中分配
+1. 如果 TLAB 的剩余空间过小，那么就对老 TLAB 进行填充一个 dummy 对象，然后去申请一个新的 TLAB。G1 在扫描时，当遇到对象时会一整个跳过，而遇到空白区域时则需要一个字一个字的来扫描，这势必影响效率，为此，G1 通过为这些空白区域也分配一个空对象，即 dummy 对象，从而让扫描变得更快
+2. 如果 TLAB 的剩余空间并不小，那么就更新 refill_waste_limit 的值，然后不使用 TLAB 进行分配，直接返回 NULL，让 JVM 去堆中分配
 
 > jdk8u60-master\hotspot\src\share\vm\gc_interface\collectedHeap.cpp
 
@@ -102,9 +103,9 @@ HeapWord* CollectedHeap::allocate_from_tlab_slow(KlassHandle klass, Thread* thre
 }
 ```
 
-## 初始化TLAB的大小
+## 初始化 TLAB 的大小
 
-如果TLAB过小，那么TLAB则不能存储更多的对象，所以可能需要不断地重新分配新的TLAB。但是如果TLAB过大，则可能导致内存碎片问题。可以使用参数-XX:TLABSize设置TLAB的大小，默认值是0，JVM会推断这个值多大更合适。参数-XX:TLABWasteTargetPercent用于设置TLAB可占用的Eden空间的百分比，默认值1%，推断方式为：TLABSize=Eden*2*TLABWasteTargetPercent/线程个数。
+如果 TLAB 过小，那么 TLAB 则不能存储更多的对象，所以可能需要不断地重新分配新的 TLAB。但是如果 TLAB 过大，则可能导致内存碎片问题。可以使用参数-XX:TLABSize 设置 TLAB 的大小，默认值是 0，JVM 会推断这个值多大更合适。参数-XX:TLABWasteTargetPercent 用于设置 TLAB 可占用的 Eden 空间的百分比，默认值 1%，推断方式为：TLABSize=Eden*2*TLABWasteTargetPercent/线程个数。
 
 > jdk8u60-master\hotspot\src\share\vm\memory\threadLocalAllocBuffer.cpp
 
@@ -157,7 +158,7 @@ size_t ThreadLocalAllocBuffer::initial_desired_size() {
 }
 ```
 
-## 分配一个新的TLAB
+## 分配一个新的 TLAB
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 
@@ -175,7 +176,7 @@ HeapWord* G1CollectedHeap::allocate_new_tlab(size_t word_size) {
 }
 ```
 
-attempt_allocation()方法会先使用CAS分配TLAB，如果失败，则开始慢速分配。
+attempt_allocation()方法会先使用 CAS 分配 TLAB，如果失败，则开始慢速分配。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.inline.hpp
 
@@ -239,12 +240,12 @@ inline HeapWord* G1OffsetTableContigSpace::par_allocate_impl(size_t size,
 
 慢速分配的过程：
 
-1. 首先尝试对堆分区进行加锁分配，成功则返回，在attempt_allocation_locked完成
-2. 不成功，则判定是否可以对新生代分区进行扩展，如果可以扩展则扩展后再分配TLAB，成功则返回，在attempt_allocation_force完成
-3. 不成功，判定是否可以进行垃圾回收，如果可以进行垃圾回收后再分配，成功则返回，在do_collection_pause完成
-4. 不成功，如果尝试分配次数达到阈值（默认值是2次）则返回失败
+1. 首先尝试对堆分区进行加锁分配，成功则返回，在 attempt_allocation_locked 完成
+2. 不成功，则判定是否可以对新生代分区进行扩展，如果可以扩展则扩展后再分配 TLAB，成功则返回，在 attempt_allocation_force 完成
+3. 不成功，判定是否可以进行垃圾回收，如果可以进行垃圾回收后再分配，成功则返回，在 do_collection_pause 完成
+4. 不成功，如果尝试分配次数达到阈值（默认值是 2 次）则返回失败
 5. 如果还可以继续尝试，再次判定是否进行快速分配，如果成功则返回
-6. 不成功则通过for循环重新再尝试一次流程，直到成功或者达到阈值失败
+6. 不成功则通过 for 循环重新再尝试一次流程，直到成功或者达到阈值失败
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 

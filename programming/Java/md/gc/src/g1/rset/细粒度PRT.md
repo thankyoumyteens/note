@@ -1,10 +1,10 @@
-# 细粒度PRT
+# 细粒度 PRT
 
-细粒度PRT是一个的数组，每个元素包含了一个HeapRegion的起始地址和一个位图，这个位图描述这个HeapRegion的引用情况，每一位对应Region的512字节，所以它的大小为HeapRegionSize%512，这样可以使用更少的内存存储更多的引用关系。
+细粒度 PRT 是一个的数组，每个元素包含了一个 HeapRegion 的起始地址和一个位图，这个位图描述这个 HeapRegion 的引用情况，每一位对应 Region 的 512 字节，所以它的大小为 HeapRegionSize%512，这样可以使用更少的内存存储更多的引用关系。
 
 ![](../../img/prt.png)
 
-细粒度PRT的定义：
+细粒度 PRT 的定义：
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionRemSet.cpp
 

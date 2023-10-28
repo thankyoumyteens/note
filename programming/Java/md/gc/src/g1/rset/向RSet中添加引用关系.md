@@ -1,18 +1,18 @@
-# 向RSet中添加引用关系
+# 向 RSet 中添加引用关系
 
-JVM在每次给引用类型的字段赋值时，会插入一个写后屏障(post-write barrier)，post-write barrier中会做下面的处理：
+JVM 在每次给引用类型的字段赋值时，会插入一个写后屏障(post-write barrier)，post-write barrier 中会做下面的处理：
 
-1. 在global card table中找到该字段所在的card，并设置为dirty_card
-2. 如果当前是应用线程，每个Java线程有一个dirty card queue(DCQ)，把该card插入队列
-3. G1有一个全局卡表(global card table)，它的每个card都对应某个Region中的512字节的内存空间，如果一个card变脏(dirty)，就说明对应的region存在跨region的引用
+1. 在 global card table 中找到该字段所在的 card，并设置为 dirty_card
+2. 如果当前是应用线程，每个 Java 线程有一个 dirty card queue(DCQ)，把该 card 插入队列
+3. G1 有一个全局卡表(global card table)，它的每个 card 都对应某个 Region 中的 512 字节的内存空间，如果一个 card 变脏(dirty)，就说明对应的 region 存在跨 region 的引用
 
-赋值动作到此结束，接下来RSet的更新操作交由多个ConcurrentG1RefineThread并发完成，Refine线程会取出若干个DCQ，遍历每个DCQ中记录的card，并进行处理：
+赋值动作到此结束，接下来 RSet 的更新操作交由多个 ConcurrentG1RefineThread 并发完成，Refine 线程会取出若干个 DCQ，遍历每个 DCQ 中记录的 card，并进行处理：
 
-1. 根据card的地址，计算出card所在的Region
-2. 如果Region不存在，或者Region在新生代中，或者该Region在回收集中，则不进行处理
-3. 使用G1UpdateRSOrPushRefOopClosure::do_oop_nv()函数处理该card
+1. 根据 card 的地址，计算出 card 所在的 Region
+2. 如果 Region 不存在，或者 Region 在新生代中，或者该 Region 在回收集中，则不进行处理
+3. 使用 G1UpdateRSOrPushRefOopClosure::do_oop_nv()函数处理该 card
 
-do_oop_nv()函数中处理该card的代码：
+do_oop_nv()函数中处理该 card 的代码：
 
 ```cpp
 // to是被引用对象所在的Region
@@ -21,7 +21,7 @@ to->rem_set()->add_reference(p, _worker_i);
 
 add_reference()函数的处理：
 
-1. 首先会使用稀疏PRT记录引用关系，当引用逐渐增多，RSet占用的内存空间越来越大，就会将这种引用关系记录的详细程度往下降，描述不再那么详细进而存储更多的引用关系。当稀疏表中的某一个entry中的cards数组长度为4之后，就会将该entry中的所有记录转到细粒度PRT中。当细粒度PRT的记录数达到了G1设定的阈值之后，会转为使用粗粒度。
+1. 首先会使用稀疏 PRT 记录引用关系，当引用逐渐增多，RSet 占用的内存空间越来越大，就会将这种引用关系记录的详细程度往下降，描述不再那么详细进而存储更多的引用关系。当稀疏表中的某一个 entry 中的 cards 数组长度为 4 之后，就会将该 entry 中的所有记录转到细粒度 PRT 中。当细粒度 PRT 的记录数达到了 G1 设定的阈值之后，会转为使用粗粒度。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionRemSet.cpp
 

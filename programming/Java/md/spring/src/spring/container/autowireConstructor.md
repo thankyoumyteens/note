@@ -199,7 +199,10 @@ class ConstructorResolver {
             }
 
             if (explicitArgs == null) {
-                // 添加到构造方法参数缓存
+                // 缓存解析的结果：
+                // 已解析出的构造方法对象resolvedConstructorOrFactoryMethod，
+                // 构造方法参数列表是否已解析标志constructorArgumentsResolved，
+                // 构造方法参数resolvedConstructorArguments或preparedConstructorArguments
                 argsHolderToUse.storeCache(mbd, constructorToUse);
             }
         }
@@ -207,7 +210,7 @@ class ConstructorResolver {
         try {
             final InstantiationStrategy strategy = beanFactory.getInstantiationStrategy();
             Object beanInstance;
-
+            // 创建bean对象
             if (System.getSecurityManager() != null) {
                 final Constructor<?> ctorToUse = constructorToUse;
                 final Object[] argumentsToUse = argsToUse;
@@ -217,12 +220,32 @@ class ConstructorResolver {
             } else {
                 beanInstance = strategy.instantiate(mbd, beanName, this.beanFactory, constructorToUse, argsToUse);
             }
-
+            // 封装bean的包装类
             bw.setBeanInstance(beanInstance);
             return bw;
         } catch (Throwable ex) {
             throw new BeanCreationException(mbd.getResourceDescription(), beanName,
                     "Bean instantiation via constructor failed", ex);
+        }
+    }
+}
+
+public class SimpleInstantiationStrategy implements InstantiationStrategy {
+
+    public Object instantiate(RootBeanDefinition bd, @Nullable String beanName, BeanFactory owner,
+                              final Constructor<?> ctor, @Nullable Object... args) {
+
+        if (!bd.hasMethodOverrides()) {
+            if (System.getSecurityManager() != null) {
+                // use own privileged to change accessibility (when security is on)
+                AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+                    ReflectionUtils.makeAccessible(ctor);
+                    return null;
+                });
+            }
+            return (args != null ? BeanUtils.instantiateClass(ctor, args) : BeanUtils.instantiateClass(ctor));
+        } else {
+            return instantiateWithMethodInjection(bd, beanName, owner, ctor, args);
         }
     }
 }
