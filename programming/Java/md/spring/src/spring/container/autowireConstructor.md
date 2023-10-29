@@ -236,6 +236,7 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
                               final Constructor<?> ctor, @Nullable Object... args) {
 
         if (!bd.hasMethodOverrides()) {
+            // 不需要替换方法
             if (System.getSecurityManager() != null) {
                 // use own privileged to change accessibility (when security is on)
                 AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
@@ -245,6 +246,7 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
             }
             return (args != null ? BeanUtils.instantiateClass(ctor, args) : BeanUtils.instantiateClass(ctor));
         } else {
+            // 需要替换方法
             return instantiateWithMethodInjection(bd, beanName, owner, ctor, args);
         }
     }
