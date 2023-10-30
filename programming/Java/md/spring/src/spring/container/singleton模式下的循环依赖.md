@@ -28,17 +28,17 @@ TestA a = (TestA) bf.getBean("testA");
 1. 首先从缓存中获取单例bean：testA
 2. singletonObjects缓存中没有testA，并且singletonsCurrentlyInCreation缓存中也没有testA，直接返回null
 3. 开始创建testA，首先把tastA添加到singletonsCurrentlyInCreation缓存中，表示testA正在创建中
-4. 创建testA，并执行依赖注入
+4. 创建testA，并填充tastA的属性(给字段赋值，比如依赖注入)
 5. spring发现testA中依赖了testB，会调用getBean()方法获取testB
 6. 由于testB没有创建，所以也会开始执行创建过程
 7. 首先从缓存中获取单例bean：testB
 8. singletonObjects缓存中没有testB，并且singletonsCurrentlyInCreation缓存中也没有testB，直接返回null
 9. 开始创建testB，首先把tastB添加到singletonsCurrentlyInCreation缓存中，表示testB正在创建中
-10. 创建testB，并执行依赖注入
+10. 创建testB，并填充taseB的属性
 11. 这时，spring发现testB中依赖了testA，会调用getBean()方法获取testA
 12. 又会从缓存中获取单例bean：testA
-13. singletonObjects缓存中没有testA，但是这时singletonsCurrentlyInCreation缓存中存在testA，spring会找到testA对象的地址，并把它返回
-14. testB中调用的getBean()方法返回testA对象的地址(引用)，把它赋值给testB中的testA属性
+13. singletonObjects缓存中没有testA，但是这时singletonsCurrentlyInCreation缓存中存在testA，spring会把testA对象的引用返回
+14. testB中调用的getBean()方法返回testA对象的引用，把它赋值给testB中的testA属性
 15. testB对象创建完成，从singletonsCurrentlyInCreation缓存中移除testB，并把它加到singletonObjects缓存中
 16. testA对象创建完成，从singletonsCurrentlyInCreation缓存中移除testA，并把它加到singletonObjects缓存中
 
@@ -56,6 +56,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
             bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
         } else {
             // ...
+            // 缓存中没有
             // 单例模式实例化bean
             if (mbd.isSingleton()) {
                 sharedInstance = getSingleton(beanName, () -> {
@@ -86,6 +87,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
         return getSingleton(beanName, true);
     }
 
+    /**
+     * 从缓存中获取
+     */
     protected Object getSingleton(String beanName, boolean allowEarlyReference) {
         // singletonObjects就是单例缓存
         Object singletonObject = this.singletonObjects.get(beanName);
@@ -114,14 +118,15 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
     }
 
     /**
-     * 判断beanName是否在创建中的beanName缓存
-     */
-    public boolean isSingletonCurrentlyInCreation(String beanName) {
-        return this.singletonsCurrentlyInCreation.contains(beanName);
-    }
-
-    /**
-     * 实例化bean
+     * 单例模式实例化bean
+     * sharedInstance = getSingleton(beanName, () -> {
+     *     try {
+     *         return createBean(beanName, mbd, args);
+     *     } catch (BeansException ex) {
+     *         destroySingleton(beanName);
+     *         throw ex;
+     *     }
+     * });
      */
     public Object getSingleton(String beanName, ObjectFactory<?> singletonFactory) {
         synchronized (this.singletonObjects) {
@@ -134,7 +139,6 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
                 try {
                     // 创建bean
                     // 在这里会给singletonFactories赋值
-                    // addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
                     singletonObject = singletonFactory.getObject();
                     // ...
                 } finally {
@@ -148,6 +152,64 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
             }
             return singletonObject;
         }
+    }
+}
+
+public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
+
+    /**
+     * singletonObject = singletonFactory.getObject();会调用到这里
+     * 创建bean
+     */
+    protected Object createBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args) throws BeanCreationException {
+
+        RootBeanDefinition mbdToUse = mbd;
+
+        // ...
+        try {
+            // 常规创建bean
+            Object beanInstance = doCreateBean(beanName, mbdToUse, args);
+            return beanInstance;
+        } catch (BeanCreationException | ImplicitlyAppearedSingletonException ex) {
+            // ...
+        }
+    }
+
+    protected Object doCreateBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args) throws BeanCreationException {
+
+        // ...
+        // 用于解决循环依赖
+        boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences && isSingletonCurrentlyInCreation(beanName));
+        if (earlySingletonExposure) {
+            // 把单例工厂添加到三级缓存中
+            // getEarlyBeanReference()返回当前正在创建的bean的引用
+            // 第三个参数bean就是当前正在创建的bean对象
+            addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
+        }
+        // ...
+        // 填充bean的属性，注入属性值，如果依赖其它的bean，会递归去初始化其它的bean
+        populateBean(beanName, mbd, instanceWrapper);
+        // ...
+    }
+
+    /**
+     * 返回bean的引用
+     */
+    protected Object getEarlyBeanReference(String beanName, RootBeanDefinition mbd, Object bean) {
+        Object exposedObject = bean;
+        if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
+            // 执行后置处理器
+            for (BeanPostProcessor bp : getBeanPostProcessors()) {
+                if (bp instanceof SmartInstantiationAwareBeanPostProcessor) {
+                    // 后置处理器可能返回一个代理对象取代原有的bean
+                    SmartInstantiationAwareBeanPostProcessor ibp = (SmartInstantiationAwareBeanPostProcessor) bp;
+                    exposedObject = ibp.getEarlyBeanReference(exposedObject, beanName);
+                }
+            }
+        }
+        // 如果bean没有被替换，则返回传入的bean
+        // 如果bean被替换了，则返回替换后的bean
+        return exposedObject;
     }
 }
 ```

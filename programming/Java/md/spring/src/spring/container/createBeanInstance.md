@@ -48,7 +48,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 // 处理autowire="constructor"自动装配，并创建bean
                 return autowireConstructor(beanName, mbd, null, null);
             } else {
-                // 使用默认构造方法创建bean
+                // 使用默认无参构造方法创建bean
                 return instantiateBean(beanName, mbd);
             }
         }
@@ -64,7 +64,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             return autowireConstructor(beanName, mbd, ctors, args);
         }
 
-        // 使用默认构造方法创建bean
+        // 使用默认无参构造方法创建bean
         return instantiateBean(beanName, mbd);
     }
 

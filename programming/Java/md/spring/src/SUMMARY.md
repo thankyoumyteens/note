@@ -45,7 +45,9 @@
             - [Spring的后置处理器](./spring/container/resolveBeforeInstantiation.md)
             - [常规创建bean](./spring/container/doCreateBean.md)
                 - [创建bean对象](./spring/container/createBeanInstance.md)
-                - [自动装配构造方法](./spring/container/autowireConstructor.md)
+                - [自动装配构造方法创建bean](./spring/container/autowireConstructor.md)
+                - [使用默认无参构造方法创建bean](./spring/container/instantiateBean.md)
+                - [填充bean属性](./spring/container/populateBean.md)
                 - [使用工厂创建bean](./spring/container/instantiateUsingFactoryMethod.md)
 
 - [SpringBoot](./springboot/springboot.md)

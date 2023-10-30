@@ -1,4 +1,4 @@
-# 自动装配构造方法
+# 自动装配构造方法创建bean
 
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory
@@ -238,16 +238,43 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
         if (!bd.hasMethodOverrides()) {
             // 不需要替换方法
             if (System.getSecurityManager() != null) {
-                // use own privileged to change accessibility (when security is on)
+                // 校验权限
                 AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
                     ReflectionUtils.makeAccessible(ctor);
                     return null;
                 });
             }
+            // 调用有参或者无参的构造方法
             return (args != null ? BeanUtils.instantiateClass(ctor, args) : BeanUtils.instantiateClass(ctor));
         } else {
             // 需要替换方法
+            // 这个方法会被子类CglibSubclassingInstantiationStrategy重写
+            // 通过cglib动态代理实现方法的替换
             return instantiateWithMethodInjection(bd, beanName, owner, ctor, args);
+        }
+    }
+}
+
+public abstract class BeanUtils {
+
+    /**
+     * 构造方法反射创建对象
+     */
+    public static <T> T instantiateClass(Constructor<T> ctor, Object... args) throws BeanInstantiationException {
+        Assert.notNull(ctor, "Constructor must not be null");
+        try {
+            // 反射调用Constructor::newInstance()
+            ReflectionUtils.makeAccessible(ctor);
+            return (KotlinDetector.isKotlinType(ctor.getDeclaringClass()) ?
+                    KotlinDelegate.instantiateClass(ctor, args) : ctor.newInstance(args));
+        } catch (InstantiationException ex) {
+            throw new BeanInstantiationException(ctor, "Is it an abstract class?", ex);
+        } catch (IllegalAccessException ex) {
+            throw new BeanInstantiationException(ctor, "Is the constructor accessible?", ex);
+        } catch (IllegalArgumentException ex) {
+            throw new BeanInstantiationException(ctor, "Illegal arguments for constructor", ex);
+        } catch (InvocationTargetException ex) {
+            throw new BeanInstantiationException(ctor, "Constructor threw exception", ex.getTargetException());
         }
     }
 }

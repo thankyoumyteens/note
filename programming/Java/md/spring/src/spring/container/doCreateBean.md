@@ -1,4 +1,4 @@
-# 常规创建bean
+# 常规创建 bean
 
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
@@ -61,7 +61,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
         Object exposedObject = bean;
         try {
-            // 填充bean，注入属性值，如果依赖其它的bean，会递归去初始化其它的bean
+            // 填充bean属性，注入属性值，如果依赖其它的bean，会递归去初始化其它的bean
             populateBean(beanName, mbd, instanceWrapper);
             // 调用初始化方法，这里面也会调用后置处理器InstantiationAwareBeanPostProcessor
             // bean对象可能会被代理对象替换

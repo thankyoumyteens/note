@@ -1,4 +1,4 @@
-# 使用工厂创建bean
+# 使用工厂创建 bean
 
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
