@@ -49,7 +49,7 @@ MESI协议是弱一致性，由于使用了store buffer，不能保证一个线�
 public class SingletonObj {
     private static SingletonObj singleton = null;
 
-    private Singleton1() {}
+    private SingletonObj() {}
 
     public static SingletonObj getInstance() {
         if (singleton == null) {
@@ -67,7 +67,7 @@ public class SingletonObj {
 public class SingletonObj {
     private static SingletonObj singleton = null;
 
-    private Singleton1() {}
+    private SingletonObj() {}
 
     public static SingletonObj getInstance() {
         if (singleton == null) {
@@ -96,13 +96,23 @@ public class SingletonObj {
 2. 将对象内存空间的地址赋值给对应的引用类型变量
 3. 调用`<init>()`方法初始化对象
 
-时间 | 线程A | 线程B
---|--|--
-t1 | 分配内存空间 | 
-t2 | 将对象内存空间的地址赋值给singleton变量 |
-t3 |  | 判断singleton是否为空
-t4 |  | 由于singleton不为null，线程B将访问singleton指向的对象
-t5 | 调用`<init>()`方法初始化对象 | 
+CPU时间片 | 线程A | 线程B | 线程C
+--|--|--|--
+t1 | 第一次判断singleton是否为null | - | -
+t2 | singleton为null，加锁 | - | -
+t3 | 第二次判断singleton是否为null | - | -
+t4 | - | - | 第一次判断singleton是否为null
+t5 | - | - | singleton为null，加锁，加锁失败，开始阻塞等待锁
+t6 | singleton为null，开始创建对象 | - | -
+t7 | 为对象分配内存空间 | - | -
+t8 | 将对象内存空间的地址赋值给singleton变量 | - | -
+t9 | - | 第一次判断singleton是否为null | -
+t10 | - | singleton不为null，访问singleton指向的对象 | -
+t11 | 调用`<init>()`方法初始化对象 | - | -
+t12 | 释放锁 | - | -
+t13 | - | - | 获取到锁，继续执行
+t14 | - | - | 第二次判断singleton是否为null
+t15 | - | - | singleton不为null，访问singleton指向的对象
 
 按照这样的顺序执行，线程B将会获得一个未初始化的对象。
 
@@ -121,7 +131,7 @@ public class SingletonObj {
     // 禁止指令重排序
     private static volatile SingletonObj singleton = null;
 
-    private Singleton1() {}
+    private SingletonObj() {}
 
     public static SingletonObj getInstance() {
         if (singleton == null) {
