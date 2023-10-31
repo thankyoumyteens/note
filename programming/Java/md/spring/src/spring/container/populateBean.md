@@ -86,26 +86,25 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      */
     protected void autowireByName(
             String beanName, AbstractBeanDefinition mbd, BeanWrapper bw, MutablePropertyValues pvs) {
-
+        // 获取bw中需要依赖注入的属性列表
         String[] propertyNames = unsatisfiedNonSimpleProperties(mbd, bw);
         for (String propertyName : propertyNames) {
+            // 只有bean需要注入
             if (containsBean(propertyName)) {
+                // 创建bean
                 Object bean = getBean(propertyName);
+                // 把属性存入pvs中
                 pvs.add(propertyName, bean);
+                // 注册propertyName和beanName的依赖关系
+                // 实现在销毁propertyName指向的bean之前先把beanName指向的bean销毁
                 registerDependentBean(propertyName, beanName);
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Added autowiring by name from bean name '" + beanName +
-                            "' via property '" + propertyName + "' to bean named '" + propertyName + "'");
-                }
-            } else {
-                if (logger.isTraceEnabled()) {
-                    logger.trace("Not autowiring property '" + propertyName + "' of bean '" + beanName +
-                            "' by name: no matching bean found");
-                }
             }
         }
     }
 
+    /**
+     * byType
+     */
     protected void autowireByType(
             String beanName, AbstractBeanDefinition mbd, BeanWrapper bw, MutablePropertyValues pvs) {
 
@@ -115,27 +114,25 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         Set<String> autowiredBeanNames = new LinkedHashSet<>(4);
+        // 获取bw中需要依赖注入的属性列表
         String[] propertyNames = unsatisfiedNonSimpleProperties(mbd, bw);
         for (String propertyName : propertyNames) {
             try {
                 PropertyDescriptor pd = bw.getPropertyDescriptor(propertyName);
-                // Don't try autowiring by type for type Object: never makes sense,
-                // even if it technically is a unsatisfied, non-simple property.
                 if (Object.class != pd.getPropertyType()) {
+                    // 查找指定属性的setter
                     MethodParameter methodParam = BeanUtils.getWriteMethodParameter(pd);
-                    // Do not allow eager init for type matching in case of a prioritized post-processor.
                     boolean eager = !(bw.getWrappedInstance() instanceof PriorityOrdered);
                     DependencyDescriptor desc = new AutowireByTypeDependencyDescriptor(methodParam, eager);
+                    // 寻找与属性类型匹配的bean
                     Object autowiredArgument = resolveDependency(desc, beanName, autowiredBeanNames, converter);
                     if (autowiredArgument != null) {
+                        // 把属性存入pvs中
                         pvs.add(propertyName, autowiredArgument);
                     }
                     for (String autowiredBeanName : autowiredBeanNames) {
+                        // 注册autowiredBeanName和beanName的依赖关系
                         registerDependentBean(autowiredBeanName, beanName);
-                        if (logger.isDebugEnabled()) {
-                            logger.debug("Autowiring by type from bean name '" + beanName + "' via property '" +
-                                    propertyName + "' to bean named '" + autowiredBeanName + "'");
-                        }
                     }
                     autowiredBeanNames.clear();
                 }
@@ -224,6 +221,115 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         } catch (BeansException ex) {
             throw new BeanCreationException(
                     mbd.getResourceDescription(), beanName, "Error setting property values", ex);
+        }
+    }
+}
+
+public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory
+        implements ConfigurableListableBeanFactory, BeanDefinitionRegistry, Serializable {
+
+    public Object resolveDependency(DependencyDescriptor descriptor, @Nullable String requestingBeanName,
+                                    @Nullable Set<String> autowiredBeanNames, @Nullable TypeConverter typeConverter) throws BeansException {
+
+        descriptor.initParameterNameDiscovery(getParameterNameDiscoverer());
+        if (Optional.class == descriptor.getDependencyType()) {
+            return createOptionalDependency(descriptor, requestingBeanName);
+        } else if (ObjectFactory.class == descriptor.getDependencyType() ||
+                ObjectProvider.class == descriptor.getDependencyType()) {
+            return new DependencyObjectProvider(descriptor, requestingBeanName);
+        } else if (javaxInjectProviderClass == descriptor.getDependencyType()) {
+            return new Jsr330ProviderFactory().createDependencyProvider(descriptor, requestingBeanName);
+        } else {
+            Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary(
+                    descriptor, requestingBeanName);
+            if (result == null) {
+                result = doResolveDependency(descriptor, requestingBeanName, autowiredBeanNames, typeConverter);
+            }
+            return result;
+        }
+    }
+
+    @Nullable
+    public Object doResolveDependency(DependencyDescriptor descriptor, @Nullable String beanName,
+                                      @Nullable Set<String> autowiredBeanNames, @Nullable TypeConverter typeConverter) throws BeansException {
+
+        InjectionPoint previousInjectionPoint = ConstructorResolver.setCurrentInjectionPoint(descriptor);
+        try {
+            Object shortcut = descriptor.resolveShortcut(this);
+            if (shortcut != null) {
+                return shortcut;
+            }
+
+            Class<?> type = descriptor.getDependencyType();
+            // 处理@Value注解
+            Object value = getAutowireCandidateResolver().getSuggestedValue(descriptor);
+            if (value != null) {
+                if (value instanceof String) {
+                    String strVal = resolveEmbeddedValue((String) value);
+                    BeanDefinition bd = (beanName != null && containsBean(beanName) ? getMergedBeanDefinition(beanName) : null);
+                    value = evaluateBeanDefinitionString(strVal, bd);
+                }
+                TypeConverter converter = (typeConverter != null ? typeConverter : getTypeConverter());
+                return (descriptor.getField() != null ?
+                        converter.convertIfNecessary(value, type, descriptor.getField()) :
+                        converter.convertIfNecessary(value, type, descriptor.getMethodParameter()));
+            }
+
+            Object multipleBeans = resolveMultipleBeans(descriptor, beanName, autowiredBeanNames, typeConverter);
+            if (multipleBeans != null) {
+                return multipleBeans;
+            }
+
+            Map<String, Object> matchingBeans = findAutowireCandidates(beanName, type, descriptor);
+            if (matchingBeans.isEmpty()) {
+                if (isRequired(descriptor)) {
+                    raiseNoMatchingBeanFound(type, descriptor.getResolvableType(), descriptor);
+                }
+                return null;
+            }
+
+            String autowiredBeanName;
+            Object instanceCandidate;
+
+            if (matchingBeans.size() > 1) {
+                autowiredBeanName = determineAutowireCandidate(matchingBeans, descriptor);
+                if (autowiredBeanName == null) {
+                    if (isRequired(descriptor) || !indicatesMultipleBeans(type)) {
+                        return descriptor.resolveNotUnique(type, matchingBeans);
+                    } else {
+                        // In case of an optional Collection/Map, silently ignore a non-unique case:
+                        // possibly it was meant to be an empty collection of multiple regular beans
+                        // (before 4.3 in particular when we didn't even look for collection beans).
+                        return null;
+                    }
+                }
+                instanceCandidate = matchingBeans.get(autowiredBeanName);
+            } else {
+                // We have exactly one match.
+                Map.Entry<String, Object> entry = matchingBeans.entrySet().iterator().next();
+                autowiredBeanName = entry.getKey();
+                instanceCandidate = entry.getValue();
+            }
+
+            if (autowiredBeanNames != null) {
+                autowiredBeanNames.add(autowiredBeanName);
+            }
+            if (instanceCandidate instanceof Class) {
+                instanceCandidate = descriptor.resolveCandidate(autowiredBeanName, type, this);
+            }
+            Object result = instanceCandidate;
+            if (result instanceof NullBean) {
+                if (isRequired(descriptor)) {
+                    raiseNoMatchingBeanFound(type, descriptor.getResolvableType(), descriptor);
+                }
+                result = null;
+            }
+            if (!ClassUtils.isAssignableValue(type, result)) {
+                throw new BeanNotOfRequiredTypeException(autowiredBeanName, type, instanceCandidate.getClass());
+            }
+            return result;
+        } finally {
+            ConstructorResolver.setCurrentInjectionPoint(previousInjectionPoint);
         }
     }
 }
