@@ -2,6 +2,10 @@
     - [路径操作](./io/路径操作.md)
     - [文件操作](./io/文件操作.md)
 
+- [subprocess](./subprocess/subprocess.md)
+    - [Popen](./subprocess/Popen.md)
+    - [run](./subprocess/run.md)
+
 - [正则表达式](./regex/regex.md)
     - [查找](./regex/查找.md)
     - [分组](./regex/分组.md)
@@ -31,3 +35,8 @@
 
 - [Excel](./excel/excel.md)
     - [excel字母列号与数字列号之间的转换](./excel/excel字母列号与数字列号之间的转换.md)
+
+- [selenium](./selenium/selenium.md)
+    - [安装selenium](./selenium/安装selenium.md)
+    - [等待元素出现](./selenium/等待元素出现.md)
+    - [模拟登录](./selenium/模拟登录.md)
