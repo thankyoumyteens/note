@@ -48,6 +48,7 @@
                 - [自动装配构造方法创建bean](./spring/container/autowireConstructor.md)
                 - [使用默认无参构造方法创建bean](./spring/container/instantiateBean.md)
                 - [填充bean属性](./spring/container/populateBean.md)
+                - [初始化bean](./spring/container/initializeBean.md)
                 - [使用工厂创建bean](./spring/container/instantiateUsingFactoryMethod.md)
 
 - [SpringBoot](./springboot/springboot.md)

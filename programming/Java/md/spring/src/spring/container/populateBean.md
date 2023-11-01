@@ -118,6 +118,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         String[] propertyNames = unsatisfiedNonSimpleProperties(mbd, bw);
         for (String propertyName : propertyNames) {
             try {
+                // 获取属性描述符
                 PropertyDescriptor pd = bw.getPropertyDescriptor(propertyName);
                 if (Object.class != pd.getPropertyType()) {
                     // 查找指定属性的setter
@@ -152,12 +153,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         MutablePropertyValues mpvs = null;
+        // 待处理列表
         List<PropertyValue> original;
 
         if (pvs instanceof MutablePropertyValues) {
+            // 如果 pvs 是默认实现方式，则可以直接转换
             mpvs = (MutablePropertyValues) pvs;
             if (mpvs.isConverted()) {
-                // Shortcut: use the pre-converted values as-is.
                 try {
                     bw.setPropertyValues(mpvs);
                     return;
@@ -166,6 +168,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                             mbd.getResourceDescription(), beanName, "Error setting property values", ex);
                 }
             }
+            // 等待后续处理
             original = mpvs.getPropertyValueList();
         } else {
             original = Arrays.asList(pvs.getPropertyValues());
@@ -177,24 +180,26 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
         BeanDefinitionValueResolver valueResolver = new BeanDefinitionValueResolver(this, beanName, mbd, converter);
 
-        // Create a deep copy, resolving any references for values.
+        // 给属性创建一份深拷贝
         List<PropertyValue> deepCopy = new ArrayList<>(original.size());
         boolean resolveNecessary = false;
         for (PropertyValue pv : original) {
             if (pv.isConverted()) {
+                // 如果已经转换，不需要再转换，直接加入
                 deepCopy.add(pv);
             } else {
                 String propertyName = pv.getName();
                 Object originalValue = pv.getValue();
+                // 给定一个 PropertyValue，返回一个转换后的值，必要时解析对工厂中其他 bean 的任何引用
                 Object resolvedValue = valueResolver.resolveValueIfNecessary(pv, originalValue);
                 Object convertedValue = resolvedValue;
+                // 判断是否为可转换且非嵌套属性
                 boolean convertible = bw.isWritableProperty(propertyName) &&
                         !PropertyAccessorUtils.isNestedOrIndexedProperty(propertyName);
                 if (convertible) {
+                    // 转换属性
                     convertedValue = convertForProperty(resolvedValue, propertyName, bw, converter);
                 }
-                // Possibly store converted value in merged bean definition,
-                // in order to avoid re-conversion for every created bean instance.
                 if (resolvedValue == originalValue) {
                     if (convertible) {
                         pv.setConvertedValue(convertedValue);
@@ -212,10 +217,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             }
         }
         if (mpvs != null && !resolveNecessary) {
+            // 标记转换完成
             mpvs.setConverted();
         }
 
-        // Set our (possibly massaged) deep copy.
         try {
             bw.setPropertyValues(new MutablePropertyValues(deepCopy));
         } catch (BeansException ex) {
@@ -228,10 +233,14 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory
         implements ConfigurableListableBeanFactory, BeanDefinitionRegistry, Serializable {
 
+    /**
+     * 解析指定依赖项
+     */
     public Object resolveDependency(DependencyDescriptor descriptor, @Nullable String requestingBeanName,
                                     @Nullable Set<String> autowiredBeanNames, @Nullable TypeConverter typeConverter) throws BeansException {
 
         descriptor.initParameterNameDiscovery(getParameterNameDiscoverer());
+        // 根据依赖项的类型进行不同的处理
         if (Optional.class == descriptor.getDependencyType()) {
             return createOptionalDependency(descriptor, requestingBeanName);
         } else if (ObjectFactory.class == descriptor.getDependencyType() ||
@@ -240,9 +249,11 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         } else if (javaxInjectProviderClass == descriptor.getDependencyType()) {
             return new Jsr330ProviderFactory().createDependencyProvider(descriptor, requestingBeanName);
         } else {
+            // 用于@Lazy注解，解决循环依赖
             Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary(
                     descriptor, requestingBeanName);
             if (result == null) {
+                // 解析指定依赖项
                 result = doResolveDependency(descriptor, requestingBeanName, autowiredBeanNames, typeConverter);
             }
             return result;
@@ -274,12 +285,12 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
                         converter.convertIfNecessary(value, type, descriptor.getField()) :
                         converter.convertIfNecessary(value, type, descriptor.getMethodParameter()));
             }
-
+            // 尝试解析包含多个 bean 的依赖对象，如集合、数组、Map 等
             Object multipleBeans = resolveMultipleBeans(descriptor, beanName, autowiredBeanNames, typeConverter);
             if (multipleBeans != null) {
                 return multipleBeans;
             }
-
+            // 查找所需类型的依赖
             Map<String, Object> matchingBeans = findAutowireCandidates(beanName, type, descriptor);
             if (matchingBeans.isEmpty()) {
                 if (isRequired(descriptor)) {
@@ -292,20 +303,18 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
             Object instanceCandidate;
 
             if (matchingBeans.size() > 1) {
+                // 存在多个类型相同的依赖，确定使用哪个依赖
                 autowiredBeanName = determineAutowireCandidate(matchingBeans, descriptor);
                 if (autowiredBeanName == null) {
                     if (isRequired(descriptor) || !indicatesMultipleBeans(type)) {
                         return descriptor.resolveNotUnique(type, matchingBeans);
                     } else {
-                        // In case of an optional Collection/Map, silently ignore a non-unique case:
-                        // possibly it was meant to be an empty collection of multiple regular beans
-                        // (before 4.3 in particular when we didn't even look for collection beans).
                         return null;
                     }
                 }
                 instanceCandidate = matchingBeans.get(autowiredBeanName);
             } else {
-                // We have exactly one match.
+                // 只查到一个依赖
                 Map.Entry<String, Object> entry = matchingBeans.entrySet().iterator().next();
                 autowiredBeanName = entry.getKey();
                 instanceCandidate = entry.getValue();
