@@ -30,7 +30,8 @@ opt.binary_location = "C:/ungoogled-chromium_112.0.5615.138-1.1_windows/chrome.e
 driver_path = "C:/ChromeDriver_112.0.5615.28_win32/chromedriver.exe"
 
 driver = webdriver.Chrome(options=opt, executable_path=driver_path)
-
+# 设置浏览器的大小
+driver.set_window_size(1400,800)
 # 打开网页
 driver.get("https://www.baidu.com")
 sleep(3)
