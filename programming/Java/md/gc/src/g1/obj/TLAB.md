@@ -59,8 +59,8 @@ JVM 还提供了一个参数-XX:TLABWasteIncrement，默认值为 4 个字，用
 
 TLAB 慢速分配具体有以下两种情况：
 
-1. 如果 TLAB 的剩余空间过小，那么就对老 TLAB 进行填充一个 dummy 对象，然后去申请一个新的 TLAB。G1 在扫描时，当遇到对象时会一整个跳过，而遇到空白区域时则需要一个字一个字的来扫描，这势必影响效率，为此，G1 通过为这些空白区域也分配一个空对象，即 dummy 对象，从而让扫描变得更快
-2. 如果 TLAB 的剩余空间并不小，那么就更新 refill_waste_limit 的值，然后不使用 TLAB 进行分配，直接返回 NULL，让 JVM 去堆中分配
+1. 如果 TLAB 的剩余空间小于或等于 refill_waste_limit，那么就对这个 TLAB 进行填充一个 dummy 对象，然后去申请一个新的 TLAB。G1 在扫描时，当遇到对象时会一整个跳过，而遇到空白区域时则需要一个字一个字的来扫描，这势必影响效率，为此，G1 通过为这些空白区域也分配一个空对象，即 dummy 对象，从而让扫描变得更快
+2. 如果 TLAB 的剩余空间大于 refill_waste_limit，虽然不够分配当前这个对象，但是可以用来分配其他小一点的对象，那么这次就不使用 TLAB 进行分配，直接返回 NULL，让 JVM 去堆中分配，并且增大 refill_waste_limit 的值。这样，refill_waste_limit 就会随着 JVM 的运行不断增大，从而使 TLAB 可以逐渐分配更大的对象，减少去堆中分配对象的次数
 
 > jdk8u60-master\hotspot\src\share\vm\gc_interface\collectedHeap.cpp
 
