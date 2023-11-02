@@ -41,7 +41,6 @@
     - [Java堆](./memory/heap/Java堆.md)
         - [内存分配与垃圾回收](./memory/heap/内存分配与垃圾回收.md)
         - [TLAB](./memory/heap/TLAB.md)
-        - [堆空间常用JVM参数](./memory/heap/堆空间常用JVM参数.md)
     - [方法区](./memory/方法区.md)
     - [对象](./memory/object/对象.md)
         - [对象的创建](./memory/object/对象的创建.md)

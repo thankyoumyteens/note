@@ -1,5 +1,6 @@
 - [文件](./io/io.md)
     - [路径操作](./io/路径操作.md)
+    - [pathlib](./io/pathlib.md)
     - [文件操作](./io/文件操作.md)
 
 - [subprocess](./subprocess/subprocess.md)
