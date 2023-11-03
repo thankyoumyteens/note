@@ -1,3 +1,7 @@
+- [基本语法](./base/base.md)
+    - [字符串格式化](./base/字符串格式化.md)
+    - [日期格式化](./base/日期格式化.md)
+
 - [文件](./io/io.md)
     - [路径操作](./io/路径操作.md)
     - [pathlib](./io/pathlib.md)
