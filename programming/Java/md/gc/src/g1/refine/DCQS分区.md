@@ -5,7 +5,7 @@ DCQS 分为 4 个区：白、绿、黄、红，由 Green、Yellow 和 Red 三个
 1. 白区：`[0，Green)`，对于该区，Refine 线程并不处理，交由 GC 线程来处理 DCQ
 2. 绿区：`[Green，Yellow)`，在该区中，Refine 线程开始启动，并且根据 DCQS 的大小启动不同数量的 Refine 线程来处理 DCQ
 3. 黄区：`[Yellow，Red)`，在该区，所有的 Refine 线程(除了抽样线程)都参与 DCQ 处理
-4. 红区：`[Red，+∞)`，在该区，不仅仅所有的 Refine 线程参与处理 RSet，用户线程也会参与处理 DCQ
+4. 红区：`[Red，+∞)`，在该区，不仅仅所有的 Refine 线程参与处理 RSet，Java 线程也会参与处理 DCQ
 
 Green、Yellow 和 Red 三个值通过三个参数设置：-XX:G1ConcRefinementGreenZone、-XX:G1ConcRefinementYellowZone、-XX:G1ConcRefinementRedZone，默认值都是 0。如果没有设置这三个值，G1 则自动推断这三个区的阈值大小。
 

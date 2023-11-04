@@ -2,10 +2,10 @@
 
 JVM 在每次给引用类型的字段赋值时，会通过写屏障把引用者对象在全局卡表中所在的 card 插入到 dirty card queue(DCQ)中。DCQ 分为两种：
 
-1. 每个用户线程都有一个自己的 DCQ，DCQ 的大小由参数-XX:G1UpdateBufferSize 设置，默认值是 256，表示最多可以存放 256 个引用关系
-2. JVM 有一个全局的 DCQ，所有用户线程共享这个 DCQ
+1. 每个 Java 线程都有一个自己的 DCQ，DCQ 的大小由参数-XX:G1UpdateBufferSize 设置，默认值是 256，表示最多可以存放 256 个引用关系
+2. JVM 有一个全局的 DCQ，所有 Java 线程共享这个 DCQ
 
-JVM 中有一个全局的 dirty card queue set(DCQS)用于存放已经满了的 DCQ。当 DCQ 已放满 256 个引用关系时，用户线程会把这个 DCQ 添加到 DCQS 中。如果在添加时发现 DCQS 已经满了，那么说明引用变更太多了，Refine 线程已经处理不过来了，用户线程就不会继续往 DCQS 里添加了，并且这个用户线程会暂停其他代码执行，替代 Refine 线程来更新 RSet。
+JVM 中有一个全局的 dirty card queue set(DCQS)用于存放已经满了的 DCQ。当 DCQ 已放满 256 个引用关系时，Java 线程会把这个 DCQ 添加到 DCQS 中。如果在添加时发现 DCQS 已经满了，那么说明引用变更太多了，Refine 线程已经处理不过来了，Java 线程就不会继续往 DCQS 里添加了，并且这个 Java 线程会暂停其他代码执行，替代 Refine 线程来更新 RSet。
 
 把对象加入到 DCQ 的代码：
 
@@ -73,10 +73,10 @@ void PtrQueue::handle_zero_index() {
         return;
       }
     } else {
-      // 把用户线程的DCQ放入到DCQS中
+      // 把Java线程的DCQ放入到DCQS中
       // qset()方法返回DCQS
       if (qset()->process_or_enqueue_complete_buffer(_buf)) {
-        // 返回值为真，说明用户线程暂停执行应用代码，帮助处理DCQ，
+        // 返回值为真，说明Java线程暂停执行应用代码，帮助处理DCQ，
         // 把这个DCQ清空，重用DCQ
         _sz = qset()->buffer_size();
         _index = _sz;
@@ -109,23 +109,23 @@ void PtrQueue::locking_enqueue_completed_buffer(void** buf) {
 }
 
 /**
- * 把用户线程的DCQ放入到DCQS中
+ * 把Java线程的DCQ放入到DCQS中
  */
 bool PtrQueueSet::process_or_enqueue_complete_buffer(void** buf) {
-  // 检查是否需要用户线程帮忙更新RSet
+  // 检查是否需要Java线程帮忙更新RSet
   if (Thread::current()->is_Java_thread()) {
     // 需要
     if (_max_completed_queue == 0 || _max_completed_queue > 0 &&
         _n_completed_buffers >= _max_completed_queue + _completed_queue_padding) {
-      // 用户线程处理DCQ
+      // Java线程处理DCQ
       bool b = mut_process_buffer(buf);
       if (b) {
-        // 返回值为true，表示用户线程暂停执行应用代码，帮助处理DCQ，
+        // 返回值为true，表示Java线程暂停执行应用代码，帮助处理DCQ，
         return true;
       }
     }
   }
-  // 把用户线程的DCQ放入到DCQS中
+  // 把Java线程的DCQ放入到DCQS中
   enqueue_complete_buffer(buf);
   return false;
 }

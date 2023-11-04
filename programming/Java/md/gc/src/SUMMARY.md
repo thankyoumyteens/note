@@ -1,6 +1,7 @@
 # Summary
 
 - [G1](./g1/g1.md)
+    - [Oop-Klass对象模型](./g1/Oop-Klass对象模型.md)
     - [Region](./g1/region/Region.md)
     - [对象分配](./g1/obj/对象分配.md)
         - [TLAB](./g1/obj/TLAB.md)
@@ -17,6 +18,5 @@
             - [DCQS分区](./g1/refine/DCQS分区.md)
     - [Young GC](./g1/ygc/ygc.md)
         - [并行任务处理](./g1/ygc/并行任务处理.md)
-            - [Oop-Klass对象模型](./g1/ygc/Oop-Klass对象模型.md)
             - [根处理](./g1/ygc/根处理.md)
             - [RSet处理](./g1/ygc/RSet处理.md)
