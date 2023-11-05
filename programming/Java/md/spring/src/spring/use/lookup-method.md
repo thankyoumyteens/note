@@ -1,8 +1,8 @@
-# 解析lookup-method子标签
+# lookup-method
 
-lookup-method是一种特殊的方法注入，它把一个方法声明为返回某种类型的bean，但实际要返回的bean是在配置文件里面配置的。
+lookup-method 是一种特殊的方法注入，它把一个方法声明为返回某种类型的 bean，但实际要返回的 bean 是在配置文件里面配置的。
 
-## lookup-method的用法
+## lookup-method 的用法
 
 1. 创建一个父类：
 
@@ -14,7 +14,7 @@ public class User {
 }
 ```
 
-2. 创建一个子类，并覆盖showMe()方法：
+2. 创建一个子类，并覆盖 showMe()方法：
 
 ```java
 public class Teacher extends User {
@@ -48,7 +48,7 @@ public static void main(String[] args) {
 }
 ```
 
-5. xml配置文件：
+5. xml 配置文件：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -72,29 +72,4 @@ public static void main(String[] args) {
 
 ```
 i am teacher
-```
-
-## 解析lookup-method标签
-
-```java
-public class BeanDefinitionParserDelegate {
-
-    public void parseLookupOverrideSubElements(Element beanEle, MethodOverrides overrides) {
-        NodeList nl = beanEle.getChildNodes();
-        for (int i = 0; i < nl.getLength(); i++) {
-            Node node = nl.item(i);
-            // lookup-method标签只有在bean标签内才生效
-            if (isCandidateElement(node) && nodeNameEquals(node, LOOKUP_METHOD_ELEMENT)) {
-                Element ele = (Element) node;
-                // 获取配置返回的bean
-                String methodName = ele.getAttribute(NAME_ATTRIBUTE);
-                String beanRef = ele.getAttribute(BEAN_ELEMENT);
-                LookupOverride override = new LookupOverride(methodName, beanRef);
-                override.setSource(extractSource(ele));
-                // 保存到BeanDefinition的methodOverrides字段中
-                overrides.addOverride(override);
-            }
-        }
-    }
-}
 ```

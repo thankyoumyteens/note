@@ -1,9 +1,8 @@
-# 注册BeanDefinition
+# 注册 BeanDefinition
 
-bean标签解析完成后，spring会把解析好的BeanDefinition对象注册到BeanDefinitionRegistry中。
+bean 标签解析完成后，spring 会把解析好的 BeanDefinition 对象注册到 BeanDefinitionRegistry 中。
 
-BeanDefinitionRegistry是一个注册中心，所有的BeanDefinition都会注册到它上面。想要获取BeanDefinition的时候，就可以通过beanName从这个注册中心获取。
-
+BeanDefinitionRegistry 是一个注册中心，所有的 BeanDefinition 都会注册到它上面。想要获取 BeanDefinition 的时候，就可以通过 beanName 从这个注册中心获取。
 
 ```java
 public class BeanDefinitionReaderUtils {
@@ -31,19 +30,19 @@ public class BeanDefinitionReaderUtils {
 }
 ```
 
-## 使用beanName注册bean
+## 使用 beanName 注册 bean
 
 ```java
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory
         implements ConfigurableListableBeanFactory, BeanDefinitionRegistry, Serializable {
-    
+
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)
             throws BeanDefinitionStoreException {
 
         if (beanDefinition instanceof AbstractBeanDefinition) {
             try {
                 // 注册前的最后一次校验，这里的校验不同于之前的XML文件校验，
-                // 主要是对于AbstractBeanDefinition中的methodOverrides的校验 
+                // 主要是对于AbstractBeanDefinition中的methodOverrides的校验
                 // 校验methodOverrides是否与工厂方法并存
                 // 或者methodOverrides对应的方法根本不存在
                 ((AbstractBeanDefinition) beanDefinition).validate();
@@ -104,7 +103,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 }
 ```
 
-## 使用别名注册bean
+## 使用别名注册 bean
 
 ```java
 public class SimpleAliasRegistry implements AliasRegistry {

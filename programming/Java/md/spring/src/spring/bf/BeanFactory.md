@@ -1,6 +1,6 @@
-# 使用BeanFactory
+# 使用 BeanFactory
 
-maven依赖：
+maven 依赖：
 
 ```xml
 <dependency>
@@ -10,11 +10,11 @@ maven依赖：
 </dependency>
 ```
 
-定义bean：
+定义 bean：
 
 ```java
-public class MyTestBean { 
-    private String testStr = "testStr"; 
+public class MyTestBean {
+    private String testStr = "testStr";
     public String getTestStr() {
         return testStr;
     }
@@ -41,15 +41,13 @@ public class MyTestBean {
 
 ```java
 public class BeanFactoryTest {
-    @Test
-    public void testSimpleLoad() {
+    public static void main(String[] args) {
         // 读取xml配置文件
         Resource resource = new ClassPathResource("beanFactoryTest.xml");
-        // 加载bean
+        // 创建BeanFactory
         BeanFactory bf = new XmlBeanFactory(resource);
         // 获取bean
         MyTestBean bean = (MyTestBean) bf.getBean("myTestBean");
-        assertEquals("testStr", bean.getTestStr());
     }
 }
 ```
