@@ -59,6 +59,7 @@
                 - [注册DisposableBean](./spring/bf/registerDisposableBeanIfNecessary.md)
     - [使用ApplicationContext](./spring/ac/ApplicationContext.md)
         - [ClassPathXmlApplicationContext](./spring/ac/ClassPathXmlApplicationContext.md)
+            - [准备工作](./spring/ac/prepareRefresh.md)
 
 - [SpringBoot](./springboot/springboot.md)
     - [多环境配置](./springboot/多环境配置.md)
