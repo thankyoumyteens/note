@@ -1,6 +1,6 @@
 # ClassPathResource
 
-Spring的配置文件读取是通过ClassPathResource进行封装的：
+Spring 的配置文件读取是通过 ClassPathResource 进行封装的：
 
 ```java
 Resource resource = new ClassPathResource("beanFactoryTest.xml");
@@ -8,17 +8,17 @@ Resource resource = new ClassPathResource("beanFactoryTest.xml");
 
 ![](../../img/ClassPathResource.png)
 
-## Resource接口
+## Resource 接口
 
-Spring使用Resource接口封装其内部使用到的资源。
+Spring 使用 Resource 接口封装其内部使用到的资源。
 
-Resource接口抽象了所有Spring内部使用到的底层资源，对不同来源的资源文件都有相应的Resource实现：
+Resource 接口抽象了所有 Spring 内部使用到的底层资源，对不同来源的资源文件都有相应的 Resource 实现：
 
 - 文件(FileSystemResource)
 - 类路径下的资源(ClassPathResource)
-- URL资源(UrlResource)
-- InputStream资源(InputStreamResource)
-- Byte数组(ByteArrayResource)
+- URL 资源(UrlResource)
+- InputStream 资源(InputStreamResource)
+- Byte 数组(ByteArrayResource)
 - 其他
 
 ```java

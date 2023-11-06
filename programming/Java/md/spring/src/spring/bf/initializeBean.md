@@ -104,7 +104,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 ((InitializingBean) bean).afterPropertiesSet();
             }
         }
-        // 调用init-method属性配置的方法
+        // 判断是否指定了init-method方法，
+        // 如果指定了init-method方法，则调用
         if (mbd != null && bean.getClass() != NullBean.class) {
             String initMethodName = mbd.getInitMethodName();
             if (StringUtils.hasLength(initMethodName) &&

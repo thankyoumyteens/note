@@ -1,4 +1,13 @@
-# 解析bean标签
+# 解析 bean 标签
+
+把一个 bean 标签解析成 BeanDefinition 的过程：
+
+1. spring 会为每个 bean 创建一个全局唯一的 beanName
+2. 首先取出 id 属性和 name 属性，如果设置了 id，就把 id 作为 beanName
+3. 如果没有设置 id，就把 name 作为 beanName，由于 name 属性可以设置多个(用逗号分隔)，spring 会把第一个 name 设置为 beanName，其他的 name 就当成这个 bean 的别名
+4. 如果 id 和 name 都没有设置，spring 会自己生成一个唯一的 beanName
+5. 然后 spring 会创建一个 BeanDefinition，并把 bean 标签的属性和子标签都存储到 BeanDefinition 中对应的字段上
+6. 最后 spring 会把 BeanDefinition 封装到一个 BeanDefinitionHolder 中返回
 
 ```java
 public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocumentReader {
@@ -14,37 +23,21 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
                 BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
             }
             catch (BeanDefinitionStoreException ex) {
-                getReaderContext().error("Failed to register bean definition with name '" +
-                        bdHolder.getBeanName() + "'", ele, ex);
+                // ...
             }
             // 通知相关的监听器，这个bean已经加载完成了
             getReaderContext().fireComponentRegistered(new BeanComponentDefinition(bdHolder));
         }
     }
 }
-```
 
-## 把bean标签解析成BeanDefinition
-
-BeanDefinition是是bean标签在Spring容器中的内部表示形式，类似于java.lang.Class是"类"这个概念在Java语言中的内部表示形式一样。bean标签的所有属性和子标签，在BeanDefinition中都有对应的字段。
-
-把一个bean标签解析成BeanDefinition的过程：
-
-1. spring会为每个bean创建一个全局唯一的beanName
-2. 首先取出id属性和name属性，如果设置了id，就把id作为beanName
-3. 如果没有设置id，就把name作为beanName，由于name属性可以设置多个(用逗号分隔)，spring会把第一个name设置为beanName，其他的name就当成这个bean的别名
-4. 如果id和name都没有设置，spring会自己生成一个唯一的beanName
-5. 然后spring会创建一个BeanDefinition，并把bean标签的属性和子标签都存储到BeanDefinition中对应的字段上
-6. 最后spring会把BeanDefinition封装到一个BeanDefinitionHolder中返回
-
-```java
 public class BeanDefinitionParserDelegate {
 
     public BeanDefinitionHolder parseBeanDefinitionElement(Element ele) {
         return parseBeanDefinitionElement(ele, null);
     }
 
-    // 解析bean标签，如：<bean id="myTestBean" class="bean.MyTestBean">
+    // 解析bean标签，如：<bean id="myTestBean" class="test.MyTestBean">
     public BeanDefinitionHolder parseBeanDefinitionElement(
             Element ele, @Nullable BeanDefinition containingBean) {
         // 获取id属性，ID_ATTRIBUTE = "id"
@@ -97,7 +90,7 @@ public class BeanDefinitionParserDelegate {
                         // 如果满足这些条件，那么就将这个类名添加到别名列表中
                         String beanClassName = beanDefinition.getBeanClassName();
                         if (beanClassName != null &&
-                                beanName.startsWith(beanClassName) && 
+                                beanName.startsWith(beanClassName) &&
                                 beanName.length() > beanClassName.length() &&
                                 !this.readerContext.getRegistry().isBeanNameInUse(beanClassName)) {
                             aliases.add(beanClassName);
@@ -155,7 +148,7 @@ public class BeanDefinitionParserDelegate {
             parsePropertyElements(ele, bd);
             // 解析qualifier子标签
             parseQualifierElements(ele, bd);
-            // 记录bean的来源
+            // 记录bean的来源xml文件
             bd.setResource(this.readerContext.getResource());
             bd.setSource(extractSource(ele));
 

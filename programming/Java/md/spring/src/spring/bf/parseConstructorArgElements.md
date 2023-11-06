@@ -1,27 +1,4 @@
-# 解析constructor-arg子标签
-
-使用构造方法注入时，可以使用constructor-arg子标签，来指定构造方法的参数。
-
-```xml
-<bean id="teacher" class="test.Teacher">
-
-<bean id="testBean" class="test.TestBean">
-  <!-- 使用value属性指定constructor-arg的值 -->
-  <constructor-arg type="score" value="7500000"/>
-  <!-- 使用ref属性指定constructor-arg的值 -->
-  <constructor-arg type="teacher" ref="teacher"/>
-  <!-- 使用子标签指定constructor-arg的值 -->
-  <constructor-arg type="dream">
-    <list>
-        <value>soldier</value>
-        <value>scientist</value>
-        <value>pilot</value>
-    </list>
-  </constructor-arg>
-</bean>
-```
-
-parseConstructorArgElements()方法会解析bean的constructor-arg子标签。
+# 解析 constructor-arg 子标签
 
 ```java
 public class BeanDefinitionParserDelegate {
@@ -39,20 +16,20 @@ public class BeanDefinitionParserDelegate {
     }
 
     public void parseConstructorArgElement(Element ele, BeanDefinition bd) {
-        // 对应用法：<constructor-arg index="0" value="7500000"/>
+        // 获取index属性
         String indexAttr = ele.getAttribute(INDEX_ATTRIBUTE);
-        // 对应用法：<constructor-arg type="int" value="7500000"/>
+        // 获取type属性
         String typeAttr = ele.getAttribute(TYPE_ATTRIBUTE);
-        // 对应用法：<constructor-arg name="score" value="7500000"/>
+        // 获取name属性
         String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
         if (StringUtils.hasLength(indexAttr)) {
             // 如果指定了index属性
             try {
                 int index = Integer.parseInt(indexAttr);
+                // index从0开始
                 if (index < 0) {
                     error("'index' cannot be lower than 0", ele);
-                }
-                else {
+                } else {
                     try {
                         this.parseState.push(new ConstructorArgumentEntry(index));
                         // 解析constructor-arg的值
@@ -69,23 +46,19 @@ public class BeanDefinitionParserDelegate {
                         // index已存在，不允许重复指定
                         if (bd.getConstructorArgumentValues().hasIndexedArgumentValue(index)) {
                             error("Ambiguous constructor-arg entries for index " + index, ele);
-                        }
-                        else {
+                        } else {
                             // 添加到BeanDefinition的constructorArgumentValues中
-                            // 指定了index的参数存储到indexedArgumentValues中
+                            // index属性存储到indexedArgumentValues中
                             bd.getConstructorArgumentValues().addIndexedArgumentValue(index, valueHolder);
                         }
-                    }
-                    finally {
+                    } finally {
                         this.parseState.pop();
                     }
                 }
-            }
-            catch (NumberFormatException ex) {
+            } catch (NumberFormatException ex) {
                 error("Attribute 'index' of tag 'constructor-arg' must be an integer", ele);
             }
-        }
-        else {
+        } else {
             // 如果没有指定index属性
             try {
                 this.parseState.push(new ConstructorArgumentEntry());
@@ -101,7 +74,7 @@ public class BeanDefinitionParserDelegate {
                 }
                 valueHolder.setSource(extractSource(ele));
                 // 添加到BeanDefinition的constructorArgumentValues中
-                // 没有指定index的参数存储到genericArgumentValues中
+                // 没有指定index属性时，把属性存储到genericArgumentValues中
                 bd.getConstructorArgumentValues().addGenericArgumentValue(valueHolder);
             }
             finally {
@@ -115,11 +88,26 @@ public class BeanDefinitionParserDelegate {
         String elementName = (propertyName != null ?
                 "<property> element for property '" + propertyName + "'" :
                 "<constructor-arg> element");
-        // constructor-arg的值有两种配置形式
-        // 1. constructor-arg的value/ref属性
-        // 2. constructor-arg的value/ref/list/map等子标签
+        /*
+         * constructor-arg的值有两种配置形式
+         * 
+         * 1. 使用value/ref属性：
+         * <bean class="test.Student">
+         *   <constructor-arg name="name" value="张三"></constructor-arg>
+         * </bean>
+         * 
+         * 2. 使用value/ref/list/map等子标签：
+         * <bean class="test.Student">
+         *   <constructor-arg name="num">
+         *     <list>
+         *       <value>1</value>
+         *       <value>2</value>
+         *     </list>
+         *   </constructor-arg>
+         * </bean>
+         */
 
-        // 解析子标签
+        // 获取子标签
         NodeList nl = ele.getChildNodes();
         Element subElement = null;
         for (int i = 0; i < nl.getLength(); i++) {
@@ -136,7 +124,7 @@ public class BeanDefinitionParserDelegate {
                 }
             }
         }
-        // 解析value/ref属性
+        // 获取value/ref属性
         boolean hasRefAttribute = ele.hasAttribute(REF_ATTRIBUTE);
         boolean hasValueAttribute = ele.hasAttribute(VALUE_ATTRIBUTE);
         if ((hasRefAttribute && hasValueAttribute) ||
@@ -171,12 +159,13 @@ public class BeanDefinitionParserDelegate {
         }
     }
 
-    // 解析constructor-arg的子标签
+    /**
+     * 解析constructor-arg的子标签
+     */
     public Object parsePropertySubElement(Element ele, @Nullable BeanDefinition bd) {
         return parsePropertySubElement(ele, bd, null);
     }
 
-    // 解析constructor-arg的子标签
     public Object parsePropertySubElement(Element ele, @Nullable BeanDefinition bd, @Nullable String defaultValueType) {
         if (!isDefaultNamespace(ele)) {
             // 自定义标签

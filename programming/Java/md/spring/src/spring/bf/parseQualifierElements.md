@@ -1,6 +1,6 @@
-# 解析qualifier子标签
+# 解析 qualifier 子标签
 
-qualifier用于在有多个相同类型bean的时候指定bean的名称以消除歧义：
+qualifier 用于在有多个相同类型 bean 的时候指定 bean 的名称以消除歧义：
 
 ```java
 @Autowired
@@ -12,7 +12,7 @@ private MyObj obj2;
 private MyObj obj2;
 ```
 
-parseQualifierElements()方法会解析bean的qualifier子标签。
+parseQualifierElements()方法会解析 bean 的 qualifier 子标签。
 
 ```java
 public class BeanDefinitionParserDelegate {

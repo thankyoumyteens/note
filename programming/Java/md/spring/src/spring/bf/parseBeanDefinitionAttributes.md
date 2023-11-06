@@ -1,6 +1,6 @@
-# 获取bean的其他属性
+# 获取 bean 的其他属性
 
-获取bean标签的各种属性。
+获取 bean 标签的各种属性。
 
 ```java
 public class BeanDefinitionParserDelegate {
@@ -16,7 +16,7 @@ public class BeanDefinitionParserDelegate {
             // 获取scope属性
             bd.setScope(ele.getAttribute(SCOPE_ATTRIBUTE));
         } else if (containingBean != null) {
-            // 如果是内嵌bean，则使用上级bean的scope值
+            // 如果是内嵌bean，则使用父级bean的scope值
             bd.setScope(containingBean.getScope());
         }
 

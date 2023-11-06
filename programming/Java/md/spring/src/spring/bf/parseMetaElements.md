@@ -1,6 +1,6 @@
-# 解析meta子标签
+# 解析 meta 子标签
 
-meta标签是一个额外的声明，当需要使用里面的信息的时候可以通过BeanDefinition的getAttribute(key)方法进行获取。
+meta 标签是一个额外的声明，当需要使用里面的信息的时候可以通过 BeanDefinition 的 getAttribute(key)方法进行获取。
 
 ```xml
 <bean id="myTestBean" class="bean.MyTestBean">
@@ -8,7 +8,7 @@ meta标签是一个额外的声明，当需要使用里面的信息的时候可�
 </bean>
 ```
 
-解析meta标签，并存储到BeanDefinition中。
+解析 meta 标签，并存储到 BeanDefinition 中。
 
 ```java
 public class BeanDefinitionParserDelegate {

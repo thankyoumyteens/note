@@ -1,4 +1,4 @@
-# 解析lookup-method子标签
+# 解析 lookup-method 子标签
 
 ```java
 public class BeanDefinitionParserDelegate {
