@@ -43,7 +43,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
         synchronized (this.startupShutdownMonitor) {
             // 准备工作
             prepareRefresh();
-            // 初始化BeanFactory，并读取xml文件
+            // 创建BeanFactory，在这里会加载BeanDefinition
             ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
             // 扩展BeanFactory
             prepareBeanFactory(beanFactory);

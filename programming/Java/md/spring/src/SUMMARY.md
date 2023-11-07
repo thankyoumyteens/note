@@ -65,6 +65,8 @@
     - [使用ApplicationContext](./spring/ac/ApplicationContext.md)
         - [ClassPathXmlApplicationContext](./spring/ac/ClassPathXmlApplicationContext.md)
             - [准备工作](./spring/ac/prepareRefresh.md)
+            - [创建BeanFactory](./spring/ac/obtainFreshBeanFactory.md)
+            - [扩展BeanFactory](./spring/ac/prepareBeanFactory.md)
 
 - [SpringBoot](./springboot/springboot.md)
     - [多环境配置](./springboot/多环境配置.md)
