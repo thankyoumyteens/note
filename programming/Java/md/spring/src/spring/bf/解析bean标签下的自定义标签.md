@@ -1,6 +1,6 @@
 # 解析bean标签下的自定义标签
 
-bean标签下的自定义标签：
+bean标签下的自定义标签是一种装饰器模式。装饰器模式的作用是对对象已有的功能进行增强，但是不改变原有对象结构。这避免了通过继承方式进行功能扩充导致的类体系臃肿。
 
 ```xml
 <bean id="testBean" class="test.TestBean">
@@ -25,14 +25,14 @@ public class BeanDefinitionParserDelegate {
 
         BeanDefinitionHolder finalDefinition = originalDef;
 
-        // 遍历所有的属性，看是否有适用于修饰的属性
+        // 遍历所有的属性，看是否有适用于装饰的自定义属性
         NamedNodeMap attributes = ele.getAttributes();
         for (int i = 0; i < attributes.getLength(); i++) {
             Node node = attributes.item(i);
             finalDefinition = decorateIfRequired(node, finalDefinition, containingBd);
         }
 
-        // 遍历所有的子标签，看是否有适用于修饰的子标签
+        // 遍历所有的子标签，看是否有适用于装饰的自定义标签
         NodeList children = ele.getChildNodes();
         for (int i = 0; i < children.getLength(); i++) {
             Node node = children.item(i);
@@ -47,12 +47,11 @@ public class BeanDefinitionParserDelegate {
             Node node, BeanDefinitionHolder originalDef, @Nullable BeanDefinition containingBd) {
         // 获取自定义标签的命名空间
         String namespaceUri = getNamespaceURI(node);
-        // 要修饰非默认标签
         if (namespaceUri != null && !isDefaultNamespace(namespaceUri)) {
             // 根据命名空间找到对应的处理器
             NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
             if (handler != null) {
-                // 进行修饰
+                // 进行装饰，decorate()方法由用户重写
                 BeanDefinitionHolder decorated =
                         handler.decorate(node, originalDef, new ParserContext(this.readerContext, this, containingBd));
                 if (decorated != null) {

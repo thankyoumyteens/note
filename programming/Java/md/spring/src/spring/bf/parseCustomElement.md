@@ -27,7 +27,7 @@ public class BeanDefinitionParserDelegate {
 
 ## 根据命名空间找到自定义的解析器
 
-this.readerContext.getNamespaceHandlerResolver()会返回一个DefaultNamespaceHandlerResolver的对象。
+this.readerContext.getNamespaceHandlerResolver()会返回一个 DefaultNamespaceHandlerResolver 的对象。
 
 ```java
 public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver {
@@ -114,17 +114,17 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 
 ## handler.parse()方法
 
-自定义解析器可以继承自NamespaceHandlerSupport抽象类，这样只需要自己实现init()方法，其他方法使用NamespaceHandlerSupport中默认的即可：
+自定义解析器可以继承自 NamespaceHandlerSupport 抽象类，这样只需要自己实现 init()方法，其他方法使用 NamespaceHandlerSupport 中默认的即可：
 
 ```java
-public class MyNamespaceHandler extends NamespaceHandlerSupport {  
-    public void init() {  
-        registerBeanDefinitionParser("mytag", new MyBeanDefinitionParser());  
+public class MyNamespaceHandler extends NamespaceHandlerSupport {
+    public void init() {
+        registerBeanDefinitionParser("mytag", new MyBeanDefinitionParser());
     }
-}  
+}
 ```
 
-假设handler.parse()方法调用的是NamespaceHandlerSupport::parse()方法。
+假设 handler.parse()方法调用的是 NamespaceHandlerSupport::parse()方法。
 
 ```java
 public abstract class NamespaceHandlerSupport implements NamespaceHandler {
@@ -133,6 +133,10 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
         // 找到用户指定的BeanDefinitionParser对象
         BeanDefinitionParser parser = findParserForElement(element, parserContext);
         // 解析自定义标签
+        // 如果用户通过继承AbstractSingleBeanDefinitionParser类来实现自定义解析器，
+        // 那么他需要重写parse()方法中的doParse()方法
+        // 如果用户通过实现BeanDefinitionParser接口来实现自定义解析器，
+        // 那么他需要实现整个parse()方法，并在其中自己注册bean
         return (parser != null ? parser.parse(element, parserContext) : null);
     }
 
@@ -152,14 +156,16 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 }
 ```
 
-## parser.parse()方法
+## 通过继承 AbstractSingleBeanDefinitionParser 类来实现自定义解析器
 
-与NamespaceHandler类似，自定义的BeanDefinitionParser实现类也可以继承AbstractSingleBeanDefinitionParser以减少代码量。
+与 NamespaceHandler 类似，自定义的 BeanDefinitionParser 实现类也可以继承 AbstractSingleBeanDefinitionParser 以减少代码量。
 
 ```java
 public abstract class AbstractSingleBeanDefinitionParser extends AbstractBeanDefinitionParser {
 
-    // 这个方法是父类AbstractBeanDefinitionParser中的
+    /**
+     * parse()方法是AbstractSingleBeanDefinitionParser的父类中的方法
+     */
     public final BeanDefinition parse(Element element, ParserContext parserContext) {
         // 把自定义标签解析成BeanDefinition
         AbstractBeanDefinition definition = parseInternal(element, parserContext);
@@ -199,7 +205,9 @@ public abstract class AbstractSingleBeanDefinitionParser extends AbstractBeanDef
         return definition;
     }
 
-    // 把自定义标签解析成BeanDefinition
+    /**
+     * 把自定义标签解析成BeanDefinition
+     */
     protected final AbstractBeanDefinition parseInternal(Element element, ParserContext parserContext) {
         // 构建GenericBeanDefinition
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
@@ -241,7 +249,7 @@ public abstract class AbstractSingleBeanDefinitionParser extends AbstractBeanDef
         doParse(element, builder);
     }
 
-    // 空的，用户可以重写，在这里解析标签里自己的属性
+    // 空的，用户需要重写，在这里解析标签里自己的属性
     protected void doParse(Element element, BeanDefinitionBuilder builder) {}
 }
 ```
