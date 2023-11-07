@@ -77,6 +77,8 @@
         - [Buffer](.netty/io/Buffer.md)
 
 - [Oracle](./oracle/oracle.md)
+    - [按指定字段查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)
+    - [case_when排序](./oracle/case_when排序.md)
     - [生成12个月月份](./oracle/生成12个月月份.md)
     - [生成指定时间范围内的每一天日期](./oracle/生成指定时间范围内的每一天日期.md)
     - [递归查询所有下级](./oracle/递归查询所有下级.md)

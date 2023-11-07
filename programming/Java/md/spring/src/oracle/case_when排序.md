@@ -1,4 +1,4 @@
-# 使用 case ...when 
+# case when 排序
 
 排序顺序: CHECK_STATUS == 01 && CHECK_TYPE == 02 > CHECK_STATUS == 01 && CHECK_TYPE == 01 > 其它 > UPDATE_TIME desc > CREATE_TIME desc
 
