@@ -63,7 +63,7 @@ public class BeanDefinitionParserDelegate {
             beanName = aliases.remove(0);
         }
         if (containingBean == null) {
-            // 检查beanName是否唯一
+            // 检查beanName和别名是否唯一
             checkNameUniqueness(beanName, aliases, ele);
         }
         // 获取bean标签的其他属性，并创建BeanDefinition

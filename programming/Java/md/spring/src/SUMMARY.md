@@ -89,6 +89,9 @@
                     - [注册BeanDefinition](./spring/ac/registerBeanDefinitions.md)
                         - [解析默认标签](./spring/ac/parseDefaultElement.md)
                             - [解析bean标签](./spring/ac/processBeanDefinition.md)
+                                - [创建BeanDefinition](./spring/ac/createBeanDefinition.md)
+                                - [获取bean的其他属性](./spring/ac/parseBeanDefinitionAttributes.md)
+                                - [解析meta子标签](./spring/ac/parseMetaElements.md)
             - [扩展BeanFactory](./spring/ac/prepareBeanFactory.md)
 
 - [SpringBoot](./springboot/springboot.md)
