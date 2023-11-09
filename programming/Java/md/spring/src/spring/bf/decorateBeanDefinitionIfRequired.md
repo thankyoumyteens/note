@@ -1,6 +1,6 @@
-# 解析bean标签下的自定义标签
+# 解析 bean 标签下的自定义子标签
 
-bean标签下的自定义标签是一种装饰器模式。装饰器模式的作用是对对象已有的功能进行增强，但是不改变原有对象结构。这避免了通过继承方式进行功能扩充导致的类体系臃肿。
+bean 标签下的自定义标签是一种装饰器模式。装饰器模式的作用是对对象已有的功能进行增强，但是不改变原有对象结构。这避免了通过继承方式进行功能扩充导致的类体系臃肿。
 
 ```xml
 <bean id="testBean" class="test.TestBean">
@@ -8,7 +8,7 @@ bean标签下的自定义标签是一种装饰器模式。装饰器模式的作�
 </bean>
 ```
 
-bean标签下的自定义标签会委托给BeanDefinitionParserDelegate::decorateBeanDefinitionIfRequired()方法解析。
+bean 标签下的自定义标签会委托给 BeanDefinitionParserDelegate::decorateBeanDefinitionIfRequired()方法解析。
 
 ```java
 public class BeanDefinitionParserDelegate {

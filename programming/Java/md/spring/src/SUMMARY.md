@@ -58,7 +58,7 @@
                         - [解析constructor-arg子标签](./spring/bf/parseConstructorArgElements.md)
                         - [解析property子标签](./spring/bf/parsePropertyElements.md)
                         - [解析qualifier子标签](./spring/bf/parseQualifierElements.md)
-                        - [解析bean标签下的自定义标签](./spring/bf/解析bean标签下的自定义标签.md)
+                        - [解析bean标签下的自定义子标签](./spring/bf/decorateBeanDefinitionIfRequired.md)
                         - [注册BeanDefinition](./spring/bf/registerBeanDefinition.md)
                     - [解析alias标签](./spring/bf/processAliasRegistration.md)
                     - [解析import标签](./spring/bf/importBeanDefinitionResource.md)
