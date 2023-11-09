@@ -83,6 +83,12 @@
         - [ClassPathXmlApplicationContext](./spring/ac/ClassPathXmlApplicationContext.md)
             - [准备工作](./spring/ac/prepareRefresh.md)
             - [创建BeanFactory](./spring/ac/obtainFreshBeanFactory.md)
+                - [BeanDefinition](./spring/ac/BeanDefinition.md)
+                - [加载BeanDefinition](./spring/ac/loadBeanDefinitions.md)
+                    - [解析XML配置文件](./spring/ac/doLoadDocument.md)
+                    - [注册BeanDefinition](./spring/ac/registerBeanDefinitions.md)
+                        - [解析默认标签](./spring/ac/parseDefaultElement.md)
+                            - [解析bean标签](./spring/ac/processBeanDefinition.md)
             - [扩展BeanFactory](./spring/ac/prepareBeanFactory.md)
 
 - [SpringBoot](./springboot/springboot.md)

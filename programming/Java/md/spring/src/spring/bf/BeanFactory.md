@@ -45,6 +45,8 @@ public class BeanFactoryTest {
         // 读取xml配置文件
         Resource resource = new ClassPathResource("beanFactoryTest.xml");
         // 创建BeanFactory
+        // Spring 3.1之后已经废弃XmlBeanFactory，使用ApplicationContext代替，
+        // BeanFactory包含在ApplicationContext的内部
         BeanFactory bf = new XmlBeanFactory(resource);
         // 获取bean
         MyTestBean bean = (MyTestBean) bf.getBean("myTestBean");
