@@ -1,4 +1,4 @@
-# 创建 bean
+# 定义 bean
 
 ```java
 @Data
