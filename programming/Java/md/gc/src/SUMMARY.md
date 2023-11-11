@@ -21,3 +21,5 @@
             - [根处理](./g1/ygc/根处理.md)
             - [RSet处理](./g1/ygc/RSet处理.md)
             - [复制](./g1/ygc/复制.md)
+    - [Mixed GC](./g1/mgc/mgc.md)
+        - [并发标记算法](./g1/mgc/并发标记算法.md)
