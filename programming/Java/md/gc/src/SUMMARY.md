@@ -23,3 +23,5 @@
             - [复制](./g1/ygc/复制.md)
     - [Mixed GC](./g1/mgc/mgc.md)
         - [并发标记算法](./g1/mgc/并发标记算法.md)
+            - [写屏障](./g1/mgc/写屏障.md)
+        - [Mixed GC步骤](./g1/mgc/MixedGC步骤.md)
