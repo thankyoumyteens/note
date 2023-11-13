@@ -103,6 +103,8 @@
                             - [解析import标签](./spring/ac/importBeanDefinitionResource.md)
                         - [解析自定义标签](./spring/ac/parseCustomElement.md)
             - [扩展BeanFactory](./spring/ac/prepareBeanFactory.md)
+                - [SpEL语言支持](./spring/ac/setBeanExpressionResolver.md)
+                - [属性编辑器](./spring/ac/addPropertyEditorRegistrar.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
     - [include标签传参](./mybatis/include标签传参.md)

@@ -7,8 +7,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
     protected void prepareBeanFactory(ConfigurableListableBeanFactory beanFactory) {
         // 把当前ApplicationContext的类加载器设置为beanFactory的类加载器
         beanFactory.setBeanClassLoader(getClassLoader());
+
         // 设置SpEL语言的解析器
         beanFactory.setBeanExpressionResolver(new StandardBeanExpressionResolver(beanFactory.getBeanClassLoader()));
+
         // 设置属性编辑器，用于对bean的属性进行管理
         beanFactory.addPropertyEditorRegistrar(new ResourceEditorRegistrar(this, getEnvironment()));
 
