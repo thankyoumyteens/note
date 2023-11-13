@@ -16,7 +16,7 @@ subprocess.run(args, *, stdin=None, input=None, stdout=None, stderr=None, captur
 ```python
 import subprocess
 
-npm_build_cmds = ['C:/Program Files/nodejs/npm.cmd', 'run', 'build-v1']
+npm_build_cmds = ['C:/Program Files/nodejs/npm.cmd', 'run', 'build']
 fe_dir = 'C:/projects/my-vue-app'
 r = subprocess.run(npm_build_cmds, shell=False, cwd=fe_dir, capture_output=True)
 print(str(r.stdout, encoding="utf-8"))

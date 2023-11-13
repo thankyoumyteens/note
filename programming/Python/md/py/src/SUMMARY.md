@@ -1,4 +1,6 @@
-- [基本语法](./base/base.md)
+- [基本用法](./base/base.md)
+    - [虚拟环境](./base/虚拟环境.md)
+    - [import绝对路径](./base/import绝对路径.md)
     - [字符串格式化](./base/字符串格式化.md)
     - [日期格式化](./base/日期格式化.md)
 
