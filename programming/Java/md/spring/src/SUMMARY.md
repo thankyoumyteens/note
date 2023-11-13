@@ -104,6 +104,10 @@
                         - [解析自定义标签](./spring/ac/parseCustomElement.md)
             - [扩展BeanFactory](./spring/ac/prepareBeanFactory.md)
 
+- [MyBatis](./mybatis/MyBatis.md)
+    - [include标签传参](./mybatis/include标签传参.md)
+    - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
+
 - [SpringBoot](./springboot/springboot.md)
     - [多环境配置](./springboot/多环境配置.md)
     - [SpringBoot整合Kafka](./springboot/SpringBoot整合Kafka.md)
