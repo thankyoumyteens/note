@@ -39,6 +39,7 @@
         - [BeanDefinitionParser实现](./spring/use/BeanDefinitionParser.md)
     - [自定义属性](./spring/use/自定义属性.md)
     - [自定义子标签](./spring/use/自定义子标签.md)
+    - [属性编辑器](./spring/use/属性编辑器.md)
 
 - [Spring源码分析](./spring/Spring源码分析.md)
     - [Spring整体架构](./spring/Spring整体架构.md)
@@ -104,7 +105,8 @@
                         - [解析自定义标签](./spring/ac/parseCustomElement.md)
             - [扩展BeanFactory](./spring/ac/prepareBeanFactory.md)
                 - [SpEL语言支持](./spring/ac/setBeanExpressionResolver.md)
-                - [属性编辑器](./spring/ac/addPropertyEditorRegistrar.md)
+                - [设置属性编辑器](./spring/ac/addPropertyEditorRegistrar.md)
+                - [设置后置处理器](./spring/ac/ApplicationContextAwareProcessor.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
     - [include标签传参](./mybatis/include标签传参.md)
