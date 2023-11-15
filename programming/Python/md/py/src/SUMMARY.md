@@ -49,3 +49,7 @@
     - [定位元素](./selenium/定位元素.md)
     - [等待元素出现](./selenium/等待元素出现.md)
     - [模拟登录](./selenium/模拟登录.md)
+
+- [pyautogui](./pyautogui/pyautogui.md)
+    - [屏幕操作](./pyautogui/屏幕操作.md)
+    - [鼠标操作](./pyautogui/鼠标操作.md)
