@@ -53,3 +53,6 @@
 - [pyautogui](./pyautogui/pyautogui.md)
     - [屏幕操作](./pyautogui/屏幕操作.md)
     - [鼠标操作](./pyautogui/鼠标操作.md)
+    - [键盘操作](./pyautogui/键盘操作.md)
+    - [弹框](./pyautogui/弹框.md)
+    - [截图](./pyautogui/截图.md)
