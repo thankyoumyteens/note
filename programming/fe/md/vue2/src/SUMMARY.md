@@ -1,8 +1,9 @@
-- [Vue语法]()
+- [Vue]()
     - [Vue.$set与响应式](./syntax/Vue.$set与响应式.md)
     - [动态组件](./syntax/动态组件.md)
     - [keep-alive](./syntax/keep-alive.md)
     - [动态绑定img的src属性](./syntax/动态绑定img的src属性.md)
+    - [通过js调用自定义弹窗组件](./syntax/通过js调用自定义弹窗组件.md)
 
 - [axios]()
     - [封装axios](./axios/封装axios.md)
