@@ -13,3 +13,5 @@
     - [ubuntu配置maven](./Linux/Ubuntu/ubuntu配置maven.md)
     - [ubuntu安装python3](./Linux/Ubuntu/ubuntu安装python3.md)
     - [ubuntu安装node](./Linux/Ubuntu/ubuntu安装node.md)
+    - [ubuntu安装docker](./Linux/Ubuntu/ubuntu安装docker.md)
+    - [ubuntu安装docker-compose](./Linux/Ubuntu/ubuntu安装docker-compose.md)
