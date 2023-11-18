@@ -23,6 +23,7 @@
             - [Refine线程的工作过程](./g1/refine/Refine线程的工作过程.md)
             - [DCQS分区](./g1/refine/DCQS分区.md)
     - [Young GC](./g1/ygc/ygc.md)
+        - [YGC触发的时机](./g1/ygc/YGC触发的时机.md)
         - [并行任务处理](./g1/ygc/并行任务处理.md)
             - [根处理](./g1/ygc/根处理.md)
             - [RSet处理](./g1/ygc/RSet处理.md)
@@ -32,3 +33,4 @@
             - [写屏障](./g1/mgc/写屏障.md)
         - [Mixed GC步骤](./g1/mgc/MixedGC步骤.md)
         - [并发标记线程](./g1/mgc/并发标记线程.md)
+            - [根扫描子阶段](./g1/mgc/根扫描子阶段.md)
