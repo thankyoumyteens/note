@@ -1,4 +1,4 @@
-# TLAB
+# 从 TLAB 分配内存
 
 线程本地分配缓冲区(Thread Local Allocation Buffer，TLAB)产生的目的就是为了进行内存快速分配。从 JVM 堆空间分配对象时，必须锁定整个堆，以便不会被其他线程中断和影响。为了解决这个问题，TLAB 通过为每个线程分配一个缓冲区来避免和减少使用锁。
 
@@ -22,8 +22,6 @@ HeapWord* CollectedHeap::allocate_from_tlab(KlassHandle klass, Thread* thread, s
 TLAB 是 Eden 中的一块内存，不同线程的 TLAB 都位于 Eden 区，所有的 TLAB 内存对所有的线程都是可见的，只不过每个线程有一个 TLAB 的数据结构，用于保存待分配内存区间的起始地址（start）和结束地址（end），在分配的时候只在这个区间做分配，从而达到无锁分配。另外，虽然 TLAB 在分配对象空间的时候是无锁分配，但是 TLAB 空间本身在分配的时候还是需要锁的，G1 中使用 CAS 来分配 TLAB 空间，一个 Region 中可能存在多个 TLAB，但是一个 TLAB 是不能跨 Region 的。
 
 JVM 使用指针碰撞的方法在 TLAB 中分配对象，在 TLAB 中保存一个 top 指针用于标记当前已分配和未分配的空间的分界点，如果剩余空间(end-top)大于待分配的对象大小，则直接分配，并将 top 的新值修改为 top+对象的大小。
-
-![](../../img/g1gc17.png)
 
 > jdk8u60-master\hotspot\src\share\vm\memory\threadLocalAllocBuffer.inline.hpp
 
