@@ -25,6 +25,7 @@
             - [DCQS分区](./g1/refine/DCQS分区.md)
     - [Young GC](./g1/ygc/ygc.md)
         - [YGC触发的时机](./g1/ygc/YGC触发的时机.md)
+            - [GC_locker](./g1/ygc/GC_locker.md)
         - [并行任务处理](./g1/ygc/并行任务处理.md)
             - [根处理](./g1/ygc/根处理.md)
             - [RSet处理](./g1/ygc/RSet处理.md)

@@ -114,7 +114,47 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size,
   HeapWord* result = NULL;
   // 循环次数由参数GCLockerRetryAllocationCount控制，默认3次
   for (int try_count = 1; ; try_count += 1) {
-    // ...
+    bool should_try_gc;
+    uint gc_count_before;
+
+    {
+      // 加锁分配
+      MutexLockerEx x(Heap_lock);
+      result = _allocator->mutator_alloc_region(context)->attempt_allocation_locked(word_size,
+                                                                                    false);
+      if (result != NULL) {
+        return result;
+      }
+
+      // 加锁分配失败
+      assert(_allocator->mutator_alloc_region(context)->get() == NULL, "only way to get here");
+
+      if (GC_locker::is_active_and_needs_gc()) {
+        // 判断是否可以对新生代进行扩展
+        if (g1_policy()->can_expand_young_list()) {
+          // 扩大新生代后再分配
+          result = _allocator->mutator_alloc_region(context)->attempt_allocation_force(word_size,
+                                                                                       false);
+          if (result != NULL) {
+            return result;
+          }
+        }
+        should_try_gc = false;
+      } else {
+        // 在访问JNI代码时，JNI代码可能会进入临界区，
+        // 为了防止GC导致JNI代码出问题，需要利用GC_locker加锁，保证临界区代码的正确执行
+        // 如果在此时需要发生GC，那么此次GC就会被阻止，并将needs_gc置为true，在临界区代码执行完毕后，
+        // GC_locker会触发GC操作，之后将needs_gc重新复位为false
+        if (GC_locker::needs_gc()) {
+          should_try_gc = false;
+        } else {
+          // 没有GC_locker干扰的正常情况
+          gc_count_before = total_collections();
+          should_try_gc = true;
+        }
+      }
+    }
+
     if (should_try_gc) {
       // GC后再分配
       bool succeeded;
