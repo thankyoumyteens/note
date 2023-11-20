@@ -182,7 +182,7 @@ HeapWord* G1CollectedHeap::do_collection_pause(size_t word_size,
                                                GCCause::Cause gc_cause) {
   assert_heap_not_locked_and_not_at_safepoint();
   g1_policy()->record_stop_world_start();
-  // 要执行的gc任务，false表示不开启并发标记
+  // 要执行的gc任务：GC并分配对象的内存，false表示只执行Young GC
   VM_G1IncCollectionPause op(gc_count_before,
                              word_size,
                              false, /* should_initiate_conc_mark */
@@ -190,7 +190,7 @@ HeapWord* G1CollectedHeap::do_collection_pause(size_t word_size,
                              gc_cause);
 
   op.set_allocation_context(AllocationContext::current());
-  // GC并分配对象的内存
+  // 执行gc任务
   VMThread::execute(&op);
 
   HeapWord* result = op.result();
@@ -262,7 +262,7 @@ void VM_G1IncCollectionPause::doit() {
   }
 
   GCCauseSetter x(g1h, _gc_cause);
-  // 这里传入的是false，表示进行Young GC
+  // 是否并发标记，这里传入的是false，只进行Young GC
   if (_should_initiate_conc_mark) {
     _old_marking_cycles_completed_before = g1h->old_marking_cycles_completed();
     bool res = g1h->g1_policy()->force_initial_mark_if_outside_cycle(_gc_cause);
@@ -292,6 +292,9 @@ void VM_G1IncCollectionPause::doit() {
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 
 ```cpp
+/**
+ * Young GC
+ */
 bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_ms) {
   assert_at_safepoint(true);
   guarantee(!is_gc_active(), "collection is not reentrant");
@@ -300,12 +303,8 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
     return false;
   }
 
-  // 判断此次Young GC是不是一次初次标记
-  //（即老年代并发垃圾回收时,会伴随一次youngGC,此时会返回true）
-  //纯youngGC阶段这里会返回false
   g1_policy()->decide_on_conc_mark_initiation();
 
-  // 是否处于初始标记停顿阶段(youngGC这里返回的是false)
   bool should_start_conc_mark = g1_policy()->during_initial_mark_pause();
 
   // Inner scope for scope based logging, timers, and stats collection
@@ -377,12 +376,6 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
         // the possible verification above.
         double sample_start_time_sec = os::elapsedTime();
 
-#if YOUNG_LIST_VERBOSE
-        gclog_or_tty->print_cr("\nBefore recording pause start.\nYoung_list:");
-        _young_list->print();
-        g1_policy()->print_collection_set(g1_policy()->inc_cset_head(), gclog_or_tty);
-#endif // YOUNG_LIST_VERBOSE
-
         g1_policy()->record_collection_pause_start(sample_start_time_sec);
 
         double scan_wait_start = os::elapsedTime();
@@ -398,20 +391,9 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
         }
         g1_policy()->phase_times()->record_root_region_scan_wait_time(wait_time_ms);
 
-#if YOUNG_LIST_VERBOSE
-        gclog_or_tty->print_cr("\nAfter recording pause start.\nYoung_list:");
-        _young_list->print();
-#endif // YOUNG_LIST_VERBOSE
-
         if (g1_policy()->during_initial_mark_pause()) {
           concurrent_mark()->checkpointRootsInitialPre();
         }
-
-#if YOUNG_LIST_VERBOSE
-        gclog_or_tty->print_cr("\nBefore choosing collection set.\nYoung_list:");
-        _young_list->print();
-        g1_policy()->print_collection_set(g1_policy()->inc_cset_head(), gclog_or_tty);
-#endif // YOUNG_LIST_VERBOSE
 
         g1_policy()->finalize_cset(target_pause_time_ms, evacuation_info);
 
@@ -431,11 +413,6 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
             hr = hr->next_in_collection_set();
           }
         }
-
-#ifdef ASSERT
-        VerifyCSetClosure cl;
-        collection_set_iterate(&cl);
-#endif // ASSERT
 
         setup_surviving_young_words();
 
@@ -466,11 +443,6 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
         // Survivor regions will fail the !is_young() check.
         assert(check_young_list_empty(false /* check_heap */),
           "young list should be empty");
-
-#if YOUNG_LIST_VERBOSE
-        gclog_or_tty->print_cr("Before recording survivors.\nYoung List:");
-        _young_list->print();
-#endif // YOUNG_LIST_VERBOSE
 
         g1_policy()->record_survivor_regions(_young_list->survivor_length(),
                                              _young_list->first_survivor_region(),
@@ -504,12 +476,6 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
         }
 
         allocate_dummy_regions();
-
-#if YOUNG_LIST_VERBOSE
-        gclog_or_tty->print_cr("\nEnd of the pause.\nYoung_list:");
-        _young_list->print();
-        g1_policy()->print_collection_set(g1_policy()->inc_cset_head(), gclog_or_tty);
-#endif // YOUNG_LIST_VERBOSE
 
         _allocator->init_mutator_alloc_region();
 
@@ -576,10 +542,6 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
       // event, and after we retire the GC alloc regions so that all
       // RETIRE events are generated before the end GC event.
       _hr_printer.end_gc(false /* full */, (size_t) total_collections());
-
-#ifdef TRACESPINNING
-      ParallelTaskTerminator::print_termination_counts();
-#endif
 
       gc_epilogue(false);
     }
