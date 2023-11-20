@@ -15,3 +15,4 @@
     - [ubuntu安装node](./Linux/Ubuntu/ubuntu安装node.md)
     - [ubuntu安装docker](./Linux/Ubuntu/ubuntu安装docker.md)
     - [ubuntu安装docker-compose](./Linux/Ubuntu/ubuntu安装docker-compose.md)
+    - [ubuntu安装harbor](./Linux/Ubuntu/ubuntu安装harbor.md)
