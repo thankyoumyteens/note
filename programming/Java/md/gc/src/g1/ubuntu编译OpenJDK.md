@@ -1,4 +1,4 @@
-# 编译 OpenJDK
+# ubuntu 编译 OpenJDK
 
 ## 下载 VirtualBox
 
