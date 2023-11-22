@@ -74,11 +74,7 @@ cd jdk-jdk8-b120
 ## 编译
 
 ```sh
-sudo apt-get install -y openjdk-7-jdk
-sudo apt-get install -y libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
-sudo apt-get install -y libcups2-dev
-sudo apt-get install -y libfreetype6-dev
-sudo apt-get install -y libasound2-dev
+sudo apt-get install -y openjdk-7-jdk libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libfreetype6-dev libasound2-dev
 sudo chmod 777 configure
 ./configure --with-target-bits=64 --with-debug-level=slowdebug
 make

@@ -4,6 +4,9 @@ mybatis 的 include 标签主要是用于 sql 语句的可重用，并且可以�
 
 ```xml
 <sql id="demo">
+    <if test="strParam != null">
+        #{strParam}
+    </if>
     <if test="demoParam != null">
         #{demoParam}
     </if>
@@ -14,12 +17,10 @@ mybatis 的 include 标签主要是用于 sql 语句的可重用，并且可以�
 
 <select id="test2" resultType="java.lang.String">
     select
-    <include refid="demo">
-        <property name="demoParam" value="#{demoParam}"/>
-    </include>
+    <include refid="demo"/>
     ,
     <include refid="demo">
-        <property name="demoParam" value="strParam"/>
+        <property name="strParam" value="123"/>
     </include>
     from dual
 </select>
