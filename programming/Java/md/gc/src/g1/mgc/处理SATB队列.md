@@ -108,8 +108,7 @@ public:
 
 ```cpp
 inline void CMTask::make_reference_grey(oop obj, HeapRegion* hr) {
-  // 把对象标记到_nextMarkBitMap位图中(染成灰色)并计数，
-  // 根扫描子阶段中也用到了这个方法
+  // 把对象标记到_nextMarkBitMap位图中(染成灰色)并计数
   if (_cm->par_mark_and_count(obj, hr, _marked_bytes_array, _card_bm)) {
 
     HeapWord* global_finger = _cm->finger();
@@ -117,41 +116,37 @@ inline void CMTask::make_reference_grey(oop obj, HeapRegion* hr) {
     if (is_below_finger(obj, global_finger)) {
       if (obj->is_typeArray()) {
         // 对象是一个数组，无须继续追踪。直接记录数组的长度
+        // false表示不继续扫描对象的字段
         process_grey_object<false>(obj);
       } else {
-        // 把对象push到本地队列，等待后续处理
+        // 把对象push到本地队列，等待后续处理它的字段
         push(obj);
       }
     }
   }
 }
 
+inline bool ConcurrentMark::par_mark_and_count(oop obj,
+                                               HeapRegion* hr,
+                                               size_t* marked_bytes_array,
+                                               BitMap* task_card_bm) {
+  HeapWord* addr = (HeapWord*)obj;
+  // 通过CAS修改nextMarkBitMap的值
+  if (_nextMarkBitMap->parMark(addr)) {
+    count_object(obj, hr, marked_bytes_array, task_card_bm);
+    return true;
+  }
+  return false;
+}
+
 inline void CMTask::push(oop obj) {
   HeapWord* objAddr = (HeapWord*) obj;
-  assert(_g1h->is_in_g1_reserved(objAddr), "invariant");
-  assert(!_g1h->is_on_master_free_list(
-              _g1h->heap_region_containing((HeapWord*) objAddr)), "invariant");
-  assert(!_g1h->is_obj_ill(obj), "invariant");
-  assert(_nextMarkBitMap->isMarked(objAddr), "invariant");
-
-  if (_cm->verbose_high()) {
-    gclog_or_tty->print_cr("[%u] pushing " PTR_FORMAT, _worker_id, p2i((void*) obj));
-  }
-
+  // 添加到本地队列
   if (!_task_queue->push(obj)) {
-    // The local task queue looks full. We need to push some entries
-    // to the global stack.
-
-    if (_cm->verbose_medium()) {
-      gclog_or_tty->print_cr("[%u] task queue overflow, "
-                             "moving entries to the global stack",
-                             _worker_id);
-    }
+    // 本地队列满了，把本地队列中的一部分对象移动到全局标记栈中
     move_entries_to_global_stack();
 
-    // this should succeed since, even if we overflow the global
-    // stack, we should have definitely removed some entries from the
-    // local queue. So, there must be space on it.
+    // 重新尝试把这个对象添加到本地队列
     bool success = _task_queue->push(obj);
     assert(success, "invariant");
   }
@@ -161,5 +156,45 @@ inline void CMTask::push(oop obj) {
                _local_max_size = tmp_size;
              }
              ++_local_pushes );
+}
+```
+
+> jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\concurrentMark.cpp
+
+```cpp
+void CMTask::move_entries_to_global_stack() {
+  // global_stack_transfer_size
+  // 用于控制要从本地队列转移多少个对象到全局标记栈中
+  // 默认是16
+  oop buffer[global_stack_transfer_size];
+
+  int n = 0;
+  oop obj;
+  // 先把本地队列中的对象移动到缓冲区中
+  while (n < global_stack_transfer_size && _task_queue->pop_local(obj)) {
+    buffer[n] = obj;
+    ++n;
+  }
+
+  if (n > 0) {
+    statsOnly( ++_global_transfers_to; _local_pops += n );
+    // 把缓冲区中的对象入栈
+    if (!_cm->mark_stack_push(buffer, n)) {
+      // 栈溢出了，设置终止标记
+      set_has_aborted();
+    } else {
+      // 转移成功
+      statsOnly( int tmp_size = _cm->mark_stack_size();
+                 if (tmp_size > _global_max_size) {
+                   _global_max_size = tmp_size;
+                 }
+                 _global_pushes += n );
+    }
+  }
+
+  // 把本地队列中的对象移动到全局标记栈的行为非常耗费资源，
+  // 调用这个方法让处理队列的操作更频繁，
+  // 避免再出现本地队列满了的情况
+  decrease_limits();
 }
 ```
