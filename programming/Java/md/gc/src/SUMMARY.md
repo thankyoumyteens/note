@@ -2,6 +2,7 @@
 
 - [G1](./g1/g1.md)
     - [ubuntu编译OpenJDK](./g1/ubuntu编译OpenJDK.md)
+    - [ubuntu22调试OpenJDK21](./g1/ubuntu22调试OpenJDK21.md)
     - [windows编译OpenJDK](./g1/windows编译OpenJDK.md)
     - [Oop-Klass对象模型](./g1/Oop-Klass对象模型.md)
     - [Java对象内存布局](./g1/Java对象内存布局.md)
