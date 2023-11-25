@@ -7,7 +7,7 @@ wget https://mirrors.tuna.tsinghua.edu.cn/jenkins/war-stable/2.346.1/jenkins.war
 
 安装字体
 ```
-sudo apt install fontconfig -y
+sudo apt-get install fontconfig -y
 ```
 
 启动

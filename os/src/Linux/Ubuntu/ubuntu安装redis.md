@@ -1,7 +1,7 @@
 # 安装依赖包
 
 ```sh
-sudo apt install -y build-essential tcl
+sudo apt-get install -y build-essential tcl
 ```
 
 # 下载Redis源代码

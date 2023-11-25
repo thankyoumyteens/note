@@ -2,7 +2,7 @@
 
 安装基本的编译工具
 ```
-sudo apt install build-essential tcl
+sudo apt-get install build-essential tcl
 ```
 
 下载Redis源代码

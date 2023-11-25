@@ -10,10 +10,10 @@ apt update && apt upgrade
 ```
 apt update
 apt upgrade
-apt install python
-apt install clang
-apt install git
-apt install vim
+apt-get install python
+apt-get install clang
+apt-get install git
+apt-get install vim
 ```
 
 # 访问手机内置存储
@@ -26,7 +26,7 @@ termux-setup-storage
 
 ### termux开启的sshd服务用的是8022端口，而不是常用的22端口
 ```
-apt install openssh
+apt-get install openssh
 sshd
 ```
 

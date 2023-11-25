@@ -2,7 +2,7 @@
 
 ```sh
 sudo apt update
-sudo apt install -y mariadb-server
+sudo apt-get install -y mariadb-server
 ```
 
 # 查看运行状态

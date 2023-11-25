@@ -6,9 +6,9 @@ sudo apt-get update
 ```
 安装python
 ```
-sudo apt install python
-sudo apt install python3
-sudo apt install python-minimal
+sudo apt-get install python
+sudo apt-get install python3
+sudo apt-get install python-minimal
 ```
 安装nodejs和npm
 ```

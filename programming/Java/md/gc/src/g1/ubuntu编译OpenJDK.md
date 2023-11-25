@@ -29,7 +29,7 @@
 
 ```sh
 su
-apt install -y vim
+apt-get install -y vim
 vim /etc/sudoers
 ```
 

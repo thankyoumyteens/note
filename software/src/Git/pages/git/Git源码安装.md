@@ -11,7 +11,7 @@ sudo yum install -y zlib-devel perl-ExtUtils-MakeMaker
 ## ubuntu
 
 ```
-sudo apt install -y wget gcc g++ zlib1g.dev tcl build-essential tk gettext
+sudo apt-get install -y wget gcc g++ zlib1g.dev tcl build-essential tk gettext
 ```
 
 # 下载编译源码
