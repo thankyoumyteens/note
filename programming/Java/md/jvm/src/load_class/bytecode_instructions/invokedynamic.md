@@ -30,7 +30,7 @@ public class MethodHandleTest {
     public static void main(String[] args) throws Throwable {
         // 无法确定obj是哪个类的实例
         Object obj = System.currentTimeMillis() % 2 == 0 ? System.out : new ClassA();
-        getPrintlnMH(obj).invokeExact("icyfenix");
+        getPrintlnMH(obj).invokeExact("invoke");
     }
 }
 ```
@@ -47,9 +47,9 @@ invokedynamic 指令在 JDK 7 中被引入，用于支持动态类型语言的�
 
 JDK 7 以前的字节码指令集中，4 条方法调用指令(invokevirtual、invokespecial、invokestatic、invokeinterface)的第一个参数都是被调用的方法的符号引用。
 
-每一处含有 invokedynamic 指令的位置都被称作动态调用点(Dynamically-Computed Call Site)，这条指令的第一个参数不再是代表方法符号引用的 CONSTANT_Methodref_info 常量，而是变为 JDK 7 新加入的 CONSTANT_InvokeDynamic_info 常量，从这个新常量中可以得到 3 项信息：引导方法、方法类型和方法名称。
+invokedynamic 指令的第一个参数不再是代表方法符号引用的 CONSTANT_Methodref_info 常量，而是变为 JDK 7 新加入的 CONSTANT_InvokeDynamic_info 常量，从这个新常量中可以得到 3 项信息：引导方法、方法描述符和方法名称。
 
-引导方法有固定的参数，并且返回值是 java.lang.invoke.CallSite 对象，这个对象代表了真正要执行的目标方法调用。根据 CONSTANT_InvokeDynamic_info 常量中提供的信息，虚拟机可以找到引导方法并传入方法类型和方法名称，从而获得一个 CallSite 对象，最终调用到要执行的目标方法上。
+引导方法有固定的参数，并且返回值是 java.lang.invoke.CallSite 对象，这个对象代表了真正要执行的目标方法调用。根据 CONSTANT_InvokeDynamic_info 提供的信息，JVM 可以找到引导方法并传入描述符和方法名称，从而获得一个 CallSite 对象，最终调用到要执行的目标方法上。
 
 ## lambda 表达式的执行过程
 
@@ -78,7 +78,7 @@ CONSTANT_InvokeDynamic_info 常量的结构：
 | -                           | bootstrap_method_attr_index | u2   | 值必须是对当前 Class 文件中引导方法表的 bootstrap_methods[]数组的有效索引                                         |
 | -                           | name_and_type_index         | u2   | 值必须是对当前常量池的有效索引，常量池在该索引处的项必须是 CONSTANT_NameAndType_info 结构，表示方法名和方法描述符 |
 
-name_and_type_index 的值为#30，指向常量池的 CONSTANT_NameAndType_info 常量，表示方法名和方法描述符：
+name_and_type_index 的值为#30，指向常量池的 CONSTANT_NameAndType_info 常量，表示目标方法的方法名和方法描述符：
 
 ![](../../img/lambda3.png)
 
@@ -90,8 +90,9 @@ bootstrap_method_attr_index 的值为#0，指向引导方法表中索引为 0 �
 
 ```java
 // caller: 调用者，这里是LambdaTest这个类
-// invokedName: CallSite的调用名，这里是#30常量中的run
-// invokedType: CallSite的函数签名，这里是#30常量中的(String[])Runnable
+// invokedName: 目标方法的方法名，这里是常量池中#30的run
+// invokedType: 目标方法的方法描述符，
+//     这里是常量池中#30的(String[])Runnable
 // 后面三个参数则是对应上面引导方法表中的Method arguments
 public static CallSite metafactory(MethodHandles.Lookup caller,
                                    String invokedName,
@@ -110,11 +111,11 @@ public static CallSite metafactory(MethodHandles.Lookup caller,
 }
 ```
 
-#29 中的 org/example/LambdaTest.lambda$main$0 方法是编译器自动生成的，编译器会把lambda表达式转换成传统的Java方法，lambda$main$0 表示是 main()方法中的第一个 Lambda 表达式：
+引导方法表中#29 的 org/example/LambdaTest.lambda$main$0 方法是编译器自动生成的，编译器会把lambda表达式转换成传统的Java方法，lambda$main$0 表示是 main()方法中的第一个 Lambda 表达式：
 
 ![](../../img/lambda5.png)
 
-引导方法 metafactory()执行时，会通过 ASM 动态生成一个类，可以通过虚拟机参数 -Djdk.internal.lambda.dumpProxyClasses=输出路径 让它运行的时候输出到文件：
+引导方法 metafactory()执行时，会通过 ASM 动态生成一个类，可以通过 JVM 参数 -Djdk.internal.lambda.dumpProxyClasses=输出路径 让它运行的时候输出到文件：
 
 ```java
 // 通过ASM动态生成的类
@@ -142,7 +143,9 @@ final class LambdaTest$$Lambda$1 implements Runnable {
 ### invokedynamic 最终实现的效果
 
 ```java
-/* 原始lambda写法: */
+/**
+ * lambda的写法
+ */
 public class LambdaTest {
     public static void main(String[] args) {
         Runnable r = () -> System.out.println(Arrays.toString(args));
@@ -150,23 +153,36 @@ public class LambdaTest {
     }
 }
 
-/* 经过invokedynamic的转换: */
-public class MyThread implements Runnable {
+/**
+ * 经过invokedynamic的转换的lambda
+ */
+public final class MyThread implements Runnable {
+
     private final String[] args;
+
     public MyThread(String[] args) {
         this.args = args;
     }
+
+    public static getMyThread(String[] args) {
+        return new MyThread(args);
+    }
+
     @Override
     public void run() {
         LambdaTest.doRun(this.args);
     }
 }
+
 public class LambdaTest {
+
     public static void doRun(String[] args) {
         System.out.println(Arrays.toString(args));
     }
+
     public static void main(String[] args) {
-        new MyThread(args).run();
+        Runnable r = MyThread.getMyThread(args);
+        r.run();
     }
 }
 ```
