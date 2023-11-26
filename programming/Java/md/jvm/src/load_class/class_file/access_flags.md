@@ -16,7 +16,20 @@
 
 access_flags 中一共有 16 个标志位可以使用，当前只定义了其中 9 个，没有使用到的标志位要求一律为零。
 
-如果一个类既是 public 的，又是 final 的，而且使用 JDK8 编译，那么它的访问标志就是`0x0001`+`0x0010`+`0x0020`+`0x0000`+`0x0000`+`0x0000`+`0x0000`+`0x0000`+`0x0000`=`0x0031`。
+如果一个类既是 public 的，又是 final 的，而且使用 JDK8 编译，那么它的访问标志就是：
+
+```
+  0x0001
++ 0x0010
++ 0x0020
++ 0x0000
++ 0x0000
++ 0x0000
++ 0x0000
++ 0x0000
++ 0x0000
+= 0x0031
+```
 
 ---
 
@@ -34,7 +47,7 @@ public class ClassFileDemo {
 
 ![](../../img/class_file3.png)
 
-ClassFileDemo 是一个普通 Java 类，不是接口、枚举、注解或者模块，被 public 关键字修饰但没有被声明为 final 和 abstract，并且它使用了 JDK 1.2 之后的编译器进行编译，因此它的 ACC_PUBLIC、ACC_SUPER 标志应当为真，而 ACC_FINAL、ACC_INTERFACE、ACC_ABSTRACT、ACC_SYNTHETIC、ACC_ANNOTATION、ACC_ENUM、ACC_MODULE 这七个标志应当为假，因此它的访问标志的值是`0x0001`+`0x0000`+`0x0020`+`0x0000`+`0x0000`+`0x0000`+`0x0000`+`0x0000`+`0x0000`=`0x0021`。
+ClassFileDemo 是一个普通 Java 类，不是接口、枚举、注解或者模块，被 public 关键字修饰但没有被声明为 final 和 abstract，并且它使用了 JDK 1.2 之后的编译器进行编译，因此它的 ACC_PUBLIC 和 ACC_SUPER 标志应当为真，其它的标志应当为假，因此它的访问标志的值是`0x0021`。
 
 使用 javap -verbose ClassFileDemo.class 命令解析 class 文件，可以对应上访问标志的内容：
 

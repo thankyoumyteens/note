@@ -14,7 +14,7 @@
 
 name_index 和 descriptor_index 都是对常量池项的引用，分别代表着方法名以及方法的描述符。
 
-如果父类方法在子类中没有被重写，方法表集合中就不会出现来自父类的方法信息。但有可能会出现由编译器自动添加的方法，最常见的便是类构造器`<clinit>()`方法和实例构造器`<init>()`方法。
+如果父类方法在子类中没有被重写，方法集合中就不会出现来自父类的方法信息。但有可能会出现由编译器自动添加的方法，最常见的便是类构造器`<clinit>()`方法和实例构造器`<init>()`方法。
 
 ## 方法访问标志(access_flags)
 
@@ -35,28 +35,32 @@ name_index 和 descriptor_index 都是对常量池项的引用，分别代表着
 
 ## 方法描述符
 
-| 标识字符 | 说明                           |
-| -------- | ------------------------------ |
-| B        | 基本类型 byte                  |
-| C        | 基本类型 char                  |
-| D        | 基本类型 double                |
-| F        | 基本类型 float                 |
-| I        | 基本类型 int                   |
-| J        | 基本类型 long                  |
-| S        | 基本类型 short                 |
-| Z        | 基本类型 boolean               |
-| V        | 特殊类型 void                  |
-| L        | 对象类型，如 Ljava/lang/Object |
+| 标识字符 | 说明                             |
+| -------- | -------------------------------- |
+| B        | 基本类型 byte                    |
+| C        | 基本类型 char                    |
+| D        | 基本类型 double                  |
+| F        | 基本类型 float                   |
+| I        | 基本类型 int                     |
+| J        | 基本类型 long                    |
+| S        | 基本类型 short                   |
+| Z        | 基本类型 boolean                 |
+| V        | 特殊类型 void                    |
+| L        | 对象类型，比如 Ljava/lang/Object |
 
 用描述符来描述方法时，按照先参数列表、后返回值的顺序描述，参数列表按照参数的顺序放在一组小括号之内。
 
-例如，方法 void inc() 的描述符为 ()V。
+```java
+// 方法描述符示例:
+// ()V
+void inc();
+// ()Ljava/lang/String
+String toString();
+// ([CII[CIII)I
+int indexOf(char[]source,int sourceOffset,int sourceCount,char[]target,int targetOffset,int targetCount,int fromIndex);
+```
 
-方法 String toString() 的描述符为 ()Ljava/lang/String。
-
-方法 int indexOf(char\[]source,int sourceOffset,int sourceCount,char\[]target,int targetOffset,int targetCount,int fromIndex) 的描述符为 (\[CII\[CIII)I。
-
-方法的定义可以通过访问标志、名称索引、描述符索引来表达清楚，而方法里面的代码经过编译后，存放在方法属性表集合(attributes)中一个名为 Code 的属性(attribute_info)里面。
+方法的定义可以通过访问标志、名称索引、描述符索引来表达清楚，而方法里面的代码经过编译后，存放在方法的属性表(attributes)中一个名为 Code 的属性(attribute_info)里面。
 
 ---
 
@@ -74,7 +78,7 @@ public class ClassFileDemo {
 
 ![](../../img/class_file6.png)
 
-方法个数(methods_count)为`0x0002`，即有 2 个方法。紧接着是方法表集合。
+方法个数(methods_count)为`0x0002`，即有 2 个方法。紧接着是方法集合。
 
 第一个方法：access_flags 为`0x0001`，表示修饰符为`ACC_PUBLIC`。name_index 为`0x0007`，指向常量池中索引为 7 的值`<init>`。descriptor_index 为`0x0008`，指向常量池中索引为 8 的值`()V`。attributes_count 为`0x0001`，表示此方法的属性表集合有 1 项属性，紧接着的是 attribute_info，其中的属性名称的索引值为`0x0009`，指向常量池中索引为 9 的值`Code`，说明此属性是方法的字节码描述。后面的 4 个字节`0x0000002F`表示属性`Code`的长度，即十进制的 47。
 

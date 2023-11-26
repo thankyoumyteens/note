@@ -3,6 +3,7 @@
 
 - [类的加载](./load_class/load_class.md)
     - [类文件结构](./load_class/class_file/class_file.md)
+        - [魔数和版本号](./load_class/class_file/magic_and_version.md)
         - [常量池](./load_class/class_file/constant_pool.md)
         - [访问标志](./load_class/class_file/access_flags.md)
         - [索引](./load_class/class_file/indexes.md)

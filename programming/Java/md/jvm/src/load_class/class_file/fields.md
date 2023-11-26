@@ -38,18 +38,18 @@ name_index 和 descriptor_index 都是对常量池项的引用，分别代表着
 
 ## 字段描述符
 
-| 标识字符 | 说明                           |
-| -------- | ------------------------------ |
-| B        | 基本类型 byte                  |
-| C        | 基本类型 char                  |
-| D        | 基本类型 double                |
-| F        | 基本类型 float                 |
-| I        | 基本类型 int                   |
-| J        | 基本类型 long                  |
-| S        | 基本类型 short                 |
-| Z        | 基本类型 boolean               |
-| V        | 特殊类型 void                  |
-| L        | 对象类型，如 Ljava/lang/Object |
+| 标识字符 | 说明                             |
+| -------- | -------------------------------- |
+| B        | 基本类型 byte                    |
+| C        | 基本类型 char                    |
+| D        | 基本类型 double                  |
+| F        | 基本类型 float                   |
+| I        | 基本类型 int                     |
+| J        | 基本类型 long                    |
+| S        | 基本类型 short                   |
+| Z        | 基本类型 boolean                 |
+| V        | 特殊类型 void                    |
+| L        | 对象类型，比如 Ljava/lang/Object |
 
 对于数组类型，每一维度将使用一个前置的`[`字符来描述，如一个 String[][]类型的二维数组将被记录成`[[Ljava/lang/String`，一个整型数组 int[]将被记录成`[I`。
 
