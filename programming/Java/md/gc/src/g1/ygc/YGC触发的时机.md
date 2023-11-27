@@ -394,7 +394,9 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
         if (g1_policy()->during_initial_mark_pause()) {
           concurrent_mark()->checkpointRootsInitialPre();
         }
-
+        // 选择CSet，
+        // Young GC会选择所有新生代region，
+        // Mixed GC会选择所有新生代region和部分老年代region，
         g1_policy()->finalize_cset(target_pause_time_ms, evacuation_info);
 
         register_humongous_regions_with_in_cset_fast_test();
