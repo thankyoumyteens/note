@@ -20,8 +20,8 @@ touch do_say.go
 do_say.go 文件内容如下：
 
 ```go
-// 包名可以和文件夹名/文件名不同
-package mypackage
+// 包名
+package say_hello
 
 import "fmt"
 // 导出函数
@@ -41,7 +41,7 @@ hello.go 文件内容如下：
 ```go
 package main
 
-// 导入 say_hello
+// 导入 say_hello 包
 import (
 	"test/say_hello"
 )
@@ -50,7 +50,7 @@ import (
 func main() {
     // 调用 do_say.go 中的 SayHello 函数
     // 需要用包名调用
-    mypackage.SayHello()
+    say_hello.SayHello()
 }
 ```
 
