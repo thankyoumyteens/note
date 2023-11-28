@@ -1,6 +1,6 @@
 # 创建ChromeOptions
 
-selenium启动配置参数接收是ChromeOptions类，创建方式如下：
+selenium启动配置参数接收是ChromeOptions类, 创建方式如下: 
 ```python
 from selenium import webdriver
 option = webdriver.ChromeOptions()
@@ -30,7 +30,7 @@ options.add_argument('incognito')
 # 自动打开开发者工具
 options.add_argument("auto-open-devtools-for-tabs")
 
-# 设置窗口尺寸，注意宽高之间使用逗号而不是x
+# 设置窗口尺寸, 注意宽高之间使用逗号而不是x
 options.add_argument('window-size=300,600')
 
 # 设置窗口启动位置（左上角坐标）
@@ -42,9 +42,9 @@ options.add_argument('disable-gpu')
 # 全屏启动
 options.add_argument('start-fullscreen')
 
-# 全屏启动，无地址栏
+# 全屏启动, 无地址栏
 options.add_argument('kiosk') 
 
- # 启动时，不激活（前置）窗口
+ # 启动时, 不激活（前置）窗口
 options.add_argument('no-startup-window') 
 ```

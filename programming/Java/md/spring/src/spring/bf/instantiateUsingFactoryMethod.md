@@ -35,9 +35,9 @@ class ConstructorResolver {
             }
             // 根据名称获取工厂
             factoryBean = this.beanFactory.getBean(factoryBeanName);
-            // bean是单例，且工厂已经存在
+            // bean是单例, 且工厂已经存在
             if (mbd.isSingleton() && this.beanFactory.containsSingleton(beanName)) {
-                // 重复创建单例bean，报错
+                // 重复创建单例bean, 报错
                 throw new ImplicitlyAppearedSingletonException();
             }
             // 获取工厂的Class
@@ -59,7 +59,7 @@ class ConstructorResolver {
         Method factoryMethodToUse = null;
         ArgumentsHolder argsHolderToUse = null;
         Object[] argsToUse = null;
-        // 如果指定了构造方法的参数，则构造bean的时候使用此构造方法
+        // 如果指定了构造方法的参数, 则构造bean的时候使用此构造方法
         if (explicitArgs != null) {
             argsToUse = explicitArgs;
         } else {
@@ -75,7 +75,7 @@ class ConstructorResolver {
                     }
                 }
             }
-            // 如果缓存中存在，则解析存储在BeanDefinition中的参数
+            // 如果缓存中存在, 则解析存储在BeanDefinition中的参数
             if (argsToResolve != null) {
                 argsToUse = resolvePreparedArguments(beanName, mbd, bw, factoryMethodToUse, argsToResolve);
             }
@@ -87,7 +87,7 @@ class ConstructorResolver {
             Method[] rawCandidates = getCandidateMethods(factoryClass, mbd);
             List<Method> candidateList = new ArrayList<>();
             for (Method candidate : rawCandidates) {
-                // 如果方法为静态方法，且为工厂方法则添加到candidateList中
+                // 如果方法为静态方法, 且为工厂方法则添加到candidateList中
                 if (Modifier.isStatic(candidate.getModifiers()) == isStatic && mbd.isFactoryMethod(candidate)) {
                     candidateList.add(candidate);
                 }
@@ -104,7 +104,7 @@ class ConstructorResolver {
             if (explicitArgs != null) {
                 minNrOfArgs = explicitArgs.length;
             } else {
-                // 如果getBean没有传递参数，则需要解析保存在BeanDefinition中的构造方法参数
+                // 如果getBean没有传递参数, 则需要解析保存在BeanDefinition中的构造方法参数
                 if (mbd.hasConstructorArgumentValues()) {
                     ConstructorArgumentValues cargs = mbd.getConstructorArgumentValues();
                     resolvedValues = new ConstructorArgumentValues();
@@ -151,9 +151,9 @@ class ConstructorResolver {
                         }
                     }
                     // 判断解析方法的时候是否以宽松模式还是严格模式
-                    // 严格模式：解析方法时，必须所有的参数都需要匹配，否则抛出异常
-                    // 宽松模式：使用具有最接近的模式进行匹配
-                    // typeDiffWeight：类型差异权重
+                    // 严格模式: 解析方法时, 必须所有的参数都需要匹配, 否则抛出异常
+                    // 宽松模式: 使用具有最接近的模式进行匹配
+                    // typeDiffWeight: 类型差异权重
                     int typeDiffWeight = (mbd.isLenientConstructorResolution() ?
                             argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes));
                     // 选择最接近的一个方法
@@ -177,7 +177,7 @@ class ConstructorResolver {
                     }
                 }
             }
-            // 没有可执行的工厂方法，抛出异常
+            // 没有可执行的工厂方法, 抛出异常
             if (factoryMethodToUse == null) {
                 if (causes != null) {
                     UnsatisfiedDependencyException ex = causes.removeLast();
@@ -271,7 +271,7 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
             Method priorInvokedFactoryMethod = currentlyInvokedFactoryMethod.get();
             try {
                 currentlyInvokedFactoryMethod.set(factoryMethod);
-                // 调用工厂，创建bean
+                // 调用工厂, 创建bean
                 Object result = factoryMethod.invoke(factoryBean, args);
                 if (result == null) {
                     result = new NullBean();

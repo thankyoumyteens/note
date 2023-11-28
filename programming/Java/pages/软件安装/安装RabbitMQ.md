@@ -24,7 +24,7 @@ vim /etc/profile
 ERL_HOME=/usr/local/erlang
 PATH=$ERL_HOME/bin:$PATH
 ```
-使环境变量生效：
+使环境变量生效: 
 ```
 source /etc/profile
 ```
@@ -60,14 +60,14 @@ mkdir /etc/rabbitmq/
 # 启动和关闭RabbitMQ
 
 ```
-启动监控管理器：rabbitmq-plugins enable rabbitmq_management
-关闭监控管理器：rabbitmq-plugins disable rabbitmq_management
-启动rabbitmq：rabbitmq-service start
-关闭rabbitmq：rabbitmq-service stop
-查看所有的队列：rabbitmqctl list_queues
-清除所有的队列：rabbitmqctl reset
-关闭应用：rabbitmqctl stop_app
-启动应用：rabbitmqctl start_app
+启动监控管理器: rabbitmq-plugins enable rabbitmq_management
+关闭监控管理器: rabbitmq-plugins disable rabbitmq_management
+启动rabbitmq: rabbitmq-service start
+关闭rabbitmq: rabbitmq-service stop
+查看所有的队列: rabbitmqctl list_queues
+清除所有的队列: rabbitmqctl reset
+关闭应用: rabbitmqctl stop_app
+启动应用: rabbitmqctl start_app
 ```
 管理界面
 ```

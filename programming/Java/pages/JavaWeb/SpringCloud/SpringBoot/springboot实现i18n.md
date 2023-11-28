@@ -1,16 +1,16 @@
 # 增加多语言文件
 
-在resources中，新增static/i18n文件夹，在里面新建新建三个文件：
+在resources中, 新增static/i18n文件夹, 在里面新建新建三个文件: 
 
 - messages.properties（默认的多语言文件）
 - messages_zh_CN.properties(中文语言文件)
 - messages_en_US.properties（英文语言文件）
 
-在里面添加上相同键的不同语言翻译值；如zh_CN中：
+在里面添加上相同键的不同语言翻译值；如zh_CN中: 
 ```
 user.appname=中文语言
 ```
-en_US中：
+en_US中: 
 ```
 user.appname=English Language
 ```
@@ -27,7 +27,7 @@ File->Settings->Build,Execution,Deployment -> Compiler -> Java Compiler,
 设置 Additional command line parameters选项为 -encoding utf-8
 
 打开Run/Debug Configuration,选择你的tomcat, 
-然后在  Server > VM options 设置为 -Dfile.encoding=UTF-8 ，重启tomcat
+然后在  Server > VM options 设置为 -Dfile.encoding=UTF-8 , 重启tomcat
 
 # 配置文件增加配置
 
@@ -105,7 +105,7 @@ public class LocalUtil
 
 # 使用
 
-注意：在调用接口时，如果不传lang参数，会获取默认解析器的语言，如果传入了lang，就使用lang参数传入的语言
+注意: 在调用接口时, 如果不传lang参数, 会获取默认解析器的语言, 如果传入了lang, 就使用lang参数传入的语言
 
 ```java
 @GetMapping("/getmsg")

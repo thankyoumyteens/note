@@ -1114,10 +1114,10 @@
         <mxCell id="RHNBFfmXrk5GfQPQTmIy-4" value="Region B" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="229" y="525" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="RHNBFfmXrk5GfQPQTmIy-5" value="key：指向其他Region" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="RHNBFfmXrk5GfQPQTmIy-5" value="key: 指向其他Region" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="229" y="265" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="RHNBFfmXrk5GfQPQTmIy-6" value="value：数组中每个元素都是其他Region中的卡片索引" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="RHNBFfmXrk5GfQPQTmIy-6" value="value: 数组中每个元素都是其他Region中的卡片索引" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="449" y="265" width="300" height="30" as="geometry" />
         </mxCell>
         <mxCell id="RHNBFfmXrk5GfQPQTmIy-8" value="6144" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">

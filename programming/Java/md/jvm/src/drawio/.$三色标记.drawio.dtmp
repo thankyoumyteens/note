@@ -243,7 +243,7 @@
         <mxCell id="ArFNChyJmPc6KOklQDSW-11" value="d" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="400" y="230" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ArFNChyJmPc6KOklQDSW-13" value="扫描到对象b的时候，b指向e的引用被切断" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="ArFNChyJmPc6KOklQDSW-13" value="扫描到对象b的时候, b指向e的引用被切断" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="360" y="490" width="276" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ArFNChyJmPc6KOklQDSW-14" value="对象a建立了一个指向e的引用" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -302,7 +302,7 @@
         <mxCell id="Pv_kJaSo7O3V1H2DTz82-12" value="d" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="340" y="300" width="50" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="Pv_kJaSo7O3V1H2DTz82-13" value="扫描到对象b的时候，b指向e的引用被切断，虚拟机保存引用删除前的快照" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="Pv_kJaSo7O3V1H2DTz82-13" value="扫描到对象b的时候, b指向e的引用被切断, 虚拟机保存引用删除前的快照" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="230" y="535" width="240" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Pv_kJaSo7O3V1H2DTz82-14" value="对象a建立了一个指向e的引用" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -374,7 +374,7 @@
             <mxPoint x="320" y="810" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="EdSOO-8-CptPm2KY8c4X-17" value="重新标记阶段，根据原始快照，从b节点重新扫描" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="EdSOO-8-CptPm2KY8c4X-17" value="重新标记阶段, 根据原始快照, 从b节点重新扫描" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="530" y="710" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="m3aRT_kx7MYN-tnMybKk-1" value="根" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
@@ -427,10 +427,10 @@
         <mxCell id="MHhOF_-iVvGTy5cQNES6-12" value="d" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
           <mxGeometry x="330" y="310" width="50" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="MHhOF_-iVvGTy5cQNES6-13" value="扫描到对象b的时候，b指向e的引用被切断" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="MHhOF_-iVvGTy5cQNES6-13" value="扫描到对象b的时候, b指向e的引用被切断" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="340" y="460" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="MHhOF_-iVvGTy5cQNES6-14" value="对象a建立了一个指向e的引用，虚拟机会把这个新增的引用记录下来" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="MHhOF_-iVvGTy5cQNES6-14" value="对象a建立了一个指向e的引用, 虚拟机会把这个新增的引用记录下来" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="160" y="530" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="MHhOF_-iVvGTy5cQNES6-20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="MHhOF_-iVvGTy5cQNES6-21" target="MHhOF_-iVvGTy5cQNES6-24" edge="1">
@@ -478,7 +478,7 @@
             <mxPoint x="350" y="980" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MHhOF_-iVvGTy5cQNES6-35" value="重新标记阶段，根据集合中的内容，从a节点重新扫描" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="MHhOF_-iVvGTy5cQNES6-35" value="重新标记阶段, 根据集合中的内容, 从a节点重新扫描" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="-35" y="740" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="MHhOF_-iVvGTy5cQNES6-37" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">

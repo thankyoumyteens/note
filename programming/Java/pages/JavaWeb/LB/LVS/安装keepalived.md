@@ -10,7 +10,7 @@ make && make install
 
 # 将配置文件拷贝到系统对应的目录下
 
-keepalived启动时会从/etc/keepalived目录下查找keepalived.conf配置文件，如果没有找到则使用默认的配置。/etc/keepalived目录安装时默认是没有安装的，需要手动创建。
+keepalived启动时会从/etc/keepalived目录下查找keepalived.conf配置文件, 如果没有找到则使用默认的配置。/etc/keepalived目录安装时默认是没有安装的, 需要手动创建。
 
 ```bash
 mkdir /etc/keepalived

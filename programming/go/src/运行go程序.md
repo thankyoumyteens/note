@@ -17,7 +17,7 @@ cd say_hello
 touch do_say.go
 ```
 
-do_say.go 文件内容如下：
+do_say.go 文件内容如下: 
 
 ```go
 // 包名
@@ -36,7 +36,7 @@ func SayHello() {
 touch hello.go
 ```
 
-hello.go 文件内容如下：
+hello.go 文件内容如下: 
 
 ```go
 package main

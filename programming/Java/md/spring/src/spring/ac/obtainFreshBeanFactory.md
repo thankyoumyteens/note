@@ -5,7 +5,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
         implements ConfigurableApplicationContext {
 
     protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
-        // 初始化BeanFactory，并加载BeanDefinition
+        // 初始化BeanFactory, 并加载BeanDefinition
         refreshBeanFactory();
         // 返回BeanFactory对象
         ConfigurableListableBeanFactory beanFactory = getBeanFactory();
@@ -18,7 +18,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
     private volatile DefaultListableBeanFactory beanFactory;
 
     /**
-     * 创建BeanFactory，并存储到当前ApplicationContext对象的字段中
+     * 创建BeanFactory, 并存储到当前ApplicationContext对象的字段中
      */
     protected final void refreshBeanFactory() throws BeansException {
         if (hasBeanFactory()) {
@@ -32,7 +32,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
             beanFactory.setSerializationId(getId());
             // 定制BeanFactory
             customizeBeanFactory(beanFactory);
-            // 创建BeanDefinitionReader，并加载BeanDefinition
+            // 创建BeanDefinitionReader, 并加载BeanDefinition
             loadBeanDefinitions(beanFactory);
             this.beanFactory = beanFactory;
         } catch (IOException ex) {
@@ -83,11 +83,11 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableC
             // 加载BeanDefinition
             reader.loadBeanDefinitions(configResources);
         }
-        // xml还没加载成Resource，
-        // 先获取xml配置文件的路径，
+        // xml还没加载成Resource, 
+        // 先获取xml配置文件的路径, 
         String[] configLocations = getConfigLocations();
         if (configLocations != null) {
-            // 先把xml配置文件加载成Resource，
+            // 先把xml配置文件加载成Resource, 
             // 再去加载BeanDefinition
             reader.loadBeanDefinitions(configLocations);
         }

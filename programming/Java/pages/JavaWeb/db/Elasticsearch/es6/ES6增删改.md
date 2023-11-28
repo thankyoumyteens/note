@@ -13,7 +13,7 @@ curl -H 'Content-Type: application/json' -X POST 'http://localhost:9200/demo/exa
 '
 ```
 
-ES响应：
+ES响应: 
 
 ```json
 {
@@ -37,7 +37,7 @@ ElasticSearch的核心功能——搜索。
 
 ```POST http://localhost:9200/demo/example_type/_search?pretty```
 
-ES响应：
+ES响应: 
 
 ```json
 {
@@ -81,7 +81,7 @@ POST http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX/_update
 }
 ```
 
-ES响应：
+ES响应: 
 
 ```json
 {
@@ -104,7 +104,7 @@ ES响应：
 
 ```DELETE http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX```
 
-ES的响应：
+ES的响应: 
 
 ```json
 {

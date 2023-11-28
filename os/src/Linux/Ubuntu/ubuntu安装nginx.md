@@ -21,7 +21,7 @@ sudo make
 sudo make install
 ```
 
-configure参数含义：
+configure参数含义: 
 
 - `--prefix=/usr/local/nginx` 安装路径
 - `--pid-path=/usr/local/nginx/logs/nginx.pid` 进程文件

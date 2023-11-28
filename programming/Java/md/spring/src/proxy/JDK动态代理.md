@@ -37,8 +37,8 @@ public class DemoProxy implements InvocationHandler {
     }
     /**
      * @param proxy 不是委托对象
-     * @param method 动态代理调用方法时，被调用的那个方法
-     * @param args 动态代理调用方法时，传入被调用方法的参数
+     * @param method 动态代理调用方法时, 被调用的那个方法
+     * @param args 动态代理调用方法时, 传入被调用方法的参数
      */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("pre");
@@ -92,7 +92,7 @@ public class App {
 }
 ```
 
-重新运行程序后，可以看到生成的代理类
+重新运行程序后, 可以看到生成的代理类
 
 ![](./img/generated_proxy_class.png)
 
@@ -179,8 +179,8 @@ public final class $Proxy0 extends Proxy implements DemoInterface {
 
 可以发现$Proxy0类实现了Proxy.newProxyInstance()传入的接口DemoInterface。
 
-$Proxy0中的每一个方法(call、equals、toString等)都改成了被super.h.invoke()调用，其中的h如下：
+$Proxy0中的每一个方法(call、equals、toString等)都改成了被super.h.invoke()调用, 其中的h如下: 
 
 ![](./img/Proxy_h.png)
 
-所以，最终$Proxy0中的所有方法都会由实现了InvocationHandler接口的DemoProxy调用。
+所以, 最终$Proxy0中的所有方法都会由实现了InvocationHandler接口的DemoProxy调用。

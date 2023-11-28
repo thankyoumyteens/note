@@ -19,12 +19,12 @@ const routes = [
     path: '/home',
     // 路由名称
     name: 'home',
-    // 对应的组件(懒加载，在该路由被访问时才会加载对应的组件)
+    // 对应的组件(懒加载, 在该路由被访问时才会加载对应的组件)
     component: () => import('./views/Home.vue')
   },
   // 其他页面的路由
 ];
-// 创建一个Vue Router实例，并将路由配置传递给它
+// 创建一个Vue Router实例, 并将路由配置传递给它
 const router = new VueRouter({
   routes
 });
@@ -32,7 +32,7 @@ const router = new VueRouter({
 export default router;
 ```
 
-# 在Vue应用的main.js中，将Vue Router实例作为router选项传递给Vue实例
+# 在Vue应用的main.js中, 将Vue Router实例作为router选项传递给Vue实例
 
 ```javascript
 import router from './router';

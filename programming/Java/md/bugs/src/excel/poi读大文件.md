@@ -11,7 +11,7 @@ try (XSSFWorkbook wb = new XSSFWorkbook(file.getInputStream())) {
         String val1 = getCellData(row, 1);
         String val2 = getCellData(row, 2);
         if (StrUtil.isNotBlank(val2) && val2.length() > 100) {
-            throw new Exception("输出过长，第" + (i + 1) + "行");
+            throw new Exception("输出过长, 第" + (i + 1) + "行");
         }
         if (StringUtils.isBlank(val0)
                 && StringUtils.isBlank(val1)
@@ -45,7 +45,7 @@ try (XSSFWorkbook wb = new XSSFWorkbook(file.getInputStream())) {
 
 ## 原因
 
-POI有一些缺陷，操作都是在内存中完成的，内存消耗很大。poi在处理之前使用IOUtils里面的方法校验了下数据的字节长度，当超过常量配置的长度后会抛出上面的异常，如果不做限制就会导致内存不足。
+POI有一些缺陷, 操作都是在内存中完成的, 内存消耗很大。poi在处理之前使用IOUtils里面的方法校验了下数据的字节长度, 当超过常量配置的长度后会抛出上面的异常, 如果不做限制就会导致内存不足。
 
 ## 解决
 
@@ -63,7 +63,7 @@ EasyExcel.read(
             String val1 = o.getVal1();
             String val2 = o.getVal2();
             if (StrUtil.isNotBlank(val2) && val2.length() > 200) {
-                errorMsg[0] = "输出过长，第" + analysisContext.getCurrentRowNum() + "行";
+                errorMsg[0] = "输出过长, 第" + analysisContext.getCurrentRowNum() + "行";
             }
             if (StringUtils.isBlank(val0)
                     && StringUtils.isBlank(val1)

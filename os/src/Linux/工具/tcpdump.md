@@ -1,21 +1,21 @@
 # 简介
 
-tcpdump是一个用于截取网络分组，并输出分组内容的工具。凭借强大的功能和灵活的截取策略，使其成为类UNIX系统下用于网络分析和问题排查的首选工具
+tcpdump是一个用于截取网络分组, 并输出分组内容的工具。凭借强大的功能和灵活的截取策略, 使其成为类UNIX系统下用于网络分析和问题排查的首选工具
 
-tcpdump 支持针对网络层、协议、主机、网络或端口的过滤，并提供and、or、not等逻辑语句来帮助你去掉无用的信息
+tcpdump 支持针对网络层、协议、主机、网络或端口的过滤, 并提供and、or、not等逻辑语句来帮助你去掉无用的信息
 
 # 常用功能
 
 ## 默认启动
 
-普通情况下，直接启动tcpdump将监视第一个网络接口上所有流过的数据包。
+普通情况下, 直接启动tcpdump将监视第一个网络接口上所有流过的数据包。
 ```
 tcpdump
 ```
 
 ## 监视指定网卡的数据包
 
-如果不指定网卡，默认tcpdump只会监视第一个网络接口，一般是eth0。　
+如果不指定网卡, 默认tcpdump只会监视第一个网络接口, 一般是eth0。　
 ```
 tcpdump -i eth1
 ```
@@ -61,21 +61,21 @@ tcpdump host 210.27.48.1 and port 8080
 
 # 过滤表达式(pcap filter)
 
-表达式的作用是过滤掉我们抓到的包，我们可以再抓取的时候进行过滤，同时我们也可以再显示的时候进行过滤。
+表达式的作用是过滤掉我们抓到的包, 我们可以再抓取的时候进行过滤, 同时我们也可以再显示的时候进行过滤。
 
-过滤包就是抓到我们想要的包：我们可以过滤指定包的协议、包的类型、包的传输源和目的和包中一些关键字进行过滤。同时我们也可以指定包中的内容进行过滤。
+过滤包就是抓到我们想要的包: 我们可以过滤指定包的协议、包的类型、包的传输源和目的和包中一些关键字进行过滤。同时我们也可以指定包中的内容进行过滤。
 
 - filter表达式通常由一个或多个原语构成。
 - 原语通常是由带一个或多个修饰符+id(name or number)所构成。
 - 使用`and`、`or`、`not`连接多个原语。
-- 使用括号可以改变表达式的优先级，但是括号会被shell解释，所以应该使用反斜线转义, 或者把整个表达式包围在引号中。
+- 使用括号可以改变表达式的优先级, 但是括号会被shell解释, 所以应该使用反斜线转义, 或者把整个表达式包围在引号中。
 
-有三种不同类型的修饰符：
+有三种不同类型的修饰符: 
 
-1. type： type限定符用于指明当前要引用哪一种类型的id name 或 id number。可选值有： `host`, `net`, `port`, `portrange`。默认值为`host`。
-2. dir: dir限定符用于指明传输方向。可选的方向有： `src`, `dst`, `src or dst`, `src and dst`, `ra`, `ta`, `addr1`, `addr2`, `addr3`, `addr4`。默认值为`src or dst`。而`ra`, `ta`, `addr1`, `addr2`, `addr3`, `addr4`限定符只在IEEE 802.11无线网络链路层有效。
-3. proto: proto限定符用于设置匹配的协议类型。可选值有： `ether`, `fddi`, `tr`, `wlan`, `ip`, `ip6`, `arp`, `rarp`, `decnet`, `tcp`和`udp`。 默认值为所有兼容该type的协议类型。
-4. 例如：`host baidu.com and not port 8080 and not portrange 8081-8088`
+1. type:  type限定符用于指明当前要引用哪一种类型的id name 或 id number。可选值有:  `host`, `net`, `port`, `portrange`。默认值为`host`。
+2. dir: dir限定符用于指明传输方向。可选的方向有:  `src`, `dst`, `src or dst`, `src and dst`, `ra`, `ta`, `addr1`, `addr2`, `addr3`, `addr4`。默认值为`src or dst`。而`ra`, `ta`, `addr1`, `addr2`, `addr3`, `addr4`限定符只在IEEE 802.11无线网络链路层有效。
+3. proto: proto限定符用于设置匹配的协议类型。可选值有:  `ether`, `fddi`, `tr`, `wlan`, `ip`, `ip6`, `arp`, `rarp`, `decnet`, `tcp`和`udp`。 默认值为所有兼容该type的协议类型。
+4. 例如: `host baidu.com and not port 8080 and not portrange 8081-8088`
 
 ## 存取数据包内的数据
 
@@ -88,10 +88,10 @@ proto [index:length]
 - length 是偏移几个字节
 
 例子:
-- `ip[9]==1` 表示抓icmp协议，因为IP包中的第9个字节是表示的协议类型，1是icmp协议。
-- `tcp[0:2]=80` 表示源端口为80，因为tcp包中第0个字节开始并偏移2个字节，即表示tcp包的开始前16位，正好是源端口
-- `tcp[2:2]=80` 表示目的端口为80，因为从第2字节（实际就是第三个字节开始，因为从0开始数）并偏移2个字节，正好是目的端口所占用的16位。
-- `icmp[0]=8` 表示echo request，因为icmp的第一个字节正好表示icmp的type，type=8表示回显请求
+- `ip[9]==1` 表示抓icmp协议, 因为IP包中的第9个字节是表示的协议类型, 1是icmp协议。
+- `tcp[0:2]=80` 表示源端口为80, 因为tcp包中第0个字节开始并偏移2个字节, 即表示tcp包的开始前16位, 正好是源端口
+- `tcp[2:2]=80` 表示目的端口为80, 因为从第2字节（实际就是第三个字节开始, 因为从0开始数）并偏移2个字节, 正好是目的端口所占用的16位。
+- `icmp[0]=8` 表示echo request, 因为icmp的第一个字节正好表示icmp的type, type=8表示回显请求
 
 # 选项
 
@@ -112,7 +112,7 @@ proto [index:length]
 
     在采用2。2版本或之后版本内核的Linux 操作系统上, 'any' 这个虚拟网络接口可被用来接收所有网络接口上的数据包(nt: 这会包括目的是该网络接口的, 也包括目的不是该网络接口的)。 需要注意的是如果真实网络接口不能工作在'混杂'模式(promiscuous)下,则无法在'any'这个虚拟的网络接口上抓取其数据包。
 
-    如果 -D 标志被指定, tcpdump会打印系统中的接口编号，而该编号就可用于此处的interface 参数。
+    如果 -D 标志被指定, tcpdump会打印系统中的接口编号, 而该编号就可用于此处的interface 参数。
 
 -l  对标准输出进行行缓冲(nt: 使标准输出设备遇到一个换行符就马上把这行的内容打印出来)。在需要同时观察抓包打印以及保存抓包记录的时候很有用。 比如, 可通过以下命令组合来达到此目的:
     ``tcpdump  -l  |  tee dat'' 或者 ``tcpdump  -l   > dat  &  tail  -f  dat''。(nt: 前者使用tee来把tcpdump 的输出同时放到文件dat和标准输出中, 而后者通过重定向操作'>', 把tcpdump的输出放到dat 文件中, 同时通过tail把dat文件中的内容放到标准输出中)
@@ -120,7 +120,7 @@ proto [index:length]
 -L  列出指定网络接口所支持的数据链路层的类型后退出。(nt: 指定接口通过-i 来指定)
 
 -m  module
-    通过module 指定的file 装载SMI MIB 模块(nt: SMI，Structure of Management Information, 管理信息结构MIB, Management Information Base, 管理信息库。 可理解为, 这两者用于SNMP(Simple Network Management Protoco)协议数据包的抓取。 具体SNMP 的工作原理未知, 另需补充)。
+    通过module 指定的file 装载SMI MIB 模块(nt: SMI, Structure of Management Information, 管理信息结构MIB, Management Information Base, 管理信息库。 可理解为, 这两者用于SNMP(Simple Network Management Protoco)协议数据包的抓取。 具体SNMP 的工作原理未知, 另需补充)。
 
     此选项可多次使用, 从而为tcpdump 装载不同的MIB 模块。
 
@@ -136,7 +136,7 @@ proto [index:length]
 
 -q  快速(也许用'安静'更好?)打印输出。 即打印很少的协议相关信息, 从而输出行都比较简短。
 
--R  设定tcpdump 对 ESP/AH 数据包的解析按照 RFC1825而不是RFC1829(nt: AH, 认证头, ESP， 安全负载封装, 这两者会用在IP包的安全传输机制中)。 如果此选项被设置, tcpdump 将不会打印出'禁止中继'域(nt: relay prevention field)。 另外,由于ESP/AH规范中没有规定ESP/AH数据包必须拥有协议版本号域,所以tcpdump不能从收到的ESP/AH数据包中推导出协议版本号。
+-R  设定tcpdump 对 ESP/AH 数据包的解析按照 RFC1825而不是RFC1829(nt: AH, 认证头, ESP,  安全负载封装, 这两者会用在IP包的安全传输机制中)。 如果此选项被设置, tcpdump 将不会打印出'禁止中继'域(nt: relay prevention field)。 另外,由于ESP/AH规范中没有规定ESP/AH数据包必须拥有协议版本号域,所以tcpdump不能从收到的ESP/AH数据包中推导出协议版本号。
 
 -r  file
     从文件file 中读取包数据。 如果file 字段为 '-' 符号, 则tcpdump 会从标准输入中读取包数据。
@@ -144,7 +144,7 @@ proto [index:length]
 -S  打印TCP 数据包的顺序号时, 使用绝对的顺序号, 而不是相对的顺序号。(nt: 相对顺序号可理解为, 相对第一个TCP 包顺序号的差距,比如, 接受方收到第一个数据包的绝对顺序号为232323, 对于后来接收到的第2个,第3个数据包, tcpdump会打印其序列号为1, 2分别表示与第一个数据包的差距为1 和 2。 而如果此时-S 选项被设置, 对于后来接收到的第2个, 第3个数据包会打印出其绝对顺序号:232324, 232325)。
 
 -s  snaplen
-    设置tcpdump的数据包抓取长度为snaplen, 如果不设置默认将会是68字节(而支持网络接口分接头(nt: NIT, 上文已有描述,可搜索'网络接口分接头'关键字找到那里)的SunOS系列操作系统中默认的也是最小值是96)。68字节对于IP, ICMP(nt: Internet Control Message Protocol,因特网控制报文协议), TCP 以及 UDP 协议的报文已足够, 但对于名称服务(nt: 可理解为dns, nis等服务), NFS服务相关的数据包会产生包截短。 如果产生包截短这种情况, tcpdump的相应打印输出行中会出现''[|proto]''的标志（proto 实际会显示为被截短的数据包的相关协议层次)。 需要注意的是, 采用长的抓取长度(nt: snaplen比较大), 会增加包的处理时间, 并且会减少tcpdump 可缓存的数据包的数量， 从而会导致数据包的丢失。 所以, 在能抓取我们想要的包的前提下, 抓取长度越小越好。把snaplen 设置为0 意味着让tcpdump自动选择合适的长度来抓取数据包。
+    设置tcpdump的数据包抓取长度为snaplen, 如果不设置默认将会是68字节(而支持网络接口分接头(nt: NIT, 上文已有描述,可搜索'网络接口分接头'关键字找到那里)的SunOS系列操作系统中默认的也是最小值是96)。68字节对于IP, ICMP(nt: Internet Control Message Protocol,因特网控制报文协议), TCP 以及 UDP 协议的报文已足够, 但对于名称服务(nt: 可理解为dns, nis等服务), NFS服务相关的数据包会产生包截短。 如果产生包截短这种情况, tcpdump的相应打印输出行中会出现''[|proto]''的标志（proto 实际会显示为被截短的数据包的相关协议层次)。 需要注意的是, 采用长的抓取长度(nt: snaplen比较大), 会增加包的处理时间, 并且会减少tcpdump 可缓存的数据包的数量,  从而会导致数据包的丢失。 所以, 在能抓取我们想要的包的前提下, 抓取长度越小越好。把snaplen 设置为0 意味着让tcpdump自动选择合适的长度来抓取数据包。
 
 -T  type
     强制tcpdump按type指定的协议所描述的包结构来分析收到的数据包。  目前已知的type 可取的协议为:

@@ -1,8 +1,8 @@
 # GC_locker
 
-GC_locker 是 JNI 线程访问临界区时的加锁机制。临界区（Critical Section）是指在多线程环境下，一段需要确保同一时刻只有一个线程能够访问的代码区域。
+GC_locker 是 JNI 线程访问临界区时的加锁机制。临界区（Critical Section）是指在多线程环境下, 一段需要确保同一时刻只有一个线程能够访问的代码区域。
 
-比如，当使用本地方法 JNI 函数访问 JVM 中的字符串或数组数据时，需要用到 jni_GetStringCritical 和 jni_ReleaseStringCritical 两个函数。
+比如, 当使用本地方法 JNI 函数访问 JVM 中的字符串或数组数据时, 需要用到 jni_GetStringCritical 和 jni_ReleaseStringCritical 两个函数。
 
 > jdk8u60-master\jdk\src\share\native\common\jni_util.c
 
@@ -19,7 +19,7 @@ static const char* getString8859_1Chars(JNIEnv *env, jstring jstr) {
     // 分配内存
     result = MALLOC_MIN4(len);
     if (result == 0) {
-        // 内存不足，抛出OOM异常
+        // 内存不足, 抛出OOM异常
         (*env)->ReleaseStringCritical(env, jstr, str);
         JNU_ThrowOutOfMemoryError(env, 0);
         return 0;
@@ -53,7 +53,7 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(
                                       env, string, (uintptr_t *) isCopy);
 #endif
-  // 进入临界区，使用GC_locker对临界区加锁
+  // 进入临界区, 使用GC_locker对临界区加锁
   GC_locker::lock_critical(thread);
   if (isCopy != NULL) {
     *isCopy = JNI_FALSE;
@@ -89,7 +89,7 @@ JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar 
   HOTSPOT_JNI_RELEASESTRINGCRITICAL_ENTRY(
                                           env, str, (uint16_t *) chars);
 #endif
-  // 离开临界区，使用GC_locker对临界区解锁
+  // 离开临界区, 使用GC_locker对临界区解锁
   GC_locker::unlock_critical(thread);
 #ifndef USDT2
   DTRACE_PROBE(hotspot_jni, ReleaseStringCritical__return);
@@ -102,18 +102,18 @@ JNI_END
 
 ## 进入临界区
 
-每个线程都有一个参数\_jni_active_critical，用来记录当前进入的临界区个数，如果\_jni_active_critical > 0，说明该线程已经在临界区。
+每个线程都有一个参数\_jni_active_critical, 用来记录当前进入的临界区个数, 如果\_jni_active_critical > 0, 说明该线程已经在临界区。
 
-如果该线程还没进入临界区，且\_needs_gc 标识为 true，则执行 jni_lock 方法。\_needs_gc 默认为 false，只有在特殊情况下才会被设置为 true。\_jni_lock_count 记录正在临界区内的线程个数。
+如果该线程还没进入临界区, 且\_needs_gc 标识为 true, 则执行 jni_lock 方法。\_needs_gc 默认为 false, 只有在特殊情况下才会被设置为 true。\_jni_lock_count 记录正在临界区内的线程个数。
 
 > jdk8u60-master\hotspot\src\share\vm\memory\gcLocker.inline.hpp
 
 ```cpp
 inline void GC_locker::lock_critical(JavaThread* thread) {
-  // 当_jni_active_critical大于0时，in_critical()返回true
+  // 当_jni_active_critical大于0时, in_critical()返回true
   if (!thread->in_critical()) {
     if (needs_gc()) {
-      // 如果该线程还没进入临界区，且_needs_gc为true
+      // 如果该线程还没进入临界区, 且_needs_gc为true
       jni_lock(thread);
       return;
     }
@@ -130,7 +130,7 @@ inline void GC_locker::lock_critical(JavaThread* thread) {
 void GC_locker::jni_lock(JavaThread* thread) {
   assert(!thread->in_critical(), "shouldn't currently be in a critical region");
   MutexLocker mu(JNICritical_lock);
-  // 当_needs_gc为true，且_jni_lock_count大于0时，
+  // 当_needs_gc为true, 且_jni_lock_count大于0时, 
   // is_active_and_needs_gc()返回true
   // _doing_gc表示enter_critical()方法中正在进行GC
   while (is_active_and_needs_gc() || _doing_gc) {
@@ -147,7 +147,7 @@ void GC_locker::jni_lock(JavaThread* thread) {
 
 ## 发生 Young GC
 
-如果有线程已经进入了临界区，此时发生了 Young GC：
+如果有线程已经进入了临界区, 此时发生了 Young GC: 
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 
@@ -158,7 +158,7 @@ void GC_locker::jni_lock(JavaThread* thread) {
 bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_ms) {
   assert_at_safepoint(true);
   guarantee(!is_gc_active(), "collection is not reentrant");
-  // 判断是否有线程在临界区，如果有则舍弃本次gc，并把_needs_gc参数设置为true
+  // 判断是否有线程在临界区, 如果有则舍弃本次gc, 并把_needs_gc参数设置为true
   if (GC_locker::check_active_before_gc()) {
     return false;
   }
@@ -166,14 +166,14 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
 }
 ```
 
-在开始 Young GC 之前，会判断是否有线程在临界区，如果有线程已经进入了临界区，则舍弃本次 gc，并把\_needs_gc 参数设置为 true：
+在开始 Young GC 之前, 会判断是否有线程在临界区, 如果有线程已经进入了临界区, 则舍弃本次 gc, 并把\_needs_gc 参数设置为 true: 
 
 > jdk8u60-master\hotspot\src\share\vm\memory\gcLocker.cpp
 
 ```cpp
 bool GC_locker::check_active_before_gc() {
   assert(SafepointSynchronize::is_at_safepoint(), "only read at safepoint");
-  // _jni_lock_count大于0时，is_active()返回true
+  // _jni_lock_count大于0时, is_active()返回true
   if (is_active() && !_needs_gc) {
     verify_critical_count();
     // _needs_gc设为true
@@ -183,11 +183,11 @@ bool GC_locker::check_active_before_gc() {
 }
 ```
 
-因为有线程进入了临界区，导致本次触发的 Young GC 被丢弃了，但是内存分配时空间不足的问题还需要解决，所以在离开临界区时，如果发现有 GC 被舍弃了，JVM 会重新执行一次这个 GC。
+因为有线程进入了临界区, 导致本次触发的 Young GC 被丢弃了, 但是内存分配时空间不足的问题还需要解决, 所以在离开临界区时, 如果发现有 GC 被舍弃了, JVM 会重新执行一次这个 GC。
 
 ## 离开临界区
 
-如果该线程已经在临界区中，且\_needs_gc 标识为 true，则执行 jni_unlock 方法。
+如果该线程已经在临界区中, 且\_needs_gc 标识为 true, 则执行 jni_unlock 方法。
 
 > jdk8u60-master\hotspot\src\share\vm\memory\gcLocker.inline.hpp
 
@@ -195,8 +195,8 @@ bool GC_locker::check_active_before_gc() {
 inline void GC_locker::unlock_critical(JavaThread* thread) {
   if (thread->in_last_critical()) {
     if (needs_gc()) {
-      // 如果该线程已经在临界区中，且_needs_gc为true，
-      // 表示有GC被舍弃了，需要补回来
+      // 如果该线程已经在临界区中, 且_needs_gc为true, 
+      // 表示有GC被舍弃了, 需要补回来
       jni_unlock(thread);
       return;
     }
@@ -218,15 +218,15 @@ void GC_locker::jni_unlock(JavaThread* thread) {
   decrement_debug_jni_lock_count();
   // 离开临界区
   thread->exit_critical();
-  // _needs_gc为true，且_jni_lock_count小于等于0，即临界区中最后一个线程也离开了
+  // _needs_gc为true, 且_jni_lock_count小于等于0, 即临界区中最后一个线程也离开了
   if (needs_gc() && !is_active_internal()) {
     // 标记正在进行GC
     _doing_gc = true;
     {
       MutexUnlocker munlock(JNICritical_lock);
       // GC
-      // Universe::heap ()方法返回的是当前JVM使用的堆类，
-      // 因为使用的是G1垃圾回收器，所以返回的是G1CollectedHeap
+      // Universe::heap ()方法返回的是当前JVM使用的堆类, 
+      // 因为使用的是G1垃圾回收器, 所以返回的是G1CollectedHeap
       Universe::heap()->collect(GCCause::_gc_locker);
     }
     // GC结束
@@ -285,7 +285,7 @@ void G1CollectedHeap::collect(GCCause::Cause cause) {
         }
       }
     } else {
-      // 从GC_locker传入的GC原因是GCCause::_gc_locker，
+      // 从GC_locker传入的GC原因是GCCause::_gc_locker, 
       // 所以会进行Young GC
       if (cause == GCCause::_gc_locker || cause == GCCause::_wb_young_gc
           DEBUG_ONLY(|| cause == GCCause::_scavenge_alot)) {

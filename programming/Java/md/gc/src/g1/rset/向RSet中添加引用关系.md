@@ -1,27 +1,27 @@
 # 向 RSet 中添加引用关系
 
-JVM 在每次给引用类型的字段赋值时，会插入一个写后屏障(post-write barrier)，post-write barrier 中会做下面的处理：
+JVM 在每次给引用类型的字段赋值时, 会插入一个写后屏障(post-write barrier), post-write barrier 中会做下面的处理: 
 
-1. 在 global card table 中找到该字段所在的 card，并设置为 dirty_card
-2. 如果当前是应用线程，每个 Java 线程有一个 dirty card queue(DCQ)，把该 card 插入队列
-3. G1 有一个全局卡表(global card table)，它的每个 card 都对应某个 Region 中的 512 字节的内存空间，如果一个 card 变脏(dirty)，就说明对应的 region 存在跨 region 的引用
+1. 在 global card table 中找到该字段所在的 card, 并设置为 dirty_card
+2. 如果当前是应用线程, 每个 Java 线程有一个 dirty card queue(DCQ), 把该 card 插入队列
+3. G1 有一个全局卡表(global card table), 它的每个 card 都对应某个 Region 中的 512 字节的内存空间, 如果一个 card 变脏(dirty), 就说明对应的 region 存在跨 region 的引用
 
-赋值动作到此结束，接下来 RSet 的更新操作交由多个 ConcurrentG1RefineThread 并发完成，Refine 线程会取出若干个 DCQ，遍历每个 DCQ 中记录的 card，并进行处理：
+赋值动作到此结束, 接下来 RSet 的更新操作交由多个 ConcurrentG1RefineThread 并发完成, Refine 线程会取出若干个 DCQ, 遍历每个 DCQ 中记录的 card, 并进行处理: 
 
-1. 根据 card 的地址，计算出 card 所在的 Region
-2. 如果 Region 不存在，或者 Region 在新生代中，或者该 Region 在回收集中，则不进行处理
+1. 根据 card 的地址, 计算出 card 所在的 Region
+2. 如果 Region 不存在, 或者 Region 在新生代中, 或者该 Region 在回收集中, 则不进行处理
 3. 使用 G1UpdateRSOrPushRefOopClosure::do_oop_nv()函数处理该 card
 
-do_oop_nv()函数中处理该 card 的代码：
+do_oop_nv()函数中处理该 card 的代码: 
 
 ```cpp
 // to是被引用对象所在的Region
 to->rem_set()->add_reference(p, _worker_i);
 ```
 
-add_reference()函数的处理：
+add_reference()函数的处理: 
 
-1. 首先会使用稀疏 PRT 记录引用关系，当引用逐渐增多，RSet 占用的内存空间越来越大，就会将这种引用关系记录的详细程度往下降，描述不再那么详细进而存储更多的引用关系。当稀疏表中的某一个 entry 中的 cards 数组长度为 4 之后，就会将该 entry 中的所有记录转到细粒度 PRT 中。当细粒度 PRT 的记录数达到了 G1 设定的阈值之后，会转为使用粗粒度。
+1. 首先会使用稀疏 PRT 记录引用关系, 当引用逐渐增多, RSet 占用的内存空间越来越大, 就会将这种引用关系记录的详细程度往下降, 描述不再那么详细进而存储更多的引用关系。当稀疏表中的某一个 entry 中的 cards 数组长度为 4 之后, 就会将该 entry 中的所有记录转到细粒度 PRT 中。当细粒度 PRT 的记录数达到了 G1 设定的阈值之后, 会转为使用粗粒度。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionRemSet.cpp
 
@@ -33,28 +33,28 @@ void OtherRegionsTable::add_reference(OopOrNarrowOopStar from, int tid) {
   uint cur_hrm_ind = hr()->hrm_index();
   // 计算引用者所在的card
   int from_card = (int)(uintptr_t(from) >> CardTableModRefBS::card_shift);
-  // 为了提高效率，有一个卡表的缓存，在缓存中发现引用已经处理则返回
+  // 为了提高效率, 有一个卡表的缓存, 在缓存中发现引用已经处理则返回
   if (FromCardCache::contains_or_replace((uint)tid, cur_hrm_ind, from_card)) {
     return;
   }
 
-  // 大对象可能跨region，因此需要找到该对象的头部region
+  // 大对象可能跨region, 因此需要找到该对象的头部region
   HeapRegion* from_hr = _g1h->heap_region_containing_raw(from);
   // 获取region对应的region_index
   RegionIdx_t from_hrm_ind = (RegionIdx_t) from_hr->hrm_index();
 
   // 如果RSet已经变成粗粒度位图
   // 也就是说RSet里面记录的是引用者对象所在的Region
-  // 而不是对象对应的卡表地址，那么可以直接返回
+  // 而不是对象对应的卡表地址, 那么可以直接返回
   if (_coarse_map.at(from_hrm_ind)) {
     return;
   }
 
-  // RSet还没有变成粗粒度位图，就要找一个细粒度PRT记录引用
+  // RSet还没有变成粗粒度位图, 就要找一个细粒度PRT记录引用
   size_t ind = from_hrm_ind & _mod_max_fine_entries_mask;
   PerRegionTable* prt = find_region_table(ind, from_hr);
   if (prt == NULL) {
-    // 加锁，避免多个线程同时访问一个Region对应的RSet
+    // 加锁, 避免多个线程同时访问一个Region对应的RSet
     MutexLockerEx x(_m, Mutex::_no_safepoint_check_flag);
     // 再次确认有没有细粒度PRT、针对并发情况
     prt = find_region_table(ind, from_hr);
@@ -68,21 +68,21 @@ void OtherRegionsTable::add_reference(OopOrNarrowOopStar from, int tid) {
       if (G1HRRSUseSparseTable && _sparse_table.add_card(from_hrm_ind, card_index)) {
         return;
       }
-      // 稀疏PRT满了，继续执行
+      // 稀疏PRT满了, 继续执行
       if (_n_fine_entries == _max_fine_entries) {
-        // 细粒度PRT已经满了，调用delete_region_table()函数
-        // 把细粒度PRT数组中最大的一个细粒度PRT元素迁移到粗粒度位图中，
+        // 细粒度PRT已经满了, 调用delete_region_table()函数
+        // 把细粒度PRT数组中最大的一个细粒度PRT元素迁移到粗粒度位图中, 
         // 并返回该元素
         prt = delete_region_table();
-        // 重新初始化该元素，即清空内容
+        // 重新初始化该元素, 即清空内容
         prt->init(from_hr, false);
       } else {
-        // 细粒度PRT没满，分配一个新的细粒度PRT来存储
+        // 细粒度PRT没满, 分配一个新的细粒度PRT来存储
         prt = PerRegionTable::alloc(from_hr);
         link_to_all(prt);
       }
 
-      // 此时稀疏PRT已经满了，并且已经申请了一个细粒度PRT
+      // 此时稀疏PRT已经满了, 并且已经申请了一个细粒度PRT
 	    // 那么就要将稀疏PRT中的信息添迁移到细粒度PRT中
       PerRegionTable* first_prt = _fine_grain_regions[ind];
       prt->set_collision_list_next(first_prt);

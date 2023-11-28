@@ -27,7 +27,7 @@ public class BeanDefinitionParserDelegate {
                 error("Multiple 'property' definitions for property '" + propertyName + "'", ele);
                 return;
             }
-            // 解析property的值，和解析constructor-arg的值用的一个方法
+            // 解析property的值, 和解析constructor-arg的值用的一个方法
             Object val = parsePropertyValue(ele, bd, propertyName);
             PropertyValue pv = new PropertyValue(propertyName, val);
             parseMetaElements(ele, pv);

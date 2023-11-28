@@ -12,7 +12,7 @@ nvm --version
 
 # 安装node
 
-高版本的nodejs需要更高版本的glibc编译环境，而升级glibc可能会对系统稳定性产生影响，所以建议降低node.js的版本，去兼容低版本glibc。
+高版本的nodejs需要更高版本的glibc编译环境, 而升级glibc可能会对系统稳定性产生影响, 所以建议降低node.js的版本, 去兼容低版本glibc。
 
 ```sh
 nvm install 16.15.1

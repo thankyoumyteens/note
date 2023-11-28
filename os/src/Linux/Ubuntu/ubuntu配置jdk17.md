@@ -13,7 +13,7 @@ tar -zxvf Alibaba_Dragonwell_Standard_17.0.8.0.8.7_x64_linux.tar.gz
 sudo vim /etc/profile
 ```
 
-2. 在最后一行添加：
+2. 在最后一行添加: 
 ```conf
 export JAVA_HOME=/root/src_pack/dragonwell-17.0.8.0.8+7-GA
 export PATH=$JAVA_HOME/bin:$PATH

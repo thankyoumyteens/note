@@ -8,12 +8,12 @@
 
 ## 方式1
 
-先访问Cache，若Cache未命中再访问主存
+先访问Cache, 若Cache未命中再访问主存
 
 t=H×tc + (1-H)×(tc+tm)
 
 ## 方式2
 
-同时访问 Cache和主存，若Cache命中则立即停止访问主存
+同时访问 Cache和主存, 若Cache命中则立即停止访问主存
 
 t=H×tc + (1-H)×tm

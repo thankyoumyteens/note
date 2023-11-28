@@ -1,16 +1,16 @@
 # 编译期处理注解(APT)
 
-按照处理时期，注解分为两种类型，一种是运行时注解，另一种是编译时注解
+按照处理时期, 注解分为两种类型, 一种是运行时注解, 另一种是编译时注解
 
-编译时注解的核心依赖APT(Annotation Processing Tools)实现，对应的处理流程为：
+编译时注解的核心依赖APT(Annotation Processing Tools)实现, 对应的处理流程为: 
 
 - 在某些代码元素上（如类型、函数、字段等）添加注解
 - 编译时编译器会检查AbstractProcessor的子类
-- 然后将添加了注解的所有元素都传递到该类的process函数中，使得开发人员可以在编译器进行相应的处理，比如动态生成代码
+- 然后将添加了注解的所有元素都传递到该类的process函数中, 使得开发人员可以在编译器进行相应的处理, 比如动态生成代码
 
 # POM
 
-注意：不能将AbstractProcessor和使用该AbstractProcessor的类写在同一个项目中，会因为AbstractProcessor没有预编译导致报错。
+注意: 不能将AbstractProcessor和使用该AbstractProcessor的类写在同一个项目中, 会因为AbstractProcessor没有预编译导致报错。
 
 父模块
 
@@ -42,7 +42,7 @@
 </project>
 ```
 
-子模块1：定义编译时注解处理器
+子模块1: 定义编译时注解处理器
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -70,7 +70,7 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <!-- 避免编译时使用自身的DemoProcessor，因为自定义的DemoProcessor还没被编译生成 -->
+          <!-- 避免编译时使用自身的DemoProcessor, 因为自定义的DemoProcessor还没被编译生成 -->
           <compilerArgument>-proc:none</compilerArgument>
           <source>1.8</source>
           <target>1.8</target>
@@ -81,7 +81,7 @@
 </project>
 ```
 
-子模块2：使用编译时注解
+子模块2: 使用编译时注解
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -165,7 +165,7 @@ public class DemoProcessor extends AbstractProcessor {
             writer.write(builder.toString());
             writer.flush();
             writer.close();
-            // 注解处理器的日志都要使用Messager发送，最终会以编译结果的形式呈现出来
+            // 注解处理器的日志都要使用Messager发送, 最终会以编译结果的形式呈现出来
             this.processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "生成成功");
         } catch (IOException e) {
             this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.toString());
@@ -213,12 +213,12 @@ public class App {
 
 # 增加配置文件
 
-1. 在m1模块的main目录下，创建resources目录
+1. 在m1模块的main目录下, 创建resources目录
 2. 在resources目录下创建META-INF目录
 3. 在META-INF目录下创建services目录
 4. 在services目录下创建名为javax.annotation.processing.Processor的文件
 
-在文件内容中指定注解处理器：
+在文件内容中指定注解处理器: 
 
 ```
 org.m1.DemoProcessor
@@ -226,7 +226,7 @@ org.m1.DemoProcessor
 
 # 编译
 
-IDE会缓存上一次生成的类文件，所以需要每次都mvn clean
+IDE会缓存上一次生成的类文件, 所以需要每次都mvn clean
 
 mvn clean -> mvn install -> 运行main
 
@@ -256,4 +256,4 @@ public class DemoProcessor extends AbstractProcessor {
 }
 ```
 
-使用AutoService后，自己的javax.annotation.processing.Processor文件可以删除了，m1模块的pom中maven-jar-plugin插件也可以删除了
+使用AutoService后, 自己的javax.annotation.processing.Processor文件可以删除了, m1模块的pom中maven-jar-plugin插件也可以删除了

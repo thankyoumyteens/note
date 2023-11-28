@@ -1,6 +1,6 @@
 # ubuntu安装python3
 
-不要轻易删除python3及其依赖，由于系统中很多软件都是依赖python3，所以卸载了python3会导致系统崩溃。
+不要轻易删除python3及其依赖, 由于系统中很多软件都是依赖python3, 所以卸载了python3会导致系统崩溃。
 
 ```sh
 cd ~/src_pack

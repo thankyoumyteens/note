@@ -40,17 +40,17 @@ public class TransactionManager {
     try { 
       //获取方法执行所需的参数 
       Object[] args = pjp.getArgs(); 
-      //前置通知：开启事务 
+      //前置通知: 开启事务 
       beginTransaction(); 
       //执行方法 
       rtValue = pjp.proceed(args); 
-      //后置通知：提交事务 
+      //后置通知: 提交事务 
       commit(); 
     }catch(Throwable e) { 
-      //异常通知：回滚事务 
+      //异常通知: 回滚事务 
       rollback(); 
     }finally { 
-      //最终通知：释放资源 
+      //最终通知: 释放资源 
       release(); 
     }
     return rtValue; 
@@ -102,8 +102,8 @@ public class TransactionManager {
 
 ```java
 // 有且只有一个Serializable参数的方法, 
-// 只要这个参数实现了java.io.Serializable接口就可以，
-// 不管是Serializable还是Integer，还是String都可以
+// 只要这个参数实现了java.io.Serializable接口就可以, 
+// 不管是Serializable还是Integer, 还是String都可以
 @Pointcut("args(java.io.Serializable)")
 ```
 
@@ -126,6 +126,6 @@ public class TransactionManager {
 // 任何方法有Transactional注解的方法
 @Pointcut("@annotation(org.springframework.transaction.annotation.Transactional)")
 // 有且仅有一个参数并且参数上类型上有Transactional注解, 
-// 注意是参数类型上有Transactional注解，而不是方法的参数上有注解。
+// 注意是参数类型上有Transactional注解, 而不是方法的参数上有注解。
 @Pointcut("@args(org.springframework.transaction.annotation.Transactional)")
 ```

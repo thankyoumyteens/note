@@ -8,7 +8,7 @@ logging:
   level:
     # 要打印日志的接口
     com.example.demo.feign.FeignDemo: debug
-# 下面的配置，也可以写代码代替
+# 下面的配置, 也可以写代码代替
 # @Bean
 # public Logger.Level level() { return Logger.Level.FULL; }
 feign:
@@ -44,7 +44,7 @@ public interface FeignDemo {
 
 # 所有FeignClient接口开启日志
 
-修改FeignConfiguration，自定义feign.Logger
+修改FeignConfiguration, 自定义feign.Logger
 ```java
 @Configuration
 public class FeignConfiguration {
@@ -59,7 +59,7 @@ public class FeignConfiguration {
 ```yaml
 logging:
   level:
-    # 删除具体的FeignClient接口配置，只保留这一个就好了
+    # 删除具体的FeignClient接口配置, 只保留这一个就好了
     feign.Logger: debug
 # 也可以写代码代替
 # @Bean

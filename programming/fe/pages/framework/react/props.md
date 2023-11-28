@@ -10,7 +10,7 @@ props是只读的
 //props基本使用
 function Com(props){
     return (
-        <div>外部传递的数据：{props.text} ---{props.num}</div>
+        <div>外部传递的数据: {props.text} ---{props.num}</div>
     )
 }
 
@@ -39,7 +39,7 @@ let obj={
 class Com extends React.Component{
     render(){
         return(
-            <div>外部传递的数据：{props.text} ---{props.num}</div>
+            <div>外部传递的数据: {props.text} ---{props.num}</div>
         )
     }
 }
@@ -67,7 +67,7 @@ class Com extends React.Component{
     }
     render(){
         return(
-            <div>外部传递的数据：{props.text} ---{props.num}</div>
+            <div>外部传递的数据: {props.text} ---{props.num}</div>
         )
     }
 }
@@ -89,7 +89,7 @@ let obj={
 class Com extends React.Component{
     render(){
         return(
-            <div>外部传递的数据：{props.text} ---{props.num}</div>
+            <div>外部传递的数据: {props.text} ---{props.num}</div>
         )
     }
 }
@@ -120,7 +120,7 @@ class Com extends React.Component{
 
     render(){
         return(
-            <div>外部传递的数据：{props.text} ---{props.num}</div>
+            <div>外部传递的数据: {props.text} ---{props.num}</div>
         )
     }
 }

@@ -8,7 +8,7 @@ yum search ifconfig
 ```
 来搜索下ifconfig的相关包
 
-发现ifconfig匹配的是net-tools.x86_64包，安装net-tools.x86_64包
+发现ifconfig匹配的是net-tools.x86_64包, 安装net-tools.x86_64包
 ```
 yum install net-tools.x86_64 -y
 ```

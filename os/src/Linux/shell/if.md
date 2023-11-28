@@ -10,9 +10,9 @@ else
 fi
 ```
 
-- 如果command执行后返回0，则表示true
+- 如果command执行后返回0, 则表示true
 - `[ ]`表示条件测试。注意这里的空格很重要。要注意在`[`后面和`]`前面都必须要有空格
-- 注意if判断中对于变量的处理，需要加引号，以免一些不必要的错误。如`if [ ! -f "$doiido" ]; then`
+- 注意if判断中对于变量的处理, 需要加引号, 以免一些不必要的错误。如`if [ ! -f "$doiido" ]; then`
 
 # command
 
@@ -63,8 +63,8 @@ fi
 
 # 逻辑判断
 
-- `! EXPR` 逻辑非，如果 EXPR 是false则返回为真。
-- `EXPR1 -a EXPR2` 逻辑与，如果 EXPR1 and EXPR2 全真则返回为真。
-- `EXPR1 -o EXPR2` 逻辑或，如果 EXPR1 或者 EXPR2 为真则返回为真。
+- `! EXPR` 逻辑非, 如果 EXPR 是false则返回为真。
+- `EXPR1 -a EXPR2` 逻辑与, 如果 EXPR1 and EXPR2 全真则返回为真。
+- `EXPR1 -o EXPR2` 逻辑或, 如果 EXPR1 或者 EXPR2 为真则返回为真。
 - `[ ] || [ ]` 用OR来合并两个条件
 - `[ ] && [ ]` 用AND来合并两个条件

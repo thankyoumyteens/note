@@ -1,15 +1,15 @@
 # 注册 BeanDefinition
 
-bean 标签解析完成后，spring 会把解析好的 BeanDefinition 对象注册到 BeanDefinitionRegistry 中。
+bean 标签解析完成后, spring 会把解析好的 BeanDefinition 对象注册到 BeanDefinitionRegistry 中。
 
-BeanDefinitionRegistry 是一个注册中心，所有的 BeanDefinition 都会注册到它上面。想要获取 BeanDefinition 的时候，就可以通过 beanName 从这个注册中心获取。
+BeanDefinitionRegistry 是一个注册中心, 所有的 BeanDefinition 都会注册到它上面。想要获取 BeanDefinition 的时候, 就可以通过 beanName 从这个注册中心获取。
 
 ```java
 public class BeanDefinitionReaderUtils {
 
     /**
      * 注册BeanDefinition
-     * 这里传入的registry是BeanDefinitionRegistry的实现类：DefaultListableBeanFactory
+     * 这里传入的registry是BeanDefinitionRegistry的实现类: DefaultListableBeanFactory
      */
     public static void registerBeanDefinition(
             BeanDefinitionHolder definitionHolder, BeanDefinitionRegistry registry)
@@ -41,7 +41,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
         if (beanDefinition instanceof AbstractBeanDefinition) {
             try {
-                // 注册前的最后一次校验，这里的校验不同于之前的XML文件校验，
+                // 注册前的最后一次校验, 这里的校验不同于之前的XML文件校验, 
                 // 主要是对于AbstractBeanDefinition中的methodOverrides的校验
                 // 校验methodOverrides是否与工厂方法并存
                 // 或者methodOverrides对应的方法根本不存在
@@ -58,21 +58,21 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         if (existingDefinition != null) {
             // beanName在map中
             if (!isAllowBeanDefinitionOverriding()) {
-                // 如果不允许覆盖旧的bean，则抛异常
+                // 如果不允许覆盖旧的bean, 则抛异常
                 throw new BeanDefinitionStoreException(beanDefinition.getResourceDescription(), beanName,
                         "Cannot register bean definition [" + beanDefinition + "] for bean '" + beanName +
                         "': There is already [" + existingDefinition + "] bound.");
             }
-            // 把beanName作为key，beanDefinition作为value，存储到map中
+            // 把beanName作为key, beanDefinition作为value, 存储到map中
             this.beanDefinitionMap.put(beanName, beanDefinition);
         } else {
             // beanName不在map中
             // 判断是不是已经有bean被创建
-            // 如果已经有bean被创建，那么代表已经开始进行了业务操作，
-            // Spring容器无法保证下面的代码不会出现线程安全问题，所以需要加锁
+            // 如果已经有bean被创建, 那么代表已经开始进行了业务操作, 
+            // Spring容器无法保证下面的代码不会出现线程安全问题, 所以需要加锁
             if (hasBeanCreationStarted()) {
                 synchronized (this.beanDefinitionMap) {
-                    // 把beanName作为key，beanDefinition作为value，存储到map中
+                    // 把beanName作为key, beanDefinition作为value, 存储到map中
                     this.beanDefinitionMap.put(beanName, beanDefinition);
                     // 维护beanName的列表
                     List<String> updatedDefinitions = new ArrayList<>(this.beanDefinitionNames.size() + 1);
@@ -86,7 +86,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
                     }
                 }
             } else {
-                // 还处在spring容器的启动阶段，不用加锁
+                // 还处在spring容器的启动阶段, 不用加锁
                 this.beanDefinitionMap.put(beanName, beanDefinition);
                 this.beanDefinitionNames.add(beanName);
                 this.manualSingletonNames.remove(beanName);
@@ -111,7 +111,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
     public void registerAlias(String name, String alias) {
         synchronized (this.aliasMap) {
             if (alias.equals(name)) {
-                // 别名和beanName一样，删掉
+                // 别名和beanName一样, 删掉
                 this.aliasMap.remove(alias);
             } else {
                 String registeredName = this.aliasMap.get(alias);
@@ -126,7 +126,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
                                 name + "': It is already registered for name '" + registeredName + "'.");
                     }
                 }
-                // 当A->B存在时，如果再出现A->C->B，就会抛异常
+                // 当A->B存在时, 如果再出现A->C->B, 就会抛异常
                 checkForAliasCircle(name, alias);
                 // 注册别名
                 this.aliasMap.put(alias, name);

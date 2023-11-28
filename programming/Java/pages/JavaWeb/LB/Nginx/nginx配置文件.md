@@ -6,7 +6,7 @@ user  nobody;
 # 启动的工作进程数数量
 worker_processes  2;
 
-# 错误日志配置，语法：error_log file [debug | info | notice | warn | error | crit | alert | emerg]
+# 错误日志配置, 语法: error_log file [debug | info | notice | warn | error | crit | alert | emerg]
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
 #error_log  logs/error.log  info;
@@ -46,16 +46,16 @@ http {
 
     # 作为web服务器的时候打开sendfile加快文件传输
     sendfile        on;
-    # 在开启了sendfile的情况下，合并请求后统一发送给客户端
+    # 在开启了sendfile的情况下, 合并请求后统一发送给客户端
     #tcp_nopush     on;
 
-    # 设置会话保持时间，单位是秒
+    # 设置会话保持时间, 单位是秒
     keepalive_timeout  65;
 
     # 开启文件压缩
     #gzip  on;
 
-    # 配置上游服务器，实现负载均衡
+    # 配置上游服务器, 实现负载均衡
     upstream microservice1 {
         server 127.0.0.1:8000 weight=1 fail_timeout=100 max_fails=3;
 #        check interval=3000 rise=2 fall=5 timeout=1000;
@@ -70,11 +70,11 @@ http {
         # 配置server监听的端口
         listen       7776;
         server_name  localhost;
-        # 设置编码格式，默认是俄语格式，可以改为utf-8
+        # 设置编码格式, 默认是俄语格式, 可以改为utf-8
         #charset koi8-r;
         # 自定义访问日志
         #access_log  logs/microservice.access.log  main_formatter;
-        # 限制请求体的大小，若超过所设定的大小，返回413错误
+        # 限制请求体的大小, 若超过所设定的大小, 返回413错误
         client_max_body_size 50m;
 
         # 处理接收到的请求
@@ -110,7 +110,7 @@ http {
         server_name  localhost;
         
         location / {
-            # 默认页面的目录名，默认是相对路径
+            # 默认页面的目录名, 默认是相对路径
             root html;
             #默认页面的文件名
             index index.html index.htm;
@@ -134,7 +134,7 @@ http {
         location /ui/ {
             # 设置别名
             alias   /home/html/frontend/;
-            # 按指定的file顺序查找存在的文件，并使用第一个找到的文件进行请求处理
+            # 按指定的file顺序查找存在的文件, 并使用第一个找到的文件进行请求处理
             # 查找路径是按照给定的root或alias为根路径来查找的
             try_files $uri $uri/ /index.html /;
             index  index.html;

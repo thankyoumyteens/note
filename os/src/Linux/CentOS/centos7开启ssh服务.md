@@ -1,9 +1,9 @@
-# 先检查有没有安装ssh服务：
+# 先检查有没有安装ssh服务: 
 ```
 rpm -qa | grep ssh
 ```
 
-# 如果没有安装ssh服务就安装 ： 
+# 如果没有安装ssh服务就安装 :  
 ```
 yum install openssh-server -y
 ```
@@ -30,7 +30,7 @@ ps -e | grep sshd
 netstat -an | grep 22
 ```
 
-# 将ssh服务添加到自启动列表中：
+# 将ssh服务添加到自启动列表中: 
 ```
 systemctl enable sshd.service
 ```

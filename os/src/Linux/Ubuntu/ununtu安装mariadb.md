@@ -18,10 +18,10 @@ sudo mysql_secure_installation
 ```
 
 ```sh
-# 由于没有设置 root 密码，所以这里仅仅输入回车"Enter"即可
+# 由于没有设置 root 密码, 所以这里仅仅输入回车"Enter"即可
 Enter current password for root (enter for none):
-# 接下来，会提示是否为 MySQL root 用户设置密码
-# 在 Ubuntu 上，MariaDB 用户默认使用auth_socket进行鉴权
+# 接下来, 会提示是否为 MySQL root 用户设置密码
+# 在 Ubuntu 上, MariaDB 用户默认使用auth_socket进行鉴权
 Set root password? [Y/n] n
 # 移除匿名用户
 Remove anonymous users? [Y/n] Y

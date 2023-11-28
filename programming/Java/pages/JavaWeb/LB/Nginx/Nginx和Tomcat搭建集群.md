@@ -30,7 +30,7 @@ upstream backserver {
 
 # 指定权重
 
-指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
+指定轮询几率, weight和访问比率成正比, 用于后端服务器性能不均的情况。
 
 ```conf
 upstream backserver { 

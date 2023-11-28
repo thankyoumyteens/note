@@ -17,18 +17,18 @@ Host key verification failed.
 NaCl plugin exited with status code 255.
 (R)econnect, (C)hoose another connection, or E(x)it?
 ```
-解决方法如下：
+解决方法如下: 
 1. 打开secure shell；
 2. 尝试登录openwrt；
-3. 按 ctrl+shift+j 组合键，调出控制台；
-4. 输入如下命令：
+3. 按 ctrl+shift+j 组合键, 调出控制台；
+4. 输入如下命令: 
 ```
 term_.command.removeAllKnownHosts()
 ```
-回车后，可以看见 true
+回车后, 可以看见 true
 
-重新连接openwrt，出现
+重新连接openwrt, 出现
 Are you sure you want to continue connecting (yes/no)?
-时，输入yes
+时, 输入yes
 
 问题解决

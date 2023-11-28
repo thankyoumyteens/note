@@ -6,7 +6,7 @@ ES6中, 只对```text```类型进行分词
 
 ES的默认分词器是```standard```, 可直接通过API指定分词器以及字符串查看分词结果。
 
-使用```standard```进行英文分词：
+使用```standard```进行英文分词: 
 
 ```json
 POST http://localhost:9200/_analyze
@@ -16,7 +16,7 @@ POST http://localhost:9200/_analyze
 }
 ```
 
-ES响应：
+ES响应: 
 
 ```json
 {
@@ -43,11 +43,11 @@ ES响应：
 
 # 中文分词ik插件
 
-ik下载地址（直接下载编译好了的zip文件, 需要和ES版本一致）：[https://github.com/medcl/elasticsearch-analysis-ik/releases](https://github.com/medcl/elasticsearch-analysis-ik/releases)。
+ik下载地址（直接下载编译好了的zip文件, 需要和ES版本一致）: [https://github.com/medcl/elasticsearch-analysis-ik/releases](https://github.com/medcl/elasticsearch-analysis-ik/releases)。
 
 下载完成后解压```elasticsearch-analysis-ik-6.3.2.zip```将解压后的文件夹直接放入ES安装目录下的```plugins```文件夹中, 重启ES。
 
-使用ik插件的```ik_smart```分词器：
+使用ik插件的```ik_smart```分词器: 
 
 ```json
 POST http://localhost:9200/_analyze
@@ -57,7 +57,7 @@ POST http://localhost:9200/_analyze
 }
 ```
 
-ES响应：
+ES响应: 
 
 ```json
 {
@@ -79,7 +79,7 @@ ES响应：
 
 有时候一个词并不在ik插件的词库中, 例如很多网络用语等, 此时我们可以将其添加到ik插件的自定义词库中。
 
-“小米手机”使用```ik_smart```的分词结果：
+“小米手机”使用```ik_smart```的分词结果: 
 
 ```json
 {
@@ -102,7 +102,7 @@ ES响应：
 }
 ```
 
-进入ik插件安装目录```elasticsearch-5.6.0/plugins/elasticsearch/config```, 创建名为```custom.dic```的自定义词库, 向文件中添加“小米手机”并保存。仍然是此目录, 修改```IKAnalyzer.cfg.xml```文件, 如下所示：
+进入ik插件安装目录```elasticsearch-5.6.0/plugins/elasticsearch/config```, 创建名为```custom.dic```的自定义词库, 向文件中添加“小米手机”并保存。仍然是此目录, 修改```IKAnalyzer.cfg.xml```文件, 如下所示: 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -144,7 +144,7 @@ PUT http://localhost:9200/word/analyzer_demo/_mapping
 
 查看word索引结构  ```GET http://localhost:9200/word ```
 
-ES响应：
+ES响应: 
 
 ```json
 {

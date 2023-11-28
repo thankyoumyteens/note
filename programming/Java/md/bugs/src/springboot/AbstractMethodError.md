@@ -1,6 +1,6 @@
 # java.lang.AbstractMethodError
 
-项目部署后报错：
+项目部署后报错: 
 
 ```
 org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.AbstractMethodError: Method com/xxx/event/EventSignStatusChanged.getAgentUUID()Ljava/lang/String; is abstract
@@ -35,13 +35,13 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 
 ## 原因
 
-发现是将实体类转成json时报的错，本地没问题，部署到服务器上就报错。
+发现是将实体类转成json时报的错, 本地没问题, 部署到服务器上就报错。
 
-本地查找EventSignStatusChanged.getAgentUUID()方法，没找到。
+本地查找EventSignStatusChanged.getAgentUUID()方法, 没找到。
 
-把服务器上的jar包下载下来查找EventSignStatusChanged.getAgentUUID()方法，发现在EventSignStatusChanged的父类的父类Event类里。
+把服务器上的jar包下载下来查找EventSignStatusChanged.getAgentUUID()方法, 发现在EventSignStatusChanged的父类的父类Event类里。
 
-把线上的Event类与本地的Event类对比，发现内容不一致。
+把线上的Event类与本地的Event类对比, 发现内容不一致。
 
 ```java
 // 本地的
@@ -79,4 +79,4 @@ public interface Event extends Message {
 }
 ```
 
-原因：本地和线上用的不同的maven仓库，下载的jar包不一样。
+原因: 本地和线上用的不同的maven仓库, 下载的jar包不一样。

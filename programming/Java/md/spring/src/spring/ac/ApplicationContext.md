@@ -1,6 +1,6 @@
 # 使用ApplicationContext
 
-maven 依赖：
+maven 依赖: 
 
 ```xml
 <dependency>
@@ -10,7 +10,7 @@ maven 依赖：
 </dependency>
 ```
 
-定义 bean：
+定义 bean: 
 
 ```java
 public class MyTestBean {
@@ -24,7 +24,7 @@ public class MyTestBean {
 }
 ```
 
-配置文件：
+配置文件: 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -37,7 +37,7 @@ public class MyTestBean {
 </beans>
 ```
 
-测试代码：
+测试代码: 
 
 ```java
 public class ApplicationContextTest {

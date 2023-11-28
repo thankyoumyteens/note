@@ -10,13 +10,13 @@ public class BeanDefinitionParserDelegate {
 
         // 获取scope属性
         if (ele.hasAttribute(SINGLETON_ATTRIBUTE)) {
-            // singleton属性不再被支持，需要使用scope属性替代
+            // singleton属性不再被支持, 需要使用scope属性替代
             error("Old 1.x 'singleton' attribute in use - upgrade to 'scope' declaration", ele);
         } else if (ele.hasAttribute(SCOPE_ATTRIBUTE)) {
             // 获取scope属性
             bd.setScope(ele.getAttribute(SCOPE_ATTRIBUTE));
         } else if (containingBean != null) {
-            // 如果是内嵌bean，则使用父级bean的scope值
+            // 如果是内嵌bean, 则使用父级bean的scope值
             bd.setScope(containingBean.getScope());
         }
 
@@ -43,7 +43,7 @@ public class BeanDefinitionParserDelegate {
             bd.setDependsOn(StringUtils.tokenizeToStringArray(dependsOn, MULTI_VALUE_ATTRIBUTE_DELIMITERS));
         }
 
-        // 获取autowire-candidate属性，该属性为false代表该bean不会被选为自动注入的对象
+        // 获取autowire-candidate属性, 该属性为false代表该bean不会被选为自动注入的对象
         String autowireCandidate = ele.getAttribute(AUTOWIRE_CANDIDATE_ATTRIBUTE);
         if (isDefaultValue(autowireCandidate)) {
             String candidatePattern = this.defaults.getAutowireCandidates();
@@ -66,8 +66,8 @@ public class BeanDefinitionParserDelegate {
             String initMethodName = ele.getAttribute(INIT_METHOD_ATTRIBUTE);
             bd.setInitMethodName(initMethodName);
         } else if (this.defaults.getInitMethod() != null) {
-            // 如果bean没有指定init-method属性，
-            // 但beans标签指定了default-init-method属性，
+            // 如果bean没有指定init-method属性, 
+            // 但beans标签指定了default-init-method属性, 
             // 则会使用该属性
             bd.setInitMethodName(this.defaults.getInitMethod());
             bd.setEnforceInitMethod(false);
@@ -78,8 +78,8 @@ public class BeanDefinitionParserDelegate {
             String destroyMethodName = ele.getAttribute(DESTROY_METHOD_ATTRIBUTE);
             bd.setDestroyMethodName(destroyMethodName);
         } else if (this.defaults.getDestroyMethod() != null) {
-            // 如果bean没有指定destroy-method属性，
-            // 但beans标签指定了default-destroy-method属性，
+            // 如果bean没有指定destroy-method属性, 
+            // 但beans标签指定了default-destroy-method属性, 
             // 则会使用该属性
             bd.setDestroyMethodName(this.defaults.getDestroyMethod());
             bd.setEnforceDestroyMethod(false);

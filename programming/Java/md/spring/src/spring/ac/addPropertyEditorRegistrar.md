@@ -57,4 +57,4 @@ public class ResourceEditorRegistrar implements PropertyEditorRegistrar {
 }
 ```
 
-ResourceEditorRegistrar::registerCustomEditors() 方法会在创建 bean 实例时，被 AbstractBeanFactory::initBeanWrapper() 方法调用。
+ResourceEditorRegistrar::registerCustomEditors() 方法会在创建 bean 实例时, 被 AbstractBeanFactory::initBeanWrapper() 方法调用。

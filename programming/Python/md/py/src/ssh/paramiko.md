@@ -12,13 +12,13 @@ pip install paramiko
 import paramiko   
 # 实例化SSHClient  
 ssh_client = paramiko.SSHClient()   
-# 自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接 ，此方法必须放在connect方法的前面
+# 自动添加策略, 保存服务器的主机名和密钥信息, 如果不添加, 那么不再本地know_hosts文件中记录的主机将无法连接 , 此方法必须放在connect方法的前面
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())   
-# 连接SSH服务端，以用户名和密码进行认证 ，调用connect方法连接服务器
+# 连接SSH服务端, 以用户名和密码进行认证 , 调用connect方法连接服务器
 ssh_client.connect(hostname='192.168.137.105', port=22, username='root', password='123456')   
-# 打开一个Channel并执行命令  结果放到stdout中，如果有错误将放到stderr中
+# 打开一个Channel并执行命令  结果放到stdout中, 如果有错误将放到stderr中
 stdin, stdout, stderr = ssh_client.exec_command('df -hT ') 
-# stdout 为正确输出，stderr为错误输出，同时是有1个变量有值   
+# stdout 为正确输出, stderr为错误输出, 同时是有1个变量有值   
 # 打印执行结果 
 print(stdout.read().decode('utf-8'))  
 # 关闭SSHClient连接 
@@ -32,34 +32,34 @@ ssh_client.close()
 private = paramiko.RSAKey.from_private_key_file('/root/.ssh/id_rsa') 
 #实例化SSHClient
 ssh_client = paramiko.SSHClient() 
-#自动添加策略，保存服务器的主机名和密钥信息，如果不添加，那么不再本地know_hosts文件中记录的主机将无法连接
+#自动添加策略, 保存服务器的主机名和密钥信息, 如果不添加, 那么不再本地know_hosts文件中记录的主机将无法连接
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy()) 
-#连接SSH服务端，以用户名和密钥进行认证
+#连接SSH服务端, 以用户名和密钥进行认证
 ssh_client.connect(hostname='192.168.137.100', port=22, username='root', pkey=private)
 ```
 
 ## connect()
 
-实现远程服务器的连接与认证，对于该方法只有hostname是必传参数
+实现远程服务器的连接与认证, 对于该方法只有hostname是必传参数
 
 - hostname 连接的目标主机
 - port=SSH_PORT 指定端口
 - username=None 验证的用户名
 - password=None 验证的用户密码
 - pkey=None 私钥方式用于身份验证
-- key_filename=None 一个文件名或文件列表，指定私钥文件
+- key_filename=None 一个文件名或文件列表, 指定私钥文件
 - timeout=None 可选的tcp连接超时时间
-- allow_agent=True, 是否允许连接到ssh代理，默认为True 允许
-- look_for_keys=True 是否在~/.ssh中搜索私钥文件，默认为True 允许
+- allow_agent=True, 是否允许连接到ssh代理, 默认为True 允许
+- look_for_keys=True 是否在~/.ssh中搜索私钥文件, 默认为True 允许
 - compress=False, 是否打开压缩
 
 ## set_missing_host_key_policy()
 
 设置连接的远程主机没有本地主机密钥或HostKeys对象时的策略
 
-- AutoAddPolicy 自动添加主机名及主机密钥到本地HostKeys对象，不依赖load_system_host_key的配置。即新建立ssh连接时不需要再输入yes或no进行确认
-- WarningPolicy 用于记录一个未知的主机密钥的python警告。并接受，功能上和AutoAddPolicy类似，但是会提示是新连接
-- RejectPolicy 自动拒绝未知的主机名和密钥，依赖load_system_host_key的配置。此为默认选项
+- AutoAddPolicy 自动添加主机名及主机密钥到本地HostKeys对象, 不依赖load_system_host_key的配置。即新建立ssh连接时不需要再输入yes或no进行确认
+- WarningPolicy 用于记录一个未知的主机密钥的python警告。并接受, 功能上和AutoAddPolicy类似, 但是会提示是新连接
+- RejectPolicy 自动拒绝未知的主机名和密钥, 依赖load_system_host_key的配置。此为默认选项
 
 ## exec_command()
 
@@ -67,9 +67,9 @@ ssh_client.connect(hostname='192.168.137.100', port=22, username='root', pkey=pr
 
 ```py
 # 使用exec_command执行多条命令
-# 加上get_pty=True参数，多条命令用分号隔开
+# 加上get_pty=True参数, 多条命令用分号隔开
 std_in,std_out,std_err = ssh_client.exec_command('cd /home;tar -zxvf requests-2.13.0.tar.gz;cd requests-2.13.0;sudo -S python setup.py install',get_pty=True)
-# 执行输入命令，输入sudo命令的密码，会自动执行
+# 执行输入命令, 输入sudo命令的密码, 会自动执行
 std_in.write('PWD'+'\n')
 for line in std_out:
     print line.strip('\n')
@@ -112,14 +112,14 @@ shell.close()
 在当前ssh会话的基础上创建一个sftp会话。该方法会返回一个SFTPClient对象
 
 ```py
-# 利用SSHClient对象的open_sftp()方法，可以直接返回一个基于当前连接的sftp对象，可以进行文件的上传等操作. 
+# 利用SSHClient对象的open_sftp()方法, 可以直接返回一个基于当前连接的sftp对象, 可以进行文件的上传等操作. 
 sftp = ssh_client.open_sftp()
 sftp.put('local.txt','remote.txt')
 ```
 
 # SFTPClient
 
-- put(localpath, remotepath, callback=None, confirm=True) 将本地文件上传到服务器, confirm：是否调用stat()方法检查文件状态，返回ls -l的结果
+- put(localpath, remotepath, callback=None, confirm=True) 将本地文件上传到服务器, confirm: 是否调用stat()方法检查文件状态, 返回ls -l的结果
 - get(remotepath, localpath, callback=None) 从服务器下载文件到本地
 - mkdir() 在服务器上创建目录
 - remove() 在服务器上删除目录
@@ -131,7 +131,7 @@ sftp.put('local.txt','remote.txt')
 import paramiko 
 # 实例化一个transport对象
 tran = paramiko.Transport(('192.168.137.100', 22)) 
-# 连接SSH服务端，使用password
+# 连接SSH服务端, 使用password
 tran.connect(username="root", password='123456')
 # 或使用密钥连接
 #private = paramiko.RSAKey.from_private_key_file('/root/.ssh/id_rsa')

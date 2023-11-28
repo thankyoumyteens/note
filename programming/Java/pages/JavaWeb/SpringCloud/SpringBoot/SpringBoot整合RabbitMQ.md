@@ -28,9 +28,9 @@ spring:
         initial-interval: 10000ms
         max-interval: 300000ms
         multiplier: 2
-      # 缺省的交换机名称，此处配置后，发送消息如果不指定交换机就会使用这个
+      # 缺省的交换机名称, 此处配置后, 发送消息如果不指定交换机就会使用这个
       exchange: topic.exchange
-    # 生产者确认机制，确保消息会正确发送，如果发送失败会有错误回执，从而触发重试
+    # 生产者确认机制, 确保消息会正确发送, 如果发送失败会有错误回执, 从而触发重试
     publisher-confirms: true
 ```
 
@@ -48,7 +48,7 @@ public class RabbitmqConfig {
     //声明交换机
     @Bean(EXCHANGE_NAME)
     public Exchange exchange(){
-        //durable(true) 持久化，mq重启之后交换机还在
+        //durable(true) 持久化, mq重启之后交换机还在
         return ExchangeBuilder.topicExchange(EXCHANGE_NAME).durable(true).build();
     }
  
@@ -69,12 +69,12 @@ public class RabbitmqConfig {
         return new Queue(QUEUE_SMS);
     }
  
-    //ROUTINGKEY_EMAIL队列绑定交换机，指定routingKey
+    //ROUTINGKEY_EMAIL队列绑定交换机, 指定routingKey
     @Bean
     public Binding bindingEmail(@Qualifier(QUEUE_EMAIL) Queue queue, @Qualifier(EXCHANGE_NAME) Exchange exchange){
         return BindingBuilder.bind(queue).to(exchange).with(ROUTINGKEY_EMAIL).noargs();
     }
-    //ROUTINGKEY_SMS队列绑定交换机，指定routingKey
+    //ROUTINGKEY_SMS队列绑定交换机, 指定routingKey
     @Bean
     public Binding bindingSMS(@Qualifier(QUEUE_SMS) Queue queue, @Qualifier(EXCHANGE_NAME) Exchange exchange){
         return BindingBuilder.bind(queue).to(exchange).with(ROUTINGKEY_SMS).noargs();
@@ -93,13 +93,13 @@ public class Send {
     @Test
     public void sendMsgByTopics(){
         /**
-         * 参数：
+         * 参数: 
          * 1、交换机名称
          * 2、routingKey
          * 3、消息内容
          */
         for (int i=0;i<5;i++){
-            String message = "恭喜您，注册成功！userid="+i;
+            String message = "恭喜您, 注册成功！userid="+i;
             rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE_NAME,"topic.sms.email",message);
             System.out.println(" [x] Sent '" + message + "'");
         }

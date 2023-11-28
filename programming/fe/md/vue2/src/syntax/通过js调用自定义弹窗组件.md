@@ -1,6 +1,6 @@
 # 通过 js 调用自定义弹窗组件
 
-1. 定义弹窗组件：
+1. 定义弹窗组件: 
 
 ```html
 <template>
@@ -90,7 +90,7 @@
 </style>
 ```
 
-2. 在 main.js 中引入：
+2. 在 main.js 中引入: 
 
 ```js
 import MyNotifyDialog from "@/components/MyNotifyDialog/index.vue";
@@ -101,7 +101,7 @@ document.body.appendChild(notifyInstance.$el);
 Vue.prototype.$myNotify = notifyInstance;
 ```
 
-3. 在 vue 页面中使用：
+3. 在 vue 页面中使用: 
 
 ```html
 <template>

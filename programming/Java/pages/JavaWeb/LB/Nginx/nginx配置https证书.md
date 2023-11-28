@@ -15,7 +15,7 @@ http{
     server{
         #监听443端口
         listen 443;
-        #对应的域名，把baofeidyz.com改成你们自己的域名就可以了
+        #对应的域名, 把baofeidyz.com改成你们自己的域名就可以了
         server_name 域名;
 
         ssl on;

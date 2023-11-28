@@ -1,13 +1,13 @@
 # 管理 RSet
 
-JVM 在每次给引用类型的字段赋值时，会通过写屏障把引用者对象在全局卡表中所在的 card 插入到 dirty card queue(DCQ)中。DCQ 分为两种：
+JVM 在每次给引用类型的字段赋值时, 会通过写屏障把引用者对象在全局卡表中所在的 card 插入到 dirty card queue(DCQ)中。DCQ 分为两种: 
 
-1. 每个 Java 线程都有一个自己的 DCQ，DCQ 的大小由参数-XX:G1UpdateBufferSize 设置，默认值是 256，表示最多可以存放 256 个引用关系
-2. JVM 有一个全局的 DCQ，所有 Java 线程共享这个 DCQ
+1. 每个 Java 线程都有一个自己的 DCQ, DCQ 的大小由参数-XX:G1UpdateBufferSize 设置, 默认值是 256, 表示最多可以存放 256 个引用关系
+2. JVM 有一个全局的 DCQ, 所有 Java 线程共享这个 DCQ
 
-JVM 中有一个全局的 dirty card queue set(DCQS)用于存放已经满了的 DCQ。当 DCQ 已放满 256 个引用关系时，Java 线程会把这个 DCQ 添加到 DCQS 中。如果在添加时发现 DCQS 已经满了，那么说明引用变更太多了，Refine 线程已经处理不过来了，Java 线程就不会继续往 DCQS 里添加了，并且这个 Java 线程会暂停其他代码执行，替代 Refine 线程来更新 RSet。
+JVM 中有一个全局的 dirty card queue set(DCQS)用于存放已经满了的 DCQ。当 DCQ 已放满 256 个引用关系时, Java 线程会把这个 DCQ 添加到 DCQS 中。如果在添加时发现 DCQS 已经满了, 那么说明引用变更太多了, Refine 线程已经处理不过来了, Java 线程就不会继续往 DCQS 里添加了, 并且这个 Java 线程会暂停其他代码执行, 替代 Refine 线程来更新 RSet。
 
-把对象加入到 DCQ 的代码：
+把对象加入到 DCQ 的代码: 
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\ptrQueue.hpp
 
@@ -15,7 +15,7 @@ JVM 中有一个全局的 dirty card queue set(DCQS)用于存放已经满了的 
 class PtrQueue VALUE_OBJ_CLASS_SPEC {
 public:
   /**
-   * ptr：指向引用者的对象所在的card
+   * ptr: 指向引用者的对象所在的card
    */
   void enqueue(void* ptr) {
     // _active表示是否需要记录引用关系的变化
@@ -23,10 +23,10 @@ public:
       return;
     } else {
       // 判断当前DCQ还有没有空间
-      // 如果有，则直接加入
-      // 如果满了，则看一下DCQS是否还有空间，
-      // 来决定是把当前DCQ添加到DCQS中，并分配一个新的DCQ，
-      // 还是暂停其他代码执行，替代Refine线程来更新RSet
+      // 如果有, 则直接加入
+      // 如果满了, 则看一下DCQS是否还有空间, 
+      // 来决定是把当前DCQ添加到DCQS中, 并分配一个新的DCQ, 
+      // 还是暂停其他代码执行, 替代Refine线程来更新RSet
       enqueue_known_active(ptr);
     }
   }
@@ -37,18 +37,18 @@ public:
 
 ```cpp
 void PtrQueue::enqueue_known_active(void* ptr) {
-  // _index变量用于记录对象最后一次入队的位置，初始值为_sz(表示缓冲区为空)，
-  // 随着对象的入队操作，其值会逐渐减小到0
+  // _index变量用于记录对象最后一次入队的位置, 初始值为_sz(表示缓冲区为空), 
+  // 随着对象的入队操作, 其值会逐渐减小到0
   // _sz变量表示DCQ能记录多少个对象
   // _buf是DCQ
   while (_index == 0) {
-    // _index为0，表示DCQ已经满了，
-    // 需要把当前DCQ加入到DCQS，并申请新的DCQ
+    // _index为0, 表示DCQ已经满了, 
+    // 需要把当前DCQ加入到DCQS, 并申请新的DCQ
     handle_zero_index();
   }
-  // 对象加入DCQ，其值会逐渐减小
+  // 对象加入DCQ, 其值会逐渐减小
   _index -= oopSize;
-  // index的步长是一个对象的大小，需要换算成数组的索引
+  // index的步长是一个对象的大小, 需要换算成数组的索引
   // return _index / oopSize;
   _buf[byte_index_to_index((int)_index)] = ptr;
 }
@@ -63,12 +63,12 @@ void PtrQueue::handle_zero_index() {
     }
 
     if (_lock) {
-      // 进入这里，说明使用的是全局的DCQ
+      // 进入这里, 说明使用的是全局的DCQ
       void** buf = _buf;
       _buf = NULL;
       // 把全局DCQ放入到DCQS中
       locking_enqueue_completed_buffer(buf);
-      // 如果_buf不为null，说明其他的线程已经成功地为全局DCQ申请到空间了，直接返回
+      // 如果_buf不为null, 说明其他的线程已经成功地为全局DCQ申请到空间了, 直接返回
       if (_buf != NULL) {
         return;
       }
@@ -76,15 +76,15 @@ void PtrQueue::handle_zero_index() {
       // 把Java线程的DCQ放入到DCQS中
       // qset()方法返回DCQS
       if (qset()->process_or_enqueue_complete_buffer(_buf)) {
-        // 返回值为真，说明Java线程暂停执行应用代码，帮助处理DCQ，
-        // 把这个DCQ清空，重用DCQ
+        // 返回值为真, 说明Java线程暂停执行应用代码, 帮助处理DCQ, 
+        // 把这个DCQ清空, 重用DCQ
         _sz = qset()->buffer_size();
         _index = _sz;
         return;
       }
     }
   }
-  // 执行到这里，说明DCQS没满，并且原来的DCQ已经加入到DCQS了，
+  // 执行到这里, 说明DCQS没满, 并且原来的DCQ已经加入到DCQS了, 
   // 申请一个新的DCQ
   _buf = qset()->allocate_buffer();
   _sz = qset()->buffer_size();
@@ -98,9 +98,9 @@ void PtrQueue::locking_enqueue_completed_buffer(void** buf) {
   // 检查当前线程是否拥有锁
   assert(_lock->owned_by_self(), "Required.");
 
-  // 在将全局DCQ加入DCQS之前，会先解锁
-  // 因为在enqueue_complete_buffer函数内部可能会获取到相同的锁，
-  // 为了避免死锁，需要先解锁
+  // 在将全局DCQ加入DCQS之前, 会先解锁
+  // 因为在enqueue_complete_buffer函数内部可能会获取到相同的锁, 
+  // 为了避免死锁, 需要先解锁
   _lock->unlock();
   // 将DCQ加入DCQS
   qset()->enqueue_complete_buffer(buf);
@@ -120,7 +120,7 @@ bool PtrQueueSet::process_or_enqueue_complete_buffer(void** buf) {
       // Java线程处理DCQ
       bool b = mut_process_buffer(buf);
       if (b) {
-        // 返回值为true，表示Java线程暂停执行应用代码，帮助处理DCQ，
+        // 返回值为true, 表示Java线程暂停执行应用代码, 帮助处理DCQ, 
         return true;
       }
     }
@@ -135,13 +135,13 @@ bool PtrQueueSet::process_or_enqueue_complete_buffer(void** buf) {
  */
 void PtrQueueSet::enqueue_complete_buffer(void** buf, size_t index) {
   MutexLockerEx x(_cbl_mon, Mutex::_no_safepoint_check_flag);
-  // DCQS是一个链表，BufferNode是它的节点
+  // DCQS是一个链表, BufferNode是它的节点
   BufferNode* cbn = BufferNode::new_from_buffer(buf);
   cbn->set_index(index);
   // 链表为空
   if (_completed_buffers_tail == NULL) {
-    // _completed_buffers_head：链表的头节点
-    // _completed_buffers_tail：链表的尾节点
+    // _completed_buffers_head: 链表的头节点
+    // _completed_buffers_tail: 链表的尾节点
     _completed_buffers_head = cbn;
     _completed_buffers_tail = cbn;
   } else {

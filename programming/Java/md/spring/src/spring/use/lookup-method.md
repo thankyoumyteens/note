@@ -1,10 +1,10 @@
 # lookup-method
 
-lookup-method 是一种特殊的方法注入，它把一个方法声明为返回某种类型的 bean，但实际要返回的 bean 是在配置文件里面配置的。
+lookup-method 是一种特殊的方法注入, 它把一个方法声明为返回某种类型的 bean, 但实际要返回的 bean 是在配置文件里面配置的。
 
 ## lookup-method 的用法
 
-1. 创建一个父类：
+1. 创建一个父类: 
 
 ```java
 public class User {
@@ -14,7 +14,7 @@ public class User {
 }
 ```
 
-2. 创建一个子类，并覆盖 showMe()方法：
+2. 创建一个子类, 并覆盖 showMe()方法: 
 
 ```java
 public class Teacher extends User {
@@ -24,7 +24,7 @@ public class Teacher extends User {
 }
 ```
 
-3. 创建调用方法：
+3. 创建调用方法: 
 
 ```java
 public abstract class GetBeanTest {
@@ -38,7 +38,7 @@ public abstract class GetBeanTest {
 }
 ```
 
-4. 创建测试方法：
+4. 创建测试方法: 
 
 ```java
 public static void main(String[] args) {
@@ -48,7 +48,7 @@ public static void main(String[] args) {
 }
 ```
 
-5. xml 配置文件：
+5. xml 配置文件: 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -60,7 +60,7 @@ public static void main(String[] args) {
 
     <bean id="teacher" class="test.lookup.bean.Teacher" />
     <!-- lookup-method会动态地将teacher所代表的bean作为getBean的返回值 -->
-    <!-- 当需要使用其他类时，只需要把lookup-method的bean属性换成相应的类即可 -->
+    <!-- 当需要使用其他类时, 只需要把lookup-method的bean属性换成相应的类即可 -->
     <bean id="getBeanTest" class="test.lookup.app.GetBeanTest">
         <lookup-method name="getBean" bean="teacher" />
     </bean>
@@ -68,7 +68,7 @@ public static void main(String[] args) {
 </beans>
 ```
 
-6. 运行结果：
+6. 运行结果: 
 
 ```
 i am teacher

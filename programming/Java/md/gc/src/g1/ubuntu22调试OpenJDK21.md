@@ -16,7 +16,7 @@ tar -zxvf zulu21.30.15-ca-jdk21.0.1-linux_x64.tar.gz
 sudo vim /etc/profile
 ```
 
-2. 在最后一行添加：
+2. 在最后一行添加: 
 
 ```conf
 export JAVA_HOME=/root/src_pack/zulu21.30.15-ca-jdk21.0.1-linux_x64
@@ -46,9 +46,9 @@ make compile-commands
 
 选择 open as Project
 
-这时候，你会发现你是看不到源码的，所以下面需要修改项目的根目录，
+这时候, 你会发现你是看不到源码的, 所以下面需要修改项目的根目录, 
 
-Tools -> Compilation Database -> Change Project Root 功能，选中你的源码目录：/home/walter/src_pack/jdk21-jdk-21-ga
+Tools -> Compilation Database -> Change Project Root 功能, 选中你的源码目录: /home/walter/src_pack/jdk21-jdk-21-ga
 
 ## Custom Build Targets
 

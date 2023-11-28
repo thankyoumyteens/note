@@ -72,7 +72,7 @@ post
 
 ## 把动态生成的代理类保存到磁盘
 
-在程序入口加下下面一行：
+在程序入口加下下面一行: 
 
 ```java
 package org.example;
@@ -94,6 +94,6 @@ public class App {
 }
 ```
 
-重新运行程序后，可以看到生成的代理类：
+重新运行程序后, 可以看到生成的代理类: 
 
 ![](./img/generated_cglib_class.png)

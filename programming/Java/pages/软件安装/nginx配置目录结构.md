@@ -2,7 +2,7 @@
 
 nginx.conf是配置文件的入口
 
-基本内容：
+基本内容: 
 ```conf
 user www-data;
 worker_processes auto;

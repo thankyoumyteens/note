@@ -28,7 +28,7 @@ select *, (CASE WHEN age>=60 THEN ‘老年’ WHEN age<60 AND age>=30 THEN ‘�
 from user
 ```
 
-# sql 按指定规则排序，例如 按 1,3,2排序 而不是1,2,3
+# sql 按指定规则排序, 例如 按 1,3,2排序 而不是1,2,3
 
 ```sql
 SELECT TOP 3 id,Name FROM dbo.Company order by (case Id when 2 then 0 else Id end) ASC 

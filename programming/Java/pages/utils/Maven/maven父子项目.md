@@ -31,7 +31,7 @@ Parent
 <name>Simple-main</name>
 ```
 
-父pom写好了, 子pom就通过parent标签继承父pom的依赖, 如下：
+父pom写好了, 子pom就通过parent标签继承父pom的依赖, 如下: 
 ```xml
 <parent>
    <groupId>com.module</groupId>

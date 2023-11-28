@@ -1,6 +1,6 @@
 # 使用 BeanFactory
 
-maven 依赖：
+maven 依赖: 
 
 ```xml
 <dependency>
@@ -10,7 +10,7 @@ maven 依赖：
 </dependency>
 ```
 
-定义 bean：
+定义 bean: 
 
 ```java
 public class MyTestBean {
@@ -24,7 +24,7 @@ public class MyTestBean {
 }
 ```
 
-配置文件：
+配置文件: 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -37,7 +37,7 @@ public class MyTestBean {
 </beans>
 ```
 
-测试代码：
+测试代码: 
 
 ```java
 public class BeanFactoryTest {
@@ -45,7 +45,7 @@ public class BeanFactoryTest {
         // 读取xml配置文件
         Resource resource = new ClassPathResource("beanFactoryTest.xml");
         // 创建BeanFactory
-        // Spring 3.1之后已经废弃XmlBeanFactory，使用ApplicationContext代替，
+        // Spring 3.1之后已经废弃XmlBeanFactory, 使用ApplicationContext代替, 
         // BeanFactory包含在ApplicationContext的内部
         BeanFactory bf = new XmlBeanFactory(resource);
         // 获取bean

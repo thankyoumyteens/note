@@ -61,9 +61,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
         Object exposedObject = bean;
         try {
-            // 填充bean属性，注入属性值，如果依赖其它的bean，会递归去初始化其它的bean
+            // 填充bean属性, 注入属性值, 如果依赖其它的bean, 会递归去初始化其它的bean
             populateBean(beanName, mbd, instanceWrapper);
-            // 调用初始化方法，这里面也会调用后置处理器InstantiationAwareBeanPostProcessor
+            // 调用初始化方法, 这里面也会调用后置处理器InstantiationAwareBeanPostProcessor
             // bean对象可能会被代理对象替换
             exposedObject = initializeBean(beanName, exposedObject, mbd);
         } catch (Throwable ex) {
@@ -91,7 +91,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                             actualDependentBeans.add(dependentBean);
                         }
                     }
-                    // 因为代理bean创建后其所依赖的bean一定是已经创建的，
+                    // 因为代理bean创建后其所依赖的bean一定是已经创建的, 
                     // actua1DependentBeans不为空则表示当前bean创建后其依赖的bean却没有没全部创建完
                     if (!actualDependentBeans.isEmpty()) {
                         throw new BeanCurrentlyInCreationException(beanName, "Bean with name '" + beanName + "' has been injected into other beans [" + StringUtils.collectionToCommaDelimitedString(actualDependentBeans) + "] in its raw version as part of a circular reference, but has eventually been " + "wrapped. This means that said other beans do not use the final version of the " + "bean. This is often the result of over-eager type matching - consider using " + "'getBeanNamesForType' with the 'allowEagerInit' flag turned off, for example.");
@@ -100,7 +100,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             }
         }
 
-        // 如果配置了destroy-method，这里需要注册以便于在销毁时候调用
+        // 如果配置了destroy-method, 这里需要注册以便于在销毁时候调用
         try {
             registerDisposableBeanIfNecessary(beanName, bean, mbd);
         } catch (BeanDefinitionValidationException ex) {

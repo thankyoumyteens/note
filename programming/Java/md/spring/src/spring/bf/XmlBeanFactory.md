@@ -1,6 +1,6 @@
 # XmlBeanFactory
 
-当通过 Resource 相关类完成了对配置文件进行封装后，配置文件的读取工作就会交给 XmlBeanFactory 来处理：
+当通过 Resource 相关类完成了对配置文件进行封装后, 配置文件的读取工作就会交给 XmlBeanFactory 来处理: 
 
 1. 关闭部分接口的自动装配功能
 2. 加载 BeanDefinition
@@ -49,9 +49,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 ## 加载 BeanDefinition
 
-BeanDefinition 是 bean 标签在 Spring 容器中的内部表示形式，类似于 java.lang.Class 是"类"这个概念在 Java 语言中的内部表示形式一样。bean 标签的所有属性和子标签，在 BeanDefinition 中都有对应的字段。
+BeanDefinition 是 bean 标签在 Spring 容器中的内部表示形式, 类似于 java.lang.Class 是"类"这个概念在 Java 语言中的内部表示形式一样。bean 标签的所有属性和子标签, 在 BeanDefinition 中都有对应的字段。
 
-加载 BeanDefinition 的过程：
+加载 BeanDefinition 的过程: 
 
 1. 解析 xml 配置文件
 2. 注册 BeanDefinition
@@ -75,7 +75,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         // 看一下有没有正在加载的xml配置文件
         Set<EncodedResource> currentResources = this.resourcesCurrentlyBeingLoaded.get();
         if (currentResources == null) {
-            // 第一次加载，初始化resourcesCurrentlyBeingLoaded
+            // 第一次加载, 初始化resourcesCurrentlyBeingLoaded
             currentResources = new HashSet<>(4);
             this.resourcesCurrentlyBeingLoaded.set(currentResources);
         }
@@ -106,7 +106,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             throw new BeanDefinitionStoreException(
                     "IOException parsing XML document from " + encodedResource.getResource(), ex);
         } finally {
-            // 加载完了，从resourcesCurrentlyBeingLoaded中移除这个xml文件
+            // 加载完了, 从resourcesCurrentlyBeingLoaded中移除这个xml文件
             currentResources.remove(encodedResource);
             if (currentResources.isEmpty()) {
                 this.resourcesCurrentlyBeingLoaded.remove();

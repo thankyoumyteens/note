@@ -15,7 +15,7 @@ public class BeanDefinitionParserDelegate {
                 // 新方法
                 String callback = replacedMethodEle.getAttribute(REPLACER_ATTRIBUTE);
                 ReplaceOverride replaceOverride = new ReplaceOverride(name, callback);
-                // 如果有参数，就记录参数
+                // 如果有参数, 就记录参数
                 List<Element> argTypeEles = DomUtils.getChildElementsByTagName(replacedMethodEle, ARG_TYPE_ELEMENT);
                 for (Element argTypeEle : argTypeEles) {
                     String match = argTypeEle.getAttribute(ARG_TYPE_MATCH_ATTRIBUTE);

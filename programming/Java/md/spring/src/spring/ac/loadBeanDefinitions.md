@@ -23,14 +23,14 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         // 看一下有没有正在加载的资源
         Set<EncodedResource> currentResources = this.resourcesCurrentlyBeingLoaded.get();
         if (currentResources == null) {
-            // 第一次加载，初始化resourcesCurrentlyBeingLoaded
+            // 第一次加载, 初始化resourcesCurrentlyBeingLoaded
             currentResources = new HashSet<>(4);
             this.resourcesCurrentlyBeingLoaded.set(currentResources);
         }
 
         // 添加当前资源
         if (!currentResources.add(encodedResource)) {
-            // 资源正在被加载，抛出异常
+            // 资源正在被加载, 抛出异常
             throw new BeanDefinitionStoreException(
                     "Detected cyclic loading of " + encodedResource + " - check your import definitions!");
         }
@@ -54,7 +54,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             throw new BeanDefinitionStoreException(
                     "IOException parsing XML document from " + encodedResource.getResource(), ex);
         } finally {
-            // 加载完了，从resourcesCurrentlyBeingLoaded中移除这个资源
+            // 加载完了, 从resourcesCurrentlyBeingLoaded中移除这个资源
             currentResources.remove(encodedResource);
             if (currentResources.isEmpty()) {
                 this.resourcesCurrentlyBeingLoaded.remove();

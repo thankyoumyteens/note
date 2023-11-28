@@ -27,10 +27,10 @@ class ConstructorResolver {
         Object[] argsToUse = null;
 
         if (explicitArgs != null) {
-            // 如果getBean()指定了参数，则直接使用
+            // 如果getBean()指定了参数, 则直接使用
             argsToUse = explicitArgs;
         } else {
-            // 如果getBean()没有指定参数，则试着从配置文件中获取
+            // 如果getBean()没有指定参数, 则试着从配置文件中获取
             Object[] argsToResolve = null;
             synchronized (mbd.constructorArgumentLock) {
                 // 从缓存中获取已经解析过的构造方法
@@ -49,17 +49,17 @@ class ConstructorResolver {
             }
             if (argsToResolve != null) {
                 // 转换参数类型
-                // 缓存中渠道的参数类型不一定与构造方法的参数类型一致，
-                // 如果构造方法constructorToUse接收的参数类型是int，
-                // 而参数argsToUse中的参数类型是String(xml文件中解析出来的都是String)，
+                // 缓存中渠道的参数类型不一定与构造方法的参数类型一致, 
+                // 如果构造方法constructorToUse接收的参数类型是int, 
+                // 而参数argsToUse中的参数类型是String(xml文件中解析出来的都是String), 
                 // 则把argsToUse中的String转换成int类型
                 argsToUse = resolvePreparedArguments(beanName, mbd, bw, constructorToUse, argsToResolve);
             }
         }
 
         if (constructorToUse == null) {
-            // 缓存中没有构造方法，则需要去解析构造方法
-            // 判断是否传入了构造方法，判断是否需要自动装配构造方法
+            // 缓存中没有构造方法, 则需要去解析构造方法
+            // 判断是否传入了构造方法, 判断是否需要自动装配构造方法
             boolean autowiring = (chosenCtors != null ||
                     mbd.getResolvedAutowireMode() == AutowireCapableBeanFactory.AUTOWIRE_CONSTRUCTOR);
             // 用来存储已经解析的构造方法参数
@@ -74,7 +74,7 @@ class ConstructorResolver {
                 // cargs对象用来存放构造方法的参数
                 ConstructorArgumentValues cargs = mbd.getConstructorArgumentValues();
                 resolvedValues = new ConstructorArgumentValues();
-                // 将BeanDefinition中配置的构造方法参数解析到resolvedValues中，
+                // 将BeanDefinition中配置的构造方法参数解析到resolvedValues中, 
                 // 并返回构造方法参数的个数
                 minNrOfArgs = resolveConstructorArguments(beanName, mbd, bw, cargs, resolvedValues);
             }
@@ -88,10 +88,10 @@ class ConstructorResolver {
                 try {
                     // 判断是否允许访问非public的构造方法
                     if (mbd.isNonPublicAccessAllowed()) {
-                        // 允许，则获取所有的构造方法
+                        // 允许, 则获取所有的构造方法
                         candidates = beanClass.getDeclaredConstructors();
                     } else {
-                        // 不允许，则只获取public的构造方法
+                        // 不允许, 则只获取public的构造方法
                         candidates = beanClass.getConstructors();
                     }
                 } catch (Throwable ex) {
@@ -101,25 +101,25 @@ class ConstructorResolver {
                 }
             }
             // 把候选的构造方法排序
-            // 排序规则：
-            // 首先按照可访问性排序，public > protected > package > private
-            // 如果可访问性相同，则按照构造方法的参数个数由多到少排序
+            // 排序规则: 
+            // 首先按照可访问性排序, public > protected > package > private
+            // 如果可访问性相同, 则按照构造方法的参数个数由多到少排序
             AutowireUtils.sortConstructors(candidates);
             int minTypeDiffWeight = Integer.MAX_VALUE;
             Set<Constructor<?>> ambiguousConstructors = null;
             LinkedList<UnsatisfiedDependencyException> causes = null;
-            // 遍历候选的构造方法，寻找合适的构造方法
+            // 遍历候选的构造方法, 寻找合适的构造方法
             for (Constructor<?> candidate : candidates) {
                 // 获取候选构造方法的参数列表
                 Class<?>[] paramTypes = candidate.getParameterTypes();
-                // constructorToUse != null 表示找到了一个合适的构造方法，
-                // argsToUse.length > paramTypes.length 表示这个候选者的参数个数比目标少，不匹配，
-                // 由于之前已经按照参数个数由多到少排序了，所以后面的候选构造方法参数个数肯定比这个更少，
-                // 再继续遍历也不会有更合适的构造方法了，可以跳出循环了
+                // constructorToUse != null 表示找到了一个合适的构造方法, 
+                // argsToUse.length > paramTypes.length 表示这个候选者的参数个数比目标少, 不匹配, 
+                // 由于之前已经按照参数个数由多到少排序了, 所以后面的候选构造方法参数个数肯定比这个更少, 
+                // 再继续遍历也不会有更合适的构造方法了, 可以跳出循环了
                 if (constructorToUse != null && argsToUse.length > paramTypes.length) {
                     break;
                 }
-                // 候选者的参数个数比允许的最小个数的还少，不匹配，继续遍历
+                // 候选者的参数个数比允许的最小个数的还少, 不匹配, 继续遍历
                 if (paramTypes.length < minNrOfArgs) {
                     continue;
                 }
@@ -158,7 +158,7 @@ class ConstructorResolver {
                     argsHolder = new ArgumentsHolder(explicitArgs);
                 }
                 // 计算权重
-                // isLenientConstructorResolution()：判断解析构造方法使用宽松模式还是严格模式，默认为宽松模式
+                // isLenientConstructorResolution(): 判断解析构造方法使用宽松模式还是严格模式, 默认为宽松模式
                 int typeDiffWeight = (mbd.isLenientConstructorResolution() ?
                         argsHolder.getTypeDifferenceWeight(paramTypes) : argsHolder.getAssignabilityWeight(paramTypes));
                 // 根据权重找到最合适的构造方法
@@ -169,8 +169,8 @@ class ConstructorResolver {
                     minTypeDiffWeight = typeDiffWeight;
                     ambiguousConstructors = null;
                 } else if (constructorToUse != null && typeDiffWeight == minTypeDiffWeight) {
-                    // 权重相同，找到多个构造方法，不知道该用哪个，
-                    // 记录下来，后面用于抛异常
+                    // 权重相同, 找到多个构造方法, 不知道该用哪个, 
+                    // 记录下来, 后面用于抛异常
                     if (ambiguousConstructors == null) {
                         ambiguousConstructors = new LinkedHashSet<>();
                         ambiguousConstructors.add(constructorToUse);
@@ -180,7 +180,7 @@ class ConstructorResolver {
             }
 
             if (constructorToUse == null) {
-                // 没找到合适的构造方法，抛异常
+                // 没找到合适的构造方法, 抛异常
                 if (causes != null) {
                     UnsatisfiedDependencyException ex = causes.removeLast();
                     for (Exception cause : causes) {
@@ -199,9 +199,9 @@ class ConstructorResolver {
             }
 
             if (explicitArgs == null) {
-                // 缓存解析的结果：
-                // 已解析出的构造方法对象resolvedConstructorOrFactoryMethod，
-                // 构造方法参数列表是否已解析标志constructorArgumentsResolved，
+                // 缓存解析的结果: 
+                // 已解析出的构造方法对象resolvedConstructorOrFactoryMethod, 
+                // 构造方法参数列表是否已解析标志constructorArgumentsResolved, 
                 // 构造方法参数resolvedConstructorArguments或preparedConstructorArguments
                 argsHolderToUse.storeCache(mbd, constructorToUse);
             }

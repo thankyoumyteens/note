@@ -1,25 +1,25 @@
 # getBean
 
-getBean()的执行过程：
+getBean()的执行过程: 
 
 1. 把参数name转换成beanName
-    - name如果是别名，就根据别名获取beanName
-    - name如果是&+beanName，就直接返回beanName(&+beanName是获取FactoryBean的写法)
+    - name如果是别名, 就根据别名获取beanName
+    - name如果是&+beanName, 就直接返回beanName(&+beanName是获取FactoryBean的写法)
 2. 从缓存中获取单例bean
-    - 如果获取到的是bean的实例，直接返回
-    - 如果获取到的是FactoryBean的实例，则需要调用它的getObject()方法获取bean，再把bean返回
-3. 如果缓存中没有，那么会先去父bean中查找有没有这个bean，如果有，就调用父bean的getBean()方法获取bean
-4. 如果父bean中没有，那么会在自己的缓存中查找BeanDefinition
-5. 如果这个bean依赖于其他的bean，则需要先实例化它依赖的bean
+    - 如果获取到的是bean的实例, 直接返回
+    - 如果获取到的是FactoryBean的实例, 则需要调用它的getObject()方法获取bean, 再把bean返回
+3. 如果缓存中没有, 那么会先去父bean中查找有没有这个bean, 如果有, 就调用父bean的getBean()方法获取bean
+4. 如果父bean中没有, 那么会在自己的缓存中查找BeanDefinition
+5. 如果这个bean依赖于其他的bean, 则需要先实例化它依赖的bean
 6. 实例化bean
-7. 如果需要类型转换，就进行类型转换操作
+7. 如果需要类型转换, 就进行类型转换操作
 8. 返回bean
 
 ```java
 public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {
 
     /**
-     * XmlBeanFactory的getBean()方法，调用的是祖先类AbstractBeanFactory中的方法
+     * XmlBeanFactory的getBean()方法, 调用的是祖先类AbstractBeanFactory中的方法
      */
     public Object getBean(String name) throws BeansException {
         return doGetBean(name, null, null, false);
@@ -27,7 +27,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
     protected <T> T doGetBean(String name, @Nullable Class<T> requiredType, @Nullable Object[] args, boolean typeCheckOnly)
             throws BeansException {
-        // 获取beanName，name有可能传入别名或&+beanName
+        // 获取beanName, name有可能传入别名或&+beanName
         String beanName = transformedBeanName(name);
         // bean的实例
         Object bean;
@@ -35,41 +35,41 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         // 从缓存中获取
         Object sharedInstance = getSingleton(beanName);
         if (sharedInstance != null && args == null) {
-            // 如果 sharedInstance 是普通的 Bean 实例，则下面的方法会直接返回
-            // 如果 sharedInstance 是FactoryBean类型，则需要调用它的getObject()方法获取bean
+            // 如果 sharedInstance 是普通的 Bean 实例, 则下面的方法会直接返回
+            // 如果 sharedInstance 是FactoryBean类型, 则需要调用它的getObject()方法获取bean
             bean = getObjectForBeanInstance(sharedInstance, name, beanName, null);
         } else {
             // 用于判断prototype模式下有没有循环依赖
             if (isPrototypeCurrentlyInCreation(beanName)) {
-                // prototype模式不允许循环依赖，抛异常
+                // prototype模式不允许循环依赖, 抛异常
                 throw new BeanCurrentlyInCreationException(beanName);
             }
-            // 缓存中没有，看看父级中有没有
+            // 缓存中没有, 看看父级中有没有
             BeanFactory parentBeanFactory = getParentBeanFactory();
             // 到parentBeanFactory中查找有没有这个bean的BeanDefinition
             if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
-                // 获取 name 对应的 beanName，如果 name 是以 & 开头，则返回 "&" + beanName
+                // 获取 name 对应的 beanName, 如果 name 是以 & 开头, 则返回 "&" + beanName
                 String nameToLookup = originalBeanName(name);
                 if (parentBeanFactory instanceof AbstractBeanFactory) {
                     return ((AbstractBeanFactory) parentBeanFactory).doGetBean(
                             nameToLookup, requiredType, args, typeCheckOnly);
                 }else if (args != null) {
-                    // 根据 args 参数是否为空，调用不同的父容器方法获取 bean 实例
+                    // 根据 args 参数是否为空, 调用不同的父容器方法获取 bean 实例
                     return (T) parentBeanFactory.getBean(nameToLookup, args);
                 } else {
-                    // 根据 args 参数是否为空，调用不同的父容器方法获取 bean 实例
+                    // 根据 args 参数是否为空, 调用不同的父容器方法获取 bean 实例
                     return parentBeanFactory.getBean(nameToLookup, requiredType);
                 }
             }
 
-            // typeCheckOnly用于判断调用 getBean 方法时，是否只是做类型检查
+            // typeCheckOnly用于判断调用 getBean 方法时, 是否只是做类型检查
             if (!typeCheckOnly) {
                 // 标记bean已实例化
                 markBeanAsCreated(beanName);
             }
 
             try {
-                // 从DefaultListableBeanFactory的BeanDefinition注册中心中获取beanName对应的 GenericBeanDefinition，并转换为 RootBeanDefinition
+                // 从DefaultListableBeanFactory的BeanDefinition注册中心中获取beanName对应的 GenericBeanDefinition, 并转换为 RootBeanDefinition
                 RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
                 // 检查当前创建的 bean 定义是否为抽象 bean 定义
                 checkMergedBeanDefinition(mbd, beanName, args);
@@ -78,7 +78,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
                 String[] dependsOn = mbd.getDependsOn();
                 if (dependsOn != null) {
                     for (String dep : dependsOn) {
-                        // 监测是否存在 depends-on 循环依赖，若存在则会抛出异常
+                        // 监测是否存在 depends-on 循环依赖, 若存在则会抛出异常
                         if (isDependent(beanName, dep)) {
                             throw new BeanCreationException(mbd.getResourceDescription(), beanName,
                                     "Circular depends-on relationship between '" + beanName + "' and '" + dep + "'");
@@ -108,23 +108,23 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
                             throw ex;
                         }
                     });
-                    // 如果 sharedInstance 是普通的 Bean 实例，则下面的方法会直接返回
-                    // 如果 sharedInstance 是FactoryBean类型，则需要调用它的getObject()方法获取bean
+                    // 如果 sharedInstance 是普通的 Bean 实例, 则下面的方法会直接返回
+                    // 如果 sharedInstance 是FactoryBean类型, 则需要调用它的getObject()方法获取bean
                     bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
                 } else if (mbd.isPrototype()) {
                     // prototype模式
                     Object prototypeInstance = null;
                     try {
-                        // 把beanName记录prototypesCurrentlyInCreation，表示正在创建，还没创建完
+                        // 把beanName记录prototypesCurrentlyInCreation, 表示正在创建, 还没创建完
                         beforePrototypeCreation(beanName);
                         // 创建bean
                         prototypeInstance = createBean(beanName, mbd, args);
                     } finally {
-                        // 创建完了，把beanName从prototypesCurrentlyInCreation中删掉
+                        // 创建完了, 把beanName从prototypesCurrentlyInCreation中删掉
                         afterPrototypeCreation(beanName);
                     }
-                    // 如果 sharedInstance 是普通的 Bean 实例，则下面的方法会直接返回
-                    // 如果 sharedInstance 是FactoryBean类型，则需要调用它的getObject()方法获取bean
+                    // 如果 sharedInstance 是普通的 Bean 实例, 则下面的方法会直接返回
+                    // 如果 sharedInstance 是FactoryBean类型, 则需要调用它的getObject()方法获取bean
                     bean = getObjectForBeanInstance(prototypeInstance, name, beanName, mbd);
                 } else {
                     // 指定的scope上实例化bean
@@ -159,7 +159,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
             }
         }
 
-        // 如果需要类型转换，这里会进行操作
+        // 如果需要类型转换, 这里会进行操作
         if (requiredType != null && !requiredType.isInstance(bean)) {
             try {
                 T convertedBean = getTypeConverter().convertIfNecessary(bean, requiredType);

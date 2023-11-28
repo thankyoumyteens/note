@@ -9,7 +9,7 @@ ListNode reverseKGroup(ListNode head, int k) {
     ListNode a, b;
     a = b = head;
     for (int i = 0; i < k; i++) {
-        // 不足 k 个，不需要反转，base case
+        // 不足 k 个, 不需要反转, base case
         if (b == null) return head;
         b = b.next;
     }
@@ -20,7 +20,7 @@ ListNode reverseKGroup(ListNode head, int k) {
     return newHead;
 }
 
-/** 反转区间 [a, b) 的元素，注意是左闭右开 */
+/** 反转区间 [a, b) 的元素, 注意是左闭右开 */
 ListNode reverse(ListNode a, ListNode b) {
     ListNode pre, cur, nxt;
     pre = null; cur = a; nxt = a;

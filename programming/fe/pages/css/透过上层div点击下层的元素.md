@@ -1,6 +1,6 @@
 # 透过上层div点击下层的元素
 
-上层元素添加css：
+上层元素添加css: 
 
 ```css
 pointer-events: none;

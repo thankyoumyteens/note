@@ -6,7 +6,7 @@ Find the median of the two sorted arrays. The overall run time complexity should
 
 You may assume nums1 and nums2 cannot be both empty.
 
-求两个有序数组组合起来的中位数，而且限制了时间复杂度为 O(log (m+n))
+求两个有序数组组合起来的中位数, 而且限制了时间复杂度为 O(log (m+n))
 
 # 例子
 

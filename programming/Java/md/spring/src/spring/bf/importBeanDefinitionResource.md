@@ -1,6 +1,6 @@
 # 解析import标签
 
-import标签用于导入其它配置文件。为了避免一个配置文件内容过多，可以将一个配置文件根据业务进行拆分，拆分后的配置文件使用import标签导入到主配置文件中，项目加载主配置文件就可以把import导入的文件一起加载。
+import标签用于导入其它配置文件。为了避免一个配置文件内容过多, 可以将一个配置文件根据业务进行拆分, 拆分后的配置文件使用import标签导入到主配置文件中, 项目加载主配置文件就可以把import导入的文件一起加载。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -17,7 +17,7 @@ import标签用于导入其它配置文件。为了避免一个配置文件内�
 </beans>
 ```
 
-解析import标签：
+解析import标签: 
 
 ```java
 public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocumentReader {
@@ -30,7 +30,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
             return;
         }
 
-        // 解析系统属性，比如："${user.dir}"
+        // 解析系统属性, 比如: "${user.dir}"
         location = getReaderContext().getEnvironment().resolveRequiredPlaceholders(location);
 
         Set<Resource> actualResources = new LinkedHashSet<>(4);
@@ -44,9 +44,9 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
         if (absoluteLocation) {
             try {
                 // 使用绝对路径解析xml
-                // 与XmlBeanFactory()一样，
+                // 与XmlBeanFactory()一样, 
                 // 调用AbstractBeanDefinitionReader::loadBeanDefinitions()
-                // 去加载BeanDefinition：
+                // 去加载BeanDefinition: 
                 // 1. 解析xml配置文件
                 // 2. 注册BeanDefinition
                 int importCount = getReaderContext().getReader().loadBeanDefinitions(location, actualResources);

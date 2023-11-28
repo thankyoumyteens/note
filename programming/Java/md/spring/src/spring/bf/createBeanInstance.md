@@ -25,7 +25,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             return instantiateUsingFactoryMethod(beanName, mbd, args);
         }
 
-        // 在prototype模式下，如果已经创建过一次这个bean了，
+        // 在prototype模式下, 如果已经创建过一次这个bean了, 
         // 那么就不需要再次判断要调用哪个构造方法或者工厂方法了
         boolean resolved = false;
         // 是否自动装配
@@ -34,7 +34,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             // 判断是否已经确定过了要使用的构造方法或者工厂方法
             synchronized (mbd.constructorArgumentLock) {
                 // 要使用的构造方法或者工厂方法会放在resolvedConstructorOrFactoryMethod中
-                // 如果不为空，表示已经创建过一次这个bean了
+                // 如果不为空, 表示已经创建过一次这个bean了
                 if (mbd.resolvedConstructorOrFactoryMethod != null) {
                     resolved = true;
                     // 是否设置了autowire="constructor"自动装配
@@ -42,10 +42,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 }
             }
         }
-        // 在prototype模式下，再次创建bean
+        // 在prototype模式下, 再次创建bean
         if (resolved) {
             if (autowireNecessary) {
-                // 处理autowire="constructor"自动装配，并创建bean
+                // 处理autowire="constructor"自动装配, 并创建bean
                 return autowireConstructor(beanName, mbd, null, null);
             } else {
                 // 使用默认无参构造方法创建bean
@@ -54,7 +54,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
         // 通过后置处理器SmartInstantiationAwareBeanPostProcessor获取指定构造方法
         Constructor<?>[] ctors = determineConstructorsFromBeanPostProcessors(beanClass, beanName);
-        // 判断：
+        // 判断: 
         // 1. 有没有指定构造方法
         // 2. 有没有autowire="constructor"自动装配
         // 3. 有没有构造方法参数
@@ -73,7 +73,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
      */
     protected BeanWrapper obtainFromSupplier(Supplier<?> instanceSupplier, String beanName) {
         Object instance;
-        // 把当前正在创建的beanNeame存储到ThreadLocal中，用于标记
+        // 把当前正在创建的beanNeame存储到ThreadLocal中, 用于标记
         String outerBean = this.currentlyCreatedBean.get();
         this.currentlyCreatedBean.set(beanName);
         try {

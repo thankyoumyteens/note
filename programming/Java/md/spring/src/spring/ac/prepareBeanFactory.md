@@ -11,12 +11,12 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
         // 设置SpEL语言的解析器
         beanFactory.setBeanExpressionResolver(new StandardBeanExpressionResolver(beanFactory.getBeanClassLoader()));
 
-        // 设置属性编辑器，用于对bean的属性进行管理
+        // 设置属性编辑器, 用于对bean的属性进行管理
         beanFactory.addPropertyEditorRegistrar(new ResourceEditorRegistrar(this, getEnvironment()));
 
-        // 设置bean的后置处理器：ApplicationContextAwareProcessor
-        // ApplicationContextAwareProcessor的作用：
-        // 在容器启动时自动检测实现了ApplicationContextAware接口的Bean，
+        // 设置bean的后置处理器: ApplicationContextAwareProcessor
+        // ApplicationContextAwareProcessor的作用: 
+        // 在容器启动时自动检测实现了ApplicationContextAware接口的Bean, 
         // 并将ApplicationContext实例传赋值这些Bean
         beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
         // 关闭实现这些接口的bean的自动装配

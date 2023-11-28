@@ -1,10 +1,10 @@
 # 细粒度 PRT
 
-细粒度 PRT 是一个的数组，每个元素包含了一个 HeapRegion 的起始地址和一个位图，这个位图描述这个 HeapRegion 的引用情况，每一位对应 Region 的 512 字节，所以它的大小为 HeapRegionSize%512，这样可以使用更少的内存存储更多的引用关系。
+细粒度 PRT 是一个的数组, 每个元素包含了一个 HeapRegion 的起始地址和一个位图, 这个位图描述这个 HeapRegion 的引用情况, 每一位对应 Region 的 512 字节, 所以它的大小为 HeapRegionSize%512, 这样可以使用更少的内存存储更多的引用关系。
 
 ![](../../img/prt.png)
 
-细粒度 PRT 的定义：
+细粒度 PRT 的定义: 
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\heapRegionRemSet.cpp
 
@@ -13,8 +13,8 @@ class PerRegionTable: public CHeapObj<mtGC> {
 
   // HeapRegion的起始地址
   HeapRegion*     _hr;
-  // 位图，每一位对应region中的一个card，每个card的大小是512字节
-  // 0代表这个card中的对象没有引用其他region的对象，1代表有引用
+  // 位图, 每一位对应region中的一个card, 每个card的大小是512字节
+  // 0代表这个card中的对象没有引用其他region的对象, 1代表有引用
   BitMap          _bm;
   // 已存储的引用关系的数量
   jint            _occupied;
@@ -71,7 +71,7 @@ protected:
           Atomic::inc(&_occupied);
         }
       } else {
-        // 把位图中from_card索引的值设置为1，表示存在引用关系
+        // 把位图中from_card索引的值设置为1, 表示存在引用关系
         _bm.at_put(from_card, 1);
         _occupied++;
       }

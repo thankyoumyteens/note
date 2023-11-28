@@ -6,7 +6,7 @@ mkdir .pip
 cd .pip
 vim pip.conf
 ```
-配置如下内容：
+配置如下内容: 
 ```conf
 [global]
 index-url = https://repo.huaweicloud.com/repository/pypi/simple

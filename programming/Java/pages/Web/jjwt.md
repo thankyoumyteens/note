@@ -45,21 +45,21 @@ String token = builder.compact();
 
 ## header
 
-setHeader() 有两种参数形式，一种是Header接口的实现，一种是Map。
+setHeader() 有两种参数形式, 一种是Header接口的实现, 一种是Map。
 
-如果以Map作为参数，在setHeader的时候会生成默认的Header接口实现DefaultHeader对象。
+如果以Map作为参数, 在setHeader的时候会生成默认的Header接口实现DefaultHeader对象。
 
-两种参数形式调用setHeader()，都会令Header重新赋值。
+两种参数形式调用setHeader(), 都会令Header重新赋值。
 
 setHeaderParam() 和 setHeaderParams() 向Header追加参数。
 
-在生成jwt的时候，如果不设置签名，那么header中的alg默认为none。
+在生成jwt的时候, 如果不设置签名, 那么header中的alg默认为none。
 
 ## claims
 
-载荷部分存在两个属性：payload和claims。两个属性均可作为载荷，jjwt中二者只能设置其一，如果同时设置，在终端方法compact() 中将抛出异常
+载荷部分存在两个属性: payload和claims。两个属性均可作为载荷, jjwt中二者只能设置其一, 如果同时设置, 在终端方法compact() 中将抛出异常
 
-JWT标准 7个保留声明(7个声明都是可选的，也就是说可以不用设置):
+JWT标准 7个保留声明(7个声明都是可选的, 也就是说可以不用设置):
 
 - setIssuer() 签发者
 - setSubject() 主题
@@ -67,7 +67,7 @@ JWT标准 7个保留声明(7个声明都是可选的，也就是说可以不用�
 - setExpiration() 到期时间
 - setNotBefore() 在此之前不可用
 - setIssuedAt() jwt的签发时间
-- setId() jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。
+- setId() jwt的唯一身份标识, 主要用来作为一次性token,从而回避重放攻击。
 
 设置自定义claims
 ```java
@@ -84,7 +84,7 @@ Jwts.builder()
     .claim("create_time", new Date(System.currentTimeMillis()));
 ```
 
-compressWith() 压缩方法。当载荷过长时可对其进行压缩。可采用jjwt实现的两种压缩方法CompressionCodecs.GZIP和CompressionCodecs.DEFLATE。如果使用压缩，生成时会将压缩算法写入header。
+compressWith() 压缩方法。当载荷过长时可对其进行压缩。可采用jjwt实现的两种压缩方法CompressionCodecs.GZIP和CompressionCodecs.DEFLATE。如果使用压缩, 生成时会将压缩算法写入header。
 
 ## signature
 
@@ -92,14 +92,14 @@ signWith() 签名方法。两个参数分别是签名算法和自定义的签名
 
 ## compact
 
-compact() 生成JWT。过程如下：
+compact() 生成JWT。过程如下: 
 
 - 载荷校验。
 - 获取key。
 - 将所使用签名算法写入header。
-- 将Json形式的header转为bytes，再Base64编码
-- 将Json形式的claims转为bytes，如果需要压缩则压缩，再进行Base64编码
-- 拼接header和claims。如果签名key为空，则不进行签名(末尾补分隔符" . ")；如果签名key不为空，以拼接的字符串作为参数，按照指定签名算法进行签名计算签名部分，签名部分同样也会进行Base64编码。
+- 将Json形式的header转为bytes, 再Base64编码
+- 将Json形式的claims转为bytes, 如果需要压缩则压缩, 再进行Base64编码
+- 拼接header和claims。如果签名key为空, 则不进行签名(末尾补分隔符" . ")；如果签名key不为空, 以拼接的字符串作为参数, 按照指定签名算法进行签名计算签名部分, 签名部分同样也会进行Base64编码。
 - 返回完整JWT
 
 # 解析Token

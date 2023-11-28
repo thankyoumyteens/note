@@ -4,7 +4,7 @@ replaced-method 可以在运行时用新的方法替换现有的方法。
 
 ## replaced-method 的用法
 
-1. 创建要被替换的方法：
+1. 创建要被替换的方法: 
 
 ```java
 public class TestChangeMethod {
@@ -15,7 +15,7 @@ public class TestChangeMethod {
 }
 ```
 
-2. 创建替换方法：
+2. 创建替换方法: 
 
 ```java
 // 需要实现MethodReplacer接口
@@ -28,7 +28,7 @@ public class TestMethodReplacer implements MethodReplacer {
 }
 ```
 
-3. 创建测试方法：
+3. 创建测试方法: 
 
 ```java
 public static void main(String[] args) {
@@ -38,7 +38,7 @@ public static void main(String[] args) {
 }
 ```
 
-4. 配置文件：
+4. 配置文件: 
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -56,7 +56,7 @@ public static void main(String[] args) {
 </beans>
 ```
 
-5. 输出结果：
+5. 输出结果: 
 
 ```
 替换原有的方法

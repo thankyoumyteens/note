@@ -56,7 +56,7 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
     public void prepareMethodOverrides() throws BeanDefinitionValidationException {
         // 判断methodOverrides缓存中是否有值
         if (hasMethodOverrides()) {
-            // 遍历methodOverrides中的方法，每个方法都放到prepareMethodOverride()方法中处理一下
+            // 遍历methodOverrides中的方法, 每个方法都放到prepareMethodOverride()方法中处理一下
             getMethodOverrides().getOverrides().forEach(this::prepareMethodOverride);
         }
     }
@@ -71,8 +71,8 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
                     "Invalid method override: no method with name '" + mo.getMethodName() +
                             "' on class [" + getBeanClassName() + "]");
         } else if (count == 1) {
-            // 这个方法没有重载版本，
-            // 设置标记，这样在后续调用的时候便可以直接使用找到的方法，
+            // 这个方法没有重载版本, 
+            // 设置标记, 这样在后续调用的时候便可以直接使用找到的方法, 
             // 而不需要进行方法的参数匹配验证
             mo.setOverloaded(false);
         }

@@ -43,7 +43,7 @@ public class BeanDefinitionParserDelegate {
                             valueHolder.setName(nameAttr);
                         }
                         valueHolder.setSource(extractSource(ele));
-                        // index已存在，不允许重复指定
+                        // index已存在, 不允许重复指定
                         if (bd.getConstructorArgumentValues().hasIndexedArgumentValue(index)) {
                             error("Ambiguous constructor-arg entries for index " + index, ele);
                         } else {
@@ -74,7 +74,7 @@ public class BeanDefinitionParserDelegate {
                 }
                 valueHolder.setSource(extractSource(ele));
                 // 添加到BeanDefinition的constructorArgumentValues中
-                // 没有指定index属性时，把属性存储到genericArgumentValues中
+                // 没有指定index属性时, 把属性存储到genericArgumentValues中
                 bd.getConstructorArgumentValues().addGenericArgumentValue(valueHolder);
             }
             finally {
@@ -91,12 +91,12 @@ public class BeanDefinitionParserDelegate {
         /*
          * constructor-arg的值有两种配置形式
          * 
-         * 1. 使用value/ref属性：
+         * 1. 使用value/ref属性: 
          * <bean class="test.Student">
          *   <constructor-arg name="name" value="张三"></constructor-arg>
          * </bean>
          * 
-         * 2. 使用value/ref/list/map等子标签：
+         * 2. 使用value/ref/list/map等子标签: 
          * <bean class="test.Student">
          *   <constructor-arg name="num">
          *     <list>
@@ -151,7 +151,7 @@ public class BeanDefinitionParserDelegate {
             valueHolder.setSource(extractSource(ele));
             return valueHolder;
         } else if (subElement != null) {
-            // 如果指定了子标签，就去解析子标签
+            // 如果指定了子标签, 就去解析子标签
             return parsePropertySubElement(subElement, bd);
         } else {
             error(elementName + " must specify a ref or value", ele);

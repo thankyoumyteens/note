@@ -47,17 +47,17 @@
 ## 安装 jdk7
 
 - 安装 jdk7
-- 添加环境变量 path：C:\Program Files\Java\jdk1.7.0_80\bin
+- 添加环境变量 path: C:\Program Files\Java\jdk1.7.0_80\bin
 
 ## 安装 Cygwin
 
-cmd 运行安装程序：
+cmd 运行安装程序: 
 
 ```sh
 .\setup-x86_64 --site http://mirrors.163.com/cygwin/ --only-site
 ```
 
-由于默认的安装只会安装一些必要的软件，所以安装过程中需要选择安装一些额外的包：
+由于默认的安装只会安装一些必要的软件, 所以安装过程中需要选择安装一些额外的包: 
 
 - binutils
 - make
@@ -69,9 +69,9 @@ cmd 运行安装程序：
 
 ## 编译 FreeType
 
-将这个 freetype 编译成 freetype.lib 和 freeetype.dll：
+将这个 freetype 编译成 freetype.lib 和 freeetype.dll: 
 
-运行 Visual Studio 2010，依次点击 File -> Open -> Project/Solution。
+运行 Visual Studio 2010, 依次点击 File -> Open -> Project/Solution。
 
 打开 freetype-2.7\builds\windows\vc2010\freetype.sln 文件。
 
@@ -81,13 +81,13 @@ cmd 运行安装程序：
 
 ![](../img/ConfigurationManager.png)
 
-设置编译成 freetype.lib：
+设置编译成 freetype.lib: 
 
 ![](../img/lib.png)
 
 右键项目选择 build。等待编译完成。
 
-设置编译成 freetype.dll：
+设置编译成 freetype.dll: 
 
 ![](../img/dll.png)
 
@@ -99,7 +99,7 @@ cmd 运行安装程序：
 
 ## 切换到 jdk 源码目录
 
-打开 cygwin，切换到 jdk 源码目录：
+打开 cygwin, 切换到 jdk 源码目录: 
 
 ```sh
 cd /cygdrive/c/Users/Public/jdk-jdk8-b120
@@ -107,7 +107,7 @@ cd /cygdrive/c/Users/Public/jdk-jdk8-b120
 
 ## 修改 generated-configure.sh
 
-编辑：jdk 源码目录\common\autoconf\generated-configure.sh
+编辑: jdk 源码目录\common\autoconf\generated-configure.sh
 
 搜索 `Your cygwin is too old`
 
@@ -127,9 +127,9 @@ cd /cygdrive/c/Users/Public/jdk-jdk8-b120
 vi jdk/make/CreateJars.gmk
 ```
 
-键盘输入：268gg，跳转到 268 行。定位到 class$$ 的 s 和$之间。按 i 进入输入模式。在输入状态下，按 Ctrl + V, Ctrl + M，即可打出^M。保存退出。
+键盘输入: 268gg, 跳转到 268 行。定位到 class$$ 的 s 和$之间。按 i 进入输入模式。在输入状态下, 按 Ctrl + V, Ctrl + M, 即可打出^M。保存退出。
 
-一共有 2 个地方需要这样修改：
+一共有 2 个地方需要这样修改: 
 
 ![](../img/CreateJars.png)
 

@@ -1,6 +1,6 @@
 # 解析 qualifier 子标签
 
-qualifier 用于在有多个相同类型 bean 的时候指定 bean 的名称以消除歧义：
+qualifier 用于在有多个相同类型 bean 的时候指定 bean 的名称以消除歧义: 
 
 ```java
 @Autowired

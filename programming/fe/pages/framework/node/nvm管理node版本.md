@@ -17,7 +17,7 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 # 设置镜像
 
-在nvm的安装目录，修改settings.txt
+在nvm的安装目录, 修改settings.txt
 
 ```
 nvm npm_mirror https://npmmirror.com/mirrors/npm/

@@ -1,8 +1,8 @@
 # Object类型响应式
 
-当把一个object对象放到Vue的data里面时，Vue会使用Object.defineproperty将该对象的所有属性都设置上getter和setter。
+当把一个object对象放到Vue的data里面时, Vue会使用Object.defineproperty将该对象的所有属性都设置上getter和setter。
 
-使用Object.defineproperty能监听对象上的某个属性的修改与获取，但是无法监听到对象属性的增和删。所以Vue无法监听到data的某个属性增加与删除。
+使用Object.defineproperty能监听对象上的某个属性的修改与获取, 但是无法监听到对象属性的增和删。所以Vue无法监听到data的某个属性增加与删除。
 
 ```js
 export default {
@@ -31,14 +31,14 @@ export default {
 }
 ```
 
-在ES6中提供了Proxy可以实现元编程，Vue3也使用Proxy来重写了响应式系统，在Vue3中可以监听到data的某个属性增加与删除。
+在ES6中提供了Proxy可以实现元编程, Vue3也使用Proxy来重写了响应式系统, 在Vue3中可以监听到data的某个属性增加与删除。
 
 # Array类型响应式
 
 Vue不能检测数组的以下变动
 
-- 使用索引直接设置一个数组项，如this.arr\[0] = 10
-- 修改数组的长度，如this.arr.length = 100
+- 使用索引直接设置一个数组项, 如this.arr\[0] = 10
+- 修改数组的长度, 如this.arr.length = 100
 
 ```js
 export default {

@@ -29,13 +29,13 @@ mv docker-compose /usr/local/bin
 vim /etc/profile
 ```
 
-增加：
+增加: 
 
 ```sh
 export PATH=$PATH:/usr/local/bin
 ```
 
-使环境变量生效：
+使环境变量生效: 
 
 ```sh
 source /etc/profile

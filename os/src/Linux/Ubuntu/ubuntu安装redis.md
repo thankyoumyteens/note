@@ -34,7 +34,7 @@ sudo make install
 /usr/local/bin/redis-server /etc/redis/6379.conf
 ```
 
-如果更改了端口, 使用`redis-cli`客户端连接时, 也需要指定端口, 例如：
+如果更改了端口, 使用`redis-cli`客户端连接时, 也需要指定端口, 例如: 
 
 ```sh
 redis-cli -p 6380

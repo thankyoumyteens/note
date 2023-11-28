@@ -1,13 +1,13 @@
 # 启动 Mixed GC
 
-在并发标记结束后，会通过 g1_policy->record_concurrent_mark_cleanup_completed() 设置标记，在下一次增量收集的时候，会判断是否可以开始 Mixed GC。判断的依据主要是根据 CSet 中可回收的 region 信息。
+在并发标记结束后, 会通过 g1_policy->record_concurrent_mark_cleanup_completed() 设置标记, 在下一次增量收集的时候, 会判断是否可以开始 Mixed GC。判断的依据主要是根据 CSet 中可回收的 region 信息。
 
-是否可以启动 Mixed GC 的两个前提条件：
+是否可以启动 Mixed GC 的两个前提条件: 
 
-1. 并发标记已经结束，更新好 CSet Chooser，用于下一次 CSet 的选择
-2. Young GC 结束，判断是否可以进行 Mixed GC
+1. 并发标记已经结束, 更新好 CSet Chooser, 用于下一次 CSet 的选择
+2. Young GC 结束, 判断是否可以进行 Mixed GC
 
-判断的依据在 next_gc_should_be_mixed 中：
+判断的依据在 next_gc_should_be_mixed 中: 
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectorPolicy.cpp
 
@@ -23,18 +23,18 @@ bool G1CollectorPolicy::next_gc_should_be_mixed(const char* true_action_str,
   size_t reclaimable_bytes = cset_chooser->remaining_reclaimable_bytes();
   // 可回收的空间大小占G1堆总空间大小的比例
   double reclaimable_perc = reclaimable_bytes_perc(reclaimable_bytes);
-  // 最小可以浪费的空间G1HeapWastePercent，默认值是5
+  // 最小可以浪费的空间G1HeapWastePercent, 默认值是5
   double threshold = (double) G1HeapWastePercent;
   if (reclaimable_perc <= threshold) {
     return false;
   }
-  // 可回收的空间大小占G1堆总空间大小的比例大于G1HeapWastePercent，
+  // 可回收的空间大小占G1堆总空间大小的比例大于G1HeapWastePercent, 
   // 开始Mixed GC
   return true;
 }
 ```
 
-在下一次对象分配失败，需要 GC 的时候会开始 Mixed GC，这部分代码和 Young GC 完全一致，唯一不同的就是 CSet 的处理。在真正的回收时候，会根据预测时间来选择要回收的 region，其主要代码在 G1CollectorPolicy::finalize_cset 中：
+在下一次对象分配失败, 需要 GC 的时候会开始 Mixed GC, 这部分代码和 Young GC 完全一致, 唯一不同的就是 CSet 的处理。在真正的回收时候, 会根据预测时间来选择要回收的 region, 其主要代码在 G1CollectorPolicy::finalize_cset 中: 
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectorPolicy.cpp
 
@@ -91,16 +91,16 @@ void G1CollectorPolicy::finalize_cset(double target_pause_time_ms, EvacuationInf
   phase_times()->record_young_cset_choice_time_ms((young_end_time_sec - young_start_time_sec) * 1000.0);
 
   double non_young_start_time_sec = young_end_time_sec;
-  // 判断是否满足启动 Mixed GC 的两个前提条件：
-  // 1. 并发标记已经结束，并更新好了 CSet Chooser
+  // 判断是否满足启动 Mixed GC 的两个前提条件: 
+  // 1. 并发标记已经结束, 并更新好了 CSet Chooser
   // 2. Young GC 结束
   if (!gcs_are_young()) {
     // 启动Mixed GC
     CollectionSetChooser* cset_chooser = _collectionSetChooser;
     cset_chooser->verify();
-    // 最小收集数，计算CSet中最少要放几个老年代region
+    // 最小收集数, 计算CSet中最少要放几个老年代region
     const uint min_old_cset_length = calc_min_old_cset_length();
-    // 最大收集数，计算CSet中最多能放几个老年代region
+    // 最大收集数, 计算CSet中最多能放几个老年代region
     const uint max_old_cset_length = calc_max_old_cset_length();
 
     uint expensive_region_num = 0;
@@ -109,7 +109,7 @@ void G1CollectorPolicy::finalize_cset(double target_pause_time_ms, EvacuationInf
     HeapRegion* hr = cset_chooser->peek();
     while (hr != NULL) {
       if (old_cset_region_length() >= max_old_cset_length) {
-        // 老年代处理数达到最大值，停止添加到CSet
+        // 老年代处理数达到最大值, 停止添加到CSet
         break;
       }
 
@@ -117,7 +117,7 @@ void G1CollectorPolicy::finalize_cset(double target_pause_time_ms, EvacuationInf
       double reclaimable_perc = reclaimable_bytes_perc(reclaimable_bytes);
       double threshold = (double) G1HeapWastePercent;
       if (reclaimable_perc <= threshold) {
-        // 可回收的空间比例低于G1HeapWastePercent，停止添加到CSet
+        // 可回收的空间比例低于G1HeapWastePercent, 停止添加到CSet
         break;
       }
 
@@ -127,13 +127,13 @@ void G1CollectorPolicy::finalize_cset(double target_pause_time_ms, EvacuationInf
         if (predicted_time_ms > time_remaining_ms) {
           // 预测时间已经超过了目标暂停时间
           if (old_cset_region_length() >= min_old_cset_length) {
-            // 已经向CSet中添加了min_old_cset_length个老年代region，
+            // 已经向CSet中添加了min_old_cset_length个老年代region, 
             // 停止添加到CSet
             break;
           }
 
-          // 还没达到最小收集数，但是已经超过了预测时间
-          // 记录下来，还差多少个region没有达到最小收集数
+          // 还没达到最小收集数, 但是已经超过了预测时间
+          // 记录下来, 还差多少个region没有达到最小收集数
           expensive_region_num += 1;
         }
       } else {
@@ -168,15 +168,15 @@ void G1CollectorPolicy::finalize_cset(double target_pause_time_ms, EvacuationInf
  * 计算最小收集数
  */
 uint G1CollectorPolicy::calc_min_old_cset_length() {
-  // 计算最小收集数的时候用到了参数G1MixedGCCountTarget（默认值为8），
-  // 这个参数越大，要收集的老年代region越少，反之收集的region越多。
-  // 老年代region在CSet中的比例要超过1/G1MixedGCCountTarget，
-  // 如果没有超过这个值，即使预测时间超过了目标时间，仍然会添加region，
-  // 如果预测时间超过了目标时间，到达最小值之后就不会继续添加
+  // 计算最小收集数的时候用到了参数G1MixedGCCountTarget（默认值为8）, 
+  // 这个参数越大, 要收集的老年代region越少, 反之收集的region越多。
+  // 老年代region在CSet中的比例要超过1/G1MixedGCCountTarget, 
+  // 如果没有超过这个值, 即使预测时间超过了目标时间, 仍然会添加region, 
+  // 如果预测时间超过了目标时间, 到达最小值之后就不会继续添加
   const size_t region_num = (size_t) _collectionSetChooser->length();
   const size_t gc_num = (size_t) MAX2(G1MixedGCCountTarget, (uintx) 1);
   size_t result = region_num / gc_num;
-  // 向上取整，至少要回收一个老年代region
+  // 向上取整, 至少要回收一个老年代region
   if (result * gc_num < region_num) {
     result += 1;
   }
@@ -187,7 +187,7 @@ uint G1CollectorPolicy::calc_min_old_cset_length() {
  * 计算最大收集数
  */
 uint G1CollectorPolicy::calc_max_old_cset_length() {
-  // G1OldCSetRegionThresholdPercent参数默认值是10，
+  // G1OldCSetRegionThresholdPercent参数默认值是10, 
   // 即一次最多收集10%的region
   G1CollectedHeap* g1h = G1CollectedHeap::heap();
   const size_t region_num = g1h->num_regions();

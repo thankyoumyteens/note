@@ -29,7 +29,7 @@ sudo make install
 sudo vim /etc/profile
 ```
 
-2. 在最后一行添加：
+2. 在最后一行添加: 
 ```conf
 # git
 export PATH=$PATH:/usr/local/bin

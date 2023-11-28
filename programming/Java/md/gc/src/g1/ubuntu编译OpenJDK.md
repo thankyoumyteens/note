@@ -33,19 +33,19 @@ apt-get install -y vim
 vim /etc/sudoers
 ```
 
-添加一行：
+添加一行: 
 
 ```
 用户名  ALL=(ALL:ALL)  ALL
 ```
 
-保存：
+保存: 
 
 ```sh
 wq!
 ```
 
-退出 su：
+退出 su: 
 
 ```sh
 exit
@@ -57,7 +57,7 @@ exit
 sudo usermod -aG vboxsf $(whoami)
 ```
 
-重启后验证：
+重启后验证: 
 
 ```sh
 ll /media/sf_others/
@@ -80,30 +80,30 @@ sudo chmod 777 configure
 make
 ```
 
-## 报错：This os not support
+## 报错: This os not support
 
-查看 os 版本：
+查看 os 版本: 
 
 ```sh
 uname -r
 ```
 
-修改 makefile：
+修改 makefile: 
 
 ```sh
 vim hotspot/make/linux/Makefile
 ```
 
-修改：
+修改: 
 
 ```conf
 # 修改前的内容
 # SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3%
-# 如果uname -r返回4.4.0-142-generic，则添加4%
+# 如果uname -r返回4.4.0-142-generic, 则添加4%
 SUPPORTED_OS_VERSION = 2.4% 2.5% 2.6% 3% 4%
 ```
 
-保存，重新执行 make
+保存, 重新执行 make
 
 ## 验证
 

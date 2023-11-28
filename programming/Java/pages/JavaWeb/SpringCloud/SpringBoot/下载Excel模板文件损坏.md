@@ -1,13 +1,13 @@
 # 下载Excel模板文件损坏
 
-maven插件打包项目的时候，默认会压缩resources目录下的文件，excel文件被压缩后就会损坏
+maven插件打包项目的时候, 默认会压缩resources目录下的文件, excel文件被压缩后就会损坏
 
 # pom.xml配置文件过滤
 
 ```xml
 <build>
     <resources>
-        <!-- 后缀是.xlsx的文件不是资源文件，其它的资源文件需要被过滤 -->
+        <!-- 后缀是.xlsx的文件不是资源文件, 其它的资源文件需要被过滤 -->
         <resource>
             <directory>src/main/resources</directory>
             <excludes>
@@ -15,7 +15,7 @@ maven插件打包项目的时候，默认会压缩resources目录下的文件，
             </excludes>
             <filtering>true</filtering>
         </resource>
-        <!-- 后缀是.xlsx的文件是资源文件，但是不会被过滤 -->
+        <!-- 后缀是.xlsx的文件是资源文件, 但是不会被过滤 -->
         <resource>
             <directory>src/main/resources</directory>
             <includes>

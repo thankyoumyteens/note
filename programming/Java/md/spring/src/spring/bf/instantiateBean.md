@@ -8,7 +8,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         try {
             Object beanInstance;
             if (System.getSecurityManager() != null) {
-                // 先权限校验，再创建对象
+                // 先权限校验, 再创建对象
                 beanInstance = AccessController.doPrivileged(
                         (PrivilegedAction<Object>) () -> getInstantiationStrategy().instantiate(mbd, beanName, this),
                         getAccessControlContext());
@@ -38,15 +38,15 @@ public class SimpleInstantiationStrategy implements InstantiationStrategy {
                 // 先从缓存中找构造方法
                 constructorToUse = (Constructor<?>) bd.resolvedConstructorOrFactoryMethod;
                 if (constructorToUse == null) {
-                    // 缓存里没有，从Class中获取构造方法
+                    // 缓存里没有, 从Class中获取构造方法
                     final Class<?> clazz = bd.getBeanClass();
                     if (clazz.isInterface()) {
-                        // 接口无法实例化，抛异常
+                        // 接口无法实例化, 抛异常
                         throw new BeanInstantiationException(clazz, "Specified class is an interface");
                     }
                     try {
                         if (System.getSecurityManager() != null) {
-                            // 先校验权限，再获取无参构造方法
+                            // 先校验权限, 再获取无参构造方法
                             constructorToUse = AccessController.doPrivileged(
                                     (PrivilegedExceptionAction<Constructor<?>>) clazz::getDeclaredConstructor);
                         } else {

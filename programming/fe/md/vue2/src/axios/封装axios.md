@@ -1,11 +1,11 @@
 # 封装axios
 
-创建一个新的文件，例如`api.js`。
+创建一个新的文件, 例如`api.js`。
 
 ```javascript
 // 导入axios
 import axios from 'axios';
-// 创建一个axios实例，并添加自定义的配置：
+// 创建一个axios实例, 并添加自定义的配置: 
 const api = axios.create({
   baseURL: 'https://api.example.com', // 设置基础URL
   timeout: 5000, // 设置请求超时时间
@@ -13,7 +13,7 @@ const api = axios.create({
     'Content-Type': 'application/json' // 设置请求头
   }
 });
-// 在axios实例上添加自定义的方法：
+// 在axios实例上添加自定义的方法: 
 export const get = (url, params) => {
     return api.get(url, {
         params: params
@@ -53,7 +53,7 @@ api.interceptors.response.use(
 export default api; // 导出整个axios实例
 ```
 
-在其他文件中导入和使用封装好的axios实例或方法：
+在其他文件中导入和使用封装好的axios实例或方法: 
 
 ```javascript
 import api from './api'; // 导入整个axios实例

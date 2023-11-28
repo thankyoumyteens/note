@@ -34,7 +34,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 
     public NamespaceHandler resolve(String namespaceUri) {
         // 获取解析器map
-        // 这个map是一个缓存，一开始valu中会存储解析器的类名，
+        // 这个map是一个缓存, 一开始valu中会存储解析器的类名, 
         // 使用过一次后就会把类名替换成解析器的对象
         Map<String, Object> handlerMappings = getHandlerMappings();
         // 根据命名空间找到对应的NamespaceHandler
@@ -42,10 +42,10 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
         if (handlerOrClassName == null) {
             return null;
         } else if (handlerOrClassName instanceof NamespaceHandler) {
-            // 已经是个对象了，表示之前获取过，直接返回
+            // 已经是个对象了, 表示之前获取过, 直接返回
             return (NamespaceHandler) handlerOrClassName;
         } else {
-            // map里存的不是NamespaceHandler对象，表示第一次获取
+            // map里存的不是NamespaceHandler对象, 表示第一次获取
             // 解析器的类全名
             String className = (String) handlerOrClassName;
             try {
@@ -57,7 +57,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
                 }
                 NamespaceHandler namespaceHandler = (NamespaceHandler) BeanUtils.instantiateClass(handlerClass);
                 // 调用init()方法
-                // 用户需要重写这个方法，
+                // 用户需要重写这个方法, 
                 // 并在其中指定一个BeanDefinitionParser类型的对象
                 // 实际解析自定义标签的代码就写在BeanDefinitionParser类型的对象中
                 namespaceHandler.init();
@@ -82,18 +82,18 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
         if (handlerMappings == null) {
             synchronized (this) {
                 handlerMappings = this.handlerMappings;
-                // 双重检查锁(DCL)，handlerMappings是volatile的，可以禁止重排序
+                // 双重检查锁(DCL), handlerMappings是volatile的, 可以禁止重排序
                 if (handlerMappings == null) {
                     try {
                         // 加载自定义的NamespaceHandler
-                        // handlerMappingsLocation已经在构造方法中初始化为：META-INF/spring.handlers
+                        // handlerMappingsLocation已经在构造方法中初始化为: META-INF/spring.handlers
                         // public static final String DEFAULT_HANDLER_MAPPINGS_LOCATION = "META-INF/spring.handlers";
                         /*
                         public DefaultNamespaceHandlerResolver(@Nullable ClassLoader classLoader) {
                             this(classLoader, DEFAULT_HANDLER_MAPPINGS_LOCATION);
                         }
                          */
-                        // spring.handlers是一个properties文件，key是自定义命名空间，value是解析这个命名空间的解析器的类名
+                        // spring.handlers是一个properties文件, key是自定义命名空间, value是解析这个命名空间的解析器的类名
                         Properties mappings = PropertiesLoaderUtils.loadAllProperties(this.handlerMappingsLocation, this.classLoader);
                         // 存入map
                         handlerMappings = new ConcurrentHashMap<>(mappings.size());
@@ -114,7 +114,7 @@ public class DefaultNamespaceHandlerResolver implements NamespaceHandlerResolver
 
 ## handler.parse()方法
 
-自定义解析器可以继承自 NamespaceHandlerSupport 抽象类，这样只需要自己实现 init()方法，其他方法使用 NamespaceHandlerSupport 中默认的即可：
+自定义解析器可以继承自 NamespaceHandlerSupport 抽象类, 这样只需要自己实现 init()方法, 其他方法使用 NamespaceHandlerSupport 中默认的即可: 
 
 ```java
 public class MyNamespaceHandler extends NamespaceHandlerSupport {
@@ -133,10 +133,10 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
         // 找到用户指定的BeanDefinitionParser对象
         BeanDefinitionParser parser = findParserForElement(element, parserContext);
         // 解析自定义标签
-        // 如果用户通过继承AbstractSingleBeanDefinitionParser类来实现自定义解析器，
+        // 如果用户通过继承AbstractSingleBeanDefinitionParser类来实现自定义解析器, 
         // 那么他需要重写parse()方法中的doParse()方法
-        // 如果用户通过实现BeanDefinitionParser接口来实现自定义解析器，
-        // 那么他需要实现整个parse()方法，并在其中自己注册bean
+        // 如果用户通过实现BeanDefinitionParser接口来实现自定义解析器, 
+        // 那么他需要实现整个parse()方法, 并在其中自己注册bean
         return (parser != null ? parser.parse(element, parserContext) : null);
     }
 
@@ -158,7 +158,7 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 
 ## 通过继承 AbstractSingleBeanDefinitionParser 类来实现自定义解析器
 
-与 NamespaceHandler 类似，自定义的 BeanDefinitionParser 实现类也可以继承 AbstractSingleBeanDefinitionParser 以减少代码量。
+与 NamespaceHandler 类似, 自定义的 BeanDefinitionParser 实现类也可以继承 AbstractSingleBeanDefinitionParser 以减少代码量。
 
 ```java
 public abstract class AbstractSingleBeanDefinitionParser extends AbstractBeanDefinitionParser {
@@ -231,7 +231,7 @@ public abstract class AbstractSingleBeanDefinitionParser extends AbstractBeanDef
         }
         builder.getRawBeanDefinition().setSource(parserContext.extractSource(element));
         BeanDefinition containingBd = parserContext.getContainingBeanDefinition();
-        // 若存在父bean，则使用父bean的scope属性
+        // 若存在父bean, 则使用父bean的scope属性
         if (containingBd != null) {
             builder.setScope(containingBd.getScope());
         }
@@ -249,7 +249,7 @@ public abstract class AbstractSingleBeanDefinitionParser extends AbstractBeanDef
         doParse(element, builder);
     }
 
-    // 空的，用户需要重写，在这里解析标签里自己的属性
+    // 空的, 用户需要重写, 在这里解析标签里自己的属性
     protected void doParse(Element element, BeanDefinitionBuilder builder) {}
 }
 ```

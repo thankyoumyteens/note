@@ -1,6 +1,6 @@
 # YGC 触发的时机
 
-在创建对象时若申请不到内存，则会触发一次 Young GC：
+在创建对象时若申请不到内存, 则会触发一次 Young GC: 
 
 > jdk8u60-master\hotspot\src\share\vm\interpreter\bytecodeInterpreter.cpp
 
@@ -10,7 +10,7 @@
 CASE(_new): {
   // 快速分配时不需要GC
   // ...
-  // 快速分配失败了，执行慢速分配
+  // 快速分配失败了, 执行慢速分配
   CALL_VM(InterpreterRuntime::_new(THREAD, METHOD->constants(), index),
           handle_exception);
   // ...
@@ -43,8 +43,8 @@ HeapWord* CollectedHeap::common_mem_allocate_noinit(KlassHandle klass, size_t si
   // ...
   // 从Java堆中分配内存
   bool gc_overhead_limit_was_exceeded = false;
-  // Universe::heap ()方法返回的是当前JVM使用的堆类，
-  // 因为使用的是G1垃圾回收器，所以返回的是G1CollectedHeap
+  // Universe::heap ()方法返回的是当前JVM使用的堆类, 
+  // 因为使用的是G1垃圾回收器, 所以返回的是G1CollectedHeap
   result = Universe::heap()->mem_allocate(size,
                                           &gc_overhead_limit_was_exceeded);
   // ...
@@ -56,7 +56,7 @@ HeapWord* CollectedHeap::common_mem_allocate_noinit(KlassHandle klass, size_t si
 ```cpp
 HeapWord* G1CollectedHeap::mem_allocate(size_t word_size,
                                         bool*  gc_overhead_limit_was_exceeded) {
-  // 一直循环，直到内存申请成功或者GC后申请失败
+  // 一直循环, 直到内存申请成功或者GC后申请失败
   for (uint try_count = 1, gclocker_retry_count = 0; ; try_count += 1) {
     uint gc_count_before;
 
@@ -93,7 +93,7 @@ inline HeapWord* G1CollectedHeap::attempt_allocation(size_t word_size,
   HeapWord* result = _allocator->mutator_alloc_region(context)->attempt_allocation(word_size,
                                                                                    false);
   if (result == NULL) {
-    // 分配失败，进入慢速分配
+    // 分配失败, 进入慢速分配
     result = attempt_allocation_slow(word_size,
                                      context,
                                      gc_count_before_ret,
@@ -112,7 +112,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size,
                                                    uint* gc_count_before_ret,
                                                    uint* gclocker_retry_count_ret) {
   HeapWord* result = NULL;
-  // 循环次数由参数GCLockerRetryAllocationCount控制，默认3次
+  // 循环次数由参数GCLockerRetryAllocationCount控制, 默认3次
   for (int try_count = 1; ; try_count += 1) {
     bool should_try_gc;
     uint gc_count_before;
@@ -141,10 +141,10 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size,
         }
         should_try_gc = false;
       } else {
-        // 在访问JNI代码时，JNI代码可能会进入临界区，
-        // 为了防止GC导致JNI代码出问题，需要利用GC_locker加锁，保证临界区代码的正确执行
-        // 如果在此时需要发生GC，那么此次GC就会被阻止，并将needs_gc置为true，在临界区代码执行完毕后，
-        // GC_locker会触发GC操作，之后将needs_gc重新复位为false
+        // 在访问JNI代码时, JNI代码可能会进入临界区, 
+        // 为了防止GC导致JNI代码出问题, 需要利用GC_locker加锁, 保证临界区代码的正确执行
+        // 如果在此时需要发生GC, 那么此次GC就会被阻止, 并将needs_gc置为true, 在临界区代码执行完毕后, 
+        // GC_locker会触发GC操作, 之后将needs_gc重新复位为false
         if (GC_locker::needs_gc()) {
           should_try_gc = false;
         } else {
@@ -166,7 +166,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size,
       }
 
       if (succeeded) {
-        // 循环次数超出，返回
+        // 循环次数超出, 返回
         MutexLockerEx x(Heap_lock);
         *gc_count_before_ret = total_collections();
         return NULL;
@@ -182,7 +182,7 @@ HeapWord* G1CollectedHeap::do_collection_pause(size_t word_size,
                                                GCCause::Cause gc_cause) {
   assert_heap_not_locked_and_not_at_safepoint();
   g1_policy()->record_stop_world_start();
-  // 要执行的gc任务：GC并分配对象的内存，false表示只执行Young GC
+  // 要执行的gc任务: GC并分配对象的内存, false表示只执行Young GC
   VM_G1IncCollectionPause op(gc_count_before,
                              word_size,
                              false, /* should_initiate_conc_mark */
@@ -212,8 +212,8 @@ void VMThread::execute(VM_Operation* op) {
   Thread* t = Thread::current();
   // 判断是不是VMThread线程
   if (!t->is_VM_thread()) {
-    // 不是VMThread线程，可能是JavaThread或者WatcherThread
-    // 会先将任务放到一个队列中，之后再执行
+    // 不是VMThread线程, 可能是JavaThread或者WatcherThread
+    // 会先将任务放到一个队列中, 之后再执行
     //...
   } else {
     // 是VMThred线程
@@ -221,14 +221,14 @@ void VMThread::execute(VM_Operation* op) {
     _cur_vm_operation = op;
     // 判断任务是否需要在安全点执行且当前不在安全点
     if (op->evaluate_at_safepoint() && !SafepointSynchronize::is_at_safepoint()) {
-      // 不在安全点，等待所有线程进入安全点，然后把所有线程暂停
+      // 不在安全点, 等待所有线程进入安全点, 然后把所有线程暂停
       SafepointSynchronize::begin();
       // 开始gc任务, op是刚刚传入的VM_G1IncCollectionPause的对象
       // evaluate()方法最终会调用VM_G1IncCollectionPause的的doit()方法
       op->evaluate();
       SafepointSynchronize::end();
     } else {
-      // 不需要安全点或者在安全点，则直接执行
+      // 不需要安全点或者在安全点, 则直接执行
       op->evaluate();
     }
 
@@ -262,7 +262,7 @@ void VM_G1IncCollectionPause::doit() {
   }
 
   GCCauseSetter x(g1h, _gc_cause);
-  // 是否并发标记，这里传入的是false，只进行Young GC
+  // 是否并发标记, 这里传入的是false, 只进行Young GC
   if (_should_initiate_conc_mark) {
     _old_marking_cycles_completed_before = g1h->old_marking_cycles_completed();
     bool res = g1h->g1_policy()->force_initial_mark_if_outside_cycle(_gc_cause);
@@ -278,7 +278,7 @@ void VM_G1IncCollectionPause::doit() {
   _pause_succeeded =
     g1h->do_collection_pause_at_safepoint(_target_pause_time_ms);
   if (_pause_succeeded && _word_size > 0) {
-    // Young GC完成，再去申请内存
+    // Young GC完成, 再去申请内存
     _result = g1h->attempt_allocation_at_safepoint(_word_size, allocation_context(),
                                       true);
   } else {
@@ -298,7 +298,7 @@ void VM_G1IncCollectionPause::doit() {
 bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_ms) {
   assert_at_safepoint(true);
   guarantee(!is_gc_active(), "collection is not reentrant");
-  // 判断是否有线程在临界区，如果有则舍弃本次gc，并把need_gc参数设置为true
+  // 判断是否有线程在临界区, 如果有则舍弃本次gc, 并把need_gc参数设置为true
   if (GC_locker::check_active_before_gc()) {
     return false;
   }
@@ -394,9 +394,9 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
         if (g1_policy()->during_initial_mark_pause()) {
           concurrent_mark()->checkpointRootsInitialPre();
         }
-        // 选择CSet，
-        // Young GC会选择所有新生代region，
-        // Mixed GC会选择所有新生代region和部分老年代region，
+        // 选择CSet, 
+        // Young GC会选择所有新生代region, 
+        // Mixed GC会选择所有新生代region和部分老年代region, 
         g1_policy()->finalize_cset(target_pause_time_ms, evacuation_info);
 
         register_humongous_regions_with_in_cset_fast_test();

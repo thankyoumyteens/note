@@ -1,6 +1,6 @@
 # PageHelper不生效的情况
 
-调用PageHelper.startPage后，紧跟在这个方法后的第一个MyBatis查询方法会被进行分页。
+调用PageHelper.startPage后, 紧跟在这个方法后的第一个MyBatis查询方法会被进行分页。
 
 ```java
 PageHelper.startPage(pageNum, pageSize, true);
@@ -52,19 +52,19 @@ public class UserImpl implements User {
 
 PageHelper会用ThreadLocal将分页信息保存在当前线程中
 
-PageHelper配置了MyBatis的拦截器，在执行sql前会读取出分页信息，为sql加上limit
+PageHelper配置了MyBatis的拦截器, 在执行sql前会读取出分页信息, 为sql加上limit
 
 # new PageInfo<>() 可以获取到页码、页大小、总页数等信息的原因
 
-使用了`PageHelper.startPage`之后，查询出的List是`Page<T>`类型
+使用了`PageHelper.startPage`之后, 查询出的List是`Page<T>`类型
 
-Page类是ArrayList的子类：
+Page类是ArrayList的子类: 
 ```java
 public class Page<E> extends ArrayList<E> implements Closeable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 页码，从1开始
+     * 页码, 从1开始
      */
     private int pageNum;
     /**

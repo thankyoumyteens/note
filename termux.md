@@ -24,7 +24,7 @@ termux-setup-storage
 
 # 开启ssh
 
-### termux开启的sshd服务用的是8022端口，而不是常用的22端口
+### termux开启的sshd服务用的是8022端口, 而不是常用的22端口
 ```
 apt-get install openssh
 sshd

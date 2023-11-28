@@ -13,7 +13,7 @@ tar -zxvf apache-maven-3.5.3-bin.tar.gz
 sudo vim /etc/profile
 ```
 
-2. 在最后一行添加：
+2. 在最后一行添加: 
 ```conf
 export PATH=/root/src_pack/apache-maven-3.5.3/bin:$PATH
 ```

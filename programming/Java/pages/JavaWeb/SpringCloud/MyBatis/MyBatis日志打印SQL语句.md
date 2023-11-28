@@ -1,6 +1,6 @@
 # 单独使用Mybatis
 
-在mybatis.xml配置文件中添加如下配置：
+在mybatis.xml配置文件中添加如下配置: 
 ```xml
 <setting name="logImpl" value="STDOUT_LOGGING" />
 ```

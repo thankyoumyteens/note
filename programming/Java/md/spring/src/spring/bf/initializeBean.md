@@ -22,8 +22,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         }
 
         try {
-            // 执行用户自定义的初始化方法，
-            // 比如init-method属性配置的方法，
+            // 执行用户自定义的初始化方法, 
+            // 比如init-method属性配置的方法, 
             // 或者实现InitializingBean接口
             invokeInitMethods(beanName, wrappedBean, mbd);
         } catch (Throwable ex) {
@@ -40,7 +40,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     private void invokeAwareMethods(String beanName, Object bean) {
-        // 调用aware接口中相应的set方法，注入相应的对象
+        // 调用aware接口中相应的set方法, 注入相应的对象
         if (bean instanceof Aware) {
             if (bean instanceof BeanNameAware) {
                 ((BeanNameAware) bean).setBeanName(beanName);
@@ -104,8 +104,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 ((InitializingBean) bean).afterPropertiesSet();
             }
         }
-        // 判断是否指定了init-method方法，
-        // 如果指定了init-method方法，则调用
+        // 判断是否指定了init-method方法, 
+        // 如果指定了init-method方法, 则调用
         if (mbd != null && bean.getClass() != NullBean.class) {
             String initMethodName = mbd.getInitMethodName();
             if (StringUtils.hasLength(initMethodName) &&

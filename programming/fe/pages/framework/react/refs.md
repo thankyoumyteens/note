@@ -1,12 +1,12 @@
 # 什么是Refs
 
-Refs其实是提供了一个对真实DOM/组件的引用，我们可以通过这个引用直接去操作DOM/组件
+Refs其实是提供了一个对真实DOM/组件的引用, 我们可以通过这个引用直接去操作DOM/组件
 
 # 设置refs
 
 ## 方式1 字符串形式
 
-官网不推荐使用这种形式使用refs了，并且这种方法在未来的版本可能会被移除。
+官网不推荐使用这种形式使用refs了, 并且这种方法在未来的版本可能会被移除。
 
 ```jsx
 class MyComponent extends React.Component {
@@ -15,7 +15,7 @@ class MyComponent extends React.Component {
         this.refs.myInput.focus();
     }
     render() {
-        // 当组件插入到 DOM 后，ref 属性添加一个组件的引用于到 this.refs
+        // 当组件插入到 DOM 后, ref 属性添加一个组件的引用于到 this.refs
         return (
             <div>
                 <input type="text" ref="myInput" />
@@ -52,8 +52,8 @@ class CustomTextInput extends React.Component {
 
 current属性
 
-- 如果ref属性被用于html元素，那么它的值是底层DOM元素。
-- 如果ref属性被用于自定义类组件，那么它的值是已挂载的这个自定义类组件的实例。
+- 如果ref属性被用于html元素, 那么它的值是底层DOM元素。
+- 如果ref属性被用于自定义类组件, 那么它的值是已挂载的这个自定义类组件的实例。
 - 函数式组件没有ref属性。
 
 ### 指定回调函数

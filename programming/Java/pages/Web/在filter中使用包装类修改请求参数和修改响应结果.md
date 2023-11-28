@@ -1,4 +1,4 @@
-给request添加一个包装类ParameterRequestWrapper，继承HttpServletRequestWrapper，先从request中取输入流，读取流中的数据，然后重写getInputStream（）和getReader（）方法。
+给request添加一个包装类ParameterRequestWrapper, 继承HttpServletRequestWrapper, 先从request中取输入流, 读取流中的数据, 然后重写getInputStream（）和getReader（）方法。
 
 ```java
 public class ParameterRequestWrapper extends HttpServletRequestWrapper {
@@ -25,7 +25,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
 	public ServletInputStream getInputStream() throws IOException
 	{
 		String buf = new String(buffer);
-		System.out.println("request的包装类中的内容："+buf);
+		System.out.println("request的包装类中的内容: "+buf);
 		ParamUtil paramUtil = new ParamUtil();
 		boolean offlineLicense = paramUtil.isOfflineLicense(buf);
 		if (offlineLicense) {
@@ -48,7 +48,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
 }
 ```
 
-上面是修改请求参数的，还有，有时候需要对返回的结果进行修改，这时候也需要使用包装类。写一个ParameterResponseWrapper，继承HttpServletResponseWrapper,主要是重写getOutputStream（）和getWriter（）方法。
+上面是修改请求参数的, 还有, 有时候需要对返回的结果进行修改, 这时候也需要使用包装类。写一个ParameterResponseWrapper, 继承HttpServletResponseWrapper,主要是重写getOutputStream（）和getWriter（）方法。
 
 ```java
 public class ParameterResponseWrapper extends HttpServletResponseWrapper{
@@ -81,7 +81,7 @@ public class ParameterResponseWrapper extends HttpServletResponseWrapper{
 }
 ```
 
-然后，就可以在filter中使用包装后的request和response了。
+然后, 就可以在filter中使用包装后的request和response了。
 ```java
 filterChain.doFilter(reqWrapper,responseWrapper);//此处的request和response要写包装类
 ```

@@ -2,7 +2,7 @@
 
 - str表示Unicode文本(8位的和更宽的)
 - bytes表示二进制数据
-- bytearray，是一种可变的bytes类型
+- bytearray, 是一种可变的bytes类型
 
 # 字符串类型的判断
 

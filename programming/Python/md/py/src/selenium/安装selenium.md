@@ -8,13 +8,13 @@ pip install selenium==4.9.0
 
 浏览器驱动需要与浏览器版本一致
 
-- Chrome浏览器：[ungoogled-chromium](https://ungoogled-software.github.io/ungoogled-chromium-binaries/releases/windows/32bit/112.0.5615.138-1)
-- Chrome浏览器驱动：[chromedriver](https://chromedriver.chromium.org/downloads)
-- Firefox浏览器驱动：[geckodriver](https://repo.huaweicloud.com/geckodriver/)
-- IE浏览器驱动：[IEDriverServer](http://selenium-release.storage.googleapis.com/index.html)
-- Edge浏览器驱动：[MicrosoftWebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver)
-- Opera浏览器驱动：[operadriver](https://repo.huaweicloud.com/operadriver/)
-- PhantomJS浏览器驱动：[phantomjs](http://phantomjs.org/)
+- Chrome浏览器: [ungoogled-chromium](https://ungoogled-software.github.io/ungoogled-chromium-binaries/releases/windows/32bit/112.0.5615.138-1)
+- Chrome浏览器驱动: [chromedriver](https://chromedriver.chromium.org/downloads)
+- Firefox浏览器驱动: [geckodriver](https://repo.huaweicloud.com/geckodriver/)
+- IE浏览器驱动: [IEDriverServer](http://selenium-release.storage.googleapis.com/index.html)
+- Edge浏览器驱动: [MicrosoftWebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver)
+- Opera浏览器驱动: [operadriver](https://repo.huaweicloud.com/operadriver/)
+- PhantomJS浏览器驱动: [phantomjs](http://phantomjs.org/)
 
 # 测试能否正常使用
 

@@ -20,9 +20,9 @@ pyinstaller -w tools_main.py
 
 build\和 dist\ 和 pymain.spec 是多出来的打包生成的文件
 
-- build不需要使用，可以忽略掉
-- dist路径包含了生的的exe和各种依赖文件，可以直接拿去发布
-- pymain.spec是pyinstaller自动生成的配置文件，后续修改打包配置都可以直接在上面修改
+- build不需要使用, 可以忽略掉
+- dist路径包含了生的的exe和各种依赖文件, 可以直接拿去发布
+- pymain.spec是pyinstaller自动生成的配置文件, 后续修改打包配置都可以直接在上面修改
 
 # 打包成单文件
 
@@ -30,7 +30,7 @@ build\和 dist\ 和 pymain.spec 是多出来的打包生成的文件
 pyinstaller -w -F tools_main.py
 ```
 
-文件变小，但启动速度变慢
+文件变小, 但启动速度变慢
 
 # UPX压缩
 

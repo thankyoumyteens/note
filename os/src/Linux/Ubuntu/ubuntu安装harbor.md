@@ -15,7 +15,7 @@ vim harbor.yml
 ```
 
 注释掉 https 的配置内容
-配置 http 相关的参数，主要是 hostname 和 port
+配置 http 相关的参数, 主要是 hostname 和 port
 
 # 安装
 

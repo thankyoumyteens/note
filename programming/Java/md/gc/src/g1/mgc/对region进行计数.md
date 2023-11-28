@@ -34,7 +34,7 @@ public:
 
     assert(hr->bottom() <= ntams && ntams <= hr->end(), "Preconditions.");
 
-    // 如果在开始并发标记之后又有新的对象分配，需要额外处理
+    // 如果在开始并发标记之后又有新的对象分配, 需要额外处理
     if (ntams < top) {
       // 标记该region有存活对象
       set_bit_for_region(hr);
@@ -49,7 +49,7 @@ public:
       _cm->set_card_bitmap_range(_card_bm, start_idx, end_idx, true /* is_par */);
     }
 
-    // 再次设置标记，表示这个region有存活的对象
+    // 再次设置标记, 表示这个region有存活的对象
     if (hr->next_marked_bytes() > 0) {
       set_bit_for_region(hr);
     }

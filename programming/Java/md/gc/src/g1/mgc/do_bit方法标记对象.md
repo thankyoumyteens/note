@@ -21,7 +21,7 @@ public:
 
     // 更新局部_finger
     _task->move_finger_to(addr);
-    // 标记这个对象的字段指向的对象，
+    // 标记这个对象的字段指向的对象, 
     // 它会把字段指向的对象添加到本地队列中
     // 处理本地队列中也用到了这个方法
     _task->scan_object(oop(addr));

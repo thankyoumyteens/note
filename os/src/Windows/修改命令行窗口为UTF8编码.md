@@ -4,8 +4,8 @@
 chcp 65001
 ```
 
-- gbk编码：chcp 936
-- utf8编码：chcp 65001
+- gbk编码: chcp 936
+- utf8编码: chcp 65001
 
 # 永久修改
 

@@ -1,6 +1,6 @@
 # 启动
 
-启动代码格式：`nginx安装目录地址 -c nginx配置文件地址`
+启动代码格式: `nginx安装目录地址 -c nginx配置文件地址`
 ```
 /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
 ```

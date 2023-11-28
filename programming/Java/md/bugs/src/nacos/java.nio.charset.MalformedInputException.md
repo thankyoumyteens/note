@@ -1,4 +1,4 @@
-# windows中java -jar启动时，报错java.nio.charset.MalformedInputException: Input length = 1
+# windows中java -jar启动时, 报错java.nio.charset.MalformedInputException: Input length = 1
 
 ```sh
 java -jar demo.jar
@@ -8,7 +8,7 @@ java -jar demo.jar
 
 ## 原因
 
-windows命令行默认GBK编码，而nacos上的yml文件时utf-8编码，所以导致中文无法解析。
+windows命令行默认GBK编码, 而nacos上的yml文件时utf-8编码, 所以导致中文无法解析。
 
 ## 解决
 

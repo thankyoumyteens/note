@@ -33,19 +33,19 @@ sudo make install
 
 # 通过指定配置文件启动
 
-进入redis根目录, 输入命令：
+进入redis根目录, 输入命令: 
 ```
 ./redis-server /etc/redis/6379.conf
 ```
 
-如果更改了端口, 使用`redis-cli`客户端连接时, 也需要指定端口, 例如：
+如果更改了端口, 使用`redis-cli`客户端连接时, 也需要指定端口, 例如: 
 ```
 redis-cli -p 6380
 ```
 
 # 使用redis启动脚本设置开机自启动
 
-启动脚本 redis_init_script 位于位于Redis的 /utils/ 目录下，redis_init_script脚本代码如下
+启动脚本 redis_init_script 位于位于Redis的 /utils/ 目录下, redis_init_script脚本代码如下
 
 ```sh
 #!/bin/sh
@@ -59,9 +59,9 @@ REDISPORT=6379
 EXEC=/usr/local/bin/redis-server
 #客户端位置
 CLIEXEC=/usr/local/bin/redis-cli
-#redis的PID文件位置，需要修改
+#redis的PID文件位置, 需要修改
 PIDFILE=/var/run/redis_${REDISPORT}.pid
-#redis的配置文件位置，需将${REDISPORT}修改为文件名
+#redis的配置文件位置, 需将${REDISPORT}修改为文件名
 CONF="/etc/redis/${REDISPORT}.conf"
 case "$1" in
     start)

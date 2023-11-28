@@ -46,7 +46,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
                 }
                 // 添加到singletonsCurrentlyInCreation缓存中
                 beforeSingletonCreation(beanName);
-                // 是否为新创建的单例对象，用于判断是否需要缓存
+                // 是否为新创建的单例对象, 用于判断是否需要缓存
                 boolean newSingleton = false;
                 // suppressedExceptions用于记录bean创建过程中的异常
                 boolean recordSuppressedExceptions = (this.suppressedExceptions == null);

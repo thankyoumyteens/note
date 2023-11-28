@@ -1,10 +1,10 @@
 # 优先级
 
-nacos配置大于本地jar中的application.properties配置，在nacos配置的参数肯定会覆盖jar配置，但一旦nacos不配置参数或参数被注释掉，本地jar的配置会生效。
+nacos配置大于本地jar中的application.properties配置, 在nacos配置的参数肯定会覆盖jar配置, 但一旦nacos不配置参数或参数被注释掉, 本地jar的配置会生效。
 
-nacos中微服务配置大于nacos中共享配置，比如s1微服务在nacos中配置的s1.properties与nacos共享配置有相同的参数，微服务只加载s1.properties中的参数，共享配置的相同参数会被覆盖。
+nacos中微服务配置大于nacos中共享配置, 比如s1微服务在nacos中配置的s1.properties与nacos共享配置有相同的参数, 微服务只加载s1.properties中的参数, 共享配置的相同参数会被覆盖。
 
-nacos共享配置也大于本地jar中的application.properties配置，在本地jar的application.properties配置了和nacos共享配置相同的参数，微服务只加载nacos的共享配置。
+nacos共享配置也大于本地jar中的application.properties配置, 在本地jar的application.properties配置了和nacos共享配置相同的参数, 微服务只加载nacos的共享配置。
 
 # 开启认证
 
@@ -25,17 +25,17 @@ nacos.core.auth.enabled=true
 
 # 创建开发环境配置
 
-配置管理->配置列表，单击右上角的+按钮，进入新建配置页面，填写配置信息
+配置管理->配置列表, 单击右上角的+按钮, 进入新建配置页面, 填写配置信息
 
 其中:
 - Data ID: 填入 nacos-demo-dev.yml
 - Group: 填入 team1
 - 描述: 不填
-- 配置内容: 要加载的配置内容，比如: username=wolf
+- 配置内容: 要加载的配置内容, 比如: username=wolf
 
 # 创建测试环境配置
 
-配置管理->配置列表，单击右上角的+按钮，进入新建配置页面，填写配置信息
+配置管理->配置列表, 单击右上角的+按钮, 进入新建配置页面, 填写配置信息
 
 其中:
 - Data ID: 填入 nacos-demo-qa.yml
@@ -45,7 +45,7 @@ nacos.core.auth.enabled=true
 
 # 创建共享配置
 
-配置管理->配置列表，单击右上角的+按钮，进入新建配置页面，填写配置信息
+配置管理->配置列表, 单击右上角的+按钮, 进入新建配置页面, 填写配置信息
 
 其中:
 - Data ID: 填入 team1-baseconfig.yml
@@ -134,7 +134,7 @@ public class TestController {
 
 创建配置文件bootstrap.yml, 并配置服务名称和Nacos地址
 
-作为配置中心时，必须要使用bootstrap.yml，因为bootstrap.yml加载顺序优先于application.yml
+作为配置中心时, 必须要使用bootstrap.yml, 因为bootstrap.yml加载顺序优先于application.yml
 
 ```yml
 spring:
@@ -164,7 +164,7 @@ spring:
         shared-configs[0]:
           group: team1
           data-id: team1-baseconfig.yml
-          # 是否动态刷新，默认为false
+          # 是否动态刷新, 默认为false
           refresh: true
         shared-configs[1]:
           group: team2
@@ -216,8 +216,8 @@ spring:
 ${prefix}-${spring.profile.active}.${file-extension}
 ```
 
-- prefix: 默认为 spring.application.name的值，也可以通过配置项 spring.cloud.nacos.config.prefix来配置。
+- prefix: 默认为 spring.application.name的值, 也可以通过配置项 spring.cloud.nacos.config.prefix来配置。
 - spring.profile.active: 即当前环境对应的profile。
-- 当 spring.profile.active 为空时，对应的连接符 - 也将不存在，dataId的拼接格式变成: ${prefix}.${file-extension}
-- file-extension:  为配置文件的数据格式，可以通过设置项spring.cloud.nacos.config.file-extension来配置，默认值: properties。目前只支持 properties 和 yaml 类型。
-- Group的值默认 DEFAULT_GROUP: 可以通过设置项 spring.cloud.nacos.config.group来配置，默认值:  DEFAULT_GROUP
+- 当 spring.profile.active 为空时, 对应的连接符 - 也将不存在, dataId的拼接格式变成: ${prefix}.${file-extension}
+- file-extension:  为配置文件的数据格式, 可以通过设置项spring.cloud.nacos.config.file-extension来配置, 默认值: properties。目前只支持 properties 和 yaml 类型。
+- Group的值默认 DEFAULT_GROUP: 可以通过设置项 spring.cloud.nacos.config.group来配置, 默认值:  DEFAULT_GROUP

@@ -7,7 +7,7 @@ array.splice(index,howmany,item1...)
 ```
 
 - index: 从何处添加/删除元素
-- howmany: 要删除几个元素，不传则删除从index开始到数组结尾的所有元素。
+- howmany: 要删除几个元素, 不传则删除从index开始到数组结尾的所有元素。
 - item1...: 要插入到数组的新元素
 
 # 插入

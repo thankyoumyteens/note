@@ -13,7 +13,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 throw new BeanCreationException(
                         mbd.getResourceDescription(), beanName, "Cannot apply property values to null instance");
             } else {
-                // 没有属性需要填充，直接返回
+                // 没有属性需要填充, 直接返回
                 return;
             }
         }
@@ -36,11 +36,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         int resolvedAutowireMode = mbd.getResolvedAutowireMode();
         if (resolvedAutowireMode == AUTOWIRE_BY_NAME || resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
             MutablePropertyValues newPvs = new MutablePropertyValues(pvs);
-            // byName，找出和字段名相同的bean，存入newPvs中
+            // byName, 找出和字段名相同的bean, 存入newPvs中
             if (resolvedAutowireMode == AUTOWIRE_BY_NAME) {
                 autowireByName(beanName, mbd, bw, newPvs);
             }
-            // byType，找出和字段类型相同的bean，存入newPvs中
+            // byType, 找出和字段类型相同的bean, 存入newPvs中
             if (resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
                 autowireByType(beanName, mbd, bw, newPvs);
             }
@@ -157,7 +157,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         List<PropertyValue> original;
 
         if (pvs instanceof MutablePropertyValues) {
-            // 如果 pvs 是默认实现方式，则可以直接转换
+            // 如果 pvs 是默认实现方式, 则可以直接转换
             mpvs = (MutablePropertyValues) pvs;
             if (mpvs.isConverted()) {
                 try {
@@ -185,12 +185,12 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         boolean resolveNecessary = false;
         for (PropertyValue pv : original) {
             if (pv.isConverted()) {
-                // 如果已经转换，不需要再转换，直接加入
+                // 如果已经转换, 不需要再转换, 直接加入
                 deepCopy.add(pv);
             } else {
                 String propertyName = pv.getName();
                 Object originalValue = pv.getValue();
-                // 给定一个 PropertyValue，返回一个转换后的值，必要时解析对工厂中其他 bean 的任何引用
+                // 给定一个 PropertyValue, 返回一个转换后的值, 必要时解析对工厂中其他 bean 的任何引用
                 Object resolvedValue = valueResolver.resolveValueIfNecessary(pv, originalValue);
                 Object convertedValue = resolvedValue;
                 // 判断是否为可转换且非嵌套属性
@@ -249,7 +249,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         } else if (javaxInjectProviderClass == descriptor.getDependencyType()) {
             return new Jsr330ProviderFactory().createDependencyProvider(descriptor, requestingBeanName);
         } else {
-            // 用于@Lazy注解，解决循环依赖
+            // 用于@Lazy注解, 解决循环依赖
             Object result = getAutowireCandidateResolver().getLazyResolutionProxyIfNecessary(
                     descriptor, requestingBeanName);
             if (result == null) {
@@ -285,7 +285,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
                         converter.convertIfNecessary(value, type, descriptor.getField()) :
                         converter.convertIfNecessary(value, type, descriptor.getMethodParameter()));
             }
-            // 尝试解析包含多个 bean 的依赖对象，如集合、数组、Map 等
+            // 尝试解析包含多个 bean 的依赖对象, 如集合、数组、Map 等
             Object multipleBeans = resolveMultipleBeans(descriptor, beanName, autowiredBeanNames, typeConverter);
             if (multipleBeans != null) {
                 return multipleBeans;
@@ -303,7 +303,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
             Object instanceCandidate;
 
             if (matchingBeans.size() > 1) {
-                // 存在多个类型相同的依赖，确定使用哪个依赖
+                // 存在多个类型相同的依赖, 确定使用哪个依赖
                 autowiredBeanName = determineAutowireCandidate(matchingBeans, descriptor);
                 if (autowiredBeanName == null) {
                     if (isRequired(descriptor) || !indicatesMultipleBeans(type)) {

@@ -1,8 +1,8 @@
 # SpEL 语言支持
 
-Spring 表达式语言(Spring Expression Language，SpEL)，能在运行时构建复杂表达式、存取对象图属性、对象方法调用等。SpEL 是单独模块，只依赖于 core 模块，不依赖于其他模块，可以单独使用。
+Spring 表达式语言(Spring Expression Language, SpEL), 能在运行时构建复杂表达式、存取对象图属性、对象方法调用等。SpEL 是单独模块, 只依赖于 core 模块, 不依赖于其他模块, 可以单独使用。
 
-SpEL 使用`#{}`作为定界符，所有在大括号中的字符都将被认为是 SpEL。
+SpEL 使用`#{}`作为定界符, 所有在大括号中的字符都将被认为是 SpEL。
 
 ## 注册 SpEL 的解析器
 
@@ -20,7 +20,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 ## SpEL 解析器的调用时机
 
-在填充 bean 属性的时候，会调用 SpEL 解析器
+在填充 bean 属性的时候, 会调用 SpEL 解析器
 
 ```java
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory
@@ -36,7 +36,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         if (resolvedAutowireMode == AUTOWIRE_BY_NAME || resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
             MutablePropertyValues newPvs = new MutablePropertyValues(pvs);
             // ...
-            // byType，找出和字段类型相同的bean，存入newPvs中
+            // byType, 找出和字段类型相同的bean, 存入newPvs中
             if (resolvedAutowireMode == AUTOWIRE_BY_TYPE) {
                 autowireByType(beanName, mbd, bw, newPvs);
             }

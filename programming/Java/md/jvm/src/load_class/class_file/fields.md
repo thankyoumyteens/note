@@ -1,8 +1,8 @@
 # 字段
 
-接口索引集合之后，是字段个数(fields_count)和字段集合(fields)。字段集合由字段表(field_info)组成。
+接口索引集合之后, 是字段个数(fields_count)和字段集合(fields)。字段集合由字段表(field_info)组成。
 
-字段表(field_info)用于描述接口或者类中声明的字段。Java 语言中的字段(Field)包括类变量和实例变量，但不包括在方法内部声明的局部变量。
+字段表(field_info)用于描述接口或者类中声明的字段。Java 语言中的字段(Field)包括类变量和实例变量, 但不包括在方法内部声明的局部变量。
 
 ## 字段表结构
 
@@ -14,9 +14,9 @@
 | u2             | attributes_count | 1                |
 | attribute_info | attributes       | attributes_count |
 
-name_index 和 descriptor_index 都是对常量池项的引用，分别代表着字段名以及字段的描述符。
+name_index 和 descriptor_index 都是对常量池项的引用, 分别代表着字段名以及字段的描述符。
 
-字段集合中不会列出从父类或者父接口中继承而来的字段，但有可能会有编译器自动添加的字段。
+字段集合中不会列出从父类或者父接口中继承而来的字段, 但有可能会有编译器自动添加的字段。
 
 ## 字段访问标志(access_flags)
 
@@ -49,9 +49,9 @@ name_index 和 descriptor_index 都是对常量池项的引用，分别代表着
 | S        | 基本类型 short                   |
 | Z        | 基本类型 boolean                 |
 | V        | 特殊类型 void                    |
-| L        | 对象类型，比如 Ljava/lang/Object |
+| L        | 对象类型, 比如 Ljava/lang/Object |
 
-对于数组类型，每一维度将使用一个前置的`[`字符来描述，如一个 String[][]类型的二维数组将被记录成`[[Ljava/lang/String`，一个整型数组 int[]将被记录成`[I`。
+对于数组类型, 每一维度将使用一个前置的`[`字符来描述, 如一个 String[][]类型的二维数组将被记录成`[[Ljava/lang/String`, 一个整型数组 int[]将被记录成`[I`。
 
 ---
 
@@ -69,10 +69,10 @@ public class ClassFileDemo {
 
 ![](../../img/class_file5.png)
 
-字段个数(fields_count)为`0x0001`，即只有一个字段。紧接着是字段集合。
+字段个数(fields_count)为`0x0001`, 即只有一个字段。紧接着是字段集合。
 
-access_flags 为`0x0000`，表示字段没有修饰符。name_index 为`0x0005`，指向常量池中索引为 5 的值`num`。descriptor_index 为`0x0006`，指向常量池中索引为 6 的值`I`。attributes_count 为`0x0000`，表示字段没有额外的属性。
+access_flags 为`0x0000`, 表示字段没有修饰符。name_index 为`0x0005`, 指向常量池中索引为 5 的值`num`。descriptor_index 为`0x0006`, 指向常量池中索引为 6 的值`I`。attributes_count 为`0x0000`, 表示字段没有额外的属性。
 
-使用 javap -verbose ClassFileDemo.class 命令解析 class 文件，可以对应上字段的内容：
+使用 javap -verbose ClassFileDemo.class 命令解析 class 文件, 可以对应上字段的内容: 
 
 ![](../../img/javap4.png)

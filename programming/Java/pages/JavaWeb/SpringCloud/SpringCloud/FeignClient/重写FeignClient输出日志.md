@@ -1,8 +1,8 @@
 # 重写FeignClient输出日志
 
-FeignClient默认输出的日志，是多条INFO日志，在并发时，很有可能会互相干扰，而且格式也无法调整。
+FeignClient默认输出的日志, 是多条INFO日志, 在并发时, 很有可能会互相干扰, 而且格式也无法调整。
 
-Feign默认情况下，是使用 feign.Client.Default 发起http请求，可以重写Client，并注入Bean来替换掉 feign.Client.Default，从而实现日志记录
+Feign默认情况下, 是使用 feign.Client.Default 发起http请求, 可以重写Client, 并注入Bean来替换掉 feign.Client.Default, 从而实现日志记录
 
 编写FeignConfiguration
 ```java
@@ -63,7 +63,7 @@ public class LogClient extends Client.Default {
             // 记录请求Header
             combineHeaders(sb, request.headers());
             combineRequestBody(sb, request.body(), request.requestTemplate().queries());
-            sb.append("\r\nResponse cost time(ms)： ").append(stopWatch.getLastTaskTimeMillis());
+            sb.append("\r\nResponse cost time(ms):  ").append(stopWatch.getLastTaskTimeMillis());
             if (response != null) {
                 sb.append("  status: ").append(response.status());
             }

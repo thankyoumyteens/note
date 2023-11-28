@@ -9,12 +9,12 @@
 ```ini
 ! Configuration File for keepalived
 global_defs {
-    router_id lb02 #标识信息，一个名字而已；
+    router_id lb02 #标识信息, 一个名字而已；
 }
 vrrp_instance VI_1 {
     state MASTER    #角色是master
     interface eth0  #vip 绑定端口
-    virtual_router_id 50    #让master 和backup在同一个虚拟路由里，id 号必须相同；
+    virtual_router_id 50    #让master 和backup在同一个虚拟路由里, id 号必须相同；
     priority 150            #优先级,谁的优先级高谁就是master ;
     advert_int 1            #心跳间隔时间
     authentication {
