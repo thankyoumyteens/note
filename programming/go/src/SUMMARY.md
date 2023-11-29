@@ -1,3 +1,5 @@
 - [运行go程序](./运行go程序.md)
 - [变量](./变量.md)
 - [常量](./常量.md)
+- [if和switch](./if和switch.md)
+- [for](./for.md)
