@@ -25,3 +25,6 @@
 - [Vue.js](./vue/vue.md)
     - [z-index无效](./vue/z-index无效.md)
     - [页面不更新](./vue/页面不更新.md)
+
+- [Hibernate Validator](./validator/validator.md)
+    - [@Valid嵌套对象不效验](./validator/Valid嵌套对象不效验.md)
