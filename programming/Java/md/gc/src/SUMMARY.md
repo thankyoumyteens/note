@@ -52,3 +52,4 @@
                 - [老年代回收集处理](./g1/mgc/老年代回收集处理.md)
         - [启动Mixed GC](./g1/mgc/启动MixedGC.md)
     - [Full GC](./g1/fgc/fgc.md)
+        - [标记存活对象](./g1/fgc/mark_sweep_phase1.md)
