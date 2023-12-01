@@ -5,3 +5,4 @@
 - [if和switch](./base/if和switch.md)
 - [for](./base/for.md)
 - [数组](./base/数组.md)
+- [切片](./base/切片.md)
