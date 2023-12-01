@@ -1,5 +1,6 @@
 - [Windows 11](./Windows/win11/win11.md)
     - [win11右键菜单改回win10](./Windows/win11/win11右键菜单改回win10.md)
+    - [安装cygwin](./Windows/win11/安装cygwin.md)
 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
     - [ubuntu软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
