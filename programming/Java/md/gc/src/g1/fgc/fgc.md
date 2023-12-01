@@ -44,7 +44,7 @@ void G1MarkSweep::invoke_at_safepoint(ReferenceProcessor* rp,
   BiasedLocking::preserve_marks();
   // 标记存活对象
   mark_sweep_phase1(marked_for_unloading, clear_all_softrefs);
-
+  // 计算对象的新地址
   mark_sweep_phase2();
 
   COMPILER2_PRESENT(DerivedPointerTable::set_active(false));
