@@ -48,9 +48,9 @@ void G1MarkSweep::invoke_at_safepoint(ReferenceProcessor* rp,
   mark_sweep_phase2();
 
   COMPILER2_PRESENT(DerivedPointerTable::set_active(false));
-
+  // 更新引用的地址
   mark_sweep_phase3();
-
+  // 移动对象
   mark_sweep_phase4();
 
   GenMarkSweep::restore_marks();

@@ -54,3 +54,5 @@
     - [Full GC](./g1/fgc/fgc.md)
         - [标记存活对象](./g1/fgc/mark_sweep_phase1.md)
         - [计算对象的新地址](./g1/fgc/mark_sweep_phase2.md)
+        - [更新引用的地址](./g1/fgc/mark_sweep_phase3.md)
+        - [移动对象](./g1/fgc/mark_sweep_phase4.md)
