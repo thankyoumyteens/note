@@ -4,36 +4,16 @@
 
 ```sh
 cd ~/src_pack/
-wget https://cdn.azul.com/zulu/bin/zulu21.30.15-ca-jdk21.0.1-linux_x64.tar.gz
-tar -zxvf zulu21.30.15-ca-jdk21.0.1-linux_x64.tar.gz
-```
-
-## 配置环境变量
-
-1. 打开配置文件
-
-```sh
-sudo vim /etc/profile
-```
-
-2. 在最后一行添加: 
-
-```conf
-export JAVA_HOME=/root/src_pack/zulu21.30.15-ca-jdk21.0.1-linux_x64
-export PATH=$JAVA_HOME/bin:$PATH
-```
-
-3. 使环境变量生效
-
-```sh
-source /etc/profile
+wget https://download.bell-sw.com/java/21.0.1+12/bellsoft-jdk21.0.1+12-linux-amd64.tar.gz
+mv bellsoft-jdk21.0.1+12-linux-amd64.tar.gz ~/jdk/
+tar -zxvf bellsoft-jdk21.0.1+12-linux-amd64.tar.gz
 ```
 
 ## 编译 OpenJDK21
 
 ```sh
 sudo apt-get install -y libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libfreetype6-dev libasound2-dev autoconf
-bash ./configure --with-target-bits=64 --with-debug-level=slowdebug
+bash ./configure --with-target-bits=64 --with-boot-jdk=/home/walter/jdk/jdk-21.0.1 --with-debug-level=slowdebug
 make
 make compile-commands
 ```
