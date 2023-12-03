@@ -6,6 +6,7 @@
   - [Oop-Klass 对象模型](./g1/Oop-Klass对象模型.md)
   - [引用](./g1/引用.md)
     - [Reference](./g1/Reference.md)
+    - [ReferenceHandler](./g1/ReferenceHandler.md)
   - [Java 对象内存布局](./g1/Java对象内存布局.md)
     - [JOL 工具](./g1/JOL工具.md)
     - [对象头](./g1/对象头.md)
