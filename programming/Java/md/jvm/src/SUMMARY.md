@@ -94,3 +94,6 @@
   - [协程](./concurrency/协程.md)
   - [线程安全](./concurrency/线程安全.md)
   - [锁优化](./concurrency/锁优化.md)
+
+- [JDK命令行工具](./tools/console/jdk_tools.md)
+  - [JPS](./tools/console/jps.md)
