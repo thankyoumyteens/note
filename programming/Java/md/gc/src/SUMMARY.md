@@ -2,10 +2,10 @@
 
 - [JDK8 的 G1](./g1/g1.md)
 
-  - [ubuntu14 编译 OpenJDK8](./g1/ubuntu编译OpenJDK.md)
-  - [windows7 编译 OpenJDK8](./g1/windows编译OpenJDK.md)
   - [串行并行和并发](./g1/串行并行和并发.md)
   - [Oop-Klass 对象模型](./g1/Oop-Klass对象模型.md)
+  - [引用](./g1/引用.md)
+    - [Reference](./g1/Reference.md)
   - [Java 对象内存布局](./g1/Java对象内存布局.md)
     - [JOL 工具](./g1/JOL工具.md)
     - [对象头](./g1/对象头.md)
@@ -53,9 +53,12 @@
         - [老年代回收集处理](./g1/mgc/老年代回收集处理.md)
     - [启动 Mixed GC](./g1/mgc/启动MixedGC.md)
   - [Full GC](./g1/fgc/fgc.md)
+
     - [标记存活对象](./g1/fgc/mark_sweep_phase1.md)
     - [计算对象的新地址](./g1/fgc/mark_sweep_phase2.md)
     - [更新引用的地址](./g1/fgc/mark_sweep_phase3.md)
     - [移动对象](./g1/fgc/mark_sweep_phase4.md)
 
+- [ubuntu14 编译 OpenJDK8](./g1/ubuntu编译OpenJDK.md)
+- [windows7 编译 OpenJDK8](./g1/windows编译OpenJDK.md)
 - [ubuntu22 调试 OpenJDK21](./g1/ubuntu22调试OpenJDK21.md)
