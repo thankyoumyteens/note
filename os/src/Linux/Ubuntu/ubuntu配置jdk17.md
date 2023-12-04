@@ -1,9 +1,10 @@
 # 下载JDK 17
 
 ```sh
-cd ~/src_pack
-wget https://github.com/dragonwell-project/dragonwell17/releases/download/dragonwell-standard-17.0.8.0.8%2B7_jdk-17.0.8-ga/Alibaba_Dragonwell_Standard_17.0.8.0.8.7_x64_linux.tar.gz
-tar -zxvf Alibaba_Dragonwell_Standard_17.0.8.0.8.7_x64_linux.tar.gz
+mkdir ~/jdk
+cd ~/jdk
+wget https://download.bell-sw.com/java/17.0.9+11/bellsoft-jdk17.0.9+11-linux-amd64.tar.gz
+tar -zxvf bellsoft-jdk17.0.9+11-linux-amd64.tar.gz
 ```
 
 # 配置环境变量
