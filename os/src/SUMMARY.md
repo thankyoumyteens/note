@@ -26,3 +26,4 @@
   - [Shell 命令](./Linux/bash/cmd.md)
   - [echo 命令](./Linux/bash/echo.md)
   - [快捷键](./Linux/bash/shortcut.md)
+  - [通配符](./Linux/bash/globbing.md)
