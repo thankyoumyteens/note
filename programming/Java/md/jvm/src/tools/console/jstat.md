@@ -1,49 +1,83 @@
-# jstat
+# JSTAT
 
-jstat(JVM Statistics Monitoring Tool)是用于监视虚拟机各种运行状态信息的命令行工具。它可以显示本地或者远程虚拟机进程中的类加载、内存、垃圾收集、即时编译等运行时数据, 在没有GUI图形界面、只提供了纯文本控制台环境的服务器上, 它将是运行期定位虚拟机性能问题的常用工具。
+jstat(JVM Statistics Monitoring Tool)是用于监视虚拟机各种运行状态信息的命令行工具。
 
-jstat命令格式: 
+jstat 命令格式:
 
-```
-jstat [ option vmid [interval[s|ms] [count]] ]
-```
-
-如果是本地虚拟机进程, 参数vmid与LVMID是一致的。如果是远程虚拟机进程, 那VMID的格式应当是: 
-
-```
-[protocol:][//]lvmid[@hostname[:port]/servername]
-```
-
-参数interval和count代表查询间隔和次数, 如果省略这2个参数, 说明只查询一次。假设需要每250毫秒查询一次进程2764垃圾收集状况, 一共查询20次, 那命令应当是: 
-
-```
+```sh
+jstat [-命令选项] [vmid] [间隔时间/毫秒] [查询次数]
+# 查询vmid为2764的进程的垃圾回收情况, 每250毫秒查询一次, 一共查询20次
 jstat -gc 2764 250 20
 ```
 
-选项option代表用户希望查询的虚拟机信息, 主要分为三类: 类加载、垃圾收集、运行期编译状
-况。
+option 常用选项:
 
-option常用选项: 
+- -class: 监视类加载、卸载数量、总空间以及类装载所耗费的时间
+- -compiler: 输出即时编译器编译过的方法、耗时等信息
+- -printcompilation: 输出已经被即时编译的方法
+- -gc: 垃圾回收情况
+- -gccapacity: 监视内容与 -gc 基本相同，但输出主要关注 Java 堆各个区域使用到的最大、最小空间
+- -gcutil: 监视内容与 -gc 基本相同，但输出主要关注已使用空间占总空间的百分比
+- -gccause: 与 -gcutil 功能一样，但是会额外输出导致上一次垃圾收集产生的原因
+- -gcnew: 监视新生代的垃圾回收状况
+- -gcnewcapacity: 监视内容与 -gcnew 基本相同，输出主要关注使用到的最大、最小空间
+- -gcold: 监视老年代的垃圾回收状况
+- -gcoldcapacity: 监视内容与 -gcold 基本相同，输出主要关注使用到的最大、最小空间
+- -gcpermcapacity: 输出永久代使用到的最大、最小空间
 
-- -class: 类加载、卸载、总空间、加载数量
-- -gc: 垃圾收集情况
-- -gccapacity: 堆空间、新生代、老年代、永久代、jvm各代容量
-- -gcutil: 垃圾收集、已使用、未使用、已使用百分比
-- -gccause: 垃圾收集的个数、原因
-- -gcnew: 新生代垃圾收集状况
-- -gcnewcapacity: 新生代、老年代容量
-- -gcold: 老年代垃圾收集状况
-- -gcoldcapacity: 老年代容量
-- -gcpermcapacity: 永久代容量
-- -compiler: 编译状态
-- -printcompilation: 显示即时编译的状况
+## 类加载、卸载、总空间、加载数量
 
-## jstat执行样例
-
-```
-jstat -gcutil 2764
-S0     S1     E      O      P       YGC    YGCT    FGC    FGCT    GCT
-0.00   0.00   6.20   41.42  47.20   16     0.105   3      0.472   0.577
+```sh
+$ jstat -class 15948
+Loaded  Bytes  Unloaded  Bytes     Time
+  7459 14228.4        0     0.0       5.58
 ```
 
-查询结果表明: 这台服务器的新生代Eden区(E, 表示Eden)使用了6.2%的空间, 2个Survivor区(S0、S1, 表示Survivor0、Survivor1)里面都是空的, 老年代(O, 表示Old)和永久代(P, 表示Permanent)则分别使用了41.42%和47.20%的空间。程序运行以来共发生Minor GC(YGC, 表示Young GC)16次, 总耗时0.105秒。发生Full GC(FGC, 表示Full GC)3次, 总耗时(FGCT, 表示Full GC Time)为0.472秒。所有GC总耗时(GCT, 表示GC Time)为0.577秒。
+- Loaded: 已加载的 class 的数量
+- Bytes: 所占用空间大小
+- Unloaded: 未加载的 class 数量
+- Bytes: 未加载的 class 占用的空间
+- Time: 类加载耗费的时间
+
+## 编译状态
+
+```sh
+$ jstat -compiler 15948
+Compiled Failed Invalid   Time   FailedType FailedMethod
+    4147      0       0    11.41          0
+```
+
+- Compiled: JIT 编译器已编译的方法的数量
+- Failed: 编译失败的数量
+- Invalid: 不可用的数量
+- Time: 编译耗费的时间
+- FailedType: 失败类型
+- FailedMethod: 编译失败的方法
+
+## 垃圾回收情况
+
+```sh
+$ jstat -gc 15948
+    S0C         S1C         S0U         S1U          EC           EU           OC           OU          MC         MU       CCSC      CCSU     YGC     YGCT     FGC    FGCT     CGC    CGCT       GCT
+     1024.0      1024.0       820.7         0.0       8256.0       5192.0      20480.0      16530.4    34176.0    33872.2    4288.0    4193.6     48     0.175     1     0.060     -         -     0.235
+```
+
+- S0C：Survivor0 的大小
+- S1C：Survivor1 的大小
+- S0U：Survivor0 已使用的大小
+- S1U：Survivor1 已使用的大小
+- EC：Eden 区的大小
+- EU：Eden 区已使用的大小
+- OC：老年代的大小
+- OU：老年代已使用的大小
+- MC：方法区的大小
+- MU：方法区已使用的大小
+- CCSC:压缩类空间(存放类的元数据)大小
+- CCSU:压缩类空间已使用的大小
+- YGC：新生代代垃圾回收次数
+- YGCT：Young GC 消耗的时间
+- FGC：Full GC 次数
+- FGCT：Full GC 消耗的时间
+- CGC：并发 GC 次数
+- CGCT：并发 GC 消耗的时间
+- GCT：垃圾回收消耗的总时间
