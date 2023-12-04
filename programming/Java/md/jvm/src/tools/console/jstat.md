@@ -1,11 +1,11 @@
-# JSTAT
+# jstat
 
 jstat(JVM Statistics Monitoring Tool)是用于监视虚拟机各种运行状态信息的命令行工具。
 
 jstat 命令格式:
 
 ```sh
-jstat [-命令选项] [vmid] [间隔时间/毫秒] [查询次数]
+jstat [option] [vmid] [间隔时间/毫秒] [查询次数]
 # 查询vmid为2764的进程的垃圾回收情况, 每250毫秒查询一次, 一共查询20次
 jstat -gc 2764 250 20
 ```
@@ -74,10 +74,32 @@ $ jstat -gc 15948
 - MU：方法区已使用的大小
 - CCSC:压缩类空间(存放类的元数据)大小
 - CCSU:压缩类空间已使用的大小
-- YGC：新生代代垃圾回收次数
+- YGC：Young GC 发生的次数
 - YGCT：Young GC 消耗的时间
-- FGC：Full GC 次数
+- FGC：Full GC 发生的次数
 - FGCT：Full GC 消耗的时间
-- CGC：并发 GC 次数
+- CGC：并发 GC 发生的次数
+- CGCT：并发 GC 消耗的时间
+- GCT：垃圾回收消耗的总时间
+
+## gcutil
+
+```sh
+jstat -gcutil 31836
+  S0     S1     E      O      M     CCS    YGC     YGCT     FGC    FGCT     CGC    CGCT       GCT
+  0.00  83.33  58.33  47.49  98.84  95.96     18     0.164     0     0.000     2     0.005     0.169
+```
+
+- S0：Survivor0 已使用的空间占总空间的比例
+- S1：Survivor1 已使用的空间占总空间的比例
+- E：Eden 已使用的空间占总空间的比例
+- O：老年代已使用的空间占总空间的比例
+- M：方法区已使用的空间占总空间的比例
+- CCS：压缩类空间已使用的空间占总空间的比例
+- YGC：Young GC 发生的次数
+- YGCT：Young GC 消耗的时间
+- FGC：Full GC 发生的次数
+- FGCT：Full GC 消耗的时间
+- CGC：并发 GC 发生的次数
 - CGCT：并发 GC 消耗的时间
 - GCT：垃圾回收消耗的总时间

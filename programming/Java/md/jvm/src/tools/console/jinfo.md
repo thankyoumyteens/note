@@ -1,19 +1,38 @@
 # jinfo
 
-jinfo(Configuration Info for Java)的作用是实时查看和调整虚拟机各项参数。使用jps命令的-v参数可以查看虚拟机启动时显式指定的参数列表, 但如果想知道未被显式指定的参数的系统默认值, 就只能使用jinfo的-flag选项进行查询了(JDK 6或以上版本可以使用javaXX:+PrintFlagsFinal查看参数默认值)。jinfo还可以使用-sysprops选项把虚拟机进程的System.getProperties()的内容打印出来。可以使用-flag\[+|-\]name或者-flag name=value在运行期修改一部分运行期可写的
-虚拟机参数值。
+jinfo(Configuration Info for Java)的作用是实时查看和调整虚拟机各项参数。
 
-jinfo命令格式: 
+jinfo 命令格式:
 
+```sh
+jinfo [option] pid
 ```
-jinfo [ option ] pid
+
+## 查看 PrintGC 是否开启
+
+```sh
+$ jinfo -flag PrintGC 31836
+-XX:-PrintGC
 ```
 
-## jinfo执行样例
+## 显示全部已配置的参数
 
-查询CMSInitiatingOccupancyFraction参数值
-
+```sh
+jinfo -flags 31836
+VM Flags:
+-XX:CICompilerCount=2 -XX:ConcGCThreads=1 -XX:G1ConcRefinementThreads=1 -XX:G1EagerReclaimRemSetThreshold=8 -XX:G1HeapRegionSize=1048576 -XX:GCDrainStackTargetSize=64 -XX:InitialHeapSize=31457280 -XX:MarkStackSize=4194304 -XX:MaxHeapSize=490733568 -XX:MaxNewSize=293601280 -XX:MinHeapDeltaBytes=1048576 -XX:MinHeapSize=8388608 -XX:NonNMethodCodeHeapSize=5826188 -XX:NonProfiledCodeHeapSize=122916026 -XX:ProfiledCodeHeapSize=122916026 -XX:ReservedCodeCacheSize=251658240 -XX:+SegmentedCodeCache -XX:SoftMaxHeapSize=490733568 -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseFastUnorderedTimeStamps -XX:+UseG1GC
 ```
-jinfo -flag CMSInitiatingOccupancyFraction 1444
--XX:CMSInitiatingOccupancyFraction=85
+
+## 显示当前 JVM 的全部系统属性
+
+```sh
+jinfo -sysprops 31836
+Java System Properties:
+#Mon Dec 04 21:38:33 CST 2023
+java.specification.version=17
+sun.jnu.encoding=UTF-8
+java.class.path=demo.jar
+java.vm.vendor=BellSoft
+sun.arch.data.model=64
+catalina.useNaming=false
 ```
