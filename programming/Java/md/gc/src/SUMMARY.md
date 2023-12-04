@@ -7,6 +7,7 @@
   - [引用](./g1/引用.md)
     - [Reference](./g1/Reference.md)
     - [ReferenceHandler](./g1/ReferenceHandler.md)
+    - [FinalReference](./g1/FinalReference.md)
   - [Java 对象内存布局](./g1/Java对象内存布局.md)
     - [JOL 工具](./g1/JOL工具.md)
     - [对象头](./g1/对象头.md)
