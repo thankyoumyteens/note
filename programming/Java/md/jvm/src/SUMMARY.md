@@ -99,7 +99,13 @@
   - [锁优化](./concurrency/锁优化.md)
 
 - [JDK 命令行工具](./tools/console/jdk_tools.md)
+
   - [jps](./tools/console/jps.md)
   - [jstat](./tools/console/jstat.md)
   - [jinfo](./tools/console/jinfo.md)
   - [jmap](./tools/console/jmap.md)
+  - [jstack](./tools/console/jstack.md)
+
+- [JDK 可视化工具](./tools/gui/jdk_tools.md)
+
+  - [jhsdb](./tools/gui/jhsdb.md)
