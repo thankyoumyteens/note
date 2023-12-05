@@ -34,6 +34,8 @@
       - [GC_locker](./g1/ygc/GC_locker.md)
     - [并行任务处理](./g1/ygc/并行任务处理.md)
       - [根处理](./g1/ygc/根处理.md)
+        - [处理普通对象](./g1/ygc/处理普通对象.md)
+        - [处理引用对象](./g1/ygc/处理引用对象.md)
       - [RSet 处理](./g1/ygc/RSet处理.md)
       - [复制](./g1/ygc/复制.md)
   - [Mixed GC](./g1/mgc/mgc.md)
