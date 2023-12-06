@@ -7,21 +7,25 @@ public abstract class Reference<T> {
     // 引用类型包裹的对象
     private T referent;
 
-    // 引用队列，由queue和next一起构成了一个单向链表
+    // 引用队列(单向链表)
     // queue中使用head字段存储链表的头节点
-    // next指向当前节点的下一个节点
     volatile ReferenceQueue<? super T> queue;
 
-    // 指向queue中当前节点的下一个节点
+    // 当前reference处于不同个状态时, 取值不同:
+    // Active: null
+    // Pending: this
+    // Enqueued: 指向ReferenceQueue的下一个节点
+    // Inactive: this
     volatile Reference next;
 
-    // Pending队列, 全局唯一
-    // 由pending和discovered一起构成了一个单向链表
+    // Pending队列(单向链表), 全局唯一
     // pending为链表的头节点
-    // discovered指向当前节点的下一个节点
     private static Reference<Object> pending = null;
 
-    // 指向Pending队列中当前节点的下一个节点
+    // 当前reference处于不同个状态时, 取值不同:
+    // Active: 指向discovered list中的下一个节点, discovered list由JVM内部使用
+    // Pending: 指向Pending队列的下一个节点
+    // 其他状态: null
     transient private Reference<T> discovered;
 
     // lock是Pending队列的全局锁
