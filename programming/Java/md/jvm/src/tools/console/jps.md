@@ -2,6 +2,8 @@
 
 JVM Process Status Tool(JPS)可以列出正在运行的 JVM 进程, 并显示虚拟机执行主类(main 函数所在的类)名称以及这些进程的本地虚拟机唯一 ID(LVMID, Local Virtual Machine Identifier)。其他的 JDK 工具大多需要输入这个 LVMID 来定位 JVM 进程。
 
+cygwin中使用jps命令无法看到运行的java程序。
+
 jps 命令格式:
 
 ```
