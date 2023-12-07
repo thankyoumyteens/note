@@ -66,3 +66,6 @@
 - [ubuntu14 编译 OpenJDK8](./g1/ubuntu编译OpenJDK.md)
 - [windows7 编译 OpenJDK8](./g1/windows编译OpenJDK.md)
 - [ubuntu22 调试 OpenJDK21](./g1/ubuntu22调试OpenJDK21.md)
+
+- [JDK21 的 G1](./jdk21/g1/g1.md)
+  - [new字节码指令](./jdk21/g1/allocate_object.md)

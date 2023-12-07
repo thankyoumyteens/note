@@ -77,18 +77,28 @@ javac Demo.java
 ```java
 // -Xmx128M -XX:+UseG1GC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintTLAB -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest
 
-// -Xmx256M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCTimeStamps
+// -Xmx256M -XX:+UseG1GC -Xlog:gc*=debug Test
 
-// -Xmx256M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCTimeStamps
+import java.util.LinkedList;
 
 public class Test {
-  private static final LinkedList<String> strings = new LinkedList<>();
+
+    public static class DemoObj {
+        public String v;
+        public DemoObj(String v) {
+            this.v = v;
+        }
+    }
+
+  private static final LinkedList<DemoObj> strings = new LinkedList<>();
   public static void main(String[] args) throws Exception {
     int iteration = 0;
     while (true) {
       for (int i = 0; i < 100; i++) {
         for (int j = 0; j < 10; j++) {
-          strings.add(new String("String " + j));
+           DemoObj o =  new DemoObj("String " + j);
+        //    System.out.println(strings.size() + " -- " + o.toString());
+          strings.add(o);
         }
       }
       Thread.sleep(100);
