@@ -1,4 +1,4 @@
-# new字节码指令
+# new 字节码指令
 
 hotspot 有两个解释器, 基于 C++ 的解释器和基于汇编的模板解释器, hotspot 默认使用比较快的模板解释器。
 
@@ -132,7 +132,7 @@ void TemplateTable::_new() {
 }
 ```
 
-## C++解释器
+## C++ 解释器
 
 ```cpp
 // jdk21-jdk-21-ga/src/hotspot/share/interpreter/zero/bytecodeInterpreter.cpp
@@ -146,7 +146,7 @@ CASE(_new): {
   //   - klass需要支持快速分配内存空间
   //   - 允许在TLAB上分配内存空间
   ConstantPool* constants = istate->method()->constants();
-  // 判断是否允许在TLAB上分配内存空间, 
+  // 判断是否允许在TLAB上分配内存空间,
   // 并且常量池中index索引上的是一个可以解析的klass对象
   if (UseTLAB && !constants->tag_at(index).is_unresolved_klass()) {
     Klass* entry = constants->resolved_klass_at(index);
@@ -178,7 +178,7 @@ CASE(_new): {
 
         oop obj = cast_to_oop(result);
 
-        // 使用StoreStore屏障禁止重排序, 
+        // 使用StoreStore屏障禁止重排序,
         // 防止把还没初始化完成的对象入栈
         OrderAccess::storestore();
         // 把这个对象放到操作数栈的栈顶
@@ -191,10 +191,10 @@ CASE(_new): {
   // 从TLAB中分配内存空间失败, 开始慢速分配
   CALL_VM(InterpreterRuntime::_new(THREAD, METHOD->constants(), index),
           handle_exception);
-  // 使用StoreStore屏障禁止重排序, 
+  // 使用StoreStore屏障禁止重排序,
   // 防止把还没初始化完成的对象入栈
   OrderAccess::storestore();
-  // InterpreterRuntime::_new中分配的对象会保存在vm_result中, 
+  // InterpreterRuntime::_new中分配的对象会保存在vm_result中,
   // 将对象取出, 并放到操作数栈的顶部
   SET_STACK_OBJECT(THREAD->vm_result(), 0);
   // 清空vm_result
@@ -217,7 +217,6 @@ class InstanceKlass: public Klass {
   }
 }
 ```
-
 
 ```cpp
 // jdk21-jdk-21-ga/src/hotspot/share/interpreter/interpreterRuntime.cpp
