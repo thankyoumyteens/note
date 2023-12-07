@@ -73,3 +73,26 @@ javac Demo.java
    1. Program Arguments 输入 Demo
    2. Working directory 输入 class 文件所在的目录
 2. 启动 debug
+
+```java
+// -Xmx128M -XX:+UseG1GC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintTLAB -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest
+
+// -Xmx256M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCTimeStamps
+
+// -Xmx256M -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCTimeStamps
+
+public class Test {
+  private static final LinkedList<String> strings = new LinkedList<>();
+  public static void main(String[] args) throws Exception {
+    int iteration = 0;
+    while (true) {
+      for (int i = 0; i < 100; i++) {
+        for (int j = 0; j < 10; j++) {
+          strings.add(new String("String " + j));
+        }
+      }
+      Thread.sleep(100);
+    }
+  }
+}
+```
