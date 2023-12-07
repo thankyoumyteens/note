@@ -90,7 +90,7 @@ final class Finalizer extends FinalReference<Object> {
 
 ## 执行 finalize() 方法
 
-当对象 a 要被回收时, JVM 会把 Finalizer 对象 f 加入 Pending 队列, 接下来 ReferenceHandler 线程会把 f 从 Pending 队列转移到 ReferenceQueue 队列。Finalizer 类在加载的时候会启动一个 FinalizerThread 线程来处理 ReferenceQueue 中的 Finalizer 对象。
+当对象 a 要被回收时, JVM 会把 Finalizer 对象 f 加入 pending_list, 接下来 ReferenceHandler 线程会把 f 从 pending_list 转移到 ReferenceQueue 队列。Finalizer 类在加载的时候会启动一个 FinalizerThread 线程来处理 ReferenceQueue 中的 Finalizer 对象。
 
 ```java
 final class Finalizer extends FinalReference<Object> {

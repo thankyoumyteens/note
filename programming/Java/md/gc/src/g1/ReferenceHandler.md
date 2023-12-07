@@ -1,6 +1,6 @@
 # ReferenceHandler
 
-ReferenceHandler 线程的作用是: 在 GC 结束后，当 pending 队列不为空的时候，循环将 pending 队列里面 Reference 取出，放入到它自己的 ReferenceQueue 里面。
+ReferenceHandler 线程的作用是: 在 GC 结束后，当 pending_list 不为空的时候，循环将 pending_list 里面 Reference 取出，放入到它自己的 ReferenceQueue 里面。
 
 ```java
 public abstract class Reference<T> {
