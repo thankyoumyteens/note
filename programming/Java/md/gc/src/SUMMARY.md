@@ -69,3 +69,4 @@
 
 - [JDK21 的 G1](./jdk21/g1/g1.md)
   - [new 字节码指令](./jdk21/g1/allocate_object/new.md)
+    - [慢速分配对象](./jdk21/g1/allocate_object/allocate_slow.md)
