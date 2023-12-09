@@ -29,3 +29,5 @@ math/calculus/*.fls
 .favorites.json
 # mdbook
 book/
+# drawio
+.drawio.bkp
