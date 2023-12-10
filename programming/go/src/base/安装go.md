@@ -2,19 +2,20 @@
 
 下载安装程序:
 
-[go](https://go.dev/dl/go1.21.4.windows-amd64.msi)
+[go](https://go.dev/dl/)
 
 ## vscode 环境配置
 
 1. 扩展商店搜索安装: golang.go
 2. 安装 go 插件
 
-```bat
-@REM 使用 go env 找到GOPATH, 进入GOPATH目录
-@REM 默认GOPATH目录: 用户目录(%USERPROFILE%)
+```sh
+# 使用 go env 找到GOPATH, 进入GOPATH目录
+go_path="$(echo $(go env | grep GOPATH))"
+echo "${go_path:11}"
+cd "$(echo "${go_path:11}")/src"
 
-@REM 下载源码
-cd %USERPROFILE%\go\src
+# 下载源码
 mkdir github.com
 cd github.com
 mkdir acroca cweill derekparker go-delve josharian karrick mdempsky pkg ramya-rao-a rogpeppe sqs uudashr
@@ -54,16 +55,16 @@ cd ..
 cd uudashr
 git clone https://github.com/uudashr/gopkgs.git
 cd ..
-mkdir golang.org\x
-cd golang.org\x
+mkdir -p golang.org/x
+cd golang.org/x
 git clone https://github.com/golang/tools.git
 git clone https://github.com/golang/lint.git
 
-@REM 设置国内代理
+# 设置国内代理
 go env -w GOPROXY=https://goproxy.cn,direct
 
-@REM 编译源码
-cd %USERPROFILE%\go\src
+# 编译源码
+cd "$(echo "${go_path:11}")/src"
 go install github.com/mdempsky/gocode@latest
 go install github.com/uudashr/gopkgs/cmd/gopkgs@latest
 go install github.com/ramya-rao-a/go-outline@latest
