@@ -69,4 +69,9 @@
 
 - [JDK21 的 G1](./jdk21/g1/g1.md)
   - [new 字节码指令](./jdk21/g1/allocate_object/new.md)
+    - [从TLAB中分配对象](./jdk21/g1/allocate_object/tlab_allocate.md)
     - [慢速分配对象](./jdk21/g1/allocate_object/allocate_slow.md)
+      - [类的初始化](./jdk21/g1/allocate_object/initialize_class.md)
+      - [类的连接](./jdk21/g1/allocate_object/link_class.md)
+      - [注册finalizer](./jdk21/g1/allocate_object/register_finalizer.md)
+      - [初始化对象](./jdk21/g1/allocate_object/initialize_object.md)
