@@ -4,6 +4,7 @@
 - [运行 go 程序](./base/运行go程序.md)
 - [变量](./base/变量.md)
 - [常量](./base/常量.md)
+- [字符串](./base/字符串.md)
 - [if 和 switch](./base/if和switch.md)
 - [for](./base/for.md)
 - [数组](./base/数组.md)
