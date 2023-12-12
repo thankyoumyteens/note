@@ -1,4 +1,4 @@
-# 在新的TLAB中分配
+# 在新的 TLAB 中分配
 
 ```cpp
 // jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp
@@ -25,16 +25,16 @@ HeapWord* MemAllocator::mem_allocate_inside_tlab_slow(Allocation& allocation) co
 
   // TLAB剩余的空间大于可以浪费掉的最大空间
   // 假设要分配的对象a的大小为10k, refill_waste_limit是5k:
-  // 1. 如果当前TLAB剩余3k, 那么这个TLAB就会被舍弃, 
+  // 1. 如果当前TLAB剩余3k, 那么这个TLAB就会被舍弃,
   //    JVM会创建一个新的TLAB来为对象a分配空间
-  // 2. 如果当前TLAB剩余6k, 那么这个TLAB就会被保留, 
+  // 2. 如果当前TLAB剩余6k, 那么这个TLAB就会被保留,
   //    等待分配其它较小的对象, JVM会直接在堆中为对象a分配空间
   if (tlab.free() > tlab.refill_waste_limit()) {
-    // 每浪费一次TLAB的剩余空间, 
-    // 就增大一次refill_waste_limit, 
+    // 每浪费一次TLAB的剩余空间,
+    // 就增大一次refill_waste_limit,
     // 避免空间浪费
     tlab.record_slow_allocation(_word_size);
-    // 返回null, 
+    // 返回null,
     // 以调用mem_allocate_outside_tlab()
     // 直接在堆中分配这个对象
     return nullptr;
@@ -54,7 +54,7 @@ HeapWord* MemAllocator::mem_allocate_inside_tlab_slow(Allocation& allocation) co
   // 计算新的TLAB所需的最小空间
   size_t min_tlab_size = ThreadLocalAllocBuffer::compute_min_size(_word_size);
   // 创建新的TLAB, new_tlab_size不能小于min_tlab_size, 否则创建失败
-  // 由于是新的TLAB, 对象从头开始分配, 
+  // 由于是新的TLAB, 对象从头开始分配,
   // 所以mem既是TLAB的开始地址, 又是待分配的对象的开始地址
   mem = Universe::heap()->allocate_new_tlab(min_tlab_size, new_tlab_size, &allocation._allocated_tlab_size);
   // 新的TLAB创建失败
@@ -87,5 +87,21 @@ HeapWord* MemAllocator::mem_allocate_inside_tlab_slow(Allocation& allocation) co
   tlab.fill(mem, mem + _word_size, allocation._allocated_tlab_size);
   // 返回对象的开始地址
   return mem;
+}
+
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp
+
+void ThreadLocalAllocBuffer::fill(HeapWord* start,
+                                  HeapWord* top,
+                                  size_t    new_size) {
+  _number_of_refills++;
+  _allocated_size += new_size;
+  print_stats("fill");
+  assert(top <= start + new_size - alignment_reserve(), "size too small");
+  // 初始化TLAB
+  initialize(start, top, start + new_size - alignment_reserve());
+
+  // 为新的TLAB初始化refill_waste_limit值
+  set_refill_waste_limit(initial_refill_waste_limit());
 }
 ```

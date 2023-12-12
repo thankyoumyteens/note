@@ -1,4 +1,4 @@
-# 填充dummy对象
+# 填充 dummy 对象
 
 ```cpp
 // jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp

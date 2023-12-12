@@ -1,4 +1,4 @@
-# 创建新的TLAB
+# 创建新的 TLAB
 
 ```cpp
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp

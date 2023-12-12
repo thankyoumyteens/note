@@ -1,4 +1,4 @@
-# 计算新的TLAB大小
+# 计算新的 TLAB 大小
 
 ```cpp
 // jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp
