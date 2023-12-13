@@ -27,9 +27,11 @@ G1CollectedHeap::mem_allocate(size_t word_size,
   assert_heap_not_locked_and_not_at_safepoint();
 
   if (is_humongous(word_size)) {
+    // 分配大对象
     return attempt_allocation_humongous(word_size);
   }
   size_t dummy = 0;
+  // 分配普通对象
   return attempt_allocation(word_size, word_size, &dummy);
 }
 
@@ -39,17 +41,20 @@ inline HeapWord* G1CollectedHeap::attempt_allocation(size_t min_word_size,
   assert_heap_not_locked_and_not_at_safepoint();
   assert(!is_humongous(desired_word_size), "attempt_allocation() should not "
          "be called for humongous allocation requests");
-
+  // 使用CAS分配对象的内存空间
   HeapWord* result = _allocator->attempt_allocation(min_word_size, desired_word_size, actual_word_size);
 
   if (result == nullptr) {
     *actual_word_size = desired_word_size;
+    // CAS分配失败, 加锁分配
     result = attempt_allocation_slow(desired_word_size);
   }
 
   assert_heap_not_locked();
   if (result != nullptr) {
+    // 对象分配成功
     assert(*actual_word_size != 0, "Actual size must have been set here");
+    // 在全局卡表中标记这个对象属于新生代region
     dirty_young_block(result, *actual_word_size);
   } else {
     *actual_word_size = 0;

@@ -1,9 +1,12 @@
 # Summary
 
+- [基本概念](./jdk21/g1/base/base.md)
+  - [Oop-Klass 对象模型](./jdk21/g1/base/Oop-Klass对象模型.md)
+  - [mutator](./jdk21/g1/base/mutator.md)
+  - [串行并行和并发](./jdk21/g1/base/串行并行和并发.md)
+
 - [JDK8 的 G1](./g1/g1.md)
 
-  - [串行并行和并发](./g1/串行并行和并发.md)
-  - [Oop-Klass 对象模型](./g1/Oop-Klass对象模型.md)
   - [引用](./g1/引用.md)
     - [Reference](./g1/Reference.md)
     - [ReferenceHandler](./g1/ReferenceHandler.md)
@@ -73,6 +76,9 @@
     - [慢速分配对象](./jdk21/g1/allocate_object/allocate_slow.md)
       - [在新的TLAB中分配](./jdk21/g1/allocate_object/mem_allocate_inside_tlab_slow.md)
       - [直接在堆中分配](./jdk21/g1/allocate_object/mem_allocate_outside_tlab.md)
+        - [CAS分配](./jdk21/g1/allocate_object/attempt_allocation.md)
+        - [加锁分配](./jdk21/g1/allocate_object/attempt_allocation_slow.md)
+        - [在全局卡表中标记](./jdk21/g1/allocate_object/dirty_young_block.md)
       - [初始化对象](./jdk21/g1/allocate_object/initialize_object.md)
     - [分配大对象](./jdk21/g1/allocate_object/allocate_humongous.md)
   - [TLAB](./jdk21/g1/tlab/tlab.md)
