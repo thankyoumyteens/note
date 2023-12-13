@@ -1,4 +1,4 @@
-# CAS分配
+# CAS 分配
 
 ```cpp
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Allocator.inline.hpp
