@@ -1,12 +1,10 @@
 # Summary
 
 - [概览](./overview/overview.md)
-
   - [Java 虚拟机](./overview/jvm.md)
   - [Win11 编译 OpenJDK21](./overview/compile_openjdk21.md)
 
 - [类的加载](./load_class/load_class.md)
-
   - [类文件结构](./load_class/class_file/class_file.md)
     - [魔数和版本号](./load_class/class_file/magic_and_version.md)
     - [常量池](./load_class/class_file/constant_pool.md)
@@ -30,7 +28,6 @@
     - [类加载器的改动](./load_class/module/new_class_loader.md)
 
 - [运行时数据区](./memory/jvm_memory.md)
-
   - [程序计数器](./memory/pc.md)
   - [Java 虚拟机栈](./memory/stack/stack.md)
     - [栈帧](./memory/stack/stack_frame.md)
@@ -55,28 +52,26 @@
     - [对象的访问定位](./memory/object/locate_objects.md)
 
 - [垃圾回收](./garbage_collection/gc.md)
-  - [判断对象是否存活](./garbage_collection/判断对象是否存活.md)
-    - [引用计数算法](./garbage_collection/引用计数算法.md)
-    - [可达性分析算法](./garbage_collection/可达性分析算法.md)
-  - [垃圾收集算法](./garbage_collection/垃圾收集算法.md)
-    - [分代收集理论](./garbage_collection/分代收集理论.md)
-    - [标记清除算法](./garbage_collection/标记清除算法.md)
-    - [标记复制算法](./garbage_collection/标记复制算法.md)
-    - [标记整理算法](./garbage_collection/标记整理算法.md)
-    - [根节点枚举](./garbage_collection/garbage_collector/根节点枚举.md)
-    - [安全点和安全区域](./garbage_collection/garbage_collector/安全点和安全区域.md)
-    - [记忆集与卡表](./garbage_collection/garbage_collector/记忆集与卡表.md)
-    - [写屏障](./garbage_collection/garbage_collector/写屏障.md)
-- [垃圾收集器](./garbage_collection/garbage_collector/垃圾收集器.md)
+  - [判断对象是否存活](./garbage_collection/object_alive.md)
+    - [引用计数算法](./garbage_collection/reference_counting.md)
+    - [可达性分析算法](./garbage_collection/reachability_analysis.md)
+  - [垃圾回收算法](./garbage_collection/gc_algorithm.md)
+    - [分代收集理论](./garbage_collection/generational_collection.md)
+    - [标记清除算法](./garbage_collection/mark_sweep.md)
+    - [标记复制算法](./garbage_collection/mark_copy.md)
+    - [标记整理算法](./garbage_collection/mark_compact.md)
+    - [根节点枚举](./garbage_collection/garbage_collector/gc_root.md)
+    - [安全点和安全区域](./garbage_collection/garbage_collector/safe_point.md)
+    - [记忆集与卡表](./garbage_collection/garbage_collector/rset.md)
+    - [写屏障](./garbage_collection/garbage_collector/write_barrier.md)
 
-  - [经典垃圾收集器](./garbage_collection/garbage_collector/经典垃圾收集器.md)
-    - [CMS 收集器](./garbage_collection/garbage_collector/CMS收集器.md)
-    - [G1 收集器](./garbage_collection/garbage_collector/G1收集器.md)
-  - [低延迟垃圾收集器](./garbage_collection/garbage_collector/低延迟垃圾收集器.md)
-    - [ZGC 收集器](./garbage_collection/garbage_collector/ZGC收集器.md)
+- [垃圾回收器](./garbage_collection/garbage_collector/collector.md)
+  - [经典垃圾回收器](./garbage_collection/garbage_collector/classic_collector.md)
+  - [CMS](./garbage_collection/garbage_collector/cms.md)
+  - [G1](./garbage_collection/garbage_collector/g1.md)
+  - [ZGC](./garbage_collection/garbage_collector/zgc.md)
 
 - [编译与优化](./java_compile/compile.md)
-
   - [前端编译与优化](./java_compile/前端编译与优化.md)
     - [Javac 编译器](./java_compile/Javac编译器.md)
     - [泛型](./java_compile/ParameterizedType.md)
@@ -89,7 +84,6 @@
     - [数组边界检查消除](./java_compile/数组边界检查消除.md)
 
 - [并发](./concurrency/并发.md)
-
   - [缓存一致性](./concurrency/缓存一致性.md)
   - [Java 内存模型](./concurrency/Java内存模型.md)
   - [关键字 volatile](./concurrency/关键字volatile.md)
@@ -99,7 +93,6 @@
   - [锁优化](./concurrency/锁优化.md)
 
 - [JDK 命令行工具](./tools/console/jdk_tools.md)
-
   - [jps](./tools/console/jps.md)
   - [jstat](./tools/console/jstat.md)
   - [jinfo](./tools/console/jinfo.md)
@@ -107,5 +100,4 @@
   - [jstack](./tools/console/jstack.md)
 
 - [JDK 可视化工具](./tools/gui/jdk_tools.md)
-
   - [jhsdb](./tools/gui/jhsdb.md)
