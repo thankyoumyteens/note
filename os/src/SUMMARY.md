@@ -27,3 +27,5 @@
   - [echo 命令](./Linux/bash/echo.md)
   - [快捷键](./Linux/bash/shortcut.md)
   - [通配符](./Linux/bash/globbing.md)
+  - [环境变量](./Linux/bash/env.md)
+  - [变量](./Linux/bash/var.md)
