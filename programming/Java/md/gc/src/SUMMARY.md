@@ -15,6 +15,7 @@
       - [锁升级](./jdk21/g1/base/锁升级.md)
     - [实例数据](./jdk21/g1/base/实例数据.md)
     - [指针压缩](./jdk21/g1/base/指针压缩.md)
+  - [GCLocker](./jdk21/g1/base/GC_locker.md)
 
 - [JDK8 的 G1](./g1/g1.md)
 
@@ -35,7 +36,6 @@
       - [DCQS 分区](./g1/refine/DCQS分区.md)
   - [Young GC](./g1/ygc/ygc.md)
     - [YGC 触发的时机](./g1/ygc/YGC触发的时机.md)
-      - [GC_locker](./g1/ygc/GC_locker.md)
     - [并行任务处理](./g1/ygc/并行任务处理.md)
       - [根处理](./g1/ygc/根处理.md)
         - [处理普通对象](./g1/ygc/处理普通对象.md)

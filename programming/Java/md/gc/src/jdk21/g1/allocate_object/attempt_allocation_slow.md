@@ -20,7 +20,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
   // fails to perform the allocation. b) is the only case when we'll
   // return null.
   HeapWord* result = nullptr;
-  for (uint try_count = 1, gclocker_retry_count = 0; /* we'll return */; try_count += 1) {
+  for (uint try_count = 1, gclocker_retry_count = 0 ; ; try_count += 1) {
     bool should_try_gc;
     uint gc_count_before;
 

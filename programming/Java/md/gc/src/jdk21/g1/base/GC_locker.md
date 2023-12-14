@@ -1,12 +1,15 @@
-# GC_locker
+# GCLocker
 
-GC_locker 是 JNI 线程访问临界区时的加锁机制。临界区（Critical Section）是指在多线程环境下, 一段需要确保同一时刻只有一个线程能够访问的代码区域。
+GCLocker 是 JNI 线程访问临界区时的加锁机制。
 
-比如, 当使用本地方法 JNI 函数访问 JVM 中的字符串或数组数据时, 需要用到 jni_GetStringCritical 和 jni_ReleaseStringCritical 两个函数。
+临界区(Critical Section)是指在多线程环境下, 一段需要确保同一时刻只有一个线程能够访问的代码区域。
 
-> jdk8u60-master\jdk\src\share\native\common\jni_util.c
+比如, 当使用本地方法 JNI 函数访问 JVM 中的字符串或数组数据时, 需要用到 jni_GetStringCritical 和 jni_ReleaseStringCritical 两个函数:
+
 
 ```cpp
+// jni_util.c
+
 static const char* getString8859_1Chars(JNIEnv *env, jstring jstr) {
     // 从JVM返回字符串指针
     int i;
@@ -37,21 +40,19 @@ static const char* getString8859_1Chars(JNIEnv *env, jstring jstr) {
     (*env)->ReleaseStringCritical(env, jstr, str);
     return result;
 }
-```
 
-> jdk8u60-master\hotspot\src\share\vm\prims\jni.cpp
+// jni.cpp
 
-```cpp
 /**
  * jni_GetStringCritical
+ * 进入临界区
  */
 JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jboolean *isCopy))
   JNIWrapper("GetStringCritical");
 #ifndef USDT2
   DTRACE_PROBE3(hotspot_jni, GetStringCritical__entry, env, string, isCopy);
 #else
-  HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(
-                                      env, string, (uintptr_t *) isCopy);
+  HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
 #endif
   // 进入临界区, 使用GC_locker对临界区加锁
   GC_locker::lock_critical(thread);
@@ -80,14 +81,14 @@ JNI_END
 
 /**
  * jni_ReleaseStringCritical
+ * 离开临界区
  */
 JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar *chars))
   JNIWrapper("ReleaseStringCritical");
 #ifndef USDT2
   DTRACE_PROBE3(hotspot_jni, ReleaseStringCritical__entry, env, str, chars);
 #else
-  HOTSPOT_JNI_RELEASESTRINGCRITICAL_ENTRY(
-                                          env, str, (uint16_t *) chars);
+  HOTSPOT_JNI_RELEASESTRINGCRITICAL_ENTRY(env, str, (uint16_t *) chars);
 #endif
   // 离开临界区, 使用GC_locker对临界区解锁
   GC_locker::unlock_critical(thread);
@@ -106,9 +107,9 @@ JNI_END
 
 如果该线程还没进入临界区, 且\_needs_gc 标识为 true, 则执行 jni_lock 方法。\_needs_gc 默认为 false, 只有在特殊情况下才会被设置为 true。\_jni_lock_count 记录正在临界区内的线程个数。
 
-> jdk8u60-master\hotspot\src\share\vm\memory\gcLocker.inline.hpp
-
 ```cpp
+// gcLocker.inline.hpp
+
 inline void GC_locker::lock_critical(JavaThread* thread) {
   // 当_jni_active_critical大于0时, in_critical()返回true
   if (!thread->in_critical()) {
@@ -122,15 +123,13 @@ inline void GC_locker::lock_critical(JavaThread* thread) {
   // 进入临界区
   thread->enter_critical();
 }
-```
 
-> jdk8u60-master\hotspot\src\share\vm\memory\gcLocker.cpp
+// gcLocker.cpp
 
-```cpp
 void GC_locker::jni_lock(JavaThread* thread) {
   assert(!thread->in_critical(), "shouldn't currently be in a critical region");
   MutexLocker mu(JNICritical_lock);
-  // 当_needs_gc为true, 且_jni_lock_count大于0时, 
+  // 当_needs_gc为true, 且_jni_lock_count大于0时,
   // is_active_and_needs_gc()返回true
   // _doing_gc表示enter_critical()方法中正在进行GC
   while (is_active_and_needs_gc() || _doing_gc) {
@@ -147,7 +146,7 @@ void GC_locker::jni_lock(JavaThread* thread) {
 
 ## 发生 Young GC
 
-如果有线程已经进入了临界区, 此时发生了 Young GC: 
+如果有线程已经进入了临界区, 此时发生了 Young GC:
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 
@@ -166,7 +165,7 @@ bool G1CollectedHeap::do_collection_pause_at_safepoint(double target_pause_time_
 }
 ```
 
-在开始 Young GC 之前, 会判断是否有线程在临界区, 如果有线程已经进入了临界区, 则舍弃本次 gc, 并把\_needs_gc 参数设置为 true: 
+在开始 Young GC 之前, 会判断是否有线程在临界区, 如果有线程已经进入了临界区, 则舍弃本次 gc, 并把\_needs_gc 参数设置为 true:
 
 > jdk8u60-master\hotspot\src\share\vm\memory\gcLocker.cpp
 
@@ -195,7 +194,7 @@ bool GC_locker::check_active_before_gc() {
 inline void GC_locker::unlock_critical(JavaThread* thread) {
   if (thread->in_last_critical()) {
     if (needs_gc()) {
-      // 如果该线程已经在临界区中, 且_needs_gc为true, 
+      // 如果该线程已经在临界区中, 且_needs_gc为true,
       // 表示有GC被舍弃了, 需要补回来
       jni_unlock(thread);
       return;
@@ -225,7 +224,7 @@ void GC_locker::jni_unlock(JavaThread* thread) {
     {
       MutexUnlocker munlock(JNICritical_lock);
       // GC
-      // Universe::heap ()方法返回的是当前JVM使用的堆类, 
+      // Universe::heap ()方法返回的是当前JVM使用的堆类,
       // 因为使用的是G1垃圾回收器, 所以返回的是G1CollectedHeap
       Universe::heap()->collect(GCCause::_gc_locker);
     }
@@ -285,7 +284,7 @@ void G1CollectedHeap::collect(GCCause::Cause cause) {
         }
       }
     } else {
-      // 从GC_locker传入的GC原因是GCCause::_gc_locker, 
+      // 从GC_locker传入的GC原因是GCCause::_gc_locker,
       // 所以会进行Young GC
       if (cause == GCCause::_gc_locker || cause == GCCause::_wb_young_gc
           DEBUG_ONLY(|| cause == GCCause::_scavenge_alot)) {
