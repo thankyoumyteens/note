@@ -1,2 +1,0 @@
-- [AbstractMethodError](../pages/exceptions/AbstractMethodError.md)
-- [ORA-00904: "ID": 标识符无效](../pages/exceptions/ORA-00904.md)

@@ -1,1 +1,0 @@
-- <a href="../Jenkins/CentOS安装Jenkins.md">CentOS安装Jenkins</a>
