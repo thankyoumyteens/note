@@ -1,7 +1,10 @@
 # 初始化对象
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp
+//////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp //
+//////////////////////////////////////////////////////////////////
+
 oop ObjAllocator::initialize(HeapWord* mem) const {
   mem_clear(mem);
   return finish(mem);

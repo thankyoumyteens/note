@@ -5,7 +5,10 @@ TLAB 使用指针碰撞分配内存: 所有被使用过的内存都被放在一�
 HeapWord 是 JVM 管理的堆内存的地址抽象。堆中的内存地址都需要通过 HeapWord* 指针进行表示, 例如申请内存起始地址的函数一般返回的都是 HeapWord*, 大小也是 HeapWordSize 的整数倍, 因为 Java 堆是按照一定内存大小对齐的。
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp
+///////////////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp //
+///////////////////////////////////////////////////////////////////////////////////
+
 inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
   // void invariants() const {
   //   assert(top() >= start() && top() <= end(), "invalid tlab");
@@ -34,7 +37,10 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
   return nullptr;
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/utilities/globalDefinitions.hpp
+///////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/utilities/globalDefinitions.hpp //
+///////////////////////////////////////////////////////////////////////
+
 inline size_t pointer_delta(const HeapWord* left, const HeapWord* right) {
   return pointer_delta(left, right, sizeof(HeapWord));
 }

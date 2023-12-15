@@ -1,7 +1,10 @@
 # 计算新的 TLAB 大小
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp
+///////////////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp //
+///////////////////////////////////////////////////////////////////////////////////
+
 inline size_t ThreadLocalAllocBuffer::compute_size(size_t obj_size) {
   // 为了避免内存碎片, 新的TLAB会比之前分配的更小
   // Compute the size for the new TLAB.

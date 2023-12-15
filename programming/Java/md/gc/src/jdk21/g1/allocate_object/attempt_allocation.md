@@ -1,7 +1,9 @@
 # CAS 分配
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Allocator.inline.hpp
+////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Allocator.inline.hpp //
+////////////////////////////////////////////////////////////////////
 
 // 使用CAS分配对象的内存空间
 inline HeapWord* G1Allocator::attempt_allocation(size_t min_word_size,
@@ -19,7 +21,9 @@ inline HeapWord* G1Allocator::attempt_allocation(size_t min_word_size,
   return mutator_alloc_region(node_index)->attempt_allocation(min_word_size, desired_word_size, actual_word_size);
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp
+//////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
+//////////////////////////////////////////////////////////////////////
 
 /**
  * 在保留region中分配
@@ -77,7 +81,9 @@ inline HeapWord* HeapRegion::par_allocate(size_t min_word_size,
   return par_allocate_impl(min_word_size, desired_word_size, actual_word_size);
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegion.inline.hpp
+///////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegion.inline.hpp //
+///////////////////////////////////////////////////////////////////
 
 /**
  * 使用CAS分配对象内存

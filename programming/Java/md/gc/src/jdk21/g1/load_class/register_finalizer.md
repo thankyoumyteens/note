@@ -1,7 +1,10 @@
 # 注册 finalizer
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/interpreter/interpreterRuntime.cpp
+//////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/interpreter/interpreterRuntime.cpp //
+//////////////////////////////////////////////////////////////////////////
+
 instanceOop InstanceKlass::register_finalizer(instanceOop i, TRAPS) {
   // 打印注册finalizer相关日志
   if (TraceFinalizerRegistration) {

@@ -1,7 +1,9 @@
 # 在全局卡表中标记
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp
+////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp //
+////////////////////////////////////////////////////////////////////////
 
 // It dirties the cards that cover the block so that the post
 // write barrier never queues anything when updating objects on this
@@ -26,7 +28,9 @@ G1CollectedHeap::dirty_young_block(HeapWord* start, size_t word_size) {
   card_table()->g1_mark_as_young(mr);
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CardTable.cpp
+/////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CardTable.cpp //
+/////////////////////////////////////////////////////////////
 
 void G1CardTable::g1_mark_as_young(const MemRegion& mr) {
   // 找到这个新分配的对象所属的卡片范围

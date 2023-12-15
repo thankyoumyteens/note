@@ -1,7 +1,9 @@
 # 分配大对象
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp
+/////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+/////////////////////////////////////////////////////////////////
 
 HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
   ResourceMark rm; // For retrieving the thread names in log messages.

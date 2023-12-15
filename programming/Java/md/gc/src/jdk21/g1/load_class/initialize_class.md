@@ -1,7 +1,10 @@
 # 类的初始化
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.cpp
+//////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.cpp //
+//////////////////////////////////////////////////////////////
+
 void InstanceKlass::initialize(TRAPS) {
   if (this->should_be_initialized()) {
     initialize_impl(CHECK);

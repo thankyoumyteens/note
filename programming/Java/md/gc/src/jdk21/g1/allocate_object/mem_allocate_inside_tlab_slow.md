@@ -1,7 +1,9 @@
 # 在新的 TLAB 中分配
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp
+//////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp //
+//////////////////////////////////////////////////////////////////
 
 /**
  * 申请一个新的TLAB, 并在新的TLAB中分配对象内存
@@ -24,15 +26,17 @@ HeapWord* MemAllocator::mem_allocate_inside_tlab_slow(Allocation& allocation) co
   }
 
   // TLAB剩余的空间大于可以浪费掉的最大空间
+  // 每个TLAB都会维护一个refill_waste_limit,
+  // 用于判断当前TLAB不够分配时, 是否需要申请新的TLAB,
   // 假设要分配的对象a的大小为10k, refill_waste_limit是5k:
   // 1. 如果当前TLAB剩余3k, 那么这个TLAB就会被舍弃,
   //    JVM会创建一个新的TLAB来为对象a分配空间
   // 2. 如果当前TLAB剩余6k, 那么这个TLAB就会被保留,
   //    等待分配其它较小的对象, JVM会直接在堆中为对象a分配空间
   if (tlab.free() > tlab.refill_waste_limit()) {
-    // 每浪费一次TLAB的剩余空间,
-    // 就增大一次refill_waste_limit,
-    // 避免空间浪费
+    // 保留这个TLAB
+    // 增大refill_waste_limit,
+    // 避免频繁在堆中直接分配对象
     tlab.record_slow_allocation(_word_size);
     // 返回null,
     // 以调用mem_allocate_outside_tlab()
@@ -89,7 +93,9 @@ HeapWord* MemAllocator::mem_allocate_inside_tlab_slow(Allocation& allocation) co
   return mem;
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp
+////////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
+////////////////////////////////////////////////////////////////////////////
 
 void ThreadLocalAllocBuffer::fill(HeapWord* start,
                                   HeapWord* top,

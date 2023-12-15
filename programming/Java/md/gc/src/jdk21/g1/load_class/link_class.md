@@ -1,7 +1,10 @@
 # 类的连接
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.cpp
+//////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.cpp //
+//////////////////////////////////////////////////////////////
+
 void InstanceKlass::link_class(TRAPS) {
   // bool is_loaded() const {
   //   return init_state() >= loaded;

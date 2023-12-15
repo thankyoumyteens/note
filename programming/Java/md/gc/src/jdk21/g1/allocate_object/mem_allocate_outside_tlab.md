@@ -1,7 +1,9 @@
 # 直接在堆中分配
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp
+//////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp //
+//////////////////////////////////////////////////////////////////
 
 /**
  * 直接在堆中分配对象内存
@@ -19,7 +21,9 @@ HeapWord* MemAllocator::mem_allocate_outside_tlab(Allocation& allocation) const 
   return mem;
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp
+/////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+/////////////////////////////////////////////////////////////////
 
 HeapWord*
 G1CollectedHeap::mem_allocate(size_t word_size,

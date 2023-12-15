@@ -7,7 +7,10 @@ hotspot 有两个解释器, 基于 C++ 的解释器和基于汇编的模板解�
 ## 模板解释器
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/cpu/x86/templateTable_x86.cpp
+///////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/cpu/x86/templateTable_x86.cpp //
+///////////////////////////////////////////////////////////////
+
 void TemplateTable::_new() {
   // 以__开头的是汇编代码
   transition(vtos, atos);
@@ -135,7 +138,10 @@ void TemplateTable::_new() {
 ## C++ 解释器
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/interpreter/zero/bytecodeInterpreter.cpp
+////////////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/interpreter/zero/bytecodeInterpreter.cpp //
+////////////////////////////////////////////////////////////////////////////////
+
 CASE(_new): {
   u2 index = Bytes::get_Java_u2(pc+1);
 

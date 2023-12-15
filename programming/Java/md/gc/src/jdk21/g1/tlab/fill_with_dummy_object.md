@@ -1,7 +1,10 @@
 # 填充 dummy 对象
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp
+////////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
+////////////////////////////////////////////////////////////////////////////
+
 void ThreadLocalAllocBuffer::retire_before_allocation() {
   _refill_waste += (unsigned int)remaining();
   retire();
@@ -94,10 +97,11 @@ void ThreadLocalAllocBuffer::initialize(HeapWord* start,
   set_allocation_end(end);
   invariants();
 }
-```
 
-```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/collectedHeap.cpp
+///////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/collectedHeap.cpp //
+///////////////////////////////////////////////////////////////////
+
 void CollectedHeap::fill_with_dummy_object(HeapWord* start, HeapWord* end, bool zap) {
   CollectedHeap::fill_with_object(start, end, zap);
 }

@@ -1,19 +1,20 @@
 # 加锁分配
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp
+/////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+/////////////////////////////////////////////////////////////////
 
+/**
+ * CAS分配失败, 加锁分配
+ */
 HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
   ResourceMark rm; // For retrieving the thread names in log messages.
-
-  // Make sure you read the note in attempt_allocation_humongous().
 
   assert_heap_not_locked_and_not_at_safepoint();
   assert(!is_humongous(word_size), "attempt_allocation_slow() should not "
          "be called for humongous allocation requests");
 
-  // We should only get here after the first-level allocation attempt
-  // (attempt_allocation()) failed to allocate.
 
   // We will loop until a) we manage to successfully perform the
   // allocation or b) we successfully schedule a collection which
@@ -27,8 +28,8 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
     {
       MutexLocker x(Heap_lock);
 
-      // Now that we have the lock, we first retry the allocation in case another
-      // thread changed the region while we were waiting to acquire the lock.
+      // 在本线程等待锁时, 其他线程可能已经扩容了region或者进行了GC, 
+      // 所以拿到锁后, 首先尝试分配对象
       result = _allocator->attempt_allocation_locked(word_size);
       if (result != nullptr) {
         return result;
@@ -56,6 +57,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
 
     if (should_try_gc) {
       bool succeeded;
+      // GC并分配对象内存
       result = do_collection_pause(word_size, gc_count_before, &succeeded, GCCause::_g1_inc_collection_pause);
       if (result != nullptr) {
         assert(succeeded, "only way to get back a non-null result");
@@ -74,8 +76,9 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
       log_trace(gc, alloc)("%s: Unsuccessfully scheduled collection allocating " SIZE_FORMAT " words",
                            Thread::current()->name(), word_size);
     } else {
-      // Failed to schedule a collection.
+      // 本来要执行的GC被GCLocker阻止了
       if (gclocker_retry_count > GCLockerRetryAllocationCount) {
+        // GC被GCLocker阻止了太多次, 直接返回null
         log_warning(gc, alloc)("%s: Retried waiting for GCLocker too often allocating "
                                SIZE_FORMAT " words", Thread::current()->name(), word_size);
         return nullptr;

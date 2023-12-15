@@ -3,7 +3,9 @@
 如果从 TLAB 中分配内存空间失败, 就会开始慢速分配。
 
 ```cpp
-// jdk21-jdk-21-ga/src/hotspot/share/interpreter/interpreterRuntime.cpp
+//////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/interpreter/interpreterRuntime.cpp //
+//////////////////////////////////////////////////////////////////////////
 
 JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool, int index))
   // 从常量池中取出klass对象
@@ -23,7 +25,9 @@ JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool
   current->set_vm_result(obj);
 JRT_END
 
-// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.cpp
+//////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.cpp //
+//////////////////////////////////////////////////////////////
 
 void InstanceKlass::check_valid_for_instantiation(bool throwError, TRAPS) {
   // 确保klass不是抽象类或接口
@@ -57,7 +61,9 @@ instanceOop InstanceKlass::allocate_instance(TRAPS) {
   return i;
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/memory/universe.hpp
+///////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/memory/universe.hpp //
+///////////////////////////////////////////////////////////
 
 static CollectedHeap* heap() {
   // 返回当前使用的垃圾回收器管理的堆,
@@ -65,7 +71,9 @@ static CollectedHeap* heap() {
   return _collectedHeap;
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/collectedHeap.inline.hpp
+//////////////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/collectedHeap.inline.hpp //
+//////////////////////////////////////////////////////////////////////////
 
 inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
   ObjAllocator allocator(klass, size, THREAD);
@@ -73,7 +81,9 @@ inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
   return allocator.allocate();
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp
+//////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp //
+//////////////////////////////////////////////////////////////////
 
 /**
  * 给对象分配内存空间
@@ -97,7 +107,9 @@ oop MemAllocator::allocate() const {
   return obj;
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp
+//////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp //
+//////////////////////////////////////////////////////////////////
 
 /**
  * 给对象分配内存空间
