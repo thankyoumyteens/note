@@ -1,25 +1,22 @@
 # Summary
 
 - [基本用法](./base/base.md)
-
   - [虚拟环境](./base/虚拟环境.md)
   - [import 绝对路径](./base/import绝对路径.md)
+  - [字符串操作](./base/字符串操作.md)
   - [字符串格式化](./base/字符串格式化.md)
   - [日期格式化](./base/日期格式化.md)
 
 - [文件](./io/io.md)
-
   - [路径操作](./io/路径操作.md)
   - [pathlib](./io/pathlib.md)
   - [文件操作](./io/文件操作.md)
 
 - [subprocess](./subprocess/subprocess.md)
-
   - [Popen](./subprocess/Popen.md)
   - [run](./subprocess/run.md)
 
 - [正则表达式](./regex/regex.md)
-
   - [查找](./regex/查找.md)
   - [分组](./regex/分组.md)
   - [换行匹配](./regex/换行匹配.md)
@@ -27,11 +24,9 @@
   - [替换](./regex/替换.md)
 
 - [压缩解压](./zip/压缩解压.md)
-
   - [ZipFile](./zip/ZipFile.md)
 
 - [PySide6](./pyside/PySide6.md)
-
   - [安装 Pyside6](./pyside/安装Pyside6.md)
   - [创建主窗口](./pyside/创建主窗口.md)
   - [布局](./pyside/布局.md)
@@ -40,7 +35,6 @@
   - [打包 exe](./pyside/打包exe.md)
 
 - [Requests](./requests/requests.md)
-
   - [GET 请求](./requests/get请求.md)
   - [POST 请求](./requests/post请求.md)
   - [上传文件](./requests/上传文件.md)
@@ -50,11 +44,9 @@
   - [使用代理](./requests/代理.md)
 
 - [Excel](./excel/excel.md)
-
   - [excel 字母列号与数字列号之间的转换](./excel/excel字母列号与数字列号之间的转换.md)
 
 - [selenium](./selenium/selenium.md)
-
   - [安装 selenium](./selenium/安装selenium.md)
   - [设置浏览器](./selenium/设置浏览器.md)
   - [定位元素](./selenium/定位元素.md)
