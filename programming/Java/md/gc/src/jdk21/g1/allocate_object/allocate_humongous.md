@@ -6,18 +6,7 @@
 /////////////////////////////////////////////////////////////////
 
 HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
-  ResourceMark rm; // For retrieving the thread names in log messages.
-
-  // The structure of this method has a lot of similarities to
-  // attempt_allocation_slow(). The reason these two were not merged
-  // into a single one is that such a method would require several "if
-  // allocation is not humongous do this, otherwise do that"
-  // conditional paths which would obscure its flow. In fact, an early
-  // version of this code did use a unified method which was harder to
-  // follow and, as a result, it had subtle bugs that were hard to
-  // track down. So keeping these two methods separate allows each to
-  // be more readable. It will be good to keep these two in sync as
-  // much as possible.
+  ResourceMark rm;
 
   assert_heap_not_locked_and_not_at_safepoint();
   assert(is_humongous(word_size), "attempt_allocation_humongous() "
@@ -30,20 +19,19 @@ HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
   // allocated memory while we do a GC.
   if (policy()->need_to_start_conc_mark("concurrent humongous allocation",
                                         word_size)) {
+    // 开启并发标记
     collect(GCCause::_g1_humongous_allocation);
   }
 
-  // We will loop until a) we manage to successfully perform the
-  // allocation or b) we successfully schedule a collection which
-  // fails to perform the allocation. b) is the only case when we'll
-  // return null.
+  // 加锁分配对象
   HeapWord* result = nullptr;
-  for (uint try_count = 1, gclocker_retry_count = 0; /* we'll return */; try_count += 1) {
+  for (uint try_count = 1, gclocker_retry_count = 0 ; ; try_count += 1) {
     bool should_try_gc;
     uint gc_count_before;
 
 
     {
+      // 加锁
       MutexLocker x(Heap_lock);
 
       size_t size_in_regions = humongous_obj_size_in_regions(word_size);
@@ -57,16 +45,15 @@ HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
         return result;
       }
 
-      // Only try a GC if the GCLocker does not signal the need for a GC. Wait until
-      // the GCLocker initiated GC has been performed and then retry. This includes
-      // the case when the GC Locker is not active but has not been performed.
+      // 加锁分配失败, 且GCLocker稍后不会补上GC时, 需要执行一次GC
       should_try_gc = !GCLocker::needs_gc();
-      // Read the GC count while still holding the Heap_lock.
+      // 获取之前已经执行的GC次数
       gc_count_before = total_collections();
     }
 
     if (should_try_gc) {
       bool succeeded;
+      // 执行GC并分配对象的内存, GCCause标记需要分配大对象
       result = do_collection_pause(word_size, gc_count_before, &succeeded, GCCause::_g1_humongous_allocation);
       if (result != nullptr) {
         assert(succeeded, "only way to get back a non-null result");
@@ -79,8 +66,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
       }
 
       if (succeeded) {
-        // We successfully scheduled a collection which failed to allocate. No
-        // point in trying to allocate further. We'll just return null.
+        // GC执行成功, 还是不够分配对象, 内存空间不足
         log_trace(gc, alloc)("%s: Successfully scheduled collection failing to allocate "
                              SIZE_FORMAT " words", Thread::current()->name(), word_size);
         return nullptr;
@@ -88,29 +74,17 @@ HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
       log_trace(gc, alloc)("%s: Unsuccessfully scheduled collection allocating " SIZE_FORMAT "",
                            Thread::current()->name(), word_size);
     } else {
-      // Failed to schedule a collection.
+      // 本来要执行的GC被GCLocker阻止了
       if (gclocker_retry_count > GCLockerRetryAllocationCount) {
         log_warning(gc, alloc)("%s: Retried waiting for GCLocker too often allocating "
                                SIZE_FORMAT " words", Thread::current()->name(), word_size);
         return nullptr;
       }
       log_trace(gc, alloc)("%s: Stall until clear", Thread::current()->name());
-      // The GCLocker is either active or the GCLocker initiated
-      // GC has not yet been performed. Stall until it is and
-      // then retry the allocation.
+      // 当前线程需要等待GCLocker处理完成, 然后重新尝试分配对象的内存
       GCLocker::stall_until_clear();
       gclocker_retry_count += 1;
     }
-
-
-    // We can reach here if we were unsuccessful in scheduling a
-    // collection (because another thread beat us to it) or if we were
-    // stalled due to the GC locker. In either can we should retry the
-    // allocation attempt in case another thread successfully
-    // performed a collection and reclaimed enough space.
-    // Humongous object allocation always needs a lock, so we wait for the retry
-    // in the next iteration of the loop, unlike for the regular iteration case.
-    // Give a warning if we seem to be looping forever.
 
     if ((QueuedAllocationWarningCount > 0) &&
         (try_count % QueuedAllocationWarningCount == 0)) {
