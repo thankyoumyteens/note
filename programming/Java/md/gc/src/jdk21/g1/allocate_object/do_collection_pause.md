@@ -1,4 +1,4 @@
-# 执行GC并分配对象
+# 执行 GC 并分配对象
 
 ```cpp
 /////////////////////////////////////////////////////////////////
@@ -12,7 +12,7 @@ HeapWord* G1CollectedHeap::do_collection_pause(size_t word_size,
   assert_heap_not_locked_and_not_at_safepoint();
   // GC操作: GC并分配对象
   VM_G1CollectForAllocation op(word_size, gc_count_before, gc_cause);
-  // 通过VMThread::execute启动GC线程执行GC
+  // 通过VMThread::execute执行GC
   VMThread::execute(&op);
 
   HeapWord* result = op.result();

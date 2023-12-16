@@ -97,4 +97,6 @@
     - [申请新region](./jdk21/g1/region/allocate_new_region.md)
   - [GC](./jdk21/g1/gc/gc.md)
     - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
-    - [VMThread::execute](./jdk21/g1/gc/VMThread_execute.md)
+    - [VMThread](./jdk21/g1/gc/VMThread.md)
+      - [VMThread::execute](./jdk21/g1/gc/VMThread_execute.md)
+      - [VMThread::loop](./jdk21/g1/gc/VMThread_loop.md)

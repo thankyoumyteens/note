@@ -28,7 +28,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
       // 当x脱离作用域时, MutexLocker的析构函数会自动解锁
       MutexLocker x(Heap_lock);
 
-      // 在本线程等待锁时, 其他线程可能已经扩容了region或者进行了GC, 
+      // 在本线程等待锁时, 其他线程可能已经扩容了region或者进行了GC,
       // 所以拿到锁后, 首先尝试分配对象
       result = _allocator->attempt_allocation_locked(word_size);
       if (result != nullptr) {
@@ -38,10 +38,10 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
       // 如果JNI代码在访问临界区时发生了GC, JVM会阻止这次GC, 等到JNI代码退出临界区后再补上这次GC,
       // GCLocker用于管理这些操作, 如果is_active_and_needs_gc()返回true,
       // 则表示有JNI代码在访问临界区, 并且阻止了一次GC, 在退出临界区后, GCLocker会执行一次GC
-      // 
+      //
       // can_expand_young_list()返回当前已经持有的新生代region个数是否小于最大新生代region个数
       // 如果还没有达到最大region个数, 则尝试扩容新生代
-      // 
+      //
       // bool G1Policy::can_expand_young_list() const {
       //   uint young_list_length = _g1h->young_regions_count();
       //   return young_list_length < young_list_max_length();
@@ -92,7 +92,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
         return nullptr;
       }
       log_trace(gc, alloc)("%s: Stall until clear", Thread::current()->name());
-      // JNI线程还在临界区, 或者GCLocker启动的GC还没有结束, 
+      // JNI线程还在临界区, 或者GCLocker启动的GC还没有结束,
       // 当前线程需要等待GCLocker处理完成, 然后重新尝试分配对象的内存
       GCLocker::stall_until_clear();
       // 被GCLocker阻止的GC次数
@@ -102,8 +102,8 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
     // 有两种可能会导致代码执行到这里:
     // 1. GC被其他线程打断
     // 2. GC被GCLocker阻止
-    // 此时, 其他线程可能已经执行完了GC, 回收了内存空间, 
-    // 所以再次尝试分配对象内存, 
+    // 此时, 其他线程可能已经执行完了GC, 回收了内存空间,
+    // 所以再次尝试分配对象内存,
     // 先使用CAS分配, 如果CAS失败, 就会由下一轮循环进行加锁分配
     size_t dummy = 0;
     // 使用CAS分配对象的内存空间
