@@ -47,7 +47,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
       //   return young_list_length < young_list_max_length();
       // }
       if (GCLocker::is_active_and_needs_gc() && policy()->can_expand_young_list()) {
-        // 从空闲region列表中申请一个region, 作为新生代region
+        // 申请新region并分配对象
         result = _allocator->attempt_allocation_force(word_size);
         if (result != nullptr) {
           return result;
