@@ -113,10 +113,10 @@ inline HeapWord* HeapRegion::par_allocate_impl(size_t min_word_size,
         *actual_size = want_to_allocate;
         return obj;
       }
-      // CAS操作失败, 等待下次循环重试
     } else {
       return nullptr;
     }
+    // CAS操作失败, 等待下次循环重试
   } while (true);
 }
 ```

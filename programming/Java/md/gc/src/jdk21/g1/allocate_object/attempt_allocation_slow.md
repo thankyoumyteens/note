@@ -16,16 +16,16 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
          "be called for humongous allocation requests");
 
 
-  // We will loop until a) we manage to successfully perform the
-  // allocation or b) we successfully schedule a collection which
-  // fails to perform the allocation. b) is the only case when we'll
-  // return null.
+  // 无限循环, 直到分配成功或内存不足
   HeapWord* result = nullptr;
   for (uint try_count = 1, gclocker_retry_count = 0 ; ; try_count += 1) {
     bool should_try_gc;
     uint gc_count_before;
 
     {
+      // MutexLocker的构造函数会加锁, 析构函数会解锁
+      // 创建一个MutexLocker的对象x, 同时加锁
+      // 当x脱离作用域时, MutexLocker的析构函数会自动解锁
       MutexLocker x(Heap_lock);
 
       // 在本线程等待锁时, 其他线程可能已经扩容了region或者进行了GC, 
@@ -35,31 +35,40 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
         return result;
       }
 
-      // If the GCLocker is active and we are bound for a GC, try expanding young gen.
-      // This is different to when only GCLocker::needs_gc() is set: try to avoid
-      // waiting because the GCLocker is active to not wait too long.
+      // 如果JNI代码在访问临界区时发生了GC, JVM会阻止这次GC, 等到JNI代码退出临界区后再补上这次GC,
+      // GCLocker用于管理这些操作, 如果is_active_and_needs_gc()返回true,
+      // 则表示有JNI代码在访问临界区, 并且阻止了一次GC, 在退出临界区后, GCLocker会执行一次GC
+      // 
+      // can_expand_young_list()返回当前已经持有的新生代region个数是否小于最大新生代region个数
+      // 如果还没有达到最大region个数, 则尝试扩容新生代
+      // 
+      // bool G1Policy::can_expand_young_list() const {
+      //   uint young_list_length = _g1h->young_regions_count();
+      //   return young_list_length < young_list_max_length();
+      // }
       if (GCLocker::is_active_and_needs_gc() && policy()->can_expand_young_list()) {
-        // No need for an ergo message here, can_expand_young_list() does this when
-        // it returns true.
+        // 从空闲region列表中申请一个region, 作为新生代region
         result = _allocator->attempt_allocation_force(word_size);
         if (result != nullptr) {
           return result;
         }
       }
 
-      // Only try a GC if the GCLocker does not signal the need for a GC. Wait until
-      // the GCLocker initiated GC has been performed and then retry. This includes
-      // the case when the GC Locker is not active but has not been performed.
+      // 加锁分配失败, 且GCLocker稍后不会补上GC时, 需要执行一次GC
       should_try_gc = !GCLocker::needs_gc();
-      // Read the GC count while still holding the Heap_lock.
+      // 获取之前已经执行的GC次数
       gc_count_before = total_collections();
+
+      // x脱离作用域, MutexLocker的析构函数会自动解锁
     }
 
+    // 是否需要执行GC
     if (should_try_gc) {
       bool succeeded;
-      // GC并分配对象内存
+      // 执行GC并分配对象的内存
       result = do_collection_pause(word_size, gc_count_before, &succeeded, GCCause::_g1_inc_collection_pause);
       if (result != nullptr) {
+        // 对象分配成功
         assert(succeeded, "only way to get back a non-null result");
         log_trace(gc, alloc)("%s: Successfully scheduled collection returning " PTR_FORMAT,
                              Thread::current()->name(), p2i(result));
@@ -67,8 +76,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
       }
 
       if (succeeded) {
-        // We successfully scheduled a collection which failed to allocate. No
-        // point in trying to allocate further. We'll just return null.
+        // GC执行成功, 还是不够分配对象, 内存空间不足
         log_trace(gc, alloc)("%s: Successfully scheduled collection failing to allocate "
                              SIZE_FORMAT " words", Thread::current()->name(), word_size);
         return nullptr;
@@ -84,22 +92,21 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
         return nullptr;
       }
       log_trace(gc, alloc)("%s: Stall until clear", Thread::current()->name());
-      // The GCLocker is either active or the GCLocker initiated
-      // GC has not yet been performed. Stall until it is and
-      // then retry the allocation.
+      // JNI线程还在临界区, 或者GCLocker启动的GC还没有结束, 
+      // 当前线程需要等待GCLocker处理完成, 然后重新尝试分配对象的内存
       GCLocker::stall_until_clear();
+      // 被GCLocker阻止的GC次数
       gclocker_retry_count += 1;
     }
 
-    // We can reach here if we were unsuccessful in scheduling a
-    // collection (because another thread beat us to it) or if we were
-    // stalled due to the GC locker. In either can we should retry the
-    // allocation attempt in case another thread successfully
-    // performed a collection and reclaimed enough space. We do the
-    // first attempt (without holding the Heap_lock) here and the
-    // follow-on attempt will be at the start of the next loop
-    // iteration (after taking the Heap_lock).
+    // 有两种可能会导致代码执行到这里:
+    // 1. GC被其他线程打断
+    // 2. GC被GCLocker阻止
+    // 此时, 其他线程可能已经执行完了GC, 回收了内存空间, 
+    // 所以再次尝试分配对象内存, 
+    // 先使用CAS分配, 如果CAS失败, 就会由下一轮循环进行加锁分配
     size_t dummy = 0;
+    // 使用CAS分配对象的内存空间
     result = _allocator->attempt_allocation(word_size, word_size, &dummy);
     if (result != nullptr) {
       return result;
