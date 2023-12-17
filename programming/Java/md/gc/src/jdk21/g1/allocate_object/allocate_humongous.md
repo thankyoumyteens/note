@@ -12,14 +12,10 @@ HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
   assert(is_humongous(word_size), "attempt_allocation_humongous() "
          "should only be called for humongous allocations");
 
-  // Humongous objects can exhaust the heap quickly, so we should check if we
-  // need to start a marking cycle at each humongous object allocation. We do
-  // the check before we do the actual allocation. The reason for doing it
-  // before the allocation is that we avoid having to keep track of the newly
-  // allocated memory while we do a GC.
+  // 大对象会占用大量堆空间, 所以在每个大对象分配之前, 检查是否需要开启并发标记
   if (policy()->need_to_start_conc_mark("concurrent humongous allocation",
                                         word_size)) {
-    // 开启并发标记
+    // 开启并发标记, 并执行GC
     collect(GCCause::_g1_humongous_allocation);
   }
 
@@ -29,15 +25,13 @@ HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
     bool should_try_gc;
     uint gc_count_before;
 
-
     {
       // 加锁
       MutexLocker x(Heap_lock);
 
       size_t size_in_regions = humongous_obj_size_in_regions(word_size);
-      // Given that humongous objects are not allocated in young
-      // regions, we'll first try to do the allocation without doing a
-      // collection hoping that there's enough space in the heap.
+      // 大对象不会分配在新生代region中, 
+      // 大对象一般比较少, 可能会有足够的空间, 先直接尝试分配
       result = humongous_obj_allocate(word_size);
       if (result != nullptr) {
         policy()->old_gen_alloc_tracker()->
@@ -81,7 +75,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_humongous(size_t word_size) {
         return nullptr;
       }
       log_trace(gc, alloc)("%s: Stall until clear", Thread::current()->name());
-      // 当前线程需要等待GCLocker处理完成, 然后重新尝试分配对象的内存
+      // 当前线程需要等待GCLocker处理完成, 然后在下一轮循环重新尝试分配对象的内存
       GCLocker::stall_until_clear();
       gclocker_retry_count += 1;
     }

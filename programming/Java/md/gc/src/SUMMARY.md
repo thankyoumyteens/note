@@ -83,6 +83,8 @@
         - [在全局卡表中标记](./jdk21/g1/allocate_object/dirty_young_block.md)
       - [初始化对象](./jdk21/g1/allocate_object/initialize_object.md)
     - [分配大对象](./jdk21/g1/allocate_object/allocate_humongous.md)
+      - [开启并发标记](./jdk21/g1/allocate_object/start_conc_mark.md)
+      - [分配大对象](./jdk21/g1/allocate_object/humongous_obj_allocate.md)
   - [TLAB](./jdk21/g1/tlab/tlab.md)
     - [初始化 TLAB](./jdk21/g1/tlab/init_tlab.md)
     - [refill_waste_limit](./jdk21/g1/tlab/refill_waste_limit.md)
