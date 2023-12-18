@@ -15,7 +15,8 @@ HeapWord* G1CollectedHeap::humongous_obj_allocate(size_t word_size) {
   // 这个大对象需要用几个region存储
   uint obj_regions = (uint) humongous_obj_size_in_regions(word_size);
 
-  // 尝试从空闲region列表中分配一个大对象
+  // 尝试从空闲region列表寻找可以存放这个大对象的obj_regions个region,
+  // 并返回第1个region的指针
   HeapRegion* humongous_start = _hrm.allocate_humongous(obj_regions);
   if (humongous_start == nullptr) {
     // 空闲列表中的region不够分配,
@@ -62,20 +63,20 @@ HeapWord* G1CollectedHeap::humongous_obj_allocate(size_t word_size) {
 
 
 
-
-
-
-
 ```cpp
 ///////////////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegionManager.cpp //
 ///////////////////////////////////////////////////////////////////
 
+/**
+ * 分配一个大对象
+ */
 HeapRegion* HeapRegionManager::allocate_humongous(uint num_regions) {
-  // Special case a single region to avoid expensive search.
+  // 大对象只占用1个region, 分配起来简单
   if (num_regions == 1) {
     return allocate_free_region(HeapRegionType::Humongous, G1NUMA::AnyNodeIndex);
   }
+  // 大对象占用不止1个region
   return allocate_humongous_from_free_list(num_regions);
 }
 
@@ -83,15 +84,14 @@ HeapRegion* HeapRegionManager::allocate_free_region(HeapRegionType type, uint re
   HeapRegion* hr = nullptr;
   bool from_head = !type.is_young();
   G1NUMA* numa = G1NUMA::numa();
-
+  // 判断是否使用NUMA技术
   if (requested_node_index != G1NUMA::AnyNodeIndex && numa->is_enabled()) {
     // Try to allocate with requested node index.
     hr = _free_list.remove_region_with_node_index(from_head, requested_node_index);
   }
 
   if (hr == nullptr) {
-    // If there's a single active node or we did not get a region from our requested node,
-    // try without requested node index.
+    // 取出空闲region列表的第一个region给大对象分配
     hr = _free_list.remove_region(from_head);
   }
 

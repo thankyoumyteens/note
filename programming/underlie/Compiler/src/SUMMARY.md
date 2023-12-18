@@ -7,3 +7,4 @@
   - [扫描整数字面量](./develop_a_compiler/javacc_integer.md)
   - [扫描空白字符](./develop_a_compiler/javacc_space.md)
   - [扫描单行注释](./develop_a_compiler/javacc_line_comment.md)
+  - [扫描多行注释](./develop_a_compiler/javacc_block_comment.md)
