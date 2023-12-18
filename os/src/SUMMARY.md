@@ -1,12 +1,10 @@
 # Summary
 
 - [Windows 11](./Windows/win11/win11.md)
-
   - [win11 右键菜单改回 win10](./Windows/win11/win11右键菜单改回win10.md)
   - [安装 cygwin](./Windows/win11/安装cygwin.md)
 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
-
   - [ubuntu 软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
   - [ubuntu 开启 ssh 服务](./Linux/Ubuntu/ubuntu开启ssh服务.md)
   - [ubuntu 修改 DNS](./Linux/Ubuntu/ubuntu修改DNS.md)

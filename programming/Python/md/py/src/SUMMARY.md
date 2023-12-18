@@ -45,6 +45,7 @@
 
 - [Excel](./excel/excel.md)
   - [excel 字母列号与数字列号之间的转换](./excel/excel字母列号与数字列号之间的转换.md)
+  - [excel操作](./excel/excel操作.md)
 
 - [selenium](./selenium/selenium.md)
   - [安装 selenium](./selenium/安装selenium.md)

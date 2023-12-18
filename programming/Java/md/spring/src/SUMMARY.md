@@ -1,18 +1,16 @@
 # Summary
 
 - [Java](./java/java.md)
-
   - [正则表达式](./java/正则表达式.md)
   - [日期加一天](./java/日期加一天.md)
   - [两个日期间隔几天](./java/两个日期间隔几天.md)
 
 - [Maven](./Maven/Maven.md)
-    - [设置项目jdk版本](./Maven/设置项目jdk版本.md)
-    - [导入本地jar包](./Maven/导入本地jar包.md)
-    - [设置私服](./Maven/设置私服.md)
+  - [设置项目jdk版本](./Maven/设置项目jdk版本.md)
+  - [导入本地jar包](./Maven/导入本地jar包.md)
+  - [设置私服](./Maven/设置私服.md)
 
 - [Oracle](./oracle/oracle.md)
-
   - [按指定字段查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)
   - [case_when 排序](./oracle/case_when排序.md)
   - [生成 12 个月月份](./oracle/生成12个月月份.md)
@@ -22,24 +20,19 @@
   - [两个日期间隔几天](./oracle/两个日期间隔几天.md)
 
 - [Excel](./excel/excel.md)
-
   - [EasyExcel 导出表头合并](./excel/EasyExcel导出表头合并.md)
 
 - [字节码技术](./bytecode/bytecode.md)
-
   - [编译期处理注解(APT)](<./bytecode/编译期处理注解(APT).md>)
 
 - [动态代理](./proxy/proxy.md)
-
   - [JDK 动态代理](./proxy/JDK动态代理.md)
   - [CGLIB 动态代理](./proxy/CGLIB动态代理.md)
 
 - [Servlet](./servlet/servlet.md)
-
   - [使用包装类改请求和响应数据](./servlet/使用包装类改请求和响应数据.md)
 
 - [Spring](./spring/spring.md)
-
   - [自动装配](./spring/use/自动装配.md)
   - [Aware 接口](./spring/use/aware.md)
   - [初始化 bean](./spring/use/initializeBean.md)
@@ -55,18 +48,15 @@
   - [属性编辑器](./spring/use/属性编辑器.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
-
   - [include 标签传参](./mybatis/include标签传参.md)
   - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
 
 - [SpringBoot](./springboot/springboot.md)
-
   - [多环境配置](./springboot/多环境配置.md)
   - [SpringBoot 整合 Kafka](./springboot/SpringBoot整合Kafka.md)
   - [重写 FeignClient 输出日志](./springboot/重写FeignClient输出日志.md)
 
 - [Netty](./netty/netty.md)
-
   - [IO](.netty/io/IO.md)
     - [四种 IO 模型](.netty/io/四种IO模型.md)
     - [JavaNIO](.netty/io/JavaNIO.md)
