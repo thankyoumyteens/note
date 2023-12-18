@@ -1,16 +1,22 @@
-# javaCC 基本用法
+# JavaCC 基本用法
 
-下载:
+JavaCC 用来生成词法分析器和语法分析器。
+
+## 安装
 
 [javacc-7.0.13.zip](https://github.com/javacc/javacc/archive/javacc-7.0.13.zip)
 
 [javacc-7.0.13.jar](https://repo1.maven.org/maven2/net/java/dev/javacc/javacc/7.0.13/javacc-7.0.13.jar)
 
-解压 javacc-7.0.13.zip 得到 javacc-javacc-7.0.12 目录, 把 javacc-7.0.13.jar 复制到 javacc-javacc-7.0.12/target/目录下。
+1. 解压 javacc-7.0.13.zip 得到 javacc-javacc-7.0.12/ 目录
+2. 把 javacc-7.0.13.jar 复制到 javacc-javacc-7.0.12/target/ 目录下
+3. 把 javacc-javacc-7.0.12/scripts/ 配置到 PATH 环境变量
+
+## demo
 
 创建 adder.jj 文件:
 
-```
+```java
 options {
     STATIC = false;
     OUTPUT_DIRECTORY = "./demo-adder";

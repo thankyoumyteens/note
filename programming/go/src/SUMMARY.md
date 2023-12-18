@@ -12,3 +12,4 @@
   - [数组](./base/数组.md)
   - [切片](./base/切片.md)
   - [map](./base/map.md)
+  - [函数](./base/func.md)
