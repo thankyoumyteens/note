@@ -47,6 +47,22 @@ HeapWord* G1CollectedHeap::humongous_obj_allocate(size_t word_size) {
 
   return result;
 }
+
+///////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegionManager.cpp //
+///////////////////////////////////////////////////////////////////
+
+/**
+ * 分配大对象
+ */
+HeapRegion* HeapRegionManager::allocate_humongous(uint num_regions) {
+  // 大对象只占用1个region, 分配起来简单
+  if (num_regions == 1) {
+    return allocate_free_region(HeapRegionType::Humongous, G1NUMA::AnyNodeIndex);
+  }
+  // 大对象占用不止1个region
+  return allocate_humongous_from_free_list(num_regions);
+}
 ```
 
 
@@ -62,51 +78,7 @@ HeapWord* G1CollectedHeap::humongous_obj_allocate(size_t word_size) {
 
 
 
-
 ```cpp
-///////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegionManager.cpp //
-///////////////////////////////////////////////////////////////////
-
-/**
- * 分配一个大对象
- */
-HeapRegion* HeapRegionManager::allocate_humongous(uint num_regions) {
-  // 大对象只占用1个region, 分配起来简单
-  if (num_regions == 1) {
-    return allocate_free_region(HeapRegionType::Humongous, G1NUMA::AnyNodeIndex);
-  }
-  // 大对象占用不止1个region
-  return allocate_humongous_from_free_list(num_regions);
-}
-
-HeapRegion* HeapRegionManager::allocate_free_region(HeapRegionType type, uint requested_node_index) {
-  HeapRegion* hr = nullptr;
-  bool from_head = !type.is_young();
-  G1NUMA* numa = G1NUMA::numa();
-  // 判断是否使用NUMA技术
-  if (requested_node_index != G1NUMA::AnyNodeIndex && numa->is_enabled()) {
-    // Try to allocate with requested node index.
-    hr = _free_list.remove_region_with_node_index(from_head, requested_node_index);
-  }
-
-  if (hr == nullptr) {
-    // 取出空闲region列表的第一个region给大对象分配
-    hr = _free_list.remove_region(from_head);
-  }
-
-  if (hr != nullptr) {
-    assert(hr->next() == nullptr, "Single region should not have next");
-    assert(is_available(hr->hrm_index()), "Must be committed");
-
-    if (numa->is_enabled() && hr->node_index() < numa->num_active_nodes()) {
-      numa->update_statistics(G1NUMAStats::NewRegionAlloc, requested_node_index, hr->node_index());
-    }
-  }
-
-  return hr;
-}
-
 HeapRegion* HeapRegionManager::allocate_humongous_from_free_list(uint num_regions) {
   uint candidate = find_contiguous_in_free_list(num_regions);
   if (candidate == G1_NO_HRM_INDEX) {

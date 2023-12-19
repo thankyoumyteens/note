@@ -82,6 +82,7 @@
     - [分配大对象](./jdk21/g1/allocate_object/allocate_humongous.md)
       - [开启并发标记](./jdk21/g1/allocate_object/start_conc_mark.md)
       - [分配大对象](./jdk21/g1/allocate_object/humongous_obj_allocate.md)
+        - [分配占用1个region的大对象](./jdk21/g1/allocate_object/allocate_free_region.md)
   - [TLAB](./jdk21/g1/tlab/tlab.md)
     - [初始化 TLAB](./jdk21/g1/tlab/init_tlab.md)
     - [refill_waste_limit](./jdk21/g1/tlab/refill_waste_limit.md)
