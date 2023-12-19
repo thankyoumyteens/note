@@ -1,7 +1,6 @@
 # Summary
 
 - [基本概念](./jdk21/g1/base/base.md)
-
   - [Oop-Klass 对象模型](./jdk21/g1/base/Oop-Klass对象模型.md)
   - [mutator](./jdk21/g1/base/mutator.md)
   - [串行并行和并发](./jdk21/g1/base/串行并行和并发.md)
@@ -18,7 +17,6 @@
   - [GCLocker](./jdk21/g1/base/GC_locker.md)
 
 - [JDK8 的 G1](./g1/g1.md)
-
   - [Region](./g1/region/Region.md)
   - [对象分配](./g1/obj/对象分配.md)
     - [new 关键字](./g1/obj/new关键字.md)
@@ -61,7 +59,6 @@
         - [老年代回收集处理](./g1/mgc/老年代回收集处理.md)
     - [启动 Mixed GC](./g1/mgc/启动MixedGC.md)
   - [Full GC](./g1/fgc/fgc.md)
-
     - [标记存活对象](./g1/fgc/mark_sweep_phase1.md)
     - [计算对象的新地址](./g1/fgc/mark_sweep_phase2.md)
     - [更新引用的地址](./g1/fgc/mark_sweep_phase3.md)
