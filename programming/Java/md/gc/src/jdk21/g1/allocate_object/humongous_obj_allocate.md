@@ -19,7 +19,7 @@ HeapWord* G1CollectedHeap::humongous_obj_allocate(size_t word_size) {
   // 并返回第1个region的指针
   HeapRegion* humongous_start = _hrm.allocate_humongous(obj_regions);
   if (humongous_start == nullptr) {
-    // 空闲列表中的region不够分配,
+    // 空闲列表中没找到合适的region,
     // 尝试扩大堆空间后重新分配
     humongous_start = _hrm.expand_and_allocate_humongous(obj_regions);
     if (humongous_start != nullptr) {
@@ -53,10 +53,12 @@ HeapWord* G1CollectedHeap::humongous_obj_allocate(size_t word_size) {
 ///////////////////////////////////////////////////////////////////
 
 /**
- * 分配大对象
+ * 寻找可以分配大对象的region
+ * 这里只返回region, 不会分配
  */
 HeapRegion* HeapRegionManager::allocate_humongous(uint num_regions) {
-  // 大对象只占用1个region, 分配起来简单
+  // 大对象只占用1个region, 分配起来简单, 
+  // 直接从空闲region列表中拿一个region给这个大对象分配
   if (num_regions == 1) {
     return allocate_free_region(HeapRegionType::Humongous, G1NUMA::AnyNodeIndex);
   }
@@ -64,47 +66,6 @@ HeapRegion* HeapRegionManager::allocate_humongous(uint num_regions) {
   return allocate_humongous_from_free_list(num_regions);
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```cpp
-HeapRegion* HeapRegionManager::allocate_humongous_from_free_list(uint num_regions) {
-  uint candidate = find_contiguous_in_free_list(num_regions);
-  if (candidate == G1_NO_HRM_INDEX) {
-    return nullptr;
-  }
-  return allocate_free_regions_starting_at(candidate, num_regions);
-}
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

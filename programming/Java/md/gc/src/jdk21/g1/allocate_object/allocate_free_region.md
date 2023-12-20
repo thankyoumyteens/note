@@ -6,10 +6,11 @@
 ///////////////////////////////////////////////////////////////////
 
 /**
- * 分配占用1个region的大对象
+ * 寻找一个region用于分配占用1个region的大对象
  */
 HeapRegion* HeapRegionManager::allocate_free_region(HeapRegionType type, uint requested_node_index) {
   HeapRegion* hr = nullptr;
+  // 传入的是HeapRegionType::Humongous, 所以from_head是true
   bool from_head = !type.is_young();
   G1NUMA* numa = G1NUMA::numa();
   // 判断是否使用NUMA技术
@@ -54,8 +55,10 @@ inline HeapRegion* FreeRegionList::remove_region(bool from_head) {
   HeapRegion* hr;
 
   if (from_head) {
+    // 从头节点取
     hr = remove_from_head_impl();
   } else {
+    // 从尾节点取
     hr = remove_from_tail_impl();
   }
 
@@ -63,14 +66,18 @@ inline HeapRegion* FreeRegionList::remove_region(bool from_head) {
     _last = nullptr;
   }
 
-  // remove() will verify the region and check mt safety.
+  // 更新空闲队列的长度
   remove(hr);
 
+  // 维护NUMA中用到的信息
   decrease_length(hr->node_index());
 
   return hr;
 }
 
+/**
+ * 取出头节点的region, 并把它移出队列
+ */
 inline HeapRegion* FreeRegionList::remove_from_head_impl() {
   HeapRegion* result = _head;
   _head = result->next();
@@ -83,6 +90,9 @@ inline HeapRegion* FreeRegionList::remove_from_head_impl() {
   return result;
 }
 
+/**
+ * 取出尾节点的region, 并把它移出队列
+ */
 inline HeapRegion* FreeRegionList::remove_from_tail_impl() {
   HeapRegion* result = _tail;
 
@@ -94,5 +104,17 @@ inline HeapRegion* FreeRegionList::remove_from_tail_impl() {
   }
   result->set_prev(nullptr);
   return result;
+}
+
+inline void HeapRegionSetBase::remove(HeapRegion* hr) {
+  check_mt_safety();
+  verify_region(hr);
+  assert_heap_region_set(hr->next() == nullptr, "should already be unlinked");
+  assert_heap_region_set(hr->prev() == nullptr, "should already be unlinked");
+
+  hr->set_containing_set(nullptr);
+  assert_heap_region_set(_length > 0, "pre-condition");
+  // _length用来记录空闲列表中有几个region
+  _length--;
 }
 ```
