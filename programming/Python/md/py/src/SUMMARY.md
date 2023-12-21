@@ -1,6 +1,8 @@
 # Summary
 
 - [基本用法](./base/base.md)
+  - [pip设置国内源](./base/pip设置国内源.md)
+  - [pip管理包](./base/pip管理包.md)
   - [虚拟环境](./base/虚拟环境.md)
   - [import 绝对路径](./base/import绝对路径.md)
   - [字符串操作](./base/字符串操作.md)
