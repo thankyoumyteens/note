@@ -51,7 +51,7 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
 
 当待分配对象大于 TLAB 中的剩余空间时, 就会导致 TLAB 分配失败, 开始 TLAB 慢速分配。
 
-虚拟机内部会维护一个叫做 refill_waste_limit 的值, 当 TLAB 剩余空间大于 refill_waste_limit 时, 说明 TLAB 剩余的空间还能满足很多对象的分配, 此时会选择在堆中分配这个比较大的对象。若 TLAB 剩余空间小于 refill_waste_limit 时, 则会废弃当前 TLAB, 新建一个新的 TLAB 来分配对象。refill_waste_limit 的值可以使用参数-XX:TLABRefillWasteFraction 来调整, 默认值为 64, 表示 1/64 的 TLAB 空间可以浪费, 成为内存碎片。老的 TLAB 不用处理, 在垃圾回收的时候, 垃圾收集器不会特殊处理 TLAB, 而是把 Eden 空间当作一个整体来回收里面的对象。在垃圾回收结束之后, 每个 Java 线程又会重新从 Eden 分配自己的 TLAB。
+虚拟机内部会维护一个叫做 refill_waste_limit 的值, 当 TLAB 剩余空间大于 refill_waste_limit 时, 说明 TLAB 剩余的空间还能满足很多对象的分配, 此时会选择在堆中分配这个比较大的对象。若 TLAB 剩余空间小于 refill_waste_limit 时, 则会废弃当前 TLAB, 新建一个新的 TLAB 来分配对象。refill_waste_limit 的值可以使用参数-XX:TLABRefillWasteFraction 来调整, 默认值为 64, 表示 1/64 的 TLAB 空间可以浪费, 成为内存碎片。老的 TLAB 不用处理, 在垃圾回收的时候, 垃圾回收器不会特殊处理 TLAB, 而是把 Eden 空间当作一个整体来回收里面的对象。在垃圾回收结束之后, 每个 Java 线程又会重新从 Eden 分配自己的 TLAB。
 
 JVM 还提供了一个参数-XX:TLABWasteIncrement, 默认值为 4 个字, 用于动态增加这个 refill_waste_limit 的值。默认情况下, TLAB 大小和 refill_waste_limit 都会在运行时不断调整, 使系统的运行状态达到最优。在动态调整的过程中, 也不能无限制变更, 所以 JVM 提供了-XX:MinTLABSize, 默认值 2K, 用于控制 TLAB 的最小值, 对于 G1 来说, 由于大对象都不在新生代, 所以 TLAB 也不能分配大对象, Region 大小的一半就会被认定为大对象, 所以 TLAB 肯定不会超过 Region 大小的一半。可以使用-XX:-ResizeTLAB 禁止自动调整 TLAB 的大小。-XX:+PrintTLAB 可以跟踪 TLAB 的使用情况。
 

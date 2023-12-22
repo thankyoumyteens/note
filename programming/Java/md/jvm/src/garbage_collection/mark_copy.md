@@ -10,10 +10,12 @@
 
 ## Appel 式回收
 
-Appel 式回收: 半区复制算法的优化, 把新生代分为一块较大的 Eden 空间和两块较小的 Survivor 空间, 每次分配内存只使用 Eden 和其中一块 Survivor。发生垃圾收集时, 将 Eden 和 Survivor 中仍然存活的对象一次性复制到另外一块 Survivor 空间上, 然后直接清理掉 Eden 和已用过的那块 Survivor 空间。
+Appel 式回收: 半区复制算法的优化, 把新生代分为一块较大的 Eden 空间和两块较小的 Survivor 空间, 每次分配内存只使用 Eden 和其中一块 Survivor。发生 GC 时, 将 Eden 和 Survivor 中仍然存活的对象一次性复制到另外一块 Survivor 空间上, 然后直接清理掉 Eden 和已用过的那块 Survivor 空间。
 
 ![](../img/mark_copy.png)
 
-HotSpot 虚拟机默认 Eden 和 Survivor 的大小比例是 8∶1:1, 也即每次新生代中可用内存空间为整个新生代容量的 90%(Eden 的 80%加上一个 Survivor 的 10%), 只有一个 Survivor 空间, 即 10%的新生代是会被浪费的。
+HotSpot 默认 Eden 和 Survivor 的大小比例是 8:1:1, 即每次新生代中可用内存空间为整个新生代容量的 90%(Eden 的 80%加上一个 Survivor 的 10%), 只有一个 Survivor 空间(10%)是会被浪费的。
 
-由于无法保证每次回收都只有不多于 10%的对象存活, 因此当 Survivor 空间不足以容纳一次 Young GC 之后存活的对象时, 就需要依赖其他内存区域(大多就是老年代)进行分配担保(Handle Promotion)。如果另外一块 Survivor 空间没有足够空间存放上一次新生代收集下来的存活对象, 这些对象便将通过分配担保机制直接进入老年代, 这对虚拟机来说就是安全的。
+这种算法由于无法保证每次回收都只有不多于 10%的对象存活, 因此当 Survivor 空间不足以容纳一次 Young GC 之后存活的对象时, 就需要依赖其他内存区域(大多就是老年代)进行分配担保。
+
+分配担保(Handle Promotion): 如果另外一块 Survivor 没有足够的空间存放 Young GC 后存活的对象, 这些对象便将通过分配担保机制直接进入老年代。

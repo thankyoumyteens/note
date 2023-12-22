@@ -66,7 +66,9 @@
     - [标记整理算法](./garbage_collection/mark_compact.md)
 
 - [垃圾回收器](./garbage_collection/garbage_collector/collector.md)
-  - [经典垃圾回收器](./garbage_collection/garbage_collector/classic_collector.md)
+  - [Serial和SerialOld](./garbage_collection/garbage_collector/serial.md)
+  - [ParallelScavenge和ParallelOld](./garbage_collection/garbage_collector/parallel.md)
+  - [ParNew](./garbage_collection/garbage_collector/par_new.md)
   - [CMS](./garbage_collection/garbage_collector/cms.md)
   - [G1](./garbage_collection/garbage_collector/g1.md)
   - [ZGC](./garbage_collection/garbage_collector/zgc.md)

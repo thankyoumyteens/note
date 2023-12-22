@@ -128,7 +128,7 @@ java -Xms512m -Xmx1024m Demo.class
 - -XX:OnError: 在发生致命错误时执行指定的命令或脚本。如 -XX:OnError="java -version" 表示在发生致命错误时执行java -version命令
 - -XX:ErrorFile=filename: 指定生成的错误日志文件的保存路径
 
-## 设置垃圾收集器
+## 设置垃圾回收器
 
 - -XX:+UseG1GC: 使用G1垃圾回收器
 - -XX:+UseConcMarkSweepGC: 使用CMS垃圾回收器
