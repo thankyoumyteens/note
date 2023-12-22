@@ -16,7 +16,7 @@ HeapRegion* HeapRegionManager::allocate_humongous_from_free_list(uint num_region
     // 没找到
     return nullptr;
   }
-  // 分配大对象
+  // 返回第1个region的指针
   return allocate_free_regions_starting_at(candidate, num_regions);
 }
 
@@ -45,7 +45,7 @@ uint HeapRegionManager::find_contiguous_in_free_list(uint num_regions) {
     // _committed_map 记录了堆中属于committed的region
     // next_active_range()查找active状态的region的范围
     range = _committed_map.next_active_range(range.end());
-    // TODO
+    // 寻找用于分配大对象的起始region
     candidate = find_contiguous_in_range(range.start(), range.end(), num_regions);
   } while (candidate == G1_NO_HRM_INDEX && range.end() < reserved_length());
 
@@ -74,35 +74,42 @@ HeapRegionRange G1CommittedRegionMap::next_active_range(uint offset) const {
   return HeapRegionRange(start, end);
 }
 
-// TODO
+/**
+ * 返回可以分配大对象的region列表的起始region
+ */
 uint HeapRegionManager::find_contiguous_in_range(uint start, uint end, uint num_regions) {
   assert(start <= end, "precondition");
   assert(num_regions >= 1, "precondition");
-  uint candidate = start;       // First region in candidate sequence.
-  uint unchecked = candidate;   // First unchecked region in candidate.
-  // While the candidate sequence fits in the range...
+  // 把start作为候选region
+  uint candidate = start;
+  // 待检查的region
+  uint unchecked = candidate;
+
   while (num_regions <= (end - candidate)) {
-    // Walk backward over the regions for the current candidate.
+    // 从第num_regions个region往前遍历
     for (uint i = candidate + num_regions - 1; true; --i) {
+      // 检查region是否active且空闲
       if (is_available(i) && !at(i)->is_free()) {
-        // Region i can't be used, so restart with i+1 as the start
-        // of a new candidate sequence, and with the region after the
-        // old candidate sequence being the first unchecked region.
+        // 跳过num_regions个region
         unchecked = candidate + num_regions;
         candidate = i + 1;
         break;
       } else if (i == unchecked) {
-        // All regions of candidate sequence have passed check.
+        // unchecked是起始region, i从后往前遍历,
+        // i == unchecked时, 大对象所需的region已经检查完成
         assert_contiguous_range(candidate, num_regions);
         return candidate;
       }
     }
   }
+  // 没找到
   return G1_NO_HRM_INDEX;
 }
 
 inline HeapRegion* HeapRegionManager::allocate_free_regions_starting_at(uint first, uint num_regions) {
+  // 获取索引对应的region
   HeapRegion* start = at(first);
+  // 从空闲列表中删除分配给大对象的region
   _free_list.remove_starting_at(start, num_regions);
   return start;
 }
