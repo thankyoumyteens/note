@@ -62,11 +62,12 @@
     - [标记整理算法](./garbage_collection/mark_compact.md)
 
 - [垃圾回收器](./garbage_collection/garbage_collector/collector.md)
-  - [前置知识](./garbage_collection/garbage_collector/pre.md)
+  - [基本概念](./garbage_collection/garbage_collector/pre.md)
       - [根节点枚举](./garbage_collection/garbage_collector/gc_root.md)
       - [安全点和安全区域](./garbage_collection/garbage_collector/safe_point.md)
       - [记忆集与卡表](./garbage_collection/garbage_collector/rset.md)
       - [写屏障](./garbage_collection/garbage_collector/write_barrier.md)
+      - [并发标记](./garbage_collection/garbage_collector/concurrent_mark.md)
       - [三色标记](./garbage_collection/garbage_collector/three_color_marking.md)
       - [浮动垃圾](./garbage_collection/garbage_collector/floating_garbage.md)
       - [漏标](./garbage_collection/garbage_collector/missing.md)
