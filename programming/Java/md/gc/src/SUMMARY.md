@@ -68,6 +68,7 @@
   - [region](./jdk21/g1/region/region.md)
     - [初始化region的大小](./jdk21/g1/region/setup_heap_region_size.md)
     - [初始化新生代的大小](./jdk21/g1/region/setup_young_region_size.md)
+    - [扩大新生代](./jdk21/g1/region/expand_young.md)
     - [申请新region](./jdk21/g1/region/allocate_new_region.md)
   - [new字节码指令](./jdk21/g1/allocate_object/new.md)
     - [从TLAB中分配对象](./jdk21/g1/allocate_object/tlab_allocate.md)
