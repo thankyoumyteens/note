@@ -36,7 +36,6 @@ HeapWord* G1CollectedHeap::humongous_obj_allocate(size_t word_size) {
     // 大对象分配完成, 初始化内存
     result = humongous_obj_allocate_initialize_regions(humongous_start, obj_regions, word_size);
     assert(result != nullptr, "it should always return a valid result");
-    // TODO
     // A successful humongous object allocation changes the used space
     // information of the old generation so we need to recalculate the
     // sizes and update the jstat counters here.

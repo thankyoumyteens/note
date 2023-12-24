@@ -68,7 +68,7 @@ void G1CollectedHeap::set_humongous_metadata(HeapRegion* first_hr,
                                              uint num_regions,
                                              size_t word_size,
                                              bool update_remsets) {
-  // 计算top指针的位置
+  // 计算top指针的位置(大对象末尾的位置)
   HeapWord* obj_top = first_hr->bottom() + word_size;
   // 计算大对象分配的region的大小
   size_t word_size_sum = num_regions * HeapRegion::GrainWords;
@@ -144,5 +144,34 @@ void G1CollectedHeap::set_humongous_metadata(HeapRegion* first_hr,
   assert(words_not_fillable == 0 ||
          first_hr->bottom() + word_size_sum - words_not_fillable == hr->top(),
          "Miscalculation in humongous allocation");
+}
+
+////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegion.cpp //
+////////////////////////////////////////////////////////////
+
+void HeapRegion::hr_clear(bool clear_space) {
+  set_top(bottom());
+  clear_young_index_in_cset();
+  clear_index_in_opt_cset();
+  uninstall_surv_rate_group();
+  set_free();
+  reset_pre_dummy_top();
+
+  rem_set()->clear_locked();
+
+  init_top_at_mark_start();
+  if (clear_space) clear(SpaceDecorator::Mangle);
+}
+
+void HeapRegion::set_starts_humongous(HeapWord* obj_top, size_t fill_size) {
+  assert(!is_humongous(), "sanity / pre-condition");
+  assert(top() == bottom(), "should be empty");
+  // 发送通知
+  report_region_type_change(G1HeapRegionTraceType::StartsHumongous);
+  _type.set_starts_humongous();
+  _humongous_start_region = this;
+
+  _bot_part.set_for_starts_humongous(obj_top, fill_size);
 }
 ```

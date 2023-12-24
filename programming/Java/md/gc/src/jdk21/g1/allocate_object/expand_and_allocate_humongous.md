@@ -68,18 +68,17 @@ void HeapRegionManager::expand_exact(uint start, uint num_regions, WorkerThreads
   uint end = start + num_regions;
 
   for (uint i = start; i < end; i++) {
-    // 如果inactive是inactive状态的, 则尝试重新设为active
+    // 如果region i是inactive状态的, 在它变为uncommitted之前, 尝试重新设为active
     if (_committed_map.inactive(i)) {
       // 加锁
       MutexLocker uc(Uncommit_lock, Mutex::_no_safepoint_check_flag);
-      // region状态可能在等待锁时改变, 再次检查
+      // region i的状态可能在等待锁时改变, 再次检查
       if (_committed_map.inactive(i)) {
         // 把region设为active
         reactivate_regions(i, 1);
       }
     }
-    // Not else-if to catch the case where the inactive region was uncommitted
-    // while waiting to get the lock.
+    // 在等待锁的时候, region i已经被其他线程变为uncommitted了
     if (!_committed_map.active(i)) {
       expand(i, 1, pretouch_workers);
     }
@@ -95,7 +94,7 @@ void HeapRegionManager::expand(uint start, uint num_regions, WorkerThreads* pret
   for (uint i = start; i < start + num_regions; i++) {
     HeapRegion* hr = _regions.get_by_index(i);
     if (hr == nullptr) {
-      // 把i对应的堆空间分配成region
+      // 从堆空间分配一个新的region
       hr = new_heap_region(i);
       OrderAccess::storestore();
       _regions.set_by_index(i, hr);
@@ -104,6 +103,20 @@ void HeapRegionManager::expand(uint start, uint num_regions, WorkerThreads* pret
     G1CollectedHeap::heap()->hr_printer()->commit(hr);
   }
   activate_regions(start, num_regions);
+}
+
+void HeapRegionManager::commit_regions(uint index, size_t num_regions, WorkerThreads* pretouch_workers) {
+  guarantee(num_regions > 0, "Must commit more than zero regions");
+  guarantee(num_regions <= available(),
+            "Cannot commit more than the maximum amount of regions");
+
+  _heap_mapper->commit_regions(index, num_regions, pretouch_workers);
+
+  // Also commit auxiliary data
+  _bitmap_mapper->commit_regions(index, num_regions, pretouch_workers);
+
+  _bot_mapper->commit_regions(index, num_regions, pretouch_workers);
+  _cardtable_mapper->commit_regions(index, num_regions, pretouch_workers);
 }
 
 //////////////////////////////////////////////////////////////////////////
