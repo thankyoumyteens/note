@@ -14,9 +14,11 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
   // expand_bytes大于0表示需要扩容
   if (expand_bytes > 0) {
     double expand_ms = 0.0;
+    // 扩容
     if (!expand(expand_bytes, _workers, &expand_ms)) {
-      // We failed to expand the heap. Cannot do anything about it.
+      // 扩容失败
     }
+    // 记录扩容花费的时间
     phase_times()->record_expand_heap_time(expand_ms);
   }
 }
@@ -25,12 +27,18 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1HeapSizingPolicy.cpp //
 ////////////////////////////////////////////////////////////////////
 
+/**
+ * 计算新生代可以扩容的大小
+ */
 size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
   assert(GCTimeRatio > 0, "must be");
 
   double long_term_pause_time_ratio = _analytics->long_term_pause_time_ratio();
   double short_term_pause_time_ratio = _analytics->short_term_pause_time_ratio();
+  // GCTimeRatio控制GC执行时间和应用程序执行时间的比例, 默认为GCTimeRatio
+  // 默认情况下, GC执行时间 : 应用程序执行时间 = 1 : 10
   const double pause_time_threshold = 1.0 / (1.0 + GCTimeRatio);
+  // 根据堆的剩余空间调整这个比例
   double threshold = scale_with_heap(pause_time_threshold);
 
   size_t expand_bytes = 0;
