@@ -27,3 +27,9 @@ pip freeze > requirements.txt
 ```sh
 pip install -r requirements.txt
 ```
+
+## 更新 pip
+
+```sh
+python.exe -m pip install --upgrade pip
+```

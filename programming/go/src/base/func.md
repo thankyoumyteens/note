@@ -1,16 +1,23 @@
 # 函数
 
 ```go
-func add(a int, b int) int {
+// 无返回值
+func add1(a int, b int) {
+	fmt.Println(a + b)
+}
+
+// 1个返回值
+func add2(a int, b int) int {
 	return a + b
 }
 
-// 函数可以返回多个值
-func addWithError(a int, b int) (int, error) {
+// 多个返回值
+func add3(a int, b int) (int, error) {
 	return a + b, nil
 }
 func main() {
-	fmt.Println(add(1, 1))
-	fmt.Println(addWithError(1, 1))
+	add1(1, 1)
+	fmt.Println(add2(1, 1))
+	fmt.Println(add3(1, 1))
 }
 ```
