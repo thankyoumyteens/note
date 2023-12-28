@@ -32,7 +32,7 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
  */
 size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
   assert(GCTimeRatio > 0, "must be");
-
+  // TODO
   double long_term_pause_time_ratio = _analytics->long_term_pause_time_ratio();
   double short_term_pause_time_ratio = _analytics->short_term_pause_time_ratio();
   // GCTimeRatio控制GC执行时间和应用程序执行时间的比例, 默认为GCTimeRatio
