@@ -28,6 +28,12 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 ```
 
+## 更新包
+
+```sh
+pip install --upgrade 包名
+```
+
 ## 更新 pip
 
 ```sh
