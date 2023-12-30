@@ -65,6 +65,7 @@
     - [移动对象](./g1/fgc/mark_sweep_phase4.md)
 
 - [JDK21的G1](./jdk21/g1/g1.md)
+  - [ubuntu22调试OpenJDK21](./jdk21/g1/ubuntu22_jdk21.md)
   - [region](./jdk21/g1/region/region.md)
     - [初始化region的大小](./jdk21/g1/region/setup_heap_region_size.md)
     - [初始化新生代的大小](./jdk21/g1/region/setup_young_region_size.md)

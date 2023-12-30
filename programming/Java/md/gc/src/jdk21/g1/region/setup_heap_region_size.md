@@ -40,6 +40,7 @@ void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
   LogOfHRGrainBytes = region_size_log;
 
   guarantee(GrainBytes == 0, "we should only set it once");
+  // 用于扩容堆空间
   GrainBytes = region_size;
 
   guarantee(GrainWords == 0, "we should only set it once");

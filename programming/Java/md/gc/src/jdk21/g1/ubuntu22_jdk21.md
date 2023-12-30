@@ -1,6 +1,6 @@
 # ubuntu22 调试 OpenJDK21
 
-## 下载 zuluJDK
+## 下载 Bootstrap JDK
 
 ```sh
 cd ~/src_pack/
@@ -56,27 +56,6 @@ Tools -> Compilation Database -> Change Project Root 功能, 选中你的源码�
 创建文件
 
 ```java
-public class Demo {
-    public static void main(String[] args) throws Exception {
-        System.out.println("ok");
-    }
-}
-```
-
-编译成 class
-
-```sh
-javac Demo.java
-```
-
-1. Run/Debug configurations
-   1. Program Arguments 输入 Demo
-   2. Working directory 输入 class 文件所在的目录
-2. 启动 debug
-
-```java
-// -Xmx128M -XX:+UseG1GC -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintTLAB -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest
-
 // -Xmx256M -XX:+UseG1GC -Xlog:gc*=debug Test
 
 import java.util.LinkedList;
@@ -106,3 +85,15 @@ public class Test {
   }
 }
 ```
+
+编译成 class
+
+```sh
+javac Test.java
+```
+
+1. Clion -> Run/Debug configurations
+   1. Program Arguments 输入 Test
+   2. Working directory 输入 class 文件所在的目录
+2. 启动 debug
+

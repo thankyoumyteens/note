@@ -30,12 +30,9 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
  */
 size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
   assert(GCTimeRatio > 0, "must be");
-  // long_term_pause_time_ratio和short_term_pause_time_ratio
-  // 都是GC暂停时间占程序执行总时间的比例
-  // 区别是:
-  //   long_term_pause_time_ratio计算了多次GC
-  //   short_term_pause_time_ratio只计算最新一次GC
+  // GC暂停时间占程序执行总时间的比例的平均值
   double long_term_pause_time_ratio = _analytics->long_term_pause_time_ratio();
+  // 上一次GC暂停时间占程序执行总时间的比例
   double short_term_pause_time_ratio = _analytics->short_term_pause_time_ratio();
   // GCTimeRatio用于控制GC暂停时间占程序执行总时间比例的阈值, 默认为9
   // 默认情况下, GC暂停时间 : GC暂停时间+mutator执行时间 = 1 : 10
@@ -70,17 +67,28 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
                             _ratio_over_threshold_count);
 
   // Check if we've had enough GC time ratio checks that were over the
-  // threshold to trigger an expansion. We'll also expand if we've
+  // threshold to trigger an expansion. 
+  // We'll also expand if we've
   // reached the end of the history buffer and the average of all entries
   // is still over the threshold. This indicates a smaller number of GCs were
   // long enough to make the average exceed the threshold.
   bool filled_history_buffer = _pauses_since_start == _num_prev_pauses_for_heuristics;
+  // 判断是否需要扩容
+  //   MinOverThresholdForGrowth固定为4, GC暂停时间超过阈值的次数达到4时, 需要扩容
+  // 
   if ((_ratio_over_threshold_count == MinOverThresholdForGrowth) ||
       (filled_history_buffer && (long_term_pause_time_ratio > threshold))) {
+    // GrainBytes在初始化region大小的时候被设置
+    // GrainBytes = region_size;
+    // 最小也要扩容一个region的大小
     size_t min_expand_bytes = HeapRegion::GrainBytes;
+    // 堆的总大小
     size_t reserved_bytes = _g1h->max_capacity();
+    // 已分配成region的堆大小
     size_t committed_bytes = _g1h->capacity();
+    // 未分配的堆大小
     size_t uncommitted_bytes = reserved_bytes - committed_bytes;
+    // G1ExpandByPercentOfAvailable控制每次扩容多大, 默认20
     size_t expand_bytes_via_pct =
       uncommitted_bytes * G1ExpandByPercentOfAvailable / 100;
     double scale_factor = 1.0;
@@ -99,6 +107,8 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
     // times the base size. The scaling will be linear in the range from
     // StartScaleUpAt to (StartScaleUpAt + ScaleUpRange). In other words,
     // ScaleUpRange sets the rate of scaling up.
+
+    // InitialHeapSize: 初始堆内存大小, 等价于-Xms, 默认为0
     if (committed_bytes < InitialHeapSize / 4) {
       expand_bytes = (InitialHeapSize - committed_bytes) / 2;
     } else {
@@ -127,10 +137,9 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
 
     expand_bytes = static_cast<size_t>(expand_bytes * scale_factor);
 
-    // Ensure the expansion size is at least the minimum growth amount
-    // and at most the remaining uncommitted byte size.
+    // 把expand_bytes的值控制在min_expand_bytes和uncommitted_bytes之间
     expand_bytes = clamp(expand_bytes, min_expand_bytes, uncommitted_bytes);
-
+    // 清除本次扩容修改的变量
     clear_ratio_check_data();
   } else {
     // An expansion was not triggered. If we've started counting, increment
@@ -162,5 +171,11 @@ double G1HeapSizingPolicy::scale_with_heap(double pause_time_threshold) {
   }
 
   return threshold;
+}
+
+void G1HeapSizingPolicy::clear_ratio_check_data() {
+  _ratio_over_threshold_count = 0;
+  _ratio_over_threshold_sum = 0.0;
+  _pauses_since_start = 0;
 }
 ```

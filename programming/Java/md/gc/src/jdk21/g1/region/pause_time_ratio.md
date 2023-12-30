@@ -2,7 +2,6 @@
 
 ![](../../../img/compute_pause_time_ratios.drawio.png)
 
-
 ```cpp
 //////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
@@ -31,8 +30,9 @@ void G1Policy::update_gc_pause_time_ratios(G1GCPauseType gc_type, double start_t
 
   double pause_time_sec = end_time_sec - start_time_sec;
   double pause_time_ms = pause_time_sec * 1000.0;
-
+  // 记录GC暂停时间占程序执行总时间的比例, 用于堆空间扩容
   _analytics->compute_pause_time_ratios(end_time_sec, pause_time_ms);
+  // 记录本次GC暂停的时间和结束的时间
   _analytics->update_recent_gc_times(end_time_sec, pause_time_ms);
 
   if (gc_type == G1GCPauseType::Cleanup || gc_type == G1GCPauseType::Remark) {
@@ -49,6 +49,7 @@ void G1Policy::update_gc_pause_time_ratios(G1GCPauseType gc_type, double start_t
 void G1Analytics::compute_pause_time_ratios(double end_time_sec, double pause_time_ms) {
   // 计算_long_term_pause_time_ratio: 
   // 截止到本次为止的GC暂停时间 : 从最早的一次GC结束到本次GC结束间隔的时间
+  // 即总的GC暂停时间比例的平均值
   double long_interval_ms = (end_time_sec - oldest_known_gc_end_time_sec()) * 1000.0;
   // long_interval_ms是不包含在这之前的程序运行时间的
   // 所以也需要把最早的一次GC暂停时间排除
@@ -57,6 +58,7 @@ void G1Analytics::compute_pause_time_ratios(double end_time_sec, double pause_ti
   _long_term_pause_time_ratio = clamp(_long_term_pause_time_ratio, 0.0, 1.0);
   // 计算_short_term_pause_time_ratio: 
   // 本次GC暂停时间 : 从上一次GC结束到本次GC结束间隔的时间
+  // 即本次的GC暂停时间比例
   double short_interval_ms = (end_time_sec - most_recent_gc_end_time_sec()) * 1000.0;
   _short_term_pause_time_ratio = pause_time_ms / short_interval_ms;
   _short_term_pause_time_ratio = clamp(_short_term_pause_time_ratio, 0.0, 1.0);
@@ -79,5 +81,4 @@ double G1Analytics::most_recent_gc_end_time_sec() const {
   // 取出最新一次GC结束的时间
   return _recent_prev_end_times_for_all_gcs_sec.last();
 }
-
 ```
