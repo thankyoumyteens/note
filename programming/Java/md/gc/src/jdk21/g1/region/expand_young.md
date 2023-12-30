@@ -2,8 +2,6 @@
 
 在Young GC的收尾阶段, 会判断是否需要扩大新生代。
 
-参数GCTimeRatio用于判断是否需要扩大新生代, 默认9。 
-
 ```cpp
 /////////////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
@@ -32,15 +30,20 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
  */
 size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
   assert(GCTimeRatio > 0, "must be");
-  // TODO
+  // long_term_pause_time_ratio和short_term_pause_time_ratio
+  // 都是GC暂停时间占程序执行总时间的比例
+  // 区别是:
+  //   long_term_pause_time_ratio计算了多次GC
+  //   short_term_pause_time_ratio只计算最新一次GC
   double long_term_pause_time_ratio = _analytics->long_term_pause_time_ratio();
   double short_term_pause_time_ratio = _analytics->short_term_pause_time_ratio();
-  // GCTimeRatio控制GC执行时间和应用程序执行时间的比例, 默认为GCTimeRatio
-  // 默认情况下, GC执行时间 : 应用程序执行时间 = 1 : 10
+  // GCTimeRatio用于控制GC暂停时间占程序执行总时间比例的阈值, 默认为9
+  // 默认情况下, GC暂停时间 : GC暂停时间+mutator执行时间 = 1 : 10
   const double pause_time_threshold = 1.0 / (1.0 + GCTimeRatio);
   // 根据堆的剩余空间调整这个比例
   double threshold = scale_with_heap(pause_time_threshold);
 
+  // 要扩容的大小
   size_t expand_bytes = 0;
 
   if (_g1h->capacity() == _g1h->max_capacity()) {
@@ -51,11 +54,11 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
     return expand_bytes;
   }
 
-  // If the last GC time ratio is over the threshold, increment the count of
-  // times it has been exceeded, and add this ratio to the sum of exceeded
-  // ratios.
+  // 最新一次GC暂停时间比例超过阈值
   if (short_term_pause_time_ratio > threshold) {
+    // 超过阈值的次数
     _ratio_over_threshold_count++;
+    // 超过阈值的累计比例
     _ratio_over_threshold_sum += short_term_pause_time_ratio;
   }
 
