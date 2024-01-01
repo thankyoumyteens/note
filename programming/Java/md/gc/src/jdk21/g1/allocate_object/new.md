@@ -210,7 +210,10 @@ CASE(_new): {
   UPDATE_PC_AND_TOS_AND_CONTINUE(3, 1);
 }
 
-// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.hpp
+//////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.hpp //
+//////////////////////////////////////////////////////////////
+
 class InstanceKlass: public Klass {
   // 判断klass是否支持快速分配内存空间
   // _layout_helper在classFileParser.cpp中初始化
