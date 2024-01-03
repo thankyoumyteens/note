@@ -1,8 +1,10 @@
 # Summary
 
-- [基本用法](./base/base.md)
+- [pip](./base/base.md)
   - [pip设置国内源](./base/pip设置国内源.md)
   - [pip管理包](./base/pip管理包.md)
+
+- [python](./base/base.md)
   - [虚拟环境](./base/虚拟环境.md)
   - [import绝对路径](./base/import绝对路径.md)
   - [字符串操作](./base/字符串操作.md)
@@ -11,7 +13,6 @@
 
 - [文件](./io/io.md)
   - [路径操作](./io/路径操作.md)
-  - [pathlib](./io/pathlib.md)
   - [文件操作](./io/文件操作.md)
 
 - [subprocess](./subprocess/subprocess.md)

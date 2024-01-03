@@ -2,8 +2,7 @@
 
 - [Java](./java/java.md)
   - [正则表达式](./java/正则表达式.md)
-  - [日期加一天](./java/日期加一天.md)
-  - [两个日期间隔几天](./java/两个日期间隔几天.md)
+  - [日期操作](./java/日期操作.md)
 
 - [Maven](./Maven/Maven.md)
   - [设置项目jdk版本](./Maven/设置项目jdk版本.md)
