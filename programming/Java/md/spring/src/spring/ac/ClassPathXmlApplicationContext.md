@@ -1,5 +1,7 @@
 # ClassPathXmlApplicationContext
 
+ClassPathXmlApplicationContext 是 Spring 框架中用于从类路径下加载 XML 配置文件并初始化 Spring 容器的一种方式。它是 ApplicationContext 接口的实现类之一，通过读取类路径下的 XML 配置文件，可以实例化和管理 Spring 容器中的各种 Bean。
+
 ```java
 public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContext {
 
@@ -24,8 +26,8 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
         if (locations != null) {
             this.configLocations = new String[locations.length];
             for (int i = 0; i < locations.length; i++) {
-                // resolvePath()方法主要用于解析给定的路径数组, 
-                // 如果数组中包含特殊符号, 如${var}, 
+                // resolvePath()方法主要用于解析给定的路径数组,
+                // 如果数组中包含特殊符号, 如${var},
                 // 那么在resoIvePath()中会搜寻匹配的系统变量并替换
                 this.configLocations[i] = resolvePath(locations[i]).trim();
             }
@@ -35,10 +37,14 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
         }
     }
 }
+```
 
+## refresh()方法
+
+```java
 public abstract class AbstractApplicationContext extends DefaultResourceLoader
         implements ConfigurableApplicationContext {
-    
+
     public void refresh() throws BeansException, IllegalStateException {
         synchronized (this.startupShutdownMonitor) {
             // 准备工作

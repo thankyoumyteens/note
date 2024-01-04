@@ -1,16 +1,16 @@
-# 使用ApplicationContext
+# ApplicationContext
 
-maven 依赖: 
+maven 依赖:
 
 ```xml
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context</artifactId>
-    <version>5.2.5.RELEASE</version>
+    <version>5.0.20.RELEASE</version>
 </dependency>
 ```
 
-定义 bean: 
+定义 bean:
 
 ```java
 public class MyTestBean {
@@ -24,7 +24,7 @@ public class MyTestBean {
 }
 ```
 
-配置文件: 
+配置文件 applicationContextTest.xml:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -37,13 +37,14 @@ public class MyTestBean {
 </beans>
 ```
 
-测试代码: 
+测试代码:
 
 ```java
 public class ApplicationContextTest {
     public static void main(String[] args) {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContextTest.xml");
         MyTestBean bean = (MyTestBean) ac.getBean("myTestBean");
+        System.out.println(bean.getTestStr());
     }
 }
 ```
