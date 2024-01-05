@@ -1,7 +1,9 @@
-# 安装nvm
+# 安装 nvm
 
 ```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+# 国内镜像
+curl -o- https://gitee.com/RubyMetric/nvm-cn/raw/main/install.sh | bash
 ```
 
 # 重启终端
@@ -10,15 +12,22 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 nvm --version
 ```
 
-# 安装node
+# 设置国内源
 
-高版本的nodejs需要更高版本的glibc编译环境, 而升级glibc可能会对系统稳定性产生影响, 所以建议降低node.js的版本, 去兼容低版本glibc。
+```sh
+nvm npm_mirror https://npmmirror.com/mirrors/npm/
+nvm node_mirror https://npmmirror.com/mirrors/node/
+```
+
+# 安装 node
+
+高版本的 nodejs 需要更高版本的 glibc 编译环境, 而升级 glibc 可能会对系统稳定性产生影响, 所以建议降低 node.js 的版本, 去兼容低版本 glibc。
 
 ```sh
 nvm install 16.15.1
 ```
 
-# 切换node版本
+# 切换 node 版本
 
 ```sh
 nvm use 16.15.1

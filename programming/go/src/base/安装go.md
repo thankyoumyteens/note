@@ -2,7 +2,14 @@
 
 下载安装程序:
 
-[go](https://go.dev/dl/)
+- [官方](https://go.dev/dl/)
+- [镜像](https://mirrors.ustc.edu.cn/golang/)
+
+## 设置国内代理
+
+```sh
+go env -w GOPROXY=https://goproxy.cn,direct
+```
 
 ## vscode 环境配置
 
