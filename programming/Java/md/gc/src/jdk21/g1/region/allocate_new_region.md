@@ -139,7 +139,7 @@ HeapRegion* HeapRegionManager::allocate_free_region(HeapRegionType type, uint re
 //////////////////////////////////////////////////////////////////////
 
 /**
- * 取出空闲region列表的第一个region
+ * 取出空闲region列表的一个region
  */
 inline HeapRegion* FreeRegionList::remove_region(bool from_head) {
   check_mt_safety();
