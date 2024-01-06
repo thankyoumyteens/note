@@ -66,7 +66,7 @@ inline HeapRegion* FreeRegionList::remove_region(bool from_head) {
     _last = nullptr;
   }
 
-  // 更新空闲队列的长度
+  // 更新空闲region列表的长度
   remove(hr);
 
   // 维护NUMA中用到的信息
@@ -76,7 +76,7 @@ inline HeapRegion* FreeRegionList::remove_region(bool from_head) {
 }
 
 /**
- * 取出头节点的region, 并把它移出队列
+ * 取出头节点的region, 并把它移出空闲region列表
  */
 inline HeapRegion* FreeRegionList::remove_from_head_impl() {
   HeapRegion* result = _head;
@@ -91,7 +91,7 @@ inline HeapRegion* FreeRegionList::remove_from_head_impl() {
 }
 
 /**
- * 取出尾节点的region, 并把它移出队列
+ * 取出尾节点的region, 并把它移出空闲region列表
  */
 inline HeapRegion* FreeRegionList::remove_from_tail_impl() {
   HeapRegion* result = _tail;

@@ -72,6 +72,7 @@
     - [扩大新生代](./jdk21/g1/region/expand_young.md)
       - [计算pause_time_ratio](./jdk21/g1/region/pause_time_ratio.md)
     - [申请新region](./jdk21/g1/region/allocate_new_region.md)
+      - [扩大堆空间](./jdk21/g1/region/expand_single_region.md)
   - [new字节码指令](./jdk21/g1/allocate_object/new.md)
     - [从TLAB中分配对象](./jdk21/g1/allocate_object/tlab_allocate.md)
     - [慢速分配对象](./jdk21/g1/allocate_object/allocate_slow.md)

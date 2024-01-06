@@ -66,8 +66,8 @@ G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
 
 /**
  * 计算新生代region的范围, 调用时机:
- *   1. 堆初始化时
- *   2. 堆空间改变时(堆中的region数量改变)
+ *   1. 堆空间初始化时
+ *   2. 堆空间改变时(堆中的region数量改变, 比如GC后需要调整堆空间大小)
  *
  * number_of_heap_regions: 堆中region的总数
  * min_young_length: 新生代region个数的最小值
