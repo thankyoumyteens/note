@@ -73,8 +73,7 @@
       - [漏标](./garbage_collection/garbage_collector/missing.md)
   - [Serial和SerialOld](./garbage_collection/garbage_collector/serial.md)
   - [ParallelGC](./garbage_collection/garbage_collector/parallel.md)
-  - [ParNew](./garbage_collection/garbage_collector/par_new.md)
-  - [CMS](./garbage_collection/garbage_collector/cms.md)
+  - [ParNew和CMS](./garbage_collection/garbage_collector/cms.md)
   - [G1](./garbage_collection/garbage_collector/g1.md)
   - [ZGC](./garbage_collection/garbage_collector/zgc.md)
 

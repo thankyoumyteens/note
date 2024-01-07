@@ -1,4 +1,4 @@
-# ParallelScavenge 和 ParallelOld
+# ParallelGC(ParallelScavenge 和 ParallelOld)
 
 Parallel Scavenge 是一款新生代回收器, 它是基于标记-复制算法实现的, 能够并行回收的多线程回收器。Parallel Scavenge 的特点是它的关注点与其他回收器不同, 其他回收器的关注点是尽可能地缩短垃圾回收时用户线程的停顿时间, 而 Parallel Scavenge 的目标是提高吞吐量, 它不会关心 GC 时用户线程的停顿时间。
 
