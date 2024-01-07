@@ -59,10 +59,11 @@
     - [分代收集理论](./garbage_collection/generational_collection.md)
     - [标记清除算法](./garbage_collection/mark_sweep.md)
     - [标记复制算法](./garbage_collection/mark_copy.md)
-    - [标记整理算法](./garbage_collection/mark_compact.md)
+    - [标记压缩算法](./garbage_collection/mark_compact.md)
 
 - [垃圾回收器](./garbage_collection/garbage_collector/collector.md)
   - [基本概念](./garbage_collection/garbage_collector/pre.md)
+      - [对象图](./garbage_collection/garbage_collector/object_graph.md)
       - [根节点枚举](./garbage_collection/garbage_collector/gc_root.md)
       - [安全点和安全区域](./garbage_collection/garbage_collector/safe_point.md)
       - [记忆集与卡表](./garbage_collection/garbage_collector/rset.md)
@@ -75,6 +76,7 @@
   - [ParallelGC](./garbage_collection/garbage_collector/parallel.md)
   - [ParNew和CMS](./garbage_collection/garbage_collector/cms.md)
   - [G1](./garbage_collection/garbage_collector/g1.md)
+  - [Shenandoah](./garbage_collection/garbage_collector/shenandoah.md)
   - [ZGC](./garbage_collection/garbage_collector/zgc.md)
 
 - [编译与优化](./java_compile/compile.md)
