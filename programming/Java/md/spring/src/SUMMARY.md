@@ -3,6 +3,7 @@
 - [Java](./java/java.md)
   - [正则表达式](./java/正则表达式.md)
   - [日期操作](./java/日期操作.md)
+  - [BigDecimal](./java/BigDecimal.md)
 
 - [Maven](./Maven/Maven.md)
   - [设置国内源](./Maven/设置国内源.md)
@@ -23,7 +24,12 @@
   - [EasyExcel 导出表头合并](./excel/EasyExcel导出表头合并.md)
 
 - [字节码技术](./bytecode/bytecode.md)
-  - [编译期处理注解(APT)](<./bytecode/编译期处理注解(APT).md>)
+  - [编译期处理注解(APT)](./bytecode/编译期处理注解(APT).md)
+  - [Javassist](./bytecode/javassist.md)
+    - [配置依赖](./bytecode/javassist/配置依赖.md)
+    - [创建class文件](./bytecode/javassist/创建class文件.md)
+    - [修改class文件](./bytecode/javassist/修改class文件.md)
+    - [运行时修改class](./bytecode/javassist/运行时修改class.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK 动态代理](./proxy/JDK动态代理.md)

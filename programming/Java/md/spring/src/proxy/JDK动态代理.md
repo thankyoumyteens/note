@@ -1,6 +1,7 @@
-# JDK动态代理的用法
+# JDK 动态代理的用法
 
-DemoInterface接口
+DemoInterface 接口
+
 ```java
 package org.example;
 
@@ -9,7 +10,8 @@ public interface DemoInterface {
 }
 ```
 
-DemoInterface接口的实现类
+DemoInterface 接口的实现类
+
 ```java
 package org.example;
 
@@ -21,6 +23,7 @@ public class DemoInterfaceImpl implements DemoInterface {
 ```
 
 实现动态代理
+
 ```java
 package org.example;
 import java.lang.reflect.InvocationHandler;
@@ -50,6 +53,7 @@ public class DemoProxy implements InvocationHandler {
 ```
 
 使用动态代理
+
 ```java
 package org.example;
 import java.lang.reflect.Proxy;
@@ -65,6 +69,7 @@ public class App {
 ```
 
 输出
+
 ```
 pre
 ok
@@ -76,6 +81,7 @@ Process finished with exit code 0
 # 把动态生成的代理类保存到磁盘
 
 在程序入口加下下面一行
+
 ```java
 package org.example;
 import java.lang.reflect.Proxy;
@@ -177,10 +183,10 @@ public final class $Proxy0 extends Proxy implements DemoInterface {
 }
 ```
 
-可以发现$Proxy0类实现了Proxy.newProxyInstance()传入的接口DemoInterface。
+可以发现$Proxy0 类实现了 Proxy.newProxyInstance()传入的接口 DemoInterface。
 
-$Proxy0中的每一个方法(call、equals、toString等)都改成了被super.h.invoke()调用, 其中的h如下: 
+$Proxy0 中的每一个方法(call、equals、toString 等)都改成了被 super.h.invoke()调用, 其中的 h 如下:
 
 ![](./img/Proxy_h.png)
 
-所以, 最终$Proxy0中的所有方法都会由实现了InvocationHandler接口的DemoProxy调用。
+所以, 最终$Proxy0 中的所有方法都会由实现了 InvocationHandler 接口的 DemoProxy 调用。
