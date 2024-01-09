@@ -1,4 +1,4 @@
-# 直接在堆中分配
+# 直接在 region 中分配
 
 ```cpp
 //////////////////////////////////////////////////////////////////
@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////////
 
 /**
- * 直接在堆中分配对象内存
+ * 直接在region中分配对象内存
  */
 HeapWord* MemAllocator::mem_allocate_outside_tlab(Allocation& allocation) const {
   allocation._allocated_outside_tlab = true;

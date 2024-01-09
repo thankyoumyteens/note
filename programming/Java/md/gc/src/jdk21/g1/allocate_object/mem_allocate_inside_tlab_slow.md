@@ -40,7 +40,7 @@ HeapWord* MemAllocator::mem_allocate_inside_tlab_slow(Allocation& allocation) co
     tlab.record_slow_allocation(_word_size);
     // 返回null,
     // 以调用mem_allocate_outside_tlab()
-    // 直接在堆中分配这个对象
+    // 直接在region中分配这个对象
     return nullptr;
   }
 

@@ -148,7 +148,7 @@ HeapWord* MemAllocator::mem_allocate_slow(Allocation& allocation) const {
       return mem;
     }
   }
-  // 还是失败, 直接在堆中分配对象内存
+  // 还是失败, 直接在region中分配对象内存
   return mem_allocate_outside_tlab(allocation);
 }
 ```

@@ -77,7 +77,7 @@
     - [从TLAB中分配对象](./jdk21/g1/allocate_object/tlab_allocate.md)
     - [慢速分配对象](./jdk21/g1/allocate_object/allocate_slow.md)
       - [在新的TLAB中分配](./jdk21/g1/allocate_object/mem_allocate_inside_tlab_slow.md)
-      - [直接在堆中分配](./jdk21/g1/allocate_object/mem_allocate_outside_tlab.md)
+      - [直接在region中分配](./jdk21/g1/allocate_object/mem_allocate_outside_tlab.md)
         - [CAS分配](./jdk21/g1/allocate_object/attempt_allocation.md)
         - [加锁分配](./jdk21/g1/allocate_object/attempt_allocation_slow.md)
           - [拿到锁后分配](./jdk21/g1/allocate_object/attempt_allocation_locked.md)
