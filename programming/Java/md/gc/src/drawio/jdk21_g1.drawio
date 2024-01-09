@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2023-12-20T14:33:33.843Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.1 Chrome/112.0.5615.204 Electron/24.6.0 Safari/537.36" etag="kBsBoLpKXKbbR8tqI4zN" version="21.5.1" type="device">
+<mxfile host="Electron" modified="2024-01-09T14:39:00.351Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.1 Chrome/112.0.5615.204 Electron/24.6.0 Safari/537.36" etag="2XWyABCqo6ARkXCsET-A" version="21.5.1" type="device" pages="3">
   <diagram name="new" id="bklyo7J1YZmxzQaDpNCq">
     <mxGraphModel dx="1863" dy="606" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -79,6 +79,142 @@
         </mxCell>
         <mxCell id="sWprTyQdZ1LkLAopUJ1c-22" value="new指令执行完毕" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="-120" y="960" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="oW3j_rPfgROvcho1qrUc" name="new指令">
+    <mxGraphModel dx="1151" dy="673" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-OJIdpRybpenP9V4FP4R-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="-OJIdpRybpenP9V4FP4R-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="339" y="80" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-7" target="-OJIdpRybpenP9V4FP4R-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-4" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="-OJIdpRybpenP9V4FP4R-3">
+          <mxGeometry x="-0.2877" y="1" relative="1" as="geometry">
+            <mxPoint x="-1" y="27" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-7" target="-OJIdpRybpenP9V4FP4R-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-6" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="-OJIdpRybpenP9V4FP4R-5">
+          <mxGeometry x="-0.2348" y="-1" relative="1" as="geometry">
+            <mxPoint x="1" y="-38" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-7" value="是否可以&lt;br&gt;从TLAB中分配&lt;br&gt;内存空间" style="rhombus;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="264" y="120" width="150" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-9" target="-OJIdpRybpenP9V4FP4R-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-9" value="从klass中获取对象占用内存的大小" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="160" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-10" target="rWQDr-o0GuLbs398mI11-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="399" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-10" value="开始慢速分配过程" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="430" y="480" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-13" target="-OJIdpRybpenP9V4FP4R-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-13" value="尝试从TLAB中分配对象的内存空间" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="160" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-18" target="-OJIdpRybpenP9V4FP4R-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-15" value="是" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="-OJIdpRybpenP9V4FP4R-14">
+          <mxGeometry x="-0.2896" y="-3" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-0RTffuCLD2pMuLuq9Dc-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-18" target="-OJIdpRybpenP9V4FP4R-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-0RTffuCLD2pMuLuq9Dc-2" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="-0RTffuCLD2pMuLuq9Dc-1">
+          <mxGeometry x="0.0313" y="2" relative="1" as="geometry">
+            <mxPoint y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-18" value="内存分配是否成功" style="rhombus;whiteSpace=wrap;html=1;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="160" y="470" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="-OJIdpRybpenP9V4FP4R-20" target="rWQDr-o0GuLbs398mI11-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="279" y="730" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-OJIdpRybpenP9V4FP4R-20" value="初始化这块内存空间" style="rounded=0;whiteSpace=wrap;html=1;align=center;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
+          <mxGeometry x="160" y="600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rWQDr-o0GuLbs398mI11-1" value="new指令" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="283.5" y="20" width="111" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rWQDr-o0GuLbs398mI11-2" value="new指令执行完毕" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="278.5" y="710" width="121" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="7BWk7HoBqgWX0FazAnfg" name="慢速分配过程">
+    <mxGraphModel dx="1036" dy="606" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GyfSc5u9ufKp2un-3A2U-11" target="GyfSc5u9ufKp2un-3A2U-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-11" value="开始慢速分配" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="800" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GyfSc5u9ufKp2un-3A2U-23" target="GyfSc5u9ufKp2un-3A2U-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-23" value="尝试从TLAB中分配对象内存" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="960" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GyfSc5u9ufKp2un-3A2U-28" target="GyfSc5u9ufKp2un-3A2U-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-27" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="GyfSc5u9ufKp2un-3A2U-26">
+          <mxGeometry x="-0.21" y="-4" relative="1" as="geometry">
+            <mxPoint x="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-28" value="内存分配是否成功" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GyfSc5u9ufKp2un-3A2U-30" target="GyfSc5u9ufKp2un-3A2U-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-30" value="申请一个新的TLAB, 并在新的TLAB中分配对象内存" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bZEwRvsZJEGcgtPM8opT-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GyfSc5u9ufKp2un-3A2U-33" target="GyfSc5u9ufKp2un-3A2U-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bZEwRvsZJEGcgtPM8opT-2" value="否" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="bZEwRvsZJEGcgtPM8opT-1">
+          <mxGeometry x="-0.1314" y="3" relative="1" as="geometry">
+            <mxPoint x="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-33" value="内存分配是否成功" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1440" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="GyfSc5u9ufKp2un-3A2U-34" value="在堆中分配对象内存" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="310" y="1660" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
