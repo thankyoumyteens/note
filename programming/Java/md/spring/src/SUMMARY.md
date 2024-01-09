@@ -29,6 +29,7 @@
     - [配置依赖](./bytecode/javassist/配置依赖.md)
     - [创建class文件](./bytecode/javassist/创建class文件.md)
     - [修改class文件](./bytecode/javassist/修改class文件.md)
+    - [修改jar包中的class文件](./bytecode/javassist/修改jar包中的class文件.md)
     - [运行时修改class](./bytecode/javassist/运行时修改class.md)
 
 - [动态代理](./proxy/proxy.md)

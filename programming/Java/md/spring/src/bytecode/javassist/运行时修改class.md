@@ -22,9 +22,11 @@ import java.lang.reflect.Method;
 
 public class JavassistDemo {
 
+    /**
+     * 需要保证org.example.Demo类被其它地方加载前调用此方法
+     */
     public static void editClass() throws Exception {
         ClassPool pool = ClassPool.getDefault();
-
         CtClass classDemo = pool.get("org.example.Demo");
 
         // 新增方法
