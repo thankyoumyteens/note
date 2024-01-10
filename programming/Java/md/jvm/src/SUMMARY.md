@@ -6,8 +6,11 @@
 
 - [类的加载](./load_class/load_class.md)
   - [class文件结构](./load_class/class_file/class_file.md)
-    - [魔数和版本号](./load_class/class_file/magic_and_version.md)
-    - [常量池](./load_class/class_file/constant_pool.md)
+    - [编译一个java文件](./load_class/class_file/get_class_file.md)
+    - [魔数](./load_class/class_file/magic.md)
+    - [版本号](./load_class/class_file/version.md)
+    - [常量池](./load_class/class_file/constant_pool_overview.md)
+      - [常量池中的常量](./load_class/class_file/constant_pool_const.md)
     - [访问标志](./load_class/class_file/access_flags.md)
     - [索引](./load_class/class_file/indexes.md)
     - [字段](./load_class/class_file/fields.md)
