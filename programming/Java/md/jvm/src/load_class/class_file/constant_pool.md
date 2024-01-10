@@ -1,6 +1,6 @@
 # 常量池
 
-紧接着版本号之后的是常量池的容量(constant_pool_count), 表示常量池的大小。
+紧接着版本号之后的是常量池的容量(constant_pool_count), 表示常量池中常量的个数。
 
 常量池的索引是从 1 开始的。如果后面某些指向常量池的索引值的数据在特定情况下需要表达不引用任何一个常量池项目, 可以把索引值设置为 0 来表示。
 
@@ -102,6 +102,6 @@ public class ClassFileDemo {
 
 以常量池的第一项常量为例, 它的标志位是`0x0A`, 即十进制的 10, 对应的常量是 CONSTANT_Methodref_info 类型, 此类型的常量代表一个类中方法的符号引用。CONSTANT_Methodref_info 类型的结构是: tag+index+index。所以紧接着标志位的是指向声明方法的类描述符 CONSTANT_Class info 的索引项`0x0004`。再后面是指向名称及类型描述符 CONSTANT_NameAndType_info 的索引项`0x0012`, 即十进制的 18。
 
-使用 javap -verbose ClassFileDemo.class 命令解析 class 文件, 可以对应上第一项常量的内容: 
+使用 javap -verbose ClassFileDemo.class 命令解析 class 文件, 可以对应上第一项常量的内容:
 
 ![](../../img/javap1.png)

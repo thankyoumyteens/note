@@ -5,7 +5,7 @@
   - [Win11 编译 OpenJDK21](./overview/compile_openjdk21.md)
 
 - [类的加载](./load_class/load_class.md)
-  - [类文件结构](./load_class/class_file/class_file.md)
+  - [class文件结构](./load_class/class_file/class_file.md)
     - [魔数和版本号](./load_class/class_file/magic_and_version.md)
     - [常量池](./load_class/class_file/constant_pool.md)
     - [访问标志](./load_class/class_file/access_flags.md)
