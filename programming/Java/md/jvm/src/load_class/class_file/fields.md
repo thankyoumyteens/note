@@ -1,10 +1,8 @@
 # 字段
 
-接口索引集合之后, 是字段个数(fields_count)和字段集合(fields)。字段集合由字段表(field_info)组成。
+Java 中的字段(Field)包括类变量和实例变量, 通过 class 文件中的字段个数(fields_count)和字段集合(fields)共同表示。字段个数表示类中定义了多少个字段, 这些字段存放在字段集合中, 字段集合由字段表(field_info)组成。
 
-字段表(field_info)用于描述接口或者类中声明的字段。Java 语言中的字段(Field)包括类变量和实例变量, 但不包括在方法内部声明的局部变量。
-
-## 字段表结构
+字段表(field_info)用于描述接口或者类中声明的字段, 定义如下:
 
 | 类型           | 名称             | 数量             |
 | -------------- | ---------------- | ---------------- |
@@ -73,6 +71,6 @@ public class ClassFileDemo {
 
 access_flags 为`0x0000`, 表示字段没有修饰符。name_index 为`0x0005`, 指向常量池中索引为 5 的值`num`。descriptor_index 为`0x0006`, 指向常量池中索引为 6 的值`I`。attributes_count 为`0x0000`, 表示字段没有额外的属性。
 
-使用 javap -verbose ClassFileDemo.class 命令解析 class 文件, 可以对应上字段的内容: 
+使用 javap -verbose ClassFileDemo.class 命令解析 class 文件, 可以对应上字段的内容:
 
 ![](../../img/javap4.png)

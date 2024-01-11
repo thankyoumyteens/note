@@ -1,6 +1,8 @@
 # 访问标志
 
-在常量池的部分结束之后, 接下来的是访问标志(access_flags), 这个标志用于识别一些类或者接口层次的访问信息, 包括: 这个 Class 是类还是接口、是否定义为 public 类型、是否定义为 abstract 类型、如果是类的话, 是否被声明为 final 等等。
+在常量池的部分结束之后, 接下来的是访问标志(access_flags), 这个标志用于识别一些类或者接口层次的访问信息, 包括: 这个 class 文件描述的是类还是接口、这个类(或接口)是否定义为 public、是否定义为 abstract、如果是类的话, 是否被声明为 final 等等。
+
+访问标志的定义如下:
 
 | 标志名称       | 标志值 | 说明                                                                                         |
 | -------------- | ------ | -------------------------------------------------------------------------------------------- |
@@ -16,39 +18,10 @@
 
 access_flags 中一共有 16 个标志位可以使用, 当前只定义了其中 9 个, 没有使用到的标志位要求一律为零。
 
-如果一个类既是 public 的, 又是 final 的, 而且使用 JDK8 编译, 那么它的访问标志就是:
+如果一个类既是 public 的, 又是 final 的, 而且使用 JDK1.0.2 之后的 JDK  编译, 那么它的访问标志就是 ACC_PUBLIC, ACC_FINAL, ACC_SUPER 这三个的标志值相加的结果: 0x0031。
 
-```
-  0x0001
-+ 0x0010
-+ 0x0020
-+ 0x0000
-+ 0x0000
-+ 0x0000
-+ 0x0000
-+ 0x0000
-+ 0x0000
-= 0x0031
-```
+ClassFileDemo.class 文件中定义了一个 public 的类: ClassFileDemo, 并且它使用了 JDK 21 进行编译, 因此它应该包含 ACC_PUBLIC 和 ACC_SUPER 这两个标志, 所以它的访问标志是 0x0021。
 
----
+查看 ClassFileDemo.class 文件中访问标志的值, 可以看到正是 0x0021:
 
-```java
-public class ClassFileDemo {
-    int num;
-
-    public int getNum() {
-        return this.num;
-    }
-}
-```
-
-字节码文件内容:
-
-![](../../img/class_file3.png)
-
-ClassFileDemo 是一个普通 Java 类, 不是接口、枚举、注解或者模块, 被 public 关键字修饰但没有被声明为 final 和 abstract, 并且它使用了 JDK 1.2 之后的编译器进行编译, 因此它的 ACC_PUBLIC 和 ACC_SUPER 标志应当为真, 其它的标志应当为假, 因此它的访问标志的值是`0x0021`。
-
-使用 javap -verbose ClassFileDemo.class 命令解析 class 文件, 可以对应上访问标志的内容:
-
-![](../../img/javap2.png)
+![](../../img/class_file_af.png)
