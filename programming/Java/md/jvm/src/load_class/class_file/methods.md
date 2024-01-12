@@ -46,7 +46,7 @@ int indexOf(char[]source,int sourceOffset,int sourceCount,char[]target,int targe
 
 方法的定义可以通过访问标志、名称索引、描述符索引来表达清楚, 而方法里面的代码经过编译后, 会存放在方法的附加属性(attributes)中一个名为 Code 的属性(attribute_info)里面。
 
-ClassFileDemo 类中有两个方法, 一个是编译器自动生成的构造器`<init>()`方法, 另一个是源码中的`getNum()`方法。
+ClassFileDemo 类中有两个方法, 一个是编译器自动生成的构造器 `<init>()` 方法, 另一个是源码中的 getNum() 方法。
 
 图中标出了方法个数和方法集合中的第一个方法:
 
