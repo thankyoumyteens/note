@@ -1,4 +1,8 @@
-# 初始化region的大小
+# 初始化 region 的大小
+
+在 G1 中, 每个 region 的大小都是相同的。region 的大小会影响 G1 的运行效率, 如果 region 过大, 一个 region 虽然可以分配更多的对象, 但回收就会花费更长的时间。如果 region 过小, 则会导致对象的分配效率过于低下。
+
+可以通过参数 -XX:G1HeapRegionSize 来设置 Region 的大小, 它的默认值为 0。如果不指定 region 的大小, G1 就会自己推断出 region 的合适大小。
 
 ```cpp
 ////////////////////////////////////////////////////////////
@@ -24,7 +28,7 @@ void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
   }
 
   // 确保region大小是2的幂
-  // 返回值满足: 
+  // 返回值满足:
   //   1. 大于或等于region_size
   //   2. 是2的n次方
   region_size = round_up_power_of_2(region_size);

@@ -1,6 +1,6 @@
 # 初始化新生代的大小
 
-新生代的大小即类型是新生代的reion个数。
+新生代的大小即类型是新生代的 reion 个数。
 
 ```cpp
 /////////////////////////////////////////////////////////////////
@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////
 
 /**
+ * 初始化G1YoungGenSizer
  * G1Policy的构造函数中调用
  * _sizer_kind默认使用SizerDefaults
  * _min_desired_young_length: 最小新生代region数量
@@ -78,21 +79,27 @@ void G1YoungGenSizer::recalculate_min_max_young_length(uint number_of_heap_regio
 
   switch (_sizer_kind) {
     case SizerDefaults:
+      // min_young_length和max_young_length都会动态调整
       *min_young_length = calculate_default_min_length(number_of_heap_regions);
       *max_young_length = calculate_default_max_length(number_of_heap_regions);
       break;
     case SizerNewSizeOnly:
+      // min_young_length固定, 只调整max_young_length
       *max_young_length = calculate_default_max_length(number_of_heap_regions);
       *max_young_length = MAX2(*min_young_length, *max_young_length);
       break;
     case SizerMaxNewSizeOnly:
+      // max_young_length固定, 只调整min_young_length
       *min_young_length = calculate_default_min_length(number_of_heap_regions);
       *min_young_length = MIN2(*min_young_length, *max_young_length);
       break;
     case SizerMaxAndNewSize:
-      // 新生代region个数固定, 不会动态调整
+      // 新生代region个数固定, 不会调整,
+      // 在后续对新生代进行回收的时候可能满足不了用户期望的暂停时间
       break;
     case SizerNewRatio:
+      // 新生代region个数调整为当前堆空间的百分比,
+      // min_young_length和max_young_length相等
       *min_young_length = MAX2((uint)(number_of_heap_regions / (NewRatio + 1)), 1u);
       *max_young_length = *min_young_length;
       break;
