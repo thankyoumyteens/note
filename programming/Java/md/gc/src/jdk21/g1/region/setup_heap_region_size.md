@@ -19,9 +19,11 @@ void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
   // G1HeapRegionSize为0表示由JVM自己计算region的大小
   if (region_size == 0) {
     // 把堆空间分为2048个region, 计算每个region的大小
-    // starget_number()返回2048
-    // min_size()返回1M
-    // max_ergonomics_size()返回32M
+    // region大小限制在[1M, 32M]之间
+    //
+    // target_number(): 返回2048
+    // min_size(): region最小的大小, 返回1M
+    // max_ergonomics_size(): region最大的合理大小, 超过这个大小可能会降低性能, 返回32M
     region_size = clamp(max_heap_size / HeapRegionBounds::target_number(),
                         HeapRegionBounds::min_size(),
                         HeapRegionBounds::max_ergonomics_size());
@@ -44,7 +46,7 @@ void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
   LogOfHRGrainBytes = region_size_log;
 
   guarantee(GrainBytes == 0, "we should only set it once");
-  // 用于扩容堆空间
+  // 记录region的大小, 用于后面扩容堆空间
   GrainBytes = region_size;
 
   guarantee(GrainWords == 0, "we should only set it once");
