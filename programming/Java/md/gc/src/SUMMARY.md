@@ -69,6 +69,7 @@
   - [region](./jdk21/g1/region/region.md)
     - [初始化region的大小](./jdk21/g1/region/setup_heap_region_size.md)
     - [初始化新生代的大小](./jdk21/g1/region/setup_young_region_size.md)
+      - [停顿预测模型](./jdk21/g1/region/g1_predict.md)
     - [扩大新生代](./jdk21/g1/region/expand_young.md)
       - [计算pause_time_ratio](./jdk21/g1/region/pause_time_ratio.md)
     - [申请新region](./jdk21/g1/region/allocate_new_region.md)

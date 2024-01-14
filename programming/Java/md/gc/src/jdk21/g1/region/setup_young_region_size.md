@@ -124,3 +124,306 @@ uint G1YoungGenSizer::calculate_default_max_length(uint new_number_of_heap_regio
   return MAX2(1U, default_value);
 }
 ```
+
+## 初始化新生代region的时机
+
+```cpp
+//////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+//////////////////////////////////////////////////////////
+
+/**
+ * G1CollectedHeap初始化时调用
+ */
+void G1Policy::init(G1CollectedHeap* g1h, G1CollectionSet* collection_set) {
+  _g1h = g1h;
+  _collection_set = collection_set;
+
+  assert(Heap_lock->owned_by_self(), "Locking discipline.");
+  // 传入整个堆空间的region数量
+  _young_gen_sizer.adjust_max_new_size(_g1h->max_regions());
+  // 记录当前空闲region数量
+  _free_regions_at_end_of_collection = _g1h->num_free_regions();
+  // 设置新生代region数量
+  update_young_length_bounds();
+
+  // 初始化cset
+  _collection_set->start_incremental_building();
+}
+
+/////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1YoungGenSizer.cpp //
+/////////////////////////////////////////////////////////////////
+
+void G1YoungGenSizer::adjust_max_new_size(uint number_of_heap_regions) {
+
+  uint temp = _min_desired_young_length;
+  uint result = _max_desired_young_length;
+  recalculate_min_max_young_length(number_of_heap_regions, &temp, &result);
+  // 计算新生代region最大字节数
+  size_t max_young_size = result * HeapRegion::GrainBytes;
+  if (max_young_size != MaxNewSize) {
+    FLAG_SET_ERGO(MaxNewSize, max_young_size);
+  }
+}
+```
+
+## 设置新生代region数量
+
+```cpp
+//////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+//////////////////////////////////////////////////////////
+
+void G1Policy::update_young_length_bounds() {
+  assert(!Universe::is_fully_initialized() || SafepointSynchronize::is_at_safepoint(), "must be");
+  bool for_young_only_phase = collector_state()->in_young_only_phase();
+  update_young_length_bounds(_analytics->predict_pending_cards(for_young_only_phase),
+                             _analytics->predict_rs_length(for_young_only_phase));
+}
+
+void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length) {
+  // uint young_list_target_length() const { return Atomic::load(&_young_list_target_length); }
+  // 当前新生代region数量
+  uint old_young_list_target_length = young_list_target_length();
+
+  uint new_young_list_desired_length = calculate_young_desired_length(pending_cards, rs_length);
+  uint new_young_list_target_length = calculate_young_target_length(new_young_list_desired_length);
+  uint new_young_list_max_length = calculate_young_max_length(new_young_list_target_length);
+
+  log_trace(gc, ergo, heap)("Young list length update: pending cards %zu rs_length %zu old target %u desired: %u target: %u max: %u",
+                            pending_cards,
+                            rs_length,
+                            old_young_list_target_length,
+                            new_young_list_desired_length,
+                            new_young_list_target_length,
+                            new_young_list_max_length);
+
+  // Write back. This is not an attempt to control visibility order to other threads
+  // here; all the revising of the young gen length are best effort to keep pause time.
+  // E.g. we could be "too late" revising young gen upwards to avoid GC because
+  // there is some time left, or some threads could get different values for stopping
+  // allocation.
+  // That is "fine" - at most this will schedule a GC (hopefully only a little) too
+  // early or too late.
+  // 设置新生代预期region数量
+  Atomic::store(&_young_list_desired_length, new_young_list_desired_length);
+  // 设置新生代实际region数量
+  Atomic::store(&_young_list_target_length, new_young_list_target_length);
+  // 设置新生代最大region数量
+  Atomic::store(&_young_list_max_length, new_young_list_max_length);
+}
+```
+
+## 设置新生代预期region数量
+
+```cpp
+//////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+//////////////////////////////////////////////////////////
+
+// Calculates desired young gen length. It is calculated from:
+//
+// - sizer min/max bounds on young gen
+// - pause time goal for whole young gen evacuation
+// - MMU goal influencing eden to make GCs spaced apart
+// - if after a GC, request at least one eden region to avoid immediate full gcs
+//
+// We may enter with already allocated eden and survivor regions because there
+// are survivor regions (after gc). Young gen revising can call this method at any
+// time too.
+//
+// For this method it does not matter if the above goals may result in a desired
+// value smaller than what is already allocated or what can actually be allocated.
+// This return value is only an expectation.
+//
+uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_length) const {
+  uint min_young_length_by_sizer = _young_gen_sizer.min_desired_young_length();
+  uint max_young_length_by_sizer = _young_gen_sizer.max_desired_young_length();
+
+  assert(min_young_length_by_sizer >= 1, "invariant");
+  assert(max_young_length_by_sizer >= min_young_length_by_sizer, "invariant");
+
+  // Calculate the absolute and desired min bounds first.
+
+  // This is how many survivor regions we already have.
+  const uint survivor_length = _g1h->survivor_regions_count();
+  // Size of the already allocated young gen.
+  const uint allocated_young_length = _g1h->young_regions_count();
+  // This is the absolute minimum young length that we can return. Ensure that we
+  // don't go below any user-defined minimum bound.  Also, we must have at least
+  // one eden region, to ensure progress. But when revising during the ensuing
+  // mutator phase we might have already allocated more than either of those, in
+  // which case use that.
+  uint absolute_min_young_length = MAX3(min_young_length_by_sizer,
+                                        survivor_length + 1,
+                                        allocated_young_length);
+  // Calculate the absolute max bounds. After evac failure or when revising the
+  // young length we might have exceeded absolute min length or absolute_max_length,
+  // so adjust the result accordingly.
+  uint absolute_max_young_length = MAX2(max_young_length_by_sizer, absolute_min_young_length);
+
+  uint desired_eden_length_by_mmu = 0;
+  uint desired_eden_length_by_pause = 0;
+
+  uint desired_young_length = 0;
+  if (use_adaptive_young_list_length()) {
+    desired_eden_length_by_mmu = calculate_desired_eden_length_by_mmu();
+
+    double base_time_ms = predict_base_time_ms(pending_cards, rs_length);
+
+    desired_eden_length_by_pause =
+      calculate_desired_eden_length_by_pause(base_time_ms,
+                                             absolute_min_young_length - survivor_length,
+                                             absolute_max_young_length - survivor_length);
+
+    // Incorporate MMU concerns; assume that it overrides the pause time
+    // goal, as the default value has been chosen to effectively disable it.
+    uint desired_eden_length = MAX2(desired_eden_length_by_pause,
+                                    desired_eden_length_by_mmu);
+
+    desired_young_length = desired_eden_length + survivor_length;
+  } else {
+    // The user asked for a fixed young gen so we'll fix the young gen
+    // whether the next GC is young or mixed.
+    desired_young_length = min_young_length_by_sizer;
+  }
+  // Clamp to absolute min/max after we determined desired lengths.
+  desired_young_length = clamp(desired_young_length, absolute_min_young_length, absolute_max_young_length);
+
+  log_trace(gc, ergo, heap)("Young desired length %u "
+                            "survivor length %u "
+                            "allocated young length %u "
+                            "absolute min young length %u "
+                            "absolute max young length %u "
+                            "desired eden length by mmu %u "
+                            "desired eden length by pause %u ",
+                            desired_young_length, survivor_length,
+                            allocated_young_length, absolute_min_young_length,
+                            absolute_max_young_length, desired_eden_length_by_mmu,
+                            desired_eden_length_by_pause);
+
+  assert(desired_young_length >= allocated_young_length, "must be");
+  return desired_young_length;
+}
+```
+
+# 设置新生代实际region数量
+```cpp
+//////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+//////////////////////////////////////////////////////////
+
+// Limit the desired (wished) young length by current free regions. If the request
+// can be satisfied without using up reserve regions, do so, otherwise eat into
+// the reserve, giving away at most what the heap sizer allows.
+uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
+  uint allocated_young_length = _g1h->young_regions_count();
+
+  uint receiving_additional_eden;
+  if (allocated_young_length >= desired_young_length) {
+    // Already used up all we actually want (may happen as G1 revises the
+    // young list length concurrently, or caused by gclocker). Do not allow more,
+    // potentially resulting in GC.
+    receiving_additional_eden = 0;
+    log_trace(gc, ergo, heap)("Young target length: Already used up desired young %u allocated %u",
+                              desired_young_length,
+                              allocated_young_length);
+  } else {
+    // Now look at how many free regions are there currently, and the heap reserve.
+    // We will try our best not to "eat" into the reserve as long as we can. If we
+    // do, we at most eat the sizer's minimum regions into the reserve or half the
+    // reserve rounded up (if possible; this is an arbitrary value).
+
+    uint max_to_eat_into_reserve = MIN2(_young_gen_sizer.min_desired_young_length(),
+                                        (_reserve_regions + 1) / 2);
+
+    log_trace(gc, ergo, heap)("Young target length: Common "
+                              "free regions at end of collection %u "
+                              "desired young length %u "
+                              "reserve region %u "
+                              "max to eat into reserve %u",
+                              _free_regions_at_end_of_collection,
+                              desired_young_length,
+                              _reserve_regions,
+                              max_to_eat_into_reserve);
+
+    if (_free_regions_at_end_of_collection <= _reserve_regions) {
+      // Fully eat (or already eating) into the reserve, hand back at most absolute_min_length regions.
+      uint receiving_young = MIN3(_free_regions_at_end_of_collection,
+                                  desired_young_length,
+                                  max_to_eat_into_reserve);
+      // We could already have allocated more regions than what we could get
+      // above.
+      receiving_additional_eden = allocated_young_length < receiving_young ?
+                                  receiving_young - allocated_young_length : 0;
+
+      log_trace(gc, ergo, heap)("Young target length: Fully eat into reserve "
+                                "receiving young %u receiving additional eden %u",
+                                receiving_young,
+                                receiving_additional_eden);
+    } else if (_free_regions_at_end_of_collection < (desired_young_length + _reserve_regions)) {
+      // Partially eat into the reserve, at most max_to_eat_into_reserve regions.
+      uint free_outside_reserve = _free_regions_at_end_of_collection - _reserve_regions;
+      assert(free_outside_reserve < desired_young_length,
+             "must be %u %u",
+             free_outside_reserve, desired_young_length);
+
+      uint receiving_within_reserve = MIN2(desired_young_length - free_outside_reserve,
+                                           max_to_eat_into_reserve);
+      uint receiving_young = free_outside_reserve + receiving_within_reserve;
+      // Again, we could have already allocated more than we could get.
+      receiving_additional_eden = allocated_young_length < receiving_young ?
+                                  receiving_young - allocated_young_length : 0;
+
+      log_trace(gc, ergo, heap)("Young target length: Partially eat into reserve "
+                                "free outside reserve %u "
+                                "receiving within reserve %u "
+                                "receiving young %u "
+                                "receiving additional eden %u",
+                                free_outside_reserve, receiving_within_reserve,
+                                receiving_young, receiving_additional_eden);
+    } else {
+      // No need to use the reserve.
+      receiving_additional_eden = desired_young_length - allocated_young_length;
+      log_trace(gc, ergo, heap)("Young target length: No need to use reserve "
+                                "receiving additional eden %u",
+                                receiving_additional_eden);
+    }
+  }
+
+  uint target_young_length = allocated_young_length + receiving_additional_eden;
+
+  assert(target_young_length >= allocated_young_length, "must be");
+
+  log_trace(gc, ergo, heap)("Young target length: "
+                            "young target length %u "
+                            "allocated young length %u "
+                            "received additional eden %u",
+                            target_young_length, allocated_young_length,
+                            receiving_additional_eden);
+  return target_young_length;
+}
+```
+
+## 设置新生代最大region数量
+```cpp
+//////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+//////////////////////////////////////////////////////////
+
+uint G1Policy::calculate_young_max_length(uint target_young_length) const {
+  uint expansion_region_num = 0;
+  // GCLockerEdenExpansionPercent: 默认5
+  if (GCLockerEdenExpansionPercent > 0) {
+    double perc = GCLockerEdenExpansionPercent / 100.0;
+    double expansion_region_num_d = perc * young_list_target_length();
+    // We use ceiling so that if expansion_region_num_d is > 0.0 (but
+    // less than 1.0) we'll get 1.
+    expansion_region_num = (uint) ceil(expansion_region_num_d);
+  }
+  uint max_length = target_young_length + expansion_region_num;
+  assert(target_young_length <= max_length, "overflow");
+  return max_length;
+}
+```
