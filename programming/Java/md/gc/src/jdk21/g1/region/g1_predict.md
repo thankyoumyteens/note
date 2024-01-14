@@ -74,7 +74,7 @@ class G1Predictions {
  public:
   // 调用位置
   // G1ConfidencePercent: 默认50
-  // 
+  //
   // G1Policy::G1Policy(STWGCTimer* gc_timer) :
   //   _predictor(G1ConfidencePercent / 100.0),
   // }

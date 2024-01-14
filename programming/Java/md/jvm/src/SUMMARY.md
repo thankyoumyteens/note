@@ -11,6 +11,7 @@
     - [版本号](./load_class/class_file/version.md)
     - [常量池](./load_class/class_file/constant_pool_overview.md)
       - [常量池中的常量](./load_class/class_file/constant_pool_const.md)
+      - [常量池中的17种数据类型的结构](./load_class/class_file/constant_pool_struct.md)
     - [访问标志](./load_class/class_file/access_flags.md)
     - [类索引](./load_class/class_file/this_class.md)
     - [父类索引](./load_class/class_file/super_class.md)

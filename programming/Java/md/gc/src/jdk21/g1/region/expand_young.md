@@ -1,6 +1,6 @@
 # 扩大新生代
 
-在Young GC的收尾阶段, 会判断是否需要扩大新生代。
+在 Young GC 的收尾阶段, 会判断是否需要扩大新生代。
 
 ```cpp
 /////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
                             _ratio_over_threshold_count);
 
   // Check if we've had enough GC time ratio checks that were over the
-  // threshold to trigger an expansion. 
+  // threshold to trigger an expansion.
   // We'll also expand if we've
   // reached the end of the history buffer and the average of all entries
   // is still over the threshold. This indicates a smaller number of GCs were
@@ -75,7 +75,7 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
   bool filled_history_buffer = _pauses_since_start == _num_prev_pauses_for_heuristics;
   // 判断是否需要扩容
   //   MinOverThresholdForGrowth固定为4, GC暂停时间超过阈值的次数达到4时, 需要扩容
-  // 
+  //
   if ((_ratio_over_threshold_count == MinOverThresholdForGrowth) ||
       (filled_history_buffer && (long_term_pause_time_ratio > threshold))) {
     // GrainBytes在初始化region大小的时候被设置

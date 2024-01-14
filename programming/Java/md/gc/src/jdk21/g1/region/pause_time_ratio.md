@@ -1,4 +1,4 @@
-# 计算pause_time_ratio
+# 计算 pause_time_ratio
 
 ![](../../../img/compute_pause_time_ratios.drawio.png)
 
@@ -47,7 +47,7 @@ void G1Policy::update_gc_pause_time_ratios(G1GCPauseType gc_type, double start_t
 /////////////////////////////////////////////////////////////
 
 void G1Analytics::compute_pause_time_ratios(double end_time_sec, double pause_time_ms) {
-  // 计算_long_term_pause_time_ratio: 
+  // 计算_long_term_pause_time_ratio:
   // 截止到本次为止的GC暂停时间 : 从最早的一次GC结束到本次GC结束间隔的时间
   // 即总的GC暂停时间比例的平均值
   double long_interval_ms = (end_time_sec - oldest_known_gc_end_time_sec()) * 1000.0;
@@ -56,7 +56,7 @@ void G1Analytics::compute_pause_time_ratios(double end_time_sec, double pause_ti
   double gc_pause_time_ms = _recent_gc_times_ms.sum() - _recent_gc_times_ms.oldest() + pause_time_ms;
   _long_term_pause_time_ratio = gc_pause_time_ms / long_interval_ms;
   _long_term_pause_time_ratio = clamp(_long_term_pause_time_ratio, 0.0, 1.0);
-  // 计算_short_term_pause_time_ratio: 
+  // 计算_short_term_pause_time_ratio:
   // 本次GC暂停时间 : 从上一次GC结束到本次GC结束间隔的时间
   // 即本次的GC暂停时间比例
   double short_interval_ms = (end_time_sec - most_recent_gc_end_time_sec()) * 1000.0;

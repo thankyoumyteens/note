@@ -1,6 +1,16 @@
 # 初始化新生代的大小
 
-新生代的大小就是新生代 reion 的个数。G1 会计算出新生代 region 个数的可选范围\[min_young_length, max_young_length\], 在后续调整新生代 region 的时候就会从这个范围中找到一个满足 MaxGCPauseMillis 的最大值。
+新生代的大小就是新生代 reion 的个数。在初始化阶段, G1 会确定新生代 region 个数的可选范围\[min_young_length, max_young_length\]的计算方法。在后续调整新生代 region 的时候, G1 会先使用初始化时确定的计算方法计算出新生代 region 个数的可选范围, 然后从这个范围中找到一个满足 MaxGCPauseMillis 的最大值。
+
+## 确定 min_young_length 和 max_young_length 的计算方法
+
+使用哪种方法计算新生代 region 个数的可选范围, 与启动 JVM 时设置的参数有关:
+
+1. 不设置任何相关的参数: 由 G1 自己决定, min_young_length 的值是: (堆空间的 region 数量 \* G1NewSizePercent) / 100, G1NewSizePercent 是新生代的初始大小占整个堆大小的百分比, 默认为 5。max_young_length 的值是: (堆空间的 region 数量 \* G1MaxNewSizePercent) / 100, G1MaxNewSizePercent 是新生代的最大大小占整个堆大小的百分比, 默认为 60
+2. NewRatio: 如果设置了 NewRatio, 那么 min_young_length 和 max_young_length 相同, 都是: 堆空间 region 个数 / (NewRatio + 1)。如果设置了 NewSize 或者 MaxNewSize, NewRatio 参数就会失效
+3. NewSize: 如果设置了 NewSize, 那么 min_young_length 固定为: NewSize / 一个 region 的大小, max_young_length 会动态变化
+4. MaxNewSize: 如果设置了 MaxNewSize, 那么 max_young_length 固定为: MaxNewSize / 一个 region 的大小, min_young_length 会动态变化
+5. 同时设置了 NewSize 和 MaxNewSize: min_young_length 和 max_young_length 都会固定, 不会动态变化, 在后续对新生代进行回收的时候可能满足不了用户期望的暂停时间
 
 ```cpp
 /////////////////////////////////////////////////////////////////
@@ -10,13 +20,15 @@
 /**
  * 初始化G1YoungGenSizer
  * G1Policy的构造函数中调用
- * _sizer_kind默认使用SizerDefaults
+ *
+ * _sizer_kind: min_young_length 和 max_young_length 的计算方法,
+ *              默认使用SizerDefaults
  * _min_desired_young_length: 最小新生代region数量
  * _max_desired_young_length: 最大新生代region数量
  */
 G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
   _use_adaptive_sizing(true), _min_desired_young_length(0), _max_desired_young_length(0) {
-
+  // 是否手动设置了NewRatio
   if (FLAG_IS_CMDLINE(NewRatio)) {
     if (FLAG_IS_CMDLINE(NewSize) || FLAG_IS_CMDLINE(MaxNewSize)) {
       // 如果设置了NewSize或MaxNewSize会导致NewRatio无效
@@ -41,13 +53,10 @@ G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
 
   if (FLAG_IS_CMDLINE(NewSize)) {
     // 设置最小新生代region数量
-    _min_desired_young_length = MAX2((uint) (NewSize / HeapRegion::GrainBytes),
-                                     1U);
+    _min_desired_young_length = MAX2((uint) (NewSize / HeapRegion::GrainBytes), 1U);
     if (FLAG_IS_CMDLINE(MaxNewSize)) {
       // 设置最大新生代region数量
-      _max_desired_young_length =
-                             MAX2((uint) (MaxNewSize / HeapRegion::GrainBytes),
-                                  1U);
+      _max_desired_young_length = MAX2((uint) (MaxNewSize / HeapRegion::GrainBytes), 1U);
       // 新生代的region数量不会动态变化
       _sizer_kind = SizerMaxAndNewSize;
       _use_adaptive_sizing = _min_desired_young_length != _max_desired_young_length;
@@ -57,9 +66,7 @@ G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
     }
   } else if (FLAG_IS_CMDLINE(MaxNewSize)) {
     // 设置最大新生代region数量
-    _max_desired_young_length =
-                             MAX2((uint) (MaxNewSize / HeapRegion::GrainBytes),
-                                  1U);
+    _max_desired_young_length = MAX2((uint) (MaxNewSize / HeapRegion::GrainBytes), 1U);
     // 动态调整最小新生代region数量
     _sizer_kind = SizerMaxNewSizeOnly;
   }
@@ -94,8 +101,7 @@ void G1YoungGenSizer::recalculate_min_max_young_length(uint number_of_heap_regio
       *min_young_length = MIN2(*min_young_length, *max_young_length);
       break;
     case SizerMaxAndNewSize:
-      // 新生代region个数固定, 不会调整,
-      // 在后续对新生代进行回收的时候可能满足不了用户期望的暂停时间
+      // 新生代region个数固定, 不会调整
       break;
     case SizerNewRatio:
       // 新生代region个数调整为当前堆空间的百分比,
@@ -125,7 +131,11 @@ uint G1YoungGenSizer::calculate_default_max_length(uint new_number_of_heap_regio
 }
 ```
 
-## 初始化新生代region的时机
+## 初始化新生代 region 的时机
+
+<!-- TODO 存疑 -->
+
+在堆空间初始化时(G1CollectedHeap 初始化), 会调用上面的 recalculate_min_max_young_length() 函数计算新生代 region 的范围, 并根据这个范围设置新生代 region 的数量。
 
 ```cpp
 //////////////////////////////////////////////////////////
@@ -159,6 +169,7 @@ void G1YoungGenSizer::adjust_max_new_size(uint number_of_heap_regions) {
 
   uint temp = _min_desired_young_length;
   uint result = _max_desired_young_length;
+  // 计算新生代region的范围
   recalculate_min_max_young_length(number_of_heap_regions, &temp, &result);
   // 计算新生代region最大字节数
   size_t max_young_size = result * HeapRegion::GrainBytes;
@@ -168,7 +179,7 @@ void G1YoungGenSizer::adjust_max_new_size(uint number_of_heap_regions) {
 }
 ```
 
-## 设置新生代region数量
+## 设置新生代 region 数量
 
 ```cpp
 //////////////////////////////////////////////////////////
@@ -187,8 +198,11 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
   // 当前新生代region数量
   uint old_young_list_target_length = young_list_target_length();
 
+  // 计算新生代预期region数量
   uint new_young_list_desired_length = calculate_young_desired_length(pending_cards, rs_length);
+  // 计算新生代实际region数量
   uint new_young_list_target_length = calculate_young_target_length(new_young_list_desired_length);
+  // 计算新生代最大region数量
   uint new_young_list_max_length = calculate_young_max_length(new_young_list_target_length);
 
   log_trace(gc, ergo, heap)("Young list length update: pending cards %zu rs_length %zu old target %u desired: %u target: %u max: %u",
@@ -215,7 +229,7 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 }
 ```
 
-## 设置新生代预期region数量
+## 计算新生代预期 region 数量
 
 ```cpp
 //////////////////////////////////////////////////////////
@@ -308,7 +322,8 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
 }
 ```
 
-# 设置新生代实际region数量
+# 计算新生代实际 region 数量
+
 ```cpp
 //////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
@@ -406,7 +421,8 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
 }
 ```
 
-## 设置新生代最大region数量
+## 计算新生代最大 region 数量
+
 ```cpp
 //////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
