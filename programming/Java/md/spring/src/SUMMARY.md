@@ -25,12 +25,14 @@
 
 - [字节码技术](./bytecode/bytecode.md)
   - [编译期处理注解(APT)](./bytecode/编译期处理注解(APT).md)
-  - [Javassist](./bytecode/javassist.md)
+  - [Javassist](./bytecode/javassist/javassist.md)
     - [配置依赖](./bytecode/javassist/配置依赖.md)
     - [创建class文件](./bytecode/javassist/创建class文件.md)
-    - [修改class文件](./bytecode/javassist/修改class文件.md)
     - [修改jar包中的class文件](./bytecode/javassist/修改jar包中的class文件.md)
     - [运行时修改class](./bytecode/javassist/运行时修改class.md)
+  - [ASM](./bytecode/asm/asm.md)
+    - [将class文件转换为ASM代码](./bytecode/asm/class2asm.md)
+    - [基本用法](./bytecode/asm/quick_start.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK 动态代理](./proxy/JDK动态代理.md)
