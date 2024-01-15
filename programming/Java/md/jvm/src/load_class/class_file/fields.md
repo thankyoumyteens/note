@@ -36,20 +36,20 @@ access_flags 需要满足以下几个条件:
 
 接下来看一下字段描述符, 它的定义如下:
 
-| 标识字符 | 说明                             |
-| -------- | -------------------------------- |
-| B        | 基本类型 byte                    |
-| C        | 基本类型 char                    |
-| D        | 基本类型 double                  |
-| F        | 基本类型 float                   |
-| I        | 基本类型 int                     |
-| J        | 基本类型 long                    |
-| S        | 基本类型 short                   |
-| Z        | 基本类型 boolean                 |
-| V        | 特殊类型 void                    |
-| L        | 对象类型, 比如 Ljava/lang/Object |
+| 标识字符 | 说明                              |
+| -------- | --------------------------------- |
+| B        | 基本类型 byte                     |
+| C        | 基本类型 char                     |
+| D        | 基本类型 double                   |
+| F        | 基本类型 float                    |
+| I        | 基本类型 int                      |
+| J        | 基本类型 long                     |
+| S        | 基本类型 short                    |
+| Z        | 基本类型 boolean                  |
+| V        | 特殊类型 void                     |
+| L        | 对象类型, 比如 Ljava/lang/Object; |
 
-对于数组类型, 每一维度将使用一个前置的`[`字符来描述, 比如二维数组`String[][]`的字段描述符是: `[[Ljava/lang/String`, 一个整型数组`int[]`的字段描述符是: `[I`。
+对于数组类型, 每一维度将使用一个前置的`[`字符来描述, 比如二维数组`String[][]`的字段描述符是: `[[Ljava/lang/String;`, 一个整型数组`int[]`的字段描述符是: `[I`。
 
 ClassFileDemo 类中只有一个字段: `int num`, class 文件中的数据如下:
 

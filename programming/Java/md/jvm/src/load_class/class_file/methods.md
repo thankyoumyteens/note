@@ -38,7 +38,7 @@ name_index 和 descriptor_index 在方法表中分别代表着方法名以及方
 ```java
 // ()V
 void inc();
-// ()Ljava/lang/String
+// ()Ljava/lang/String;
 String toString();
 // ([CII[CIII)I
 int indexOf(char[]source,int sourceOffset,int sourceCount,char[]target,int targetOffset,int targetCount,int fromIndex);
