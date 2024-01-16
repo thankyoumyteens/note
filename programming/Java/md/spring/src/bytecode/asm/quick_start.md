@@ -26,7 +26,13 @@ import java.io.*;
 public class AsmDemo {
 
     /**
-     * 生成接口
+     * 生成接口:
+     * package org.example;
+     *
+     * public interface PersonGender {
+     *     int MALE = 1;
+     *     int FEMALE = 0;
+     * }
      */
     public static void genInterface() {
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
@@ -55,7 +61,15 @@ public class AsmDemo {
     }
 
     /**
-     * 生成类
+     * 生成类:
+     * package org.example;
+     *
+     * public class Person {
+     *     public int gender;
+     *
+     *     public Person() {
+     *     }
+     * }
      */
     public static void genClass() {
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
@@ -91,7 +105,7 @@ public class AsmDemo {
         // 但是如果不写visitMaxs, 在用到Person类时就会抛异常:
         // Exception in thread "main" java.lang.VerifyError: Operand stack overflow
         // 这里的visitMaxs只起到标记Code属性结束的作用
-        method.visitMaxs(-1, -1);
+        method.visitMaxs(0, 0);
         method.visitEnd();
 
         writer.visitEnd();

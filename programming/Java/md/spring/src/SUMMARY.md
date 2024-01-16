@@ -39,6 +39,11 @@
       - [visitField方法](./bytecode/asm/visitField.md)
       - [visitMethod方法](./bytecode/asm/visitMethod.md)
       - [visitEnd方法](./bytecode/asm/visitEnd.md)
+    - [FieldVisitor](./bytecode/asm/FieldVisitor.md)
+      - [visitAnnotation方法](./bytecode/asm/visitAnnotation.md)
+    - [MethodVisitor](./bytecode/asm/MethodVisitor.md)
+      - [visitCode方法](./bytecode/asm/visitCode.md)
+      - [visitXxxInsn方法](./bytecode/asm/visitInsn.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK 动态代理](./proxy/JDK动态代理.md)
