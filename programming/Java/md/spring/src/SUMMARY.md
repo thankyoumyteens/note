@@ -86,7 +86,7 @@
   - [Spring整体架构](./spring/Spring整体架构.md)
   - [ApplicationContext](./spring/ac/ApplicationContext.md)
     - [ClassPathXmlApplicationContext](./spring/ac/ClassPathXmlApplicationContext.md)
-      - [准备工作](./spring/ac/prepareRefresh.md)
+      - [refresh的准备工作](./spring/ac/prepareRefresh.md)
       - [创建BeanFactory](./spring/ac/obtainFreshBeanFactory.md)
         - [BeanDefinition](./spring/ac/BeanDefinition.md)
         - [加载 BeanDefinition](./spring/ac/loadBeanDefinitions.md)

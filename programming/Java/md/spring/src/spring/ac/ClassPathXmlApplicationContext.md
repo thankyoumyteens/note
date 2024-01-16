@@ -13,14 +13,19 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
             String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)
             throws BeansException {
         super(parent);
+        // 记录xml配置文件
         setConfigLocations(configLocations);
         if (refresh) {
             refresh();
         }
     }
+}
 
+public abstract class AbstractRefreshableConfigApplicationContext
+        extends AbstractRefreshableApplicationContext
+        implements BeanNameAware, InitializingBean {
     /**
-     * 把xml配置文件设置configLocations字段中
+     * 把xml配置文件保存到configLocations字段中
      */
     public void setConfigLocations(@Nullable String... locations) {
         if (locations != null) {
@@ -39,15 +44,17 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 }
 ```
 
-## refresh()方法
+## refresh 方法
 
 ```java
 public abstract class AbstractApplicationContext extends DefaultResourceLoader
         implements ConfigurableApplicationContext {
 
     public void refresh() throws BeansException, IllegalStateException {
+        // startupShutdownMonitor是专门给refresh和destroy两个方法加锁用的:
+        // private final Object startupShutdownMonitor = new Object();
         synchronized (this.startupShutdownMonitor) {
-            // 准备工作
+            // refresh的准备工作
             prepareRefresh();
             // 创建BeanFactory, 在这里会加载BeanDefinition
             ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();

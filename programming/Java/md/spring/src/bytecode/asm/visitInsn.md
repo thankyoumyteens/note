@@ -8,7 +8,7 @@ visitXxxInsn 方法用于执行字节码指令:
 - visitTypeInsn(int, String): 类/接口相关的字节码指令, 比如 NEW
 - visitFieldInsn(int, String, String, String): 操作字段的字节码指令, 比如 PUTFIELD
 - visitMethodInsn(int, String, String, String, boolean): 方法调用的字节码指令, 比如 INVOKEVIRTUAL
-- visitInvokeDynamicInsn(String, String, Handle, Object...): INVOKEDYNAMIC 指令
+- visitInvokeDynamicInsn(String, String, Handle, Object...): 执行 INVOKEDYNAMIC 指令
 - visitJumpInsn(int, Label): 跳转的字节码指令，如 IFEQ
 
 ## visitInsn
@@ -56,4 +56,132 @@ public void visitInsn(int opcode);
  *                                           Opcodes.T_INT, Opcodes.T_LONG
  */
 public void visitIntInsn(int opcode, int operand);
+```
+
+## visitVarInsn
+
+```java
+/**
+ * 操作局部变量表的字节码指令
+ *
+ * @param opcode
+ *            opcode可以使用的值:
+ *            ILOAD, LLOAD, FLOAD, DLOAD, ALOAD,
+ *            ISTORE, LSTORE, FSTORE, DSTORE, ASTORE, RET
+ * @param var
+ *            var是局部变量表的索引
+ */
+public void visitVarInsn(int opcode, int var);
+```
+
+## visitTypeInsn
+
+```java
+/**
+ * 类型(类/接口/枚举)相关的字节码指令
+ *
+ * @param opcode
+ *            opcode可以使用的值:
+ *            NEW, ANEWARRAY, CHECKCAST, INSTANCEOF
+ * @param type
+ *            类型名, 比如: java/lang/Object
+ */
+public void visitTypeInsn(int opcode, String type);
+```
+
+## visitFieldInsn
+
+```java
+/**
+ * 操作字段的字节码指令
+ *
+ * @param opcode
+ *            opcode可以使用的值:
+ *            GETSTATIC, PUTSTATIC, GETFIELD, PUTFIELD
+ * @param owner
+ *            字段所在的类名, 比如: java/lang/Object
+ * @param name
+ *            字段名
+ * @param desc
+ *            字段描述符, 比如: Ljava/lang/String;
+ */
+public void visitFieldInsn(int opcode, String owner, String name,
+        String desc);
+```
+
+## visitMethodInsn
+
+```java
+/**
+ * 方法调用的字节码指令
+ *
+ * @param opcode
+ *            opcode可以使用的值:
+ *            INVOKEVIRTUAL, INVOKESPECIAL, INVOKESTATIC,
+ *            INVOKEINTERFACE
+ * @param owner
+ *            方法所在的类名, 比如: java/lang/Object
+ * @param name
+ *            方法名
+ * @param desc
+ *            方法描述符, 比如: ()Ljava/lang/String;
+ */
+@Deprecated
+public void visitMethodInsn(int opcode, String owner, String name,
+        String desc);
+
+/**
+ * 方法调用的字节码指令
+ *
+ * @param opcode
+ *            opcode可以使用的值:
+ *            INVOKEVIRTUAL, INVOKESPECIAL, INVOKESTATIC,
+ *            INVOKEINTERFACE
+ * @param owner
+ *            方法所在的类型名, 比如: java/lang/Object
+ * @param name
+ *            方法名
+ * @param desc
+ *            方法描述符, 比如: ()Ljava/lang/String;
+ * @param itf
+ *            方法所在的类型是否为接口
+ */
+public void visitMethodInsn(int opcode, String owner, String name,
+        String desc, boolean itf);
+```
+
+## visitInvokeDynamicInsn
+
+```java
+/**
+ * 执行INVOKEDYNAMIC指令
+ *
+ * @param name
+ *            方法名
+ * @param desc
+ *            方法描述符, 比如: ()Ljava/lang/String;
+ * @param bsm
+ *            引导方法
+ * @param bsmArgs
+ *            引导方法的参数
+ */
+public void visitInvokeDynamicInsn(String name, String desc, Handle bsm,
+        Object... bsmArgs);
+```
+
+## visitJumpInsn
+
+```java
+/**
+ * 跳转指令
+ *
+ * @param opcode
+ *            opcode可以使用的值:
+ *            IFEQ, IFNE, IFLT, IFGE, IFGT, IFLE, IF_ICMPEQ,
+ *            IF_ICMPNE, IF_ICMPLT, IF_ICMPGE, IF_ICMPGT, IF_ICMPLE,
+ *            IF_ACMPEQ, IF_ACMPNE, GOTO, JSR, IFNULL, IFNONNULL
+ * @param label
+ *            跳转到的位置
+ */
+public void visitJumpInsn(int opcode, Label label);
 ```
