@@ -16,3 +16,8 @@
 - [echarts]()
     - [基本使用](./echarts/quick_start.md)
     - [柱状堆叠图](./echarts/堆叠图.md)
+
+- [element-ui]()
+    - [基本使用](./element/quick_start.md)
+    - [bug](./element/bug/bug.md)
+        - [el-form使用自定义校验规则时validate方法失效](./element/bug/el-form的validate方法失效.md)

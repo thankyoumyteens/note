@@ -1,7 +1,8 @@
-# el-form的validate方法失效
+# el-form 使用自定义校验规则时 validate 方法失效
+
+## 错误代码
 
 ```js
-// 错误代码
 const checkMaxScore = (rule, value, callback) => {
   if (value === null || value === undefined) {
     callback(new Error("最高得分不允许为空!"));
@@ -12,10 +13,13 @@ const checkMaxScore = (rule, value, callback) => {
 };
 ```
 
-原因: el-form组件使用自定义校验规则时, 必须保证自定义校验规则的每个分支都调用了callback方法, 否则会导致el-form组件的validate方法无法进入回调函数。
+## 原因
+
+el-form 组件使用自定义校验规则时, 必须保证自定义校验规则的每个分支都调用了 callback 方法, 否则会导致 el-form 组件的 validate 方法无法进入回调函数。
+
+## 解决
 
 ```js
-// 正确代码
 const checkMaxScore = (rule, value, callback) => {
   if (value === null || value === undefined) {
     callback(new Error("最高得分不允许为空!"));
