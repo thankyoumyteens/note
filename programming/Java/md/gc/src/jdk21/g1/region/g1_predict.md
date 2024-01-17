@@ -45,47 +45,45 @@ double G1PhaseDependentSeq::predict(const G1Predictions* predictor, bool use_you
     return predictor->predict(&_mixed_seq);
   }
 }
+```
 
+## 停顿预测模型
+
+```cpp
 ///////////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Predictions.hpp //
 ///////////////////////////////////////////////////////////////
 
-// Utility class containing various helper methods for prediction.
 class G1Predictions {
  private:
-  double _sigma;
-
-  // This function is used to estimate the stddev of sample sets. There is some
-  // special consideration of small sample sets: the actual stddev for them is
-  // not very useful, so we calculate some value based on the sample average.
-  // Five or more samples yields zero (at that point we use the stddev); fewer
-  // scale the sample set average linearly from two times the average to 0.5 times
-  // it.
+  // 估算抽样数据的标准差
   double stddev_estimate(TruncatedSeq const* seq) const {
     // dsd(): 衰减标准差
     double estimate = seq->dsd();
-    // seq->num(): seq中的元素数量
+    // seq->num(): 抽样数据, seq中的元素数量
     int const samples = seq->num();
+    // 抽样数据不足5个, 做单独处理
     if (samples < 5) {
       estimate = MAX2(seq->davg() * (5 - samples) / 2.0, estimate);
     }
     return estimate;
   }
  public:
-  // 调用位置
-  // G1ConfidencePercent: 默认50
-  //
+  // 调用位置:
   // G1Policy::G1Policy(STWGCTimer* gc_timer) :
   //   _predictor(G1ConfidencePercent / 100.0),
   // }
   //
+  // G1ConfidencePercent: 默认50
   // sigma默认0.5
   G1Predictions(double sigma) : _sigma(sigma) {
     assert(sigma >= 0.0, "Confidence must be larger than or equal to zero");
   }
 
   // 可信度系数
-  double sigma() const { return _sigma; }
+  double sigma() const {
+    return _sigma;
+  }
 
   double predict(TruncatedSeq const* seq) const {
     // davg(): 衰减平均值
@@ -93,6 +91,8 @@ class G1Predictions {
   }
 };
 ```
+
+## 衰减平均值和衰减方差
 
 ```cpp
 ///////////////////////////////////////////////////////////////
@@ -112,17 +112,19 @@ AbsSeq::AbsSeq(double alpha) :
 
 void AbsSeq::add(double val) {
   if (_num == 0) {
-    // if the sequence is empty, the davg is the same as the value
+    // 如果添加元素之前, 队列为空,
+    // 则添加这个元素之后, 队列只有1个元素,
+    // 它的平均值就是这个元素的值, 方差是0
     _davg = val;
-    // and the variance is 0
     _dvariance = 0.0;
   } else {
-    // otherwise, calculate both
-    // Formula from "Incremental calculation of weighted mean and variance" by Tony Finch
+    // 计算平均值和方差
     // diff := x - mean
     // incr := alpha * diff
     // mean := mean + incr
     // variance := (1 - alpha) * (variance + diff * incr)
+    // 计算公式来自这篇论文:
+    // "Incremental calculation of weighted mean and variance" by Tony Finch
     // PDF available at https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
     double diff = val - _davg;
     double incr = _alpha * diff;
@@ -131,6 +133,8 @@ void AbsSeq::add(double val) {
   }
 }
 ```
+
+## 衰减标准差
 
 ```cpp
 ///////////////////////////////////////////////////////////////
@@ -149,9 +153,7 @@ double AbsSeq::dvariance() const {
 
   double result = _dvariance;
   if (result < 0.0) {
-    // due to loss-of-precision errors, the variance might be negative
-    // by a small bit
-
+    // 由于double的精度损失, _dvariance有可能小于0
     guarantee(-0.1 < result && result < 0.0,
                "if variance is negative, it should be very small");
     result = 0.0;
