@@ -18,6 +18,7 @@
     - [柱状堆叠图](./echarts/堆叠图.md)
 
 - [element-ui]()
-    - [基本使用](./element/quick_start.md)
+    - [el-table自定义单元格样式](./element/cell-class-name.md)
     - [bug](./element/bug/bug.md)
-        - [el-form使用自定义校验规则时validate方法失效](./element/bug/el-form的validate方法失效.md)
+        - [el-form使用自定义校验规则时validate方法失效](./element/bug/el-form-validate.md)
+        - [el-table-column中使用v-if导致不能正常渲染](./element/bug/el-table-column-v-if.md)
