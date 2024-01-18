@@ -122,3 +122,4 @@
 
 - [字节码指令](./is/is.md)
   - [加载和存储指令](./is/load_store.md)
+  - [算术指令](./is/calc.md)
