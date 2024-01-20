@@ -133,7 +133,7 @@ uint G1YoungGenSizer::calculate_default_max_length(uint new_number_of_heap_regio
 
 ## 初始化新生代 region 的时机
 
-<!-- TODO 存疑 -->
+<!-- TODO 存疑 看看_max_desired_young_length的值，它什么时候改变 -->
 
 在堆空间初始化时(G1CollectedHeap 初始化), 会调用上面的 recalculate_min_max_young_length() 函数计算新生代 region 的范围, 并根据这个范围设置新生代 region 的数量。
 

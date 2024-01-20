@@ -6,7 +6,6 @@ GCLocker 是 JNI 线程访问临界区时的加锁机制。
 
 比如, 当使用本地方法 JNI 函数访问 JVM 中的字符串或数组数据时, 需要用到 jni_GetStringCritical 和 jni_ReleaseStringCritical 两个函数:
 
-
 ```cpp
 // jni_util.c
 

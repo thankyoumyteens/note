@@ -38,7 +38,7 @@ double G1Analytics::predict_zero_bounded(G1PhaseDependentSeq const* seq, bool fo
 
 double G1PhaseDependentSeq::predict(const G1Predictions* predictor, bool use_young_only_phase_seq) const {
   if (use_young_only_phase_seq || !enough_samples_to_use_mixed_seq()) {
-    // 预测只作Young GC时新生代所需region数
+    // 预测Young GC时新生代所需region数
     return predictor->predict(&_young_only_seq);
   } else {
     // 预测Mixed GC时新生代所需region数

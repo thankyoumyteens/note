@@ -4,7 +4,7 @@ openjdk 官网提供了查看对象内存布局的工具 jol (java object layout
 
 ## 用法
 
-1. 导入依赖: 
+1. 导入依赖:
 
 ```xml
 <dependency>
@@ -14,7 +14,7 @@ openjdk 官网提供了查看对象内存布局的工具 jol (java object layout
 </dependency>
 ```
 
-2. 测试类: 
+2. 测试类:
 
 ```java
 public class DemoObj {
@@ -24,7 +24,7 @@ public class DemoObj {
 }
 ```
 
-3. 打印 DemoObj 类的对象的内存布局: 
+3. 打印 DemoObj 类的对象的内存布局:
 
 ```java
 DemoObj obj = new DemoObj();
@@ -34,7 +34,7 @@ obj.val3 = "str";
 System.out.println(ClassLayout.parseInstance(obj).toPrintable());
 ```
 
-4. 输出: 
+4. 输出:
 
 ```java
 demo.DemoObj object internals:
@@ -49,7 +49,7 @@ Instance size: 24 bytes
 Space losses: 3 bytes internal + 0 bytes external = 3 bytes total
 ```
 
-输出结果中每一列的含义: 
+输出结果中每一列的含义:
 
 1. OFF: 偏移量
 2. SZ: 占用字节数

@@ -1,11 +1,11 @@
 # region
 
-Region 是 G1 堆和操作系统交互的最小管理单位。G1 的 Region 分为 4 类: 
+Region 是 G1 堆和操作系统交互的最小管理单位。G1 的 Region 分为 4 类:
 
 1. 空闲 Region(Free Heap Region)
 2. 新生代 Region(Young Heap Region), 新生代 Region 又可以分为 Eden 和 Survivor
 3. 老年代 Region(Old Heap Region)
-4. 大对象 Region(Humongous Heap Region), 大对象可能 1 个 Region 放不下, 需要多个Region共同存放, Starts 存放大对象的开始, Continues 继续存放 Starts 没存下的部分
+4. 大对象 Region(Humongous Heap Region), 大对象可能 1 个 Region 放不下, 需要多个 Region 共同存放, Starts 存放大对象的开始, Continues 继续存放 Starts 没存下的部分
 
 ```cpp
 ////////////////////////////////////////////////////////////////

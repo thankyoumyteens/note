@@ -1,6 +1,6 @@
 # 计算 pause_time_ratio
 
-![](../../../img/compute_pause_time_ratios.drawio.png)
+![](../../../img/compute_pause_time_ratios.png)
 
 ```cpp
 //////////////////////////////////////////////////////////

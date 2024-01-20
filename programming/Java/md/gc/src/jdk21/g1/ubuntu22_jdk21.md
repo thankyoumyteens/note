@@ -26,7 +26,7 @@ make compile-commands
 
 选择 open as Project
 
-这时候, 你会发现你是看不到源码的, 所以下面需要修改项目的根目录, 
+这时候, 你会发现你是看不到源码的, 所以下面需要修改项目的根目录,
 
 Tools -> Compilation Database -> Change Project Root 功能, 选中你的源码目录: /home/walter/src_pack/jdk21-jdk-21-ga
 
@@ -96,4 +96,3 @@ javac Test.java
    1. Program Arguments 输入 Test
    2. Working directory 输入 class 文件所在的目录
 2. 启动 debug
-
