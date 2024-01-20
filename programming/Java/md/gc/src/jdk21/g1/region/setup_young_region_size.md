@@ -1,8 +1,8 @@
 # 初始化新生代的大小
 
-新生代的大小就是新生代 reion 的个数。在初始化阶段, G1 会确定新生代 region 个数的可选范围\[min_young_length, max_young_length\]的计算方法。在后续调整新生代 region 的时候, G1 会先使用初始化时确定的计算方法计算出新生代 region 个数的可选范围, 然后从这个范围中找到一个满足 MaxGCPauseMillis 的最大值。
+新生代的大小就是新生代 reion 的个数。在初始化阶段, G1 会确定新生代预期 region 个数的可选范围\[min_young_length, max_young_length\]的计算方法。在后续调整新生代 region 的时候, G1 会先使用初始化时确定的计算方法计算出新生代 region 个数的可选范围, 然后从这个范围中找到一个满足 MaxGCPauseMillis 的最大值。
 
-## 确定 min_young_length 和 max_young_length 的计算方法
+## 计算新生代 region 数的预期范围
 
 使用哪种方法计算新生代 region 个数的可选范围, 与启动 JVM 时设置的参数有关:
 
@@ -194,8 +194,8 @@ void G1Policy::update_young_length_bounds() {
 }
 
 void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length) {
-  // uint young_list_target_length() const { return Atomic::load(&_young_list_target_length); }
   // 当前新生代region数量
+  // return Atomic::load(&_young_list_target_length);
   uint old_young_list_target_length = young_list_target_length();
 
   // 计算新生代预期region数量
@@ -213,13 +213,6 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
                             new_young_list_target_length,
                             new_young_list_max_length);
 
-  // Write back. This is not an attempt to control visibility order to other threads
-  // here; all the revising of the young gen length are best effort to keep pause time.
-  // E.g. we could be "too late" revising young gen upwards to avoid GC because
-  // there is some time left, or some threads could get different values for stopping
-  // allocation.
-  // That is "fine" - at most this will schedule a GC (hopefully only a little) too
-  // early or too late.
   // 设置新生代预期region数量
   Atomic::store(&_young_list_desired_length, new_young_list_desired_length);
   // 设置新生代实际region数量
@@ -260,23 +253,21 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
 
   // Calculate the absolute and desired min bounds first.
 
-  // This is how many survivor regions we already have.
+  // 堆中当前的survivor region个数
   const uint survivor_length = _g1h->survivor_regions_count();
-  // Size of the already allocated young gen.
+  // 堆中已经有的新生代region个数
   const uint allocated_young_length = _g1h->young_regions_count();
-  // This is the absolute minimum young length that we can return. Ensure that we
-  // don't go below any user-defined minimum bound.  Also, we must have at least
-  // one eden region, to ensure progress. But when revising during the ensuing
-  // mutator phase we might have already allocated more than either of those, in
-  // which case use that.
+
+  // 新生代region数的下边界
+  // survivor_length + 1: 至少需要有一个 eden region
   uint absolute_min_young_length = MAX3(min_young_length_by_sizer,
                                         survivor_length + 1,
                                         allocated_young_length);
-  // Calculate the absolute max bounds. After evac failure or when revising the
-  // young length we might have exceeded absolute min length or absolute_max_length,
-  // so adjust the result accordingly.
+  // 新生代region数的上边界
   uint absolute_max_young_length = MAX2(max_young_length_by_sizer, absolute_min_young_length);
-
+  // MMU，全称为Minimum Mutator Utilization，
+  // 是描述在一段时间内应用程序能够运行的最小百分比
+  // 例如，设定MMU为95%, 表示在一个指定的时间段内，mutator最多只能被停顿5%的时间
   uint desired_eden_length_by_mmu = 0;
   uint desired_eden_length_by_pause = 0;
 
