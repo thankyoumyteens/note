@@ -69,13 +69,19 @@
   - [属性编辑器](./spring/use/属性编辑器.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
-  - [include 标签传参](./mybatis/include标签传参.md)
+  - [include标签传参](./mybatis/include标签传参.md)
   - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
 
 - [SpringBoot](./springboot/springboot.md)
   - [多环境配置](./springboot/多环境配置.md)
   - [SpringBoot 整合 Kafka](./springboot/SpringBoot整合Kafka.md)
   - [重写 FeignClient 输出日志](./springboot/重写FeignClient输出日志.md)
+
+- [Redis](./redis/redis.md)
+  - [缓存](./redis/cache/cache.md)
+    - [缓存穿透](./redis/cache/cache_penetration.md)
+    - [缓存击穿](./redis/cache/hotspot_invalid.md)
+    - [缓存雪崩](./redis/cache/cache_avalanche.md)
 
 - [Netty](./netty/netty.md)
   - [IO](.netty/io/IO.md)
