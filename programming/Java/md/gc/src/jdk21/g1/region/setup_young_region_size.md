@@ -133,7 +133,7 @@ uint G1YoungGenSizer::calculate_default_max_length(uint new_number_of_heap_regio
 
 ## 初始化新生代 region 的时机
 
-在堆空间初始化时(G1CollectedHeap::initialize), 会设置region的初始数量, 这时会调用上面的 recalculate_min_max_young_length() 函数计算新生代 region数的预期范围:
+在堆空间初始化时(G1CollectedHeap::initialize), 会设置 region 的初始数量, 这时会调用上面的 recalculate_min_max_young_length() 函数计算新生代 region 数的预期范围:
 
 ```cpp
 /////////////////////////////////////////////////////////////////
@@ -161,7 +161,9 @@ void G1YoungGenSizer::heap_size_changed(uint new_number_of_heap_regions) {
           &_max_desired_young_length);
 }
 ```
-计算完新生代 region数的预期范围之后, 会在G1Policy::init中设置新生代 region 数量:
+
+计算完新生代 region 数的预期范围之后, 会在 G1Policy::init 中设置新生代 region 数量:
+
 ```cpp
 //////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
@@ -356,18 +358,26 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
   // return _eden.length() + _survivor.length();
   uint allocated_young_length = _g1h->young_regions_count();
 
-  // 要新增的region个数
+  // 要新增的eden region个数
   uint receiving_additional_eden;
+
   if (allocated_young_length >= desired_young_length) {
+    // 实际已用的region数已经超过了预期, 不再增加region
     receiving_additional_eden = 0;
     log_trace(gc, ergo, heap)("Young target length: Already used up desired young %u allocated %u",
                               desired_young_length,
                               allocated_young_length);
   } else {
-    // 尽可能少的使用保留region
+    // 先计算调整后的新生代region数量receiving_young,
+    // 然后用receiving_young减去堆中已经有的新生代region个数allocated_young_length,
+    // 就得到了要新增的eden region个数receiving_additional_eden
     // 
+    // receiving_young要在尽量满足desired_young_length的同时, 尽可能少的使用保留region
+
+    // max_to_eat_into_reserve: 最多能使用多少个保留region
+    //
     // _reserve_regions: 保留的region个数, 堆空间初始化时设置
-    // 取值是堆中region数的10%:
+    //   取值是堆中region个数的10%:
     //   double reserve_regions_d = (double) new_number_of_regions * _reserve_factor;
     //   _reserve_regions = (uint) ceil(reserve_regions_d);
     uint max_to_eat_into_reserve = MIN2(_young_gen_sizer.min_desired_young_length(),
@@ -384,12 +394,14 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
                               max_to_eat_into_reserve);
 
     if (_free_regions_at_end_of_collection <= _reserve_regions) {
-      // Fully eat (or already eating) into the reserve, hand back at most absolute_min_length regions.
+      // 全部使用保留region
+
+      // 调整后的新生代region数量, 尽量满足desired_young_length
       uint receiving_young = MIN3(_free_regions_at_end_of_collection,
                                   desired_young_length,
                                   max_to_eat_into_reserve);
-      // We could already have allocated more regions than what we could get
-      // above.
+
+      // 如果实际已用的region数已经超过了计算出来的数量, 则不再增加region
       receiving_additional_eden = allocated_young_length < receiving_young ?
                                   receiving_young - allocated_young_length : 0;
 
@@ -398,16 +410,19 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
                                 receiving_young,
                                 receiving_additional_eden);
     } else if (_free_regions_at_end_of_collection < (desired_young_length + _reserve_regions)) {
-      // Partially eat into the reserve, at most max_to_eat_into_reserve regions.
+      // 使用一部分保留region
+
+      // 要使用的空闲region个数
       uint free_outside_reserve = _free_regions_at_end_of_collection - _reserve_regions;
       assert(free_outside_reserve < desired_young_length,
              "must be %u %u",
              free_outside_reserve, desired_young_length);
-
+      // 要使用的保留region个数
       uint receiving_within_reserve = MIN2(desired_young_length - free_outside_reserve,
                                            max_to_eat_into_reserve);
+      // 调整后的新生代region数量, 尽量满足desired_young_length
       uint receiving_young = free_outside_reserve + receiving_within_reserve;
-      // Again, we could have already allocated more than we could get.
+      // 如果实际已用的region数已经超过了计算出来的调整后的数量, 则不再增加region
       receiving_additional_eden = allocated_young_length < receiving_young ?
                                   receiving_young - allocated_young_length : 0;
 
@@ -419,7 +434,7 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
                                 free_outside_reserve, receiving_within_reserve,
                                 receiving_young, receiving_additional_eden);
     } else {
-      // No need to use the reserve.
+      // 不使用保留region
       receiving_additional_eden = desired_young_length - allocated_young_length;
       log_trace(gc, ergo, heap)("Young target length: No need to use reserve "
                                 "receiving additional eden %u",
