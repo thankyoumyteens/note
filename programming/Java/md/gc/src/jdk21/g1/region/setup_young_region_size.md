@@ -36,6 +36,7 @@ G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
     } else {
       // 设置了NewRatio, 则新生代的大小为: 堆大小 / (NewRatio + 1)
       _sizer_kind = SizerNewRatio;
+      // 关闭自适应新生代大小
       _use_adaptive_sizing = false;
       return;
     }
@@ -59,6 +60,7 @@ G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
       _max_desired_young_length = MAX2((uint) (MaxNewSize / HeapRegion::GrainBytes), 1U);
       // 新生代的region数量不会动态变化
       _sizer_kind = SizerMaxAndNewSize;
+      // 如果NewSize==MaxNewSize, 则关闭自适应新生代大小
       _use_adaptive_sizing = _min_desired_young_length != _max_desired_young_length;
     } else {
       // 动态调整最大新生代region数量
@@ -73,10 +75,8 @@ G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
 }
 
 /**
- * 计算新生代region的范围, 调用时机:
- *   1. 堆空间初始化时
- *   2. 堆空间改变时(堆中的region数量改变, 比如GC后需要调整堆空间大小)
- *
+ * 计算新生代region的预期范围
+
  * number_of_heap_regions: 堆中region的总数
  * min_young_length: 新生代region个数的最小值
  * max_young_length: 新生代region个数的最大值
@@ -133,23 +133,60 @@ uint G1YoungGenSizer::calculate_default_max_length(uint new_number_of_heap_regio
 
 ## 初始化新生代 region 的时机
 
-<!-- TODO 存疑 看看_max_desired_young_length的值，它什么时候改变 -->
+在堆空间初始化时(G1CollectedHeap::initialize), 会设置region的初始数量, 这时会调用上面的 recalculate_min_max_young_length() 函数计算新生代 region数的预期范围:
 
-在堆空间初始化时(G1CollectedHeap 初始化), 会调用上面的 recalculate_min_max_young_length() 函数计算新生代 region 的范围, 并根据这个范围设置新生代 region 的数量。
+```cpp
+/////////////////////////////////////////////////////////////////
+// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1YoungGenSizer.cpp //
+/////////////////////////////////////////////////////////////////
 
+// 调用栈:
+// G1YoungGenSizer::heap_size_changed g1YoungGenSizer.cpp
+// G1Policy::record_new_heap_size g1Policy.cpp:175
+// G1CollectedHeap::expand g1CollectedHeap.cpp:1112
+// G1CollectedHeap::initialize g1CollectedHeap.cpp:1477
+// Universe::initialize_heap universe.cpp:843
+// universe_init universe.cpp:785
+// init_globals init.cpp:124
+// Threads::create_vm threads.cpp:549
+// JNI_CreateJavaVM_inner jni.cpp:3577
+// JNI_CreateJavaVM jni.cpp:3668
+// InitializeJVM java.c:1506
+// JavaMain java.c:415
+// ThreadJavaMain java_md.c:650
+// start_thread 0x00007ffff7c94ac3
+// clone3 0x00007ffff7d26850
+void G1YoungGenSizer::heap_size_changed(uint new_number_of_heap_regions) {
+  recalculate_min_max_young_length(new_number_of_heap_regions, &_min_desired_young_length,
+          &_max_desired_young_length);
+}
+```
+计算完新生代 region数的预期范围之后, 会在G1Policy::init中设置新生代 region 数量:
 ```cpp
 //////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
-/**
- * G1CollectedHeap初始化时调用
- */
+// 调用栈:
+// G1Policy::init g1Policy.cpp
+// G1CollectedHeap::initialize g1CollectedHeap.cpp:1483
+// Universe::initialize_heap universe.cpp:843
+// universe_init universe.cpp:785
+// init_globals init.cpp:124
+// Threads::create_vm threads.cpp:549
+// JNI_CreateJavaVM_inner jni.cpp:3577
+// JNI_CreateJavaVM jni.cpp:3668
+// InitializeJVM java.c:1506
+// JavaMain java.c:415
+// ThreadJavaMain java_md.c:650
+// start_thread 0x00007ffff7c94ac3
+// clone3 0x00007ffff7d26850
 void G1Policy::init(G1CollectedHeap* g1h, G1CollectionSet* collection_set) {
   _g1h = g1h;
   _collection_set = collection_set;
 
   assert(Heap_lock->owned_by_self(), "Locking discipline.");
+  // 调整MaxNewSize的值
   // 传入整个堆空间的region数量
   _young_gen_sizer.adjust_max_new_size(_g1h->max_regions());
   // 记录当前空闲region数量
@@ -165,6 +202,9 @@ void G1Policy::init(G1CollectedHeap* g1h, G1CollectionSet* collection_set) {
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1YoungGenSizer.cpp //
 /////////////////////////////////////////////////////////////////
 
+/**
+ * 调整MaxNewSize的值
+ */
 void G1YoungGenSizer::adjust_max_new_size(uint number_of_heap_regions) {
 
   uint temp = _min_desired_young_length;
@@ -174,6 +214,7 @@ void G1YoungGenSizer::adjust_max_new_size(uint number_of_heap_regions) {
   // 计算新生代region最大字节数
   size_t max_young_size = result * HeapRegion::GrainBytes;
   if (max_young_size != MaxNewSize) {
+    // 更新MaxNewSize的值
     FLAG_SET_ERGO(MaxNewSize, max_young_size);
   }
 }
@@ -229,33 +270,20 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
-// Calculates desired young gen length. It is calculated from:
-//
-// - sizer min/max bounds on young gen
-// - pause time goal for whole young gen evacuation
-// - MMU goal influencing eden to make GCs spaced apart
-// - if after a GC, request at least one eden region to avoid immediate full gcs
-//
-// We may enter with already allocated eden and survivor regions because there
-// are survivor regions (after gc). Young gen revising can call this method at any
-// time too.
-//
-// For this method it does not matter if the above goals may result in a desired
-// value smaller than what is already allocated or what can actually be allocated.
-// This return value is only an expectation.
-//
 uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_length) const {
+  // return _min_desired_young_length;
   uint min_young_length_by_sizer = _young_gen_sizer.min_desired_young_length();
+  // return _max_desired_young_length;
   uint max_young_length_by_sizer = _young_gen_sizer.max_desired_young_length();
 
   assert(min_young_length_by_sizer >= 1, "invariant");
   assert(max_young_length_by_sizer >= min_young_length_by_sizer, "invariant");
 
-  // Calculate the absolute and desired min bounds first.
-
   // 堆中当前的survivor region个数
+  // return _survivor.length();
   const uint survivor_length = _g1h->survivor_regions_count();
   // 堆中已经有的新生代region个数
+  // return _eden.length() + _survivor.length();
   const uint allocated_young_length = _g1h->young_regions_count();
 
   // 新生代region数的下边界
@@ -272,28 +300,31 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
   uint desired_eden_length_by_pause = 0;
 
   uint desired_young_length = 0;
+  // 是否使用自适应的新生代大小
   if (use_adaptive_young_list_length()) {
+    // 根据mmu计算期望的eden region数
     desired_eden_length_by_mmu = calculate_desired_eden_length_by_mmu();
-
+    // 基准时间
+    // 包括: 处理rset的时间, 处理整个新生代的的固定花费的时间,
+    //      处理refinement缓存的时间, 把对象复制到survovor的时间
+    //      基本上包含除了复制eden region之外的所有时间
     double base_time_ms = predict_base_time_ms(pending_cards, rs_length);
 
+    // 根据基准时间计算期望的eden region数
     desired_eden_length_by_pause =
       calculate_desired_eden_length_by_pause(base_time_ms,
                                              absolute_min_young_length - survivor_length,
                                              absolute_max_young_length - survivor_length);
 
-    // Incorporate MMU concerns; assume that it overrides the pause time
-    // goal, as the default value has been chosen to effectively disable it.
     uint desired_eden_length = MAX2(desired_eden_length_by_pause,
                                     desired_eden_length_by_mmu);
 
     desired_young_length = desired_eden_length + survivor_length;
   } else {
-    // The user asked for a fixed young gen so we'll fix the young gen
-    // whether the next GC is young or mixed.
+    // 新生代大小固定
     desired_young_length = min_young_length_by_sizer;
   }
-  // Clamp to absolute min/max after we determined desired lengths.
+  // 确保desired_young_length在[absolute_min_young_length, absolute_max_young_length]范围内
   desired_young_length = clamp(desired_young_length, absolute_min_young_length, absolute_max_young_length);
 
   log_trace(gc, ergo, heap)("Young desired length %u "
@@ -313,7 +344,7 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
 }
 ```
 
-# 计算新生代实际 region 数量
+## 计算新生代实际 region 数量
 
 ```cpp
 //////////////////////////////////////////////////////////
