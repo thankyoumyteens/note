@@ -351,27 +351,25 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
-// Limit the desired (wished) young length by current free regions. If the request
-// can be satisfied without using up reserve regions, do so, otherwise eat into
-// the reserve, giving away at most what the heap sizer allows.
 uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
+  // 堆中已经有的新生代region个数
+  // return _eden.length() + _survivor.length();
   uint allocated_young_length = _g1h->young_regions_count();
 
+  // 要新增的region个数
   uint receiving_additional_eden;
   if (allocated_young_length >= desired_young_length) {
-    // Already used up all we actually want (may happen as G1 revises the
-    // young list length concurrently, or caused by gclocker). Do not allow more,
-    // potentially resulting in GC.
     receiving_additional_eden = 0;
     log_trace(gc, ergo, heap)("Young target length: Already used up desired young %u allocated %u",
                               desired_young_length,
                               allocated_young_length);
   } else {
-    // Now look at how many free regions are there currently, and the heap reserve.
-    // We will try our best not to "eat" into the reserve as long as we can. If we
-    // do, we at most eat the sizer's minimum regions into the reserve or half the
-    // reserve rounded up (if possible; this is an arbitrary value).
-
+    // 尽可能少的使用保留region
+    // 
+    // _reserve_regions: 保留的region个数, 堆空间初始化时设置
+    // 取值是堆中region数的10%:
+    //   double reserve_regions_d = (double) new_number_of_regions * _reserve_factor;
+    //   _reserve_regions = (uint) ceil(reserve_regions_d);
     uint max_to_eat_into_reserve = MIN2(_young_gen_sizer.min_desired_young_length(),
                                         (_reserve_regions + 1) / 2);
 
