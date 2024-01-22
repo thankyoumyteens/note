@@ -66,3 +66,64 @@
 说明:
 
 - irem: value1 和 value2 都必须为 int 类型数据，指令执行时，value1 和 value2 从操作数栈中出栈，根据 `value1-(value1÷value2)×value2` 计算出结果，然后把运算结果入栈回操作数栈中
+
+## 取反
+
+| 操作码 | 操作数 | 操作数栈-执行前 | 操作数栈-执行后 | 操作                                     |
+| ------ | ------ | --------------- | --------------- | ---------------------------------------- |
+| ineg   | -      | value           | result          | 将栈顶 int 型数值取负并将结果压入栈顶    |
+| lneg   | -      | value           | result          | 将栈顶 long 型数值取负并将结果压入栈顶   |
+| fneg   | -      | value           | result          | 将栈顶 float 型数值取负并将结果压入栈顶  |
+| dneg   | -      | value           | result          | 将栈顶 double 型数值取负并将结果压入栈顶 |
+
+说明:
+
+- ineg: value 必须为 int 类型数据，指令执行时，value 从操作数栈中出栈，接着对这个数进行算术取负运算，运算结果 value 被压入到操作数栈中
+
+## 位运算
+
+| 操作码 | 操作数 | 操作数栈-执行前 | 操作数栈-执行后 | 操作                                             |
+| ------ | ------ | --------------- | --------------- | ------------------------------------------------ |
+| ishl   | -      | value1,value2   | result          | 将 int 型数值左移指定位数并将结果压入栈顶        |
+| lshl   | -      | value1,value2   | result          | 将 long 型数值左移指定位数并将结果压入栈顶       |
+| ishr   | -      | value1,value2   | result          | 将 int 型数值带符号右移指定位数并将结果压入栈顶  |
+| lshr   | -      | value1,value2   | result          | 将 long 型数值带符号右移指定位数并将结果压入栈顶 |
+| iushr  | -      | value1,value2   | result          | 将 int 型数值无符号右移指定位数并将结果压入栈顶  |
+| lushr  | -      | value1,value2   | result          | 将 long 型数值无符号右移指定位数并将结果压入栈顶 |
+| iand   | -      | value1,value2   | result          | 将栈顶两 int 型数值"按位与"并将结果压入栈顶      |
+| land   | -      | value1,value2   | result          | 将栈顶两 long 型数值"按位与"并将结果压入栈顶     |
+| ior    | -      | value1,value2   | result          | 将栈顶两 int 型数值"按位或"并将结果压入栈顶      |
+| lor    | -      | value1,value2   | result          | 将栈顶两 long 型数值"按位或"并将结果压入栈顶     |
+| ixor   | -      | value1,value2   | result          | 将栈顶两 int 型数值"按位异或"并将结果压入栈顶    |
+| lxor   | -      | value1,value2   | result          | 将栈顶两 long 型数值"按位异或"并将结果压入栈顶   |
+
+说明:
+
+- ishl: value1 和 value2 都必须为 int 类型数据，指令执行时，value1 和 value2 从操作数栈中出栈，然后将 value1 左移 s 位，s 是 value2 低 5 位所表示的值，计算后把运算结果入栈回操作数栈中
+- ishr: value1 和 value2 都必须为 int 类型数据，指令执行时，value1 和 value2 从操作数栈中出栈，然后将 value1 右移 s 位，s 是 value2 低 5 位所表示的值，计算后把运算结果入栈回操作数栈中
+- iand: value1 和 value2 都必须为 int 类型数据，指令执行时，value1 和 value2 从操作数栈中出栈，对这两个数进行按位与操作得到 int 类型数据 result，最后 result 被压入到操作数栈中
+
+## 自增
+
+| 操作码 | 操作数      | 操作数栈-执行前 | 操作数栈-执行后 | 操作                                              |
+| ------ | ----------- | --------------- | --------------- | ------------------------------------------------- |
+| iinc   | index,const | -               | -               | 将指定 int 型变量增加指定值(如 i++, i--, i+=2 等) |
+
+说明:
+
+- iinc: index 是一个代表当前栈帧中局部变量表的索引的无符号 byte 类型整数，const 是一个有符号的 byte 类型数值。由 index 定位到的局部变量必须是 int 类型，const 首先带符号扩展成一个 int 类型数值，然后加到由 index 定位到的局部变量中
+
+## 比较
+
+| 操作码 | 操作数 | 操作数栈-执行前 | 操作数栈-执行后 | 操作                         |
+| ------ | ------ | --------------- | --------------- | ---------------------------- |
+| lcmp   | -      | value1,value2   | result          | 比较栈顶两 long 型数值大小   |
+| fcmpl  | -      | value1,value2   | result          | 比较栈顶两 float 型数值大小  |
+| fcmpg  | -      | value1,value2   | result          | 比较栈顶两 float 型数值大小  |
+| dcmpl  | -      | value1,value2   | result          | 比较栈顶两 double 型数值大小 |
+| dcmpg  | -      | value1,value2   | result          | 比较栈顶两 double 型数值大小 |
+
+说明:
+
+- lcmp: value1 和 value2 都必须为 long 类型数据，指令执行时，value1 和 value2 从操作数栈中出栈，使用一个 int 数值作为比较结果: 如果 value1 大于 value2，结果为 1。如果 value1 等于 value2，结果为 0。如果 value1 小于 value2，结果为-1。最后比较结果被压入到操作数栈中
+- fcmp: value1 和 value2 都必须为 float 类型数据，指令执行时，value1 和 value2 从操作数栈中出栈，并且经过数值集合转换后得到值 value1’ 和 value2’，接着对这 2 个值进行浮点比较操作： 如果 value1’大于 value2’ 的话，int 值 1 将压入到操作数栈中。如果 value1’ 与 value2’ 相等的话，int 值 0 将压入到操作数栈中。如果 value1’ 小于 value2’ 相等的话，int 值-1 将压入到操作数栈中。如果 value1’ 和 value2’ 之中最少有一个为 NaN，那 fcmpg 指令将 int 值 1 压入到操作数栈中，而 fcmpl 指令则把 int 值-1 压入到操作数栈中

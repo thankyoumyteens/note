@@ -123,3 +123,5 @@
 - [字节码指令](./is/is.md)
   - [加载和存储指令](./is/load_store.md)
   - [算术指令](./is/calc.md)
+  - [类型转换指令](./is/cast.md)
+  - [对象操作指令](./is/obj.md)
