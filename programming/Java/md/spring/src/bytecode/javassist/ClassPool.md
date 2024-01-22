@@ -9,6 +9,9 @@ CtClass 在 Javassist 中表示一个 class 文件。ClassPool 是一个存储 C
 3. insertClassPath: 添加一个 classpath 到类搜索路径的起始
 4. toClass: 把 CtClass 加载到 JVM 中
 5. get: 根据类名返回一个 CtClass
+6. makeClass: 创建类
+7. makeInterface: 创建接口
+8. makeAnnotation: 创建接口注解
 
 ## getDefault
 
@@ -100,4 +103,59 @@ public Class<?> toClass(CtClass ct, Class<?> neighbor);
  * @param classname 类的全限定名
  */
 public CtClass get(String classname);
+```
+
+## makeClass
+
+```java
+/**
+ * 创建一个新的pblic的类
+ * 如果存在同名的类/接口, 会覆盖
+ *
+ * @param classname                 类的全限定名
+ */
+public CtClass makeClass(String classname);
+
+/**
+ * 创建一个新的pblic的类
+ * 如果存在同名的类/接口, 会覆盖
+ *
+ * @param classname  类的全限定名
+ * @param superclass 父类
+ */
+public synchronized CtClass makeClass(String classname, CtClass superclass);
+```
+
+## makeInterface
+
+```java
+/**
+ * 创建一个新接口
+ * 如果存在同名的类/接口, 会覆盖
+ *
+ * @param name          接口的全限定名
+ * @throws RuntimeException if the existing interface is frozen.
+ */
+public CtClass makeInterface(String name);
+
+/**
+ * 创建一个新接口
+ * 如果存在同名的类/接口, 会覆盖
+ *
+ * @param name       接口的全限定名
+ * @param superclass 父接口
+ */
+public synchronized CtClass makeInterface(String name, CtClass superclass);
+```
+
+## makeAnnotation
+
+```java
+/**
+ * 创建一个新注解
+ * 如果存在同名的类/接口, 会覆盖
+ *
+ * @param name      注解的全限定名
+ */
+public CtClass makeAnnotation(String name);
 ```

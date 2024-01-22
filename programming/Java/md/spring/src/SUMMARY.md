@@ -28,6 +28,7 @@
   - [Javassist](./bytecode/javassist/javassist.md)
     - [基本用法](./bytecode/javassist/quick_start.md)
     - [ClassPool](./bytecode/javassist/ClassPool.md)
+    - [CtClass](./bytecode/javassist/CtClass.md)
     - [创建class文件](./bytecode/javassist/创建class文件.md)
     - [修改jar包中的class文件](./bytecode/javassist/修改jar包中的class文件.md)
     - [运行时创建class](./bytecode/javassist/运行时创建class.md)
