@@ -468,9 +468,9 @@ uint G1Policy::calculate_young_max_length(uint target_young_length) const {
   // GCLockerEdenExpansionPercent: 默认5
   if (GCLockerEdenExpansionPercent > 0) {
     double perc = GCLockerEdenExpansionPercent / 100.0;
+    // 当前新生代region数量的5%
     double expansion_region_num_d = perc * young_list_target_length();
-    // We use ceiling so that if expansion_region_num_d is > 0.0 (but
-    // less than 1.0) we'll get 1.
+
     expansion_region_num = (uint) ceil(expansion_region_num_d);
   }
   uint max_length = target_young_length + expansion_region_num;
