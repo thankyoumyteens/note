@@ -120,24 +120,6 @@ public void visitFieldInsn(int opcode, String owner, String name,
  *            INVOKEVIRTUAL, INVOKESPECIAL, INVOKESTATIC,
  *            INVOKEINTERFACE
  * @param owner
- *            方法所在的类名, 比如: java/lang/Object
- * @param name
- *            方法名
- * @param desc
- *            方法描述符, 比如: ()Ljava/lang/String;
- */
-@Deprecated
-public void visitMethodInsn(int opcode, String owner, String name,
-        String desc);
-
-/**
- * 方法调用的字节码指令
- *
- * @param opcode
- *            opcode可以使用的值:
- *            INVOKEVIRTUAL, INVOKESPECIAL, INVOKESTATIC,
- *            INVOKEINTERFACE
- * @param owner
  *            方法所在的类型名, 比如: java/lang/Object
  * @param name
  *            方法名
@@ -184,4 +166,17 @@ public void visitInvokeDynamicInsn(String name, String desc, Handle bsm,
  *            跳转到的位置
  */
 public void visitJumpInsn(int opcode, Label label);
+```
+
+## visitLdcInsn
+
+```java
+/**
+ * 将常量池中的数据入栈
+ * LDC系列指令
+ *
+ * @param cst
+ *            常量池中的常量
+ */
+public void visitLdcInsn(Object cst);
 ```

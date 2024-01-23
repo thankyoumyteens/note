@@ -8,7 +8,7 @@ public AnnotationVisitor visitAnnotation(String desc, boolean visible)
 
 参数说明:
 
-- desc: 注解类, 比如: Ljavax/annotation/Resource;
+- desc: 注解类的描述符, 比如: Ljavax/annotation/Resource;
 - visible: 注解是否运行时可见
 
 ## 用法

@@ -46,6 +46,7 @@
     - [MethodVisitor](./bytecode/asm/MethodVisitor.md)
       - [visitCode方法](./bytecode/asm/visitCode.md)
       - [visitXxxInsn方法](./bytecode/asm/visitInsn.md)
+    - [Label](./bytecode/asm/Label.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK 动态代理](./proxy/JDK动态代理.md)
