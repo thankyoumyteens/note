@@ -125,3 +125,5 @@
   - [算术指令](./is/calc.md)
   - [类型转换指令](./is/cast.md)
   - [对象操作指令](./is/obj.md)
+  - [操作数栈指令](./is/stack.md)
+  - [跳转指令](./is/jump.md)

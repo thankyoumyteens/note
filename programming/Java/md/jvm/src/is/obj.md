@@ -53,3 +53,56 @@
 - putfield: 无符号数 indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值，构建方式为`(indexbyte1 << 8) | indexbyte2`，该索引所指向的运行时常量池项应当是一个字段的符号引用，它包含了字段的名称和描述符，以及包含该字段的类的符号引用。objectref 所引用的对象不能是数组类型，如果取值的字段是 protected 的，并且这个字段是当前类的父类成员，并且这个字段没有在同一个运行时包中定义过，那 objectref 所指向的对象的类型必须为当前类或者当前类的子类。这个字段的符号引用是已被解析过的。被 putfield 指令存储到字段中的 value 值的类型必须与字段的描述符相匹配。如果字段描述符的类型是 boolean、byte、char、short 或者 int，那么 value 必须为 int 类型。如果字段描述符的类型是 float、long 或者 double，那 value 的类型必须相应为 float、long 或者 double。如果字段描述符的类型是 reference 类型，那 value 必须为一个可与之匹配的类型。如果字段被声明为 final 的，那就只能在当前类的`<init>`方法中设置当前类的 final 字段。指令执行时，value 和 objectref 从操作数栈中出栈，objectref 必须为 reference 类型数据，value 为 objectref 的指定字段的值
 
 ## 把一个数组元素加载到操作数栈
+
+| 操作码 | 操作数 | 操作数栈-执行前 | 操作数栈-执行后 | 操作                                         |
+| ------ | ------ | --------------- | --------------- | -------------------------------------------- |
+| iaload | -      | arrayref,index  | value           | 将 int 型数组指定索引的值推送至栈顶          |
+| laload | -      | arrayref,index  | value           | 将 long 型数组指定索引的值推送至栈顶         |
+| faload | -      | arrayref,index  | value           | 将 float 型数组指定索引的值推送至栈顶        |
+| daload | -      | arrayref,index  | value           | 将 double 型数组指定索引的值推送至栈顶       |
+| baload | -      | arrayref,index  | value           | 将 boolean/byte 型数组指定索引的值推送至栈顶 |
+| caload | -      | arrayref,index  | value           | 将 char 型数组指定索引的值推送至栈顶         |
+| saload | -      | arrayref,index  | value           | 将 short 型数组指定索引的值推送至栈顶        |
+| aaload | -      | arrayref,index  | value           | 将引用类型数组指定索引的值推送至栈顶         |
+
+说明:
+
+- iaload: arrayref 必须是一个 reference 类型的数据，它指向一个组件类型为 int 的数组，index 必须为 int 类型。指令执行后，arrayref 和 index 同时从操作数栈出栈，index 作为索引定位到数组中的 int 类型值将压入到操作数栈中
+
+## 给数组元素赋值
+
+| 操作码  | 操作数 | 操作数栈-执行前      | 操作数栈-执行后 | 操作                                                    |
+| ------- | ------ | -------------------- | --------------- | ------------------------------------------------------- |
+| iastore | -      | arrayref,index,value | -               | 将栈顶 int 型数值存入指定数组的指定索引位置             |
+| lastore | -      | arrayref,index,value | -               | 将栈顶 long 型数值存入指定数组的指定索引位置            |
+| fastore | -      | arrayref,index,value | -               | 将栈顶 float 型数值存入指定数组的指定索引位置           |
+| dastore | -      | arrayref,index,value | -               | 将栈顶 double 型数值存入指定数组的指定索引位置          |
+| bastore | -      | arrayref,index,value | -               | 将栈顶 boolean 或 byte 型数值存入指定数组的指定索引位置 |
+| castore | -      | arrayref,index,value | -               | 将栈顶 char 型数值存入指定数组的指定索引位置            |
+| sastore | -      | arrayref,index,value | -               | 将栈顶 short 型数值存入指定数组的指定索引位置           |
+| aastore | -      | arrayref,index,value | -               | 将栈顶引用类型值存入指定数组的指定索引位置              |
+
+说明:
+
+- iastore: arrayref 必须是一个 reference 类型的数据，它指向一个组件类型为 int 的数组，index 和 value 都必须为 int 类型。指令执行后，arrayref、index 和 value 同时从操作数栈出栈，然后 value 存储到 index 作为索引定位到的数组元素中
+
+## 获取数组长度
+
+| 操作码      | 操作数 | 操作数栈-执行前 | 操作数栈-执行后 | 操作                       |
+| ----------- | ------ | --------------- | --------------- | -------------------------- |
+| arraylength | -      | arrayref        | length          | 获取数组的长度值并压入栈顶 |
+
+说明:
+
+- arraylength: arrayref 必须是指向数组的 reference 类型的数据，指令执行时，arrayref 从操作数栈中出栈，数组的长度 length 将被计算出来并作为一个 int 类型数据压入到操作数栈中
+
+## 检查对象的类型
+
+| 操作码     | 操作数                | 操作数栈-执行前 | 操作数栈-执行后 | 操作                                                               |
+| ---------- | --------------------- | --------------- | --------------- | ------------------------------------------------------------------ |
+| checkcast  | indexbyte1,indexbyte2 | objectref       | objectref       | 检验类型转换, 检验未通过将抛出 ClassCastException                  |
+| instanceof | indexbyte1,indexbyte2 | instanceof      | result          | 检验对象是否是指定类的对象, 如果是将 1 压入栈顶, 否则将 0 压入栈顶 |
+
+说明:
+
+- checkcast: objectref 必须为 reference 类型的数据，indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值，构建方式为`(indexbyte1 << 8) | indexbyte2`，该索引所指向的运行时常量池项应当是一个类、接口或者数组类型的符号引用。 如果 objectref 为 null 的话，那操作数栈不会有任何变化。 否则，参数指定的类、接口或者数组类型会被虚拟机解析。如果 objectref 可以转换为这个类、接口或者数组类型，那操作数栈就保持不变，否则 checkcast 指令将抛出一个 ClassCastException 异常
