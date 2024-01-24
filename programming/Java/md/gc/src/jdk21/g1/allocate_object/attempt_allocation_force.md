@@ -22,7 +22,7 @@ inline HeapWord* G1AllocRegion::attempt_allocation_force(size_t word_size) {
   trace("forcing alloc", word_size, word_size);
   // 申请新region并分配对象
   // 与attempt_allocation_using_new_region()类似
-  // 区别是第二个参数force为true, 表示即使达到最大region个数，也要尝试分配新的region
+  // 区别是第二个参数force为true, 表示即使达到最大region个数, 也要尝试分配新的region
   HeapWord* result = new_alloc_region_and_allocate(word_size, true /* force */);
   if (result != nullptr) {
     trace("alloc forced", word_size, word_size, word_size, result);

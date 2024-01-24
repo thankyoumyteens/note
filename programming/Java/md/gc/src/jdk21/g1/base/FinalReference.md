@@ -1,6 +1,6 @@
 # FinalReference
 
-FinalReference 确保对象在垃圾回收器回收它们之前，可以有最后的机会来释放它们所持有的资源。它通过将对象包装在一个 Finalizer 对象中来实现。当一个对象被标记为准备回收，且它是一个 Finalizable 类（即它有一个空的、参数为 void 的、名为 finalize 的方法）的时候，JVM 会创建一个 FinalReference 指向这个对象。然后，JVM 会创建一个 Finalizer 线程来执行这个对象的 finalize 方法。在 finalize 方法中，对象可以释放它所持有的所有资源。
+FinalReference 确保对象在垃圾回收器回收它们之前, 可以有最后的机会来释放它们所持有的资源。它通过将对象包装在一个 Finalizer 对象中来实现。当一个对象被标记为准备回收, 且它是一个 Finalizable 类（即它有一个空的、参数为 void 的、名为 finalize 的方法）的时候, JVM 会创建一个 FinalReference 指向这个对象。然后, JVM 会创建一个 Finalizer 线程来执行这个对象的 finalize 方法。在 finalize 方法中, 对象可以释放它所持有的所有资源。
 
 ```java
 class FinalReference<T> extends Reference<T> {
@@ -18,7 +18,7 @@ class FinalReference<T> extends Reference<T> {
 
 ## Finalizer
 
-Finalizer 的构造方法是私有的，是由 JVM 自己来创建。JVM 会主动调用 Finalizer 的 register 方法，同时将这个 Finalizer 对象加入到 Finalizer 对象链表里，Finalizer 的类变量 unfinalized 指向这个链表的头节点。
+Finalizer 的构造方法是私有的, 是由 JVM 自己来创建。JVM 会主动调用 Finalizer 的 register 方法, 同时将这个 Finalizer 对象加入到 Finalizer 对象链表里, Finalizer 的类变量 unfinalized 指向这个链表的头节点。
 
 JVM 在创建一个对象 a 的过程中会判断这个对象是否重写了 finalize() 方法, 且方法体不为空, 如果符合要求, JVM 就会调用 register 方法, 创建一个引用对象 a 的 Finalizer 对象 f, 并把 f 加入到链表中, 对象 a 此时被 f 引用, f 又被一个静态链表引用, 所以在 f 被移出链表之前, a 不会被垃圾回收。
 

@@ -32,7 +32,7 @@
 | aload_2 | -      | -               | value           | 操作数是 2 的 aload 操作码的简写                   |
 | aload_3 | -      | -               | value           | 操作数是 3 的 aload 操作码的简写                   |
 
-说明: index 是一个代表当前栈帧中局部变量表的索引的无符号 byte 类型整数，index 作为索引定位的局部变量必须是 int/long/float/double/引用 类型，记为 value。指令执行后，value 将会压入到操作数栈的栈顶
+说明: index 是一个代表当前栈帧中局部变量表的索引的无符号 byte 类型整数, index 作为索引定位的局部变量必须是 int/long/float/double/引用 类型, 记为 value。指令执行后, value 将会压入到操作数栈的栈顶
 
 ## 将一个数值从操作数栈存储到局部变量表
 
@@ -66,7 +66,7 @@
 | astore_2 | -      | value           | -               | 操作数是 2 的 astore 操作码的简写            |
 | astore_3 | -      | value           | -               | 操作数是 3 的 astore 操作码的简写            |
 
-说明: index 是一个无符号 byte 型整数，它是当前栈帧局部变量表的索引值，而在操作数栈栈顶的 value 必须是 int/long/float/double/引用 类型的数据，这个数据将从操作数栈出栈，然后保存到 index 所指向的局部变量表位置中
+说明: index 是一个无符号 byte 型整数, 它是当前栈帧局部变量表的索引值, 而在操作数栈栈顶的 value 必须是 int/long/float/double/引用 类型的数据, 这个数据将从操作数栈出栈, 然后保存到 index 所指向的局部变量表位置中
 
 ## 将一个常量加载到操作数栈
 
@@ -95,8 +95,8 @@
 
 说明:
 
-- bipush: 将 byte 带符号扩展为一个 int 类型的值 value，然后将 value 压入到操作数栈中
-- sipush: 无符号数 byte1 和 byte2 通过`(byte1 << 8) | byte2` 方式构造成一个 short 类型数值，然后此数值带符号扩展为一个 int 类型的值 value，然后将 value 压入到操作数栈中
-- ldc: index 是一个无符号 byte 型数据，它作为当前类的运行时常量池的索引使用。index 指向的运行时常量池项必须是一个 int 或者 float 类型的运行时常量，或者是一个类的符号引用或者字符串字面量。如果运行时常量池项是一个 int 或者 float 类型的运行时常量，那这个常量所对应的数值 value 将被压入到操作数栈之中。如果运行时常量池项是一个代表字符串字面量的 String 类的引用，那这个引用所对应的 reference 类型数据 value 将被压入到操作数栈之中。如果运行时常量池项是一个类的符号引用, 且这个符号引用是已被解析过的，那这个类的 Class 对象所对应的 reference 类型数据 value 将被压入到操作数栈之中
-- ldc_w: 无符号数 indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值，构建方式为`(indexbyte1 << 8) | indexbyte2`，该索引所指向的运行时常量池项应当是一个 int 或者 float 类型的运行时常量，或者是一个类的符号引用或者字符串字面量。ldc_w 指令与 ldc 指令的差别在于它使用了更宽的运行时常量池索引
-- ldc2_w: 无符号数 indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值，构建方式为`(indexbyte1 << 8) | indexbyte2`，该索引所指向的运行时常量池项应当是一个 long 或者 double 类型的运行时常量，这个常量所对应的数值将被压入到操作数栈之中
+- bipush: 将 byte 带符号扩展为一个 int 类型的值 value, 然后将 value 压入到操作数栈中
+- sipush: 无符号数 byte1 和 byte2 通过`(byte1 << 8) | byte2` 方式构造成一个 short 类型数值, 然后此数值带符号扩展为一个 int 类型的值 value, 然后将 value 压入到操作数栈中
+- ldc: index 是一个无符号 byte 型数据, 它作为当前类的运行时常量池的索引使用。index 指向的运行时常量池项必须是一个 int 或者 float 类型的运行时常量, 或者是一个类的符号引用或者字符串字面量。如果运行时常量池项是一个 int 或者 float 类型的运行时常量, 那这个常量所对应的数值 value 将被压入到操作数栈之中。如果运行时常量池项是一个代表字符串字面量的 String 类的引用, 那这个引用所对应的 reference 类型数据 value 将被压入到操作数栈之中。如果运行时常量池项是一个类的符号引用, 且这个符号引用是已被解析过的, 那这个类的 Class 对象所对应的 reference 类型数据 value 将被压入到操作数栈之中
+- ldc_w: 无符号数 indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值, 构建方式为`(indexbyte1 << 8) | indexbyte2`, 该索引所指向的运行时常量池项应当是一个 int 或者 float 类型的运行时常量, 或者是一个类的符号引用或者字符串字面量。ldc_w 指令与 ldc 指令的差别在于它使用了更宽的运行时常量池索引
+- ldc2_w: 无符号数 indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值, 构建方式为`(indexbyte1 << 8) | indexbyte2`, 该索引所指向的运行时常量池项应当是一个 long 或者 double 类型的运行时常量, 这个常量所对应的数值将被压入到操作数栈之中

@@ -295,9 +295,9 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
                                         allocated_young_length);
   // 新生代region数的上边界
   uint absolute_max_young_length = MAX2(max_young_length_by_sizer, absolute_min_young_length);
-  // MMU，全称为Minimum Mutator Utilization，
+  // MMU, 全称为Minimum Mutator Utilization, 
   // 是描述在一段时间内应用程序能够运行的最小百分比
-  // 例如，设定MMU为95%, 表示在一个指定的时间段内，mutator最多只能被停顿5%的时间
+  // 例如, 设定MMU为95%, 表示在一个指定的时间段内, mutator最多只能被停顿5%的时间
   uint desired_eden_length_by_mmu = 0;
   uint desired_eden_length_by_pause = 0;
 

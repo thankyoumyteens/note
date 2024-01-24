@@ -95,4 +95,4 @@ void G1PrepareCompactClosure::prepare_for_compaction_work(CompactPoint* cp,
 }
 ```
 
-SCAN_AND_FORWARD()函数定义在 hotspot/src/share/vm/memory/space.hpp 中。这一部分代码是用宏实现的, 主要的工作就是计算每个对象对应新位置的指针, 这个指针表示如果移除垃圾对象之后，它应该在的位置。
+SCAN_AND_FORWARD()函数定义在 hotspot/src/share/vm/memory/space.hpp 中。这一部分代码是用宏实现的, 主要的工作就是计算每个对象对应新位置的指针, 这个指针表示如果移除垃圾对象之后, 它应该在的位置。

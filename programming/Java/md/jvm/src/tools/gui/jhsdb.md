@@ -1,6 +1,6 @@
 # jhsdb
 
-Jhsdb 是 JDK9 引入的工具，它有 clhsdb、debugd、hsdb、jstack、jmap、jinfo、jsnap 这些 mode 可以使用，jhsdb 整合了多个其他工具的功能，还做了一些功能拓展。
+Jhsdb 是 JDK9 引入的工具, 它有 clhsdb、debugd、hsdb、jstack、jmap、jinfo、jsnap 这些 mode 可以使用, jhsdb 整合了多个其他工具的功能, 还做了一些功能拓展。
 
 jhsdb 的 jdk 版本必须和项目保持一致。
 
@@ -72,6 +72,6 @@ Tools -> Object Histogram 可以看到方法区里的所有 class, 输入类的�
 
 ![](../../img/hsdb4.png)
 
-选择一个对象，点击 Inspect 可以看到对象的相关属性:
+选择一个对象, 点击 Inspect 可以看到对象的相关属性:
 
 ![](../../img/hsdb5.png)

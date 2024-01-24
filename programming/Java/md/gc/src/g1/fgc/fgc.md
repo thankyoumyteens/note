@@ -1,6 +1,6 @@
 # Full GC
 
-对象在堆中慢速分配时, 如果还分配失败, 会进行 Full GC。在 Full GC 之前需要做一些预处理，主要有停止并发标记、停止增量回收等动作。
+对象在堆中慢速分配时, 如果还分配失败, 会进行 Full GC。在 Full GC 之前需要做一些预处理, 主要有停止并发标记、停止增量回收等动作。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\g1CollectedHeap.cpp
 

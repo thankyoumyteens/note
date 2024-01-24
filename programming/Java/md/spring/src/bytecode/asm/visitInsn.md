@@ -9,7 +9,7 @@ visitXxxInsn 方法用于执行字节码指令:
 - visitFieldInsn(int, String, String, String): 操作字段的字节码指令, 比如 PUTFIELD
 - visitMethodInsn(int, String, String, String, boolean): 方法调用的字节码指令, 比如 INVOKEVIRTUAL
 - visitInvokeDynamicInsn(String, String, Handle, Object...): 执行 INVOKEDYNAMIC 指令
-- visitJumpInsn(int, Label): 跳转的字节码指令，如 IFEQ
+- visitJumpInsn(int, Label): 跳转的字节码指令, 如 IFEQ
 
 ## visitInsn
 

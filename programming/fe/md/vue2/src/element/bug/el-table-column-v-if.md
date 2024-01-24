@@ -18,7 +18,7 @@ vue 在渲染元素时, 出于效率考虑, 会尽量地复用已有的元素而
 
 ## 解决
 
-添加一个具有唯一值的 key attribute，表明该元素是完全独立的，不要复用它。
+添加一个具有唯一值的 key attribute, 表明该元素是完全独立的, 不要复用它。
 
 ```html
 <el-table-column v-if="isShow" prop="myVal" label="xxx" :key="data['myVal']" />
