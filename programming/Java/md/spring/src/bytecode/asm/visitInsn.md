@@ -173,10 +173,60 @@ public void visitJumpInsn(int opcode, Label label);
 ```java
 /**
  * 将常量池中的数据入栈
- * LDC系列指令
+ * 执行LDC系列指令
  *
  * @param cst
  *            常量池中的常量
  */
 public void visitLdcInsn(Object cst);
+```
+
+## visitIincInsn
+
+```java
+/**
+ * 将指定 int 型变量增加指定值
+ * 执行IINC指令
+ *
+ * @param var
+ *            局部变量表的索引
+ * @param increment
+ *            要加的数
+ */
+public void visitIincInsn(int var, int increment);
+```
+
+## visitTableSwitchInsn
+
+```java
+/**
+ * 执行TABLESWITCH指令
+ *
+ * @param min
+ *            case中的最小值
+ * @param max
+ *            case中的最大值
+ * @param dflt
+ *            default的Label
+ * @param labels
+ *            每个case的Label
+ */
+public void visitTableSwitchInsn(int min, int max, Label dflt,
+        Label... labels);
+```
+
+## visitLookupSwitchInsn
+
+```java
+/**
+ * 执行LOOKUPSWITCH指令
+ *
+ * @param dflt
+ *            default的Label
+ * @param keys
+ *            每个case的值
+ * @param labels
+ *            每个case的Label
+ */
+public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels);
 ```
