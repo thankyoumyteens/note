@@ -4,7 +4,7 @@
 
 主版本号后面的 2 个字节是 constant_pool_count, 它表示常量池中常量的个数。
 
-ClassFileDemo.class 文件中的 constant_pool_count 是  0x0013, 转换成十进制是 19, 代表常量池中有 18  项常量, 索引范围是  1 ～ 18 (常量池的索引是从 1 开始的)。
+ClassFileDemo.class 文件中的 constant_pool_count 是  0x0013, 转换成十进制是 19, 代表常量池中有 18  项常量, 索引范围是  1 ~ 18 (常量池的索引是从 1 开始的)。
 
 ![](../../img/class_file_cpc.png)
 

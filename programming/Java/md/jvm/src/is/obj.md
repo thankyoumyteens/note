@@ -105,4 +105,4 @@
 
 说明:
 
-- checkcast: objectref 必须为 reference 类型的数据, indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值, 构建方式为`(indexbyte1 << 8) | indexbyte2`, 该索引所指向的运行时常量池项应当是一个类、接口或者数组类型的符号引用。 如果 objectref 为 null 的话, 那操作数栈不会有任何变化。 否则, 参数指定的类、接口或者数组类型会被虚拟机解析。如果 objectref 可以转换为这个类、接口或者数组类型, 那操作数栈就保持不变, 否则 checkcast 指令将抛出一个 ClassCastException 异常
+- checkcast: objectref 必须为 reference 类型的数据, indexbyte1 和 indexbyte2 用于构建一个当前类的运行时常量池的索引值, 构建方式为`(indexbyte1 << 8) | indexbyte2`, 该索引所指向的运行时常量池项应当是一个类、接口或者数组类型的符号引用。 如果 objectref 为 null 的话, 那操作数栈不会有任何变化。否则, 参数指定的类、接口或者数组类型会被虚拟机解析。如果 objectref 可以转换为这个类、接口或者数组类型, 那操作数栈就保持不变, 否则 checkcast 指令将抛出一个 ClassCastException 异常
