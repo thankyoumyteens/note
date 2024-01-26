@@ -127,3 +127,4 @@
   - [对象操作指令](./is/obj.md)
   - [操作数栈指令](./is/stack.md)
   - [跳转指令](./is/jump.md)
+  - [方法调用指令](./is/invoke.md)
