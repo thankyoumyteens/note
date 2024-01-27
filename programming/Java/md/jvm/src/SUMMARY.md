@@ -128,3 +128,4 @@
   - [操作数栈指令](./is/stack.md)
   - [跳转指令](./is/jump.md)
   - [方法调用指令](./is/invoke.md)
+  - [方法返回指令](./is/return.md)
