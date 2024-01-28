@@ -1,6 +1,12 @@
-# new 字节码指令
+# 对象的分配
 
-对象分配流程:
+创建一个对象通常是 new, dup, invokespecial 三条指令一起出现:
+
+1. new 指令会分配一块内存空间给新的对象使用, new 指令执行完成后会把新对象的引用放入操作数栈的栈顶给后续的 dup 指令使用
+2. dup 指令会把栈顶的对象引用复制一份给后面的 invokespecial 指令使用
+3. invokespecial 指令会调用 `<init>` 方法初始化对象的字段
+
+new 指令的执行过程:
 
 ![](../../../img/op_new.png)
 
@@ -59,9 +65,9 @@ CASE(_new): {
         oop obj = cast_to_oop(result);
 
         // 使用StoreStore屏障禁止重排序,
-        // 防止把还没初始化完成的对象入栈
+        // 防止把对象头还没初始化完成的对象入栈
         OrderAccess::storestore();
-        // 把这个对象放到操作数栈的栈顶
+        // 把这个对象的引用放到操作数栈的栈顶给后续的dup指令使用
         SET_STACK_OBJECT(obj, 0);
         // 更新程序计数器, 此条new指令执行完毕, new指令总共3个字节, PC加3
         UPDATE_PC_AND_TOS_AND_CONTINUE(3, 1);
@@ -72,10 +78,10 @@ CASE(_new): {
   CALL_VM(InterpreterRuntime::_new(THREAD, METHOD->constants(), index),
           handle_exception);
   // 使用StoreStore屏障禁止重排序,
-  // 防止把还没初始化完成的对象入栈
+  // 防止把对象头还没初始化完成的对象入栈
   OrderAccess::storestore();
   // InterpreterRuntime::_new中分配的对象会保存在vm_result中,
-  // 将对象取出, 并放到操作数栈的顶部
+  // 将对象的引用取出, 并放到操作数栈的栈顶给后续的dup指令使用
   SET_STACK_OBJECT(THREAD->vm_result(), 0);
   // 清空vm_result
   THREAD->set_vm_result(nullptr);
