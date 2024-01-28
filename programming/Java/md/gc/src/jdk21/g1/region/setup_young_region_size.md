@@ -478,3 +478,14 @@ uint G1Policy::calculate_young_max_length(uint target_young_length) const {
   return max_length;
 }
 ```
+
+<!-- 
+TODO
+pending_cards
+rs_length
+保留region
+是什么
+
+_young_list_target_length
+用在哪
+ -->

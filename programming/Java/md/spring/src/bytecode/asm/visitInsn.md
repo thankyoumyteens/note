@@ -230,3 +230,29 @@ public void visitTableSwitchInsn(int min, int max, Label dflt,
  */
 public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels);
 ```
+
+## visitTryCatchBlock
+
+```java
+/**
+ * try catch语句
+ * 显式异常处理表示例:
+ *   from    to  target type
+ *       6    16    19   any
+ *      19    22    19   any
+ * @param start
+ *            显式异常处理表的from,
+ *            try开始位置
+ * @param end
+ *            显式异常处理表的to,
+ *            try结束位置
+ * @param handler
+ *            显式异常处理表的target,
+ *            catch开始位置
+ * @param type
+ *            显式异常处理表的type,
+ *            异常类型名, 比如: java/lang/Exception
+ */
+public void visitTryCatchBlock(Label start, Label end, Label handler,
+        String type);
+```

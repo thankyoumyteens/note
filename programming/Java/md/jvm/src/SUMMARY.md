@@ -129,3 +129,5 @@
   - [跳转指令](./is/jump.md)
   - [方法调用指令](./is/invoke.md)
   - [方法返回指令](./is/return.md)
+  - [异常处理指令](./is/throw.md)
+  - [同步指令](./is/lock.md)
