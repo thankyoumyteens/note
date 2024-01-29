@@ -246,8 +246,8 @@ AB                   // lookupswitch
 
 说明:
 
-- goto: 无符号 byte 型数据 branchbyte1 和 branchbyte2 用于构建一个 16 位有符号的分支偏移量，构建方式为`(branchbyte1 << 8) | branchbyte2`。指令执行后，程序将会转到这个 goto 指令之后的，由上述偏移量确定的目标地址上继续执行。这个目标地址必须处于 goto 指令所在的方法之中
-- goto_w: 无符号 byte 型数据 branchbyte1、branchbyte2、branchbyte3 和 branchbyte4 用于构建一个 32 位有符号的分支偏移量，构建方式为`(branchbyte1 << 24) | (branchbyte2 << 16) | (branchbyte3 << 8) | branchbyte4`。指令执行后，程序将会转到这个 goto_w 指令之后的，由上述偏移量确定的目标地址上继续执行。这个目标地址必须处于 goto_w 指令所在的方法之中
-- jsr: address 是一个 returnAddress 类型的数据，它由 jsr 指令推入操作数栈中。无符号 byte 型数据 branchbyte1 和 branchbyte2 用于构建一个 16 位有符号的分支偏移量，构建方式为`(branchbyte1 << 8) | branchbyte2`。指令执行时，将产生一个当前位置的偏移坐标，并压入到操作数栈中。跳转目标地址必须在 jsr 指令所在的方法之内
-- jsr_w: address 是一个 returnAddress 类型的数据，它由 jsr_w 指令推入操作数栈中。无符号 byte 型数据 branchbyte1、branchbyte2、branchbyte3 和 branchbyte4 用于构建一个 32 位有符号的分支偏移量，构建方式为`(branchbyte1 << 24) | (branchbyte2 << 16) | (branchbyte3 << 8) | branchbyte4`。指令执行时，将产生一个当前位置的偏移坐标，并压入到操作数栈中。跳转目标地址必须在 jsr_w 指令所在的方法之内
-- ret: index 是一个 0 至 255 之间的无符号数，它代表一个当前栈帧的局部变量表的索引值，在该索引位置应为一个 returnAddress 类型的局部变量，指令执行后，将该局部变量的值更新到 JVM 的程序计数器中，令程序从修改后的位置继续执行。ret 指令被用来与 jsr、jsr_w 指令一同实现 Java 语言中的 finally 语句块。请注意，jsr_w 指令推送 address 到操作数栈，ret 指令从局部变量表中把它取出
+- goto: 无符号 byte 型数据 branchbyte1 和 branchbyte2 用于构建一个 16 位有符号的分支偏移量, 构建方式为`(branchbyte1 << 8) | branchbyte2`。指令执行后, 程序将会转到这个 goto 指令之后的, 由上述偏移量确定的目标地址上继续执行。这个目标地址必须处于 goto 指令所在的方法之中
+- goto_w: 无符号 byte 型数据 branchbyte1、branchbyte2、branchbyte3 和 branchbyte4 用于构建一个 32 位有符号的分支偏移量, 构建方式为`(branchbyte1 << 24) | (branchbyte2 << 16) | (branchbyte3 << 8) | branchbyte4`。指令执行后, 程序将会转到这个 goto_w 指令之后的, 由上述偏移量确定的目标地址上继续执行。这个目标地址必须处于 goto_w 指令所在的方法之中
+- jsr: address 是一个 returnAddress 类型的数据, 它由 jsr 指令推入操作数栈中。无符号 byte 型数据 branchbyte1 和 branchbyte2 用于构建一个 16 位有符号的分支偏移量, 构建方式为`(branchbyte1 << 8) | branchbyte2`。指令执行时, 将产生一个当前位置的偏移坐标, 并压入到操作数栈中。跳转目标地址必须在 jsr 指令所在的方法之内
+- jsr_w: address 是一个 returnAddress 类型的数据, 它由 jsr_w 指令推入操作数栈中。无符号 byte 型数据 branchbyte1、branchbyte2、branchbyte3 和 branchbyte4 用于构建一个 32 位有符号的分支偏移量, 构建方式为`(branchbyte1 << 24) | (branchbyte2 << 16) | (branchbyte3 << 8) | branchbyte4`。指令执行时, 将产生一个当前位置的偏移坐标, 并压入到操作数栈中。跳转目标地址必须在 jsr_w 指令所在的方法之内
+- ret: index 是一个 0 至 255 之间的无符号数, 它代表一个当前栈帧的局部变量表的索引值, 在该索引位置应为一个 returnAddress 类型的局部变量, 指令执行后, 将该局部变量的值更新到 JVM 的程序计数器中, 令程序从修改后的位置继续执行。ret 指令被用来与 jsr、jsr_w 指令一同实现 Java 语言中的 finally 语句块。请注意, jsr_w 指令推送 address 到操作数栈, ret 指令从局部变量表中把它取出
