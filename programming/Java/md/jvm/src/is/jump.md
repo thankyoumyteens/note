@@ -30,7 +30,7 @@
   - le: 当且仅当 value <= 0 时, 比较的结果为真
   - ge: 当且仅当 value > 0 时, 比较的结果为真
   - ge: 当且仅当 value >= 0 时, 比较的结果为真
-- if_icmpxx: value1 和 value2 都必须为 int 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 然后进行比较运算, 如果比较结果为真, 那无符号 byte 型数据 branchbyte1 和 branchbyte2 用于构建一个 16 位有符号的分支偏移量, 构建方式为`(branchbyte1 << 8) | branchbyte2`。指令执行后, 程序将会转到这个 if_icmpxx 指令之后的, 由上述偏移量确定的目标地址上继续执行。这个目标地址必须处于 if_icmpxx 指令所在的方法之中。另外, 如果比较结果为假, 那程序将继续执行 if_acmpxx 指令后面的其他字节码指令。 比较的规则如下：
+- if_icmpxx: value1 和 value2 都必须为 int 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 然后进行比较运算, 如果比较结果为真, 那无符号 byte 型数据 branchbyte1 和 branchbyte2 用于构建一个 16 位有符号的分支偏移量, 构建方式为`(branchbyte1 << 8) | branchbyte2`。指令执行后, 程序将会转到这个 if_icmpxx 指令之后的, 由上述偏移量确定的目标地址上继续执行。这个目标地址必须处于 if_icmpxx 指令所在的方法之中。另外, 如果比较结果为假, 那程序将继续执行 if_acmpxx 指令后面的其他字节码指令。 比较的规则如下: 
   - eq 当且仅当 value1 == value2 时, 比较的结果为真
   - ne 当且仅当 value1 != value2 时, 比较的结果为真
   - lt 当且仅当 value1 < value2 时, 比较的结果为真
@@ -68,7 +68,7 @@ switch 语句的 case 值连续时, 会生成 tableswitch 指令, tableswitch �
 
 说明:
 
-- tableswitch: tableswitch 是一条变长指令。紧跟 tableswitch 之后的 0 至 3 个字节作为空白填充, 而后面 defaultbyte1 至 defaultbyte4 代表了一个个由 4 个字节组成的、从当前方法开始（第一条操作码指令）计算的地址, 即紧跟随空白填充的是一系列 32 位有符号整数值：包括默认跳转地址 default、高位值 high 以及低位值 low。在此之后, 是 high-low+1 个有符号 32 位偏移量 offset, 其中要求 low 小于或等于 high。这 high-low+1 个 32 位有符号数值形成一张零基址跳转表, 所有上述的 32 位有符号数都以`(byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4`方式构成。指令执行时, int 型的 index 从操作数栈中出栈, 如果 index 比 low 值小或者比 high 值大, 那就是用 default 作为目标地址进行跳转。否则, 在跳转表中第 index-low 个地址值将作为目标地址进行跳转, 程序从目标地址开始继续执行。目标地址既可能从跳转表匹配坐标中得出, 也可能从 default 中得出, 但无论如何, 最终的目标地址必须在包含 tableswitch 指令的那个方法之内
+- tableswitch: tableswitch 是一条变长指令。紧跟 tableswitch 之后的 0 至 3 个字节作为空白填充, 而后面 defaultbyte1 至 defaultbyte4 代表了一个个由 4 个字节组成的、从当前方法开始（第一条操作码指令）计算的地址, 即紧跟随空白填充的是一系列 32 位有符号整数值: 包括默认跳转地址 default、高位值 high 以及低位值 low。在此之后, 是 high-low+1 个有符号 32 位偏移量 offset, 其中要求 low 小于或等于 high。这 high-low+1 个 32 位有符号数值形成一张零基址跳转表, 所有上述的 32 位有符号数都以`(byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4`方式构成。指令执行时, int 型的 index 从操作数栈中出栈, 如果 index 比 low 值小或者比 high 值大, 那就是用 default 作为目标地址进行跳转。否则, 在跳转表中第 index-low 个地址值将作为目标地址进行跳转, 程序从目标地址开始继续执行。目标地址既可能从跳转表匹配坐标中得出, 也可能从 default 中得出, 但无论如何, 最终的目标地址必须在包含 tableswitch 指令的那个方法之内
 
 示例代码:
 
@@ -163,7 +163,7 @@ switch 语句的 case 值不连续时, 会生成 lookupswitch 指令, lookupswit
 
 说明:
 
-- lookupswitch: lookupswitch 是一条变长指令。紧跟 lookupswitch 之后的 0 至 3 个字节作为空白填充, 而后面 defaultbyte1 至 defaultbyte4 等代表了一个个由 4 个字节组成的、从当前方法开始（第一条操作码指令）计算的地址, 即紧跟随空白填充的是一系列 32 位有符号整数值：包括默认跳转地址 default、匹配坐标的数量 npairs 以及 npairs 组匹配坐标。其中, npairs 的值应当大于或等于 0, 每一组匹配坐标都包含了一个整数值 match 以及一个有符号 32 位偏移量 offset。上述所有的 32 位有符号数值都以`(byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4`方式构成。lookupswitch 指令之后所有的匹配坐标必须以其中的 match 值排序, 按照升序储存。指令执行时, int 型的 key 从操作数栈中出栈, 与每一个 match 值相互比较。如果能找到一个与之相等的 match 值, 那就就以这个 match 所配对的偏移量 offset 作为目标地址进行跳转。如果没有配对到任何一个 match 值, 那就是用 default 作为目标地址进行跳转。程序从目标地址开始继续执行。目标地址既可能从 npairs 组匹配坐标中得出, 也可能从 default 中得出, 但无论如何, 最终的目标地址必须在包含 lookupswitch 指令的那个方法之内
+- lookupswitch: lookupswitch 是一条变长指令。紧跟 lookupswitch 之后的 0 至 3 个字节作为空白填充, 而后面 defaultbyte1 至 defaultbyte4 等代表了一个个由 4 个字节组成的、从当前方法开始（第一条操作码指令）计算的地址, 即紧跟随空白填充的是一系列 32 位有符号整数值: 包括默认跳转地址 default、匹配坐标的数量 npairs 以及 npairs 组匹配坐标。其中, npairs 的值应当大于或等于 0, 每一组匹配坐标都包含了一个整数值 match 以及一个有符号 32 位偏移量 offset。上述所有的 32 位有符号数值都以`(byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4`方式构成。lookupswitch 指令之后所有的匹配坐标必须以其中的 match 值排序, 按照升序储存。指令执行时, int 型的 key 从操作数栈中出栈, 与每一个 match 值相互比较。如果能找到一个与之相等的 match 值, 那就就以这个 match 所配对的偏移量 offset 作为目标地址进行跳转。如果没有配对到任何一个 match 值, 那就是用 default 作为目标地址进行跳转。程序从目标地址开始继续执行。目标地址既可能从 npairs 组匹配坐标中得出, 也可能从 default 中得出, 但无论如何, 最终的目标地址必须在包含 lookupswitch 指令的那个方法之内
 
 示例代码:
 

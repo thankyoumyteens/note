@@ -31,7 +31,7 @@ option 选项:
         if (thread.equals(Thread.currentThread())) {
             continue;
         }
-        out.print("\n线程：" + thread.getName() + "\n");
+        out.print("\n线程: " + thread.getName() + "\n");
         for (StackTraceElement element : stack) {
             out.print("\t"+element+"\n");
         }

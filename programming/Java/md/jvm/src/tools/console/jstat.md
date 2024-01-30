@@ -62,25 +62,25 @@ $ jstat -gc 15948
      1024.0      1024.0       820.7         0.0       8256.0       5192.0      20480.0      16530.4    34176.0    33872.2    4288.0    4193.6     48     0.175     1     0.060     -         -     0.235
 ```
 
-- S0C：Survivor0 的大小
-- S1C：Survivor1 的大小
-- S0U：Survivor0 已使用的大小
-- S1U：Survivor1 已使用的大小
-- EC：Eden 区的大小
-- EU：Eden 区已使用的大小
-- OC：老年代的大小
-- OU：老年代已使用的大小
-- MC：方法区的大小
-- MU：方法区已使用的大小
+- S0C: Survivor0 的大小
+- S1C: Survivor1 的大小
+- S0U: Survivor0 已使用的大小
+- S1U: Survivor1 已使用的大小
+- EC: Eden 区的大小
+- EU: Eden 区已使用的大小
+- OC: 老年代的大小
+- OU: 老年代已使用的大小
+- MC: 方法区的大小
+- MU: 方法区已使用的大小
 - CCSC:压缩类空间(存放类的元数据)大小
 - CCSU:压缩类空间已使用的大小
-- YGC：Young GC 发生的次数
-- YGCT：Young GC 消耗的时间
-- FGC：Full GC 发生的次数
-- FGCT：Full GC 消耗的时间
-- CGC：并发 GC 发生的次数
-- CGCT：并发 GC 消耗的时间
-- GCT：垃圾回收消耗的总时间
+- YGC: Young GC 发生的次数
+- YGCT: Young GC 消耗的时间
+- FGC: Full GC 发生的次数
+- FGCT: Full GC 消耗的时间
+- CGC: 并发 GC 发生的次数
+- CGCT: 并发 GC 消耗的时间
+- GCT: 垃圾回收消耗的总时间
 
 ## gcutil
 
@@ -90,16 +90,16 @@ jstat -gcutil 31836
   0.00  83.33  58.33  47.49  98.84  95.96     18     0.164     0     0.000     2     0.005     0.169
 ```
 
-- S0：Survivor0 已使用的空间占总空间的比例
-- S1：Survivor1 已使用的空间占总空间的比例
-- E：Eden 已使用的空间占总空间的比例
-- O：老年代已使用的空间占总空间的比例
-- M：方法区已使用的空间占总空间的比例
-- CCS：压缩类空间已使用的空间占总空间的比例
-- YGC：Young GC 发生的次数
-- YGCT：Young GC 消耗的时间
-- FGC：Full GC 发生的次数
-- FGCT：Full GC 消耗的时间
-- CGC：并发 GC 发生的次数
-- CGCT：并发 GC 消耗的时间
-- GCT：垃圾回收消耗的总时间
+- S0: Survivor0 已使用的空间占总空间的比例
+- S1: Survivor1 已使用的空间占总空间的比例
+- E: Eden 已使用的空间占总空间的比例
+- O: 老年代已使用的空间占总空间的比例
+- M: 方法区已使用的空间占总空间的比例
+- CCS: 压缩类空间已使用的空间占总空间的比例
+- YGC: Young GC 发生的次数
+- YGCT: Young GC 消耗的时间
+- FGC: Full GC 发生的次数
+- FGCT: Full GC 消耗的时间
+- CGC: 并发 GC 发生的次数
+- CGCT: 并发 GC 消耗的时间
+- GCT: 垃圾回收消耗的总时间

@@ -6,7 +6,7 @@ RTC（Real-Time Clock）实时时钟, 在计算机领域称为硬件时钟, 顾�
 
 windows 把 RTC 时间当作本地时间——在中国, 就是东八区时间。而 Linux 会将 RTC 时间当作 UTC 时间。
 
-所以：Linux 会将 RTC 设置成 UTC 时间。显示时间会根据时区显示, 例如在中国, 显示时间时会自动+8 小时。
+所以: Linux 会将 RTC 设置成 UTC 时间。显示时间会根据时区显示, 例如在中国, 显示时间时会自动+8 小时。
 
 Linux 关机, 启动 windows 后。Window 把 RTC 当成了本时区的时间, 直接显示。但是 RTC 已经被 Linux 设置成了 UTC 时间, 所以显示时间会晚 8 个小时。
 

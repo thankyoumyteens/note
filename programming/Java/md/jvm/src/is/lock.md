@@ -64,7 +64,7 @@ Code:
 ```
 
 objectref 必须为 reference 类型数据。任何对象都有一个 monitor 与之关联。当且仅当一个 monitor 被持有后, 它
-将处于锁定状态。线程执行到 monitorenter 指令时, 将会尝试获取 objectref 所对应的 monitor 的所有权, 那么：
+将处于锁定状态。线程执行到 monitorenter 指令时, 将会尝试获取 objectref 所对应的 monitor 的所有权, 那么: 
 
 - 如果 objectref 的 monitor 的进入计数器为 0, 那线程可以成功进入 monitor, 以及将计数器值设置为 1。当前线程就是 monitor 的所有者
 - 如果当前线程已经拥有 objectref 的 monitor 的所有权, 那它可以重入这个 monitor, 重入时需将进入计数器的值加 1

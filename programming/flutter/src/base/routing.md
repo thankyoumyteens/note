@@ -26,7 +26,7 @@ class MyDataPage extends StatelessWidget {
 }
 ```
 
-在 main.dart 中导入 data.dart：
+在 main.dart 中导入 data.dart: 
 
 ```dart
 import 'package:flutter/material.dart';
