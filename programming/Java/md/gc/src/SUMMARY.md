@@ -69,6 +69,7 @@
       - [VMThread::loop](./jdk21/g1/gc/VMThread_loop.md)
 
 - [JDK8的G1](./g1/g1.md)
+  - [停顿预测模型](./g1/region/g1_predict.md)
   - [Region](./g1/region/Region.md)
   - [对象分配](./g1/obj/对象分配.md)
     - [new关键字](./g1/obj/new关键字.md)
