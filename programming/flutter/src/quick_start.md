@@ -39,9 +39,12 @@
 ## 添加安卓模拟器
 
 1. 在 Android Studio 中创建安卓模拟器
-2. 选择安卓模拟器, 并启动
-3. 点击 vscode 状态栏右下角的 No Device, 选择启动的模拟器
-4. 点击 idea 右上角, 选择启动的模拟器
+2. 进入 ~\AppData\Local\Android\Sdk\emulator 目录, 打开终端
+3. 查看模拟器列表: emulator -list-avds, 找到要启动的模拟器名
+4. 启动模拟器: emulator -avd 模拟器名 -netdelay none -netspeed full
+5. 为 emulator.exe 程序创建快捷方式, 编辑此快捷方式的属性, 修改"目标": `SDK路径\emulator\emulator.exe -avd 模拟器名 -netdelay none -netspeed full`
+6. 点击 vscode 状态栏右下角的 No Device, 选择启动的模拟器
+7. 点击 idea 右上角, 选择启动的模拟器
 
 ## 设置 gradle
 
