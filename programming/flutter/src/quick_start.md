@@ -16,7 +16,11 @@
 
 安装 Flutter 插件
 
-## 创建项目
+## 设置 idea
+
+安装 Flutter 插件
+
+## vscode 创建项目
 
 1. View -> Command Palette
 2. 输入"flutter", 选择 Flutter: New Project
@@ -25,11 +29,19 @@
 5. 输入项目名称, 回车
 6. 等待项目创建完成, 并且 main.dart 文件展现在编辑器中
 
+## idea 创建项目
+
+1. New Project
+2. 选择 Flutter
+3. Flutter SDK Path 中选择 解压位置\flutter 目录
+4. 下一步
+
 ## 添加安卓模拟器
 
 1. 在 Android Studio 中创建安卓模拟器
-2. 点击 vscode 状态栏右下角的 No Device
-3. 选择安卓模拟器, 并启动
+2. 选择安卓模拟器, 并启动
+3. 点击 vscode 状态栏右下角的 No Device, 选择启动的模拟器
+4. 点击 idea 右上角, 选择启动的模拟器
 
 ## 设置 gradle
 
@@ -83,8 +95,12 @@ allprojects {
 }
 ```
 
-## 运行
+## vscode 运行
 
 1. 启动安卓模拟器
 2. vscode 切换到 main.dart 页签
 3. Run -> Start Debugging 或按下 F5
+
+## idea 运行
+
+点击 debug 按钮
