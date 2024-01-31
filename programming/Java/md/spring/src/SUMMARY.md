@@ -4,6 +4,7 @@
   - [正则表达式](./java/正则表达式.md)
   - [日期操作](./java/日期操作.md)
   - [BigDecimal](./java/BigDecimal.md)
+  - [列表去重](./java/列表去重.md)
 
 - [Maven](./Maven/Maven.md)
   - [设置国内源](./Maven/设置国内源.md)
