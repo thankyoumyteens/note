@@ -12,3 +12,5 @@
     - [Matrix4](./base/matrix4.md)
 - [常用的组件](./base/widget.md)
   - [Text](./base/text.md)
+- [样式](./base/style.md)
+  - [渐变](./base/gradient.md)

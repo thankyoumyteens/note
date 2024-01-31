@@ -98,7 +98,3 @@ class MyHomePage extends StatelessWidget {
   }
 }
 ```
-
-效果:
-
-![](../img/container.png)
