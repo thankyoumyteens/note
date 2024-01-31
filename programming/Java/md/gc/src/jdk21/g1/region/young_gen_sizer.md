@@ -2,10 +2,10 @@
 
 使用哪种方法计算新生代 region 数量的预期范围, 与启动 JVM 时设置的参数有关:
 
-1. 不设置任何相关的参数: 最小值是: (堆空间的 region 数量 × G1NewSizePercent) / 100, G1NewSizePercent 是新生代的初始大小占整个堆大小的百分比, 默认为 5。最大值是: (堆空间的 region 数量 × G1MaxNewSizePercent) / 100, G1MaxNewSizePercent 是新生代的最大大小占整个堆大小的百分比, 默认为 60
-2. NewRatio: 如果设置了 NewRatio, 那么最小值和最大值相同, 都是: 堆空间 region 个数 / (NewRatio + 1)。如果设置了 NewSize 或者 MaxNewSize, NewRatio 参数就会失效
-3. NewSize: 如果设置了 NewSize, 那么最小值固定为: NewSize / 一个 region 的大小, 最大值会动态变化
-4. MaxNewSize: 如果设置了 MaxNewSize, 那么最大值固定为: MaxNewSize / 一个 region 的大小, 最小值会动态变化
+1. 不设置任何相关的参数: 最小值是: (堆空间的 region 数量 × G1NewSizePercent) ÷ 100, G1NewSizePercent 是新生代的初始大小占整个堆大小的百分比, 默认为 5。最大值是: (堆空间的 region 数量 × G1MaxNewSizePercent) ÷ 100, G1MaxNewSizePercent 是新生代的最大大小占整个堆大小的百分比, 默认为 60
+2. NewRatio: 如果设置了 NewRatio, 那么最小值和最大值相同, 都是: 堆空间 region 个数 ÷ (NewRatio + 1)。如果设置了 NewSize 或者 MaxNewSize, NewRatio 参数就会失效
+3. NewSize: 如果设置了 NewSize, 那么最小值固定为: NewSize ÷ 一个 region 的大小, 最大值是: (堆空间的 region 数量 × G1MaxNewSizePercent) ÷ 100
+4. MaxNewSize: 如果设置了 MaxNewSize, 那么最大值固定为: MaxNewSize ÷ 一个 region 的大小, 最小值是: (堆空间的 region 数量 × G1NewSizePercent) ÷ 100
 5. 同时设置了 NewSize 和 MaxNewSize: 最小值和最大值都会固定, 不会动态变化, 在后续对新生代进行回收的时候可能满足不了用户期望的暂停时间
 
 ```cpp
