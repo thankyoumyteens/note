@@ -1,12 +1,12 @@
 # 计算新生代 region 数的预期范围
 
-使用哪种方法计算新生代 region 个数的可选范围, 与启动 JVM 时设置的参数有关:
+使用哪种方法计算新生代 region 数量的预期范围, 与启动 JVM 时设置的参数有关:
 
-1. 不设置任何相关的参数: 由 G1 自己决定, min_young_length 的值是: (堆空间的 region 数量 \* G1NewSizePercent) / 100, G1NewSizePercent 是新生代的初始大小占整个堆大小的百分比, 默认为 5。max_young_length 的值是: (堆空间的 region 数量 \* G1MaxNewSizePercent) / 100, G1MaxNewSizePercent 是新生代的最大大小占整个堆大小的百分比, 默认为 60
-2. NewRatio: 如果设置了 NewRatio, 那么 min_young_length 和 max_young_length 相同, 都是: 堆空间 region 个数 / (NewRatio + 1)。如果设置了 NewSize 或者 MaxNewSize, NewRatio 参数就会失效
-3. NewSize: 如果设置了 NewSize, 那么 min_young_length 固定为: NewSize / 一个 region 的大小, max_young_length 会动态变化
-4. MaxNewSize: 如果设置了 MaxNewSize, 那么 max_young_length 固定为: MaxNewSize / 一个 region 的大小, min_young_length 会动态变化
-5. 同时设置了 NewSize 和 MaxNewSize: min_young_length 和 max_young_length 都会固定, 不会动态变化, 在后续对新生代进行回收的时候可能满足不了用户期望的暂停时间
+1. 不设置任何相关的参数: 最小值是: (堆空间的 region 数量 × G1NewSizePercent) / 100, G1NewSizePercent 是新生代的初始大小占整个堆大小的百分比, 默认为 5。最大值是: (堆空间的 region 数量 × G1MaxNewSizePercent) / 100, G1MaxNewSizePercent 是新生代的最大大小占整个堆大小的百分比, 默认为 60
+2. NewRatio: 如果设置了 NewRatio, 那么最小值和最大值相同, 都是: 堆空间 region 个数 / (NewRatio + 1)。如果设置了 NewSize 或者 MaxNewSize, NewRatio 参数就会失效
+3. NewSize: 如果设置了 NewSize, 那么最小值固定为: NewSize / 一个 region 的大小, 最大值会动态变化
+4. MaxNewSize: 如果设置了 MaxNewSize, 那么最大值固定为: MaxNewSize / 一个 region 的大小, 最小值会动态变化
+5. 同时设置了 NewSize 和 MaxNewSize: 最小值和最大值都会固定, 不会动态变化, 在后续对新生代进行回收的时候可能满足不了用户期望的暂停时间
 
 ```cpp
 /////////////////////////////////////////////////////////////////
@@ -17,10 +17,10 @@
  * 初始化G1YoungGenSizer
  * G1Policy的构造函数中调用
  *
- * _sizer_kind: min_young_length 和 max_young_length 的计算方法,
+ * _sizer_kind: 预期范围的计算方法,
  *              默认使用SizerDefaults
- * _min_desired_young_length: 最小新生代region数量
- * _max_desired_young_length: 最大新生代region数量
+ * _min_desired_young_length: 预期最小新生代region数量
+ * _max_desired_young_length: 预期最大新生代region数量
  */
 G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
   _use_adaptive_sizing(true), _min_desired_young_length(0), _max_desired_young_length(0) {
