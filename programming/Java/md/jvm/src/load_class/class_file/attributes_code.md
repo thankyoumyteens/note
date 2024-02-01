@@ -91,13 +91,15 @@ Code 属性表中, 在字节码指令之后的是这个方法的显式异常处�
 | u2   | handler_pc | 1    |
 | u2   | catch_type | 1    |
 
-catch_type 为指向一个 CONSTANT_Class_info 型常量的索引。
+catch_type 是一个 CONSTANT_Class 型常量的索引。
 
-如果当字节码从第 start_pc 行到第 end_pc 行之间(不含第 end_pc 行)出现了类型为 catch_type 或者其子类的异常, 则转到第 handler_pc 行继续处理。当 catch_type 的值为 0 时, 代表任意异常情况都需要转到 handler_pc 处进行处理。
+当字节码从第 start_pc 行到第 end_pc 行之间(不含第 end_pc 行)时, 出现了类型为 catch_type 或者其子类的异常, 会跳转到第 handler_pc 行继续处理。当 catch_type 的值为 0 时, 代表任意异常都要跳转到 handler_pc 处进行处理。
 
 ```java
+package org.example;
+
 public class ExceptionTableDemo {
-    public int inc() {
+    public static int inc() {
         int x;
         try {
             x = 1;
@@ -109,19 +111,53 @@ public class ExceptionTableDemo {
             x = 3;
         }
     }
+
+    public static void main(String[] args) {
+        int a = inc();
+    }
 }
 ```
 
-如果没有出现异常, 返回值是 1。如果出现了 Exception 异常, 返回值是 2。如果出现了 Exception 以外的异常, 方法非正常退出, 没有返回值。
+使用 javap -verbose ExceptionTableDemo.class 查看 inc 方法的 Code 属性表:
 
-使用`javap -verbose ExceptionTableDemo.class`命令解析 class 文件:
+```java
+Code:
+  stack=1, locals=4, args_size=0
+     0: iconst_1    // 把int值1入栈
+     1: istore_0    // 把栈顶的int值1存入局部变量表#0
+     2: iload_0     // 取出局部变量表#0, 放到栈顶
+     3: istore_1    // 把栈顶的int值2存入局部变量表#1, 作为返回值
+     4: iconst_3    // 把int值3入栈
+     5: istore_0    // 把栈顶的int值3存入局部变量表#0
+     6: iload_1     // 取出局部变量表#1, 放到栈顶, 作为返回值
+     7: ireturn     // 返回栈顶的int值1
+                    // 发生Exception异常时, 执行catch中的代码
+     8: astore_1    // 把栈顶的异常对象存入局部变量表#1
+     9: iconst_2    // 把int值2入栈
+    10: istore_0    // 把栈顶的int值2存入局部变量表#0
+    11: iload_0     // 取出局部变量表#0, 放到栈顶
+    12: istore_2    // 把栈顶的int值2存入局部变量表#2, 作为返回值
+    13: iconst_3    // 把int值3入栈
+    14: istore_0    // 把栈顶的int值3存入局部变量表#0
+    15: iload_2     // 取出局部变量表#2, 放到栈顶, 作为返回值
+    16: ireturn     // 返回栈顶的int值2
+                    // 发生其他异常时, 执行finally中的代码
+    17: astore_3    // 发生了异常, 把栈顶的异常对象存入局部变量表#3
+    18: iconst_3    // 把int值3入栈
+    19: istore_0    // 把栈顶的int值3存入局部变量表#0
+    20: aload_3     // 把异常对象放到栈顶
+    21: athrow      // 抛出栈顶的异常
+  Exception table:
+     from    to  target type
+         0     4     8   Class java/lang/Exception
+         0     4    17   any
+         8    13    17   any
+```
 
-![](../../img/etd.png)
+字节码中第 0 到 3 行所做的操作就是将整数 1 赋值给变量 x, 并且将此时 x 的值复制一份副本到本地变量表的 1 号变量槽中, 这个变量槽里面的值在 ireturn 指令执行前将会被重新读到操作栈顶, 作为方法返回值使用。
 
-字节码中第 0 到 3 行所做的操作就是将整数 1 赋值给变量 x, 并且将此时 x 的值复制一份副本到本地变量表的变量槽中, 这个变量槽里面的值在 ireturn 指令执行前将会被重新读到操作栈顶, 作为方法返回值使用。
+如果这时候没有出现异常, 则会继续执行第 4 到 7 行, 将变量 x 赋值为 3, 然后将之前保存的返回值 1 读入到操作栈顶, 最后 ireturn 指令会以 int 形式返回操作栈顶的值 1, 方法结束。
 
-如果这时候没有出现异常, 则会继续执行第 4 到 7 行, 将变量 x 赋值为 3, 然后将之前保存的返回值 1 读入到操作栈顶, 最后 ireturn 指令会以 int 形式返回操作栈顶中的值, 方法结束。
+如果出现了 Exception 异常, 程序会跳转到第 8 行, 第 8 到 16 行所做的事情是将 2 赋值给变量 x, 然后将变量 x 此时的值存储为返回值, 最后再将变量 x 的值改为 3。方法返回前同样将返回值 2 读到了操作栈顶。
 
-如果出现了 Exception 异常, 程序计数器指针转到第 8 行, 第 8 到 16 行所做的事情是将 2 赋值给变量 x, 然后将变量 x 此时的值存储为返回值, 最后再将变量 x 的值改为 3。方法返回前同样将返回值 2 读到了操作栈顶。
-
-如果出现了 Exception 以外的异常, 程序计数器指针转到第 17 行代码, 将变量 x 的值赋为 3, 并将栈顶的异常抛出, 方法结束。
+如果出现了 Exception 以外的异常, 程程序会跳转转到第 17 行代码, 将变量 x 的值赋为 3, 并将栈顶的异常抛出, 方法结束。
