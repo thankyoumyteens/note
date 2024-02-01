@@ -8,7 +8,7 @@
 - [布局](./base/layout.md)
   - [Container](./base/container.md)
     - [BoxDecoration](./base/box_decoration.md)
-    - [BoxConstraints](./base/constraints.md)
+    - [constraints](./base/constraints.md)
     - [Matrix4](./base/matrix4.md)
 - [常用的组件](./base/widget.md)
   - [Text](./base/text.md)

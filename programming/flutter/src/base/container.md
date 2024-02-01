@@ -36,14 +36,11 @@ Container({
   - Colors.blue
   - Colors.white
   - ...
-- decoration: 设置装饰, 比如边框、圆角、背景图等。不能同时设置 decoration 和 color, 如果要同时设置, 可以给 decoration 设置 color。可选值:
-  - BoxDecoration
-- foregroundDecoration: 前景装饰。可选值:
-  - BoxDecoration
+- decoration: 设置装饰, 比如边框、圆角、背景图等。不能同时设置 decoration 和 color, 如果要同时设置, 可以给 decoration 设置 color
+- foregroundDecoration: 前景装饰
 - width: 宽度
 - height: 高度
-- constraints: 大小范围约束。可选值:
-  - BoxConstraints
+- constraints: 大小范围约束
 - margin: 外边距。可选值:
   - EdgeInsets.all(double value): 上下左右设置同一个值
   - EdgeInsets.fromLTRB(double left, double top, double right, double bottom): 分别设置左上右下的值
