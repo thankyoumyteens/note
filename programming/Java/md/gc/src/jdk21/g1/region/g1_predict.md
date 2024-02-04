@@ -84,6 +84,21 @@ sd_{n} & = & \sqrt{var_{n}}
 
 标准差越大, 代表数据集中大部分数值和其平均值之间差异越大。标准差越小, 代表这些数值越接近平均值。
 
+求方差的公式需要先基础算出平均值, 可以做一下变形:
+
+<!--
+\begin{eqnarray}
+var_{n} & = & \frac{1}{n} \sum_{i=1}^{n} (x_{i} - avg_{n})^{2} \\
+& = & \frac{1}{n} \sum_{i=1}^{n} (x_{i}^{2} - 2x_{i}avg_{n} + avg_{n}^{2}) \\
+& = & \frac{1}{n} \sum_{i=1}^{n} x_{i}^{2} - 2avg_{n} \frac{1}{n} \sum_{i=1}^{n} x_{i} + avg_{n}^{2}\frac{1}{n} \sum_{i=1}^{n} 1 \\
+& = & \frac{1}{n} \sum_{i=1}^{n} x_{i}^{2} - 2avg_{n}avg_{n} + avg_{n}^{2}\frac{n}{n} \\
+& = & \frac{1}{n} \sum_{i=1}^{n} x_{i}^{2} - avg_{n}^{2} \\
+& = & \frac{1}{n} \sum_{i=1}^{n} x_{i}^{2} - \left ( \frac{1}{n} \sum_{i=1}^{n} x_{i} \right ) ^{2} \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_var3.jpg)
+
 ## 衰减平均值
 
 ## 衰减方差和衰减标准差
