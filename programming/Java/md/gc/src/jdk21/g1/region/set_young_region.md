@@ -1,5 +1,7 @@
 # 设置新生代 region 数量
 
+G1 首先会预测出下一次 GC 会用到的卡表和 rset 的大小, 然后根据这两个值以及前面计算的预期范围预测出新生代的大小。再根据这个预测的新生代大小计算出新生代的实际大小, 最后根据实际大小计算出新生代最大值。
+
 ```cpp
 //////////////////////////////////////////////////////////
 // jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
@@ -19,7 +21,7 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
   // return Atomic::load(&_young_list_target_length);
   uint old_young_list_target_length = young_list_target_length();
 
-  // 计算新生代预期region数量
+  // 预测新生代预期region数量
   uint new_young_list_desired_length = calculate_young_desired_length(pending_cards, rs_length);
   // 计算新生代实际region数量
   uint new_young_list_target_length = calculate_young_target_length(new_young_list_desired_length);
@@ -43,7 +45,11 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 }
 ```
 
-## 计算新生代预期 region 数量
+## 预测新生代 region 的数量
+
+预测新生代 region 数量的方法:
+
+1.
 
 ```cpp
 //////////////////////////////////////////////////////////
@@ -51,6 +57,7 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 //////////////////////////////////////////////////////////
 
 uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_length) const {
+  // 取出新生代的预期范围
   // return _min_desired_young_length;
   uint min_young_length_by_sizer = _young_gen_sizer.min_desired_young_length();
   // return _max_desired_young_length;
@@ -62,20 +69,24 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
   // 堆中当前的survivor region个数
   // return _survivor.length();
   const uint survivor_length = _g1h->survivor_regions_count();
-  // 堆中已经有的新生代region个数
+  // 堆中当前的新生代region个数
   // return _eden.length() + _survivor.length();
   const uint allocated_young_length = _g1h->young_regions_count();
 
   // 新生代region数的下边界
-  // survivor_length + 1: 至少需要有一个 eden region
+  // survivor_length + 1 表示至少需要有一个 eden region
   uint absolute_min_young_length = MAX3(min_young_length_by_sizer,
                                         survivor_length + 1,
                                         allocated_young_length);
   // 新生代region数的上边界
   uint absolute_max_young_length = MAX2(max_young_length_by_sizer, absolute_min_young_length);
-  // MMU, 全称为Minimum Mutator Utilization, 
+
+  // 根据mmu预测eden的大小
+  //
+  // MMU, 全称为Minimum Mutator Utilization,
   // 是描述在一段时间内应用程序能够运行的最小百分比
-  // 例如, 设定MMU为95%, 表示在一个指定的时间段内, mutator最多只能被停顿5%的时间
+  // 例如, 设定MMU为95%, 表示在一个指定的时间段内,
+  // mutator最多只能被停顿5%的时间
   uint desired_eden_length_by_mmu = 0;
   uint desired_eden_length_by_pause = 0;
 
@@ -84,7 +95,7 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
   if (use_adaptive_young_list_length()) {
     // 根据mmu计算期望的eden region数
     desired_eden_length_by_mmu = calculate_desired_eden_length_by_mmu();
-    // 基准时间
+    // 预测基准时间
     // 包括: 处理rset的时间, 处理整个新生代的的固定花费的时间,
     //      处理refinement缓存的时间, 把对象复制到survovor的时间
     //      基本上包含除了复制eden region之外的所有时间
@@ -95,7 +106,7 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
       calculate_desired_eden_length_by_pause(base_time_ms,
                                              absolute_min_young_length - survivor_length,
                                              absolute_max_young_length - survivor_length);
-
+    // 取两者的最大值
     uint desired_eden_length = MAX2(desired_eden_length_by_pause,
                                     desired_eden_length_by_mmu);
 
@@ -149,7 +160,7 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
     // 先计算调整后的新生代region数量receiving_young,
     // 然后用receiving_young减去堆中已经有的新生代region个数allocated_young_length,
     // 就得到了要新增的eden region个数receiving_additional_eden
-    // 
+    //
     // receiving_young要在尽量满足desired_young_length的同时, 尽可能少的使用保留region
 
     // max_to_eat_into_reserve: 最多能使用多少个保留region
