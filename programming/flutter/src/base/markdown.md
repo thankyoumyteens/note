@@ -45,6 +45,11 @@ flutter:
     - assets/md/demo1.md
     - assets/md/demo2.md
     - assets/img/img1.png
+# 也可以写成
+# flutter:
+  # assets:
+    # - assets/md/
+    # - assets/img/
 ```
 
 编辑 main.dart 文件:
