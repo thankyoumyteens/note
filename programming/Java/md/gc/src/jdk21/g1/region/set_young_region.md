@@ -49,7 +49,17 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 
 预测新生代 region 数量的方法:
 
-1.
+1. 首先确定新生代的最小值, 方法是找出下面 3 个数量的最大值:
+   - G1YoungGenSizer 计算的新生代的最小数量
+   - survivor region 数量+1, 因为至少要有一个 eden region 用来分配对象
+   - 当前新生代 region 数量 <!-- TODO 加了这个新生代就只会变大不会变小了 -->
+2. 确定新生代的最大值, 方法是找出下面 2 个数量的最大值:
+   - G1YoungGenSizer 计算的新生代的最大数量
+   - 新生代的最小值
+3. 根据 mmu 计算期望的 eden region 数
+4. 根据基准时间计算期望的 eden region 数
+5. 取两者的最大值, 作为 eden region 数量, 加上 survivor region 数量, 作为新生代 region 数量
+6. 确保新生代 region 数量满足第 1 步和第 2 步的范围
 
 ```cpp
 //////////////////////////////////////////////////////////
@@ -136,6 +146,12 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
 ```
 
 ## 计算新生代实际 region 数量
+
+G1 默认会保留 10% 的空闲 region, 计算新生代实际 region 数量分为 3 种情况:
+
+1. 当前空闲的 region 数量已经不足 10%, G1 会把要保留的 region 分配给新生代, 保留 region 会低于 10%, 表示内存资源紧张
+2. 当前空闲的 region 数量超过 10%, 但还是小于预测的新生代 region 数量 + 10%的空闲 region, 所以也需要使用一部分本来应该保留的 region, 保留 region 也会低于 10%, 比第 1 种情况好一点, 但内存资源仍然比较紧张
+3. 当前空闲的 region 数量充足, 足够满足预测的新生代 region 数量分配, G1 可以保留 10% 的空闲 region
 
 ```cpp
 //////////////////////////////////////////////////////////
