@@ -6,8 +6,8 @@ import shutil
 dist_path = Path(os.path.abspath(os.path.dirname(__file__)))
 note_app_path = dist_path.parent / 'note_app'
 books_path = note_app_path / 'assets' / 'books'
-# pubspec_path = note_app_path / 'pubspec.yaml'
-
+pubspec_path = note_app_path / 'pubspec.yaml'
+assets_list = []
 
 def copy_files(base_path, book_name):
     book_path = books_path / book_name
@@ -36,8 +36,10 @@ def copy_files(base_path, book_name):
                     'dst_path' : book_path / relative_path,
                 })
     # 复制SUMMARY.md文件
+    assets_list.append(assets_path + '/SUMMARY.md')
     with open(book_path / 'SUMMARY.md', 'w', encoding='utf-8') as f:
         for info in summary_info:
+            assets_list.append(info["path"])
             f.write(f'{info["spaces"]}- [{info["title"]}]({info["path"]})\n')
             f.flush()
     # 复制图片
@@ -60,15 +62,40 @@ def copy_files(base_path, book_name):
                         img_alt = m.group(2)
                         img_path = m.group(3)
                         img_path = re.sub(r'^(\.*/)*', '', img_path)
-                        fw.write(f'{spaces}![{img_alt}]({assets_path}/{img_path})\n')
+                        assets_list.append(f'{assets_path}/{img_path}')
+                        fw.write(f'{spaces}![{img_alt}](resource:{assets_path}/{img_path})\n')
                     else:
                         fw.write(line)
+                fw.write(f'\n[返回目录]({assets_path}/SUMMARY.md)\n')
                 fw.flush()
 
 # jvm
 
 jvm_path = dist_path / 'programming' / 'Java' / 'md' / 'jvm' / 'src'
 copy_files(jvm_path, 'jvm')
+
+with pubspec_path.open('w', encoding='utf-8') as f:
+    f.write('name: note_app\n')
+    f.write('description: "A new Flutter project."\n')
+    f.write("publish_to: 'none'\n")
+    f.write('version: 1.0.0+1\n')
+    f.write('environment:\n')
+    f.write("  sdk: '>=3.2.6 <4.0.0'\n")
+    f.write('dependencies:\n')
+    f.write('  flutter:\n')
+    f.write('    sdk: flutter\n')
+    f.write('  flutter_markdown: ^0.6.18+3\n')
+    f.write('  cupertino_icons: ^1.0.2\n')
+    f.write('dev_dependencies:\n')
+    f.write('  flutter_test:\n')
+    f.write('    sdk: flutter\n')
+    f.write('  flutter_lints: ^2.0.0\n')
+    f.write('flutter:\n')
+    f.write('  uses-material-design: true\n')
+    f.write('  assets:\n')
+    for assests in assets_list:
+        f.write(f'    - {assests}\n')
+    f.flush()
 
 
 input('Press Enter to continue...')
