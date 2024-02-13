@@ -10,6 +10,8 @@
     - [BoxDecoration](./base/box_decoration.md)
     - [constraints](./base/constraints.md)
     - [Matrix4](./base/matrix4.md)
+  - [SizedBox](./base/sized_box.md)
+  - [线性布局](./base/row_col.md)
 - [常用的组件](./base/widget.md)
   - [Text](./base/text.md)
 - [样式](./base/style.md)
