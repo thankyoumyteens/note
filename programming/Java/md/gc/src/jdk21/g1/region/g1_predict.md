@@ -84,7 +84,7 @@ sd_{n} & = & \sqrt{var_{n}}
 
 标准差越大, 代表数据集中大部分数值和其平均值之间差异越大。标准差越小, 代表这些数值越接近平均值。
 
-求方差的公式需要先基础算出平均值, 可以做一下变形:
+求方差的公式需要先算出平均值, 可以做一下变形:
 
 <!--
 \begin{eqnarray}
@@ -99,6 +99,75 @@ var_{n} & = & \frac{1}{n} \sum_{i=1}^{n} (x_{i} - avg_{n})^{2} \\
 
 ![](../../../img/jdk21_var3.jpg)
 
+## 增量方差
+
+<!--
+\begin{eqnarray}
+var_{n} & = & \frac{1}{n} \sum_{i=1}^{n} (x_{i} - avg_{n})^{2} \\
+设 S_{n} & = & n \cdot var_{n} \\
+& = & \sum_{i=1}^{n} (x_{i} - avg_{n})^{2} \\
+& = & \sum_{i=1}^{n} x_{i}^{2} - \sum_{i=1}^{n} avg_{n}^{2} \\
+& = & \sum_{i=1}^{n} x_{i}^{2} - n \cdot avg_{n}^{2} \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_sn1.jpg)
+
+<!--
+\begin{eqnarray}
+S_{n} - S_{n-1} & = & \sum_{i=1}^{n} x_{i}^{2} - n \cdot avg_{n}^{2} - \sum_{i=1}^{n-1} x_{i}^{2} + (n - 1) \cdot avg_{n-1}^{2} \\
+& = & x_{n}^{2} - n \cdot avg_{n}^{2} + (n - 1) \cdot avg_{n-1}^{2} \\
+& = & x_{n}^{2} - n \cdot avg_{n}^{2} + n \cdot avg_{n-1}^{2} - avg_{n-1}^{2} \\
+& = & x_{n}^{2} - avg_{n-1}^{2} + n(avg_{n-1}^{2} - avg_{n}^{2}) \\
+& = & x_{n}^{2} - avg_{n-1}^{2} + n(avg_{n-1} - avg_{n})(avg_{n-1} + avg_{n}) \\
+
+使用平均值中得到的公式: \\
+x_{n} - avg_{n-1} & = & n(avg_{n} - avg_{n-1}) \\
+得到: \\
+S_{n} - S_{n-1} & = & x_{n}^{2} - avg_{n-1}^{2} + (avg_{n-1} - x_{n})(avg_{n-1} + avg_{n}) \\
+& = & x_{n}^{2} - avg_{n-1}^{2} + avg_{n-1}^{2} - x_{n} avg_{n} - x_{n} avg_{n-1} + avg_{n} avg_{n-1} \\
+& = & x_{n}^{2} - x_{n} avg_{n} - x_{n} avg_{n-1} + avg_{n} avg_{n-1} \\
+& = & (x_{n} - avg_{n-1})(x_{n} - avg_{n}) \\
+S_{n} & = & (x_{n} - avg_{n-1})(x_{n} - avg_{n}) + S_{n-1} \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_sn2.jpg)
+
+<!--
+\begin{eqnarray}
+var_{n} & = & \frac{S_{n}}{n} \\
+sd_{n} & = & \sqrt{\frac{S_{n}}{n}} \\
+& = & \sqrt{\frac{S_{n-1} + (x_{n} - avg_{n-1})(x_{n} - avg_{n})}{n}} \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_sn3.jpg)
+
+## 带权重的平均值
+
+带权重的平均值定义如下(使用 w 表示权重):
+
+<!--
+\begin{eqnarray}
+avg_{n} & = & \frac{\sum_{i=1}^{n} w_{i} x_{i}}{\sum_{i=1}^{n} w_{i}}  \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_wavg1.jpg)
+
+当每一项的权重都相同时, 它就会和普通的平均值相同:
+
+<!--
+\begin{eqnarray}
+avg_{n} & = & \frac{\sum_{i=1}^{n} w x_{i}}{\sum_{i=1}^{n} w}  \\
+& = & \frac{w \sum_{i=1}^{n} x_{i}}{n \cdot w}  \\
+& = & \frac{1}{n} \sum_{i=1}^{n} x_{i}  \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_wavg2.jpg)
+
 ## 衰减平均值
 
 ## 衰减方差和衰减标准差
@@ -107,13 +176,17 @@ var_{n} & = & \frac{1}{n} \sum_{i=1}^{n} (x_{i} - avg_{n})^{2} \\
 
 G1 会考虑某种程度的偏差, 几乎每次都会计算出安全的预测值。具体的计算方法如下:
 
-```
-包含偏差的预测值 = 衰减均值 + (可信度/100 * 衰减标准差)
-```
+<!--
+\begin{eqnarray}
+预测值 & = & davg + \left ( \frac{可信度}{100}\times dsd \right ) \\
+\end{eqnarray}
+-->
 
-这里出现了一个新术语: 可信度。可信度表示通过衰减标准差求出来的波动范围的可信程度。例如当衰减标准差的值是 6 时, 如果可信度是 100%, 则表示将偏差范围设置在 ±9 以内。如果可信度为 50%, 则将偏差范围设置为原范围的一半, 即 ±4.5 以内。G1 中可信度的默认值为 50%。
+![](../../../img/jdk21_p.jpg)
 
-将可信范围的偏差的最大值和衰减平均值（预测值）相加, 从而求出了安全的预测值:
+可信度表示通过衰减标准差求出来的波动范围的可信程度。例如当衰减标准差的值是 9 时, 如果可信度是 100%, 则表示将偏差范围设置在 ±9 以内。如果可信度为 50%, 则将偏差范围设置为原范围的一半, 即 ±4.5 以内。G1 中可信度的默认值为 50%。
+
+将可信范围的偏差的最大值和衰减平均值（预测值）相加, 就求出了安全的预测值:
 
 40 + (50 / 100 \* 9) = 44.5
 
@@ -245,7 +318,7 @@ void AbsSeq::add(double val) {
     // variance := (1 - alpha) * (variance + diff * incr)
     // 计算公式来自这篇论文:
     // "Incremental calculation of weighted mean and variance" by Tony Finch
-    // PDF available at https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
+    // https://fanf2.user.srcf.net/hermes/doc/antiforgery/stats.pdf
     double diff = val - _davg;
     double incr = _alpha * diff;
     _davg += incr;
