@@ -6,7 +6,7 @@
 
 ## Row
 
-Row 可以沿水平方向排列其子 widget。
+Row 沿水平方向排列子组件。
 
 ```dart
 const Row({
@@ -29,11 +29,12 @@ const Row({
 
 ```dart
 Column(
-  //测试Row对齐方式，排除Column默认居中对齐的干扰
+  //测试Row对齐方式, 排除Column默认居中对齐的干扰
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
     Row(
       // Row 占满水平方向的空间
+      // 默认 mainAxisSize: MainAxisSize.max,
       // 子组件水平居中
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -43,8 +44,8 @@ Column(
     ),
     Row(
       // Row 占用的水平方向的空间取决于子组件
-      // 子组件水平居中没效果
       mainAxisSize: MainAxisSize.min,
+      // 子组件水平居中没效果
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text("test 3"),
@@ -52,9 +53,9 @@ Column(
       ],
     ),
     Row(
-      // 左对齐
+      // textDirection为rtl时, 表示左对齐
       mainAxisAlignment: MainAxisAlignment.end,
-      // 从右向左排列
+      // 子组件从右向左排列
       // rtl: right to left
       textDirection: TextDirection.rtl,
       children: [
@@ -65,7 +66,7 @@ Column(
     Row(
       // 顶部(此处是下方)对齐
       crossAxisAlignment: CrossAxisAlignment.start,
-      // 垂直方向从下向上对齐
+      // 子组件垂直方向从下向上对齐
       verticalDirection: VerticalDirection.up,
       children: [
         Text(
@@ -80,3 +81,20 @@ Column(
 ```
 
 ![](../img/rc1.png)
+
+## Column
+
+Column 沿垂直方向排列子组件。
+
+```dart
+const Column({
+  super.key,
+  super.mainAxisAlignment,
+  super.mainAxisSize,
+  super.crossAxisAlignment,
+  super.textDirection,
+  super.verticalDirection,
+  super.textBaseline,
+  super.children,
+})
+```
