@@ -4,9 +4,3 @@ language = "en"
 multilingual = false
 src = "src"
 title = "python"
-
-# https://doc.rust-lang.org/cargo/getting-started/installation.html
-# cargo install mdbook
-# cargo install mdbook-epub
-[output.epub]
-[output.html]
