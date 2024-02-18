@@ -82,9 +82,11 @@
 
 - [Redis](./redis/redis.md)
   - [缓存](./redis/cache/cache.md)
+    - [缓存策略](./redis/cache/pattern.md)
     - [缓存穿透](./redis/cache/cache_penetration.md)
     - [缓存击穿](./redis/cache/hotspot_invalid.md)
     - [缓存雪崩](./redis/cache/cache_avalanche.md)
+    - [双写一致性](./redis/cache/consistency.md)
 
 - [Netty](./netty/netty.md)
   - [IO](.netty/io/IO.md)

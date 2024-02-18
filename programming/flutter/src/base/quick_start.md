@@ -8,7 +8,7 @@
 
 ## 设置环境变量
 
-- Path: 解压位置\flutter\bin
+- Path: flutter_windows_3.16.9-stable\flutter\bin
 - FLUTTER_STORAGE_BASE_URL: https://mirrors.tuna.tsinghua.edu.cn/flutter
 - PUB_HOSTED_URL: https://mirrors.tuna.tsinghua.edu.cn/dart-pub
 
@@ -33,7 +33,7 @@
 
 1. New Project
 2. 选择 Flutter
-3. Flutter SDK Path 中选择 解压位置\flutter 目录
+3. Flutter SDK Path 中选择 flutter_windows_3.16.9-stable\flutter 目录
 4. 下一步
 
 ## 添加安卓模拟器
