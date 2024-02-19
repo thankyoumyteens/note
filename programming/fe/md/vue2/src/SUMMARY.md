@@ -16,6 +16,8 @@
 - [echarts]()
     - [基本使用](./echarts/quick_start.md)
     - [柱状堆叠图](./echarts/堆叠图.md)
+    - [x轴禁止隐藏坐标](./echarts/x轴禁止隐藏坐标.md)
+    - [y轴禁止显示小数](./echarts/y轴禁止显示小数.md)
 
 - [element-ui]()
     - [el-table自定义单元格样式](./element/cell-class-name.md)
