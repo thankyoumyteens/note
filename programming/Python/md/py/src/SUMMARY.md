@@ -53,6 +53,7 @@
 - [selenium](./selenium/selenium.md)
   - [安装selenium](./selenium/安装selenium.md)
   - [设置浏览器](./selenium/设置浏览器.md)
+  - [设置代理](./selenium/设置代理.md)
   - [定位元素](./selenium/定位元素.md)
   - [等待元素出现](./selenium/等待元素出现.md)
   - [模拟登录](./selenium/模拟登录.md)

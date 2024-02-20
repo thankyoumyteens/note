@@ -46,6 +46,13 @@
 6. 点击 vscode 状态栏右下角的 No Device, 选择启动的模拟器
 7. 点击 idea 右上角, 选择启动的模拟器
 
+## 使用真机调试
+
+1. Android Studio -> Settings -> Appearance & Behavior -> System Settings -> Android SDK -> SDK Tools
+2. 勾选 Google USB Driver -> 确定
+3. 打开手机的开发者人员选项 -> 打开 USB 调式
+4. 通过 USB 连接手机后, IDE 会自动识别
+
 ## 设置 gradle
 
 如果在 Android Studio 里设置了代理的话, 就需要注释掉 ~/.gradle/gradle.properties 里面的代理设置:

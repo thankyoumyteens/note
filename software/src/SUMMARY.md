@@ -26,3 +26,4 @@
 
 - [excel](./excel/excel.md)
   - [文本数据导入](./excel/文本数据导入.md)
+  - [拼接sql语句](./excel/拼接sql语句.md)

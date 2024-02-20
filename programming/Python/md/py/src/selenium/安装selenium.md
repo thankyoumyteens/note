@@ -23,15 +23,15 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from time import sleep
 
-# 指定chrome路径
 opt = Options()
+# 指定chrome路径
 opt.binary_location = "C:/ungoogled-chromium_112.0.5615.138-1.1_windows/chrome.exe"
 # 指定chromedriver路径
 driver_path = "C:/ChromeDriver_112.0.5615.28_win32/chromedriver.exe"
 
 driver = webdriver.Chrome(options=opt, executable_path=driver_path)
 # 设置浏览器的大小
-driver.set_window_size(1400,800)
+driver.set_window_size(1280, 720)
 # 打开网页
 driver.get("https://www.baidu.com")
 sleep(3)
