@@ -1,31 +1,42 @@
-# visitAnnotation 方法
+# 设置字段的注解
 
 visitAnnotation 方法为字段添加注解:
 
 ```java
-public AnnotationVisitor visitAnnotation(String desc, boolean visible)
-```
-
-参数说明:
-
-- desc: 注解类的描述符, 比如: Ljavax/annotation/Resource;
-- visible: 注解是否运行时可见
-
-## 用法
-
-```java
-// 首先从ClassWriter获取FieldVisitor
-FieldVisitor userService = classWriter.visitField(Opcodes.ACC_PRIVATE,
-                                            "userService",
-                                            "Lorg/example/UserService;",
-                                            null, null);
-
-// 使用visitAnnotation方法获取AnnotationVisitor
-AnnotationVisitor annotationVisitor = userService.visitAnnotation("Ljavax/annotation/Resource;", true);
-// 设置@Resource注解的value字段:
-// @Resource(value = "userServiceImpl")
-annotationVisitor.visit("value", "userServiceImpl");
-annotationVisitor.visitEnd();
-
-userService.visitEnd();
+/**
+ * 为类添加字段
+ */
+private static void addField(ClassWriter writer) {
+    // 添加字段
+    FieldVisitor fieldVisitor = writer.visitField(
+            // 字段的访问标志
+            Opcodes.ACC_PUBLIC,
+            // 字段名
+            "myField1",
+            // 字段的描述符
+            "I",
+            // 泛型信息
+            null,
+            // static+final字段的初始值
+            null
+    );
+    // 设置字段的注解
+    AnnotationVisitor annotationVisitor = fieldVisitor.visitAnnotation(
+            // 注解的描述符
+            "Ljavax/annotation/Resource;",
+            // 是否在运行时可见
+            true
+    );
+    // 设置@Resource注解的value字段: @Resource(value = "f1")
+    annotationVisitor.visit(
+            // 注解的属性名
+            "value",
+            // 注解的属性值
+            "f1"
+    );
+    // 注解操作结束
+    annotationVisitor.visitEnd();
+    // 字段操作结束
+    fieldVisitor.visitEnd();
+}
 ```

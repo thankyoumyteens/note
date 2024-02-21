@@ -3,6 +3,9 @@
 使用 visitMethod 方法为类添加方法:
 
 ```java
+/**
+ * 为类添加方法
+ */
 private static void addMethod(ClassWriter writer) {
     MethodVisitor methodVisitor = writer.visitMethod(
             // 方法的访问标志
@@ -18,6 +21,7 @@ private static void addMethod(ClassWriter writer) {
     );
     // 设置方法体
     setMethodBody(methodVisitor);
+    // 方法操作结束
     methodVisitor.visitEnd();
 }
 ```

@@ -7,6 +7,7 @@
  * 为类添加字段
  */
 private static void addField(ClassWriter writer) {
+    // 添加字段
     FieldVisitor fieldVisitor = writer.visitField(
             // 字段的访问标志
             Opcodes.ACC_PUBLIC,
@@ -19,6 +20,7 @@ private static void addField(ClassWriter writer) {
             // static+final字段的初始值
             null
     );
+    // 字段操作结束
     fieldVisitor.visitEnd();
 }
 ```
