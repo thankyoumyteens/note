@@ -1,6 +1,6 @@
-# ClassWriter
+# 生成 class
 
-ClassWriter 的构造方法:
+生成 class 需要使用 ClassWriter, ClassWriter 的构造方法:
 
 ```java
 public ClassWriter(final int flags)
