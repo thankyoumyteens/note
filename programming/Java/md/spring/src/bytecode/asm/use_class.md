@@ -1,6 +1,24 @@
-# 设置类的基本信息
+# 使用生成的类
 
-使用 visit 方法可用设置类的基本信息:
+要实例化动态生成的类, 先要自定义一个类加载器:
+
+```java
+public class MyClassLoader extends ClassLoader {
+
+    /**
+     * 根据字节数组加载类
+     *
+     * @param fullClassName 类的全限定名
+     * @param b             类的字节数组
+     * @return class
+     */
+    public Class<?> load(String fullClassName, byte[] b) {
+        return defineClass(fullClassName, b, 0, b.length);
+    }
+}
+```
+
+通过自定义类加载器加载并实例化动态生成的类:
 
 ```java
 public static void main(String[] args) {
@@ -31,12 +49,14 @@ public static void main(String[] args) {
     writer.visitEnd();
     // 获取类的字节码
     byte[] byteArray = writer.toByteArray();
-    // 写入到.class文件
-    try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-         FileOutputStream fileOutputStream = new FileOutputStream("MyDemo.class")) {
-        outputStream.write(byteArray);
-        outputStream.writeTo(fileOutputStream);
-        fileOutputStream.flush();
+    // 使用class
+    MyClassLoader classLoader = new MyClassLoader();
+    Class<?> klass = classLoader.load("org.example.MyDemo", byteArray);
+    try {
+        Object myDemo = klass.newInstance();
+        Method string2int = klass.getMethod("string2int", String.class);
+        Object returnedValue = string2int.invoke(myDemo, "100");
+        System.out.println((int) returnedValue);
     } catch (Exception e) {
         throw new RuntimeException(e);
     }

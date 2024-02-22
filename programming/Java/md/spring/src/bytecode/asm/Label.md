@@ -1,8 +1,13 @@
 # Label
 
-Label 类用来实现分支和循环, 和跳转指令一起使用。通过无参构造方法创建一个 Label, 通过 visitLabel 方法设置 label 表示的位置, 通过 visitJumpInsn 方法跳转到 label 表示的位置。
+Label 类用来实现分支和循环, 和跳转指令一起使用。使用方法:
 
-这段 java 代码:
+1. 通过无参构造方法创建一个 Label 对象
+2. 通过 visitLabel 方法设置 label 的位置
+3. 通过 visitJumpInsn 方法跳转到 label 的位置
+4. 注意: 第 2 步和第 3 步没有固定的顺序
+
+示例代码:
 
 ```java
 public void test() {
@@ -14,13 +19,12 @@ public void test() {
 }
 ```
 
-可以使用下面的 asm 代码实现:
+asm 代码实现:
 
 ```java
 // 给类添加test方法
-MethodVisitor test = writer.visitMethod(Opcodes.ACC_PUBLIC, "test", "()V",
-        null, null);
-// 开始test方法体
+MethodVisitor test = writer.visitMethod(Opcodes.ACC_PUBLIC,
+        "test", "()V", null, null);
 test.visitCode();
 
 // 跳转到return语句的label

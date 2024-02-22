@@ -51,8 +51,10 @@
         - [设置字段的注解](./bytecode/asm/visitAnnotation.md)
       - [为类添加方法](./bytecode/asm/visitMethod.md)
         - [设置方法体](./bytecode/asm/visitXxxInsn.md)
-    - [visitXxxInsn方法](./bytecode/asm/visitInsn.md)
+      - [设置类的构造器](./bytecode/asm/setConstructor.md)
+      - [使用生成的类](./bytecode/asm/use_class.md)
     - [Label](./bytecode/asm/Label.md)
+    - [visitXxxInsn方法](./bytecode/asm/visitInsn.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK 动态代理](./proxy/JDK动态代理.md)
