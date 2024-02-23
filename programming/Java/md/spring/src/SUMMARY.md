@@ -53,6 +53,7 @@
         - [设置方法体](./bytecode/asm/visitXxxInsn.md)
       - [设置类的构造器](./bytecode/asm/setConstructor.md)
       - [使用生成的类](./bytecode/asm/use_class.md)
+    - [泛型](./bytecode/asm/signature.md)
     - [Label](./bytecode/asm/Label.md)
     - [visitXxxInsn方法](./bytecode/asm/visitInsn.md)
 
