@@ -22,6 +22,7 @@ def copy_files(source_path, book_name):
             simple_path = file_path.relative_to(book_path)
             simple_path = str(simple_path).replace("\\", "/")
             assets_list.append(assets_prefix + "/" + simple_path)
+        # TODO 加一段js, 使用addJavaScriptChannel通讯
     shutil.copytree(str(book_path), str(dest_path))
 
 
