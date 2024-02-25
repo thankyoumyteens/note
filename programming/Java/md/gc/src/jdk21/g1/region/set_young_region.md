@@ -52,7 +52,7 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 1. 首先确定新生代的最小值, 方法是找出下面 3 个数量的最大值:
    - G1YoungGenSizer 计算出的新生代期望最小值
    - survivor region 数 + 1, 因为至少要有一个 eden region 用来分配对象
-   - 当前新生代 region 数 <!-- TODO 加了这个新生代就只会变大不会变小了 -->
+   - 当前新生代 region 数(垃圾回收之后的)
 2. 确定新生代的最大值, 方法是找出下面 2 个数量的最大值:
    - G1YoungGenSizer 计算出的新生代期望最大值
    - 第 1 步算出的新生代的最小值
