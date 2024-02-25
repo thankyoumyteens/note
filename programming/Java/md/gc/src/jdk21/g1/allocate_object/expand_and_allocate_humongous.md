@@ -2,7 +2,7 @@
 
 ```cpp
 ///////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegionManager.cpp //
+// src/hotspot/share/gc/g1/heapRegionManager.cpp //
 ///////////////////////////////////////////////////////////////////
 
 HeapRegion* HeapRegionManager::expand_and_allocate_humongous(uint num_regions) {
@@ -120,7 +120,7 @@ void HeapRegionManager::commit_regions(uint index, size_t num_regions, WorkerThr
 }
 
 //////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegionManager.inline.hpp //
+// src/hotspot/share/gc/g1/heapRegionManager.inline.hpp //
 //////////////////////////////////////////////////////////////////////////
 
 inline HeapRegion* HeapRegionManager::allocate_free_regions_starting_at(uint first, uint num_regions) {

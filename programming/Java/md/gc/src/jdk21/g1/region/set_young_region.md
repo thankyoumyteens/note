@@ -4,7 +4,7 @@ G1 首先会预测出下一次 GC 会用到的卡表和 rset 的大小, 然后�
 
 ```cpp
 //////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+// src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
 void G1Policy::update_young_length_bounds() {
@@ -61,7 +61,7 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 
 ```cpp
 //////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+// src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
 uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_length) const {
@@ -153,7 +153,7 @@ G1 默认会保留 10% 的空闲 region, 计算新生代实际 region 数量分�
 
 ```cpp
 //////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+// src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
 uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
@@ -264,7 +264,7 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
 
 ```cpp
 //////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+// src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
 uint G1Policy::calculate_young_max_length(uint target_young_length) const {

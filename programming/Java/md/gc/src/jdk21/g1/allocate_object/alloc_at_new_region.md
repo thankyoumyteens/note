@@ -2,7 +2,7 @@
 
 ```cpp
 //////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
+// src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
 //////////////////////////////////////////////////////////////////////
 
 inline HeapWord* G1AllocRegion::attempt_allocation_using_new_region(size_t min_word_size,
@@ -22,7 +22,7 @@ inline HeapWord* G1AllocRegion::attempt_allocation_using_new_region(size_t min_w
 }
 
 ///////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AllocRegion.cpp //
+// src/hotspot/share/gc/g1/g1AllocRegion.cpp //
 ///////////////////////////////////////////////////////////////
 
 HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
@@ -60,7 +60,7 @@ HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
 }
 
 //////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
+// src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
 //////////////////////////////////////////////////////////////////////
 
 /**
@@ -74,7 +74,7 @@ inline HeapWord* G1AllocRegion::allocate(HeapRegion* alloc_region,
 }
 
 ///////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegion.inline.hpp //
+// src/hotspot/share/gc/g1/heapRegion.inline.hpp //
 ///////////////////////////////////////////////////////////////////
 
 inline HeapWord* HeapRegion::allocate(size_t word_size) {

@@ -2,7 +2,7 @@
 
 ```cpp
 ////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Allocator.inline.hpp //
+// src/hotspot/share/gc/g1/g1Allocator.inline.hpp //
 ////////////////////////////////////////////////////////////////////
 
 /**
@@ -18,7 +18,7 @@ inline HeapWord* G1Allocator::attempt_allocation_locked(size_t word_size) {
 }
 
 //////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
+// src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
 //////////////////////////////////////////////////////////////////////
 
 inline HeapWord* G1AllocRegion::attempt_allocation_locked(size_t word_size) {

@@ -194,7 +194,7 @@ G1 会考虑某种程度的偏差, 几乎每次都会计算出安全的预测值
 
 ```cpp
 //////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+// src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
 void G1Policy::update_young_length_bounds() {
@@ -206,7 +206,7 @@ void G1Policy::update_young_length_bounds() {
 }
 
 /////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Analytics.cpp //
+// src/hotspot/share/gc/g1/g1Analytics.cpp //
 /////////////////////////////////////////////////////////////
 
 size_t G1Analytics::predict_pending_cards(bool for_young_only_phase) const {
@@ -226,7 +226,7 @@ double G1Analytics::predict_zero_bounded(G1PhaseDependentSeq const* seq, bool fo
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AnalyticsSequences.inline.hpp //
+// src/hotspot/share/gc/g1/g1AnalyticsSequences.inline.hpp //
 /////////////////////////////////////////////////////////////////////////////
 
 double G1PhaseDependentSeq::predict(const G1Predictions* predictor, bool use_young_only_phase_seq) const {
@@ -244,7 +244,7 @@ double G1PhaseDependentSeq::predict(const G1Predictions* predictor, bool use_you
 
 ```cpp
 ///////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Predictions.hpp //
+// src/hotspot/share/gc/g1/g1Predictions.hpp //
 ///////////////////////////////////////////////////////////////
 
 class G1Predictions {
@@ -289,7 +289,7 @@ class G1Predictions {
 
 ```cpp
 ///////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/utilities/numberSeq.cpp //
+// src/hotspot/share/utilities/numberSeq.cpp //
 ///////////////////////////////////////////////////////////////
 
 /**
@@ -331,7 +331,7 @@ void AbsSeq::add(double val) {
 
 ```cpp
 ///////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/utilities/numberSeq.cpp //
+// src/hotspot/share/utilities/numberSeq.cpp //
 ///////////////////////////////////////////////////////////////
 
 double AbsSeq::dsd() const {

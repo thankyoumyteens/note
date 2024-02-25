@@ -18,7 +18,7 @@ hotspot 有两个解释器, 基于 C++ 的解释器和基于汇编的模板解�
 
 ```cpp
 ////////////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/interpreter/zero/bytecodeInterpreter.cpp //
+// src/hotspot/share/interpreter/zero/bytecodeInterpreter.cpp //
 ////////////////////////////////////////////////////////////////////////////////
 
 CASE(_new): {
@@ -90,7 +90,7 @@ CASE(_new): {
 }
 
 //////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.hpp //
+// src/hotspot/share/oops/instanceKlass.hpp //
 //////////////////////////////////////////////////////////////
 
 class InstanceKlass: public Klass {

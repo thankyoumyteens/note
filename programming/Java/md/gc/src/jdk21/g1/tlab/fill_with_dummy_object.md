@@ -2,7 +2,7 @@
 
 ```cpp
 ////////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
+// src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
 ////////////////////////////////////////////////////////////////////////////
 
 void ThreadLocalAllocBuffer::retire_before_allocation() {
@@ -99,7 +99,7 @@ void ThreadLocalAllocBuffer::initialize(HeapWord* start,
 }
 
 ///////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/collectedHeap.cpp //
+// src/hotspot/share/gc/shared/collectedHeap.cpp //
 ///////////////////////////////////////////////////////////////////
 
 void CollectedHeap::fill_with_dummy_object(HeapWord* start, HeapWord* end, bool zap) {

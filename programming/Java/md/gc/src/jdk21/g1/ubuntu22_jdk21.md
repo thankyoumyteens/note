@@ -13,6 +13,7 @@ tar -zxvf bellsoft-jdk21.0.1+12-linux-amd64.tar.gz
 
 ```sh
 sudo apt-get install -y libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libfreetype6-dev libasound2-dev autoconf
+cd /jdk_root # JDK源码根目录
 bash ./configure --with-target-bits=64 --with-boot-jdk=/home/walter/jdk/jdk-21.0.1 --with-debug-level=slowdebug
 make
 make compile-commands
@@ -20,15 +21,10 @@ make compile-commands
 
 ## 配置 IDE
 
-使用 CLion File=> Open => 选择文件
-
-/home/walter/src_pack/jdk21-jdk-21-ga/build/linux-x86_64-server-slowdebug/compile_commands.json
-
-选择 open as Project
-
-这时候, 你会发现你是看不到源码的, 所以下面需要修改项目的根目录,
-
-Tools -> Compilation Database -> Change Project Root 功能, 选中你的源码目录: /home/walter/src_pack/jdk21-jdk-21-ga
+1. 使用 CLion File=> Open => 选择文件: /jdk_root/build/linux-x86_64-server-slowdebug/compile_commands.json
+2. 选择 open as Project
+3. 修改项目的根目录
+4. Tools -> Compilation Database -> Change Project Root, 选中源码根目录: /jdk_root
 
 ## Custom Build Targets
 
@@ -38,18 +34,18 @@ Tools -> Compilation Database -> Change Project Root 功能, 选中你的源码�
       1. Name -> make linux-x86_64-server-slowdebug
       2. Program -> make
       3. ArguMents -> CONF=linux-x86_64-server-slowdebug
-      4. Working directory -> /home/walter/src_pack/jdk21-jdk-21-ga
+      4. Working directory 选择: /jdk_root
    3. Clean -> ... -> +
       1. Name -> clean linux-x86_64-server-slowdebug
       2. Program -> make
       3. ArguMents -> CONF=linux-x86_64-server-slowdebug clean
-      4. Working directory -> /home/walter/src_pack/jdk21-jdk-21-ga
+      4. Working directory 选择: /jdk_root
 
 ## Run/Debug configurations
 
 1. Run/Debug configurations -> + -> Custom Build Application
-   1. Target 选择 slow-debug
-   2. Executable 选择/home/walter/src_pack/jdk21-jdk-21-ga/build/linux-x86_64-server-slowdebug/jdk/bin/java
+   1. Target 选择: slow-debug
+   2. Executable 选择: /jdk_root/build/linux-x86_64-server-slowdebug/jdk/bin/java
 
 ## 调试
 

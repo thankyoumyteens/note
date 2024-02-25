@@ -1,13 +1,13 @@
 # 初始化 region 的大小
 
-在 G1 中, 每个 region 的大小都是相同的, region 的大小会影响 G1 的运行效率。如果 region 过大, 一个 region 虽然可以分配更多的对象, 但回收就会花费更长的时间。如果 region 过小, 则会导致对象的分配效率过于低下。
+在 G1 中, 每个 region 的大小都是相同的, region 的大小会影响 G1 的运行效率。如果 region 太大, 一个 region 虽然可以分配更多的对象, 但回收就会花费更长的时间。如果 region 太小, 在分配对象时会不断申请新的 region, 导致对象的分配效率过于低下。
 
-可以通过参数 -XX:G1HeapRegionSize 来设置 Region 的大小, 它的默认值为 0。如果不指定 region 的大小, G1 就会自己推断出 region 的合适大小。手动设置的 region 大小需要在 1M 到 512M 之间, 如果没有手动指定 region 大小, G1 会计算出一个在 1M 到 32M 之间的值。
-
+可以通过参数 -XX:G1HeapRegionSize 来设置 Region 的大小, 它的默认值为 0, 手动设置的 region 大小需要在 1M 到 512M 之间。如果不指定 region 的大小, G1 会在 1M 到 32M 的范围内计算出一个合适的 region 大小。
+<!-- TODO MaxHeapSize的默认值 -->
 ```cpp
-////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegion.cpp //
-////////////////////////////////////////////////////////////
+////////////////////////////////////////////
+// src/hotspot/share/gc/g1/heapRegion.cpp //
+////////////////////////////////////////////
 
 // 调用栈:
 // G1Arguments::initialize_alignments g1Arguments.cpp:56
@@ -23,7 +23,7 @@
 // start_thread 0x00007ffff7c94ac3
 // clone3 0x00007ffff7d26850
 /**
- * max_heap_size: 会传入JVM参数: MaxHeapSize, 默认96M
+ * max_heap_size: 会传入JVM参数: MaxHeapSize
  */
 void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
     // G1HeapRegionSize: JVM参数, 默认0
@@ -76,9 +76,9 @@ void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
   }
 }
 
-///////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/utilities/globalDefinitions.hpp //
-///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+// src/hotspot/share/utilities/globalDefinitions.hpp //
+///////////////////////////////////////////////////////
 
 /**
  * 返回在[min, max]之内的值:

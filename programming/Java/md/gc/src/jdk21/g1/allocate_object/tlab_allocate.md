@@ -10,7 +10,7 @@ HeapWord 是 JVM 管理的堆内存的地址抽象。堆中的内存地址都需
 
 ```cpp
 ///////////////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp //
+// src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp //
 ///////////////////////////////////////////////////////////////////////////////////
 
 inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
@@ -42,7 +42,7 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
 }
 
 ///////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/utilities/globalDefinitions.hpp //
+// src/hotspot/share/utilities/globalDefinitions.hpp //
 ///////////////////////////////////////////////////////////////////////
 
 inline size_t pointer_delta(const HeapWord* left, const HeapWord* right) {

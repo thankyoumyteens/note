@@ -4,7 +4,7 @@
 
 ```cpp
 ///////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1AllocRegion.cpp //
+// src/hotspot/share/gc/g1/g1AllocRegion.cpp //
 ///////////////////////////////////////////////////////////////
 
 HeapRegion* MutatorAllocRegion::allocate_new_region(size_t word_size,
@@ -13,7 +13,7 @@ HeapRegion* MutatorAllocRegion::allocate_new_region(size_t word_size,
 }
 
 /////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
 /////////////////////////////////////////////////////////////////
 
 HeapRegion* G1CollectedHeap::new_mutator_alloc_region(size_t word_size,
@@ -42,7 +42,7 @@ HeapRegion* G1CollectedHeap::new_mutator_alloc_region(size_t word_size,
 }
 
 //////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+// src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
 /**
@@ -56,7 +56,7 @@ bool G1Policy::should_allocate_mutator_region() const {
 }
 
 /////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
 /////////////////////////////////////////////////////////////////
 
 /**
@@ -72,7 +72,7 @@ void G1CollectedHeap::set_region_short_lived_locked(HeapRegion* hr) {
 
 ```cpp
 /////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
 /////////////////////////////////////////////////////////////////
 
 /**
@@ -122,7 +122,7 @@ HeapRegion* G1CollectedHeap::new_region(size_t word_size,
 
 ```cpp
 ////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1RemSetTrackingPolicy.cpp //
+// src/hotspot/share/gc/g1/g1RemSetTrackingPolicy.cpp //
 ////////////////////////////////////////////////////////////////////////
 
 void G1RemSetTrackingPolicy::update_at_allocate(HeapRegion* r) {

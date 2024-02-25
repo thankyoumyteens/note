@@ -2,7 +2,7 @@
 
 ```cpp
 /////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
 /////////////////////////////////////////////////////////////////
 
 bool G1CollectedHeap::expand_single_region(uint node_index) {

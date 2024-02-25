@@ -2,7 +2,7 @@
 
 ```cpp
 /////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
 /////////////////////////////////////////////////////////////////
 
 HeapWord*
@@ -147,7 +147,7 @@ void G1CollectedHeap::set_humongous_metadata(HeapRegion* first_hr,
 }
 
 ////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/heapRegion.cpp //
+// src/hotspot/share/gc/g1/heapRegion.cpp //
 ////////////////////////////////////////////////////////////
 
 void HeapRegion::hr_clear(bool clear_space) {

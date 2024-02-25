@@ -2,7 +2,7 @@
 
 ```cpp
 /////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
 /////////////////////////////////////////////////////////////////
 
 HeapWord* G1CollectedHeap::do_collection_pause(size_t word_size,

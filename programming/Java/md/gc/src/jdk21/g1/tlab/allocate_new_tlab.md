@@ -2,7 +2,7 @@
 
 ```cpp
 /////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
 /////////////////////////////////////////////////////////////////
 
 HeapWord* G1CollectedHeap::allocate_new_tlab(size_t min_size,

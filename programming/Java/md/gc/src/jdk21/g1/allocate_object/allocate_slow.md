@@ -4,7 +4,7 @@
 
 ```cpp
 //////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/interpreter/interpreterRuntime.cpp //
+// src/hotspot/share/interpreter/interpreterRuntime.cpp //
 //////////////////////////////////////////////////////////////////////////
 
 JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool, int index))
@@ -26,7 +26,7 @@ JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool
 JRT_END
 
 //////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/oops/instanceKlass.cpp //
+// src/hotspot/share/oops/instanceKlass.cpp //
 //////////////////////////////////////////////////////////////
 
 void InstanceKlass::check_valid_for_instantiation(bool throwError, TRAPS) {
@@ -62,7 +62,7 @@ instanceOop InstanceKlass::allocate_instance(TRAPS) {
 }
 
 ///////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/memory/universe.hpp //
+// src/hotspot/share/memory/universe.hpp //
 ///////////////////////////////////////////////////////////
 
 static CollectedHeap* heap() {
@@ -72,7 +72,7 @@ static CollectedHeap* heap() {
 }
 
 //////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/collectedHeap.inline.hpp //
+// src/hotspot/share/gc/shared/collectedHeap.inline.hpp //
 //////////////////////////////////////////////////////////////////////////
 
 inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
@@ -82,7 +82,7 @@ inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
 }
 
 //////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp //
+// src/hotspot/share/gc/shared/memAllocator.cpp //
 //////////////////////////////////////////////////////////////////
 
 /**
@@ -108,7 +108,7 @@ oop MemAllocator::allocate() const {
 }
 
 //////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/shared/memAllocator.cpp //
+// src/hotspot/share/gc/shared/memAllocator.cpp //
 //////////////////////////////////////////////////////////////////
 
 /**

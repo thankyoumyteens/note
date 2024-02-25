@@ -4,7 +4,7 @@
 
 ```cpp
 //////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Policy.cpp //
+// src/hotspot/share/gc/g1/g1Policy.cpp //
 //////////////////////////////////////////////////////////
 
 /**
@@ -43,7 +43,7 @@ void G1Policy::update_gc_pause_time_ratios(G1GCPauseType gc_type, double start_t
 }
 
 /////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1Analytics.cpp //
+// src/hotspot/share/gc/g1/g1Analytics.cpp //
 /////////////////////////////////////////////////////////////
 
 void G1Analytics::compute_pause_time_ratios(double end_time_sec, double pause_time_ms) {

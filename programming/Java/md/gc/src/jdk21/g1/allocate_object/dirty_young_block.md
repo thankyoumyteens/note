@@ -2,7 +2,7 @@
 
 ```cpp
 ////////////////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp //
+// src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp //
 ////////////////////////////////////////////////////////////////////////
 
 // It dirties the cards that cover the block so that the post
@@ -29,7 +29,7 @@ G1CollectedHeap::dirty_young_block(HeapWord* start, size_t word_size) {
 }
 
 /////////////////////////////////////////////////////////////
-// jdk21-jdk-21-ga/src/hotspot/share/gc/g1/g1CardTable.cpp //
+// src/hotspot/share/gc/g1/g1CardTable.cpp //
 /////////////////////////////////////////////////////////////
 
 void G1CardTable::g1_mark_as_young(const MemRegion& mr) {
