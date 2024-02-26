@@ -3,7 +3,9 @@
 在 G1 中, 每个 region 的大小都是相同的, region 的大小会影响 G1 的运行效率。如果 region 太大, 一个 region 虽然可以分配更多的对象, 但回收就会花费更长的时间。如果 region 太小, 在分配对象时会不断申请新的 region, 导致对象的分配效率过于低下。
 
 可以通过参数 -XX:G1HeapRegionSize 来设置 Region 的大小, 它的默认值为 0, 手动设置的 region 大小需要在 1M 到 512M 之间。如果不指定 region 的大小, G1 会在 1M 到 32M 的范围内计算出一个合适的 region 大小。
+
 <!-- TODO MaxHeapSize的默认值 -->
+
 ```cpp
 ////////////////////////////////////////////
 // src/hotspot/share/gc/g1/heapRegion.cpp //
