@@ -20,9 +20,24 @@
 // 首先是类型T的声明
 // T继承的是接口Serializable, 所以要用::
 // 接着是类型R的声明
-// T继承的是泛型T, T的描述符是: TT;
-// T不是接口, , 所以要用:
+// R继承的是泛型T, T的描述符是: TT;
+// T不是接口, 所以要用一个冒号
 <T::Ljava/io/Serializable;R:TT;>
+```
+
+如果类型参数使用通配符`?`, 则分为三种情况:
+
+1. 没有任何限定，需要用`*`
+2. 有 extends 限定，需要用`+`加上超类描述符
+3. 有 super 限定，需要用`-`加上子类描述符
+
+```java
+// Ljava/util/List<*>;
+List<?>
+// Ljava/util/List<+TT;>;
+List<? extends T>
+// Ljava/util/List<-TT;>;
+List<? super T>
 ```
 
 ## 泛型签名
