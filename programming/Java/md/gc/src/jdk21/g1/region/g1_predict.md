@@ -35,16 +35,26 @@ avg_{n} & = & \frac{1}{n} \sum_{i=1}^{n} x_{i} \\
 
 根据上面的公式, 可以得到另外两个有用的公式:
 
+公式 1:
+
 <!--
 \begin{eqnarray}
 x_{n} - avg_{n-1} & = & n(avg_{n} - avg_{n-1}) \\
+\end{eqnarray}
+-->
 
+![](../../../img/jdk21_avg3.jpg)
+
+公式 2:
+
+<!--
+\begin{eqnarray}
 x_{n} - avg_{n} & = & n(avg_{n} - avg_{n-1}) - avg_{n} + avg_{n-1} \\
 & = & (n - 1) (avg_{n} - avg_{n-1})
 \end{eqnarray}
 -->
 
-![](../../../img/jdk21_avg3.jpg)
+![](../../../img/jdk21_avg4.jpg)
 
 ## 方差和标准差
 
@@ -156,6 +166,8 @@ avg_{n} & = & \frac{\sum_{i=1}^{n} w_{i} x_{i}}{\sum_{i=1}^{n} w_{i}}  \\
 
 ![](../../../img/jdk21_wavg1.jpg)
 
+如果集合中某一项 a 的权重为 w, 就相当于集合中有 w 个 a, 比如列表: `[1, 2, 3]`, 权重分别为: 3, 2, 1, 那么它带权重的平均值相当于列表: `[1, 1, 1, 2, 2, 3]`的不带权重的平均值。
+
 当每一项的权重都相同时, 它就会和普通的平均值相同:
 
 <!--
@@ -168,7 +180,65 @@ avg_{n} & = & \frac{\sum_{i=1}^{n} w x_{i}}{\sum_{i=1}^{n} w}  \\
 
 ![](../../../img/jdk21_wavg2.jpg)
 
-当每一项的权重都不相同时, 我们来对平均值的公式做一下变形, 来避免大量的数相加导致溢出:
+当每一项的权重都不相同时, 和普通的平均值一样, 对公式做一下变形, 来避免大量的数相加导致溢出:
+
+<!--
+\begin{eqnarray}
+为了书写方便,令 W_{n} & = & \sum_{i=1}^{n} w_{i}  \\
+avg_{n} & = & \frac{\sum_{i=1}^{n} w_{i} x_{i}}{\sum_{i=1}^{n} w_{i}} \\
+& = & \frac{1}{W_{n}} \sum_{i=1}^{n} w_{i} x_{i} \\
+& = & \frac{1}{W_{n}} \left ( w_{n} x_{n} + \sum_{i=1}^{n-1} w_{i} x_{i} \right ) \\
+由于 avg_{n-1} & = & \frac{1}{W_{n-1}} \sum_{i=1}^{n-1} w_{i} x_{i} \\
+带入 avg_{n} & = & \frac{1}{W_{n}} \left ( w_{n} x_{n} + W_{n-1}avg_{n-1} \right ) \\
+由于 W_{n} & = & \sum_{i=1}^{n} w_{i}  \\
+& = & w_{n} + \sum_{i=1}^{n-1} w_{i}  \\
+& = & w_{n} + W_{n-1}  \\
+带入 avg_{n} & = & \frac{1}{W_{n}} \left ( w_{n} x_{n} + (W_{n} - w_{n})avg_{n-1} \right ) \\
+& = & \frac{1}{W_{n}} \left ( W_{n}avg_{n-1} + w_{n} x_{n} - w_{n} avg_{n-1} \right ) \\
+& = & avg_{n-1} + \frac{w_{n}}{W_{n}} (x_{n} - avg_{n-1}) \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_wavg3.jpg)
+
+根据上面的公式, 可以得到另外两个有用的公式:
+
+公式 1:
+
+<!--
+\begin{eqnarray}
+avg_{n} & = & avg_{n-1} + \frac{w_{n}}{W_{n}} (x_{n} - avg_{n-1}) \\
+avg_{n} - avg_{n-1} & = & \frac{w_{n}}{W_{n}} (x_{n} - avg_{n-1}) \\
+W_{n} (avg_{n} - avg_{n-1}) & = & w_{n} (x_{n} - avg_{n-1}) \\
+W_{n} (avg_{n-1} - avg_{n}) & = & w_{n} (avg_{n-1} - x_{n})\\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_wavg4.jpg)
+
+公式 2:
+
+<!--
+\begin{eqnarray}
+\frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) & = & x_{n} - avg_{n-1} \\
+x_{n} - avg_{n} + avg_{n} - avg_{n-1} & = & \frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) \\
+x_{n} - avg_{n} & = & \frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) - avg_{n} + avg_{n-1} \\
+& = & \frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) - (avg_{n} - avg_{n-1}) \\
+& = & \frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) - \frac{w_{n}}{w_{n}} (avg_{n} - avg_{n-1}) \\
+& = & \frac{W_{n} - w_{n}}{w_{n}} (avg_{n} - avg_{n-1}) \\
+& = & \frac{W_{n} - w_{n}}{w_{n}} \frac{w_{n}}{W_{n}} \frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) \\
+& = & \frac{W_{n} - w_{n}}{W_{n}} \frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) \\
+由于公式1: W_{n} (avg_{n-1} - avg_{n}) & = & w_{n} (avg_{n-1} - x_{n})\\
+得到: \frac{W_{n}}{w_{n}} & = & \frac{x_{n} - avg_{n-1}}{avg_{n} - avg_{n-1}} \\
+带入 x_{n} - avg_{n} & = & \frac{W_{n} - w_{n}}{W_{n}} (x_{n} - avg_{n-1}) \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_wavg5.jpg)
+
+## 带权重的方差
+
+和不带权重的方差类似, 公式如下:
 
 <!--
 
