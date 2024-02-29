@@ -1,7 +1,28 @@
-# 复制一个类的字段
+# 自己的 AsmUtil
 
 ```java
-public class AsmUtil implements Opcodes {
+package org.example;
+
+import org.objectweb.asm.*;
+import org.objectweb.asm.util.ASMifier;
+import org.objectweb.asm.util.Printer;
+import org.objectweb.asm.util.Textifier;
+import org.objectweb.asm.util.TraceClassVisitor;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+
+public class ASMUtil implements Opcodes {
 
     /**
      * 类加载器
@@ -21,12 +42,60 @@ public class AsmUtil implements Opcodes {
     }
 
     /**
+     * 生成指定类的ASM代码表示
+     *
+     * @param fullClassName 类全名
+     */
+    public static void printAsmCode(String fullClassName) throws IOException {
+        Printer printer = new ASMifier();
+        PrintWriter printWriter = new PrintWriter(System.out, true);
+        TraceClassVisitor traceClassVisitor = new TraceClassVisitor(null, printer, printWriter);
+        ClassReader classReader = new ClassReader(fullClassName);
+        // 不打印栈帧和debug信息
+        int parsingOptions = ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG;
+        classReader.accept(traceClassVisitor, parsingOptions);
+    }
+
+    /**
+     * 生成指定类的类似字节码表示
+     *
+     * @param fullClassName 类全名
+     */
+    public static void printByteCode(String fullClassName) throws IOException {
+        Printer printer = new Textifier();
+        PrintWriter printWriter = new PrintWriter(System.out, true);
+        TraceClassVisitor traceClassVisitor = new TraceClassVisitor(null, printer, printWriter);
+        ClassReader classReader = new ClassReader(fullClassName);
+        // 不打印栈帧和debug信息
+        int parsingOptions = ClassReader.SKIP_FRAMES | ClassReader.SKIP_DEBUG;
+        classReader.accept(traceClassVisitor, parsingOptions);
+    }
+
+    /**
+     * 根据类的字节流生成class文件
+     *
+     * @param classFileName class文件名
+     * @param byteArray     字节流
+     */
+    public static void writeToClassFile(String classFileName, byte[] byteArray) {
+        // 写入到.class文件
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+             FileOutputStream fileOutputStream = new FileOutputStream(classFileName + ".class")) {
+            outputStream.write(byteArray);
+            outputStream.writeTo(fileOutputStream);
+            fileOutputStream.flush();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * 复制类的字段, 并生成一个新的类
      *
      * @param originalEntityName 要复制的类
      * @return 新的类
      */
-    public static Class<?> copyFields(String originalEntityName) throws Exception {
+    public static Class<?> copyFields(String originalEntityName) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
         return copyFields(originalEntityName, null);
     }
 
@@ -37,7 +106,7 @@ public class AsmUtil implements Opcodes {
      * @param fieldFilter        字段过滤器, 返回true的字段才会被复制
      * @return 新的类
      */
-    public static Class<?> copyFields(String originalEntityName, Function<Field, Boolean> fieldFilter) throws Exception {
+    public static Class<?> copyFields(String originalEntityName, Function<Field, Boolean> fieldFilter) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
         // 新类内部名
         String internalName = originalEntityName.replaceAll("\\.", "/");
         internalName = internalName.substring(0, internalName.length() - 2) + "Copy";
@@ -74,6 +143,7 @@ public class AsmUtil implements Opcodes {
 
         writer.visitEnd();
 
+        // 加载类
         byte[] byteArray = writer.toByteArray();
         return new AsmUtilClassLoader().load(targetName, byteArray);
     }
@@ -163,14 +233,5 @@ public class AsmUtil implements Opcodes {
         setter.visitMaxs(2, 2);
         setter.visitEnd();
     }
-}
-```
-
-使用
-
-```java
-public static void main(String[] args) throws Exception {
-    Class<?> klass = AsmUtil.copyFields("org.example.OriginEntity");
-    System.out.println(klass);
 }
 ```

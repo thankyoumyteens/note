@@ -56,7 +56,8 @@
     - [泛型](./bytecode/asm/signature.md)
     - [Label](./bytecode/asm/Label.md)
     - [visitXxxInsn方法](./bytecode/asm/visitInsn.md)
-    - [复制一个类的字段](./bytecode/asm/copy_fields.md)
+    - [自己的AsmUtil](./bytecode/asm/AsmUtil.md)
+      - [复制一个类的字段](./bytecode/asm/copy_fields.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK 动态代理](./proxy/JDK动态代理.md)
