@@ -59,6 +59,9 @@ def copy_files(source_path, book_name):
 # jvm
 jvm_path = dist_path / "programming" / "Java" / "md" / "jvm"
 copy_files(jvm_path, "jvm")
+# jvm
+jvm_path = dist_path / "programming" / "Java" / "md" / "gc"
+copy_files(jvm_path, "gc")
 
 with pubspec_path.open("w", encoding="utf-8") as f:
     f.write("name: note_app\n")

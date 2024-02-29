@@ -8,9 +8,11 @@
 /////////////////////////////////////////////////////////////////
 
 void G1CollectedHeap::expand_heap_after_young_collection(){
+  // 计算新生代可以扩容的大小
   size_t expand_bytes = _heap_sizing_policy->young_collection_expansion_amount();
   // expand_bytes大于0表示需要扩容
   if (expand_bytes > 0) {
+    // 扩容花费的时间
     double expand_ms = 0.0;
     // 扩容
     if (!expand(expand_bytes, _workers, &expand_ms)) {
@@ -20,7 +22,26 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
     phase_times()->record_expand_heap_time(expand_ms);
   }
 }
+```
 
+## 计算新生代可以扩容的大小
+
+G1 使用 JVM 参数 GCTimeRatio 来控制 GC 暂停时间和程序执行时间的比例, GCTimeRatio 默认为 9, 二者的比例的计算方法为: `1 : 1 + GCTimeRatio`, 所以 GC 暂停时间和程序执行时间的比例默认为 1 : 10, 即默认情况下 GC 暂停时间不应该超过程序运行时间的 1/10。
+
+G1 在判断是否需要扩容的过程中会用到两个值:
+
+1. 最新一次 Young GC 暂停时间占程序执行总时间的比例: short_term_pause_time_ratio
+   - Young GC 暂停时间: Young GC 开始到结束的时间范围
+   - 程序执行总时间: 以上一次 Young GC 结束的时间点为起点, 本次 Young GC 结束的时间点为终点的时间范围
+2. 历史 Young GC 暂停时间占程序执行总时间的比例: long_term_pause_time_ratio
+   - 历史 Young GC 暂停时间: 前 n 次 Young GC 暂停时间的总和
+   - 程序执行总时间: 以 n 次之前的 Young GC 结束的时间点为起点, 本次 Young GC 结束的时间点为终点的时间范围
+
+判断是否需要扩容的过程:
+
+1.
+
+```java
 ////////////////////////////////////////////////////////////////////
 // src/hotspot/share/gc/g1/g1HeapSizingPolicy.cpp //
 ////////////////////////////////////////////////////////////////////
@@ -30,14 +51,14 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
  */
 size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
   assert(GCTimeRatio > 0, "must be");
-  // GC暂停时间占程序执行总时间的比例的平均值
+  // GC暂停时间占程序执行总时间的比例
   double long_term_pause_time_ratio = _analytics->long_term_pause_time_ratio();
   // 上一次GC暂停时间占程序执行总时间的比例
   double short_term_pause_time_ratio = _analytics->short_term_pause_time_ratio();
   // GCTimeRatio用于控制GC暂停时间占程序执行总时间比例的阈值, 默认为9
   // 默认情况下, GC暂停时间 : GC暂停时间+mutator执行时间 = 1 : 10
   const double pause_time_threshold = 1.0 / (1.0 + GCTimeRatio);
-  // 根据堆的剩余空间调整这个比例
+  // 根据堆的剩余空间调整这个阈值
   double threshold = scale_with_heap(pause_time_threshold);
 
   // 要扩容的大小
@@ -162,9 +183,7 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
 
 double G1HeapSizingPolicy::scale_with_heap(double pause_time_threshold) {
   double threshold = pause_time_threshold;
-  // If the heap is at less than half its maximum size, scale the threshold down,
-  // to a limit of 1%. Thus the smaller the heap is, the more likely it is to expand,
-  // though the scaling code will likely keep the increase small.
+  // 如果当前使用的堆空间已经不足最大可用的堆空间大小的一半，则将阈值调小, 不过最小不低于1%
   if (_g1h->capacity() <= _g1h->max_capacity() / 2) {
     threshold *= (double)_g1h->capacity() / (double)(_g1h->max_capacity() / 2);
     threshold = MAX2(threshold, 0.01);
