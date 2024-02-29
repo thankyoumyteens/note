@@ -15,11 +15,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public class ASMUtil implements Opcodes {
@@ -95,8 +95,8 @@ public class ASMUtil implements Opcodes {
      * @param originalEntityName 要复制的类
      * @return 新的类
      */
-    public static Class<?> copyFields(String originalEntityName) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
-        return copyFields(originalEntityName, null);
+    public static Class<?> copyFields(String originalEntityName) throws Exception {
+        return copyFields(originalEntityName, null, null, null);
     }
 
     /**
@@ -106,10 +106,12 @@ public class ASMUtil implements Opcodes {
      * @param fieldFilter        字段过滤器, 返回true的字段才会被复制
      * @return 新的类
      */
-    public static Class<?> copyFields(String originalEntityName, Function<Field, Boolean> fieldFilter) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+    public static Class<?> copyFields(String originalEntityName, Function<Field, Boolean> fieldFilter,
+                                      BiConsumer<String, MethodVisitor> customSetter,
+                                      BiConsumer<String, MethodVisitor> customGetter) throws Exception {
         // 新类内部名
         String internalName = originalEntityName.replaceAll("\\.", "/");
-        internalName = internalName.substring(0, internalName.length() - 2) + "Copy";
+        internalName = internalName + "Copy";
         // 新类全名
         String targetName = internalName.replaceAll("/", ".");
 
@@ -138,7 +140,7 @@ public class ASMUtil implements Opcodes {
 
         // 添加字段
         for (Field field : fieldList) {
-            addField(field, writer, internalName);
+            addField(field, writer, internalName, customSetter, customGetter);
         }
 
         writer.visitEnd();
@@ -171,8 +173,12 @@ public class ASMUtil implements Opcodes {
      * @param field        要添加的字段
      * @param writer       ClassWriter
      * @param internalName 类内部名
+     * @param customSetter 自定义setter的方法体
+     * @param customGetter 自定义getter的方法体
      */
-    private static void addField(Field field, ClassWriter writer, String internalName) throws InvocationTargetException, IllegalAccessException {
+    private static void addField(Field field, ClassWriter writer, String internalName,
+                                 BiConsumer<String, MethodVisitor> customSetter,
+                                 BiConsumer<String, MethodVisitor> customGetter) throws Exception {
         String fieldType = field.getType().getName().replaceAll("\\.", "/");
         String fieldName = field.getName();
         String pascalName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
@@ -216,21 +222,30 @@ public class ASMUtil implements Opcodes {
         // getter
         MethodVisitor getter = writer.visitMethod(ACC_PUBLIC, "get" + pascalName,
                 "()" + fieldDesc, null, null);
-        getter.visitCode();
-        getter.visitVarInsn(ALOAD, 0);
-        getter.visitFieldInsn(GETFIELD, internalName, fieldName, fieldDesc);
-        getter.visitInsn(ARETURN);
-        getter.visitMaxs(1, 1);
+        if (customGetter != null) {
+            customGetter.accept(fieldName, getter);
+        } else {
+            getter.visitCode();
+            getter.visitVarInsn(ALOAD, 0);
+            getter.visitFieldInsn(GETFIELD, internalName, fieldName, fieldDesc);
+            getter.visitInsn(ARETURN);
+            getter.visitMaxs(1, 1);
+        }
         getter.visitEnd();
+
         // setter
         MethodVisitor setter = writer.visitMethod(ACC_PUBLIC, "set" + pascalName,
                 "(" + fieldDesc + ")V", null, null);
-        setter.visitCode();
-        setter.visitVarInsn(ALOAD, 0);
-        setter.visitVarInsn(ALOAD, 1);
-        setter.visitFieldInsn(PUTFIELD, internalName, fieldName, fieldDesc);
-        setter.visitInsn(RETURN);
-        setter.visitMaxs(2, 2);
+        if (customSetter != null) {
+            customSetter.accept(fieldName, setter);
+        } else {
+            setter.visitCode();
+            setter.visitVarInsn(ALOAD, 0);
+            setter.visitVarInsn(ALOAD, 1);
+            setter.visitFieldInsn(PUTFIELD, internalName, fieldName, fieldDesc);
+            setter.visitInsn(RETURN);
+            setter.visitMaxs(2, 2);
+        }
         setter.visitEnd();
     }
 }

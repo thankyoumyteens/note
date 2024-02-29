@@ -27,17 +27,6 @@ public class AsmUtil implements Opcodes {
      * @return 新的类
      */
     public static Class<?> copyFields(String originalEntityName) throws Exception {
-        return copyFields(originalEntityName, null);
-    }
-
-    /**
-     * 复制类的字段, 并生成一个新的类
-     *
-     * @param originalEntityName 要复制的类
-     * @param fieldFilter        字段过滤器, 返回true的字段才会被复制
-     * @return 新的类
-     */
-    public static Class<?> copyFields(String originalEntityName, Function<Field, Boolean> fieldFilter) throws Exception {
         // 新类内部名
         String internalName = originalEntityName.replaceAll("\\.", "/");
         internalName = internalName.substring(0, internalName.length() - 2) + "Copy";
@@ -47,17 +36,7 @@ public class AsmUtil implements Opcodes {
         // 获取原始类的所有字段
         Class<?> originalClass = Class.forName(originalEntityName);
         Field[] declaredFields = originalClass.getDeclaredFields();
-        List<Field> fieldList;
-        if (fieldFilter != null) {
-            fieldList = new ArrayList<>();
-            for (Field field : declaredFields) {
-                if (fieldFilter.apply(field)) {
-                    fieldList.add(field);
-                }
-            }
-        } else {
-            fieldList = new ArrayList<>(Arrays.asList(declaredFields));
-        }
+        List<Field> fieldList = new ArrayList<>(Arrays.asList(declaredFields));
 
         // 创建类
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
