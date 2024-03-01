@@ -26,16 +26,16 @@ void G1CollectedHeap::expand_heap_after_young_collection(){
 
 ## 计算新生代可以扩容的大小
 
-G1 使用 JVM 参数 GCTimeRatio 来控制 GC 暂停时间和程序执行时间的比例, GCTimeRatio 默认为 9, 二者的比例的计算方法为: `1 : 1 + GCTimeRatio`, 所以 GC 暂停时间和程序执行时间的比例默认为 1 : 10, 即默认情况下 GC 暂停时间不应该超过程序运行时间的 1/10。
+G1 使用 JVM 参数 -XX:GCTimeRatio 来控制 GC 暂停时间和程序执行时间的比例, GCTimeRatio 默认为 9, 二者的比例的计算方法为: `1 : 1 + GCTimeRatio`, 所以 GC 暂停时间和程序执行时间的比例默认为 1 : 10, 即默认情况下 GC 暂停时间不应该超过程序运行时间的 1/10。
 
 G1 在判断是否需要扩容的过程中会用到两个值:
 
-1. 最新一次 Young GC 暂停时间占程序执行总时间的比例: short_term_pause_time_ratio
-   - Young GC 暂停时间: Young GC 开始到结束的时间范围
-   - 程序执行总时间: 以上一次 Young GC 结束的时间点为起点, 本次 Young GC 结束的时间点为终点的时间范围
-2. 历史 Young GC 暂停时间占程序执行总时间的比例: long_term_pause_time_ratio
+1. short_term_pause_time_ratio: 最新一次 Young GC 暂停时间占程序执行总时间的比例
+   - 最新一次 Young GC 暂停时间: 本次 Young GC 开始到结束的时间段
+   - 程序执行总时间: 以上一次 Young GC 结束的时间点为起点, 本次 Young GC 结束的时间点为终点的时间段
+2. long_term_pause_time_ratio: 历史 Young GC 暂停时间占程序执行总时间的比例
    - 历史 Young GC 暂停时间: 前 n 次 Young GC 暂停时间的总和
-   - 程序执行总时间: 以 n 次之前的 Young GC 结束的时间点为起点, 本次 Young GC 结束的时间点为终点的时间范围
+   - 程序执行总时间: 以 n 次之前的 Young GC 结束的时间点为起点, 本次 Young GC 结束的时间点为终点的时间段
 
 判断是否需要扩容的过程:
 
