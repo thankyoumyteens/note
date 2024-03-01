@@ -10,27 +10,32 @@ books_path = note_app_path / "assets" / "books"
 pubspec_path = note_app_path / "pubspec.yaml"
 assets_list = []
 
+
 def get_script(url):
     # 向flutter发送当前页面的url
-    return "<script>\n" \
-           f"UrlLogger.postMessage('{url}');\n" \
-           "</script>\n"
+    return "<script>\n" f"UrlLogger.postMessage('{url}');\n" "</script>\n"
+
 
 def is_html(path):
     if path.endswith(".html"):
         return True
     return False
 
+
 def handle_html(source_path, dest_path, simple_path):
     with source_path.open("r", encoding="utf-8") as f:
         with dest_path.open("w", encoding="utf-8") as fw:
             for line in f:
-                body_match = re.match('^\s*</body>$', line)
+                body_match = re.match("^\s*</body>$", line)
+                default_theme_match = re.match("^\s*var default_theme.+$", line)
                 if body_match:
                     fw.write(get_script(simple_path) + "</body>\n")
+                elif default_theme_match:
+                    fw.write("var default_theme = 'navy';\n")
                 else:
                     fw.write(line)
             fw.flush()
+
 
 def copy_files(source_path, book_name):
     dest_path = books_path / book_name

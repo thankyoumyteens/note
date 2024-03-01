@@ -73,3 +73,32 @@ protected Class<?> loadClass(String name, boolean resolve)
 [Loaded java.lang.Comparable from C:\jdk8\jre\lib\rt.jar]
 ...
 ```
+
+## 打破双亲委派模型
+
+重写 ClassLoader 类中的 loadClass 方法:
+
+```java
+public class MyClassLoader extends ClassLoader {
+
+    @Override
+    public Class<?> loadClass(String name) throws ClassNotFoundException {
+        String userDirectoryPath = System.getProperty("user.dir");
+        File file = new File(userDirectoryPath + "/target/classes/" +
+                             name.replaceAll("\\.", "/") + ".class");
+        if (!file.exists()) {
+            // 加载Object等类
+            return super.loadClass(name);
+        }
+        try {
+            // 加载自定义类
+            InputStream is = Files.newInputStream(file.toPath());
+            byte[] b = new byte[is.available()];
+            is.read(b);
+            return defineClass(name, b, 0, b.length);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
