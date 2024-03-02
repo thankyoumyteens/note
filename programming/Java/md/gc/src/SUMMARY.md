@@ -20,6 +20,7 @@
   - [ubuntu22调试OpenJDK21](./jdk21/g1/ubuntu22_jdk21.md)
   - [region](./jdk21/g1/region/region.md)
     - [NUMA](./jdk21/g1/region/numa.md)
+    - [region的3种状态](./jdk21/g1/region/region_state.md)
     - [初始化region的大小](./jdk21/g1/region/setup_heap_region_size.md)
     - [初始化新生代的大小](./jdk21/g1/region/setup_young_region_size.md)
       - [新生代的预期范围](./jdk21/g1/region/young_gen_sizer.md)
