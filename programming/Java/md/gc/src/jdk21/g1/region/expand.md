@@ -60,6 +60,14 @@ uint HeapRegionManager::expand_by(uint num_regions, WorkerThreads* pretouch_work
   // 返回扩容的region数
   return expanded;
 }
+```
+
+## 把Inactive状态的region恢复成Active状态
+
+```cpp
+///////////////////////////////////////////////////
+// src/hotspot/share/gc/g1/heapRegionManager.cpp //
+///////////////////////////////////////////////////
 
 uint HeapRegionManager::expand_inactive(uint num_regions) {
   uint offset = 0;
@@ -80,6 +88,38 @@ uint HeapRegionManager::expand_inactive(uint num_regions) {
 
   return expanded;
 }
+
+HeapRegionRange G1CommittedRegionMap::next_inactive_range(uint offset) const {
+  // Find first inactive region from offset.
+  uint start = (uint) _inactive.find_first_set_bit(offset);
+
+  if (start == max_length()) {
+    // Early when no inactive regions are found.
+    return HeapRegionRange(max_length(), max_length());
+  }
+
+  uint end = (uint) _inactive.find_first_clear_bit(start);
+  verify_inactive_range(start, end);
+
+  return HeapRegionRange(start, end);
+}
+
+void HeapRegionManager::reactivate_regions(uint start, uint num_regions) {
+  assert(num_regions > 0, "No point in calling this for zero regions");
+
+  clear_auxiliary_data_structures(start, num_regions);
+
+  _committed_map.reactivate(start, start + num_regions);
+  initialize_regions(start, num_regions);
+}
+```
+
+## 从Uncommitted状态的内存中分配region
+
+```cpp
+///////////////////////////////////////////////////
+// src/hotspot/share/gc/g1/heapRegionManager.cpp //
+///////////////////////////////////////////////////
 
 uint HeapRegionManager::expand_any(uint num_regions, WorkerThreads* pretouch_workers) {
   assert(num_regions > 0, "Must expand at least 1 region");

@@ -32,6 +32,8 @@ class HeapRegionManager: public CHeapObj<mtGC> {
 //////////////////////////////////////////////////////
 
 class G1CommittedRegionMap : public CHeapObj<mtGC> {
+  // 使用位图标记region的状态, true表示Active, false表示Inactive
+
   // 位图, 每一位指向一个Active状态的region
   CHeapBitMap _active;
   // 位图, 每一位指向一个Inactive状态的region
