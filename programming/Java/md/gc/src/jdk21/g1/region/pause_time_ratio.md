@@ -82,3 +82,38 @@ double G1Analytics::most_recent_gc_end_time_sec() const {
   return _recent_prev_end_times_for_all_gcs_sec.last();
 }
 ```
+
+## 队列添加元素
+
+```cpp
+TruncatedSeq::TruncatedSeq(int length, double alpha):
+  AbsSeq(alpha), _length(length), _next(0) {
+  _sequence = NEW_C_HEAP_ARRAY(double, _length, mtInternal);
+  for (int i = 0; i < _length; ++i)
+    _sequence[i] = 0.0;
+}
+
+void TruncatedSeq::add(double val) {
+  AbsSeq::add(val);
+
+  // get the oldest value in the sequence...
+  double old_val = _sequence[_next];
+  // ...remove it from the sum and sum of squares
+  _sum -= old_val;
+  _sum_of_squares -= old_val * old_val;
+
+  // ...and update them with the new value
+  _sum += val;
+  _sum_of_squares += val * val;
+
+  // now replace the old value with the new one
+  _sequence[_next] = val;
+  _next = (_next + 1) % _length;
+
+  // only increase it if the buffer is not full
+  if (_num < _length)
+    ++_num;
+
+  guarantee( variance() > -1.0, "variance should be >= 0" );
+}
+```

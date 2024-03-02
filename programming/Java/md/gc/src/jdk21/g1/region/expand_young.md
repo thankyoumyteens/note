@@ -37,9 +37,15 @@ G1 在判断是否需要扩容的过程中会用到两个值:
    - 历史 Young GC 暂停时间: 前 n 次 Young GC 暂停时间的总和
    - 程序执行总时间: 以 n 次之前的 Young GC 结束的时间点为起点, 本次 Young GC 结束的时间点为终点的时间段
 
-判断是否需要扩容的过程:
+判断是否需要扩容:
 
-1.
+1. 判断short_term_pause_time_ratio是否超过阈值, 并记录它超过阈值的次数。如果超过阈值的次数达到4次, 就需要扩容
+2. 如果历史数据的计数达到10, 就要判断long_term_pause_time_ratio是否超过阈值, 如果超过阈值, 就需要扩容
+   - 历史数据的计数方法: 如果历史数据为0, 且本次暂停时间超过阈值, 则计数加1并开始计数。此后每发生一次GC, 计数都加1, 不管是否超过阈值。如果计数达到10, 并且没有触发扩容, 则重置计数, 并等待下一次暂停时间超过阈值时, 再开始重新计数
+
+计算要扩容的大小
+
+1. 
 
 ```java
 ////////////////////////////////////////////////////////////////////
@@ -87,16 +93,13 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
                             _num_prev_pauses_for_heuristics,
                             _ratio_over_threshold_count);
 
-  // Check if we've had enough GC time ratio checks that were over the
-  // threshold to trigger an expansion.
-  // We'll also expand if we've
-  // reached the end of the history buffer and the average of all entries
-  // is still over the threshold. This indicates a smaller number of GCs were
-  // long enough to make the average exceed the threshold.
+  // 历史数据计数是否达到10次
+  // _pauses_since_start: 历史数据计数
+  // _num_prev_pauses_for_heuristics: 固定为10
   bool filled_history_buffer = _pauses_since_start == _num_prev_pauses_for_heuristics;
   // 判断是否需要扩容
-  //   MinOverThresholdForGrowth固定为4, GC暂停时间超过阈值的次数达到4时, 需要扩容
-  //
+  //   1. MinOverThresholdForGrowth固定为4, 比例超过阈值的次数达到4时, 需要扩容
+  //   2. 历史数据达到10条, 并且平均比例超过阈值, 需要扩容
   if ((_ratio_over_threshold_count == MinOverThresholdForGrowth) ||
       (filled_history_buffer && (long_term_pause_time_ratio > threshold))) {
     // GrainBytes在初始化region大小的时候被设置
@@ -160,15 +163,14 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
 
     // 把expand_bytes的值控制在min_expand_bytes和uncommitted_bytes之间
     expand_bytes = clamp(expand_bytes, min_expand_bytes, uncommitted_bytes);
-    // 清除本次扩容修改的变量
+    // 清空, 重新计数
     clear_ratio_check_data();
   } else {
-    // An expansion was not triggered. If we've started counting, increment
-    // the number of checks we've made in the current window.  If we've
-    // reached the end of the window without resizing, clear the counters to
-    // start again the next time we see a ratio above the threshold.
+    // 没有触发扩容
     if (_ratio_over_threshold_count > 0) {
+      // 历史数据条数+1
       _pauses_since_start++;
+      // 如果达到10条, 清空, 重新计数
       if (_pauses_since_start > _num_prev_pauses_for_heuristics) {
         clear_ratio_check_data();
       }
@@ -181,6 +183,9 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
   return expand_bytes;
 }
 
+/**
+ * 根据堆空间使用情况, 调整阈值
+ */
 double G1HeapSizingPolicy::scale_with_heap(double pause_time_threshold) {
   double threshold = pause_time_threshold;
   // 如果当前使用的堆空间已经不足最大可用的堆空间大小的一半，则将阈值调小, 不过最小不低于1%
@@ -192,6 +197,9 @@ double G1HeapSizingPolicy::scale_with_heap(double pause_time_threshold) {
   return threshold;
 }
 
+/**
+ * 清空计数
+ */
 void G1HeapSizingPolicy::clear_ratio_check_data() {
   _ratio_over_threshold_count = 0;
   _ratio_over_threshold_sum = 0.0;

@@ -4,8 +4,6 @@
 
 可以通过参数 -XX:G1HeapRegionSize 来设置 Region 的大小, 它的默认值为 0, 手动设置的 region 大小需要在 1M 到 512M 之间。如果不指定 region 的大小, G1 会在 1M 到 32M 的范围内计算出一个合适的 region 大小。
 
-<!-- TODO MaxHeapSize的默认值 -->
-
 ```cpp
 ////////////////////////////////////////////
 // src/hotspot/share/gc/g1/heapRegion.cpp //
