@@ -24,3 +24,12 @@ WebViewController controller = WebViewController()
     print(message.message);
   });
 ```
+
+## flutter -> js
+
+```dart
+// 无返回值调用
+controller.runJavaScript(javaScript);
+// 有返回值的调用
+String returnedValue = await controller.runJavascriptReturningResult(javaScript);
+```

@@ -17,6 +17,7 @@
 - [样式](./base/style.md)
   - [渐变](./base/gradient.md)
 - [数据持久化](./base/storage/storage.md)
+  - [shared_preferences](./base/storage/shared_preferences.md)
   - [sqfite](./base/storage/sqfite.md)
 - [显示markdown](./base/markdown.md)
 - [WebView](./base/webview/webview.md)
