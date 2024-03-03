@@ -83,6 +83,7 @@ with pubspec_path.open("w", encoding="utf-8") as f:
     f.write("  jaguar_flutter_asset: ^3.0.0\n")
     f.write("  webview_flutter: ^4.7.0\n")
     f.write("  shared_preferences: ^2.2.2\n")
+    f.write("  sqflite: ^2.3.2\n")
     f.write("  cupertino_icons: ^1.0.2\n")
     f.write("dev_dependencies:\n")
     f.write("  flutter_test:\n")
