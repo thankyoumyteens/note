@@ -6,6 +6,14 @@
   - [BigDecimal](./java/BigDecimal.md)
   - [列表去重](./java/列表去重.md)
 
+- [feature](./java/feature/feature.md)
+  - [JDK8](./java/feature/jdk8/jdk8.md)
+    - [lambda表达式](./java/feature/jdk8/lambda.md)
+    - [Stream](./java/feature/jdk8/stream.md)
+    - [Optional](./java/feature/jdk8/optional.md)
+  - [JDK17](./java/feature/jdk17/jdk17.md)
+    - [Switch表达式](./java/feature/jdk17/switch_expressions.md)
+
 - [Maven](./Maven/Maven.md)
   - [设置国内源](./Maven/设置国内源.md)
   - [设置项目jdk版本](./Maven/设置项目jdk版本.md)
