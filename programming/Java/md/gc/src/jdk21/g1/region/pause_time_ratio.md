@@ -5,6 +5,7 @@
 计算 long_term_pause_time_ratio:
 
 1.
+<!-- TODO -->
 
 计算 short_term_pause_time_ratio:
 
