@@ -26,6 +26,13 @@
   - [ubuntu 安装 docker-compose](./Linux/Ubuntu/ubuntu安装docker-compose.md)
   - [ubuntu 安装 harbor](./Linux/Ubuntu/ubuntu安装harbor.md)
 
+- [MacOS](./macos/macos.md)
+  - [Homebrew](./macos/brew.md)
+    - [安装常用软件](./macos/inst.md)
+  - [访达显示所有文件夹](./macos/finder_dir.md)
+  - [安装jdk](./macos/jdk.md)
+  - [IDE设置](./macos/ide_settings.md)
+
 - [Bash](./Linux/bash/bash.md)
   - [Shell 命令](./Linux/bash/cmd.md)
   - [echo 命令](./Linux/bash/echo.md)
