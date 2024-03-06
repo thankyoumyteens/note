@@ -31,6 +31,8 @@
     - [安装常用软件](./macos/inst.md)
   - [访达显示所有文件夹](./macos/finder_dir.md)
   - [安装jdk](./macos/jdk.md)
+  - [安装nvm](./macos/nvm.md)
+  - [安装python](./macos/py.md)
   - [IDE设置](./macos/ide_settings.md)
 
 - [Bash](./Linux/bash/bash.md)
