@@ -1,6 +1,6 @@
 # 等待异步操作完成
 
-在发送异步请求前展示 loading 组件，在异步请求完成后隐藏 loading 组件。
+在发送异步请求前展示 loading 组件, 在异步请求完成后隐藏 loading 组件。
 
 ## loading
 

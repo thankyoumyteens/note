@@ -18,6 +18,7 @@
 
 - [JDK21的G1](./jdk21/g1/g1.md)
   - [ubuntu22调试OpenJDK21](./jdk21/g1/ubuntu22_jdk21.md)
+  - [MacOS调试OpenJDK21](./jdk21/g1/mac_jdk21.md)
   - [region](./jdk21/g1/region/region.md)
     - [NUMA](./jdk21/g1/region/numa.md)
     - [region的3种状态](./jdk21/g1/region/region_state.md)

@@ -22,5 +22,5 @@ public void accept(ClassVisitor classVisitor, int parsingOptions)
   - 0: 读取 class 中的所有信息
   - ClassReader.SKIP_CODE: 跳过代码属性
   - ClassReader.SKIP_DEBUG: 跳过源文件、局部变量表、局部变量类型表、方法参数列表、行号
-  - ClassReader.SKIP_FRAME: 跳过帧（visitFrame），帧是 JVM 验证类阶段使用的数据
+  - ClassReader.SKIP_FRAME: 跳过帧（visitFrame）, 帧是 JVM 验证类阶段使用的数据
   - ClassReader.EXPANDS_FRAMES: 扩展堆栈映射帧

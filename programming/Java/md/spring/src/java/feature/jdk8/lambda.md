@@ -21,7 +21,7 @@ new Thread(() -> System.out.println("new thread")).start();
 
 ## 方法引用
 
-方法引用是 lambda 表达式的一种快捷写法。如果 lambda 表达式中的内容就是简单的调用一个已存在的方法，那么可以使用方法引用替代。
+方法引用是 lambda 表达式的一种快捷写法。如果 lambda 表达式中的内容就是简单的调用一个已存在的方法, 那么可以使用方法引用替代。
 
 使用 lambda 表达式:
 

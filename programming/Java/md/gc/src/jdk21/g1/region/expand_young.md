@@ -188,7 +188,7 @@ size_t G1HeapSizingPolicy::young_collection_expansion_amount() {
  */
 double G1HeapSizingPolicy::scale_with_heap(double pause_time_threshold) {
   double threshold = pause_time_threshold;
-  // 如果当前使用的堆空间已经不足最大可用的堆空间大小的一半，则将阈值调小, 不过最小不低于1%
+  // 如果当前使用的堆空间已经不足最大可用的堆空间大小的一半, 则将阈值调小, 不过最小不低于1%
   if (_g1h->capacity() <= _g1h->max_capacity() / 2) {
     threshold *= (double)_g1h->capacity() / (double)(_g1h->max_capacity() / 2);
     threshold = MAX2(threshold, 0.01);
