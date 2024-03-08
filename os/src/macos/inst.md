@@ -1,15 +1,42 @@
 # 安装常用软件
 
-## 通过 brew
-
 ```sh
-# git在安装CLT时自带
+# chrome
+brew install --cask google-chrome
 # ungoogled-chromium
 brew install --cask eloston-chromium
 # subversion
 brew install subversion
 # vlc
 brew install vlc
+# 鼠标滚轮
+brew install mos
+# vscodium
+brew install --cask vscodium
 ```
 
-## 直接下载
+## IDE
+
+- [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/other.html)
+- [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
+- [Jetbrains PyCharm](https://www.jetbrains.com/pycharm/download/other.html)
+- [Jetbrains WebStorm](https://www.jetbrains.com/webstorm/download/other.html)
+- [Android Studio](https://developer.android.google.cn/studio?hl=zh-cn)
+
+## 其他工具
+
+- [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)
+- [gradle](https://mirrors.cloud.tencent.com/gradle/)
+- [maven](https://repo.huaweicloud.com/apache/maven/maven-3/)
+- [VSCode](https://code.visualstudio.com/)
+- [AnotherRedisDesktopManager](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
+- [dbeaver](https://github.com/dbeaver/dbeaver/releases)
+- [pot](https://github.com/pot-app/pot-desktop)
+- [Snipaste](https://zh.snipaste.com/download.html)
+- [tabby](https://github.com/Eugeny/tabby/releases)
+- [downkyicore](https://github.com/yaobiao131/downkyicore/releases)
+- [drawio](https://github.com/jgraph/drawio-desktop/releases)
+- [Motrix](https://github.com/agalwood/Motrix/releases)
+- [upscayl](https://github.com/upscayl/upscayl/releases) 图片放大工具
+- [mactex](https://www.tug.org/mactex/mactex-download.html)
+- [texstudio](https://github.com/texstudio-org/texstudio/releases)

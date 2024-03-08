@@ -2,7 +2,7 @@
 
 下载:
 
-[bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz](https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz)
+[Liberica JDK](https://bell-sw.com/pages/downloads/)
 
 解压:
 

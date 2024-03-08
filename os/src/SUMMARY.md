@@ -31,9 +31,10 @@
   - [安装常用软件](./macos/inst.md)
   - [更改文件的默认打开方式](./macos/default_app.md)
   - [访达显示所有文件夹](./macos/finder_dir.md)
+  - [初始化git](./macos/git.md)
   - [安装jdk](./macos/jdk.md)
-  - [安装nodejs](./macos/nvm.md)
   - [安装python](./macos/py.md)
+  - [安装nodejs](./macos/nvm.md)
   - [IDE设置](./macos/ide_settings.md)
 
 - [Bash](./Linux/bash/bash.md)
