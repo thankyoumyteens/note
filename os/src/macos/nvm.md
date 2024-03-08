@@ -1,4 +1,6 @@
-# 安装 nvm
+# 安装 nodejs
+
+## 安装 nvm
 
 ```sh
 brew install nvm
