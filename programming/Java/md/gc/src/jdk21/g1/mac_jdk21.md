@@ -51,9 +51,9 @@ java -version
 
 1. 使用 CLion File=> Open => 选择文件: jdk 源码根目录/build/macosx-aarch64-serverANDclient-slowdebug/compile_commands.json
 2. 选择 open as Project
-3. 修改项目的根目录: Tools -> Compilation Database -> Change Project Root, 选中 jdk 源码根目录
+3. 修改项目的根目录: Tools -> Compilation Database(或者 Makefile) -> Change Project Root, 选中 jdk 源码根目录
 
-4. 左上角 CLion -> Settings -> Build,Execution,Deployment -> Custom Build Targets -> +
+4. 左上角 CLion -> Settings -> Build,Execution,Deployment -> Custom Build Targets -> + -> Tool
 
    1. Name -> slow-debug
    2. Build -> ... -> +
@@ -70,7 +70,7 @@ java -version
 5. Add Configuration... -> + Custom Build Application
 
    1. Target 选择: slow-debug
-   2. Executable 选择: j d k/build/macosx-aarch64-serverANDclient-slowdebug/jdk/bin/java
+   2. Executable 选择: jdk/build/macosx-aarch64-serverANDclient-slowdebug/jdk/bin/java
 
 6. 创建文件
 
