@@ -1,10 +1,18 @@
 # import 绝对路径
 
 ```python
-import importlib.util
-my_util_spec = importlib.util.spec_from_file_location('my_util', "C:/my_util.py")
-my_util = importlib.util.module_from_spec(my_util_spec)
-my_util_spec.loader.exec_module(my_util)
+import sys
+import os
+from pathlib import Path
 
-print(my_util.test())
+# 当前文件所在的文件夹
+dist_path = Path(os.path.abspath(os.path.dirname(__file__)))
+# 要导入的文件所在的文件夹
+utils_path = dist_path.parent / 'utils'
+# 添加到path
+sys.path.append(str(mybatis_generator_path))
+# 导入
+from utils import MyUtil
+
+print(MyUtil().test())
 ```
