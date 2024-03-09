@@ -1,21 +1,21 @@
-# region的3种状态
+# region 的 3 种状态
 
-G1可使用的堆大小取决于JVM参数MaxHeapSize, 但是G1不会一开始就把所有堆都分配成region, 而是根据需要才分配, 没有分配成region的内存处于Uncommitted状态, Uncommitted状态的region可以用于分配对象。已经分配成region的内存处于Commited状态, Commited状态又分为Active状态和Inactive状态。
+G1 可使用的堆大小取决于 JVM 参数 MaxHeapSize, 但是 G1 不会一开始就把所有堆都分配成 region, 而是根据需要才分配, 没有分配成 region 的内存处于 Uncommitted 状态, Uncommitted 状态的内存不可以使用。已经分配成 region 的内存处于 Commited 状态, Commited 状态又分为 Active 状态和 Inactive 状态, 只有处于 Active 状态的 region 才可以用于分配对象。
 
-G1 使用HeapRegionManager类的对象管理堆空间, 它有一个字段 _committed_map 记录了堆中属于Committed状态的region。如果不需要那么多的region, G1也会重新把一些region变回Uncommitted状态。
+G1 使用 HeapRegionManager 对象管理堆空间, 它使用字段 \_committed_map 记录堆中属于 Committed 状态的 region。如果不需要那么多的 region, G1 也会重新把一些 region 变回 Uncommitted 状态。
 
-region有3种状态:
+region 的 3 种状态:
 
-1. Uncommitted: 属于未分配的内存
-2. Active: 表示这是个准备使用的region, 处于Active状态的region才可以用于分配对象
-3. Inactive : 准备转换成Uncommit状态
+1. Uncommitted: 未分配的内存
+2. Active: 准备分配对象的 region
+3. Inactive: 准备转换成 Uncommit 状态的 region
 
-3种状态之间的转换:
+3 种状态之间的转换:
 
 - Uncommitted -> Active
-- Active      -> Inactive
-- Inactive    -> Active
-- Inactive    -> Uncommitted
+- Active -> Inactive
+- Inactive -> Active
+- Inactive -> Uncommitted
 
 ```cpp
 ///////////////////////////////////////////////////

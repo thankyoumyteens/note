@@ -1,6 +1,6 @@
 # 新生代的预期范围
 
-在设置新生代大小前, G1 会先预测新生代的预期范围, 然后参考这个范围找到一个合适的值, 作为新生代 region 的数量。使用哪种方法计算新生代 region 数量的预期范围, 与启动 JVM 时设置的参数有关:
+在设置新生代大小之前, G1 会先计算新生代的预期范围, 然后参考这个范围找到一个合适的值, 作为新生代 region 的数量。使用哪种方法计算这个预期范围, 与启动 JVM 时设置的参数有关:
 
 1. 不设置任何相关的参数: 最小值是: (堆空间的 region 数量 × G1NewSizePercent) ÷ 100, G1NewSizePercent 是新生代的初始大小占整个堆大小的百分比, 默认为 5。最大值是: (堆空间的 region 数量 × G1MaxNewSizePercent) ÷ 100, G1MaxNewSizePercent 是新生代的最大大小占整个堆大小的百分比, 默认为 60
 2. NewRatio: 如果设置了 NewRatio, 那么最小值和最大值相同, 都是: 堆空间 region 个数 ÷ (NewRatio + 1)。如果设置了 NewSize 或者 MaxNewSize, NewRatio 参数就会失效
@@ -13,6 +13,24 @@
 // src/hotspot/share/gc/g1/g1YoungGenSizer.cpp //
 /////////////////////////////////////////////////
 
+// 调用栈:
+// G1YoungGenSizer::G1YoungGenSizer() g1YoungGenSizer.cpp:35
+// G1YoungGenSizer::G1YoungGenSizer() g1YoungGenSizer.cpp:33
+// G1Policy::G1Policy(STWGCTimer *) g1Policy.cpp:71
+// G1Policy::G1Policy(STWGCTimer *) g1Policy.cpp:85
+// G1CollectedHeap::G1CollectedHeap() g1CollectedHeap.cpp:1254
+// G1CollectedHeap::G1CollectedHeap() g1CollectedHeap.cpp:1270
+// G1Arguments::create_heap() g1Arguments.cpp:262
+// Universe::initialize_heap() universe.cpp:840
+// universe_init() universe.cpp:785
+// init_globals() init.cpp:124
+// Threads::create_vm(JavaVMInitArgs *, bool *) threads.cpp:550
+// JNI_CreateJavaVM_inner(JavaVM_ **, void **, void *) jni.cpp:3577
+// JNI_CreateJavaVM(JavaVM **, void **, void *) jni.cpp:3668
+// InitializeJVM java.c:1506
+// JavaMain java.c:415
+// ThreadJavaMain java_md_macosx.m:720
+// _pthread_start 0x0000000188f8a034
 /**
  * 初始化G1YoungGenSizer
  * G1Policy的构造函数中调用
@@ -72,7 +90,8 @@ G1YoungGenSizer::G1YoungGenSizer() : _sizer_kind(SizerDefaults),
 
 /**
  * 计算新生代region的预期范围
-
+ * 在堆空间初始化时会调用这个方法
+ *
  * number_of_heap_regions: 堆中region的总数
  * min_young_length: 新生代region个数的最小值
  * max_young_length: 新生代region个数的最大值

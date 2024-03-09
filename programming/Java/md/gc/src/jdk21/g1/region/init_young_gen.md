@@ -1,10 +1,10 @@
 # 初始化新生代 region
 
-在堆空间初始化时(G1CollectedHeap::initialize 方法), 会调用 recalculate_min_max_young_length() 函数计算出新生代的预期范围, 为后面设置新生代大小做准备。另外, 在这里 G1 也会设置要保留的 region 数量。
+G1 使用 G1CollectedHeap 对象管理整个堆空间, 在堆空间初始化时, 会调用 recalculate_min_max_young_length() 函数计算出新生代的预期范围, 为后面设置新生代大小做准备。另外, 在这里 G1 也会设置要保留的 region 数量。
 
-保留的 region: 通过-XX:G1ReservePercent 设置, 默认值是堆空间的 10%。这个值是为了保留一些堆空间以避免发生 to-space overflow/exhausted。
+保留的 region: 通过 -XX:G1ReservePercent 设置, 默认值是堆空间的 10%。这个值是为了保留一些堆空间以避免发生 to-space overflow(to-space exhausted)。
 
-to-space exhausted: 在 Young GC 的 Evacuation 阶段, G1 会把 eden region 中的存活对象都移动到新申请的 survivor region 中, 原来的 survivor region 中的存活对象会根据阈值移动到新申请的 survivor region 中或者晋升到老年代 region 中, 如果此时堆空间不够, 可能会导致 Full GC 耗费大量时间。
+to-space overflow: 在 Young GC 的 Evacuation 阶段, G1 会把 eden region 中的存活对象都移动到新申请的 survivor region 中, 现有的 survivor region 中的存活对象则会根据阈值分别移动到新申请的 survivor region 中或者晋升到老年代 region 中, 如果此时堆空间不够, 可能会导致 Full GC 耗费大量时间。
 
 ```cpp
 //////////////////////////////////////////
@@ -12,19 +12,19 @@ to-space exhausted: 在 Young GC 的 Evacuation 阶段, G1 会把 eden region �
 //////////////////////////////////////////
 
 // 调用栈:
-// G1CollectedHeap::expand g1CollectedHeap.cpp:1112
-// G1CollectedHeap::initialize g1CollectedHeap.cpp:1477
-// Universe::initialize_heap universe.cpp:843
-// universe_init universe.cpp:785
-// init_globals init.cpp:124
-// Threads::create_vm threads.cpp:549
-// JNI_CreateJavaVM_inner jni.cpp:3577
-// JNI_CreateJavaVM jni.cpp:3668
+// G1Policy::record_new_heap_size(unsigned int) g1Policy.cpp:170
+// G1CollectedHeap::expand(unsigned long, WorkerThreads *, double *) g1CollectedHeap.cpp:1112
+// G1CollectedHeap::initialize() g1CollectedHeap.cpp:1477
+// Universe::initialize_heap() universe.cpp:843
+// universe_init() universe.cpp:785
+// init_globals() init.cpp:124
+// Threads::create_vm(JavaVMInitArgs *, bool *) threads.cpp:550
+// JNI_CreateJavaVM_inner(JavaVM_ **, void **, void *) jni.cpp:3577
+// JNI_CreateJavaVM(JavaVM **, void **, void *) jni.cpp:3668
 // InitializeJVM java.c:1506
 // JavaMain java.c:415
-// ThreadJavaMain java_md.c:650
-// start_thread 0x00007ffff7c94ac3
-// clone3 0x00007ffff7d26850
+// ThreadJavaMain java_md_macosx.m:720
+// _pthread_start 0x0000000188f8a034
 void G1Policy::record_new_heap_size(uint new_number_of_regions) {
   // 初始化要保留的region数
   // _reserve_factor = G1ReservePercent / 100.0, 默认10%
@@ -57,19 +57,21 @@ void G1YoungGenSizer::heap_size_changed(uint new_number_of_heap_regions) {
 //////////////////////////////////////////
 
 // 调用栈:
-// G1Policy::init g1Policy.cpp
-// G1CollectedHeap::initialize g1CollectedHeap.cpp:1483
-// Universe::initialize_heap universe.cpp:843
-// universe_init universe.cpp:785
-// init_globals init.cpp:124
-// Threads::create_vm threads.cpp:549
-// JNI_CreateJavaVM_inner jni.cpp:3577
-// JNI_CreateJavaVM jni.cpp:3668
+// G1Policy::init(G1CollectedHeap *, G1CollectionSet *) g1Policy.cpp:95
+// G1CollectedHeap::initialize() g1CollectedHeap.cpp:1483
+// Universe::initialize_heap() universe.cpp:843
+// universe_init() universe.cpp:785
+// init_globals() init.cpp:124
+// Threads::create_vm(JavaVMInitArgs *, bool *) threads.cpp:550
+// JNI_CreateJavaVM_inner(JavaVM_ **, void **, void *) jni.cpp:3577
+// JNI_CreateJavaVM(JavaVM **, void **, void *) jni.cpp:3668
 // InitializeJVM java.c:1506
 // JavaMain java.c:415
-// ThreadJavaMain java_md.c:650
-// start_thread 0x00007ffff7c94ac3
-// clone3 0x00007ffff7d26850
+// ThreadJavaMain java_md_macosx.m:720
+// _pthread_start 0x0000000188f8a034
+/**
+ * G1Policy: 定义G1的对象管理策略
+ */
 void G1Policy::init(G1CollectedHeap* g1h, G1CollectionSet* collection_set) {
   _g1h = g1h;
   _collection_set = collection_set;

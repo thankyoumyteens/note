@@ -2,7 +2,7 @@
 
 在 G1 中, 每个 region 的大小都是相同的, region 的大小会影响 G1 的运行效率。如果 region 太大, 一个 region 虽然可以分配更多的对象, 但回收就会花费更长的时间。如果 region 太小, 在分配对象时会不断申请新的 region, 导致对象的分配效率过于低下。
 
-可以通过参数 -XX:G1HeapRegionSize 来设置 Region 的大小, 它的默认值为 0, 手动设置的 region 大小需要在 1M 到 512M 之间。如果不指定 region 的大小, G1 会在 1M 到 32M 的范围内计算出一个合适的 region 大小。
+可以通过参数 -XX:G1HeapRegionSize 来手动设置 region 的大小, 手动设置的 region 大小需要在 1M 到 512M 之间。如果没有手动指定 region 的大小, G1 会在 1M 到 32M 的范围内计算出一个合适的 region 大小。
 
 ```cpp
 ////////////////////////////////////////////
@@ -10,23 +10,23 @@
 ////////////////////////////////////////////
 
 // 调用栈:
-// G1Arguments::initialize_alignments g1Arguments.cpp:56
-// GCArguments::initialize_heap_sizes gcArguments.cpp:64
-// universe_init universe.cpp:783
-// init_globals init.cpp:124
-// Threads::create_vm threads.cpp:549
-// JNI_CreateJavaVM_inner jni.cpp:3577
-// JNI_CreateJavaVM jni.cpp:3668
+// HeapRegion::setup_heap_region_size(unsigned long) heapRegion.cpp:65
+// G1Arguments::initialize_alignments() g1Arguments.cpp:56
+// GCArguments::initialize_heap_sizes() gcArguments.cpp:64
+// universe_init() universe.cpp:783
+// init_globals() init.cpp:124
+// Threads::create_vm(JavaVMInitArgs *, bool *) threads.cpp:550
+// JNI_CreateJavaVM_inner(JavaVM_ **, void **, void *) jni.cpp:3577
+// JNI_CreateJavaVM(JavaVM **, void **, void *) jni.cpp:3668
 // InitializeJVM java.c:1506
 // JavaMain java.c:415
-// ThreadJavaMain java_md.c:650
-// start_thread 0x00007ffff7c94ac3
-// clone3 0x00007ffff7d26850
+// ThreadJavaMain java_md_macosx.m:720
+// _pthread_start 0x0000000188f8a034
 /**
  * max_heap_size: 会传入JVM参数: MaxHeapSize
  */
 void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
-    // G1HeapRegionSize: JVM参数, 默认0
+  // G1HeapRegionSize: JVM参数, 默认0
   size_t region_size = G1HeapRegionSize;
   // G1HeapRegionSize为0表示由JVM自己计算region的大小
   if (region_size == 0) {
@@ -59,7 +59,7 @@ void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
   guarantee(LogOfHRGrainBytes == 0, "we should only set it once");
   LogOfHRGrainBytes = region_size_log;
 
-  // 记录region的大小, 用于后面扩容堆空间
+  // 记录region的大小
   guarantee(GrainBytes == 0, "we should only set it once");
   GrainBytes = region_size;
 
