@@ -10,8 +10,9 @@ G1 首先会预测出下一次 GC 会用到的卡表和 rset 的大小, 然后�
 void G1Policy::update_young_length_bounds() {
   assert(!Universe::is_fully_initialized() || SafepointSynchronize::is_at_safepoint(), "must be");
   bool for_young_only_phase = collector_state()->in_young_only_phase();
-  // pending_cards: DCQ Set中用到的card数量
+  // pending_cards: GC中用到的card数量
   // rs_length: rset大小
+  // 堆空间初始化阶段, 这两个值都是0
   update_young_length_bounds(_analytics->predict_pending_cards(for_young_only_phase),
                              _analytics->predict_rs_length(for_young_only_phase));
 }
@@ -47,8 +48,6 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
 
 ## 预测新生代 region 的数量
 
-<!-- TODO MMU 基准时间 -->
-
 预测新生代 region 数量的方法:
 
 1. 首先确定新生代的最小值, 方法是找出下面 3 个数量的最大值:
@@ -60,6 +59,10 @@ void G1Policy::update_young_length_bounds(size_t pending_cards, size_t rs_length
    - 第 1 步算出的新生代的最小值
 3. 根据 mmu 计算期望的 eden region 数, 根据基准时间计算期望的 eden region 数, 取两者的最大值, 作为 eden region 数量。加上 survivor region 数量, 作为新生代 region 数量
 4. 确保新生代 region 数量在第 1 步和第 2 步算出的范围内
+
+MMU: 在一段时间(\_time_slice)内 mutator 运行时间的最小百分比。例如, 设定 MMU 为 95%, 表示在一个指定的时间段内, mutator 最多只能被停顿 5% 的时间。
+
+基准时间: 包括处理 rset 的时间, 处理整个新生代的的固定花费的时间, 处理 refinement 缓存的时间, 把对象复制到 survovor 的时间等, 基本上包含除了复制 eden region 之外的所有时间。
 
 ```cpp
 //////////////////////////////////////////
@@ -84,7 +87,6 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
   const uint allocated_young_length = _g1h->young_regions_count();
 
   // 新生代region数的下边界
-  // survivor_length + 1 表示至少需要有一个 eden region
   uint absolute_min_young_length = MAX3(min_young_length_by_sizer,
                                         survivor_length + 1,
                                         allocated_young_length);
@@ -92,23 +94,17 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
   uint absolute_max_young_length = MAX2(max_young_length_by_sizer, absolute_min_young_length);
 
   // 根据mmu预测eden的大小
-  //
-  // MMU, 全称为Minimum Mutator Utilization,
-  // 是描述在一段时间内应用程序能够运行的最小百分比
-  // 例如, 设定MMU为95%, 表示在一个指定的时间段内,
-  // mutator最多只能被停顿5%的时间
   uint desired_eden_length_by_mmu = 0;
+  // 根据基准时间预测eden的大小
   uint desired_eden_length_by_pause = 0;
 
   uint desired_young_length = 0;
   // 是否使用自适应的新生代大小
   if (use_adaptive_young_list_length()) {
     // 根据mmu计算期望的eden region数
+    // 在堆空间初始化阶段, 由于没有历史GC暂停时间的数据可供计算, 这个函数会返回0
     desired_eden_length_by_mmu = calculate_desired_eden_length_by_mmu();
     // 预测基准时间
-    // 包括: 处理rset的时间, 处理整个新生代的的固定花费的时间,
-    //      处理refinement缓存的时间, 把对象复制到survovor的时间
-    //      基本上包含除了复制eden region之外的所有时间
     double base_time_ms = predict_base_time_ms(pending_cards, rs_length);
 
     // 根据基准时间计算期望的eden region数
@@ -125,6 +121,7 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
     // 新生代大小固定
     desired_young_length = min_young_length_by_sizer;
   }
+
   // 确保desired_young_length在[absolute_min_young_length, absolute_max_young_length]范围内
   desired_young_length = clamp(desired_young_length, absolute_min_young_length, absolute_max_young_length);
 
@@ -143,9 +140,39 @@ uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_le
   assert(desired_young_length >= allocated_young_length, "must be");
   return desired_young_length;
 }
+
+/**
+ * 预测基准时间
+ */
+double G1Policy::predict_base_time_ms(size_t pending_cards,
+                                      size_t rs_length) const {
+  // true
+  bool in_young_only_phase = collector_state()->in_young_only_phase();
+  // 预测rset中需要扫描的card数量, 在堆空间初始化阶段是0
+  size_t unique_cards_from_rs = _analytics->predict_scan_card_num(rs_length, in_young_only_phase);
+  // 假设所有card都需要扫描, 在堆空间初始化阶段是0
+  size_t effective_scanned_cards = unique_cards_from_rs + pending_cards;
+
+  // 预测合并card的耗时, 在堆空间初始化阶段是0
+  double card_merge_time = _analytics->predict_card_merge_time_ms(pending_cards + rs_length, in_young_only_phase);
+  // 预测扫描card的耗时, 在堆空间初始化阶段是0
+  double card_scan_time = _analytics->predict_card_scan_time_ms(effective_scanned_cards, in_young_only_phase);
+  // 预测固定花费的时间, 在堆空间初始化阶段是10
+  double constant_other_time = _analytics->predict_constant_other_time_ms();
+  // 预测Young GC的Evacuation阶段的耗时, 在堆空间初始化阶段是0
+  double survivor_evac_time = predict_survivor_regions_evac_time();
+
+  double total_time = card_merge_time + card_scan_time + constant_other_time + survivor_evac_time;
+
+  log_trace(gc, ergo, heap)("Predicted base time: total %f lb_cards %zu rs_length %zu effective_scanned_cards %zu "
+                            "card_merge_time %f card_scan_time %f constant_other_time %f survivor_evac_time %f",
+                            total_time, pending_cards, rs_length, effective_scanned_cards,
+                            card_merge_time, card_scan_time, constant_other_time, survivor_evac_time);
+  return total_time;
+}
 ```
 
-## 确定新生代实际 region 数量
+## 确定新生代 region 的实际数量
 
 G1 默认会保留 10% 的空闲 region, 确定新生代的实际 region 数量分为 3 种情况:
 
@@ -173,14 +200,7 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
                               desired_young_length,
                               allocated_young_length);
   } else {
-    // 先计算调整后的新生代region数量receiving_young,
-    // 然后用receiving_young减去堆中已经有的新生代region个数allocated_young_length,
-    // 就得到了要新增的eden region个数receiving_additional_eden
-    //
-    // receiving_young要在尽量满足desired_young_length的同时, 尽可能少的使用保留region
-
     // max_to_eat_into_reserve: 最多能使用多少个要保留的region
-    //
     // _reserve_regions: 要保留的region个数, 堆空间初始化时设置,
     //                   取值是堆中region个数的10%
     uint max_to_eat_into_reserve = MIN2(_young_gen_sizer.min_desired_young_length(),
@@ -195,6 +215,14 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
                               desired_young_length,
                               _reserve_regions,
                               max_to_eat_into_reserve);
+
+    // 先计算调整后的新生代region数量receiving_young,
+    // 然后用receiving_young减去堆中已经有的新生代region个数allocated_young_length,
+    // 就得到了要新增的eden region个数receiving_additional_eden
+    //
+    // receiving_young: 调整后的新生代region数量,
+    //                  在尽量满足desired_young_length的同时,
+    //                  尽可能少的使用保留region
 
     if (_free_regions_at_end_of_collection <= _reserve_regions) {
       // 当前空闲的 region 数量已经不足 10%,
@@ -262,7 +290,7 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
 }
 ```
 
-## 计算新生代最大 region 数量
+## 计算新生代 region 的最大数量
 
 ```cpp
 //////////////////////////////////////////

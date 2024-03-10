@@ -27,7 +27,7 @@
       - [新生代的预期范围](./jdk21/g1/region/young_gen_sizer.md)
       - [初始化新生代region](./jdk21/g1/region/init_young_gen.md)
       - [设置新生代region数量](./jdk21/g1/region/set_young_region.md)
-      - [停顿预测模型](./jdk21/g1/region/g1_predict.md)
+      - [预测算法](./jdk21/g1/region/g1_predict.md)
     - [扩大新生代](./jdk21/g1/region/expand_young.md)
       - [计算pause_time_ratio](./jdk21/g1/region/pause_time_ratio.md)
       - [堆空间扩容](./jdk21/g1/region/expand.md)
@@ -120,3 +120,7 @@
     - [计算对象的新地址](./g1/fgc/mark_sweep_phase2.md)
     - [更新引用的地址](./g1/fgc/mark_sweep_phase3.md)
     - [移动对象](./g1/fgc/mark_sweep_phase4.md)
+
+## todo
+
+- [MMU](./jdk21/g1/region/mmu.md)

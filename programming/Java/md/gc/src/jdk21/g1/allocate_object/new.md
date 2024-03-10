@@ -106,3 +106,110 @@ class InstanceKlass: public Klass {
   }
 }
 ```
+
+## 汇编解释器
+
+```cpp
+///////////////////////////////////////////////////////
+// src/hotspot/cpu/aarch64/templateTable_aarch64.cpp //
+///////////////////////////////////////////////////////
+
+void TemplateTable::_new() {
+  transition(vtos, atos);
+
+  __ get_unsigned_2_byte_index_at_bcp(r3, 1);
+  Label slow_case;
+  Label done;
+  Label initialize_header;
+
+  __ get_cpool_and_tags(r4, r0);
+  // Make sure the class we're about to instantiate has been resolved.
+  // This is done before loading InstanceKlass to be consistent with the order
+  // how Constant Pool is updated (see ConstantPool::klass_at_put)
+  const int tags_offset = Array<u1>::base_offset_in_bytes();
+  __ lea(rscratch1, Address(r0, r3, Address::lsl(0)));
+  __ lea(rscratch1, Address(rscratch1, tags_offset));
+  __ ldarb(rscratch1, rscratch1);
+  __ cmp(rscratch1, (u1)JVM_CONSTANT_Class);
+  __ br(Assembler::NE, slow_case);
+
+  // get InstanceKlass
+  __ load_resolved_klass_at_offset(r4, r3, r4, rscratch1);
+
+  // make sure klass is initialized & doesn't have finalizer
+  // make sure klass is fully initialized
+  __ ldrb(rscratch1, Address(r4, InstanceKlass::init_state_offset()));
+  __ cmp(rscratch1, (u1)InstanceKlass::fully_initialized);
+  __ br(Assembler::NE, slow_case);
+
+  // get instance_size in InstanceKlass (scaled to a count of bytes)
+  __ ldrw(r3,
+          Address(r4,
+                  Klass::layout_helper_offset()));
+  // test to see if it has a finalizer or is malformed in some way
+  __ tbnz(r3, exact_log2(Klass::_lh_instance_slow_path_bit), slow_case);
+
+  // Allocate the instance:
+  //  If TLAB is enabled:
+  //    Try to allocate in the TLAB.
+  //    If fails, go to the slow path.
+  //    Initialize the allocation.
+  //    Exit.
+  //
+  //  Go to slow path.
+
+  if (UseTLAB) {
+    __ tlab_allocate(r0, r3, 0, noreg, r1, slow_case);
+
+    if (ZeroTLAB) {
+      // the fields have been already cleared
+      __ b(initialize_header);
+    }
+
+    // The object is initialized before the header.  If the object size is
+    // zero, go directly to the header initialization.
+    __ sub(r3, r3, sizeof(oopDesc));
+    __ cbz(r3, initialize_header);
+
+    // Initialize object fields
+    {
+      __ add(r2, r0, sizeof(oopDesc));
+      Label loop;
+      __ bind(loop);
+      __ str(zr, Address(__ post(r2, BytesPerLong)));
+      __ sub(r3, r3, BytesPerLong);
+      __ cbnz(r3, loop);
+    }
+
+    // initialize object header only.
+    __ bind(initialize_header);
+    __ mov(rscratch1, (intptr_t)markWord::prototype().value());
+    __ str(rscratch1, Address(r0, oopDesc::mark_offset_in_bytes()));
+    __ store_klass_gap(r0, zr);  // zero klass gap for compressed oops
+    __ store_klass(r0, r4);      // store klass last
+
+    {
+      SkipIfEqual skip(_masm, &DTraceAllocProbes, false);
+      // Trigger dtrace event for fastpath
+      __ push(atos); // save the return value
+      __ call_VM_leaf(
+           CAST_FROM_FN_PTR(address, static_cast<int (*)(oopDesc*)>(SharedRuntime::dtrace_object_alloc)), r0);
+      __ pop(atos); // restore the return value
+
+    }
+    __ b(done);
+  }
+
+  // slow case
+  __ bind(slow_case);
+  __ get_constant_pool(c_rarg1);
+  __ get_unsigned_2_byte_index_at_bcp(c_rarg2, 1);
+  call_VM(r0, CAST_FROM_FN_PTR(address, InterpreterRuntime::_new), c_rarg1, c_rarg2);
+  __ verify_oop(r0);
+
+  // continue
+  __ bind(done);
+  // Must prevent reordering of stores for object initialization with stores that publish the new object.
+  __ membar(Assembler::StoreStore);
+}
+```
