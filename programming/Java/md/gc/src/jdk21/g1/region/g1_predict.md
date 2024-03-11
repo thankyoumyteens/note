@@ -241,8 +241,42 @@ x_{n} - avg_{n} & = & \frac{W_{n}}{w_{n}} (avg_{n} - avg_{n-1}) - avg_{n} + avg_
 和不带权重的方差类似, 公式如下:
 
 <!--
-
+\begin{eqnarray}
+avg_{n} & = & \frac{1}{W_{n}} \sum_{i=1}^{n} w_{i} x_{i} \\
+var_{n} & = & \frac{1}{W_{n}} \sum_{i=1}^{n} w_{i} (x_{i} - avg_{n})^{2} \\
+& = & \frac{1}{W_{n}} \sum_{i=1}^{n} w_{i} x_{i}^{2} - \frac{1}{W_{n}} \sum_{i=1}^{n} w_{i} avg_{n}^{2} \\
+& = & \frac{1}{W_{n}} \sum_{i=1}^{n} w_{i} x_{i}^{2} - avg_{n}^{2} \\
+设 S_{n} & = & W_{n} \cdot var_{n} \\
+& = & \sum_{i=1}^{n} w_{i} x_{i}^{2} - W_{n} avg_{n}^{2} \\
+\end{eqnarray}
 -->
+
+![](../../../img/jdk21_wvar1.jpg)
+
+<!--
+\begin{eqnarray}
+S_{n} - S_{n-1} & = & \sum_{i=1}^{n} w_{i} x_{i}^{2} - W_{n} avg_{n}^{2} - \sum_{i=1}^{n-1} w_{i} x_{i}^{2} + W_{n-1} avg_{n-1}^{2} \\
+& = & w_{n} x_{n}^{2} - W_{n} avg_{n}^{2} + W_{n-1} avg_{n-1}^{2} \\
+& = & w_{n} x_{n}^{2} - W_{n} avg_{n}^{2} + (W_{n} - w_{n}) avg_{n-1}^{2} \\
+& = & w_{n} x_{n}^{2} - W_{n} avg_{n}^{2} + W_{n} avg_{n-1}^{2} - w_{n} avg_{n-1}^{2} \\
+& = & w_{n} (x_{n}^{2} - avg_{n-1}^{2}) + W_{n} (avg_{n-1}^{2} - avg_{n}^{2}) \\
+& = & w_{n} (x_{n}^{2} - avg_{n-1}^{2}) + W_{n} (avg_{n-1} - avg_{n}) (avg_{n-1} + avg_{n}) \\
+根据带权重的平均值中的公式1: \\
+W_{n} (avg_{n-1} - avg_{n}) & = & w_{n} (avg_{n-1} - x_{n}) \\
+得到: \\
+S_{n} - S_{n-1} & = & w_{n} (x_{n}^{2} - avg_{n-1}^{2}) + w_{n} (avg_{n-1} - x_{n}) (avg_{n-1} + avg_{n}) \\
+& = & w_{n} \left ( x_{n}^{2} - avg_{n-1}^{2} + w_{n} (avg_{n-1} - x_{n}) (avg_{n-1} + avg_{n}) \right ) \\
+& = & w_{n} (x_{n} - avg_{n-1}) (x_{n} - avg_{n}) \\
+S_{n} & = & S_{n-1} + w_{n} (x_{n} - avg_{n-1}) (x_{n} - avg_{n}) \\
+var_{n} & = & \frac{S_{n}}{W_{n}} \\
+sd_{n} & = & \sqrt{\frac{S_{n}}{W_{n}}} \\
+\end{eqnarray}
+-->
+
+![](../../../img/jdk21_wvar2.jpg)
+
+## 变化的权重
+
 
 ## 衰减平均值
 
