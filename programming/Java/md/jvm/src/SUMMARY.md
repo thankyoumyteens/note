@@ -32,7 +32,7 @@
     - [解析](./load_class/class_load/resolution.md)
     - [初始化](./load_class/class_load/initialization.md)
   - [类加载器](./load_class/class_loader.md)
-  - [Java 模块化系统](./load_class/module/jpms.md)
+  - [Java模块化系统](./load_class/module/jpms.md)
     - [模块路径](./load_class/module/module_path.md)
     - [类加载器的改动](./load_class/module/new_class_loader.md)
 
