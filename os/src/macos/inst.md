@@ -13,6 +13,8 @@ brew install vlc
 brew install mos
 # vscodium
 brew install --cask vscodium
+# mdbook
+brew install mdbook
 ```
 
 ## IDE
