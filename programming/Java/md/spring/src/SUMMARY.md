@@ -17,6 +17,7 @@
 - [Maven](./Maven/Maven.md)
   - [设置国内源](./Maven/设置国内源.md)
   - [设置项目jdk版本](./Maven/设置项目jdk版本.md)
+  - [指定主类](./Maven/指定主类.md)
   - [导入本地jar包](./Maven/导入本地jar包.md)
   - [设置私服](./Maven/设置私服.md)
 

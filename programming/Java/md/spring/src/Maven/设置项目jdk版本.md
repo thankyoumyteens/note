@@ -1,4 +1,4 @@
-# 设置 maven 项目使用 Java8
+# 设置项目 jdk 版本
 
 方法 1:配置 settings.xml
 
@@ -27,7 +27,7 @@
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-compiler-plugin</artifactId>
-      <version>3.8.1</version>
+      <version>3.12.1</version>
       <configuration>
         <source>1.8</source>
         <target>1.8</target>
