@@ -6,57 +6,77 @@
 
 java.base 模块比较特殊, 它并不依赖于其他任何模块, 并且 java.base 是其他模块的基础, 所以在其他模块中并不需要显式引用 java.base。
 
-## 创建模块
-
-一个 jar 包中可以有多个模块, 一个模块中可以有多个 package。每个模块通过 requires 和 exports 关键字, 对自身所依赖(requires)的模块和自身暴露(exports)出去的内容(package)进行了声明。本模块只能使用其他模块暴露出来的内容, 其他模块也只能使用本模块暴露出去的内容。
-
-创建一个 JDK 9 模块, 只需要创建一个 module-info.java 文件, 并将其放在项目的根目录中:
-
-![](../../img/java_module_demo.png)
-
-service 模块的 module-info.java:
-
-```java
-// 声明该模块的名称
-module org.xxx.service {
-    // 使用exports声明该模块要对外暴露的包
-    // 可以被直接引入和反射使用
-    exports org.example.service;
-}
-```
-
-controller 模块的 module-info.java:
-
-```java
-// 声明该模块的名称
-module org.xxx.controller {
-    // 使用requires依赖其他模块
-    requires org.xxx.service;
-    // 使用opens声明该模块要对外暴露的包
-    // 只能被反射调用
-    opens org.example.controller;
-}
-```
-
-在 controller 中使用 service 模块:
-
-```java
-package org.example.controller;
-
-// 使用org.xxx.service模块中暴露的包
-import org.example.service.DemoService;
-
-public class DemoController {
-
-    public static void main(String[] args) {
-        DemoService service = new DemoService();
-        service.test();
-    }
-}
-```
-
-## 运行
+可以使用 java --list-modules 列出 JDK 所有的模块:
 
 ```sh
-java --module-path controller\target;service\target --module org.xxx.controller/org.example.controller.DemoController
+$ java --list-modules
+java.base@21.0.2
+java.compiler@21.0.2
+java.datatransfer@21.0.2
+java.desktop@21.0.2
+java.instrument@21.0.2
+java.logging@21.0.2
+java.management@21.0.2
+java.management.rmi@21.0.2
+java.naming@21.0.2
+java.net.http@21.0.2
+java.prefs@21.0.2
+java.rmi@21.0.2
+java.scripting@21.0.2
+java.se@21.0.2
+java.security.jgss@21.0.2
+java.security.sasl@21.0.2
+java.smartcardio@21.0.2
+java.sql@21.0.2
+java.sql.rowset@21.0.2
+java.transaction.xa@21.0.2
+java.xml@21.0.2
+java.xml.crypto@21.0.2
+jdk.accessibility@21.0.2
+jdk.attach@21.0.2
+jdk.charsets@21.0.2
+jdk.compiler@21.0.2
+jdk.crypto.cryptoki@21.0.2
+jdk.crypto.ec@21.0.2
+jdk.dynalink@21.0.2
+jdk.editpad@21.0.2
+jdk.hotspot.agent@21.0.2
+jdk.httpserver@21.0.2
+jdk.incubator.vector@21.0.2
+jdk.internal.ed@21.0.2
+jdk.internal.jvmstat@21.0.2
+jdk.internal.le@21.0.2
+jdk.internal.opt@21.0.2
+jdk.internal.vm.ci@21.0.2
+jdk.internal.vm.compiler@21.0.2
+jdk.internal.vm.compiler.management@21.0.2
+jdk.jartool@21.0.2
+jdk.javadoc@21.0.2
+jdk.jcmd@21.0.2
+jdk.jconsole@21.0.2
+jdk.jdeps@21.0.2
+jdk.jdi@21.0.2
+jdk.jdwp.agent@21.0.2
+jdk.jfr@21.0.2
+jdk.jlink@21.0.2
+jdk.jpackage@21.0.2
+jdk.jshell@21.0.2
+jdk.jsobject@21.0.2
+jdk.jstatd@21.0.2
+jdk.localedata@21.0.2
+jdk.management@21.0.2
+jdk.management.agent@21.0.2
+jdk.management.jfr@21.0.2
+jdk.naming.dns@21.0.2
+jdk.naming.rmi@21.0.2
+jdk.net@21.0.2
+jdk.nio.mapmode@21.0.2
+jdk.random@21.0.2
+jdk.sctp@21.0.2
+jdk.security.auth@21.0.2
+jdk.security.jgss@21.0.2
+jdk.unsupported@21.0.2
+jdk.unsupported.desktop@21.0.2
+jdk.xml.dom@21.0.2
+jdk.zipfs@21.0.2
 ```
