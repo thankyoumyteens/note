@@ -42,8 +42,16 @@ nvm install 16.15.1
 
 ## 切换 node 版本
 
+nvm use 只能在当前控制台临时修改版本
+
 ```sh
 nvm use 16.15.1
+```
+
+## 设置默认 node 版本
+
+```sh
+nvm alias default 16.15.1
 ```
 
 ## 配置国内源

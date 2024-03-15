@@ -37,6 +37,7 @@
     - [安装nodejs](./macos/nvm.md)
     - [IDE设置](./macos/ide_settings.md)
   - [使用](./macos/u.md)
+    - [端口占用](./macos/port.md)
     - [tar命令使用](./macos/tar.md)
     - [更改文件的默认打开方式](./macos/default_app.md)
     - [外接键盘调换cmmand和option的键位](./macos/keyboard.md)

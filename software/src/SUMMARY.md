@@ -1,16 +1,14 @@
 # Summary
 
 - [IDEA]()
-
-  - [IDEA 常用设置](./idea/IDEA常用设置.md)
-  - [解决粘贴 sql 文本时格式丢失](./idea/解决粘贴sql文本时格式丢失.md)
-  - [解决 Tomcat 控制台中文乱码](./idea/解决Tomcat控制台中文乱码.md)
-  - [解决 maven 依赖全部红线](./idea/解决maven依赖全部红线.md)
-  - [删除 IDEA 托盘图标](./idea/删除IDEA托盘图标.md)
+  - [IDEA常用设置](./idea/IDEA常用设置.md)
+  - [调试jar包(远程调试)](./idea/远程调试.md)
+  - [Tomcat控制台中文乱码](./idea/解决Tomcat控制台中文乱码.md)
+  - [maven依赖全部红线](./idea/解决maven依赖全部红线.md)
+  - [删除IDEA托盘图标](./idea/删除IDEA托盘图标.md)
   - [LiveTemplates](./idea/LiveTemplates.md)
 
 - [FFmpeg]()
-
   - [播放视频](./ffmpeg/播放视频.md)
   - [格式转换](./ffmpeg/格式转换.md)
   - [修改分辨率](./ffmpeg/修改分辨率.md)
