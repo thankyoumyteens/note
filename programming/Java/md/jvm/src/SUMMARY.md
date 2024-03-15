@@ -35,6 +35,7 @@
   - [Java模块化系统](./load_class/module/jpms.md)
     - [使用模块](./load_class/module/module_demo.md)
     - [模块传递](./load_class/module/module_transitive.md)
+    - [限制导出](./load_class/module/module_exports_to.md)
     - [模块路径](./load_class/module/module_path.md)
     - [类加载器的改动](./load_class/module/new_class_loader.md)
 
