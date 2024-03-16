@@ -30,145 +30,153 @@ module org.demo.jpms.ma {
 
 1. 父 pom:
 
-   ```xml
-   <project
-       xmlns="http://maven.apache.org/POM/4.0.0"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-
-   <groupId>org.example</groupId>
-   <artifactId>jpms_demo1</artifactId>
-   <version>1.0-SNAPSHOT</version>
-   <packaging>pom</packaging>
-
-   <modules>
-       <module>ma</module>
-       <module>mb</module>
-   </modules>
-
-   <properties>
-       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-   </properties>
-
-   <build>
-       <plugins>
-       <plugin>
-           <groupId>org.apache.maven.plugins</groupId>
-           <artifactId>maven-compiler-plugin</artifactId>
-           <version>3.12.1</version>
-           <configuration>
-           <source>21</source>
-           <target>21</target>
-           </configuration>
-       </plugin>
-       </plugins>
-   </build>
-   </project>
-   ```
+```xml
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.example</groupId>
+    <artifactId>jpms_demo1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ma</module>
+        <module>mb</module>
+    </modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <build>
+        <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.12.1</version>
+            <configuration>
+            <source>21</source>
+            <target>21</target>
+            </configuration>
+        </plugin>
+        </plugins>
+    </build>
+</project>
+```
 
 2. 模块 mb 的 pom:
 
-   ```xml
-   <project
-       xmlns="http://maven.apache.org/POM/4.0.0"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-       <modelVersion>4.0.0</modelVersion>
-       <parent>
-           <groupId>org.example</groupId>
-           <artifactId>jpms_demo1</artifactId>
-           <version>1.0-SNAPSHOT</version>
-       </parent>
-
-       <artifactId>mb</artifactId>
-       <packaging>jar</packaging>
-
-       <dependencies>
-           <dependency>
-               <groupId>org.example</groupId>
-               <artifactId>mc</artifactId>
-               <version>1.0-SNAPSHOT</version>
-               <scope>compile</scope>
-           </dependency>
-       </dependencies>
-   </project>
-   ```
+```xml
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.example</groupId>
+        <artifactId>jpms_demo1</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>mb</artifactId>
+    <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>mc</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>
+```
 
 3. 模块 ma 的 pom:
 
-   ```xml
-   <project
-       xmlns="http://maven.apache.org/POM/4.0.0"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-       <modelVersion>4.0.0</modelVersion>
-       <parent>
-           <groupId>org.example</groupId>
-           <artifactId>jpms_demo1</artifactId>
-           <version>1.0-SNAPSHOT</version>
-       </parent>
-
-       <artifactId>ma</artifactId>
-       <packaging>jar</packaging>
-
-       <dependencies>
-           <dependency>
-               <groupId>org.example</groupId>
-               <artifactId>mb</artifactId>
-               <version>1.0-SNAPSHOT</version>
-               <scope>compile</scope>
-           </dependency>
-       </dependencies>
-   </project>
-   ```
+```xml
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.example</groupId>
+        <artifactId>jpms_demo1</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>ma</artifactId>
+    <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>mb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>
+```
 
 4. 模块 mb 的 module-info.java
-   ```java
-   module org.demo.jpms.mb {
-       // 导出包org.example.mb
-       exports org.example.mb;
-   }
-   ```
+
+```java
+module org.demo.jpms.mb {
+    // 导出包org.example.mb
+    exports org.example.mb;
+}
+```
+
 5. 模块 ma 的 module-info.java
-   ```java
-   module org.demo.jpms.ma {
-       // 导入模块org.demo.jpms.mb
-       requires org.demo.jpms.mb;
-   }
-   ```
+
+```java
+module org.demo.jpms.ma {
+    // 导入模块org.demo.jpms.mb
+    requires org.demo.jpms.mb;
+}
+```
+
 6. 模块 mb 的 ModuleDemoB 类
 
-   ```java
-   package org.example.mb;
-
-   public class ModuleDemoB {
-       public static String invokeB() {
-           return "ModuleDemoB.invokeB()";
-       }
-   }
-   ```
+```java
+package org.example.mb;
+public class ModuleDemoB {
+    public static String invokeB() {
+        return "ModuleDemoB.invokeB()";
+    }
+}
+```
 
 7. 模块 ma 的 App 类
 
-   ```java
-   package org.example.ma;
-
-   import org.example.mb.ModuleDemoB;
-
-   public class App {
-       public static void main(String[] args) {
-           String msg = ModuleDemoB.invokeB();
-           System.out.println(msg);
-       }
-   }
-   ```
+```java
+package org.example.ma;
+import org.example.mb.ModuleDemoB;
+public class App {
+    public static void main(String[] args) {
+        String msg = ModuleDemoB.invokeB();
+        System.out.println(msg);
+    }
+}
+```
 
 8. 运行
 
-   ```sh
-   java --module-path ma/target:mb/target --module org.demo.jpms.ma/org.example.ma.App
-   ```
+```sh
+java --module-path ma/target:mb/target --module org.demo.jpms.ma/org.example.ma.App
+```
+
+9. 打包
+
+```sh
+ jlink --module-path ma/target:mb/target:$JAVA_HOME/jmods \
+     --add-modules org.demo.jpms.ma \
+     --launcher run_app=org.demo.jpms.ma/org.example.ma.App \
+     --output ./app-image
+```
+
+10. 运行打包后的程序
+
+```sh
+./app-image/bin/run_app
+```
