@@ -3,6 +3,7 @@
 - [IDEA]()
   - [IDEA常用设置](./idea/IDEA常用设置.md)
   - [调试jar包(远程调试)](./idea/远程调试.md)
+  - [批量启动](./idea/批量启动.md)
   - [Tomcat控制台中文乱码](./idea/解决Tomcat控制台中文乱码.md)
   - [maven依赖全部红线](./idea/解决maven依赖全部红线.md)
   - [删除IDEA托盘图标](./idea/删除IDEA托盘图标.md)

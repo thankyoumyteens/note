@@ -15,6 +15,8 @@ brew install mos
 brew install --cask vscodium
 # mdbook
 brew install mdbook
+# ffmpeg
+brew install ffmpeg
 ```
 
 ## IDE

@@ -34,6 +34,7 @@
     - [安装jdk](./macos/jdk.md)
     - [安装jd-gui](./macos/jd_gui.md)
     - [安装python](./macos/py.md)
+    - [安装anaconda](./macos/anaconda.md)
     - [安装nodejs](./macos/nvm.md)
     - [IDE设置](./macos/ide_settings.md)
   - [使用](./macos/u.md)
