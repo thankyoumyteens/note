@@ -4,8 +4,7 @@
 
 计算 long_term_pause_time_ratio:
 
-1.
-<!-- TODO -->
+1.  <!-- TODO -->
 
 计算 short_term_pause_time_ratio:
 
@@ -25,12 +24,13 @@ void G1Policy::record_pause(G1GCPauseType gc_type,
                             double start,
                             double end,
                             bool evacuation_failure) {
-  // Manage the MMU tracker. For some reason it ignores Full GCs.
+  // 记录到MMU的历史数据中
   if (gc_type != G1GCPauseType::FullGC) {
     _mmu_tracker->add_pause(start, end);
   }
 
   if (!evacuation_failure) {
+    // 计算 pause_time_ratio
     update_gc_pause_time_ratios(gc_type, start, end);
   }
 
@@ -77,7 +77,7 @@ void G1Analytics::compute_pause_time_ratios(double end_time_sec, double pause_ti
 }
 
 /**
- * 取出最远的一次GC结束的时间
+ * 取出最早的一次GC结束的时间
  */
 double G1Analytics::oldest_known_gc_end_time_sec() const {
   return _recent_prev_end_times_for_all_gcs_sec.oldest();
@@ -103,6 +103,37 @@ void G1Analytics::update_recent_gc_times(double end_time_sec,
 ```
 
 ## 队列添加元素
+
+TruncatedSeq 在队列满了的时候, 如果还有新元素入队, 会把最早的元素移出队列。TruncatedSeq 的实现方式:
+
+1. TruncatedSeq 使用数组实现, 假设队列长度为 5, 在队列为空的时候 next 指向索引 0
+   ```
+   [0, 0, 0, 0, 0]
+    ^
+    |
+   _next
+   ```
+2. 队列中添加一个元素后, next 会后移一位, next 会始终指向新元素添加的位置(最老的元素)
+   ```
+   [100, 0, 0, 0, 0]
+         ^
+         |
+       _next
+   ```
+3. 当入队第 5 个元素, 导致队列满后, next 会重新指向索引 0, 此时索引 0 的元素是最早入队的
+   ```
+   [100, 101, 102, 103, 104]
+     ^
+     |
+   _next
+   ```
+4. 继续向队列添加元素时, 索引为 0 的元素会被新元素替换掉
+   ```
+   [105, 101, 102, 103, 104]
+          ^
+          |
+        _next
+   ```
 
 ```cpp
 ///////////////////////////////////////////////
