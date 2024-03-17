@@ -167,18 +167,63 @@ uint HeapRegionManager::expand_any(uint num_regions, WorkerThreads* pretouch_wor
   uint expanded = 0;
 
   do {
+    // 找出Uncommitted的region
     HeapRegionRange regions = _committed_map.next_committable_range(offset);
     if (regions.length() == 0) {
-      // No more unavailable regions.
+      // 没找到
       break;
     }
 
     uint to_expand = MIN2(num_regions - expanded, regions.length());
+    // 扩容
     expand(regions.start(), to_expand, pretouch_workers);
     expanded += to_expand;
     offset = regions.end();
   } while (expanded < num_regions);
 
   return expanded;
+}
+
+//////////////////////////////////////////////////////
+// src/hotspot/share/gc/g1/g1CommittedRegionMap.cpp //
+//////////////////////////////////////////////////////
+
+HeapRegionRange G1CommittedRegionMap::next_committable_range(uint offset) const {
+  // 确保没有Inactive状态的region
+  verify_no_inactive_regons();
+
+  // 此时, _active中为false的region都是Uncommitted的
+  uint start = (uint) _active.find_first_clear_bit(offset);
+  if (start == max_length()) {
+    // 没找到
+    return HeapRegionRange(max_length(), max_length());
+  }
+  // 确定Uncommitted的region的范围
+  uint end = (uint) _active.find_first_set_bit(start);
+  verify_free_range(start, end);
+
+  return HeapRegionRange(start, end);
+}
+
+///////////////////////////////////////////////////
+// src/hotspot/share/gc/g1/heapRegionManager.cpp //
+///////////////////////////////////////////////////
+
+void HeapRegionManager::expand(uint start, uint num_regions, WorkerThreads* pretouch_workers) {
+  commit_regions(start, num_regions, pretouch_workers);
+  for (uint i = start; i < start + num_regions; i++) {
+    HeapRegion* hr = _regions.get_by_index(i);
+    if (hr == nullptr) {
+      // 创建一个HeapRegion对象
+      hr = new_heap_region(i);
+      OrderAccess::storestore();
+      _regions.set_by_index(i, hr);
+      _allocated_heapregions_length = MAX2(_allocated_heapregions_length, i + 1);
+    }
+    // 打印日志
+    G1CollectedHeap::heap()->hr_printer()->commit(hr);
+  }
+  // 把region设置成Active状态, 并初始化region
+  activate_regions(start, num_regions);
 }
 ```
