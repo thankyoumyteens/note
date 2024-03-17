@@ -8,13 +8,15 @@
 bool G1CollectedHeap::expand(size_t expand_bytes, WorkerThreads* pretouch_workers, double* expand_time_ms) {
   // 根据操作系统的内存页大小向上对齐
   size_t aligned_expand_bytes = ReservedSpace::page_align_size_up(expand_bytes);
-  // 根据一个region的大小向上对齐
+  // 根据region的大小向上对齐
   aligned_expand_bytes = align_up(aligned_expand_bytes,
                                        HeapRegion::GrainBytes);
 
   log_debug(gc, ergo, heap)("Expand the heap. requested expansion amount: " SIZE_FORMAT "B expansion amount: " SIZE_FORMAT "B",
                             expand_bytes, aligned_expand_bytes);
 
+  // 获取状态为uncommitted的region数量
+  // return _regions.length() - _committed_map.num_active()
   if (is_maximal_no_gc()) {
     // 没有可用的堆空间
     log_debug(gc, ergo, heap)("Did not expand the heap (heap already fully expanded)");
@@ -27,7 +29,7 @@ bool G1CollectedHeap::expand(size_t expand_bytes, WorkerThreads* pretouch_worker
   assert(regions_to_expand > 0, "Must expand by at least one region");
   // 扩容
   uint expanded_by = _hrm.expand_by(regions_to_expand, pretouch_workers);
-
+  // 记录扩容的耗时
   if (expand_time_ms != nullptr) {
     *expand_time_ms = (os::elapsedTime() - expand_heap_start_time_sec) * MILLIUNITS;
   }
@@ -45,6 +47,9 @@ bool G1CollectedHeap::expand(size_t expand_bytes, WorkerThreads* pretouch_worker
 // src/hotspot/share/gc/g1/heapRegionManager.cpp //
 ///////////////////////////////////////////////////
 
+/**
+ * 按region数扩容
+ */
 uint HeapRegionManager::expand_by(uint num_regions, WorkerThreads* pretouch_workers) {
   assert(num_regions > 0, "Must expand at least 1 region");
 
@@ -62,7 +67,7 @@ uint HeapRegionManager::expand_by(uint num_regions, WorkerThreads* pretouch_work
 }
 ```
 
-## 把Inactive状态的region恢复成Active状态
+## 把 Inactive 状态的 region 恢复成 Active 状态
 
 ```cpp
 ///////////////////////////////////////////////////
@@ -74,47 +79,81 @@ uint HeapRegionManager::expand_inactive(uint num_regions) {
   uint expanded = 0;
 
   do {
+    // 找出Inactive状态的region
     HeapRegionRange regions = _committed_map.next_inactive_range(offset);
     if (regions.length() == 0) {
-      // No more unavailable regions.
+      // 没找到Inactive状态的region
       break;
     }
-
+    // 两种情况:
+    //   1. regions数量很多, 只需要使用num_regions个
+    //   2. regions数量比较少, 只能使用regions.length()个
     uint to_expand = MIN2(num_regions - expanded, regions.length());
+    // 把region恢复成Active状态
     reactivate_regions(regions.start(), to_expand);
     expanded += to_expand;
     offset = regions.end();
   } while (expanded < num_regions);
-
+  // 返回扩容了几个region
   return expanded;
 }
 
-HeapRegionRange G1CommittedRegionMap::next_inactive_range(uint offset) const {
-  // Find first inactive region from offset.
-  uint start = (uint) _inactive.find_first_set_bit(offset);
+//////////////////////////////////////////////////////
+// src/hotspot/share/gc/g1/g1CommittedRegionMap.cpp //
+//////////////////////////////////////////////////////
 
+/**
+ * 找出Inactive状态的region
+ */
+HeapRegionRange G1CommittedRegionMap::next_inactive_range(uint offset) const {
+  // 从offset偏移量开始, 在位图_inactive中找到第一个为true的索引(Inactive状态的region)
+  uint start = (uint) _inactive.find_first_set_bit(offset);
+  // return _regions.length()
   if (start == max_length()) {
-    // Early when no inactive regions are found.
+    // 没找到
     return HeapRegionRange(max_length(), max_length());
   }
-
+  // 从start开始找到第一个为false的索引
   uint end = (uint) _inactive.find_first_clear_bit(start);
   verify_inactive_range(start, end);
-
+  // start到end的范围都是Inactive状态的region
   return HeapRegionRange(start, end);
 }
 
+///////////////////////////////////////////////////
+// src/hotspot/share/gc/g1/heapRegionManager.cpp //
+///////////////////////////////////////////////////
+
+/**
+ * 把region恢复成Active状态
+ */
 void HeapRegionManager::reactivate_regions(uint start, uint num_regions) {
   assert(num_regions > 0, "No point in calling this for zero regions");
-
+  // 清理一些辅助的数据结构
   clear_auxiliary_data_structures(start, num_regions);
-
+  // 把region恢复成Active状态
   _committed_map.reactivate(start, start + num_regions);
+  // 重新初始化region
   initialize_regions(start, num_regions);
+}
+
+//////////////////////////////////////////////////////
+// src/hotspot/share/gc/g1/g1CommittedRegionMap.cpp //
+//////////////////////////////////////////////////////
+
+void G1CommittedRegionMap::reactivate(uint start, uint end) {
+  verify_active_count(start, end, 0);
+  verify_inactive_count(start, end, (end - start));
+
+  log_debug(gc, heap, region)("Reactivate regions [%u, %u)", start, end);
+  // 把_active位图中start到end范围的标志位都设置为true
+  active_set_range(start, end);
+  // 把_inactive位图中start到end范围的标志位都设置为false
+  inactive_clear_range(start, end);
 }
 ```
 
-## 从Uncommitted状态的内存中分配region
+## 从 Uncommitted 状态的内存中分配 region
 
 ```cpp
 ///////////////////////////////////////////////////

@@ -80,3 +80,13 @@ jdk.unsupported.desktop@21.0.2
 jdk.xml.dom@21.0.2
 jdk.zipfs@21.0.2
 ```
+
+如果要查看某个模块的 module-info.class 文件的内容, 可以使用 `java --describe-module 模块名` 命令:
+
+```sh
+$ java --describe-module jdk.net
+jdk.net@21.0.2
+exports jdk.net
+exports jdk.nio
+requires java.base mandated
+```

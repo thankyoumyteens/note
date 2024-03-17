@@ -35,8 +35,10 @@ class G1CommittedRegionMap : public CHeapObj<mtGC> {
   // 使用位图标记region的状态, true表示Active, false表示Inactive
 
   // 位图, 每一位指向一个Active状态的region
+  // true表示Active, false表示Inactive
   CHeapBitMap _active;
   // 位图, 每一位指向一个Inactive状态的region
+  // true表示Inactive, false表示Active
   CHeapBitMap _inactive;
 
   // Active状态的region个数

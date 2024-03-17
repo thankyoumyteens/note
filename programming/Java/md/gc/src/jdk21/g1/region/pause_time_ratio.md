@@ -2,13 +2,8 @@
 
 判断新生代是否需要扩容时, 需要用到 short_term_pause_time_ratio 和 long_term_pause_time_ratio, 这两个值是在每次 GC 结束后计算的。G1Analytics 中维护了两个长度为 10 的队列, 分别记录每一次 GC 暂停的时间和每一次 GC 结束的时间。
 
-计算 long_term_pause_time_ratio:
-
-1.  <!-- TODO -->
-
-计算 short_term_pause_time_ratio:
-
-1.
+1. 计算 short_term_pause_time_ratio: pause_time_ms ÷ short_interval_ms
+2. 计算 long_term_pause_time_ratio: (\_recent_gc_times_ms.sum() - \_recent_gc_times_ms.oldest() + pause_time_ms) ÷ long_interval_ms
 
 ![](../../../img/compute_pause_time_ratios.png)
 
