@@ -210,6 +210,7 @@ HeapRegionRange G1CommittedRegionMap::next_committable_range(uint offset) const 
 ///////////////////////////////////////////////////
 
 void HeapRegionManager::expand(uint start, uint num_regions, WorkerThreads* pretouch_workers) {
+  
   commit_regions(start, num_regions, pretouch_workers);
   for (uint i = start; i < start + num_regions; i++) {
     HeapRegion* hr = _regions.get_by_index(i);
@@ -225,5 +226,19 @@ void HeapRegionManager::expand(uint start, uint num_regions, WorkerThreads* pret
   }
   // 把region设置成Active状态, 并初始化region
   activate_regions(start, num_regions);
+}
+
+void HeapRegionManager::commit_regions(uint index, size_t num_regions, WorkerThreads* pretouch_workers) {
+  guarantee(num_regions > 0, "Must commit more than zero regions");
+  guarantee(num_regions <= available(),
+            "Cannot commit more than the maximum amount of regions");
+
+  _heap_mapper->commit_regions(index, num_regions, pretouch_workers);
+
+  // Also commit auxiliary data
+  _bitmap_mapper->commit_regions(index, num_regions, pretouch_workers);
+
+  _bot_mapper->commit_regions(index, num_regions, pretouch_workers);
+  _cardtable_mapper->commit_regions(index, num_regions, pretouch_workers);
 }
 ```
