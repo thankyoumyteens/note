@@ -1,4 +1,4 @@
-# tar 命令使用
+# tar 使用
 
 常用参数:
 
@@ -9,7 +9,13 @@
 - -f 文件: 要压缩或解压的文件
 - -v: 输出执行过程
 
-## 压缩文件夹
+## 压缩文件
+
+```sh
+tar -zcvf demo.tar.gz *.txt
+```
+
+## 压缩文件夹, 压缩包内包含文件夹
 
 ```sh
 tar -zcvf demo.tar.gz dir_path/

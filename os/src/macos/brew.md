@@ -59,3 +59,9 @@ brew install 软件名
 brew update
 brew upgrade
 ```
+
+## 卸载软件
+
+```sh
+brew uninstall 软件名
+```
