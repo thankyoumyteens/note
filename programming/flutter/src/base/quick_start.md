@@ -16,7 +16,7 @@
 
 安装 Flutter 插件
 
-## 设置 idea
+## 设置 IDEA / Android Studio
 
 安装 Flutter 插件
 
