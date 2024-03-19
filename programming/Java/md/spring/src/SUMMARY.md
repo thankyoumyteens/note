@@ -20,6 +20,7 @@
   - [指定主类](./Maven/指定主类.md)
   - [导入本地jar包](./Maven/导入本地jar包.md)
   - [设置私服](./Maven/设置私服.md)
+  - [Maven内置变量](./Maven/Maven内置变量.md)
 
 - [Oracle](./oracle/oracle.md)
   - [按指定字段查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)

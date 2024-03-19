@@ -42,3 +42,15 @@ conda clean -i
 ```sh
 conda config --set auto_activate_base false
 ```
+
+## 进入 base 环境
+
+```sh
+conda activate base
+```
+
+## 退出 base 环境
+
+```sh
+deactivate
+```

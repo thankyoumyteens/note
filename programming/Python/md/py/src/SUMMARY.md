@@ -64,3 +64,6 @@
   - [键盘操作](./pyautogui/键盘操作.md)
   - [弹框](./pyautogui/弹框.md)
   - [截图](./pyautogui/截图.md)
+
+- [anaconda](./anaconda/anaconda.md)
+  - [安装anaconda](./anaconda/quick_start.md)

@@ -46,3 +46,16 @@ export PATH=/opt/homebrew/bin:$PATH
 ```sh
 source ~/.zshrc
 ```
+
+## 安装软件
+
+```sh
+brew install 软件名
+```
+
+## 更新软件
+
+```sh
+brew update
+brew upgrade
+```
