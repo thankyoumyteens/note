@@ -9,6 +9,9 @@
   - [删除IDEA托盘图标](./idea/删除IDEA托盘图标.md)
   - [LiveTemplates](./idea/LiveTemplates.md)
 
+- [postman](./postman/postman.md)
+  - [禁止更新](./postman/禁止更新.md)
+
 - [FFmpeg]()
   - [播放视频](./ffmpeg/播放视频.md)
   - [格式转换](./ffmpeg/格式转换.md)
