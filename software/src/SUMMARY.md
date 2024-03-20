@@ -10,7 +10,7 @@
   - [LiveTemplates](./idea/LiveTemplates.md)
 
 - [git](./git/git.md)
-  - [删除git提交时的校验](./git/delete_hooks.md)
+  - [删除git提交时的校验](./git/dh.md)
 
 - [postman](./postman/postman.md)
   - [禁止更新](./postman/禁止更新.md)
