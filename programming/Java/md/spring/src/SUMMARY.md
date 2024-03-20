@@ -5,6 +5,7 @@
   - [日期操作](./java/日期操作.md)
   - [BigDecimal](./java/BigDecimal.md)
   - [列表去重](./java/列表去重.md)
+  - [SuppressWarnings](./java/SuppressWarnings.md)
 
 - [feature](./java/feature/feature.md)
   - [JDK8](./java/feature/jdk8/jdk8.md)
