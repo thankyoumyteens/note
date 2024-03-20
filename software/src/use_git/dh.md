@@ -1,1 +1,5 @@
-# 删除git提交时的校验
+# 删除 git 提交时的校验
+
+```sh
+rm -rf ./.git/hooks/pre-commit
+```
