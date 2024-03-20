@@ -8,7 +8,7 @@ visitField 方法内只会获取字段和方法的基本信息, 如果要获取�
 @Getter
 public class ClassInfoVisitor extends ClassVisitor {
 
-    private final ClassInfo classInfo;
+    public final ClassInfo classInfo;
 
     public ClassInfoVisitor() {
         super(Opcodes.ASM4);
