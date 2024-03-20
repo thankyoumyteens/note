@@ -9,8 +9,8 @@
   - [删除IDEA托盘图标](./idea/删除IDEA托盘图标.md)
   - [LiveTemplates](./idea/LiveTemplates.md)
 
-- [git](./git/git.md)
-  - [删除git提交时的校验](./git/dh.md)
+- [git](./use_git/git.md)
+  - [删除git提交时的校验](./use_git/dh.md)
 
 - [postman](./postman/postman.md)
   - [禁止更新](./postman/禁止更新.md)
