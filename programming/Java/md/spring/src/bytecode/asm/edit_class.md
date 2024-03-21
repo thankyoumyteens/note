@@ -8,7 +8,7 @@
 public class ClassEditor extends ClassVisitor implements Opcodes {
 
     /**
-     * 如果要修改class内容，必须要调用父类的带ClassVisitor参数的构造方法
+     * 如果要修改class内容, 必须要调用父类的带ClassVisitor参数的构造方法
      *
      * @param api          ASM版本
      * @param classVisitor 传入的ClassVisitor(关键)
@@ -25,7 +25,7 @@ public class ClassEditor extends ClassVisitor implements Opcodes {
      * @param descriptor 方法描述符
      * @param signature  泛型信息
      * @param exceptions 方法抛出的异常
-     * @return 返回一个MethodVisitor，用于访问方法的具体信息
+     * @return 返回一个MethodVisitor, 用于访问方法的具体信息
      */
     @Override
     public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
@@ -34,7 +34,7 @@ public class ClassEditor extends ClassVisitor implements Opcodes {
         if (name.equals("main")) {
             // 返回自定义的MethodVisitor, 用于修改方法体
             // 这里我们返回一个匿名内部类
-            // 构造方法的第二个参数必传，否则会报错
+            // 构造方法的第二个参数必传, 否则会报错
             return new MethodVisitor(ASM9, mv) {
                 @Override
                 public void visitCode() {
@@ -48,7 +48,7 @@ public class ClassEditor extends ClassVisitor implements Opcodes {
                 }
             };
         }
-        // 其他方法不做修改，直接返回原始的MethodVisitor
+        // 其他方法不做修改, 直接返回原始的MethodVisitor
         return mv;
     }
 }
