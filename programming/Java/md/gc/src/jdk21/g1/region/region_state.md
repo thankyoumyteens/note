@@ -17,6 +17,8 @@ region 的 3 种状态:
 - Inactive -> Active
 - Inactive -> Uncommitted
 
+![](../../../img/region_state.png)
+
 ```cpp
 ///////////////////////////////////////////////////
 // src/hotspot/share/gc/g1/heapRegionManager.hpp //
