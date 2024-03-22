@@ -82,34 +82,3 @@ $ ls {a..d}.txt
 ls: cannot access 'd.txt': No such file or directory
 a.txt  b.txt  c.txt
 ```
-
-## \$
-
-\$开头的字符串会被作为为变量:
-
-```sh
-$ echo $PATH
-/usr/local/bin:/usr/bin:...
-
-# ${}也可以表示变量
-$ echo ${PATH}
-/usr/local/bin:/usr/bin:...
-```
-
-## \$()
-
-\$()会返回另一个命令的运行结果:
-
-```sh
-$ echo $(date)
-Mon Dec 4 19:01:00 CST 2023
-```
-
-## \$(())
-
-\$(())会返回算术表达式的运行结果:
-
-```sh
-$ echo $((1+1))
-2
-```

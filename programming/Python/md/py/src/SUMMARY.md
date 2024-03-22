@@ -26,8 +26,13 @@
   - [与或非](./regex/与或非.md)
   - [替换](./regex/替换.md)
 
-- [压缩解压](./zip/压缩解压.md)
-  - [ZipFile](./zip/ZipFile.md)
+- [压缩解压](./zip/zip.md)
+  - [zip](./zip/zip/zip.md)
+    - [压缩](./zip/zip/compression.md)
+    - [解压](./zip/zip/decompression.md)
+  - [tar](./zip/tar/tar.md)
+    - [压缩](./zip/tar/compression.md)
+    - [解压](./zip/tar/decompression.md)
 
 - [PySide6](./pyside/PySide6.md)
   - [安装Pyside6](./pyside/安装Pyside6.md)
