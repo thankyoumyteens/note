@@ -98,7 +98,7 @@ void GCLocker::jni_lock(JavaThread* thread) {
 
 ## 垃圾回收
 
-在 JVM 执行垃圾回收前, GCLocker 会先判断当前是否有线程在临界区内, 如果有, GCLocker 会丢弃这次 GC, 并把\_needs_gc 设置为 true, 等到所有线程都退出临界区后, 会把这次 GC 补上。
+在 JVM 执行垃圾回收前, GCLocker 会先判断当前是否有线程在临界区内, 如果有, GCLocker 会丢弃这次 GC, 并把 `_needs_gc` 设置为 true, 等到所有线程都退出临界区后, 会把这次 GC 补上。
 
 ```cpp
 //////////////////////////////////////////////
@@ -111,11 +111,11 @@ void GCLocker::jni_lock(JavaThread* thread) {
  */
 bool GCLocker::check_active_before_gc() {
   assert(SafepointSynchronize::is_at_safepoint(), "only read at safepoint");
-  // is_active() 方法会检查当前是否在安全点
-  // 且 _jni_lock_count 是否大于 0
-  // is_active() 返回 true 表示有线程在临界区
+  // is_active() 方法会检查当前是否在安全点,
+  // 且 _jni_lock_count 是否大于 0,
+  // is_active() 返回 true 表示有线程在临界区,
   // 此时, GC不可执行
-  // _needs_gc 为 false 表示这是第一个GC请求
+  // _needs_gc 为 false 表示这是第一个GC请求,
   // 后续的GC请求会被直接拒绝,
   // 直到所有线程都退出临界区
   if (is_active() && !_needs_gc) {

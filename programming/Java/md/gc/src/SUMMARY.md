@@ -4,7 +4,7 @@
   - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [mutator](./jdk21/g1/base/mutator.md)
   - [串行并行和并发](./jdk21/g1/base/串行并行和并发.md)
-  - [GCLocker](./jdk21/g1/base/GC_locker.md)
+  - [GCLocker](./jdk21/g1/base/gclocker.md)
   - [NUMA](./jdk21/g1/base/numa.md)
 
 - [JDK21的G1](./jdk21/g1/g1.md)
