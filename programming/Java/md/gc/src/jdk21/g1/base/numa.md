@@ -4,7 +4,7 @@
 
 ## SMP
 
-对称多处理模型(Symmetric Multi-Processing, SMP)是指服务器中多个 CPU 对称工作, 无主次或从属关系的硬件架构。各 CPU 共享相同的物理内存, 每个 CPU 访问内存中的任何地址所需时间是相同的, 因此 SMP 也被称为一致存储器访问结构(UMA：Uniform Memory Access)。
+对称多处理模型(Symmetric Multi-Processing, SMP)是指服务器中多个 CPU 对称工作, 无主次或从属关系的硬件架构。各 CPU 共享相同的物理内存, 每个 CPU 访问内存中的任何地址所需时间是相同的, 因此 SMP 也被称为一致存储器访问结构(UMA: Uniform Memory Access)。
 
 由于每个 CPU 必须通过相同的内存总线访问相同的内存资源, 因此随着 CPU 数量的增加, 内存访问冲突将迅速增加, 最终会造成 CPU 资源的浪费, 使 CPU 性能的有效性大大降低。SMP 系统最好的情况是有 2-4 个 CPU, 适用于笔记本电脑和小型服务器等。
 

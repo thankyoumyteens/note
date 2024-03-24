@@ -22,4 +22,4 @@
 - unchecked : 关闭未经检查的操作(比如强转)的警告
 - unqualified-field-access : 关闭不合格的属性访问的警告
 - unused : 关闭未使用代码相关的警告
-- FieldCanBeLocal ：关闭全局变量只使用一次, 可以被当做局部变量的警告
+- FieldCanBeLocal : 关闭全局变量只使用一次, 可以被当做局部变量的警告

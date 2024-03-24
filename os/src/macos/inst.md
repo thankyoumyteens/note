@@ -41,6 +41,7 @@ brew install ffmpeg
 - [downkyicore](https://github.com/yaobiao131/downkyicore/releases)
 - [drawio](https://github.com/jgraph/drawio-desktop/releases)
 - [Motrix](https://github.com/agalwood/Motrix/releases)
+- [Whisky](https://github.com/Whisky-App/Whisky/releases) wine
 - [upscayl](https://github.com/upscayl/upscayl/releases) 图片放大工具
 - [mactex](https://www.tug.org/mactex/mactex-download.html)
 - [texstudio](https://github.com/texstudio-org/texstudio/releases)

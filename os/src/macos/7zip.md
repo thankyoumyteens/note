@@ -1,6 +1,6 @@
 # 安装 7-zip
 
-下载：
+下载: 
 
 [7z2301-mac.tar.xz](https://www.7-zip.org/a/7z2301-mac.tar.xz)
 
