@@ -47,7 +47,6 @@ public class MyTransformer implements ClassFileTransformer {
                                         mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
                                                 "java/io/PrintStream", "println",
                                                 "(Ljava/lang/String;)V", false);
-                                        super.visitCode();
                                     }
                                 };
                             }
@@ -96,7 +95,6 @@ public class MyAgent {
                     </manifest>
                     <manifestEntries>
                         <Premain-Class>org.example.MyAgent</Premain-Class>
-                        <Agent-Class>org.example.MyAgent</Agent-Class>
                         <Can-Redefine-Classes>true</Can-Redefine-Classes>
                         <Can-Retransform-Classes>true</Can-Retransform-Classes>
                     </manifestEntries>

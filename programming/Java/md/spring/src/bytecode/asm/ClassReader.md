@@ -1,4 +1,4 @@
-# 读取 class 信息
+# 读取 class 内容
 
 通过 ClassReader 进行字节码的解析。
 
