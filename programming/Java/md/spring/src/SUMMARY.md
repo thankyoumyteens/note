@@ -25,12 +25,14 @@
 
 - [Oracle](./oracle/oracle.md)
   - [按指定字段查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)
-  - [case_when 排序](./oracle/case_when排序.md)
-  - [生成 12 个月月份](./oracle/生成12个月月份.md)
+  - [case_when排序](./oracle/case_when排序.md)
+  - [生成12个月月份](./oracle/生成12个月月份.md)
   - [生成指定时间范围内的每一天日期](./oracle/生成指定时间范围内的每一天日期.md)
   - [递归查询所有下级](./oracle/递归查询所有下级.md)
   - [日期加减](./oracle/日期加减.md)
   - [两个日期间隔几天](./oracle/两个日期间隔几天.md)
+  - [生成随机数](./oracle/生成随机数.md)
+  - [遍历表中所有记录](./oracle/遍历表中所有记录.md)
 
 - [Excel](./excel/excel.md)
   - [EasyExcel 导出表头合并](./excel/EasyExcel导出表头合并.md)
