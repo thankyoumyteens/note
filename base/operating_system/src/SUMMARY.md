@@ -15,3 +15,4 @@
   - [进程调度](./process/process_scheduling.md)
     - [先来先服务算法](./process/fcfs.md)
     - [短作业优先算法](./process/sjf.md)
+    - [高响应比优先算法](./process/hrrn.md)
