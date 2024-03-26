@@ -43,5 +43,6 @@ brew install ffmpeg
 - [Motrix](https://github.com/agalwood/Motrix/releases)
 - [Whisky](https://github.com/Whisky-App/Whisky/releases) wine
 - [upscayl](https://github.com/upscayl/upscayl/releases) 图片放大工具
+- [tinyImage](https://github.com/focusbe/tinyImage/releases) 图片压缩工具
 - [mactex](https://www.tug.org/mactex/mactex-download.html)
 - [texstudio](https://github.com/texstudio-org/texstudio/releases)
