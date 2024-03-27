@@ -7,7 +7,7 @@ FCFS 算法适用于不需要交互或响应时间要求不高的批量处理系
 下面是 FCFS 算法的 Java 代码实现:
 
 ```java
-// 模拟进程类，包含进程ID和到达时间
+// 模拟进程类, 包含进程ID和到达时间
 class Process {
     int pid; // 进程ID
     int arrivalTime; // 进程到达时间
@@ -24,13 +24,13 @@ class Process {
 
 // 模拟CPU调度的类
 class FCFSScheduler {
-    // 用于存储进程的队列，按照到达时间排序
+    // 用于存储进程的队列, 按照到达时间排序
     LinkedList<Process> readyQueue = new LinkedList<>();
 
     // 添加进程到就绪队列
     public void addProcess(Process process) {
         // 将进程按照到达时间顺序插入到队列中
-        // 这里简单地将进程添加到队尾，实际应用中可能需要根据到达时间进行排序
+        // 这里简单地将进程添加到队尾, 实际应用中可能需要根据到达时间进行排序
         readyQueue.addLast(process);
     }
 
@@ -39,12 +39,12 @@ class FCFSScheduler {
         int totalTime = 0; // 用于记录总的模拟时间
         Process currentProcess = null; // 当前正在执行的进程
 
-        // 当队列不为空时，继续执行
+        // 当队列不为空时, 继续执行
         while (!readyQueue.isEmpty()) {
             currentProcess = readyQueue.poll(); // 取出队列的第一个进程
             System.out.println("Executing Process ID: " + currentProcess.pid);
 
-            // 模拟进程执行时间，这里假设每个进程执行时间为2个时间单位
+            // 模拟进程执行时间, 这里假设每个进程执行时间为2个时间单位
             for (int i = 0; i < 2; i++) {
                 System.out.println("Time: " + (totalTime + i) + ", Process " + currentProcess.pid + " is running.");
                 totalTime++; // 时间加一
@@ -56,15 +56,15 @@ class FCFSScheduler {
     }
 }
 
-// 主函数，用于测试FCFS调度算法
+// 主函数, 用于测试FCFS调度算法
 public class FCFSSimulation {
     public static void main(String[] args) {
         FCFSScheduler scheduler = new FCFSScheduler();
 
         // 添加进程到调度器的就绪队列中
-        scheduler.addProcess(new Process(1, 0)); // 进程1，到达时间0
-        scheduler.addProcess(new Process(2, 1)); // 进程2，到达时间1
-        scheduler.addProcess(new Process(3, 2)); // 进程3，到达时间2
+        scheduler.addProcess(new Process(1, 0)); // 进程1, 到达时间0
+        scheduler.addProcess(new Process(2, 1)); // 进程2, 到达时间1
+        scheduler.addProcess(new Process(3, 2)); // 进程3, 到达时间2
 
         // 开始执行调度算法
         scheduler.schedule();
