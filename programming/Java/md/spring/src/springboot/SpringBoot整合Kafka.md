@@ -20,10 +20,10 @@ spring:
     bootstrap-servers: 10.200.8.29:9092,10.200.8.30:9092
     #https://kafka.apache.org/documentation/#producerconfigs
     producer:
-      # 可重试错误的重试次数, 例如“连接错误”、“无主且未选举出新Leader”
+      # 可重试错误的重试次数, 例如"连接错误"、"无主且未选举出新Leader"
       retries: 1 #生产者发送消息失败重试次数
       # 多条消息放同一批次, 达到多达就让Sender线程发送
-      batch-size: 16384 # 同一批次内存大小（默认16K）
+      batch-size: 16384 # 同一批次内存大小(默认16K)
       # 发送消息的速度超过发送到服务器的速度, 会导致空间不足。send方法要么被阻塞, 要么抛异常
       # 取决于如何设置max.block.ms, 表示抛出异常前可以阻塞一段时间
       buffer-memory: 314572800 #生产者内存缓存区大小(300M = 300*1024*1024)
@@ -50,8 +50,8 @@ spring:
         # 取决于如何设置max.block.ms, 表示抛出异常前可以阻塞一段时间
         max.block.ms: 115000
         #该配置控制客户端等待服务器的响应的最长时间。
-        #如果超时之前仍未收到响应, 则客户端将在必要时重新发送请求, 如果重试次数（retries）已用尽, 则会使请求失败。 
-        #此值应大于replica.lag.time.max.ms（broker配置）, 以减少由于不必要的生产者重试而导致消息重复的可能性。
+        #如果超时之前仍未收到响应, 则客户端将在必要时重新发送请求, 如果重试次数(retries)已用尽, 则会使请求失败。 
+        #此值应大于replica.lag.time.max.ms(broker配置), 以减少由于不必要的生产者重试而导致消息重复的可能性。
         request.timeout.ms: 115000
         #等待send回调的最大时间。常用语重试, 如果一定要发送, retries则配Integer.MAX
         #如果超过该时间: TimeoutException: Expiring 1 record(s) .. has passed since batch creation
@@ -112,7 +112,7 @@ spring:
       properties:
       #如果在这个时间内没有收到心跳, 该消费者会被踢出组并触发{组再平衡 rebalance}
       session.timeout.ms: 120000
-      #最大消费时间。此决定了获取消息后提交偏移量的最大时间, 超过设定的时间（默认5分钟）, 服务端也会认为该消费者失效。踢出并再  衡
+      #最大消费时间。此决定了获取消息后提交偏移量的最大时间, 超过设定的时间(默认5分钟), 服务端也会认为该消费者失效。踢出并再  衡
       max.poll.interval.ms: 300000
       #配置控制客户端等待请求响应的最长时间。 
       #如果在超时之前没有收到响应, 客户端将在必要时重新发送请求, 

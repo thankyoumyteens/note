@@ -1,12 +1,12 @@
 # 异常处理指令
 
-在 Java 程序中显式抛出异常的操作（throw 语句）都由 athrow 指令来实现, 除了用 throw 语句显式抛出异常的情况之外, JVM 会在其他字节码指令检测到异常状况时自动抛出。例如当除数为零时, 会在 idiv 或 ldiv 指令中抛出 ArithmeticException 异常。
+在 Java 程序中显式抛出异常的操作(throw 语句)都由 athrow 指令来实现, 除了用 throw 语句显式抛出异常的情况之外, JVM 会在其他字节码指令检测到异常状况时自动抛出。例如当除数为零时, 会在 idiv 或 ldiv 指令中抛出 ArithmeticException 异常。
 
-而在 JVM 中, 处理异常（catch 语句）不是由字节码指令来实现的, 而是通过 Code 属性表中的显式异常处理表来完成。
+而在 JVM 中, 处理异常(catch 语句)不是由字节码指令来实现的, 而是通过 Code 属性表中的显式异常处理表来完成。
 
 ## athrow
 
-抛出一个异常实例（exception 或者 error）
+抛出一个异常实例(exception 或者 error)
 
 ```
 操作码:

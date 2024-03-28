@@ -34,17 +34,17 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     listener:
-      # 当每一条记录被消费者监听器（ListenerConsumer）处理之后提交
+      # 当每一条记录被消费者监听器(ListenerConsumer)处理之后提交
       # RECORD
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后提交
+      # 当每一批poll()的数据被消费者监听器(ListenerConsumer)处理之后提交
       # BATCH
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后, 距离上次提交时间大于TIME时提交
+      # 当每一批poll()的数据被消费者监听器(ListenerConsumer)处理之后, 距离上次提交时间大于TIME时提交
       # TIME
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后, 被处理record数量大于等于COUNT时提交
+      # 当每一批poll()的数据被消费者监听器(ListenerConsumer)处理之后, 被处理record数量大于等于COUNT时提交
       # COUNT
       # TIME |　COUNT　有一个条件满足时提交
       # COUNT_TIME
-      # 当每一批poll()的数据被消费者监听器（ListenerConsumer）处理之后, 手动调用Acknowledgment.acknowledge()后提交
+      # 当每一批poll()的数据被消费者监听器(ListenerConsumer)处理之后, 手动调用Acknowledgment.acknowledge()后提交
       # MANUAL
       # 手动调用Acknowledgment.acknowledge()后立即提交, 一般使用这种
       # MANUAL_IMMEDIATE

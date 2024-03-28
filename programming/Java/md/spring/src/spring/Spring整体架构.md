@@ -4,14 +4,14 @@
 
 ## Core Container
 
-Core Container（核心容器）包含 Core、Beans、Context 和 Expression Language 模块。Core 和 Beans 模块是框架的基础部分, 提供控制反转(Inversion of Control, IoC)和依赖注入(Dependency Injection, DI)特性。
+Core Container(核心容器)包含 Core、Beans、Context 和 Expression Language 模块。Core 和 Beans 模块是框架的基础部分, 提供控制反转(Inversion of Control, IoC)和依赖注入(Dependency Injection, DI)特性。
 
 - Core 模块主要包含 Spring 框架基本的核心工具类, 是其他组件的基本核心
 - Beans 模块包含访问配置文件、创建和管理 bean 以及进行 IoC/DI 操作相关的所有类
 - Context 模块构建于 Core 和 Beans 模块基础之上, 提供了一种类似于 JNDI 注册器的框架式的对象访问方法, ApplicationContext 接口是 Context 模块的关键
 - SpEL(Spring Expression Language)模块提供了一个表达式语言, 用于在运行时查询和操纵对象
 
-JNDI（Java Naming and Directory Interface）是 Java 的一个应用程序设计的 API, 它提供了查找和访问各种命名和目录服务的通用、统一的接口, 类似于在一个中心注册一个东西, 以后要用的时候, 只需要根据名字去注册中心查找, 注册中心返回你要的东西。
+JNDI(Java Naming and Directory Interface)是 Java 的一个应用程序设计的 API, 它提供了查找和访问各种命名和目录服务的通用、统一的接口, 类似于在一个中心注册一个东西, 以后要用的时候, 只需要根据名字去注册中心查找, 注册中心返回你要的东西。
 
 ## Data Access/Integration
 

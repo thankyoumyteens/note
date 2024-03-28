@@ -16,7 +16,7 @@ Region 之间有 5 种引用关系:
 4. 老年代 Region 到新生代 Region 之间有引用关系, 这个需要记录, 在 Yong GC 的时候有两种 GC Root, 一个就是栈和方法区中变量的引用, 另外一个就是老年代 Region 到新生代 Region 的引用
 5. 老年代 Region 到老年代 Region 之间有引用关系, 这个需要记录, 在 Mixed GC 的时候可能只有部分老年代 Region 被回收, 所以必须记录引用关系, 快速找到哪些对象是活跃的
 
-在线程运行过程中, 如果对象的引用发生了变化（通常就是赋值操作）, 就必须要通知 RSet, 更改其中的记录, 但对于一个 Region 来说, 里面的对象有可能被很多 Region 所引用, 这就要求这个 Region 记录所有引用者的信息。为此 G1 使用了卡表 PRT（Per region Table）来记录这种变化。
+在线程运行过程中, 如果对象的引用发生了变化(通常就是赋值操作), 就必须要通知 RSet, 更改其中的记录, 但对于一个 Region 来说, 里面的对象有可能被很多 Region 所引用, 这就要求这个 Region 记录所有引用者的信息。为此 G1 使用了卡表 PRT(Per region Table)来记录这种变化。
 
 每个 Region 都包含了一个 PRT, 它通过 HeapRegion 里面的 HeapRegionRemSet 获得, 而 HeapRegionRemSet 包含了一个 OtherRegionsTable, 也就是 PRT。
 

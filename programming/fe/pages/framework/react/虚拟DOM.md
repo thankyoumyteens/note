@@ -1,7 +1,7 @@
 # 虚拟DOM
 
 1. 本质是Object类型的对象。
-2. 虚拟DOM比较“轻”, 真实DOM比较“重”, 因为虚拟DOM是React内部在用, 无需真实DOM上那么多的属性。
+2. 虚拟DOM比较"轻", 真实DOM比较"重", 因为虚拟DOM是React内部在用, 无需真实DOM上那么多的属性。
 3. 虚拟DOM最终会被React转化为真实DOM, 呈现在页面上。
 
 # 使用jsx创建虚拟DOM

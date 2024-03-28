@@ -88,7 +88,7 @@ compressWith() 压缩方法。当载荷过长时可对其进行压缩。可采�
 
 ## signature
 
-signWith() 签名方法。两个参数分别是签名算法和自定义的签名Key（盐）。生成时会将所使用签名算法写入header。
+signWith() 签名方法。两个参数分别是签名算法和自定义的签名Key(盐)。生成时会将所使用签名算法写入header。
 
 ## compact
 

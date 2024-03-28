@@ -1,6 +1,6 @@
 # @Transactional 应用在非 public 修饰的方法上
 
-在Spring AOP 代理时, TransactionInterceptor（事务拦截器）在目标方法执行前后进行拦截, DynamicAdvisedInterceptor（CglibAopProxy 的内部类）的 intercept 方法或 JdkDynamicAopProxy 的 invoke 方法会间接调用 AbstractFallbackTransactionAttributeSource 的 computeTransactionAttribute方法, 获取Transactional 注解的事务配置信息。此方法会检查目标方法的修饰符是否为 public, 不是 public则不会获取@Transactional 的属性配置信息。
+在Spring AOP 代理时, TransactionInterceptor(事务拦截器)在目标方法执行前后进行拦截, DynamicAdvisedInterceptor(CglibAopProxy 的内部类)的 intercept 方法或 JdkDynamicAopProxy 的 invoke 方法会间接调用 AbstractFallbackTransactionAttributeSource 的 computeTransactionAttribute方法, 获取Transactional 注解的事务配置信息。此方法会检查目标方法的修饰符是否为 public, 不是 public则不会获取@Transactional 的属性配置信息。
 
 # @Transactional 注解属性 propagation 设置错误
 
@@ -12,11 +12,11 @@
 
 # @Transactional 注解属性 rollbackFor 设置错误
 
-rollbackFor 可以指定能够触发事务回滚的异常类型。Spring默认抛出了unchecked异常（继承自 RuntimeException）或者 Error 才回滚事务；其他异常不会触发回滚事务。如果在事务中抛出其他类型的异常, 但却期望 Spring 能够回滚事务, 就需要指定 rollbackFor属性。若在目标方法中抛出的异常是 rollbackFor 指定的异常的子类, 事务同样会回滚。
+rollbackFor 可以指定能够触发事务回滚的异常类型。Spring默认抛出了unchecked异常(继承自 RuntimeException)或者 Error 才回滚事务；其他异常不会触发回滚事务。如果在事务中抛出其他类型的异常, 但却期望 Spring 能够回滚事务, 就需要指定 rollbackFor属性。若在目标方法中抛出的异常是 rollbackFor 指定的异常的子类, 事务同样会回滚。
 
 # 同一个类中方法调用, 导致@Transactional失效
 
-比如有一个类Test, 它的一个方法A, A再调用本类的方法B（不论方法B是用public还是private修饰）, 但方法A没有声明注解事务, 而B方法有。则外部调用方法A之后, 方法B的事务是不会起作用的。这也是经常犯错误的一个地方。
+比如有一个类Test, 它的一个方法A, A再调用本类的方法B(不论方法B是用public还是private修饰), 但方法A没有声明注解事务, 而B方法有。则外部调用方法A之后, 方法B的事务是不会起作用的。这也是经常犯错误的一个地方。
 
 ```java
 public class Demo {

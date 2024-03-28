@@ -1,8 +1,8 @@
 # grep和egrep
 
-Linux系统中grep命令是一种强大的文本搜索工具, 它能使用正则表达式搜索文本, 并把匹配的行打印出来（匹配到的标红）。grep全称是Global Regular Expression Print, 表示全局正则表达式版本, 它的使用权限是所有用户。
+Linux系统中grep命令是一种强大的文本搜索工具, 它能使用正则表达式搜索文本, 并把匹配的行打印出来(匹配到的标红)。grep全称是Global Regular Expression Print, 表示全局正则表达式版本, 它的使用权限是所有用户。
 
-egrep = grep -E 扩展的正则表达式 （除了`\< , \> , \b` 使用其他正则都可以去掉`\`）
+egrep = grep -E 扩展的正则表达式 (除了`\< , \> , \b` 使用其他正则都可以去掉`\`)
 
 # 命令格式
 

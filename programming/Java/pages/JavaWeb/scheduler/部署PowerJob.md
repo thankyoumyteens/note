@@ -2,7 +2,7 @@
 
 ## 配置文件
 
-调度服务器（powerjob-server）为了支持环境隔离, 分别采用了日常（application-daily.properties）、预发（application-pre.properties）和线上（application-product.properties）三套配置文件
+调度服务器(powerjob-server)为了支持环境隔离, 分别采用了日常(application-daily.properties)、预发(application-pre.properties)和线上(application-product.properties)三套配置文件
 
 | 配置项                            | 含义                               | 可选                              |
 |--------------------------------|----------------------------------|---------------------------------|
@@ -15,16 +15,16 @@
 | `spring.data.mongodb.xxx`        | MongoDB连接配置                      | 是, 未配置情况下将无法在集群模式下保证容器和在线日志的高可用性 |
 | `oms.container.retention.local`  | 本地容器保留天数, 负数代表永久保留                | 是                               |
 | `oms.container.retention.remote` | 远程容器保留天数, 负数代表永久保留                | 是                               |
-| `oms.instanceinfo.retention`     | 任务实例和工作流实例信息的保留天数, 负数代表永久保留（不建议）  | 是, 推荐使用默认配置, 生产环境保留7天             |
+| `oms.instanceinfo.retention`     | 任务实例和工作流实例信息的保留天数, 负数代表永久保留(不建议)  | 是, 推荐使用默认配置, 生产环境保留7天             |
 
 ## 源码部署
 
 1. 克隆: `git clone https://github.com/PowerJob/PowerJob.git`, 下载本项目源码。
-2. 修改对应环境的配置文件（application-xxx.properties）。
-3. 打包: `mvn clean package -U -Pdev -DskipTests`, 构建调度服务器（powerjob-server）Jar 文件。
-4. 运行: `java -jar xxx.jar --spring.profiles.active=product`, 指定生效的配置文件。注意, 宿主机需要打开 7700（HTTP 服务）和 10086（AKKA 服务）端口。
+2. 修改对应环境的配置文件(application-xxx.properties)。
+3. 打包: `mvn clean package -U -Pdev -DskipTests`, 构建调度服务器(powerjob-server)Jar 文件。
+4. 运行: `java -jar xxx.jar --spring.profiles.active=product`, 指定生效的配置文件。注意, 宿主机需要打开 7700(HTTP 服务)和 10086(AKKA 服务)端口。
 
-## 部署前端页面（powerjob-console）
+## 部署前端页面(powerjob-console)
 
 1. 源码克隆: `git clone https://github.com/PowerJob/PowerJob-Console.git`
 1. 替换地址: 修改`.env.product` 中的 `VUE_APP_BASE_URL` 为调度服务器地址

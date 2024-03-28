@@ -1,6 +1,6 @@
 # Oop-Klass 对象模型
 
-一个 Klass 对象代表一个类的元数据。oop 指的是 Ordinary Object Pointer（普通对象指针）, 它用来表示一个 Java 对象。
+一个 Klass 对象代表一个类的元数据。oop 指的是 Ordinary Object Pointer(普通对象指针), 它用来表示一个 Java 对象。
 
 ## Klass
 

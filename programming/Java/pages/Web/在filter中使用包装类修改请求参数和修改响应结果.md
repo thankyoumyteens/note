@@ -1,4 +1,4 @@
-给 request 添加一个包装类 ParameterRequestWrapper, 继承 HttpServletRequestWrapper, 先从 request 中取输入流, 读取流中的数据, 然后重写 getInputStream（）和 getReader（）方法。
+给 request 添加一个包装类 ParameterRequestWrapper, 继承 HttpServletRequestWrapper, 先从 request 中取输入流, 读取流中的数据, 然后重写 getInputStream()和 getReader()方法。
 
 ```java
 public class ParameterRequestWrapper extends HttpServletRequestWrapper {
@@ -48,7 +48,7 @@ public class ParameterRequestWrapper extends HttpServletRequestWrapper {
 }
 ```
 
-上面是修改请求参数的, 还有, 有时候需要对返回的结果进行修改, 这时候也需要使用包装类。写一个 ParameterResponseWrapper, 继承 HttpServletResponseWrapper,主要是重写 getOutputStream（）和 getWriter（）方法。
+上面是修改请求参数的, 还有, 有时候需要对返回的结果进行修改, 这时候也需要使用包装类。写一个 ParameterResponseWrapper, 继承 HttpServletResponseWrapper,主要是重写 getOutputStream()和 getWriter()方法。
 
 ```java
 public class ParameterResponseWrapper extends HttpServletResponseWrapper{

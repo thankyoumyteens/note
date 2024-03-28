@@ -34,7 +34,7 @@ repl-diskless-sync yes
 
 在主从模式上添加了一个哨兵的角色来监控集群的运行状态。
 
-哨兵（Sentinel）是一个独立的进程。哨兵通过发送命令, 等待Redis服务器响应, 从而监控运行的多个Redis实例, 当哨兵监测到master不可用时, 会自动将slave切换成master, 然后通知其他的slave, 修改配置文件, 让它们切换master。当原来的master恢复后, 会变为slave。
+哨兵(Sentinel)是一个独立的进程。哨兵通过发送命令, 等待Redis服务器响应, 从而监控运行的多个Redis实例, 当哨兵监测到master不可用时, 会自动将slave切换成master, 然后通知其他的slave, 修改配置文件, 让它们切换master。当原来的master恢复后, 会变为slave。
 
 ## 配置哨兵
 
@@ -102,7 +102,7 @@ yum install ruby
 yum install rubygems
 ```
 
-安装redis-trib.rb运行依赖的ruby的包redis-3.2.2.gem（对应版本最好跟redis一致）
+安装redis-trib.rb运行依赖的ruby的包redis-3.2.2.gem(对应版本最好跟redis一致)
 ```
 wget https://rubygems.org/downloads/redis-3.2.2.gem
 gem install -l ./redis-3.2.2.gem

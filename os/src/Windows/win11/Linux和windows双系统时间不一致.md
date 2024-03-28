@@ -1,8 +1,8 @@
 # Linux 和 windows 双系统时间不一致
 
-UTC（Universal Time Coordinated）即协调世界时, 以原子时长为基础, 精度好。
+UTC(Universal Time Coordinated)即协调世界时, 以原子时长为基础, 精度好。
 
-RTC（Real-Time Clock）实时时钟, 在计算机领域称为硬件时钟, 顾名思义电脑上有个硬件保存了时间信息。让我们下次启动之后, 时间还可以正常显示。
+RTC(Real-Time Clock)实时时钟, 在计算机领域称为硬件时钟, 顾名思义电脑上有个硬件保存了时间信息。让我们下次启动之后, 时间还可以正常显示。
 
 windows 把 RTC 时间当作本地时间——在中国, 就是东八区时间。而 Linux 会将 RTC 时间当作 UTC 时间。
 

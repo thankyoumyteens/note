@@ -19,7 +19,7 @@ HeapWord* CollectedHeap::allocate_from_tlab(KlassHandle klass, Thread* thread, s
 
 ## TLAB 快速分配
 
-TLAB 是 Eden 中的一块内存, 不同线程的 TLAB 都位于 Eden 区, 所有的 TLAB 内存对所有的线程都是可见的, 只不过每个线程有一个 TLAB 的数据结构, 用于保存待分配内存区间的起始地址（start）和结束地址（end）, 在分配的时候只在这个区间做分配, 从而达到无锁分配。另外, 虽然 TLAB 在分配对象空间的时候是无锁分配, 但是 TLAB 空间本身在分配的时候还是需要锁的, G1 中使用 CAS 来分配 TLAB 空间, 一个 Region 中可能存在多个 TLAB, 但是一个 TLAB 是不能跨 Region 的。
+TLAB 是 Eden 中的一块内存, 不同线程的 TLAB 都位于 Eden 区, 所有的 TLAB 内存对所有的线程都是可见的, 只不过每个线程有一个 TLAB 的数据结构, 用于保存待分配内存区间的起始地址(start)和结束地址(end), 在分配的时候只在这个区间做分配, 从而达到无锁分配。另外, 虽然 TLAB 在分配对象空间的时候是无锁分配, 但是 TLAB 空间本身在分配的时候还是需要锁的, G1 中使用 CAS 来分配 TLAB 空间, 一个 Region 中可能存在多个 TLAB, 但是一个 TLAB 是不能跨 Region 的。
 
 JVM 使用指针碰撞的方法在 TLAB 中分配对象, 在 TLAB 中保存一个 top 指针用于标记当前已分配和未分配的空间的分界点, 如果剩余空间(end-top)大于待分配的对象大小, 则直接分配, 并将 top 的新值修改为 top+对象的大小。
 
@@ -241,7 +241,7 @@ inline HeapWord* G1OffsetTableContigSpace::par_allocate_impl(size_t size,
 1. 首先尝试对堆分区进行加锁分配, 成功则返回, 在 attempt_allocation_locked 完成
 2. 不成功, 则判定是否可以对新生代分区进行扩展, 如果可以扩展则扩展后再分配 TLAB, 成功则返回, 在 attempt_allocation_force 完成
 3. 不成功, 判定是否可以进行垃圾回收, 如果可以进行垃圾回收后再分配, 成功则返回, 在 do_collection_pause 完成
-4. 不成功, 如果尝试分配次数达到阈值（默认值是 2 次）则返回失败
+4. 不成功, 如果尝试分配次数达到阈值(默认值是 2 次)则返回失败
 5. 如果还可以继续尝试, 再次判定是否进行快速分配, 如果成功则返回
 6. 不成功则通过 for 循环重新再尝试一次流程, 直到成功或者达到阈值失败
 

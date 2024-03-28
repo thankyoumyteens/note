@@ -1,6 +1,6 @@
 # FinalReference
 
-FinalReference 确保对象在垃圾回收器回收它们之前, 可以有最后的机会来释放它们所持有的资源。它通过将对象包装在一个 Finalizer 对象中来实现。当一个对象被标记为准备回收, 且它是一个 Finalizable 类（即它有一个空的、参数为 void 的、名为 finalize 的方法）的时候, JVM 会创建一个 FinalReference 指向这个对象。然后, JVM 会创建一个 Finalizer 线程来执行这个对象的 finalize 方法。在 finalize 方法中, 对象可以释放它所持有的所有资源。
+FinalReference 确保对象在垃圾回收器回收它们之前, 可以有最后的机会来释放它们所持有的资源。它通过将对象包装在一个 Finalizer 对象中来实现。当一个对象被标记为准备回收, 且它是一个 Finalizable 类(即它有一个空的、参数为 void 的、名为 finalize 的方法)的时候, JVM 会创建一个 FinalReference 指向这个对象。然后, JVM 会创建一个 Finalizer 线程来执行这个对象的 finalize 方法。在 finalize 方法中, 对象可以释放它所持有的所有资源。
 
 ```java
 class FinalReference<T> extends Reference<T> {

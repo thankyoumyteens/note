@@ -2,7 +2,7 @@
 
 IP隧道技术又称为IP封装技术, 它可以将带有源和目标IP地址的数据报文使用新的源和目标IP进行二次封装, 这样这个报文就可以发送到一个指定的目标主机上。
 
-隧道模式下, 调度器和后端服务器组之间使用IP隧道技术。当客户端发送的请求（CIP–>VIP）被director接收后, director修改该报文, 加上IP隧道两端的IP地址作为新的源和目标地址, 并将请求转发给后端被选中的一个目标。
+隧道模式下, 调度器和后端服务器组之间使用IP隧道技术。当客户端发送的请求(CIP–>VIP)被director接收后, director修改该报文, 加上IP隧道两端的IP地址作为新的源和目标地址, 并将请求转发给后端被选中的一个目标。
 
 当后端服务器接收到报文后, 首先解封该报文原有的CIP—>VIP,该后端服务器发现自身配置了VIP, 因此接受该数据包。当请求处理完成后, 结果将不会重新交给director, 而是直接返回给客户端。此时响应数据包的源IP为VIP, 目标IP为CIP。
 
@@ -64,7 +64,7 @@ echo "2" >/proc/sys/net/ipv4/conf/all/arp_announce
 echo "0" > /proc/sys/net/ipv4/conf/all/rp_filter
 echo "0" > /proc/sys/net/ipv4/conf/tunl0/rp_filter
 ```
-执行脚本（两个rs都需要执行）
+执行脚本(两个rs都需要执行)
 ```
 /bin/bash rs_tunnel.sh
 ```

@@ -16,3 +16,4 @@
     - [先来先服务算法](./process/fcfs.md)
     - [短作业优先算法](./process/sjf.md)
     - [高响应比优先算法](./process/hrrn.md)
+    - [轮转调度算法](./process/rr.md)

@@ -30,7 +30,7 @@
 管理员打开 cmd:
 
 ```sh
-fsutil file setshortname “C:\Program Files (x86)\Windows Kits” Kits
+fsutil file setshortname "C:\Program Files (x86)\Windows Kits" Kits
 ```
 
 ## 编译

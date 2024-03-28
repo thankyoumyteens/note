@@ -10,9 +10,9 @@ Cache 是以缓存行(Cache Line)为单位存储的, 缓存行是 CPU 和主存�
 
 ## 写回
 
-CPU 通过写回（Write Back）策略将 Cache 中的数据同步回内存。
+CPU 通过写回(Write Back)策略将 Cache 中的数据同步回内存。
 
-1. 当发生写操作时, 如果数据已经在 Cache 里了, 则直接修改 Cache 里的数据, 同时标记 Cache 里的这个 Cache Line 为脏（Dirty）, 表示 Cache 里面的这个 Cache Line 的数据和内存是不一致的, 这种情况是不用把数据写到内存里的
+1. 当发生写操作时, 如果数据已经在 Cache 里了, 则直接修改 Cache 里的数据, 同时标记 Cache 里的这个 Cache Line 为脏(Dirty), 表示 Cache 里面的这个 Cache Line 的数据和内存是不一致的, 这种情况是不用把数据写到内存里的
 2. 当发生写操作时, 如果数据不在 Cache 中, CPU 会选中一个 Cache Line 用于缓存该数据, 并且检查这个 Cache Line 有没有被标记为脏, 如果是脏的话, 就会把这个 Cache Line 里的数据写回到内存, 然后再把当前要写入的数据, 写入到这个 Cache Line 里, 同时也把它标记为脏。如果 Cache Line 没有被标记为脏, 就直接将数据写入到这个 Cache Line 里, 然后再把这个 Cache Line 标记为脏的就好了。
 
 在把数据写入到 Cache 的时候, 只有在缓存不命中, 同时数据对应的 Cache Line 为脏的情况下, 才会将数据写到内存中, 而在缓存命中的情况下, 只需把该数据对应的 Cache Line 标记为脏即可, 而不用写到内存里。如果大量的操作都能够命中缓存, 那么大部分时间 CPU 都不需要直接读写内存。
@@ -25,14 +25,14 @@ CPU 通过写回（Write Back）策略将 Cache 中的数据同步回内存。
 
 要解决这⼀问题, 就要满足两个条件: 
 
-1. 写传播（Wreite Propagation）: 在一个 CPU 核⼼⾥的 Cache 数据更新时, 必须要同步到其他核⼼的 Cache 中
-2. 事务的串行化（Transaction Serialization）: 在一个 CPU 核心里面的读取和写入, 在其他 CPU 中看起来, 顺序是一样的
+1. 写传播(Wreite Propagation): 在一个 CPU 核⼼⾥的 Cache 数据更新时, 必须要同步到其他核⼼的 Cache 中
+2. 事务的串行化(Transaction Serialization): 在一个 CPU 核心里面的读取和写入, 在其他 CPU 中看起来, 顺序是一样的
 
 ## 总线嗅探
 
 总线嗅探实现了写传播。
 
-CPU 和内存或其他 CPU 的通信是通过嗅探（Snoop）内存或其他 CPU 发出的请求消息完成的, 有时 CPU 也需要针对总线中的某些请求消息进行响应。这被称为总线嗅探（Bus Snooping）。
+CPU 和内存或其他 CPU 的通信是通过嗅探(Snoop)内存或其他 CPU 发出的请求消息完成的, 有时 CPU 也需要针对总线中的某些请求消息进行响应。这被称为总线嗅探(Bus Snooping)。
 
 当 CPU 0 修改了 Cache 中变量 a 的值时, 会通过总线把这个事件⼴播通知给其他所有的核⼼, 每个 CPU 核⼼都会监听总线上的⼴播事件, 并检查⾃⼰的 Cache ⾥⾯是否有变量 a, 如果 CPU 1 的 Cache 中有变量 a, 那么也需要更新⾃⼰的 Cache 中的变量 a 的值。
 

@@ -7,7 +7,7 @@ case 值 in
     command2
     command3
 ;;
-值2）
+值2)
     command1
     command2
     command3

@@ -6,7 +6,7 @@
     <div class="father">
       <div class="child" v-for="item in 10" :key="item">
         一共10个元素, 我是第{{item}}个
-        <template v-if="item== 10">（css控制我的颜色）</template>
+        <template v-if="item== 10">(css控制我的颜色)</template>
       </div>
       <p>我是多余的元素</p>
     </div>

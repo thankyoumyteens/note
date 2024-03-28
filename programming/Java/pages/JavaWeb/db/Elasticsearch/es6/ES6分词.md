@@ -39,11 +39,11 @@ ES响应:
 }
 ```
 
-如果对“helloword”进行分词, 结果将只有“helloword”一个词, ```standsard```对英文按照空格进行分词。
+如果对"helloword"进行分词, 结果将只有"helloword"一个词, ```standsard```对英文按照空格进行分词。
 
 # 中文分词ik插件
 
-ik下载地址（直接下载编译好了的zip文件, 需要和ES版本一致）: [https://github.com/medcl/elasticsearch-analysis-ik/releases](https://github.com/medcl/elasticsearch-analysis-ik/releases)。
+ik下载地址(直接下载编译好了的zip文件, 需要和ES版本一致): [https://github.com/medcl/elasticsearch-analysis-ik/releases](https://github.com/medcl/elasticsearch-analysis-ik/releases)。
 
 下载完成后解压```elasticsearch-analysis-ik-6.3.2.zip```将解压后的文件夹直接放入ES安装目录下的```plugins```文件夹中, 重启ES。
 
@@ -73,13 +73,13 @@ ES响应:
 }
 ```
 
-```ik_smart```会按照关键字的**最粗粒度进行分词**, 比如搜索“北京大学”时, “北京大学”是一个特定的词汇, 它并不是指“北京的大学”, 此时“北京大学”不会被分词。
+```ik_smart```会按照关键字的**最粗粒度进行分词**, 比如搜索"北京大学"时, "北京大学"是一个特定的词汇, 它并不是指"北京的大学", 此时"北京大学"不会被分词。
 
-```ik_max_word```则会按照**最细粒度进行分词**, 同样搜索“北京大学”时, 它将会被分词为“北京大学”, “北京大”, “北京”, “大学”。
+```ik_max_word```则会按照**最细粒度进行分词**, 同样搜索"北京大学"时, 它将会被分词为"北京大学", "北京大", "北京", "大学"。
 
 有时候一个词并不在ik插件的词库中, 例如很多网络用语等, 此时我们可以将其添加到ik插件的自定义词库中。
 
-“小米手机”使用```ik_smart```的分词结果: 
+"小米手机"使用```ik_smart```的分词结果: 
 
 ```json
 {
@@ -102,7 +102,7 @@ ES响应:
 }
 ```
 
-进入ik插件安装目录```elasticsearch-5.6.0/plugins/elasticsearch/config```, 创建名为```custom.dic```的自定义词库, 向文件中添加“小米手机”并保存。仍然是此目录, 修改```IKAnalyzer.cfg.xml```文件, 如下所示: 
+进入ik插件安装目录```elasticsearch-5.6.0/plugins/elasticsearch/config```, 创建名为```custom.dic```的自定义词库, 向文件中添加"小米手机"并保存。仍然是此目录, 修改```IKAnalyzer.cfg.xml```文件, 如下所示: 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -120,7 +120,7 @@ ES响应:
 </properties>
 ```
 
-重启ES后, 再次通过```ik_smart```对“小米手机”进行分词, 发现“小米手机”不再被分词。
+重启ES后, 再次通过```ik_smart```对"小米手机"进行分词, 发现"小米手机"不再被分词。
 
 # 创建映射指定分词器
 

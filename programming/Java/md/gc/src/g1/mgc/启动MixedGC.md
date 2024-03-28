@@ -168,7 +168,7 @@ void G1CollectorPolicy::finalize_cset(double target_pause_time_ms, EvacuationInf
  * 计算最小收集数
  */
 uint G1CollectorPolicy::calc_min_old_cset_length() {
-  // 计算最小收集数的时候用到了参数G1MixedGCCountTarget（默认值为8）, 
+  // 计算最小收集数的时候用到了参数G1MixedGCCountTarget(默认值为8), 
   // 这个参数越大, 要收集的老年代region越少, 反之收集的region越多。
   // 老年代region在CSet中的比例要超过1/G1MixedGCCountTarget, 
   // 如果没有超过这个值, 即使预测时间超过了目标时间, 仍然会添加region, 

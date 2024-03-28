@@ -118,8 +118,8 @@ STOPSIGNAL signal
 
 # HEALTHCHECK
 ```dockerfile
-HEALTHCHECK [OPTIONS] CMD command （在容器内运行运行命令检测容器的运行情况）
-HEALTHCHECK NONE （禁止从父镜像继承检查）
+HEALTHCHECK [OPTIONS] CMD command (在容器内运行运行命令检测容器的运行情况)
+HEALTHCHECK NONE (禁止从父镜像继承检查)
 ```
 该指令可以告诉Docker怎么去检测一个容器的运行状况
 

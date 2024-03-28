@@ -23,13 +23,13 @@ subprocess.Popen(args,
 - stdin: 指定子进程的标准输入
 - stdout: 指定子进程的标准输出
 - stderr: 指定子进程的标准错误输出
-- 注意: 对于 stdin, stdout 和 stderr 而言, 如果他们是 None（默认情况）, 那么子进程使用和父进程相同的标准流文件。父进程如果想要和子进程通过 communicate() 方法通信, 对应的参数必须是 subprocess.PIPE。stdin, stdout 和 stderr 也可以是已经打开的 file 对象, 前提是以合理的方式打开, 比如 stdin 对应的文件必须要可读等。　
+- 注意: 对于 stdin, stdout 和 stderr 而言, 如果他们是 None(默认情况), 那么子进程使用和父进程相同的标准流文件。父进程如果想要和子进程通过 communicate() 方法通信, 对应的参数必须是 subprocess.PIPE。stdin, stdout 和 stderr 也可以是已经打开的 file 对象, 前提是以合理的方式打开, 比如 stdin 对应的文件必须要可读等。　
 - preexec_fn: 默认是None, 否则必须是一个函数或者可调用对象, 在子进程中首先执行这个函数, 然后再去执行为子进程指定的程序或Shell。
 - close_fds: 布尔型变量, 为 True 时, 在子进程执行前强制关闭所有除 stdin, stdout和stderr外的文件
 - shell: 使用shell运行程序, Python首先起动一个shell, 再用这个shell来解释指定运行的命令。与参数 executable 一同指定子进程运行在什么 Shell 中, 如果executable=None 而 shell=True, 则使用 /bin/sh 来执行 args 指定的程序
 - cwd: 指定子进程运行的工作目录, 要求这个目录必须存在
 - env: 字典, 键和值都是为子进程定义环境变量的字符串
-- universal_newline: 布尔型变量, 为 True 时, stdout 和 stderr 以通用换行（universal newline）模式打开, 
+- universal_newline: 布尔型变量, 为 True 时, stdout 和 stderr 以通用换行(universal newline)模式打开, 
 - startupinfo: 见下一个参数
 - creationfalgs: 最后这两个参数是Windows中才有的参数, 传递给Win32的CreateProcess API调用。
 

@@ -23,7 +23,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 ## XML 的验证模式
 
-XML 文件的验证模式保证了 XML 文件的正确性, 其中, DTD（Document Type Definition）和 XSD（XML Schema Definition）是最常用的两种模式。
+XML 文件的验证模式保证了 XML 文件的正确性, 其中, DTD(Document Type Definition)和 XSD(XML Schema Definition)是最常用的两种模式。
 
 - DTD: 文档类型定义(Document Type Definition, DTD)是一种特殊类型的文件, 可以通过比较 XML 文档和 DTD 文件来看文档是否符合规范, 元素和标签使用是否正确。一个 DTD 文档包含: 元素的定义规则, 元素间关系的定义规则, 元素可使用的属性, 可使用的实体或符号规则
 - XSD: XML 结构定义(XML Schema Definition, XSD)描述了 XML 文档的结构。可以用一个指定的 XML Schema 来验证某个 XML 文档,  以检查该 XML 文档是否符合其要求。XML Schema 本身也是 XML 文档, 它符合 XML 语法结构, 可以用通用的 XML 解析器解析它

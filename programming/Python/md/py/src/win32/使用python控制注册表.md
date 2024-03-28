@@ -54,7 +54,7 @@ HKEY_CURRENT_CONFIG|保存计算机的硬件配置文件信息
 
 例子
 ```python
-key ＝ win32api.RegOpenKey（win32con.HKEY_CURRENT_USER,'Software',0,win32con.KEY_READ)
+key ＝ win32api.RegOpenKey(win32con.HKEY_CURRENT_USER,'Software',0,win32con.KEY_READ)
 print(key)
 ```
 
@@ -90,7 +90,7 @@ win32api.RegCloseKey(key)
 ```python
 import win32api
 import win32con
-# 打开“HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer”项
+# 打开"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer"项
 key = win32api.RegOpenKey(win32con.HKEY_LOCAL_MACHINE,
     'SOFTWARE\\Microsoft\\Internet Explorer',
     0, win32con.KEY_ALL_ACCESS)
@@ -127,27 +127,27 @@ print(win32api.RegQueryInfoKey(key))  # RegQueryInfoKey函数查询项的基本�
 
 例子
 ```python
-# 将“HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer”
+# 将"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer"
 # 的默认值设为python
 win32api.RegSetValue(key,'',win32con.REG_SZ,'python')
-# 将其“Version”设置为7.0.2900.2180
+# 将其"Version"设置为7.0.2900.2180
 win32api.RegSetValueEx(key,'Version',0,win32con.REG_SZ,'7.0.2900.2180')
 ```
 
 # 添加、删除项
 
-- RegCreateKey（key, subKey） 向注册表中添加项
-- RegDeleteKey（key, subKey） 删除注册表中的项
+- RegCreateKey(key, subKey) 向注册表中添加项
+- RegDeleteKey(key, subKey) 删除注册表中的项
 
 其参数含义相同, 参数含义分别如下: 
 
 - Key: 已经打开的注册表项的句柄。
-- subKey: 所要操作（添加或删除）的子项。
+- subKey: 所要操作(添加或删除)的子项。
 
 例子
 ```python
-# 向“HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer”添加子项“Python”
+# 向"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer"添加子项"Python"
 win32api.RegCreateKey(key,'Python')
-# 删除刚才创建的子项“Python”
+# 删除刚才创建的子项"Python"
 win32api.RegDeleteKey(key,'Python')
 ```

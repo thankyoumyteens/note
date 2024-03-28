@@ -19,7 +19,7 @@ http {
 }
 ```
 
-# 轮询（默认）
+# 轮询(默认)
 
 ```conf
 upstream backserver { 

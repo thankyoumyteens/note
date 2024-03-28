@@ -25,16 +25,16 @@ fi
 - `-e FILE` 如果 指定的文件或目录存在时返回为真。
 - `-f FILE` 如果 FILE 存在且是一个普通文件则返回为真。
 - `-g FILE` 如果 FILE 存在且设置了SGID则返回为真。
-- `-h FILE` 如果 FILE 存在且是一个符号符号链接文件则返回为真。（该选项在一些老系统上无效）
+- `-h FILE` 如果 FILE 存在且是一个符号符号链接文件则返回为真。(该选项在一些老系统上无效)
 - `-k FILE` 如果 FILE 存在且已经设置了冒险位则返回为真。
 - `-p FILE` 如果 FILE 存并且是命令管道时返回为真。
 - `-r FILE` 如果 FILE 存在且是可读的则返回为真。
 - `-s FILE` 如果 FILE 存在且大小非0时为真则返回为真。
 - `-u FILE` 如果 FILE 存在且设置了SUID位时返回为真。
-- `-w FILE` 如果 FILE 存在且是可写的则返回为真。（一个目录为了它的内容被访问必然是可执行的）
+- `-w FILE` 如果 FILE 存在且是可写的则返回为真。(一个目录为了它的内容被访问必然是可执行的)
 - `-x FILE` 如果 FILE 存在且是可执行的则返回为真。
 - `-O FILE` 如果 FILE 存在且属有效用户ID则返回为真。
-- `-G FILE` 如果 FILE 存在且默认组为当前组则返回为真。（只检查系统默认组）
+- `-G FILE` 如果 FILE 存在且默认组为当前组则返回为真。(只检查系统默认组)
 - `-L FILE` 如果 FILE 存在且是一个符号连接则返回为真。
 - `-N FILE` 如果 FILE 存在 and has been mod如果ied since it was last read则返回为真。
 - `-S FILE` 如果 FILE 存在且是一个套接字则返回为真。
@@ -49,8 +49,8 @@ fi
 - `STRING1`　 如果字符串不为空则返回为真,与-n类似
 - `STRING1 == STRING2` 如果两个字符串相同则返回为真
 - `STRING1 != STRING2` 如果字符串不相同则返回为真
-- `STRING1 < STRING2` 如果 “STRING1”字典排序在“STRING2”前面则返回为真。
-- `STRING1 > STRING2` 如果 “STRING1”字典排序在“STRING2”后面则返回为真。
+- `STRING1 < STRING2` 如果 "STRING1"字典排序在"STRING2"前面则返回为真。
+- `STRING1 > STRING2` 如果 "STRING1"字典排序在"STRING2"后面则返回为真。
 
 # 数值判断
 

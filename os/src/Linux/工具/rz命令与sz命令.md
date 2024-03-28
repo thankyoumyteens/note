@@ -6,7 +6,7 @@ yum install lrzsz -y
 
 # rz命令
 
-rz命令（Receive ZMODEM）, 使用ZMODEM协议, 将本地文件批量上传到远程Linux/Unix服务器, 注意不能上传文件夹。
+rz命令(Receive ZMODEM), 使用ZMODEM协议, 将本地文件批量上传到远程Linux/Unix服务器, 注意不能上传文件夹。
 
 当我们使用虚拟终端软件, 如Xshell、SecureCRT或PuTTY来连接远程服务器后, 使用rz命令可以上传本地文件到远程服务器。输入rz回车后, 会出现文件选择对话框, 选择需要上传文件, 一次可以指定多个文件, 上传到服务器的路径为当前执行rz命令的目录。
 
@@ -36,7 +36,7 @@ rz [选项]
 
 # sz命令
 
-sz命令（Send ZMODEM）通过ZMODEM协议, 可将多个文件从远程服务器下载到本地。注意不能下载文件夹, 如果下载文件夹, 请先打包再下载
+sz命令(Send ZMODEM)通过ZMODEM协议, 可将多个文件从远程服务器下载到本地。注意不能下载文件夹, 如果下载文件夹, 请先打包再下载
 
 ```
 rz [选项] [filelist]

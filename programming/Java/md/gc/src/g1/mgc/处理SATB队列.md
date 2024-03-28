@@ -2,7 +2,7 @@
 
 SATB队列的长度为1k, 由参数G1SATBBufferSize控制, 表示每个队列有1000个对象。
 
-每个队列有一个参数G1SATBBufferEnqueueingThresholdPercent（默认值是60）, 表示当一个队列满了之后, 首先进行过滤处理, 过滤后如果使用率超过这个阈值则新分配一个队列, 否则重用这个队列。过滤的条件就是这个对象属于新分配对象（位于next和top之间）, 且还没有标记, 后续会处理该对象。
+每个队列有一个参数G1SATBBufferEnqueueingThresholdPercent(默认值是60), 表示当一个队列满了之后, 首先进行过滤处理, 过滤后如果使用率超过这个阈值则新分配一个队列, 否则重用这个队列。过滤的条件就是这个对象属于新分配对象(位于next和top之间), 且还没有标记, 后续会处理该对象。
 
 > jdk8u60-master\hotspot\src\share\vm\gc_implementation\g1\concurrentMark.cpp
 

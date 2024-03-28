@@ -8,8 +8,8 @@ File - Settings - Tools - External Tools 然后点击左上角的加号
 
 ## 新增 Pyside6-Designer 窗口中的填写内容:
 
-- Name: Pyside6-Designer（可自己定义）
-- Group: Pyside6（可自己定义）
+- Name: Pyside6-Designer(可自己定义)
+- Group: Pyside6(可自己定义)
 - Program: C:\Users\walter\AppData\Local\Programs\Python\Python37\Lib\site-packages\PySide6\designer.exe
 - Arguments: 空
 - Working directory: $FileDir$
@@ -18,8 +18,8 @@ File - Settings - Tools - External Tools 然后点击左上角的加号
 
 ## 新增 Pyside6-UIC 窗口中的填写内容:
 
-- Name: Pyside6-UIC（可自己定义）
-- Group: Pyside6（可自己定义）
+- Name: Pyside6-UIC(可自己定义)
+- Group: Pyside6(可自己定义)
 - Program: C:\Users\walter\AppData\Local\Programs\Python\Python37\Scripts\pyside6-uic.exe
 - Arguments: $FileName$ -o ui\_$FileNameWithoutExtension$.py
 - Working directory: $FileDir$

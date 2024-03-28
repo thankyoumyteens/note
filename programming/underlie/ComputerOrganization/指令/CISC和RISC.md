@@ -1,6 +1,6 @@
 # CISC
 
-CISC的英文全称为“Complex Instruction Set Computer”, 即“复杂指令系统计算机”
+CISC的英文全称为"Complex Instruction Set Computer", 即"复杂指令系统计算机"
 
 早期的CPU全部是CISC架构, 它的设计目的是要用最少的机器语言指令来完成所需的计算任务。
 
@@ -20,7 +20,7 @@ MUL ADDRA, ADDRB
 
 # RISC
 
-RISC的英文全称为“Reduced Instruction Set Computer”, 即“精简指令集计算机”
+RISC的英文全称为"Reduced Instruction Set Computer", 即"精简指令集计算机"
 
 RISC架构要求软件来指定各个操作步骤。上面的例子如果要在RISC架构上实现, 将ADDRA, ADDRB中的数据读入寄存器, 相乘和将结果写回内存的操作都必须由软件来实现, 比如: 
 ```

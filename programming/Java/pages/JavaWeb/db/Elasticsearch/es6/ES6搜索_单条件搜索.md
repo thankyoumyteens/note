@@ -97,7 +97,7 @@ POST http://localhost:9200/user/student/_search?pretty
 
 ## 更智能的模糊搜索
 
-fuzzy也是一个模糊查询。它允许语法错误, 但仍能搜出你想要的结果。例如, 我们查询name等于”kevin“的文档时, 不小心输成了”kevon“, 它仍然能查询出结果。
+fuzzy也是一个模糊查询。它允许语法错误, 但仍能搜出你想要的结果。例如, 我们查询name等于"kevin"的文档时, 不小心输成了"kevon", 它仍然能查询出结果。
 
 ```json
 POST http://localhost:9200/user/student/_search?pretty

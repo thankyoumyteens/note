@@ -6,11 +6,11 @@ spring:
       nodes: 192.168.1.101:8001,192.168.1.101:8002,192.168.1.102:8001,192.168.1.102:8002,192.168.1.103:8001,192.168.1.103:8002
       max-redirects: 3
     pool:
-      max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 1000  # 连接池最大连接数(使用负值表示没有限制)
       max-idle: 10    # 连接池中的最大空闲连接
-      max-wait: -1   # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1   # 连接池最大阻塞等待时间(使用负值表示没有限制)
       min-idle: 5     # 连接池中的最小空闲连接
-    timeout: 6000  # 连接超时时长（毫秒）
+    timeout: 6000  # 连接超时时长(毫秒)
     password: FC7EF9622A3D2B62 #redis加密密码
 ```
 
@@ -33,7 +33,7 @@ public class RedisConfig {
         MapPropertySource mapPropertySource = new MapPropertySource("RedisClusterConfiguration", source);
         RedisClusterConfiguration  redisClusterConfiguration = new RedisClusterConfiguration(mapPropertySource);
  
-        //获取application.yml 中的密码（密文）
+        //获取application.yml 中的密码(密文)
         String password = environment.getProperty("spring.redis.password");
         //解密密码并添加到配置中
         redisClusterConfiguration.setPassword(DesUtils.decode(password));

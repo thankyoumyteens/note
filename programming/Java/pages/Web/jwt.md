@@ -2,7 +2,7 @@
 
 一个JWT由三部分组成: 
 - Header: base64编码的Json字符串, Header通常由两部分组成: 令牌的类型, 即JWT, 以及使用的签名算法, 例如HMAC、SHA256或RSA。
-- Payload: base64编码的Json字符串, payload由声明（claims）组成。声明就是保存的数据。
+- Payload: base64编码的Json字符串, payload由声明(claims)组成。声明就是保存的数据。
 - Signature: 使用指定算法对Header和Payload加盐计算得到的字符串, 保证token在传输的过程中没有被篡改或者损坏。
 
 各部分以`.`分割, 如: `eyJhbGciOiJIUzUxMiJ9.eyJjcnQiOjE1MjgzNDM4OTgyNjgsImV4cCI6MTUyODM0MzkxOCwidXNlcm5hbWUiOiJ0b20ifQ.E-0jxKxLICWgcFEwNwQ4pfhdMzchcHmsd8G_BTsWgkUmVwPzDd7jJlf94cAdtbwTLMm27ouYYzTTxMXq7W1jvQ`
@@ -24,9 +24,9 @@ alg: 使用的hash算法, 例如: HMAC SHA256或者RSA
 
 ## payload
 
-JWT的第二部分是有效载荷, 其中包含声明（ claims）。
+JWT的第二部分是有效载荷, 其中包含声明( claims)。
 
-声明包含实体（通常是用户）和其他自定义信息。
+声明包含实体(通常是用户)和其他自定义信息。
 
 声明有三种类型
 
@@ -50,7 +50,7 @@ registered claims 包括
 
 # JWT工作原理
 
-客户端通过请求将用户名和密码传给服务端, 服务端将用户名和密码进行核对, 核对成功后将用户id等其他信息作为jwt的有效载荷（payload）与头部进行base64编码形成jwt（字符串）, 后端将这段字符串作为登陆成功的返回结果返回给前端。前端将其保存在localstroage或sessionstroage里, 退出登录时, 删除JWT字符串就可以。
+客户端通过请求将用户名和密码传给服务端, 服务端将用户名和密码进行核对, 核对成功后将用户id等其他信息作为jwt的有效载荷(payload)与头部进行base64编码形成jwt(字符串), 后端将这段字符串作为登陆成功的返回结果返回给前端。前端将其保存在localstroage或sessionstroage里, 退出登录时, 删除JWT字符串就可以。
 
 每次请求, 前端都会把JWT作为authorization请求头传给后端, 后端进行检查。
 

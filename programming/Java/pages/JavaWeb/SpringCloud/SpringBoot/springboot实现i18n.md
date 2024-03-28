@@ -2,9 +2,9 @@
 
 在resources中, 新增static/i18n文件夹, 在里面新建新建三个文件: 
 
-- messages.properties（默认的多语言文件）
+- messages.properties(默认的多语言文件)
 - messages_zh_CN.properties(中文语言文件)
-- messages_en_US.properties（英文语言文件）
+- messages_en_US.properties(英文语言文件)
 
 在里面添加上相同键的不同语言翻译值；如zh_CN中: 
 ```
