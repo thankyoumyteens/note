@@ -17,3 +17,5 @@
     - [短作业优先算法](./process/sjf.md)
     - [高响应比优先算法](./process/hrrn.md)
     - [轮转调度算法](./process/rr.md)
+    - [优先级调度算法](./process/p.md)
+    - [多级反馈队列算法](./process/mfq.md)
