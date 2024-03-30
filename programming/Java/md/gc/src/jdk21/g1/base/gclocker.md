@@ -49,6 +49,8 @@ GCLocker 中两个重要的属性:
 
 线程需要调用 GCLocker::lock_critical 方法进入临界区。
 
+![](../../../img/gc_locker_lock.png)
+
 ```cpp
 /////////////////////////////////////////////////////
 // src/hotspot/share/gc/shared/gcLocker.inline.hpp //
@@ -100,6 +102,8 @@ void GCLocker::jni_lock(JavaThread* thread) {
 
 在 JVM 执行垃圾回收前, GCLocker 会先判断当前是否有线程在临界区内, 如果有, GCLocker 会丢弃这次 GC, 并把 `_needs_gc` 设置为 true, 等到所有线程都退出临界区后, 会把这次 GC 补上。
 
+![](../../../img/gc_locker_gc.png)
+
 ```cpp
 //////////////////////////////////////////////
 // src/hotspot/share/gc/shared/gcLocker.cpp //
@@ -134,6 +138,8 @@ bool GCLocker::check_active_before_gc() {
 ## 离开临界区
 
 线程需要调用 GCLocker::unlock_critical 方法离开临界区。
+
+![](../../../img/gc_locker_unlock.png)
 
 ```cpp
 /////////////////////////////////////////////////////
