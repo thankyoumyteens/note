@@ -5,6 +5,9 @@
   - [mutator](./jdk21/g1/base/mutator.md)
   - [串行并行和并发](./jdk21/g1/base/串行并行和并发.md)
   - [GCLocker](./jdk21/g1/base/gclocker.md)
+  - [VMThread](./jdk21/g1/base/vm_thread.md)
+    - [VMThread::execute](./jdk21/g1/base/vm_thread_execute.md)
+    - [VMThread::loop](./jdk21/g1/base/vm_thread_loop.md)
   - [NUMA](./jdk21/g1/base/numa.md)
 
 - [JDK21的G1](./jdk21/g1/g1.md)
@@ -58,9 +61,6 @@
     - [注册finalizer](./jdk21/g1/load_class/register_finalizer.md)
   - [垃圾回收](./jdk21/g1/gc/gc.md)
     - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
-    - [VMThread](./jdk21/g1/gc/VMThread.md)
-      - [VMThread::execute](./jdk21/g1/gc/VMThread_execute.md)
-      - [VMThread::loop](./jdk21/g1/gc/VMThread_loop.md)
 
 - [JDK8的G1](./g1/g1.md)
   - [停顿预测模型](./g1/region/g1_predict.md)
