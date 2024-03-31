@@ -1,6 +1,6 @@
 # VMThread::execute
 
-如果需要 GC 的话, G1 会创建一个 VM_G1CollectForAllocation 对象交给 VMThread 执行。 JVM 会将 VMThread 的 `_next_vm_operation` 属性设置为当前的 VM_G1CollectForAllocation 对象, 之后 JavaThread 会一直阻塞, 直到当前的 VM_G1CollectForAllocation 执行结束。
+execute 函数会把传入的 VM_Operation 放入 VM_Operation 队列。 JVM 使用两个指针 `_cur_vm_operation` 和 `_next_vm_operation` 维护 VM_Operation 队列, `_next_vm_operation` 指向下一个要执行的 VM_Operation。
 
 ```cpp
 ////////////////////////////////////////////
@@ -65,17 +65,19 @@ void VMThread::wait_until_executed(VM_Operation* op) {
     }
   }
   {
-    // Wait until the operation has been processed
+    // 等待VM_Operation被执行
     TraceTime timer("Waiting for VM operation to be completed", TRACETIME_LOG(Trace, vmthread));
-    // _next_vm_operation is cleared holding VMOperation_lock after it has been
-    // executed. We wait until _next_vm_operation is not our op.
+    // VM_Operation在loop函数中执行完成后,
+    // loop函数会把_next_vm_operation设为null
     while (_next_vm_operation == op) {
-      // VM Thread can process it once we unlock the mutex on wait.
       ml.wait();
     }
   }
 }
 
+/**
+ * 将_next_vm_operation设置为当前VM_Operation
+ */
 bool VMThread::set_next_operation(VM_Operation *op) {
   if (_next_vm_operation != nullptr) {
     return false;
