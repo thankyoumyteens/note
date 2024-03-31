@@ -19,7 +19,7 @@ void VMThread::loop() {
 
   while (true) {
     if (should_terminate()) break;
-    // 等待VM_Operation
+    // 等待execute函数设置VM_Operation
     wait_for_operation();
     if (should_terminate()) break;
     assert(_next_vm_operation != nullptr, "Must have one");
@@ -28,6 +28,9 @@ void VMThread::loop() {
   }
 }
 
+/**
+ * 等待execute函数设置VM_Operation
+ */
 void VMThread::wait_for_operation() {
   assert(Thread::current()->is_VM_thread(), "Must be the VM thread");
   MonitorLocker ml_op_lock(VMOperation_lock, Mutex::_no_safepoint_check_flag);
@@ -69,6 +72,9 @@ void VMThread::wait_for_operation() {
   }
 }
 
+/**
+ * 执行VM_Operation
+ */
 void VMThread::inner_execute(VM_Operation* op) {
   assert(Thread::current()->is_VM_thread(), "Must be the VM thread");
 
