@@ -165,36 +165,156 @@ value 必须为 {x} 类型数据, 指令执行时, value 从操作数栈中出�
 
 ## 位运算-与
 
+将栈顶两个数值"按位与"并将结果压入栈顶:
+
+```
+操作码:
+        {x}and
+操作数:
+        -
+操作数栈-执行前:
+top->   value2
+        value1
+操作数栈-执行后:
+top->   result
+```
+
+{x} 需要替换成下面的值的其中之一:
+
+- i: int
+- l: long
+
+比如: iand 表示将栈顶两 int 型数值"按位与"并将结果压入栈顶。
+
+value1 和 value2 都必须为 {x} 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 对这两个数进行按位与操作得到 {x} 类型数据 result, 最后 result 被压入到操作数栈中。
+
 ## 位运算-或
+
+```
+操作码:
+        {x}or
+操作数:
+        -
+操作数栈-执行前:
+top->   value2
+        value1
+操作数栈-执行后:
+top->   result
+```
+
+{x} 需要替换成下面的值的其中之一:
+
+- i: int
+- l: long
 
 ## 位运算-异或
 
+```
+操作码:
+        {x}xor
+操作数:
+        -
+操作数栈-执行前:
+top->   value2
+        value1
+操作数栈-执行后:
+top->   result
+```
+
+{x} 需要替换成下面的值的其中之一:
+
+- i: int
+- l: long
+
 ## 位运算-左移
+
+将栈顶数值左移指定位数并将结果压入栈顶:
+
+```
+操作码:
+        {x}shl
+操作数:
+        -
+操作数栈-执行前:
+top->   value2
+        value1
+操作数栈-执行后:
+top->   result
+```
+
+{x} 需要替换成下面的值的其中之一:
+
+- i: int
+- l: long
+
+比如: ishl 表示将 int 型数值左移指定位数并将结果压入栈顶。
+
+value1 和 value2 都必须为 {x} 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 然后将 value1 左移 s 位, 计算后把运算结果入栈回操作数栈中。
+
+s 的取值:
+
+- i: value2 的低 5 位所表示的值
+- l: value2 的低 6 位所表示的值
 
 ## 位运算-带符号右移
 
+将栈顶数值右移指定位数并将结果压入栈顶:
+
+```
+操作码:
+        {x}shr
+操作数:
+        -
+操作数栈-执行前:
+top->   value2
+        value1
+操作数栈-执行后:
+top->   result
+```
+
+{x} 需要替换成下面的值的其中之一:
+
+- i: int
+- l: long
+
+比如: ishr 表示将 int 型数值右移指定位数并将结果压入栈顶。
+
+value1 和 value2 都必须为 {x} 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 然后将 value1 右移 s 位, 计算后把运算结果入栈回操作数栈中。
+
+s 的取值:
+
+- i: value2 的低 5 位所表示的值
+- l: value2 的低 6 位所表示的值
+
 ## 位运算-无符号右移
 
-| 操作码 | 操作数 | 操作数栈-执行前 | 操作数栈-执行后 | 操作                                             |
-| ------ | ------ | --------------- | --------------- | ------------------------------------------------ |
-| ishl   | -      | value1,value2   | result          | 将 int 型数值左移指定位数并将结果压入栈顶        |
-| lshl   | -      | value1,value2   | result          | 将 long 型数值左移指定位数并将结果压入栈顶       |
-| ishr   | -      | value1,value2   | result          | 将 int 型数值带符号右移指定位数并将结果压入栈顶  |
-| lshr   | -      | value1,value2   | result          | 将 long 型数值带符号右移指定位数并将结果压入栈顶 |
-| iushr  | -      | value1,value2   | result          | 将 int 型数值无符号右移指定位数并将结果压入栈顶  |
-| lushr  | -      | value1,value2   | result          | 将 long 型数值无符号右移指定位数并将结果压入栈顶 |
-| iand   | -      | value1,value2   | result          | 将栈顶两 int 型数值"按位与"并将结果压入栈顶      |
-| land   | -      | value1,value2   | result          | 将栈顶两 long 型数值"按位与"并将结果压入栈顶     |
-| ior    | -      | value1,value2   | result          | 将栈顶两 int 型数值"按位或"并将结果压入栈顶      |
-| lor    | -      | value1,value2   | result          | 将栈顶两 long 型数值"按位或"并将结果压入栈顶     |
-| ixor   | -      | value1,value2   | result          | 将栈顶两 int 型数值"按位异或"并将结果压入栈顶    |
-| lxor   | -      | value1,value2   | result          | 将栈顶两 long 型数值"按位异或"并将结果压入栈顶   |
+将栈顶数值右移指定位数并将结果压入栈顶:
 
-说明:
+```
+操作码:
+        {x}ushr
+操作数:
+        -
+操作数栈-执行前:
+top->   value2
+        value1
+操作数栈-执行后:
+top->   result
+```
 
-- ishl: value1 和 value2 都必须为 int 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 然后将 value1 左移 s 位, s 是 value2 低 5 位所表示的值, 计算后把运算结果入栈回操作数栈中
-- ishr: value1 和 value2 都必须为 int 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 然后将 value1 右移 s 位, s 是 value2 低 5 位所表示的值, 计算后把运算结果入栈回操作数栈中
-- iand: value1 和 value2 都必须为 int 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 对这两个数进行按位与操作得到 int 类型数据 result, 最后 result 被压入到操作数栈中
+{x} 需要替换成下面的值的其中之一:
+
+- i: int
+- l: long
+
+比如: iushr 表示将 int 型数值右移指定位数并将结果压入栈顶。
+
+value1 和 value2 都必须为 {x} 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 然后将 value1 右移 s 位, 计算后把运算结果入栈回操作数栈中。
+
+s 的取值:
+
+- i: value2 的低 5 位所表示的值
+- l: value2 的低 6 位所表示的值
 
 ## 自增
 

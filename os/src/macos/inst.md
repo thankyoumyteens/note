@@ -17,6 +17,8 @@ brew install --cask vscodium
 brew install mdbook
 # ffmpeg
 brew install ffmpeg
+# wget
+brew install wget
 ```
 
 ## IDE

@@ -21,7 +21,7 @@ vim ~/.zshrc
 2. 在最后一行添加:
 
 ```conf
-export JAVA_HOME=路径/jdk-21.0.2.jdk
+export JAVA_HOME=/Users/walter/walter/jdk/jdk-21.0.2.jdk
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 

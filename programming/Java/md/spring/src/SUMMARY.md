@@ -120,6 +120,7 @@
     - [缓存击穿](./redis/cache/hotspot_invalid.md)
     - [缓存雪崩](./redis/cache/cache_avalanche.md)
     - [双写一致性](./redis/cache/consistency.md)
+    - [持久化](./redis/cache/persistence.md)
 
 - [Netty](./netty/netty.md)
   - [IO](.netty/io/IO.md)
