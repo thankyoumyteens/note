@@ -33,6 +33,7 @@
   - [两个日期间隔几天](./oracle/两个日期间隔几天.md)
   - [生成随机数](./oracle/生成随机数.md)
   - [遍历表中所有记录](./oracle/遍历表中所有记录.md)
+  - [sleep](./oracle/sleep.md)
 
 - [Excel](./excel/excel.md)
   - [EasyExcel 导出表头合并](./excel/EasyExcel导出表头合并.md)
