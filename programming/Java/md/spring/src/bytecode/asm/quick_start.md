@@ -3,7 +3,6 @@
 maven
 
 ```xml
-<!-- https://mvnrepository.com/artifact/org.ow2.asm/asm-all -->
 <dependency>
     <groupId>org.ow2.asm</groupId>
     <artifactId>asm-all</artifactId>

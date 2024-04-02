@@ -175,6 +175,12 @@ public class MethodInfoVisitor extends MethodVisitor {
     }
 
     @Override
+    public void visitMaxs(int maxStack, int maxLocals) {
+        super.visitMaxs(maxStack, maxLocals);
+        System.out.println("方法体结束");
+    }
+
+    @Override
     public void visitEnd() {
         super.visitEnd();
         System.out.println("方法结束");
