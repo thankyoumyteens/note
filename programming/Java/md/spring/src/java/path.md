@@ -207,3 +207,55 @@ Files.move(src, dest, StandardCopyOption.REPLACE_EXISTING);
 Path path = Paths.get("/home/demo/a.txt");
 Files.deleteIfExists(path);
 ```
+
+## 删除文件夹
+
+```java
+Path path = Paths.get("/home/demo");
+// 递归删除文件夹
+Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        Files.delete(file);
+        return FileVisitResult.CONTINUE;
+    }
+
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+        Files.delete(dir);
+        return FileVisitResult.CONTINUE;
+    }
+});
+```
+
+## 重命名文件或文件夹
+
+```java
+Path file = Paths.get("/home/demo/a.txt");
+// 重命名文件
+Files.move(file, file.resolveSibling("b.txt"));
+// 重命名文件夹
+Path dir = Paths.get("/home/demo");
+Files.move(dir, dir.resolveSibling("demo2"));
+```
+
+## 判断文件或文件夹是否存在
+
+```java
+Path path = Paths.get("/home/demo/a.txt");
+boolean b = Files.exists(path);
+```
+
+## 判断是不是文件
+
+```java
+Path path = Paths.get("/home/demo/a.txt");
+boolean b = Files.isRegularFile(path);
+```
+
+## 判断是不是文件夹
+
+```java
+Path path = Paths.get("/home/demo");
+boolean b = Files.isDirectory(path);
+```
