@@ -45,10 +45,10 @@ public class ClassInfoVisitor extends ClassVisitor {
      */
     @Override
     public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-        System.out.println("类名：" + name);
-        System.out.println("父类：" + superName);
+        System.out.println("类名: " + name);
+        System.out.println("父类: " + superName);
         if (interfaces != null && interfaces.length > 0) {
-            System.out.print("实现的接口：");
+            System.out.print("实现的接口: ");
             for (String inter : interfaces) {
                 System.out.print(inter + " ");
             }
@@ -62,7 +62,7 @@ public class ClassInfoVisitor extends ClassVisitor {
      */
     @Override
     public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-        System.out.println("类的注解：" + desc + ", 是否可见：" + visible);
+        System.out.println("类的注解: " + desc + ", 是否可见: " + visible);
         // 返回自定义的注解Visitor, 用来获取注解的参数
         return new AnnotationInfoVisitor();
     }
@@ -74,11 +74,11 @@ public class ClassInfoVisitor extends ClassVisitor {
     @Override
     public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
         System.out.println("====================================================================");
-        System.out.println("字段名：" + name);
-        System.out.println("字段描述符：" + desc);
-        System.out.println("字段签名：" + signature);
+        System.out.println("字段名: " + name);
+        System.out.println("字段描述符: " + desc);
+        System.out.println("字段签名: " + signature);
         if (value != null) {
-            System.out.println("static final字段的初始值：" + value);
+            System.out.println("static final字段的初始值: " + value);
         }
         // 返回自定义的字段Visitor, 用来获取字段注解
         return new FieldInfoVisitor();
@@ -91,11 +91,11 @@ public class ClassInfoVisitor extends ClassVisitor {
     @Override
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
         System.out.println("====================================================================");
-        System.out.println("方法名：" + name);
-        System.out.println("方法描述符：" + desc);
-        System.out.println("方法签名：" + signature);
+        System.out.println("方法名: " + name);
+        System.out.println("方法描述符: " + desc);
+        System.out.println("方法签名: " + signature);
         if (exceptions != null && exceptions.length > 0) {
-            System.out.print("方法手动抛出的异常：");
+            System.out.print("方法手动抛出的异常: ");
             for (String exception : exceptions) {
                 System.out.print(exception + " ");
             }
@@ -121,7 +121,7 @@ public class AnnotationInfoVisitor extends AnnotationVisitor {
         // 比如: @Service(value = "demo")
         // name = value
         // value = demo
-        System.out.println("注解参数名：" + name + ", 参数值：" + value);
+        System.out.println("注解参数名: " + name + ", 参数值: " + value);
     }
 }
 ```
@@ -141,7 +141,7 @@ public class FieldInfoVisitor extends FieldVisitor {
      */
     @Override
     public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-        System.out.println("字段的注解：" + desc + ", 是否可见：" + visible);
+        System.out.println("字段的注解: " + desc + ", 是否可见: " + visible);
         // 返回自定义字段Visitor, 用来获取注解的参数
         return new AnnotationInfoVisitor();
     }
@@ -163,7 +163,7 @@ public class MethodInfoVisitor extends MethodVisitor {
      */
     @Override
     public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-        System.out.println("方法的注解：" + desc + ", 是否可见：" + visible);
+        System.out.println("方法的注解: " + desc + ", 是否可见: " + visible);
         // 返回自定义字段Visitor, 用来获取注解的参数
         return new AnnotationInfoVisitor();
     }

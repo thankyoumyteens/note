@@ -102,7 +102,7 @@ public class App {
              */
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-                System.out.println("当前访问的目录：" + dir);
+                System.out.println("当前访问的目录: " + dir);
                 return FileVisitResult.CONTINUE;
             }
 
@@ -111,7 +111,7 @@ public class App {
              */
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-                System.out.println("当前访问的文件：" + file);
+                System.out.println("当前访问的文件: " + file);
                 return FileVisitResult.CONTINUE;
             }
 
@@ -120,7 +120,7 @@ public class App {
              */
             @Override
             public FileVisitResult visitFileFailed(Path file, IOException exc) {
-                System.out.println("访问文件失败：" + file);
+                System.out.println("访问文件失败: " + file);
                 return FileVisitResult.TERMINATE;
             }
 
@@ -129,7 +129,7 @@ public class App {
              */
             @Override
             public FileVisitResult postVisitDirectory(Path dir, IOException exc) {
-                System.out.println("访问文件夹结束：" + dir);
+                System.out.println("访问文件夹结束: " + dir);
                 return FileVisitResult.CONTINUE;
             }
         });
