@@ -61,6 +61,7 @@
     - [注册finalizer](./jdk21/g1/load_class/register_finalizer.md)
   - [垃圾回收](./jdk21/g1/gc/gc.md)
     - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
+  - [安全点](./jdk21/g1/safepoint/safepoint.md)
 
 - [JDK8的G1](./g1/g1.md)
   - [停顿预测模型](./g1/region/g1_predict.md)

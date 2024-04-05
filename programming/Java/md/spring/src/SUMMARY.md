@@ -34,6 +34,7 @@
   - [递归查询所有下级](./oracle/递归查询所有下级.md)
   - [两个日期间隔几天](./oracle/两个日期间隔几天.md)
   - [生成随机数](./oracle/生成随机数.md)
+  - [生成随机日期](./oracle/random_date.md)
   - [遍历表中所有记录](./oracle/遍历表中所有记录.md)
   - [sleep](./oracle/sleep.md)
   - [数字转字符串](./oracle/数字转字符串.md)
