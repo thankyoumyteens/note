@@ -1,8 +1,12 @@
 # 创建虚拟环境
 
-```
+```sh
+# windows
 python -m venv packenv
 call packenv\scripts\activate.bat
+# unix
+python3 -m venv packenv
+source packenv/bin/activate
 ```
 
 # 添加依赖库

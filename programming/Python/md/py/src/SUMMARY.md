@@ -40,7 +40,7 @@
   - [布局](./pyside/布局.md)
   - [菜单](./pyside/菜单.md)
   - [建立信号与槽的连接](./pyside/建立信号与槽的连接.md)
-  - [打包 exe](./pyside/打包exe.md)
+  - [打包exe](./pyside/打包exe.md)
 
 - [Requests](./requests/requests.md)
   - [GET请求](./requests/get请求.md)
