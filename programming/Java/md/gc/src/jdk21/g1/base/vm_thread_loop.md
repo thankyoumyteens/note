@@ -96,7 +96,7 @@ void VMThread::inner_execute(VM_Operation* op) {
   }
 
   _cur_vm_operation = op;
-  // TODO
+  // 用来自动释放线程执行时产生的对象句柄
   HandleMark hm(VMThread::vm_thread());
 
   const char* const cause = op->cause();
@@ -158,6 +158,7 @@ void VMThread::evaluate_operation(VM_Operation* op) {
     // 这个方法会由不同的VM_Operation各自重写
     op->evaluate();
 
+    // VM_Operation执行完成, 是否要触发事件
     if (event.should_commit()) {
       post_vm_operation_event(&event, op);
     }
