@@ -37,6 +37,7 @@ void VMThread::wait_for_operation() {
 
   // 清除之前的VM_Operation
   // 在最开始_next_vm_operation会指向VM_Cleanup对象
+  // VM_Cleanup用于jvm定期执行的清理工作
   _next_vm_operation = nullptr;
   // 唤醒等待的线程(execute函数中调用ml.wait()函数进入等待),
   // 让它们可以继续尝试给_next_vm_operation设置VM_Operation
@@ -63,7 +64,9 @@ void VMThread::wait_for_operation() {
     }
     assert(_next_vm_operation == nullptr, "Must be");
     assert(_cur_vm_operation  == nullptr, "Must be");
-    // TODO
+    // 判断是否需要执行定期清理
+    // jvm会定期(-XX:GuaranteedSafepointInterval, 默认1秒)
+    // 执行清理(线程的缓存数据等)操作
     setup_periodic_safepoint_if_needed();
     if (_next_vm_operation != nullptr) {
       return;
@@ -73,6 +76,52 @@ void VMThread::wait_for_operation() {
     // 唤醒其它线程, 让它们设置VM_Operation
     ml_op_lock.notify_all();
     ml_op_lock.wait(GuaranteedSafepointInterval);
+  }
+}
+
+bool VMThread::handshake_alot() {
+  assert(_cur_vm_operation == nullptr, "should not have an op yet");
+  assert(_next_vm_operation == nullptr, "should not have an op yet");
+  if (!HandshakeALot) {
+    return false;
+  }
+  static jlong last_halot_ms = 0;
+  jlong now_ms = nanos_to_millis(os::javaTimeNanos());
+  // If only HandshakeALot is set, but GuaranteedSafepointInterval is 0,
+  // we emit a handshake if it's been more than a second since the last one.
+  // TODO 1秒握一次手, 为啥要握手
+  jlong interval = GuaranteedSafepointInterval != 0 ? GuaranteedSafepointInterval : 1000;
+  jlong deadline_ms = interval + last_halot_ms;
+  if (now_ms > deadline_ms) {
+    last_halot_ms = now_ms;
+    return true;
+  }
+  return false;
+}
+
+/**
+ * 判断是否需要执行定期清理
+ */
+void VMThread::setup_periodic_safepoint_if_needed() {
+  assert(_cur_vm_operation  == nullptr, "Already have an op");
+  assert(_next_vm_operation == nullptr, "Already have an op");
+  // 距离上次进入安全点过了多久
+  jlong interval_ms = SafepointTracing::time_since_last_safepoint_ms();
+  // 是否需要执行定期清理任务
+  bool max_time_exceeded = GuaranteedSafepointInterval != 0 &&
+                           (interval_ms >= GuaranteedSafepointInterval);
+  if (!max_time_exceeded) {
+    return;
+  }
+  // cleanup_op和safepointALot_op都需要进入安全点执行
+  if (SafepointSynchronize::is_cleanup_needed()) {
+    // 设置下一次执行的VM_Operation为清理操作
+    // VM_Cleanup
+    _next_vm_operation = &cleanup_op;
+  } else if (SafepointALot) {
+    // VM_SafepointALot
+    // TODO 干啥的
+    _next_vm_operation = &safepointALot_op;
   }
 }
 

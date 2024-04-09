@@ -62,6 +62,7 @@
   - [垃圾回收](./jdk21/g1/gc/gc.md)
     - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
   - [安全点](./jdk21/g1/safepoint/safepoint.md)
+    - [定期清理任务](./jdk21/g1/safepoint/cleanup.md)
 
 - [JDK8的G1](./g1/g1.md)
   - [停顿预测模型](./g1/region/g1_predict.md)
