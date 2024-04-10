@@ -5,4 +5,4 @@
   - [三角函数](./base/trigonometric_functions.md)
   - [常见的不等式](./base/inequality.md)
   - [邻域和去心邻域](./base/neighbourhood.md)
-  - [特殊的函数](./base/function.md)
+  - [函数](./base/function.md)
