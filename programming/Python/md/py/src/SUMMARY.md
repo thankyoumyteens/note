@@ -40,6 +40,8 @@
   - [布局](./pyside/布局.md)
   - [菜单](./pyside/菜单.md)
   - [建立信号与槽的连接](./pyside/建立信号与槽的连接.md)
+  - [选择文件对话框](./pyside/choose_file.md)
+  - [消息框](./pyside/message_box.md)
   - [打包exe](./pyside/打包exe.md)
 
 - [Requests](./requests/requests.md)
@@ -54,6 +56,10 @@
 - [Excel](./excel/excel.md)
   - [excel字母列号与数字列号之间的转换](./excel/excel字母列号与数字列号之间的转换.md)
   - [excel读写](./excel/excel读写.md)
+
+- [XML](./xml/xml.md)
+  - [解析xml](./xml/et.md)
+  - [解析命名空间](./xml/et_ns.md)
 
 - [selenium](./selenium/selenium.md)
   - [安装selenium](./selenium/安装selenium.md)
