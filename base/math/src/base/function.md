@@ -56,6 +56,18 @@
 \\
 & 由 y = \ln_{}{(x + \sqrt{x^{2}+1})} \\
 & 得到 x + \sqrt{x^{2}+1} = e^{y} \\
-
+& \because (-x + \sqrt{x^{2}+1})(x + \sqrt{x^{2}+1}) \\
+& = (\sqrt{x^{2}+1})^{2} - x^{2} \\
+& = 1 \\
+& \therefore -x + \sqrt{x^{2}+1} 和 x + \sqrt{x^{2}+1} 互为倒数 \\
+& -x + \sqrt{x^{2}+1} = e^{-y} \\
+\\
+& 把 \begin{cases}
+x + \sqrt{x^{2}+1} = e^{y} \\
+-x + \sqrt{x^{2}+1} = e^{-y}
+\end{cases} 这两个式子相减 \\
+& 得到 x = \frac{e^{y} - e^{-y}}{2} \\
 \end{align}
 -->
+
+![](../img/f5.jpg)

@@ -6,3 +6,5 @@
   - [常见的不等式](./base/inequality.md)
   - [邻域和去心邻域](./base/neighbourhood.md)
   - [函数](./base/function.md)
+  - [基本初等函数](./base/basic_elementary_function.md)
+  - [初等函数](./base/elementary_function.md)
