@@ -2,7 +2,7 @@
 
 ## 特殊的函数
 
-符号函数（Sign function，简称 sgn）用来判断实数的正负号。
+符号函数（Sign function, 简称 sgn）用来判断实数的正负号。
 
 <!-- y ={sgn} x=\left\{
 {\begin{matrix}
@@ -25,10 +25,10 @@
 
 ![](../img/f2.jpg)
 
-取整函数是一类将实数映射到相近的整数的函数。常用的取整函数有两个，分别是下取整函数（英语：floor function）和上取整函数（ceiling function）。
+取整函数是一类将实数映射到相近的整数的函数。常用的取整函数有两个, 分别是下取整函数（英语: floor function）和上取整函数（ceiling function）。
 
 <!-- \begin{align}
-& 下取整函数，在数学中一般记作 y =\left [ x \right ] 或者 y = \left \lfloor x \right \rfloor, \\
+& 下取整函数, 在数学中一般记作 y =\left [ x \right ] 或者 y = \left \lfloor x \right \rfloor, \\
 & 在计算机科学中一般记作floor(x), 表示不超过x的整数中最大的一个。\\
 & 例如: \left [ -3.2 \right ] = -4, \left [ 1.5 \right ] = 1, \left [ 3 \right ] = 3 \\
 \\ & 性质: \\
@@ -40,7 +40,7 @@
 ![](../img/f3.jpg)
 
 <!-- \begin{align}
-& 上取整函数，在数学中一般记作 y = \left \lceil x \right \rceil , \\
+& 上取整函数, 在数学中一般记作 y = \left \lceil x \right \rceil , \\
 & 在计算机科学中一般记作ceil(x), 表示不小于x的整数中最小的一个。\\
 \end{align} -->
 

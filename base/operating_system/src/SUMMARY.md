@@ -25,3 +25,6 @@
     - [双标志后检查法](./process/double_flag_late_check_method.md)
     - [Peterson算法](./process/peterson.md)
     - [中断屏蔽](./process/interrupt_masking.md)
+    - [TestAndSet指令](./process/test_and_set.md)
+    - [Swap指令](./process/swap.md)
+    - [信号量机制](./process/semaphore.md)

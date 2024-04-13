@@ -106,6 +106,7 @@
     - [缓存雪崩](./redis/cache/cache_avalanche.md)
     - [双写一致性](./redis/cache/consistency.md)
     - [持久化](./redis/cache/persistence.md)
+    - [过期策略](./redis/cache/expire.md)
 
 - [Netty](./netty/netty.md)
   - [IO](.netty/io/IO.md)

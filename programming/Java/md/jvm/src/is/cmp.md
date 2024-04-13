@@ -39,12 +39,12 @@ top->   result
 - l
 - g
 
-value1 和 value2 都必须为 float 类型数据，指令执行时，value1 和 value2 从操作数栈中出栈，并且经过数值集合转换后得到值 value1’和 value2’，接着对这 2 个值进行浮点比较操作：
+value1 和 value2 都必须为 float 类型数据, 指令执行时, value1 和 value2 从操作数栈中出栈, 并且经过数值集合转换后得到值 value1’和 value2’, 接着对这 2 个值进行浮点比较操作: 
 
-- 如果 value1’大于 value2’，int 值 1 将压入到操作数栈中
-- 如果 value1’与 value2’相等，int 值 0 将压入到操作数栈中
-- 如果 value1’小于 value2’，int 值－1 将压入到操作数栈中
-- 如果 value1’和 value2’之中最少有一个为 NaN，那 fcmpg 指令将 int 值 1 压入到操作数栈中，而 fcmpl 指令则把 int 值-1 压入到操作数栈中
+- 如果 value1’大于 value2’, int 值 1 将压入到操作数栈中
+- 如果 value1’与 value2’相等, int 值 0 将压入到操作数栈中
+- 如果 value1’小于 value2’, int 值－1 将压入到操作数栈中
+- 如果 value1’和 value2’之中最少有一个为 NaN, 那 fcmpg 指令将 int 值 1 压入到操作数栈中, 而 fcmpl 指令则把 int 值-1 压入到操作数栈中
 
 ## double 类型比较
 
