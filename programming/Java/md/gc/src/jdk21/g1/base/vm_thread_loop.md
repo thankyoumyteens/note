@@ -27,6 +27,14 @@ void VMThread::loop() {
     inner_execute(_next_vm_operation);
   }
 }
+```
+
+## 等待 VM_Operation
+
+```cpp
+////////////////////////////////////////////
+// src/hotspot/share/runtime/vmThread.cpp //
+////////////////////////////////////////////
 
 /**
  * 等待VM_Operation
@@ -46,25 +54,34 @@ void VMThread::wait_for_operation() {
   while (!should_terminate()) {
     self_destruct_if_needed();
     // 有新的VM_Operation
-    // 准备执行
+    // 返回, 交给inner_execute函数去执行
     if (_next_vm_operation != nullptr) {
       return;
     }
-    // TODO
+
+    // 判断是否需要执行所有线程的定期握手
     if (handshake_alot()) {
       {
+        // 解锁
         MutexUnlocker mul(VMOperation_lock);
         HandshakeALotClosure hal_cl;
+        // 执行握手
         Handshake::execute(&hal_cl);
       }
-      // When we unlocked above someone might have setup a new op.
+      // 在上面的解锁期间, Handshake::execute会设置
+      // 执行握手的VM_Operation,
+      // 或者可能会有其它线程抢先
+      // 调用VMThread::execute设置新的VM_Operation
+      // 所以这里需要再判断一下
       if (_next_vm_operation != nullptr) {
         return;
       }
     }
     assert(_next_vm_operation == nullptr, "Must be");
     assert(_cur_vm_operation  == nullptr, "Must be");
-    // 判断是否需要执行定期清理
+
+    // 队列中没有其它的VM_Operation要执行
+    // 开始判断是否需要执行定期清理的VM_Operation
     // jvm会定期(-XX:GuaranteedSafepointInterval, 默认1秒)
     // 执行清理(线程的缓存数据等)操作
     setup_periodic_safepoint_if_needed();
@@ -78,26 +95,60 @@ void VMThread::wait_for_operation() {
     ml_op_lock.wait(GuaranteedSafepointInterval);
   }
 }
+```
 
+### 定期握手
+
+```cpp
+////////////////////////////////////////////
+// src/hotspot/share/runtime/vmThread.cpp //
+////////////////////////////////////////////
+
+/**
+ * 判断是否需要握手
+ */
 bool VMThread::handshake_alot() {
   assert(_cur_vm_operation == nullptr, "should not have an op yet");
   assert(_next_vm_operation == nullptr, "should not have an op yet");
+  // HandshakeALot 默认为false
   if (!HandshakeALot) {
     return false;
   }
   static jlong last_halot_ms = 0;
   jlong now_ms = nanos_to_millis(os::javaTimeNanos());
-  // If only HandshakeALot is set, but GuaranteedSafepointInterval is 0,
-  // we emit a handshake if it's been more than a second since the last one.
-  // TODO 1秒握一次手, 为啥要握手
+  // 默认1秒握一次手
   jlong interval = GuaranteedSafepointInterval != 0 ? GuaranteedSafepointInterval : 1000;
   jlong deadline_ms = interval + last_halot_ms;
+  // 距离上次握手是否超过1秒
   if (now_ms > deadline_ms) {
     last_halot_ms = now_ms;
     return true;
   }
   return false;
 }
+
+/////////////////////////////////////////////
+// src/hotspot/share/runtime/handshake.cpp //
+/////////////////////////////////////////////
+
+/**
+ * 执行握手
+ */
+void Handshake::execute(HandshakeClosure* hs_cl) {
+  // 把HandshakeClosure包装成VM_Operation
+  HandshakeOperation cto(hs_cl, nullptr, Thread::current());
+  VM_HandshakeAllThreads handshake(&cto);
+  // 加入VM_Operation队列
+  VMThread::execute(&handshake);
+}
+```
+
+### 定期清理
+
+```cpp
+////////////////////////////////////////////
+// src/hotspot/share/runtime/vmThread.cpp //
+////////////////////////////////////////////
 
 /**
  * 判断是否需要执行定期清理
@@ -124,6 +175,14 @@ void VMThread::setup_periodic_safepoint_if_needed() {
     _next_vm_operation = &safepointALot_op;
   }
 }
+```
+
+## 执行 VM_Operation
+
+```cpp
+////////////////////////////////////////////
+// src/hotspot/share/runtime/vmThread.cpp //
+////////////////////////////////////////////
 
 /**
  * 执行VM_Operation

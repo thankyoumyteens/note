@@ -2,7 +2,7 @@
 
 ## 特殊的函数
 
-符号函数（Sign function, 简称 sgn）用来判断实数的正负号。
+符号函数(Sign function, 简称 sgn)用来判断实数的正负号。
 
 <!-- y ={sgn} x=\left\{
 {\begin{matrix}
@@ -14,7 +14,7 @@
 
 ![](../img/f1.jpg)
 
-狄利克雷函数（Dirichlet function）是一个判别自变量是有理数还是无理数的函数。
+狄利克雷函数(Dirichlet function)是一个判别自变量是有理数还是无理数的函数。
 
 <!-- y = D(x)=\left\{
 {\begin{matrix}
@@ -25,7 +25,7 @@
 
 ![](../img/f2.jpg)
 
-取整函数是一类将实数映射到相近的整数的函数。常用的取整函数有两个, 分别是下取整函数（英语: floor function）和上取整函数（ceiling function）。
+取整函数是一类将实数映射到相近的整数的函数。常用的取整函数有两个, 分别是下取整函数(英语: floor function)和上取整函数(ceiling function)。
 
 <!-- \begin{align}
 & 下取整函数, 在数学中一般记作 y =\left [ x \right ] 或者 y = \left \lfloor x \right \rfloor, \\

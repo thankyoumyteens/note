@@ -8,6 +8,8 @@
   - [VMThread](./jdk21/g1/base/vm_thread.md)
     - [VMThread::execute](./jdk21/g1/base/vm_thread_execute.md)
     - [VMThread::loop](./jdk21/g1/base/vm_thread_loop.md)
+  - [线程握手](./jdk21/g1/base/handshake.md)
+    - [VM_HandshakeAllThreads](./jdk21/g1/base/handshake_op.md)
   - [NUMA](./jdk21/g1/base/numa.md)
 
 - [JDK21的G1](./jdk21/g1/g1.md)
