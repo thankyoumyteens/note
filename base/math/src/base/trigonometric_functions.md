@@ -1,24 +1,46 @@
 # 三角函数
 
-<!-- \sin ^{2}\!x+\cos ^{2}\!x = 1 -->
+![](../img/tf0.jpg)
 
-![](../img/tf1.jpg)
-
-<!-- \sec(x) = \frac{1}{\cos(x)}  -->
+<!--
+\begin{align}
+& \sec x = \frac{1}{\cos x} \\
+\\
+& \csc x = \frac{1}{\sin x} \\
+\\
+& \tan x = \frac{\sin x}{\cos x} \\
+\\
+& \cot x = \frac{\cos x}{\sin x} \\
+\end{align}
+-->
 
 ![](../img/tf2.jpg)
 
-<!-- \csc(x) = \frac{1}{\sin(x)}  -->
+## 函数图像
 
-![](../img/tf3.jpg)
+![](../img/tf1_1.jpg)
+![](../img/tf1_3.jpg)
+![](../img/tf1_5.jpg)
+![](../img/tf1_2.jpg)
+![](../img/tf1_6.jpg)
+![](../img/tf1_4.jpg)
 
-<!-- \sec ^{2}\!x = 1 + \tan ^{2}\!x -->
+## 三角恒等式
 
-![](../img/tf4.jpg)
+<!--
+\begin{align}
+& 毕达哥拉斯定理: \\
+& \sin ^{2} x + \cos ^{2} x = 1 \\
+\\
+& 两边同除 \cos^{2} x: \\
+& \tan ^{2} x + 1 = \sec ^{2} x \\
+\\
+& 两边同除 \sin^{2} x: \\
+& 1 + \cot ^{2} x = \csc ^{2} x \\
+\end{align}
+-->
 
-<!-- \csc ^{2}\!x = 1 + \cot ^{2}\!x -->
-
-![](../img/tf5.jpg)
+![](../img/tf1.jpg)
 
 ## 倍角公式
 
