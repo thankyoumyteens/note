@@ -11,6 +11,7 @@
 
 - [git](./use_git/git.md)
   - [删除git提交时的校验](./use_git/dh.md)
+  - [显示未合并的冲突文件](./use_git/show_unmerged_files.md)
 
 - [postman](./postman/postman.md)
   - [禁止更新](./postman/禁止更新.md)
