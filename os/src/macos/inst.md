@@ -31,14 +31,13 @@ brew install wget
 
 ## 其他工具
 
+- [Snipaste](https://zh.snipaste.com/download.html)
 - [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)
 - [gradle](https://mirrors.cloud.tencent.com/gradle/)
 - [maven](https://repo.huaweicloud.com/apache/maven/maven-3/)
 - [VSCode](https://code.visualstudio.com/)
 - [AnotherRedisDesktopManager](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
 - [dbeaver](https://github.com/dbeaver/dbeaver/releases)
-- [pot](https://github.com/pot-app/pot-desktop)
-- [Snipaste](https://zh.snipaste.com/download.html)
 - [tabby](https://github.com/Eugeny/tabby/releases)
 - [downkyicore](https://github.com/yaobiao131/downkyicore/releases)
 - [drawio](https://github.com/jgraph/drawio-desktop/releases)
