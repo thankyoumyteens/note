@@ -47,3 +47,5 @@ brew install wget
 - [tinyImage](https://github.com/focusbe/tinyImage/releases) 图片压缩工具
 - [mactex](https://www.tug.org/mactex/mactex-download.html)
 - [texstudio](https://github.com/texstudio-org/texstudio/releases)
+- [GIMP](https://www.gimp.org/downloads/) 修图
+- [kdenlive](https://kdenlive.org/zh/download-zh/) 剪视频
