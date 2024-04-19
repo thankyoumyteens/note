@@ -3,8 +3,6 @@
 ```sh
 # chrome
 brew install --cask google-chrome
-# ungoogled-chromium
-brew install --cask eloston-chromium
 # subversion
 brew install subversion
 # vlc
@@ -31,7 +29,8 @@ brew install wget
 
 ## 其他工具
 
-- [Snipaste](https://zh.snipaste.com/download.html)
+- [vscodium](https://github.com/VSCodium/vscodium/releases)
+- [Snipaste](https://zh.snipaste.com/download.html) 截图
 - [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)
 - [gradle](https://mirrors.cloud.tencent.com/gradle/)
 - [maven](https://repo.huaweicloud.com/apache/maven/maven-3/)

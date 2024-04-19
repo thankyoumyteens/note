@@ -75,7 +75,7 @@ distributionPath=wrapper/dists
 zipStoreBase=GRADLE_USER_HOME
 zipStorePath=wrapper/dists
 # distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-all.zip
-distributionUrl=file:///C:/Users/Public/software/gradle-7.5-all.zip
+distributionUrl=file:///Users/walter/walter/software/gradle-7.5-all.zip
 ```
 
 找到项目目录下 android/build.gradle 文件, 修改:
