@@ -28,3 +28,5 @@
     - [TestAndSet指令](./process/test_and_set.md)
     - [Swap指令](./process/swap.md)
     - [信号量机制](./process/semaphore.md)
+    - [生产者消费者问题](./process/producer_consumer.md)
+    - [吸烟者问题](./process/cigarette_smokers_problem.md)

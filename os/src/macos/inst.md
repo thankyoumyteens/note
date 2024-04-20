@@ -34,7 +34,6 @@ brew install wget
 - [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)
 - [gradle](https://mirrors.cloud.tencent.com/gradle/)
 - [maven](https://repo.huaweicloud.com/apache/maven/maven-3/)
-- [VSCode](https://code.visualstudio.com/)
 - [AnotherRedisDesktopManager](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
 - [dbeaver](https://github.com/dbeaver/dbeaver/releases)
 - [tabby](https://github.com/Eugeny/tabby/releases)
