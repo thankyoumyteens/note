@@ -6,3 +6,5 @@
     - [calloc](./base/allocation/calloc.md)
     - [realloc](./base/allocation/realloc.md)
     - [new](./base/allocation/new.md)
+    - [memcopy](./base/allocation/memcopy.md)
+    - [memset](./base/allocation/memset.md)

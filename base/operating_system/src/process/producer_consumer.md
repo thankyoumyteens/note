@@ -50,9 +50,9 @@ int consumer() {
     // 进入临界区
     P(mutex);
     // 生产产品
-    buffer[indexOfProducer] = product;
+    buffer[indexOfComsumer] = product;
     // 更新索引
-    indexOfProducer = (indexOfProducer + 1) % BUFFER_SIZE;
+    indexOfComsumer = (indexOfComsumer + 1) % BUFFER_SIZE;
     // 离开临界区
     V(mutex);
     // 产品数量-1
