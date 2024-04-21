@@ -61,6 +61,24 @@
 
 ![](../img/lim4.jpg)
 
+<!--
+\begin{align}
+& 如果对于任意给定的正数 \varepsilon (要多小有多小), 都存在一个 X \gt 0 , \\
+& 当 x \gt X 时, 有 |f(x) - A| \lt \varepsilon \\
+& 则函数 f(x) 在 x \to +\infty 时以 A 为极限, 记作: \lim_{x \to +\infty} f(x) = A \\
+\\
+& 如果对于任意给定的正数 \varepsilon (要多小有多小), 都存在一个 X \gt 0 , \\
+& 当 x \lt -X 时, 有 |f(x) - A| \lt \varepsilon \\
+& 则函数 f(x) 在 x \to -\infty 时以 A 为极限, 记作: \lim_{x \to -\infty} f(x) = A \\
+\\
+& 如果对于任意给定的正数 \varepsilon (要多小有多小), 都存在一个 X \gt 0 , \\
+& 当 |x| \gt X 时, 有 |f(x) - A| \lt \varepsilon \\
+& 则函数 f(x) 在 x \to \infty 时以 A 为极限, 记作: \lim_{x \to \infty} f(x) = A \\
+\end{align}
+-->
+
+![](../img/lim9.jpg)
+
 ## 左右极限
 
 <!--
