@@ -82,8 +82,8 @@ void VMThread::wait_for_operation() {
 
     // 队列中没有其它的VM_Operation要执行
     // 开始判断是否需要执行定期清理的VM_Operation
-    // jvm会定期(-XX:GuaranteedSafepointInterval, 默认1秒)
-    // 执行清理(线程的缓存数据等)操作
+    // jvm会定期进入安全点(-XX:GuaranteedSafepointInterval, 默认1秒)
+    // 执行清理(线程的缓存数据等)等操作
     setup_periodic_safepoint_if_needed();
     if (_next_vm_operation != nullptr) {
       return;
@@ -143,7 +143,7 @@ void Handshake::execute(HandshakeClosure* hs_cl) {
 }
 ```
 
-### 定期清理
+### 定期进入安全点
 
 ```cpp
 ////////////////////////////////////////////
@@ -151,31 +151,55 @@ void Handshake::execute(HandshakeClosure* hs_cl) {
 ////////////////////////////////////////////
 
 /**
- * 判断是否需要执行定期清理
+ * 判断是否需要定期进入安全点
  */
 void VMThread::setup_periodic_safepoint_if_needed() {
   assert(_cur_vm_operation  == nullptr, "Already have an op");
   assert(_next_vm_operation == nullptr, "Already have an op");
   // 距离上次进入安全点过了多久
   jlong interval_ms = SafepointTracing::time_since_last_safepoint_ms();
-  // 是否需要执行定期清理任务
+  // 是否需要进入安全点
   bool max_time_exceeded = GuaranteedSafepointInterval != 0 &&
                            (interval_ms >= GuaranteedSafepointInterval);
   if (!max_time_exceeded) {
     return;
   }
   // cleanup_op和safepointALot_op都需要进入安全点执行
+  // 它们都是什么也不做的VM_Operation, 只是为了让所有线程定期进入安全点
   if (SafepointSynchronize::is_cleanup_needed()) {
-    // 设置下一次执行的VM_Operation为清理操作
     // VM_Cleanup
     _next_vm_operation = &cleanup_op;
   } else if (SafepointALot) {
     // VM_SafepointALot
-    // TODO 干啥的
     _next_vm_operation = &safepointALot_op;
   }
 }
+
+////////////////////////////////////////////////
+// src/hotspot/share/runtime/vmOperations.hpp //
+////////////////////////////////////////////////
+
+class VM_Cleanup: public VM_EmptyOperation {
+ public:
+  VMOp_Type type() const { return VMOp_Cleanup; }
+};
+
+class VM_SafepointALot: public VM_EmptyOperation {
+ public:
+  VMOp_Type type() const { return VMOp_SafepointALot; }
+};
+
+class VM_EmptyOperation : public VM_Operation {
+public:
+  virtual void doit() final {}
+  virtual bool skip_thread_oop_barriers() const final {
+    // doit函数和safepoint清理任务都不会在Java线程中读取oop
+    return true;
+  }
+};
 ```
+
+<!-- TODO VM_Cleanup VM_SafepointALot 功能待确认 -->
 
 ## 执行 VM_Operation
 
@@ -262,8 +286,9 @@ void VMThread::evaluate_operation(VM_Operation* op) {
 
     EventExecuteVMOperation event;
 
-    // 执行VM_Operation中的evaluate方法
-    // 这个方法会由不同的VM_Operation各自重写
+    // 执行VM_Operation中的evaluate函数
+    // 会调用doit函数
+    // doit函数会由不同的VM_Operation各自重写
     op->evaluate();
 
     // VM_Operation执行完成, 是否要触发事件
@@ -276,4 +301,45 @@ void VMThread::evaluate_operation(VM_Operation* op) {
                      op->evaluate_at_safepoint() ? 0 : 1);
   }
 }
+```
+
+## doit 函数
+
+VM_Operation 实际要执行的逻辑会写在 doit 函数中。
+
+```cpp
+///////////////////////////////////////////////
+// src/hotspot/share/runtime/vmOperation.hpp //
+///////////////////////////////////////////////
+
+class VM_Operation : public StackObj {
+ private:
+  // 执行VM_Operation的线程
+  Thread*         _calling_thread;
+  // ...
+ public:
+  VM_Operation() : _calling_thread(nullptr) {}
+
+  // 会被VMThread调用, 这个函数不能被重写
+  void evaluate();
+
+  // evaluate函数内部会调用doit函数
+  // 如果调用VMThread::execute((VM_Operation*)函数的线程是JavaThread,
+  // 那么JavaThread在把控制权交给VMThread之前会先调用doit_prologue函数,
+  // 如果doit_prologue函数返回true, 那么这个VM_Operation就会继续执行,
+  // 并且在VM_Operation执行完成后, JVM会通过JavaThread执行一次doit_epilogue函数
+  // 如果doit_prologue函数返回false, 那么这个VM_Operation不会继续执行
+  virtual void doit()                            = 0;
+  virtual bool doit_prologue()                   { return true; };
+  virtual void doit_epilogue()                   {};
+
+  // 如果VM_Operation中不需要访问线程内部的栈帧的话,
+  // 需要重写这个函数, 让它返回true
+  virtual bool skip_thread_oop_barriers() const { return false; }
+
+  // An operation can either be done inside a safepoint
+  // or concurrently with Java threads running.
+  virtual bool evaluate_at_safepoint() const { return true; }
+  // ...
+};
 ```

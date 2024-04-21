@@ -1,6 +1,6 @@
 # VMThread
 
-VMThread 就是 JVM 线程, JVM 线程在 JVM 的运行过程中只会被创建一次(只有一个实例), 并且随着 JVM 销毁而被销毁。
+VMThread 就是 JVM 线程自身, JVM 线程在 JVM 的运行过程中只会被创建一次(只有一个实例), 并且随着 JVM 销毁而被销毁。
 
 VMThread 会开启一个无限循环, 然后不断地从一个 VM_Operation 队列中取出 VM_Operation 并且执行这个 VM_Operation。
 
