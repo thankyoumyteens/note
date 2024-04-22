@@ -9,6 +9,9 @@
   - [列表去重](./java/列表去重.md)
   - [SuppressWarnings](./java/SuppressWarnings.md)
 
+- [JAR文件](./jar/jar.md)
+  - [MANIFEST.MF文件](./jar/mf.md)
+
 - [feature](./java/feature/feature.md)
   - [JDK8](./java/feature/jdk8/jdk8.md)
     - [lambda表达式](./java/feature/jdk8/lambda.md)
