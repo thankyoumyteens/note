@@ -1,4 +1,4 @@
-# EasyExcel导出表头合并
+# EasyExcel 导出表头合并
 
 ```java
 @ExcelProperty(value = {"不合并01"}, index = 1)
@@ -15,4 +15,14 @@ private String col4;
 
 @ExcelProperty(value = {"不合并02"}, index = 5)
 private String col5;
+```
+
+效果:
+
+```
+|---------|-----------|---------|
+|         |    合并    |         |
+| 不合并01 |-----------| 不合并02 |
+|         | A | B | C |         |
+|---------|-----------|---------|
 ```

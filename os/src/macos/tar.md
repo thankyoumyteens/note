@@ -12,12 +12,14 @@
 ## 压缩文件
 
 ```sh
-tar -zcvf demo.tar.gz *.txt
+tar -zcvf demo.tar.gz *.txt *.md
 ```
 
 ## 压缩文件夹, 压缩包内包含文件夹
 
 ```sh
+tar -zcvf demo.tar.gz dir_path/*.txt dir_path/*.md
+# 递归压缩文件夹下所有文件
 tar -zcvf demo.tar.gz dir_path/
 ```
 
