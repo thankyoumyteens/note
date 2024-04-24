@@ -27,3 +27,63 @@
 -->
 
 ![](../img/la1.jpg)
+
+## 有界性
+
+如果数列的极限存在，那么这个数列一定是有界, 反之不对。
+
+## 保号性
+
+如果一个函数在某一点的极限是正数或负数，那么在这一点的一个小邻域内，函数值的符号与极限的符号相同。
+
+<!--
+\begin{align}
+& 如果函数存在非0的极限 \lim_{x \to a} f(x) = A \\
+& (1) 如果 A \gt 0, 则存在 \delta \gt 0, 当 0 \lt |x - a| \lt \delta 时, 有 f(x) \gt 0 \\
+& (2) 如果 A \lt 0, 则存在 \delta \gt 0, 当 0 \lt |x - a| \lt \delta 时, 有 f(x) \lt 0 \\
+\end{align}
+-->
+
+![](../img/la2.jpg)
+
+证明:
+
+<!--
+\begin{align}
+& \lim_{x \to a} f(x) = A \\
+\\
+& 若 A \gt 0 \\
+& 取 \varepsilon = \frac{A}{2} \gt 0, 根据极限的定义, 存在 \delta \gt 0, \\
+& 当 0 \lt |x - a| \lt \delta 时, |f(x) - A| \lt \frac{A}{2}, \\
+& 从而有 \frac{A}{2} \lt f(x) \lt \frac{3A}{2}, 所以 f(x) \gt 0 \\
+\\
+& 若 A \lt 0 \\
+& 取 \varepsilon = -\frac{A}{2} \gt 0, 根据极限的定义, 存在 \delta \gt 0, \\
+& 当 0 \lt |x - a| \lt \delta 时, |f(x) - A| \lt -\frac{A}{2}, \\
+& 从而有 -\frac{3A}{2} \lt f(x) \lt \frac{A}{2}, 所以 f(x) \lt 0 \\
+\end{align}
+-->
+
+![](../img/la3.jpg)
+
+推论 1:
+
+<!--
+\begin{align}
+& 若 f(x) \gt 0 且 \lim_{x \to a} f(x) = A \\
+& 则 A \ge 0 \\
+\end{align}
+-->
+
+![](../img/la4.jpg)
+
+推论 2:
+
+<!--
+\begin{align}
+& 若 f(x) \gt g(x) 且 \lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B \\
+& 则 A \ge B \\
+\end{align}
+-->
+
+![](../img/la5.jpg)

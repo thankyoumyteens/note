@@ -16,19 +16,33 @@
 
 ![](../img/lim1.jpg)
 
+推论:
+
 <!--
 \begin{align}
-& 已知数列 \left \{ a_{n} \right \} 的极限为A, 证明: 数列 \left \{ |a_{n}| \right \} 的极限为 |A|, 反之不一定成立 \\
-&\because \lim_{x \to \infty} a_{n} = A \\
-& \therefore 根据极限的定义: \forall \varepsilon  \gt 0, 总 \exists N \gt 0, \\
-& \;\;\, 使得, 当 n \gt N 时, |a_{n} - A| \lt \varepsilon \\
+& 已知数列 \left \{ a_{n} \right \} 的极限: \lim_{n \to \infty} a_{n} = A, \\
+& 则数列 \left \{ |a_{n}| \right \} 的极限为: \lim_{n \to \infty} |a_{n}| = |A|, \\
+& 反之不一定成立 \\
+\end{align}
+-->
+
+![](../img/lim1_1.jpg)
+
+证明:
+
+<!--
+\begin{align}
+& 由于\lim_{x \to \infty} a_{n} = A \\
+& 根据极限的定义, 对任意的 \varepsilon \gt 0, 总存在 N \gt 0, \\
+& 使得, 当 n \gt N 时, |a_{n} - A| \lt \varepsilon, \\
 & 根据三角不等式: ||a_{n}| - |A|| \le |a_{n} - A| \\
-& \therefore \forall \varepsilon  \gt 0, 总 \exists N \gt 0, \\
-& \;\;\, 使得, 当 n \gt N 时, ||a_{n}| - |A|| \lt \varepsilon \\
-& \therefore \lim_{x \to \infty} |a_{n}| = |A| \\
+& 所以, 对任意的 \varepsilon  \gt 0, 也总存在 N \gt 0, \\
+& 使得, 当 n \gt N 时, ||a_{n}| - |A|| \lt \varepsilon \\
+& 所以 \lim_{x \to \infty} |a_{n}| = |A| \\
 \\
+& 证明反之不成立: \\
 & 假设 a_{n} = (-1)^{n}, 则 \lim_{x \to \infty} a_{n} 不存在, 但是 \lim_{x \to \infty} |a_{n}| = 1 \\
-& \therefore 反之不成立 \\
+& 所以反之不成立 \\
 \end{align}
 -->
 
@@ -36,7 +50,7 @@
 
 ## 函数的极限
 
-x 接近一个点时的极限:
+### x 接近某一个点时的极限
 
 <!--
 \begin{align}
@@ -49,6 +63,8 @@ x 接近一个点时的极限:
 -->
 
 ![](../img/lim3.jpg)
+
+例题:
 
 <!--
 \begin{align}
@@ -63,7 +79,7 @@ x 接近一个点时的极限:
 
 ![](../img/lim4.jpg)
 
-x 接近无穷时的极限:
+### x 接近无穷时的极限
 
 <!--
 \begin{align}
@@ -117,6 +133,8 @@ x 接近无穷时的极限:
 -->
 
 ![](../img/lim7.jpg)
+
+例题:
 
 <!--
 \begin{align}
