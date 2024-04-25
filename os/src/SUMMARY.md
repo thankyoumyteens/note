@@ -23,6 +23,8 @@
     - [外接键盘调换cmmand和option的键位](./macos/keyboard.md)
     - [ParallelsDesktop按键映射](./macos/pd_keyboard.md)
     - [访达显示所有文件夹](./macos/finder_dir.md)
+    - [访达显示隐藏文件](./macos/finder_hidden.md)
+    - [访达跳转到指定目录](./macos/finder_goto.md)
 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
   - [ubuntu 软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)

@@ -10,6 +10,7 @@
   - [LiveTemplates](./idea/LiveTemplates.md)
 
 - [git](./use_git/git.md)
+  - [分支操作](./use_git/branch.md)
   - [删除git提交时的校验](./use_git/dh.md)
   - [显示未合并的冲突文件](./use_git/show_unmerged_files.md)
 
