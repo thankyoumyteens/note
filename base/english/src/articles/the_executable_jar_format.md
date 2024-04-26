@@ -36,6 +36,36 @@ example.jar
 
 Application classes should be placed in a nested BOOT-INF/classes directory. Dependencies should be placed in a nested BOOT-INF/lib directory.
 
+### 1.2. The Executable War File Structure
+
+Spring Boot Loader-compatible war files should be structured in the following way:
+
+```
+example.war
+ |
+ +-META-INF
+ |  +-MANIFEST.MF
+ +-org
+ |  +-springframework
+ |     +-boot
+ |        +-loader
+ |           +-<spring boot loader classes>
+ +-WEB-INF
+    +-classes
+    |  +-com
+    |     +-mycompany
+    |        +-project
+    |           +-YourClasses.class
+    +-lib
+    |  +-dependency1.jar
+    |  +-dependency2.jar
+    +-lib-provided
+       +-servlet-api.jar
+       +-dependency3.jar
+```
+
+Dependencies should be placed in a nested `WEB-INF/lib` directory. Any dependencies that are required when running embedded but are not required when deploying to a traditional web container should be placed in `WEB-INF/lib-provided`.
+
 # Source
 
 [The Executable Jar Format](https://docs.spring.io/spring-boot/docs/current/reference/html/executable-jar.html#appendix.executable-jar)

@@ -11,3 +11,4 @@
 | within                | / wɪˈðɪn /         | 在...内部          | adv. |
 | problematic           | / ˌprɑːbləˈmætɪk / | 造成困难的         | adj. |
 | compatible            | / kəmˈpætəb(ə)l /  | 兼容的             | adj. |
+| ordering              | / ˈɔːrdərɪŋ /      | 排列, 排序         | n.   |
