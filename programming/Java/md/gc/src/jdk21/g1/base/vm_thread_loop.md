@@ -165,14 +165,21 @@ void VMThread::setup_periodic_safepoint_if_needed() {
     return;
   }
   // cleanup_op和safepointALot_op都需要进入安全点执行
-  // 它们都是什么也不做的VM_Operation, 只是为了让所有线程定期进入安全点
   if (SafepointSynchronize::is_cleanup_needed()) {
     // VM_Cleanup
     _next_vm_operation = &cleanup_op;
   } else if (SafepointALot) {
-    // VM_SafepointALot
+    // VM_SafepointALot什么也不做, 只是为了让所有线程定期进入安全点
     _next_vm_operation = &safepointALot_op;
   }
+}
+
+bool SafepointSynchronize::is_cleanup_needed() {
+  // Need a safepoint if some inline cache buffers is non-empty
+  if (!InlineCacheBuffer::is_empty()) return true;
+  if (StringTable::needs_rehashing()) return true;
+  if (SymbolTable::needs_rehashing()) return true;
+  return false;
 }
 
 ////////////////////////////////////////////////
@@ -199,7 +206,7 @@ public:
 };
 ```
 
-<!-- TODO VM_Cleanup VM_SafepointALot 功能待确认 -->
+<!-- TODO VM_SafepointALot 功能待确认, VM_Cleanup 到底用在哪了 -->
 
 ## 执行 VM_Operation
 

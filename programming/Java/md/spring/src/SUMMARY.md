@@ -28,6 +28,12 @@
   - [设置私服](./Maven/设置私服.md)
   - [Maven内置变量](./Maven/Maven内置变量.md)
 
+- [Gradle](./gradle/gradle.md)
+  - [安装](./gradle/install.md)
+  - [Gradle项目结构](./gradle/gradle_project.md)
+  - [Gradle Wrapper](./gradle/gradle_wrapper.md)
+  - [守护进程](./gradle/gradle_daemon.md)
+
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)
   - [按指定字段查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)
