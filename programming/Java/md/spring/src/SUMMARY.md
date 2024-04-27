@@ -33,6 +33,7 @@
   - [Gradle项目结构](./gradle/gradle_project.md)
   - [Gradle Wrapper](./gradle/gradle_wrapper.md)
   - [守护进程](./gradle/gradle_daemon.md)
+  - [设置国内源](./gradle/repositories.md)
 
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)
@@ -118,6 +119,8 @@
     - [过期策略](./redis/cache/expire.md)
     - [内存淘汰策略](./redis/cache/evict.md)
   - [分布式锁](./redis/lock/lock.md)
+    - [SETNX](./redis/lock/setnx.md)
+    - [Redisson](./redis/lock/redisson.md)
 
 - [Netty](./netty/netty.md)
   - [IO](.netty/io/IO.md)
