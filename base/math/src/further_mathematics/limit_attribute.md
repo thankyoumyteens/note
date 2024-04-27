@@ -87,3 +87,35 @@
 -->
 
 ![](../img/la5.jpg)
+
+例题 1:
+
+<!--
+\begin{align}
+& 设 \lim_{x \to 1} \frac{f(x) - 3}{\ln^{2}x} = -2 且 f(1) = 3, 讨论 x = 1 是否为函数 f(x) 的极值点？ \\
+\\
+& 因为 \lim_{x \to 1} \frac{f(x) - 3}{\ln^{2}x} = -2 \lt 0, 所以, 根据保号性, \\
+& 存在 \delta \gt 0, 当 0 \lt |x - 1| \lt \delta 时, \frac{f(x) - 3}{\ln^{2}x} \lt 0, \\
+& 而 \ln^{2}x \gt 0, 所以 f(x) - 3 \lt 0 \Rightarrow f(x) \lt 3, \\
+& 即, 当 0 \lt |x - 1| \lt \delta 时, f(x) \lt f(1), x = 1 为函数 f(x) 的极大值点
+\end{align}
+-->
+
+![](../img/la6.jpg)
+
+例题 2:
+
+<!--
+\begin{align}
+& 设 f^\prime(0) = 0, 又 \lim_{x \to 0} \frac{f^\prime(x)}{x^{3}} = -2, 讨论 x = 0 是否为函数 f(x) 的极值点？ \\
+\\
+& 因为 \lim_{x \to 0} \frac{f^\prime(x)}{x^{3}} = -2 \lt 0, 所以, 根据保号性, \\
+& 存在 \delta \gt 0, 当 0 \lt |x - 0| \lt \delta 时, \frac{f^\prime(x)}{x^{3}} \lt 0, \\
+& 当 x \in (-\delta, 0) 时, x^{3} \lt 0 \Rightarrow f^\prime(x) \gt 0, \\
+& 当 x \in (0, \delta) 时, x^{3} \gt 0 \Rightarrow f^\prime(x) \lt 0, \\
+& 当一阶导数大于0时，函数单调递增, 当一阶导数小于0时，函数单调递减, \\
+& 所以, x = 0 为函数 f(x) 的极大值点
+\end{align}
+-->
+
+![](../img/la7.jpg)
