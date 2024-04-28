@@ -14,7 +14,7 @@
     - [安装redis](./macos/redis.md)
     - [IDE设置](./macos/ide_settings.md)
   - [使用](./macos/u.md)
-    - [删除开机启动项](./macos/open_on_startup.md)
+    - [终端中的快捷键](./macos/terminal_shortcut.md)
     - [端口占用](./macos/port.md)
     - [tar使用](./macos/tar.md)
     - [zip使用](./macos/zip.md)
@@ -25,6 +25,7 @@
     - [访达显示所有文件夹](./macos/finder_dir.md)
     - [访达显示隐藏文件](./macos/finder_hidden.md)
     - [访达跳转到指定目录](./macos/finder_goto.md)
+    - [删除开机启动项](./macos/open_on_startup.md)
 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
   - [ubuntu 软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
@@ -44,6 +45,7 @@
   - [ubuntu 安装 harbor](./Linux/Ubuntu/ubuntu安装harbor.md)
 
 - [Windows 11](./Windows/win11/win11.md)
+  - [安装时跳过"让我们为你连接到网络"](./Windows/win11/让我们为你连接到网络.md)
   - [端口号占用](./Windows/win11/端口号占用.md)
   - [win11 右键菜单改回 win10](./Windows/win11/win11右键菜单改回win10.md)
   - [安装 cygwin](./Windows/win11/安装cygwin.md)

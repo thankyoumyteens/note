@@ -43,6 +43,7 @@
   - [选择文件对话框](./pyside/choose_file.md)
   - [消息框](./pyside/message_box.md)
   - [鼠标拖拽事件](./pyside/drag.md)
+  - [自定义组件](./pyside/customize_component.md)
   - [打包exe](./pyside/打包exe.md)
 
 - [Requests](./requests/requests.md)
