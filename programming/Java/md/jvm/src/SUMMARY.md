@@ -32,6 +32,7 @@
     - [解析](./load_class/class_load/resolution.md)
     - [初始化](./load_class/class_load/initialization.md)
   - [类加载器](./load_class/class_loader.md)
+    - [类加载器的可见性](./load_class/visibility_of_class_loaders.md)
   - [Java模块化系统](./load_class/module/jpms.md)
     - [使用模块](./load_class/module/module_demo.md)
     - [模块传递](./load_class/module/module_transitive.md)
