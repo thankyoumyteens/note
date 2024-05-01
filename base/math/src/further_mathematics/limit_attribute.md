@@ -119,3 +119,31 @@
 -->
 
 ![](../img/la7.jpg)
+
+## 四则运算性质
+
+<!--
+\begin{align}
+& (1) 设 \lim f(x) 和 \lim g(x) 都存在, 则有: \\
+& \lim \left [ f(x) \pm g(x) \right ] = \lim f(x) \pm \lim g(x) \\
+\\
+& (2) 设 \lim f(x) 和 \lim g(x) 都存在, 则有: \\
+& \lim \left [ f(x) \cdot g(x) \right ] = \lim f(x) \cdot \lim g(x) \\
+\\
+& (3) 设 \lim f(x) 和 \lim g(x) 都存在, 且 \lim g(x) \ne 0 则有: \\
+& \lim \frac{f(x)}{g(x)} = \frac{\lim f(x)}{\lim g(x)} \\
+\end{align}
+-->
+
+![](../img/la8.jpg)
+
+## 复合运算性质
+
+<!--
+\begin{align}
+& 设函数 f(u) 在 u = a 处连续, 即 \lim_{u \to a} f(u) = f(a), 且 \lim_{x \to x_{0}} g(x) = a, 则: \\
+& \lim_{x \to x_{0}} f \left [ g(x) \right ] = f \left [ \lim_{x \to x_{0}} g(x) \right ] = f(a) \\
+\end{align}
+-->
+
+![](../img/la9.jpg)

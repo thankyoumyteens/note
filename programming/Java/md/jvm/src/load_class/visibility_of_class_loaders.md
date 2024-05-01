@@ -12,3 +12,70 @@
 
 3. **使用代理类**：
    如果两个类由不同的类加载器加载，并且无法改变加载器，你可以通过创建一个共享的代理类来间接访问这些类。代理类可以由两个类加载器都能访问的类加载器加载。
+
+## 示例
+
+```java
+public class Demo {
+
+    public Class<?> getPerson(ClassLoader c) throws Exception {
+        return Class.forName("org.example.Person", true, c);
+    }
+}
+
+public class App {
+
+    static class MyClassLoader extends ClassLoader {
+
+        public MyClassLoader(ClassLoader parent) {
+            super(parent);
+        }
+
+        public Class<?> load(String fullClassName, byte[] b) {
+            return defineClass(fullClassName, b, 0, b.length);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        MyClassLoader parentClassLoader = new MyClassLoader(App.class.getClassLoader());
+        MyClassLoader classLoader = new MyClassLoader(parentClassLoader);
+        MyClassLoader siblingClassLoader = new MyClassLoader(parentClassLoader);
+        MyClassLoader subClassLoader = new MyClassLoader(classLoader);
+
+        byte[] bytes = AsmDemo.genClass();
+        Class<?> clazz = classLoader.load("org.example.Person", bytes);
+        System.out.println("ASM动态创建的Person类已经加载进JVM => " + clazz);
+
+        Demo demo = new Demo();
+
+        try {
+            System.out.println("父类加载器不能访问子类加载器加载的class => " + demo.getPerson(parentClassLoader));
+        } catch (Exception e) {
+            System.out.println("父类加载器不能访问子类加载器加载的class => " + e);
+        }
+        try {
+            System.out.println("类加载器可以访问自己加载的class => " + demo.getPerson(classLoader));
+        } catch (Exception ignored) {
+        }
+        try {
+            System.out.println("同级类加载器不能访问同级类加载器加载的class => " + demo.getPerson(siblingClassLoader));
+        } catch (Exception e) {
+            System.out.println("同级类加载器不能访问同级类加载器加载的class => " + e);
+        }
+        try {
+            System.out.println("子类加载器可以访问父类加载器加载的class => " + demo.getPerson(subClassLoader));
+        } catch (Exception ignored) {
+        }
+    }
+}
+```
+
+输出:
+
+```
+ASM动态创建的Person类已经加载进JVM => class org.example.Person
+父类加载器不能访问子类加载器加载的class => java.lang.ClassNotFoundException: org.example.Person
+类加载器可以访问自己加载的class => class org.example.Person
+同级类加载器不能访问同级类加载器加载的class => java.lang.ClassNotFoundException: org.example.Person
+子类加载器可以访问父类加载器加载的class => class org.example.Person
+```
