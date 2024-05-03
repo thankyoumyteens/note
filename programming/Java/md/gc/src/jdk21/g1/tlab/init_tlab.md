@@ -13,9 +13,9 @@ void Universe::initialize_tlab() {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 // src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
-////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 void ThreadLocalAllocBuffer::startup_initialization() {
   ThreadLocalAllocStats::initialize();
@@ -88,5 +88,30 @@ void ThreadLocalAllocBuffer::initialize(HeapWord* start,
   set_end(end);
   set_allocation_end(end);
   invariants();
+}
+
+/**
+ * 初始化TLAB的大小
+ */
+size_t ThreadLocalAllocBuffer::initial_desired_size() {
+  size_t init_sz = 0;
+
+  if (TLABSize > 0) {
+    // 使用JVM参数指定的大小
+    init_sz = TLABSize / HeapWordSize;
+  } else {
+    // Initial size is a function of the average number of allocating threads.
+    unsigned int nof_threads = ThreadLocalAllocStats::allocating_threads_avg();
+
+    init_sz  = (Universe::heap()->tlab_capacity(thread()) / HeapWordSize) /
+                      (nof_threads * target_refills());
+    init_sz = align_object_size(init_sz);
+  }
+  // We can't use clamp() between min_size() and max_size() here because some
+  // options based on them may still be inconsistent and so it may assert;
+  // inconsistencies between those will be caught by following AfterMemoryInit
+  // constraint checking.
+  init_sz = MIN2(MAX2(init_sz, min_size()), max_size());
+  return init_sz;
 }
 ```

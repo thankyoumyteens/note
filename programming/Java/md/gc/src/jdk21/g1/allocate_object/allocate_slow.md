@@ -1,11 +1,11 @@
 # 慢速分配对象
 
-如果从 TLAB 中分配内存空间失败, 就会开始慢速分配。
+如果从 TLAB 中分配内存空间失败, 就会开始慢速分配。JVM 会再次尝试从 TLAB 中分配内存, 如果还是失败, 则会进入真正的慢速分配过程。
 
 ```cpp
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 // src/hotspot/share/interpreter/interpreterRuntime.cpp //
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
 JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool, int index))
   // 从常量池中取出klass对象
@@ -25,24 +25,9 @@ JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool
   current->set_vm_result(obj);
 JRT_END
 
-//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////
 // src/hotspot/share/oops/instanceKlass.cpp //
-//////////////////////////////////////////////////////////////
-
-void InstanceKlass::check_valid_for_instantiation(bool throwError, TRAPS) {
-  // 确保klass不是抽象类或接口
-  if (is_interface() || is_abstract()) {
-    ResourceMark rm(THREAD);
-    THROW_MSG(throwError ? vmSymbols::java_lang_InstantiationError()
-              : vmSymbols::java_lang_InstantiationException(), external_name());
-  }
-  // 确保klass不是java.lang.Class
-  if (this == vmClasses::Class_klass()) {
-    ResourceMark rm(THREAD);
-    THROW_MSG(throwError ? vmSymbols::java_lang_IllegalAccessError()
-              : vmSymbols::java_lang_IllegalAccessException(), external_name());
-  }
-}
+//////////////////////////////////////////////
 
 instanceOop InstanceKlass::allocate_instance(TRAPS) {
   // 这个类如果有一个非空的finalize()方法,
@@ -53,6 +38,8 @@ instanceOop InstanceKlass::allocate_instance(TRAPS) {
 
   instanceOop i;
   // 给对象分配内存空间
+  // heap()函数会返回当前使用的垃圾回收器管理的堆,
+  // 使用G1的话, 返回的就是G1CollectedHeap
   i = (instanceOop)Universe::heap()->obj_allocate(this, size, CHECK_NULL);
   // 判断是否要注册finalizer
   if (has_finalizer_flag && !RegisterFinalizersAtInit) {
@@ -61,19 +48,9 @@ instanceOop InstanceKlass::allocate_instance(TRAPS) {
   return i;
 }
 
-///////////////////////////////////////////////////////////
-// src/hotspot/share/memory/universe.hpp //
-///////////////////////////////////////////////////////////
-
-static CollectedHeap* heap() {
-  // 返回当前使用的垃圾回收器管理的堆,
-  // 使用G1返回的是G1CollectedHeap
-  return _collectedHeap;
-}
-
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 // src/hotspot/share/gc/shared/collectedHeap.inline.hpp //
-//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
 inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
   ObjAllocator allocator(klass, size, THREAD);
@@ -81,9 +58,9 @@ inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
   return allocator.allocate();
 }
 
-//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////
 // src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
 /**
  * 给对象分配内存空间
@@ -107,32 +84,33 @@ oop MemAllocator::allocate() const {
   return obj;
 }
 
-//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////
 // src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
 /**
  * 给对象分配内存空间
  */
 HeapWord* MemAllocator::mem_allocate(Allocation& allocation) const {
   if (UseTLAB) {
-    // 尝试从TLAB中分配内存
+    // 尝试从现有的TLAB中分配内存
+    // return _thread->tlab().allocate(_word_size);
     HeapWord* mem = mem_allocate_inside_tlab_fast();
     if (mem != nullptr) {
       return mem;
     }
   }
-  // 在TLAB中分配失败, 开始慢速分配
+  // 在TLAB中分配失败, 开始慢速分配过程
   return mem_allocate_slow(allocation);
 }
+```
 
-HeapWord* MemAllocator::mem_allocate_inside_tlab_fast() const {
-  // ThreadLocalAllocBuffer& tlab() {
-  //   return _tlab;
-  // }
-  // 尝试从TLAB中分配内存
-  return _thread->tlab().allocate(_word_size);
-}
+## 开始慢速分配过程
+
+```cpp
+//////////////////////////////////////////////////
+// src/hotspot/share/gc/shared/memAllocator.cpp //
+//////////////////////////////////////////////////
 
 /**
  * 在TLAB中分配失败, 开始慢速分配
@@ -142,7 +120,9 @@ HeapWord* MemAllocator::mem_allocate_slow(Allocation& allocation) const {
   debug_only(JavaThread::cast(_thread)->check_for_valid_safepoint_state());
 
   if (UseTLAB) {
-    // 申请一个新的TLAB, 并在新的TLAB中分配对象内存
+    // 尝试申请一个新的TLAB, 并在新的TLAB中分配对象内存
+    // 如果TLAB中还有不少内存没用, 这个函数就并不会申请新的TLAB,
+    // 而是返回null, 让对象直接在堆中加锁分配
     HeapWord* mem = mem_allocate_inside_tlab_slow(allocation);
     if (mem != nullptr) {
       return mem;
