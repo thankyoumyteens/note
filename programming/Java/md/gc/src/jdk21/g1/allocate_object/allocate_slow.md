@@ -15,7 +15,9 @@ JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool
   // 校验Klass是不是抽象类, 接口或者java.lang.Class, 如果是则抛出异常
   klass->check_valid_for_instantiation(true, CHECK);
 
-  // 确保类已经初始化
+  // 确保类已经初始化,
+  // 如果还没初始化,
+  // 会先执行这个类的初始化
   klass->initialize(CHECK);
 
   // 给对象分配内存空间
@@ -100,7 +102,7 @@ HeapWord* MemAllocator::mem_allocate(Allocation& allocation) const {
       return mem;
     }
   }
-  // 在TLAB中分配失败, 开始慢速分配过程
+  // 在TLAB中分配还是失败, 开始慢速分配过程
   return mem_allocate_slow(allocation);
 }
 ```
@@ -116,19 +118,19 @@ HeapWord* MemAllocator::mem_allocate(Allocation& allocation) const {
  * 在TLAB中分配失败, 开始慢速分配
  */
 HeapWord* MemAllocator::mem_allocate_slow(Allocation& allocation) const {
-  // Allocation of an oop can always invoke a safepoint.
   debug_only(JavaThread::cast(_thread)->check_for_valid_safepoint_state());
 
   if (UseTLAB) {
     // 尝试申请一个新的TLAB, 并在新的TLAB中分配对象内存
-    // 如果TLAB中还有不少内存没用, 这个函数就并不会申请新的TLAB,
+    // 如果TLAB中还有不少内存没用,
+    // 那么这个函数就不会申请新的TLAB,
     // 而是返回null, 让对象直接在堆中加锁分配
     HeapWord* mem = mem_allocate_inside_tlab_slow(allocation);
     if (mem != nullptr) {
       return mem;
     }
   }
-  // 还是失败, 直接在region中分配对象内存
+  // 还是失败, 直接在TLAB外面分配对象内存
   return mem_allocate_outside_tlab(allocation);
 }
 ```
