@@ -31,3 +31,4 @@
     - [生产者消费者问题](./process/producer_consumer.md)
     - [吸烟者问题](./process/cigarette_smokers_problem.md)
     - [读者-写者问题](./process/readers_writers_problem.md)
+    - [哲学家进餐问题](./process/dining_philosophers_problem.md)
