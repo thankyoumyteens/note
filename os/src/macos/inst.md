@@ -50,3 +50,4 @@ brew install wget
 - [texstudio](https://github.com/texstudio-org/texstudio/releases) latex 编辑器
 - [GIMP](https://www.gimp.org/downloads/) 修图
 - [kdenlive](https://kdenlive.org/zh/download-zh/) 剪视频
+- [calibre](https://github.com/kovidgoyal/calibre/releases)
