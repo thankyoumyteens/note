@@ -121,6 +121,8 @@
   - [分布式锁](./redis/lock/lock.md)
     - [SETNX](./redis/lock/setnx.md)
     - [Redisson](./redis/lock/redisson.md)
+  - [集群](./redis/cluster/cluster.md)
+    - [主从复制](./redis/cluster/master_slave_replication.md)
 
 - [Netty](./netty/netty.md)
   - [IO](.netty/io/IO.md)
