@@ -46,6 +46,7 @@
   - [生成随机数](./oracle/生成随机数.md)
   - [生成随机日期](./oracle/random_date.md)
   - [遍历表中所有记录](./oracle/遍历表中所有记录.md)
+  - [从表中随机取出一条数据](./oracle/从表中随机取出一条数据.md)
   - [sleep](./oracle/sleep.md)
   - [数字转字符串](./oracle/数字转字符串.md)
 
