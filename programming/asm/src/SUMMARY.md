@@ -5,3 +5,4 @@
   - [第一个汇编程序](./base/quick_start.md)
   - [查找最大值](./base/maximum.md)
   - [寻址方式](./base/addressing_modes.md)
+  - [函数](./base/function.md)
