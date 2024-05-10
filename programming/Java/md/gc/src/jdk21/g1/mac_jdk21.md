@@ -1,8 +1,11 @@
 # MacOS 调试 OpenJDK21
 
-## 下载 JDK 源码
+## 下载 OPENJDK 源码
 
-[jdk-21.0.1-ga](https://codeload.github.com/openjdk/jdk21u/zip/refs/tags/jdk-21.0.1-ga)
+```sh
+git clone https://gitee.com/mirrors/openjdk.git
+git checkout -b jdk-21-ga jdk-21-ga
+```
 
 ## 安装 Command Line Tools (CLT) for Xcode
 
@@ -26,6 +29,8 @@ brew install freetype
 [bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz](https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz)
 
 ## 编译
+
+进入 openjdk 源码根目录
 
 ```sh
 bash ./configure --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.13.2/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.13.2/include --with-jvm-variants=server,client --disable-warnings-as-errors --with-debug-level=slowdebug
