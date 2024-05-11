@@ -59,6 +59,9 @@
   - [excel字母列号与数字列号之间的转换](./excel/excel字母列号与数字列号之间的转换.md)
   - [excel读写](./excel/excel读写.md)
 
+- [pdf](./pdf/pdf.md)
+  - [删除指定页](./pdf/delete_page.md)
+
 - [XML](./xml/xml.md)
   - [解析xml](./xml/et.md)
   - [解析命名空间](./xml/et_ns.md)
