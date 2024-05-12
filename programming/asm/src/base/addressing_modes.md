@@ -38,7 +38,7 @@ movl string_start(, %ecx, 1), %eax
 间接寻址方式从寄存器指定的地址加载值。例如，如果 `%eax` 保存着一个地址，可通过以下操作将该地址中的数据移入 `%ebx`：
 
 ```x86asm
-movl(%eax), %ebx
+movl (%eax), %ebx
 ```
 
 ## 基址寻址
