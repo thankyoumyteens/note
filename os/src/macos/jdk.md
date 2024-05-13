@@ -4,11 +4,7 @@
 
 [Liberica JDK](https://bell-sw.com/pages/downloads/)
 
-解压:
-
-```sh
-tar -xvf bellsoft-jdk21.0.2+14-macos-aarch64.tar
-```
+[Adoptium](https://mirrors.tuna.tsinghua.edu.cn/Adoptium/)
 
 ## 配置环境变量
 

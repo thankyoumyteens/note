@@ -28,6 +28,10 @@ brew install freetype
 
 [bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz](https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz)
 
+[华为云 openjdk 镜像](https://mirrors.huaweicloud.com/openjdk/21.0.2/openjdk-21.0.2_macos-aarch64_bin.tar.gz)
+
+[清华 Adoptium 镜像](https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jdk/aarch64/mac/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.3_9.tar.gz)
+
 ## 编译
 
 进入 openjdk 源码根目录

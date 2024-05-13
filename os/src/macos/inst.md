@@ -36,7 +36,7 @@ brew install wget
 
 ## 其他
 
-- [parallels desktop](https://www.parallels.cn/products/desktop/) 虚拟机
+- [parallels desktop](https://www.parallels.cn/products/desktop/download/) 虚拟机
 - [UTM](https://github.com/utmapp/UTM/releases) 虚拟机
 - [Snipaste](https://zh.snipaste.com/download.html) 截图
 - [obs](https://github.com/obsproject/obs-studio/releases) 录屏

@@ -23,6 +23,7 @@
 
 - [SpringBoot](./springboot/springboot.md)
     - [java.lang.AbstractMethodError](./springboot/AbstractMethodError.md)
+    - [使用systemPath缺少本地jar包](./springboot/使用systemPath缺少本地jar包.md)
 
 - [Vue.js](./vue/vue.md)
     - [z-index无效](./vue/z-index无效.md)

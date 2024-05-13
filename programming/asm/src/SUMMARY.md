@@ -11,3 +11,4 @@
   - [函数](./base/function.md)
     - [栈](./base/stack.md)
     - [函数的执行原理](./base/invoke_function.md)
+      - [函数示例](./base/function_demo.md)
