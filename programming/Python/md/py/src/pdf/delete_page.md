@@ -1,15 +1,15 @@
 # 删除指定页
 
 ```py
-# pip install PyPDF2
+# pip install pypdf
 
-import PyPDF2
+from pypdf import PdfReader, PdfWriter
 
 # 读取原始的pdf文件
-pdf_reader = PyPDF2.PdfReader("src.pdf")
+pdf_reader = PdfReader("src.pdf")
 
 # 用来生成新的pdf文件
-pdf_writer = PyPDF2.PdfWriter()
+pdf_writer = PdfWriter()
 
 # 指定要删除的页面索引
 delete_pages = [0, 1, 2]
