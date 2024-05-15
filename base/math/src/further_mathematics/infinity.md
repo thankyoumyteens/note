@@ -60,3 +60,39 @@
 2. 两个无界函数/数列之积不一定是无界函数/数列, 比如: 两个无界数列 `1, 0, 3, 0, 5, ...` 和 `0, 2, 0, 4, 0, ...` 的积是有界的
 
 ## 无穷小的一般性质
+
+<!--
+\begin{align}
+& 1. 有限个无穷小进行加减、相乘, 结果还是无穷小 \\
+& 2. 一个常数和无穷小相乘, 结果还是无穷小 \\
+& 3. 有界函数乘以无穷小, 结果还是无穷小，比如: \lim_{x \to 0} x^{2} \sin \frac{1}{x} = 0 \\
+& 4. 极限与无穷小的关系: \lim_{x \to a} f(x) = A 的充要条件是 f(x) = A + \alpha(x), 其中 \alpha(x) 是无穷小 \\
+\end{align}
+-->
+
+![](../img/i5.jpg)
+
+证明第 4 条:
+
+<!--
+\begin{align}
+& 1. 证明: \lim_{x \to a} f(x) = A \Rightarrow f(x) = A + \alpha(x), 其中 \alpha(x) 是无穷小 \\
+\\
+& 根据极限的定义, 对任意的 \varepsilon \gt 0, 总存在 \delta \gt 0, 当 x \in \mathring{U}(a,\delta) 时, \\
+& |f(x) - A| \lt \varepsilon \\
+& f(x) = A + f(x) - A, 令 \alpha (x) = f(x) - A, \\
+& 由于 |f(x) - A| \lt \varepsilon, 所以 |\alpha (x)| \lt \varepsilon \Rightarrow |\alpha (x) - 0| \lt \varepsilon \\
+& 即 \lim_{x \to a} \alpha(x) = 0 \Rightarrow \alpha(x)是无穷小 \\
+\\
+& 2. 证明: f(x) = A + \alpha(x), 其中 \alpha(x) 是无穷小 \Rightarrow \lim_{x \to a} f(x) = A \\
+\\
+& f(x) = A + \alpha(x) 两边同时取极限: \lim_{x \to a} f(x) = \lim_{x \to a} \left [ A + \alpha (x) \right ] \\
+& \lim_{x \to a} f(x) = \lim_{x \to a} A + \lim_{x \to a} \alpha (x) \\
+& \;\;\;\;\;\;\;\;\;\;\;\;\;\, = A + 0  \\
+& \;\;\;\;\;\;\;\;\;\;\;\;\;\, = A \\
+\end{align}
+-->
+
+![](../img/i6.jpg)
+
+例题:
