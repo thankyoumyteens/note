@@ -2,7 +2,7 @@
 
 - [前置知识](./jdk21/g1/base/base.md)
   - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
-  - [大端和小端](./jdk21/g1/base/endian.md)
+  - [大端和小端](./jdk21/g1/base/endianness.md)
   - [mutator](./jdk21/g1/base/mutator.md)
   - [串行并行和并发](./jdk21/g1/base/串行并行和并发.md)
   - [GCLocker](./jdk21/g1/base/gclocker.md)
