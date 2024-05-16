@@ -20,6 +20,10 @@
   - [JDK17](./java/feature/jdk17/jdk17.md)
     - [Switch表达式](./java/feature/jdk17/switch_expressions.md)
 
+- [JNI](./jni/jni.md)
+  - [JNI调用c代码](./jni/jni_with_c.md)
+  - [JNI调用c++代码](./jni/jni_with_cpp.md)
+
 - [Maven](./Maven/Maven.md)
   - [设置国内源](./Maven/设置国内源.md)
   - [设置项目jdk版本](./Maven/设置项目jdk版本.md)

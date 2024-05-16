@@ -31,3 +31,6 @@
 
 - [Hibernate Validator](./validator/validator.md)
     - [@Valid嵌套对象不效验](./validator/Valid嵌套对象不效验.md)
+
+- [java](./java/java.md)
+    - [找不到或无法加载主类](./java/main_class_not_found.md)
