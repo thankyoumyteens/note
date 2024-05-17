@@ -23,6 +23,8 @@
 - [JNI](./jni/jni.md)
   - [JNI调用c代码](./jni/jni_with_c.md)
   - [JNI调用c++代码](./jni/jni_with_cpp.md)
+  - [JNI数据类型](./jni/jni_types.md)
+  - [基本数据类型传参](./jni/jni_primitives.md)
 
 - [Maven](./Maven/Maven.md)
   - [设置国内源](./Maven/设置国内源.md)
@@ -55,7 +57,13 @@
   - [数字转字符串](./oracle/数字转字符串.md)
 
 - [Excel](./excel/excel.md)
-  - [EasyExcel 导出表头合并](./excel/EasyExcel导出表头合并.md)
+  - [EasyExcel](./excel/easyexcel/easyexcel.md)
+    - [导出表头合并](./excel/easyexcel/merge_header.md)
+  - [POI](./excel/poi/poi.md)
+    - [内存溢出问题](./excel/poi/out_of_memory.md)
+    - [超大excel写入](./excel/poi/write_large_excel.md)
+    - [超大excel读取](./excel/poi/read_large_excel.md)
+    - [设置某些单元格不可编辑](./excel/poi/cell_readonly.md)
 
 - [字节码技术](./bytecode/bytecode.md)
   - [编译期处理注解(APT)](./bytecode/编译期处理注解(APT).md)

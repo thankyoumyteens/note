@@ -1,4 +1,4 @@
-# EasyExcel 导出表头合并
+# 导出表头合并
 
 ```java
 @ExcelProperty(value = {"不合并01"}, index = 1)
