@@ -57,6 +57,7 @@
   - [数字转字符串](./oracle/数字转字符串.md)
 
 - [Excel](./excel/excel.md)
+  - [Excel的XML格式](./excel/cell_xml_format.md)
   - [EasyExcel](./excel/easyexcel/easyexcel.md)
     - [导出表头合并](./excel/easyexcel/merge_header.md)
   - [POI](./excel/poi/poi.md)

@@ -4,21 +4,17 @@
 
 ```java
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFCell;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class DemoMain {
+public class ExcelWriter {
 
     public static void main(String[] args) {
-        String fileName = "export.xlsx";
+        String fileName = "demo.xlsx";
 
         // 使用 SXSSFWorkbook 替代 XSSFWorkbook
         try (SXSSFWorkbook wb = new SXSSFWorkbook(); FileOutputStream os = new FileOutputStream(fileName)) {
