@@ -66,6 +66,8 @@
     - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
   - [安全点](./jdk21/g1/safepoint/safepoint.md)
     - [定期清理任务](./jdk21/g1/safepoint/cleanup.md)
+  - [字节码文件](./jdk21/g1/class_file/class_file.md)
+    - [解析字节码文件](./jdk21/g1/class_file/parse_class_file.md)
 
 - [JDK8的G1](./g1/g1.md)
   - [停顿预测模型](./g1/region/g1_predict.md)
