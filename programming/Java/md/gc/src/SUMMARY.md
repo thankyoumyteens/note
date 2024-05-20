@@ -12,6 +12,7 @@
   - [线程握手](./jdk21/g1/base/handshake.md)
     - [VM_HandshakeAllThreads](./jdk21/g1/base/handshake_op.md)
   - [NUMA](./jdk21/g1/base/numa.md)
+  - [Handle](./jdk21/g1/base/handle.md)
 
 - [JDK21的G1](./jdk21/g1/g1.md)
   - [ubuntu22调试OpenJDK21](./jdk21/g1/ubuntu22_jdk21.md)

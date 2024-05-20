@@ -150,21 +150,3 @@ class     TypeArrayKlass;
 ```
 
 当 JVM 加载一个 Java 类时, 它会在内部创建一个对应的 Klass 对象, 用来存放该 Java 类的各种信息。而在 Klass 对象创建过程中, 也会计算该 Java 类所创建的 Java 对象需要多大内存空间, 该计算结果会被保存到 Klass 对象中的\_layout_helper 字段中, 这样当运行时需要创建 Java 对象时, 直接根据这个字段的值分配一块内存就好了。
-
-## Handle
-
-Handle 是对 oop 的封装, Handle 的作用:
-
-1. 降低垃圾回收器查找 GC Roots 的复杂度，提高 GC 回收的效率。通过 Handle 可以找到一个 Java 线程拥有的所有 oop
-2. 在垃圾回收时, 对象可能会被移动, 如果 oop 的地址发生变化，那么所有的引用都要更新, 当通过 Handle 对 oop 间接引用时，如果 oop 的地址发生变化，那么只需要更新 Handle 中保存的对 oop 的引用即可
-
-```cpp
-///////////////////////////////////////////
-// src/hotspot/share/runtime/handles.hpp //
-///////////////////////////////////////////
-
-class Handle {
- private:
-  oop* _handle;
-}
-```
