@@ -1,5 +1,5 @@
 - [excel](./excel/excel.md)
-    - [org.apache.poi.util.RecordFormatException: Tried to allocate an array of length 4276190, but 1000000 is the maximum for this record type](./excel/poi读大文件.md)
+    - [poi报错RecordFormatException](./excel/poi读大文件.md)
     - [easyexcel报错NoClassDefFoundError](./excel/easyexcel报错NoClassDefFoundError.md)
 
 - [word](./word/word.md)
@@ -20,6 +20,8 @@
         - [分组后行转列查不出数据](./db/oracle/分组后行转列查不出数据.md)
         - [ORA-00904: "ID": 标识符无效](./db/oracle/标识符无效.md)
         - [ORA-01795: 列表中的最大表达式数为 1000](./db/oracle/in语句不能超过1000.md)
+        - [oracle排序后，分页数据重复](./db/oracle/oracle_sort_bug.md)
+        - [oracle排序后，切换页大小数据乱序](./db/oracle/oracle_sort_bug.md)
 
 - [SpringBoot](./springboot/springboot.md)
     - [java.lang.AbstractMethodError](./springboot/AbstractMethodError.md)
