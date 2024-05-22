@@ -96,3 +96,42 @@
 ![](../img/i6.jpg)
 
 例题:
+
+<!--
+\begin{align}
+& 设 \lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B, 证明: \\
+& \qquad (1) \lim_{x \to a} \left [ f(x) \pm g(x) \right ] = A \pm B \\
+& \qquad (1) \lim_{x \to a} \left [ f(x) \cdot g(x) \right ] = AB \\
+\\
+& 证明(1) \\
+& \lim_{x \to a} f(x) = A  \Rightarrow f(x) = A + \alpha, (\alpha 是无穷小) \\
+& \lim_{x \to a} g(x) = B  \Rightarrow g(x) = B + \beta, (\beta 是无穷小) \\
+& f(x) \pm g(x) = (A \pm B) + (\alpha \pm \beta) \\
+& 两边同时取极限: \lim_{x \to a} \left [ f(x) \pm g(x) \right ] =
+\lim_{x \to a} \left [ (A \pm B) + (\alpha \pm \beta ) \right ] \\
+& \qquad\qquad\qquad\qquad\qquad\qquad\quad\;\;\,
+= \lim_{x \to a} (A \pm B) + \lim_{x \to a} (\alpha \pm \beta) \\
+& \qquad\qquad\qquad\qquad\qquad\qquad\quad\;\;\,
+= \lim_{x \to a} (A \pm B) + 0 \\
+& \qquad\qquad\qquad\qquad\qquad\qquad\quad\;\;\,
+= A \pm B \\
+\\
+& 证明(2) \\
+& f(x) \cdot g(x) = (A + \alpha)(B + \beta) \\
+& \qquad\qquad\;\, = AB + A\beta + B\alpha + \beta\alpha \\
+& 两边同时取极限: \lim_{x \to a} \left [  f(x) \cdot g(x) \right ] =
+\lim_{x \to a} (AB + A\beta + B\alpha + \beta\alpha) \\
+& \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,
+= \lim_{x \to a} (AB) + \lim_{x \to a} (A\beta + B\alpha + \beta\alpha) \\
+& \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,
+// 常数乘无穷小还是无穷小 \\
+& \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,
+= \lim_{x \to a} (AB) + 0 \\
+& \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,
+= AB \\
+\end{align}
+-->
+
+![](../img/i7.jpg)
+
+## 无穷小的等价性质
