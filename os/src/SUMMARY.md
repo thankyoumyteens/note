@@ -19,6 +19,10 @@
     - [访达跳转到指定目录](./macos/finder_goto.md)
     - [删除开机启动项](./macos/open_on_startup.md)
 
+- [Debian](./Linux/debian/debian.md)
+  - [安装debian](./Linux/debian/install_os.md)
+  - [安装sudo](./Linux/debian/sudo.md)
+
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
   - [ubuntu 软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
   - [ubuntu 开启 ssh 服务](./Linux/Ubuntu/ubuntu开启ssh服务.md)

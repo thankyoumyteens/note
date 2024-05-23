@@ -16,8 +16,10 @@ git config --global core.ignorecase false
 
 1. 下载:
 
-   - [Liberica JDK](https://bell-sw.com/pages/downloads/)
-   - [Adoptium](https://mirrors.tuna.tsinghua.edu.cn/Adoptium/)
+   - [Liberica](https://bell-sw.com/pages/downloads/)
+   - [Adoptium](https://adoptium.net/zh-CN/temurin/releases/)
+   - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
+   - [Microsoft](https://learn.microsoft.com/zh-cn/java/openjdk/download)
 
 2. 配置环境变量:
 
