@@ -135,3 +135,49 @@
 ![](../img/i7.jpg)
 
 ## 无穷小的等价性质
+
+<!--
+\begin{align}
+& 设 \alpha \to 0, \beta \to 0, \gamma \to 0, 则: \\
+& \quad (1) \alpha \sim \alpha \qquad (\sim 表示等价无穷小) \\
+& \quad (2) 若 \alpha \sim \beta, 则 \beta \sim \alpha \\
+& \quad (2) 若 \alpha \sim \beta, \beta \sim \gamma, 则 \alpha \sim \gamma \\
+\end{align}
+-->
+
+![](../img/i8.jpg)
+
+<!--
+\begin{align}
+& 若 \alpha \sim \alpha_{1}, \beta \sim \beta_{1}, 且 \lim \frac{\beta}{\alpha} = A 则: \\
+& \quad \lim \frac{\beta_{1}}{\alpha_{1}} = A \\
+\end{align}
+-->
+
+![](../img/i9.jpg)
+
+证明:
+
+<!--
+\begin{align}
+& \frac{\beta}{\alpha} = \frac{\alpha_{1}}{\alpha} \frac{\beta_{1}}{\alpha_{1}} \frac{\beta}{\beta_{1}} \\
+& \because \alpha \sim \alpha_{1} \quad \therefore \lim \frac{\alpha_{1}}{\alpha} = 1 \\
+& \because \beta \sim \beta_{1} \quad \therefore \lim \frac{\beta}{\beta_{1}} = 1 \\
+& \lim \frac{\beta}{\alpha} = \lim \frac{\alpha_{1}}{\alpha} \frac{\beta_{1}}{\alpha_{1}} \frac{\beta}{\beta_{1}} \\
+& \quad\quad\;\;\; = \lim \frac{\beta_{1}}{\alpha_{1}} \\
+\end{align}
+-->
+
+![](../img/i10.jpg)
+
+## x 趋于 0 时, 常用的等价无穷小
+
+<!--
+\begin{align}
+& (1) \quad x \sim \sin x \sim \tan x \sim \arcsin x \sim \arctan x \sim e^{x} - 1 \sim \ln (1 + x) \\
+& (2) \quad 1 - \cos x \sim \frac{1}{2} x^{2} \\
+& (3) \quad (1 + x)^{a} - 1 \sim ax \\
+\end{align}
+-->
+
+![](../img/i11.jpg)

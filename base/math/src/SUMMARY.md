@@ -13,3 +13,4 @@
   - [极限](./further_mathematics/limit.md)
   - [极限的性质](./further_mathematics/limit_attribute.md)
   - [无穷小与无穷大](./further_mathematics/infinity.md)
+  - [极限存在准则](./further_mathematics/limit_existence_criterion.md)
