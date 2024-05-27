@@ -30,6 +30,9 @@
   - [JNI调用c++代码](./jni/jni_with_cpp.md)
   - [JNI数据类型](./jni/jni_types.md)
   - [基本数据类型传参](./jni/jni_primitives.md)
+  - [字符串传参](./jni/jni_str.md)
+    - [JNI字符串操作](./jni/jni_str_op.md)
+  - [基本类型数组传参](./jni/jni_primitive_array.md)
 
 - [Maven](./Maven/Maven.md)
   - [设置国内源](./Maven/设置国内源.md)

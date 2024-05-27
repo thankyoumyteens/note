@@ -1,10 +1,10 @@
 # 创建虚拟环境
 
 ```sh
-# windows
+# Windows
 python -m venv packenv
 call packenv\scripts\activate.bat
-# unix
+# Unix-like
 python3 -m venv packenv
 source packenv/bin/activate
 ```
@@ -57,4 +57,16 @@ pip install yyy
 
 ```
 pyinstaller -w -F tools_main.py --hidden-import xxx --hidden-import yyy
+```
+
+## 打包 python-oracledb 报错 DPY-3016
+
+```log
+oracledb.exceptions.NotSupportedError: DPY-3016: python-oracledb thin mode cannot be used because the cryptography package is not installed
+```
+
+打包时添加:
+
+```sh
+--hidden-import=cryptography.hazmat.primitives.kdf.pbkdf2
 ```
