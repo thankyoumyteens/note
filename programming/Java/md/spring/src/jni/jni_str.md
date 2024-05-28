@@ -1,4 +1,4 @@
-# 字符串传参
+# 访问字符串
 
 1. 创建 `src/main/java/org/example/jnidemo/TestJNIString.java` 文件:
 

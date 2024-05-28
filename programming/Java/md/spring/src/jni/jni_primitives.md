@@ -1,4 +1,4 @@
-# 基本数据类型传参
+# 访问基本数据类型
 
 1. 创建 `src/main/java/org/example/jnidemo/TestJNIPrimitive.java` 文件:
 

@@ -1,4 +1,4 @@
-# 基本类型数组传参
+# 访问基本类型数组
 
 1. 创建 `src/main/java/org/example/jnidemo/TestJNIPrimitiveArray.java` 文件:
 
