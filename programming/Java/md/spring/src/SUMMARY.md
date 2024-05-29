@@ -26,7 +26,9 @@
     - [设置某些单元格不可编辑](./excel/poi/cell_readonly.md)
 
 - [Servlet](./servlet/servlet.md)
-  - [使用包装类改请求和响应数据](./servlet/使用包装类改请求和响应数据.md)
+  - [搭建servlet项目](./servlet/quick_start.md)
+  - [添加Filter](./servlet/add_filter.md)
+  - [使用包装类修改请求和响应数据](./servlet/wrapper.md)
 
 - [Spring](./spring/spring.md)
   - [自动装配](./spring/use/自动装配.md)
