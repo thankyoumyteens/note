@@ -1,22 +1,22 @@
-# 编译期处理注解(APT)
+# 编译期注解处理器
 
 按照处理时期, 注解分为两种类型, 一种是运行时注解, 另一种是编译时注解
 
-编译时注解的核心依赖APT(Annotation Processing Tools)实现, 对应的处理流程为: 
+编译时注解的核心依赖 APT(Annotation Processing Tools)实现, 对应的处理流程为:
 
 - 在某些代码元素上(如类型、函数、字段等)添加注解
-- 编译时编译器会检查AbstractProcessor的子类
-- 然后将添加了注解的所有元素都传递到该类的process函数中, 使得开发人员可以在编译器进行相应的处理, 比如动态生成代码
+- 编译时编译器会检查 AbstractProcessor 的子类
+- 然后将添加了注解的所有元素都传递到该类的 process 函数中, 使得开发人员可以在编译器进行相应的处理, 比如动态生成代码
 
 # POM
 
-注意: 不能将AbstractProcessor和使用该AbstractProcessor的类写在同一个项目中, 会因为AbstractProcessor没有预编译导致报错。
+注意: 不能将 AbstractProcessor 和使用该 AbstractProcessor 的类写在同一个项目中, 会因为 AbstractProcessor 没有预编译导致报错。
 
 父模块
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -42,11 +42,11 @@
 </project>
 ```
 
-子模块1: 定义编译时注解处理器
+子模块 1: 定义编译时注解处理器
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -81,11 +81,11 @@
 </project>
 ```
 
-子模块2: 使用编译时注解
+子模块 2: 使用编译时注解
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -213,12 +213,12 @@ public class App {
 
 # 增加配置文件
 
-1. 在m1模块的main目录下, 创建resources目录
-2. 在resources目录下创建META-INF目录
-3. 在META-INF目录下创建services目录
-4. 在services目录下创建名为javax.annotation.processing.Processor的文件
+1. 在 m1 模块的 main 目录下, 创建 resources 目录
+2. 在 resources 目录下创建 META-INF 目录
+3. 在 META-INF 目录下创建 services 目录
+4. 在 services 目录下创建名为 javax.annotation.processing.Processor 的文件
 
-在文件内容中指定注解处理器: 
+在文件内容中指定注解处理器:
 
 ```
 org.m1.DemoProcessor
@@ -226,13 +226,13 @@ org.m1.DemoProcessor
 
 # 编译
 
-IDE会缓存上一次生成的类文件, 所以需要每次都mvn clean
+IDE 会缓存上一次生成的类文件, 所以需要每次都 mvn clean
 
-mvn clean -> mvn install -> 运行main
+mvn clean -> mvn install -> 运行 main
 
-在target目录下就会自动生成一个org.ex.m1.GeneratedClass类
+在 target 目录下就会自动生成一个 org.ex.m1.GeneratedClass 类
 
-# 使用@AutoService自动生成javax.annotation.processing.Processor文件
+# 使用@AutoService 自动生成 javax.annotation.processing.Processor 文件
 
 ## 添加依赖
 
@@ -244,7 +244,7 @@ mvn clean -> mvn install -> 运行main
 </dependency>
 ```
 
-## 修改DemoProcessor
+## 修改 DemoProcessor
 
 ```java
 // 用来自动注册APT文件
@@ -256,4 +256,4 @@ public class DemoProcessor extends AbstractProcessor {
 }
 ```
 
-使用AutoService后, 自己的javax.annotation.processing.Processor文件可以删除了, m1模块的pom中maven-jar-plugin插件也可以删除了
+使用 AutoService 后, 自己的 javax.annotation.processing.Processor 文件可以删除了, m1 模块的 pom 中 maven-jar-plugin 插件也可以删除了
