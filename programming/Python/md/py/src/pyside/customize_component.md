@@ -29,7 +29,6 @@ class LineEditWithDragEvent(QtWidgets.QLineEdit):
             self.setText(url.toLocalFile())
         else:
             super(LineEditWithDragEvent, self).dropEvent(event)
-
 ```
 
 ## QT Designer 中使用自定义组件
