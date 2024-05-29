@@ -69,10 +69,10 @@
     - [哨兵](./redis/cluster/sentinel.md)
 
 - [Netty](./netty/netty.md)
-  - [IO](.netty/io/IO.md)
-    - [四种 IO 模型](.netty/io/四种IO模型.md)
-    - [JavaNIO](.netty/io/JavaNIO.md)
-    - [Buffer](.netty/io/Buffer.md)
+  - [IO](./netty/io/IO.md)
+    - [四种 IO 模型](./netty/io/四种IO模型.md)
+    - [JavaNIO](./netty/io/JavaNIO.md)
+    - [Buffer](./netty/io/Buffer.md)
 
 - [Spring源码分析](./spring/Spring源码分析.md)
   - [Spring整体架构](./spring/Spring整体架构.md)
