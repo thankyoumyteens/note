@@ -50,11 +50,11 @@ void ReleaseStringCritical(JNIEnv *env, jstring string, const jchar *cstring);
 
 ## GetStringChars/GetStringRegion/GetStringCritical
 
-这三个函数的作用都一样，都是将 Java 的 String 对像，转换为 char 数组。JVM 在返回 char 数组时有两个选择:
+这三个函数的作用都一样, 都是将 Java 的 String 对像, 转换为 char 数组。JVM 在返回 char 数组时有两个选择:
 
-1. 将 java String 所对应的原始 jchar 拷贝一份返回，并将 isCopy 赋值为 true。函数返回的指针指向一份拷贝的数据，即使修改也不会对原始字符串造成影响
-2. 将 Java String 所对应的原始 jchar 直接返回，并将 isCopy 赋值为 false。函数返回的指针指向原始数据，修改会直接改动原始字符串
+1. 将 java String 所对应的原始 jchar 拷贝一份返回, 并将 isCopy 赋值为 true。函数返回的指针指向一份拷贝的数据, 即使修改也不会对原始字符串造成影响
+2. 将 Java String 所对应的原始 jchar 直接返回, 并将 isCopy 赋值为 false。函数返回的指针指向原始数据, 修改会直接改动原始字符串
 
-GetStringChar 和 GetStringCritical 的区别在于: GetStringCritical 返回原始字符串的可能性更高, 一般情况下，GetStringChar 返回的是一份拷贝。GetStringCritical 返回的是原始字符串。
+GetStringChar 和 GetStringCritical 的区别在于: GetStringCritical 返回原始字符串的可能性更高, 一般情况下, GetStringChar 返回的是一份拷贝。GetStringCritical 返回的是原始字符串。
 
-注意： 在 GetStringCritical 和 ReleaseStringCritical 函数之间不能再调用其他任何 JNI 函数，也不能有任何阻塞当前线程的操作。
+注意:  在 GetStringCritical 和 ReleaseStringCritical 函数之间不能再调用其他任何 JNI 函数, 也不能有任何阻塞当前线程的操作。

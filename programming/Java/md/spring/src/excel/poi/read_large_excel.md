@@ -1,10 +1,10 @@
 # 超大 excel 读取
 
-继承 `DefaultHandler` 类，重写 `startElement()`, `characters()`, `endElement()` 方法。
+继承 `DefaultHandler` 类, 重写 `startElement()`, `characters()`, `endElement()` 方法。
 
 - `startElement()` 获取单元格的类型（如日期、数字、字符串等）
 - `characters()` 获取该单元格对应的索引值或是内容值。如果单元格类型是字符串则获取的是字符串池的索引值, 其它类型则获取的就是内容
-- `endElement()` 根据 `startElement()` 的单元格类型和 `characters()` 的索引值或内容值，最终得出单元格的内容
+- `endElement()` 根据 `startElement()` 的单元格类型和 `characters()` 的索引值或内容值, 最终得出单元格的内容
 
 ```java
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
@@ -39,7 +39,7 @@ public class ExcelReader {
         }
 
         /**
-         * 该方法自动被调用，每读一行调用n次, n是这一行有多少列
+         * 该方法自动被调用, 每读一行调用n次, n是这一行有多少列
          * 调用顺序:
          *     第1行第1列,
          *     第1行第2列,
@@ -87,12 +87,12 @@ public class ExcelReader {
         }
 
         /**
-         * 根据startElement()的单元格数字类型和characters()的索引值或内容值，最终得出单元格的内容值
+         * 根据startElement()的单元格数字类型和characters()的索引值或内容值, 最终得出单元格的内容值
          */
         @Override
         public void endElement(String uri, String localName, String name) {
             if (isString) {
-                // valueOrIndex是索引，直接取出对应的值
+                // valueOrIndex是索引, 直接取出对应的值
                 int idx = Integer.parseInt(valueOrIndex);
                 valueOrIndex = stringPool.getItemAt(idx).toString();
                 isString = false;

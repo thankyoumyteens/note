@@ -44,7 +44,7 @@ public class DemoMain {
                     }
                 }
             }
-            // sheet添加保护，这个一定要否则光锁定还是可以编辑的
+            // sheet添加保护, 这个一定要否则光锁定还是可以编辑的
             sheet.protectSheet("password");
             wb.write(os);
         } catch (IOException ignored) {

@@ -19,4 +19,4 @@ JNI 类型和 Java 引用类型的对应:
 - jthrowable -> java.lang.Throwable
 - jarray -> Java 数组
 
-Java 数组分为 8 个基本类型数组和 1 个对象数组: jintArray, jbyteArray, jshortArray, jlongArray, jfloatArray, jdoubleArray, jcharArray， jbooleanArray 和 jobjectArray。
+Java 数组分为 8 个基本类型数组和 1 个对象数组: jintArray, jbyteArray, jshortArray, jlongArray, jfloatArray, jdoubleArray, jcharArray,  jbooleanArray 和 jobjectArray。

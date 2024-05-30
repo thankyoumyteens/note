@@ -69,6 +69,7 @@
   - [集群](./redis/cluster/cluster.md)
     - [主从复制](./redis/cluster/master_slave_replication.md)
     - [哨兵](./redis/cluster/sentinel.md)
+    - [分片集群](./redis/cluster/redis_cluster.md)
 
 - [Netty](./netty/netty.md)
   - [IO](./netty/io/IO.md)

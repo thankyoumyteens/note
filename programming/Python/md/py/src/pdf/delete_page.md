@@ -18,7 +18,7 @@ delete_pages = [0, 1, 2]
 total_pages = len(pdf_reader.pages)
 # 循环遍历每一页
 for page_index in range(total_pages):
-    # 如果当前页索引不在要删除的页面列表中，则保留该页
+    # 如果当前页索引不在要删除的页面列表中, 则保留该页
     if page_index not in delete_pages:
         # 获取当前页
         page = pdf_reader.pages[page_index]
