@@ -14,9 +14,11 @@
     - [获取字段的参数化类型](./java/field_parameterized_type.md)
     - [获取方法的参数化类型](./java/method_parameterized_type.md)
   - [IO模型](./java/io/io.md)
+    - [文件描述符](./java/io/fd.md)
     - [同步阻塞IO](./java/io/bio.md)
     - [同步非阻塞IO](./java/io/nio.md)
     - [IO多路复用](./java/io/io_multiplexing.md)
+    - [实时信号驱动IO](./java/io/rtsig.md)
     - [异步IO](./java/io/aio.md)
 
 - [动态代理](./proxy/proxy.md)
