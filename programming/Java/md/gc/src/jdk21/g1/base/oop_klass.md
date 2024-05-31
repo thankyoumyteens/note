@@ -62,6 +62,13 @@ Klass 主要提供了两个功能:
 class Klass : public Metadata {
  protected:
 
+  // If you add a new field that points to any metaspace object, you
+  // must add this field to Klass::metaspace_pointers_do().
+
+  // note: put frequently-used fields together at start of klass structure
+  // for better cache behavior (may not make much of a difference but sure won't hurt)
+  enum { _primary_super_limit = 8 };
+
   // The "layout helper" is a combined descriptor of object layout.
   // For klasses which are neither instance nor array, the value is zero.
   //
@@ -95,13 +102,29 @@ class Klass : public Metadata {
   //  - Various type checking in the JVM
   const KlassKind _kind;
 
+  // Processed access flags, for use by Class.getModifiers.
+  jint        _modifier_flags;
+
+  // The fields _super_check_offset, _secondary_super_cache, _secondary_supers
+  // and _primary_supers all help make fast subtype checks.  See big discussion
+  // in doc/server_compiler/checktype.txt
+  //
+  // Where to look to observe a supertype (it is &_secondary_super_cache for
+  // secondary supers, else is &_primary_supers[depth()].
+  juint       _super_check_offset;
+
   // Class name.  Instance classes: java/lang/String, etc.  Array classes: [I,
   // [Ljava/lang/String;, etc.  Set to zero for all other kinds of classes.
   Symbol*     _name;
 
+  // Cache of last observed secondary supertype
+  Klass*      _secondary_super_cache;
+  // Array of all secondary supertypes
+  Array<Klass*>* _secondary_supers;
+  // Ordered list of all primary supertypes
+  Klass*      _primary_supers[_primary_super_limit];
   // java/lang/Class instance mirroring this class
   OopHandle   _java_mirror;
-
   // Superclass
   Klass*      _super;
   // First subclass (null if none); _subklass->next_sibling() is next one
@@ -121,7 +144,8 @@ class Klass : public Metadata {
                                 // Keep it away from the beginning of a Klass to avoid cacheline
                                 // contention that may happen when a nearby object is modified.
   AccessFlags _access_flags;    // Access flags. The class/interface distinction is stored here.
-}
+
+};
 ```
 
 JVM 中 Klass 的层级:
