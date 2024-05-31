@@ -61,3 +61,84 @@
 -->
 
 ![](../img/lec4.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 求极限 \lim_{n \to \infty} \sqrt[n]{2^{n} + 3^{n}} \\
+\\
+& 把 2^{n} + 3^{n} 放大, 得到 2 \times 3^{n} \\
+& 把 2^{n} + 3^{n} 缩小, 得到 3^{n} \\
+& 因为 3^{n} \le 2^{n} + 3^{n} \le 2 \times 3^{n} \\
+& 同时取根号 3 \le \sqrt[n]{2^{n} + 3^{n}} \le 2^{\frac{1}{n}} \times 3 \\
+& 由于 \lim_{n \to \infty} 2^{\frac{1}{n}} = 2^{0} = 1 \\
+& 同时取极限 3 \le \lim_{n \to \infty} \sqrt[n]{2^{n} + 3^{n}} \le 1 \times 3 \\
+& 根据夹逼定理 \lim_{n \to \infty} \sqrt[n]{2^{n} + 3^{n}} = 3 \\
+\end{align}
+-->
+
+![](../img/lec5.jpg)
+
+推论
+
+<!--
+\begin{align}
+& 若 a \gt 0, b \gt 0, c \gt 0 \\
+& 则 \lim_{n \to \infty} \sqrt[n]{a^{n} + b^{n} + c^{n}} = max \left \{ a, b, c \right \}  \\
+\end{align}
+-->
+
+![](../img/lec6.jpg)
+
+例题
+
+<!--
+\begin{align}
+& x \gt 0, 求极限 \lim_{n \to \infty} \sqrt[n]{x^{n} + x^{2n}} \\
+\\
+& \quad\, \lim_{n \to \infty} \sqrt[n]{x^{n} + x^{2n}} \\
+& = \lim_{n \to \infty} \sqrt[n]{x^{n} + (x^{2})^{n}} \\
+& = max \left \{ x, x^{2} \right \} \\
+& = \begin{cases}
+x, & 0 \lt x \lt 1 \\
+x^{2}, & x \ge 1
+\end{cases}
+\end{align}
+-->
+
+![](../img/lec7.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& 求极限 \lim_{n \to \infty} \left ( \frac{1}{2n^{2} + 1} + \frac{2}{2n^{2} + 2} + ... + \frac{n}{2n^{2} + n} \right )  \\
+\\
+& 式中分子的次方数是齐的(都是1次方), 分母的次方数是不齐的(有2次方, 也有1次方) \\
+& 放大和缩小的规则: 齐的部分不变, 不齐的变 \\
+& \frac{1}{2n^{2} + 1} + \frac{2}{2n^{2} + 2} + ... + \frac{n}{2n^{2} + n} 的通用格式可以表示成 \frac{i}{2n^{2} + i}, 其中 1 \le i \le n \\
+& 把 \frac{i}{2n^{2} + i} 放大, 得到 \frac{i}{2n^{2} + 1} \\
+& 把 \frac{i}{2n^{2} + i} 缩小, 得到 \frac{i}{2n^{2} + n} \\
+& 因为 \frac{i}{2n^{2} + n} \le \frac{i}{2n^{2} + i} \le \frac{i}{2n^{2} + 1} \\
+& 所以 \frac{1 + 2 + ... + n}{2n^{2} + n} \le
+\frac{1}{2n^{2} + 1} + \frac{2}{2n^{2} + 2} + ... + \frac{n}{2n^{2} + n} \le
+\frac{1 + 2 + ... + n}{2n^{2} + 1} \\
+& 即 \frac{1}{2} \frac{n(n + 1)}{2n^{2} + n} \le
+\frac{1}{2n^{2} + 1} + \frac{2}{2n^{2} + 2} + ... + \frac{n}{2n^{2} + n} \le
+\frac{1}{2} \frac{n(n + 1)}{2n^{2} + 1} \\
+& 同时取极限, 不等式左边: \lim_{n \to \infty} \frac{1}{2} \frac{n(n + 1)}{2n^{2} + n}
+= \frac{1}{2} \lim_{n \to \infty} \frac{\frac{n(n + 1)}{n^{2}}}{\frac{2n^{2} + n}{n^{2}}}
+= \frac{1}{2} \lim_{n \to \infty} \frac{1 + \frac{1}{n}}{2 + \frac{1}{n}}
+= \frac{1}{4} \\
+& 不等式右边: \lim_{n \to \infty} \frac{1}{2} \frac{n(n + 1)}{2n^{2} + 1}
+= \frac{1}{2} \lim_{n \to \infty} \frac{\frac{n(n + 1)}{n^{2}}}{\frac{2n^{2} + 1}{n^{2}}}
+= \frac{1}{2} \lim_{n \to \infty} \frac{1 + \frac{1}{n}}{2 + \frac{1}{n^{2}}}
+= \frac{1}{4} \\
+& 根据夹逼定理 \lim_{n \to \infty} \left ( \frac{1}{2n^{2} + 1} + \frac{2}{2n^{2} + 2} + ... + \frac{n}{2n^{2} + n} \right ) = \frac{1}{4} \\
+\end{align}
+-->
+
+![](../img/lec8.jpg)
+
+### 单调有界定理

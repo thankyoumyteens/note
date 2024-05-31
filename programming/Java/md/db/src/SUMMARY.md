@@ -18,6 +18,8 @@
     - [分片集群](./redis/cluster/redis_cluster.md)
   - [单线程模型](./redis/single_thread.md)
 
+- [MySQL](./mysql/mysql.md)
+
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)
   - [按指定字段查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)
