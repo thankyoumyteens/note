@@ -102,7 +102,9 @@ class Klass : public Metadata {
   //  - Various type checking in the JVM
   const KlassKind _kind;
 
-  // Processed access flags, for use by Class.getModifiers.
+  // 描述符, 用于java.lang.Class类的getModifiers方法
+  // getModifiers方法的作用:
+  //  返回指定对象的修饰符(public, protected等)
   jint        _modifier_flags;
 
   // The fields _super_check_offset, _secondary_super_cache, _secondary_supers
@@ -113,8 +115,10 @@ class Klass : public Metadata {
   // secondary supers, else is &_primary_supers[depth()].
   juint       _super_check_offset;
 
-  // Class name.  Instance classes: java/lang/String, etc.  Array classes: [I,
-  // [Ljava/lang/String;, etc.  Set to zero for all other kinds of classes.
+  // 类名
+  // 普通类, 如: java/lang/String
+  // 数组类, 如: [I, [Ljava/lang/String;
+  // 其它类: 0
   Symbol*     _name;
 
   // Cache of last observed secondary supertype
@@ -125,18 +129,18 @@ class Klass : public Metadata {
   Klass*      _primary_supers[_primary_super_limit];
   // java/lang/Class instance mirroring this class
   OopHandle   _java_mirror;
-  // Superclass
+  // 父类
   Klass*      _super;
-  // First subclass (null if none); _subklass->next_sibling() is next one
+  // 子类链表的头节点, 通过next_sibling可以找到下一个子类
   Klass* volatile _subklass;
-  // Sibling link (or null); links all subklasses of a klass
+  // 兄弟类, 父类可以通过这个链表找到所它的有子类
   Klass* volatile _next_sibling;
 
-  // All klasses loaded by a class loader are chained through these links
+  // 被同一个类加载器加载的类, 会记录到同一个链表中, 通过这个变量访问
   Klass*      _next_link;
 
-  // The VM's representation of the ClassLoader used to load this class.
-  // Provide access the corresponding instance java.lang.ClassLoader.
+  // 这个类的类加载器
+  // 用来访问对应的java.lang.ClassLoader实例
   ClassLoaderData* _class_loader_data;
 
   int _vtable_len;              // vtable length. This field may be read very often when we
