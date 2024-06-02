@@ -19,10 +19,11 @@
   - [单线程模型](./redis/single_thread.md)
 
 - [MySQL](./mysql/mysql.md)
+  - [存储过程](./mysql/func.md)
 
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)
-  - [按指定字段查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)
+  - [按指定字段分组查询最新一条数据](./oracle/按指定字段查询最新一条数据.md)
   - [case_when排序](./oracle/case_when排序.md)
   - [生成12个月月份](./oracle/生成12个月月份.md)
   - [生成指定时间范围内的每一天日期](./oracle/生成指定时间范围内的每一天日期.md)
