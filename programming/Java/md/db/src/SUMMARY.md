@@ -19,7 +19,9 @@
   - [单线程模型](./redis/single_thread.md)
 
 - [MySQL](./mysql/mysql.md)
+  - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
+  - [explain](./mysql/explain.md)
 
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)
@@ -28,9 +30,7 @@
   - [生成12个月月份](./oracle/生成12个月月份.md)
   - [生成指定时间范围内的每一天日期](./oracle/生成指定时间范围内的每一天日期.md)
   - [递归查询所有下级](./oracle/递归查询所有下级.md)
-  - [两个日期间隔几天](./oracle/两个日期间隔几天.md)
   - [生成随机数](./oracle/生成随机数.md)
-  - [生成随机日期](./oracle/random_date.md)
   - [遍历表中所有记录](./oracle/遍历表中所有记录.md)
   - [从表中随机取出一条数据](./oracle/从表中随机取出一条数据.md)
   - [sleep](./oracle/sleep.md)

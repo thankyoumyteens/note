@@ -46,6 +46,29 @@ select to_char(sysdate-1/24/60,'yyyy-mm-dd HH24:MI:SS') from dual;
 select to_char(sysdate-1/24/60/60,'yyyy-mm-dd HH24:MI:SS') from dual;
 ```
 
+## 日期间隔
+
+```sql
+-- 间隔几天
+select to_date('08/06/2015','mm/dd/yyyy')-to_date('07/01/2015','mm/dd/yyyy') from dual;
+-- 间隔几月
+select months_between(to_date('01/31/2015','mm/dd/yyyy'),to_date('12/31/2014','mm/dd/yyyy')) from dual;
+-- 间隔几年
+select trunc(months_between(to_date('08/06/2015','mm/dd/yyyy'),to_date('08/06/2013','mm/dd/yyyy'))/12) from dual;
+```
+
+## 生成随机日期
+
+```sql
+-- 生成2020-01-01 00:00:00至2020-12-31 23:59:59内的日期时间
+SELECT to_date(TRUNC(DBMS_RANDOM.VALUE(
+       to_number(to_char(to_date('20200101','yyyymmdd'),'J')),
+       to_number(to_char(to_date('20201231','yyyymmdd')+1,'J')))),'J')+
+       DBMS_RANDOM.VALUE(1,3600)/3600
+       prize_time
+FROM dual;
+```
+
 ## 日期截取
 
 ```sql
