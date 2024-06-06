@@ -43,3 +43,27 @@ select date_sub(now(),interval 1 minute);
 --减1秒
 select date_sub(now(),interval 1 second);
 ```
+
+## 日期间隔
+
+```sql
+-- 间隔几天
+select TIMESTAMPDIFF(day, date1, date2);
+select to_days('2020-01-02') - to_days('2020-01-01');
+-- 间隔几月
+select TIMESTAMPDIFF(month, date1, date2);
+-- 间隔几年
+select TIMESTAMPDIFF(year, date1, date2);
+```
+
+## 生成随机日期
+
+```sql
+-- 生成2020-01-01 00:00:00至2020-12-31 23:59:59内的日期时间
+SELECT
+    FROM_UNIXTIME(
+        UNIX_TIMESTAMP('2020-01-01 00:00:00') +
+        RAND() *
+        (UNIX_TIMESTAMP('2020-12-31 23:59:59') - UNIX_TIMESTAMP('2020-01-01 00:00:00'))
+    ) AS random_datetime;
+```

@@ -15,6 +15,7 @@
 创建 `maximum.s` 文件:
 
 ```x86asm
+.code32
 .section .data
 
     # 定义变量

@@ -1,88 +1,82 @@
 # 函数示例
 
+实现的功能: 计算 2^3 + 5^2 = ?。
+
 创建 `power.s` 文件:
 
 ```x86asm
-# 计算2的3次方
-
-# 数据段为空
+.code32
 .section .data
 
 .section .text
     .globl _start
     _start:
+        # 计算2^3
         # 参数逆序入栈
-
-        # 由于64位系统只能使用pushq,
-        # pushq 会把8个字节入栈,
-        # 而实际上只需要两个4字节的栈空间,
-        # 所以改成 subq + movl 实现
-
-        # 分配8字节的栈空间
-        subq $8, %rsp
-        # 指数参数入栈
-        movl $3, %eax
-        movl %eax, 4(%rsp)
-        # 底数参数入栈
-        movl $2, %eax
-        movl %eax, (%rsp)
-
+        pushl $3
+        pushl $2
         # 调用函数
         call power
+        # 函数调用完成, 从栈中移除两个参数
+        addl $8, %esp
+        # 保存2^3的计算结果
+        pushl %eax
 
-        # 函数调用完成,
-        # 从栈中移除两个参数
-        addq $8, %rsp
-
-        # 函数返回值在eax中
-        # 把它保存到ebx
-        movl %eax, %ebx
-        # 系统调用: exit
+        # 同理, 计算5^2
+        pushl $2
+        pushl $5
+        call power
+        addl $8, %esp
+        # 把2^3的计算取出到ebx中
+        popl %ebx
+        # 5^2的计算结果在eax中
+        # 两个结果相加
+        addl %eax, %ebx
+        # 执行系统调用exit
         movl $1, %eax
         int $0x80
 
-    # 定义power函数
+    # power函数
     .type power, @function
     power:
-        # 保存调用方的rbp
-        pushq %rbp
-        # 设置rbp为power函数的栈底,
+        # 保存_start的基址指针ebp
+        pushl %ebp
+        # 设置ebp为power函数的栈底,
         # 用来定位参数和局部变量
-        movq %rsp, %rbp
+        movl %esp, %ebp
 
         # 为局部变量分配栈空间
-        subq $4, %rsp
+        subl $4, %esp
 
         ####################################
         # 此时的栈空间:
         #
-        # 底数 <--- 20(ebp)
-        # 指数 <--- 16(ebp)
-        # 返回地址 <--- 8(%ebp)
-        # _start的rbp <--- (%rbp)
-        # 局部变量 <--- -4(%rbp)和(%rsp)
+        # 指数 <--- 12(ebp)
+        # 底数 <--- 8(ebp)
+        # 返回地址 <--- 4(%ebp)
+        # _start的ebp <--- (%ebp)
+        # 局部变量 <--- -4(%ebp)和(%esp)
         ####################################
 
-        # 把第一个参数放到ebx中
-        # (需要跳过栈中调用方的rbp和返回地址两个8字节数据)
-        movl 16(%rbp), %ebx
-        # 把第二个参数放到ecx中
-        movl 20(%rbp), %ecx
+        # 取出参数1
+        movl 8(%ebp), %ebx
+        # 取出参数2
+        movl 12(%ebp), %ecx
 
         # 先把底数存储到局部变量
-        movl %ebx, -4(%rbp)
+        movl %ebx, -4(%ebp)
         # 循环相乘,
-        # 指数从n次方减到1次方时跳出
+        # 指数从n次方减到1次方时跳出循环
         power_loop_start:
             cmpl $1, %ecx
             je end_power
             # 取出底数
             # 因为计算操作只能使用寄存器
-            movl -4(%rbp), %eax
+            movl -4(%ebp), %eax
             # 相乘
             imull %ebx, %eax
             # 把结果存回局部变量
-            movl %eax, -4(%rbp)
+            movl %eax, -4(%ebp)
 
             # 指数递减
             decl %ecx
@@ -90,21 +84,25 @@
             jmp power_loop_start
 
         end_power:
-            # 返回值放入rax
-            movl -4(%rbp), %eax
+            # 返回值放入eax
+            movl -4(%ebp), %eax
             # 移除当前函数的栈帧
-            movq %rbp, %rsp
-            # 恢复调用方的rbp
-            popq %rbp
+            movl %ebp, %esp
+            # 恢复调用方_start的基址指针ebp
+            popl %ebp
             # 返回
             ret
 ```
 
-## 运行
+## 执行
 
 ```sh
-as --gstabs power.s -o power.o
-ld power.o -o power
+# 汇编
+as --32 power.s -o power.o
+# 链接
+ld -melf_i386 power.o -o power
+# 运行
 ./power
+# 验证
 echo $?
 ```

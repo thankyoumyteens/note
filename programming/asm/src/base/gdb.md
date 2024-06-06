@@ -3,8 +3,8 @@
 ## 在可执行文件中包含调试信息
 
 ```sh
-as --gstabs maximum.s -o maximum.o
-ld maximum.o -o maximum
+as --32 --gstabs demo.s -o demo.o
+ld -melf_i386 demo.o -o demo
 ```
 
 ## 运行调试器

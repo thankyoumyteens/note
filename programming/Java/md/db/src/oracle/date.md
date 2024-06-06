@@ -57,6 +57,30 @@ select months_between(to_date('01/31/2015','mm/dd/yyyy'),to_date('12/31/2014','m
 select trunc(months_between(to_date('08/06/2015','mm/dd/yyyy'),to_date('08/06/2013','mm/dd/yyyy'))/12) from dual;
 ```
 
+## 生成指定时间范围内的每一天日期
+
+```sql
+select
+    to_date(#{startTime}, 'yyyy-MM-dd') + rownum - 1 as dateday
+from
+    dual
+connect by
+    rownum <= (
+        to_date(#{endTime}, 'yyyy-MM-dd') - to_date(#{startTime}, 'yyyy-MM-dd') + 1
+    );
+```
+
+## 生成 12 个月月份
+
+```sql
+select
+    lpad(level, 2, 0) || '月' as PER_MONTH
+from
+    DUAL
+connect by
+    level < 13;
+```
+
 ## 生成随机日期
 
 ```sql

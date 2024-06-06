@@ -5,6 +5,7 @@
 创建 `exit.s` 文件:
 
 ```x86asm
+.code32
 .section .data
 
 .section .text

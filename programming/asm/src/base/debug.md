@@ -1,8 +1,6 @@
-# 调试
+# 调试示例
 
 以 `maximum.s` 为例。
-
-创建 `maximum.s` 文件:
 
 ```x86asm
 .section .data
@@ -40,13 +38,13 @@
 首先要让编译器在可执行文件中包含调试信息, 只要在 as 命令中加入 `--gstabs` 选项就能做到这点。汇编命令改为:
 
 ```sh
-as --gstabs maximum.s -o maximum.o
+as --32 --gstabs maximum.s -o maximum.o
 ```
 
 链接命令不变:
 
 ```sh
-ld maximum.o -o maximum
+ld -melf_i386 maximum.o -o maximum
 ```
 
 ## 运行调试器
