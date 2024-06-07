@@ -50,9 +50,11 @@
   - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
 
 - [SpringBoot](./springboot/springboot.md)
-  - [多环境配置](./springboot/多环境配置.md)
-  - [SpringBoot 整合 Kafka](./springboot/SpringBoot整合Kafka.md)
-  - [重写 FeignClient 输出日志](./springboot/重写FeignClient输出日志.md)
+  - [多环境配置](./springboot/profiles.md)
+  - [整合Kafka](./springboot/kafka.md)
+  - [重写FeignClient输出日志](./springboot/重写FeignClient输出日志.md)
+  - [Hibernate Validator](./springboot/validator.md)
+    - [SpringBoot集成](./springboot/validator_with_sb.md)
 
 - [Spring源码分析](./spring/Spring源码分析.md)
   - [Spring整体架构](./spring/Spring整体架构.md)

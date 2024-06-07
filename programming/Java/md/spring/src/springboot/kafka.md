@@ -1,4 +1,6 @@
-# maven依赖
+# SpringBoot 整合 Kafka
+
+依赖
 
 ```xml
 <dependency>
@@ -11,7 +13,9 @@
 </dependency>
 ```
 
-# 生产者的配置文件
+## 生产者
+
+配置文件
 
 ```yaml
 spring:
@@ -50,7 +54,7 @@ spring:
         # 取决于如何设置max.block.ms, 表示抛出异常前可以阻塞一段时间
         max.block.ms: 115000
         #该配置控制客户端等待服务器的响应的最长时间。
-        #如果超时之前仍未收到响应, 则客户端将在必要时重新发送请求, 如果重试次数(retries)已用尽, 则会使请求失败。 
+        #如果超时之前仍未收到响应, 则客户端将在必要时重新发送请求, 如果重试次数(retries)已用尽, 则会使请求失败。
         #此值应大于replica.lag.time.max.ms(broker配置), 以减少由于不必要的生产者重试而导致消息重复的可能性。
         request.timeout.ms: 115000
         #等待send回调的最大时间。常用语重试, 如果一定要发送, retries则配Integer.MAX
@@ -60,7 +64,7 @@ spring:
         # max.in.flight.requests.per.connection: 1
 ```
 
-# Kafka生产者
+代码
 
 ```java
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +96,9 @@ public class KafkaProducer {
 }
 ```
 
-# 消费者的配置文件
+## 消费者
+
+配置文件
 
 ```yaml
 spring:
@@ -103,7 +109,7 @@ spring:
       #消费方式: 在有提交记录的时候, earliest与latest是一样的, 从提交记录的下一条开始消费
       # earliest: 无提交记录, 从头开始消费
       #latest: 无提交记录, 从最新的消息的下一条开始消费
-      auto-offset-reset: earliest 
+      auto-offset-reset: earliest
       enable-auto-commit: true #是否自动提交偏移量offset
       auto-commit-interval: 1S #前提是 enable-auto-commit=true。自动提交的频率
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -114,14 +120,14 @@ spring:
       session.timeout.ms: 120000
       #最大消费时间。此决定了获取消息后提交偏移量的最大时间, 超过设定的时间(默认5分钟), 服务端也会认为该消费者失效。踢出并再  衡
       max.poll.interval.ms: 300000
-      #配置控制客户端等待请求响应的最长时间。 
-      #如果在超时之前没有收到响应, 客户端将在必要时重新发送请求, 
+      #配置控制客户端等待请求响应的最长时间。
+      #如果在超时之前没有收到响应, 客户端将在必要时重新发送请求,
       #或者如果重试次数用尽, 则请求失败。
       request.timeout.ms: 60000
       #订阅或分配主题时, 允许自动创建主题。0.11之前, 必须设置false
       allow.auto.create.topics: true
       #poll方法向协调器发送心跳的频率, 为session.timeout.ms的三分之一
-      heartbeat.interval.ms: 40000 
+      heartbeat.interval.ms: 40000
       #每个分区里返回的记录最多不超max.partitions.fetch.bytes 指定的字节
       #0.10.1版本后 如果 fetch 的第一个非空分区中的第一条消息大于这个限制
       #仍然会返回该消息, 以确保消费者可以进行
@@ -138,7 +144,7 @@ spring:
       default-topic: "COLA"
 ```
 
-# Kafka消费者
+代码
 
 ```java
 import org.apache.kafka.clients.consumer.ConsumerRecord;

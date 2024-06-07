@@ -75,4 +75,43 @@
         movl %eax, ST_FD_OUT(%ebp)
 
         # 开始读文件
+        read_loop_begin:
+            movl $SYS_READ, %eax         # 系统调用read
+            movl ST_FD_IN(%ebp), %ebx    # 文件描述符
+            movl $BUFFER_DATA, %ecx      # 读入数据的缓冲区
+            movl $BUFFER_SIZE, %edx      # 缓冲区大小
+            int $LINUX_SYSCALL
+            cmpl $END_OF_FILE, %eax      # 判断文件末尾
+            jle end_loop
+
+            # 调用convert_to_upper函数转大写
+            pushl $BUFFER_DATA       # 入参2 缓冲区地址
+            pushl %eax               # 入参1 实际读取的字节数(由read设置)
+            call convert_to_upper
+            popl %eax                # 调用函数可能会覆盖eax, 恢复eax的值
+            addl $4, %esp
+
+            # 开始写文件
+            movl %eax, %edx               # 缓冲区中有效的字节数(现在已经是大写了)
+            movl $SYS_WRITE, %eax         # 系统调用write
+            movl ST_FD_OUT(%ebp), %ebx    # 文件描述符
+            movl $BUFFER_DATA, %ecx       # 缓冲区地址
+            int $LINUX_SYSCALL
+
+            # 继续读取下一块文件
+            jmp read_loop_begin
+
+        end_loop:
+            # 关闭文件
+            movl $SYS_CLOSE, %eax
+            movl ST_FD_OUT(%ebp), %ebx
+            int $LINUX_SYSCALL
+            movl $SYS_CLOSE, %eax
+            movl ST_FD_IN(%ebp), %ebx
+            int $LINUX_SYSCALL
+
+            # 退出
+            movl $SYS_EXIT, %eax
+            movl $0, %ebx
+            int $LINUX_SYSCALL
 ```
