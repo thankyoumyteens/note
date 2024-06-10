@@ -70,9 +70,9 @@
 
 ```sh
 # 汇编
-as --32 maximum.s -o maximum.o
+as --32 -o maximum.o maximum.s
 # 链接
-ld -melf_i386 maximum.o -o maximum
+ld -m elf_i386 -o maximum maximum.o
 # 运行
 ./exit
 # 验证

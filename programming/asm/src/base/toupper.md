@@ -5,7 +5,7 @@
 ```x86asm
 .code32
 .section .data
-    # 定义常量(.equ 类似于 #define)
+    # 定义常量
 
     # 系统调用号
     .equ SYS_OPEN, 5
@@ -58,7 +58,7 @@
         movl $SYS_OPEN, %eax    # 系统调用open
         movl ST_ARGV_1(%ebp), %ebx    # open的参数
         movl $O_RDONLY, %ecx          # 只读模式
-        movl $0666, %edx              # 文件模式(不知道干什么的)
+        movl $0666, %edx              # UNIX权限, 以八进制表示
         int $LINUX_SYSCALL            # 调用open
 
         # 保存读取的文件描述符
@@ -114,4 +114,64 @@
             movl $SYS_EXIT, %eax
             movl $0, %ebx
             int $LINUX_SYSCALL
+
+    # convert_to_upper函数
+
+    .equ LOWERCASE_A, 'a'               # 小写字母的范围
+    .equ LOWERCASE_Z, 'z'               # 小写字母的范围
+    .equ UPPER_CONVERSION, 'A' - 'a'    # 小写转大写
+
+    .equ ST_BUFFER_LEN, 8    # 入参1 实际读取的字节数
+    .equ ST_BUFFER, 12       # 入参2 缓冲区地址
+
+    # 函数体
+    convert_to_upper:
+        pushl %ebp
+        movl %esp, %ebp
+
+        movl ST_BUFFER(%ebp), %eax        # 取出缓冲区首地址
+        movl ST_BUFFER_LEN(%ebp), %ebx    # 取出缓冲区大小
+        movl $0, %edi                     # 缓冲区中字节的索引, 从0开始遍历
+
+        # 缓冲区为空, 结束
+        cmpl $0, %ebx
+        je end_convert_loop
+
+        convert_loop:
+            movb (%eax,%edi,1), %cl    # 从缓冲区首地址开始按字节读取到cl寄存器
+
+            # 确保在 [a, z] 范围内
+            cmpb $LOWERCASE_A, %cl    # if (param < a) continue;
+            jl next_byte
+            cmpb $LOWERCASE_Z, %cl    # if (param > z) continue;
+            jg next_byte
+
+            # 转大写
+            addb $UPPER_CONVERSION, %cl
+            # 写回缓冲区
+            movb %cl, (%eax,%edi,1)
+
+            # 读取下一个字节
+            next_byte:
+                incl %edi
+                cmpl %edi, %ebx     # 判断是否到缓冲区末尾
+                jne convert_loop
+
+        end_convert_loop:
+            movl %ebp, %esp
+            popl %ebp
+            ret
+```
+
+## 执行
+
+```sh
+# 汇编
+as --32 -o toupper.o toupper.s
+# 链接
+ld -m elf_i386 -o toupper toupper.o
+# 运行
+./toupper toupper.s toupper.uppercase
+# 验证
+cat toupper.uppercase
 ```

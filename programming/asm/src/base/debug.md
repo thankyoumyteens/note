@@ -38,13 +38,13 @@
 首先要让编译器在可执行文件中包含调试信息, 只要在 as 命令中加入 `--gstabs` 选项就能做到这点。汇编命令改为:
 
 ```sh
-as --32 --gstabs maximum.s -o maximum.o
+as --32 --gstabs -o maximum.o maximum.s
 ```
 
 链接命令不变:
 
 ```sh
-ld -melf_i386 maximum.o -o maximum
+ld -m elf_i386 -o maximum maximum.o
 ```
 
 ## 运行调试器

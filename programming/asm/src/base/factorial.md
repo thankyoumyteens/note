@@ -58,9 +58,9 @@
 
 ```sh
 # 汇编
-as --32 factorial.s -o factorial.o
+as --32 -o factorial.o factorial.s
 # 链接
-ld -melf_i386 factorial.o -o factorial
+ld -m elf_i386 -o factorial factorial.o
 # 运行
 ./factorial
 # 验证

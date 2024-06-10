@@ -29,9 +29,9 @@
 
 ```sh
 # 汇编
-as --32 exit.s -o exit.o
+as --32 -o exit.o exit.s
 # 链接
-ld -melf_i386 exit.o -o exit
+ld -m elf_i386 -o exit exit.o
 # 运行
 ./exit
 # 验证

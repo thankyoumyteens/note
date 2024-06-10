@@ -98,9 +98,9 @@
 
 ```sh
 # 汇编
-as --32 power.s -o power.o
+as --32 -o power.o power.s
 # 链接
-ld -melf_i386 power.o -o power
+ld -m elf_i386 -o power power.o
 # 运行
 ./power
 # 验证
