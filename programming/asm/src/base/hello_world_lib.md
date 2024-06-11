@@ -5,12 +5,21 @@
 ```x86asm
 .code32
 .section .data
-    hello_world:
-        .ascii "hello world\n\0"
+    firststring:
+        .ascii "Hello! %s is a %s who loves the number %d\n\0"
+    name:
+        .ascii "Jonathan\0"
+    personstring:
+        .ascii "person\0"
+    numberloved:
+        .long 3
 .section .text
     .globl _start
     _start:
-        pushl $hello_world
+        pushl numberloved    #This is the %d
+        pushl $personstring  #This is the second %s
+        pushl $name          #This is the first %s
+        pushl $firststring   #This is the format string
         call printf
 
         pushl $0
@@ -23,7 +32,7 @@
 # 汇编
 as --32 hello.s -o hello.o
 # 链接
-ld -m elf_i386 -dynamic-linker /lib/ld-linux.so.2 -o hello hello.o -lc
+ld -m elf_i386 -dynamic-linker /lib/ld-linux.so.2 -o hello -lc hello.o
 # 运行
 ./hello
 ```

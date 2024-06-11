@@ -26,3 +26,5 @@
   - [动态链接库](./base/dll.md)
     - [使用动态链接库的Hello World](./base/hello_world_lib.md)
     - [动态链接库的工作过程](./base/lib.md)
+    - [创建动态链接库](./base/create_lib.md)
+  - [Linux程序的内存布局](./base/memory.md)
