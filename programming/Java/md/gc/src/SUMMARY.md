@@ -67,6 +67,7 @@
   - [解析字节码文件](./jdk21/g1/class_file/parse_class_file.md)
 - [Handle](./jdk21/g1/base/handle.md)
 - [全局卡表](./jdk21/g1/base/global_card_table.md)
+- [反射](./jdk21/g1/reflection/reflection.md)
 
 ## todo
 

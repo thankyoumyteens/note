@@ -100,6 +100,17 @@ class Klass : public Metadata {
   // Klass kind used to resolve the runtime type of the instance.
   //  - Used to implement devirtualized oop closure dispatching.
   //  - Various type checking in the JVM
+  // 运行时确定类的实际类型
+  // enum KlassKind {
+  //   InstanceKlassKind,  普通类
+  //   InstanceRefKlassKind, 引用类型(java.lang.ref.Reference的子类, 软引用/弱引用之类的东西)
+  //   InstanceMirrorKlassKind, 镜像类
+  //   InstanceClassLoaderKlassKind,
+  //   InstanceStackChunkKlassKind,
+  //   TypeArrayKlassKind, 基本类型的数组类
+  //   ObjArrayKlassKind, 对象数组的数组类
+  //   UnknownKlassKind
+  // };
   const KlassKind _kind;
 
   // 描述符, 用于java.lang.Class类的getModifiers方法
@@ -127,7 +138,7 @@ class Klass : public Metadata {
   Array<Klass*>* _secondary_supers;
   // Ordered list of all primary supertypes
   Klass*      _primary_supers[_primary_super_limit];
-  // java/lang/Class instance mirroring this class
+  // 指向它的镜像
   OopHandle   _java_mirror;
   // 父类
   Klass*      _super;
@@ -147,7 +158,9 @@ class Klass : public Metadata {
                                 // have lots of itable dispatches (e.g., lambdas and streams).
                                 // Keep it away from the beginning of a Klass to avoid cacheline
                                 // contention that may happen when a nearby object is modified.
-  AccessFlags _access_flags;    // Access flags. The class/interface distinction is stored here.
+
+  // 类型的访问标志: ACC_PUBLIC, ACC_FINAL, ACC_SUPER, ...
+  AccessFlags _access_flags;
 
 };
 ```
@@ -178,3 +191,9 @@ class     TypeArrayKlass;
 ```
 
 当 JVM 加载一个 Java 类时, 它会在内部创建一个对应的 Klass 对象, 用来存放该 Java 类的各种信息。而在 Klass 对象创建过程中, 也会计算该 Java 类所创建的 Java 对象需要多大内存空间, 该计算结果会被保存到 Klass 对象中的\_layout_helper 字段中, 这样当运行时需要创建 Java 对象时, 直接根据这个字段的值分配一块内存就好了。
+
+## java_mirror
+
+类加载的最终结果便是在 JVM 的方法区创建一个与 Java 类对应的 instanceKlass 对象，但是 JVM 在创建完 instanceKlass 之后，还会创建这个 instanceKlass 的镜像对象(java_mirror)。instanceKlass 和它的 java_mirror 之间保存了指针来互相访问。
+
+JVM 创建镜像是为了给 Java 程序使用的，而 instanceKlass 则只在 JVM 内部使用。所以，JVM 直接暴露给 Java 的是 java_mirror, 而不是 InstanceKlass。JDK 类库中所提供的反射等工具类，其实都基于 java_mirror 这个内部镜像实现的。
