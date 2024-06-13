@@ -30,6 +30,17 @@
   - [添加Filter](./servlet/add_filter.md)
   - [使用包装类修改请求和响应数据](./servlet/wrapper.md)
 
+- [MyBatis](./mybatis/MyBatis.md)
+  - [include标签传参](./mybatis/include标签传参.md)
+  - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
+
+- [SpringBoot](./springboot/springboot.md)
+  - [多环境配置](./springboot/profiles.md)
+  - [整合Kafka](./springboot/kafka.md)
+  - [重写FeignClient输出日志](./springboot/重写FeignClient输出日志.md)
+  - [Hibernate Validator](./springboot/validator.md)
+    - [SpringBoot集成](./springboot/validator_with_sb.md)
+
 - [Spring](./spring/spring.md)
   - [自动装配](./spring/use/自动装配.md)
   - [Aware 接口](./spring/use/aware.md)
@@ -44,17 +55,6 @@
   - [自定义属性](./spring/use/自定义属性.md)
   - [自定义子标签](./spring/use/自定义子标签.md)
   - [属性编辑器](./spring/use/属性编辑器.md)
-
-- [MyBatis](./mybatis/MyBatis.md)
-  - [include标签传参](./mybatis/include标签传参.md)
-  - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
-
-- [SpringBoot](./springboot/springboot.md)
-  - [多环境配置](./springboot/profiles.md)
-  - [整合Kafka](./springboot/kafka.md)
-  - [重写FeignClient输出日志](./springboot/重写FeignClient输出日志.md)
-  - [Hibernate Validator](./springboot/validator.md)
-    - [SpringBoot集成](./springboot/validator_with_sb.md)
 
 - [Spring源码分析](./spring/Spring源码分析.md)
   - [Spring整体架构](./spring/Spring整体架构.md)
