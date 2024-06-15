@@ -22,15 +22,16 @@ class oopDesc {
     // 压缩的 Klass 指针
     narrowKlass _compressed_klass;
   } _metadata;
+
+  // 对象头不一定只有这几个成员变量,
+  // oopDesc的子类可能有自己的成员变量
 };
 ```
 
 oop 在 JVM 中的层级:
 
 ```cpp
-//////////////////////////////////////////////
-// src/hotspot/share/oops/oopsHierarchy.hpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/oops/oopsHierarchy.hpp --- //
 
 // 用缩进表示继承关系, oopDesc是下面所有类的父类
 //            指向Java对象的指针
@@ -45,19 +46,19 @@ typedef class     objArrayOopDesc* objArrayOop;
 typedef class     typeArrayOopDesc* typeArrayOop;
 ```
 
-每次 new 一个 Java 对象就时, JVM 就会创建一个新的 oopDesc 对象。
+每次 new 一个 Java 对象时, JVM 就会创建一个新的 oopDesc 对象。
 
 ## Klass
 
+klass 包含元数据和方法信息，用来描述 Java 类或者 JVM 内部自带的 C++类型信息。Java 类的继承信息、成员变量、静态变量、成员方法、构造方法等信息都在 klass 中保存，JVM 据此便可以在运行期反射出 Java 类的全部结构信息。
+
 Klass 主要提供了两个功能:
 
-1. 用于表示 Java 类。Klass 中保存了一个 Java 类的元数据(类型信息, 包括类名、限定符、常量池、方法字典等)。一个 class 文件被 JVM 加载之后, 就会被解析成一个 Klass 对象存储在内存中
-2. 保存虚方法表, 用于实现动态分派
+1. klass 提供一个与 Java 类对等的 C++ 类型描述。Klass 中保存了一个 Java 类的元数据(类型信息, 包括类名、限定符、常量池等)。一个 class 文件被 JVM 加载之后, 就会被解析成一个 Klass 对象存储在内存中
+2. klass 提供 JVM 内部的函数分发机制。klass 会保存虚方法表, 用于在运行期找到真正要执行的函数
 
 ```cpp
-//////////////////////////////////////
-// src/hotspot/share/oops/klass.hpp //
-//////////////////////////////////////
+// --- src/hotspot/share/oops/klass.hpp --- //
 
 class Klass : public Metadata {
  protected:
@@ -72,14 +73,14 @@ class Klass : public Metadata {
   // The "layout helper" is a combined descriptor of object layout.
   // For klasses which are neither instance nor array, the value is zero.
   //
-  // For instances, layout helper is a positive number, the instance size.
-  // This size is already passed through align_object_size and scaled to bytes.
-  // The low order bit is set if instances of this class cannot be
-  // allocated using the fastpath.
+  // 如果是一个普通对象, _layout_helper的值是正数, 表示对象需要占用的内存大小
+  // 如果这个对象不支持快速分配(在TLAB里分配), 那么它的低位比特会被设置成特殊的值
   //
-  // For arrays, layout helper is a negative number, containing four
+  // 如果是一个数组, _layout_helper的值是负数
+  // containing four
   // distinct bytes, as follows:
   //    MSB:[tag, hsz, ebt, log2(esz)]:LSB
+  //    最高有效位:[tag, hsz, ebt, log2(esz)]:最低有效位
   // where:
   //    tag is 0x80 if the elements are oops, 0xC0 if non-oops
   //    hsz is array header size in bytes (i.e., offset of first element)
@@ -138,7 +139,7 @@ class Klass : public Metadata {
   Array<Klass*>* _secondary_supers;
   // Ordered list of all primary supertypes
   Klass*      _primary_supers[_primary_super_limit];
-  // 指向它的镜像
+  // 当前类的镜像
   OopHandle   _java_mirror;
   // 父类
   Klass*      _super;
@@ -168,9 +169,7 @@ class Klass : public Metadata {
 JVM 中 Klass 的层级:
 
 ```cpp
-//////////////////////////////////////////////
-// src/hotspot/share/oops/oopsHierarchy.hpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/oops/oopsHierarchy.hpp --- //
 
 // 用缩进表示继承关系, Klass是下面所有类的父类
 class Klass;

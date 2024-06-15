@@ -3,9 +3,7 @@
 在执行握手时, HandshakeALotClosure 会包装成 VM_HandshakeAllThreads 执行。
 
 ```cpp
-/////////////////////////////////////////////
-// src/hotspot/share/runtime/handshake.cpp //
-/////////////////////////////////////////////
+// --- src/hotspot/share/runtime/handshake.cpp --- //
 
 /**
  * 执行握手
@@ -22,9 +20,7 @@ void Handshake::execute(HandshakeClosure* hs_cl) {
 ## HandshakeALotClosure
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/runtime/vmThread.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmThread.cpp --- //
 
 class HandshakeALotClosure : public HandshakeClosure {
  public:
@@ -40,9 +36,7 @@ class HandshakeALotClosure : public HandshakeClosure {
 ## VM_HandshakeAllThreads
 
 ```cpp
-/////////////////////////////////////////////
-// src/hotspot/share/runtime/handshake.cpp //
-/////////////////////////////////////////////
+// --- src/hotspot/share/runtime/handshake.cpp --- //
 
 class VM_HandshakeAllThreads: public VM_Operation {
   HandshakeOperation* const _op;

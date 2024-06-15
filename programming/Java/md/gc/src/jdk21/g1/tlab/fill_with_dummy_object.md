@@ -1,9 +1,7 @@
 # 填充 dummy 对象
 
 ```cpp
-////////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
-////////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp --- //
 
 void ThreadLocalAllocBuffer::retire_before_allocation() {
   _refill_waste += (unsigned int)remaining();
@@ -98,9 +96,7 @@ void ThreadLocalAllocBuffer::initialize(HeapWord* start,
   invariants();
 }
 
-///////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/collectedHeap.cpp //
-///////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/collectedHeap.cpp --- //
 
 void CollectedHeap::fill_with_dummy_object(HeapWord* start, HeapWord* end, bool zap) {
   CollectedHeap::fill_with_object(start, end, zap);

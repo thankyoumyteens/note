@@ -1,9 +1,7 @@
 # 从空闲 region 列表获取 region
 
 ```cpp
-///////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegionManager.cpp //
-///////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegionManager.cpp --- //
 
 /**
  * 从空闲region列表中获取一个region
@@ -36,9 +34,7 @@ HeapRegion* HeapRegionManager::allocate_free_region(HeapRegionType type, uint re
   return hr;
 }
 
-//////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegionSet.inline.hpp //
-//////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegionSet.inline.hpp --- //
 
 /**
  * 取出空闲region列表的一个region

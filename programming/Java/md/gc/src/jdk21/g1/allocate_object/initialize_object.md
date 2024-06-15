@@ -1,9 +1,7 @@
 # 初始化对象
 
 ```cpp
-//////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
 oop ObjAllocator::initialize(HeapWord* mem) const {
   mem_clear(mem);

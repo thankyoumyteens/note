@@ -303,9 +303,7 @@ G1 会考虑某种程度的偏差, 几乎每次都会计算出安全的预测值
 如果以 A 的考试成绩为例, 那么 G1 会做出预测: A 下次的考试成绩为 44 分
 
 ```cpp
-//////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 void G1Policy::update_young_length_bounds() {
   assert(!Universe::is_fully_initialized() || SafepointSynchronize::is_at_safepoint(), "must be");
@@ -315,9 +313,7 @@ void G1Policy::update_young_length_bounds() {
                              _analytics->predict_rs_length(for_young_only_phase));
 }
 
-/////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Analytics.cpp //
-/////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Analytics.cpp --- //
 
 size_t G1Analytics::predict_pending_cards(bool for_young_only_phase) const {
   return predict_size(&_pending_cards_seq, for_young_only_phase);
@@ -335,9 +331,7 @@ double G1Analytics::predict_zero_bounded(G1PhaseDependentSeq const* seq, bool fo
   return MAX2(seq->predict(_predictor, for_young_only_phase), 0.0);
 }
 
-/////////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1AnalyticsSequences.inline.hpp //
-/////////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1AnalyticsSequences.inline.hpp --- //
 
 double G1PhaseDependentSeq::predict(const G1Predictions* predictor, bool use_young_only_phase_seq) const {
   if (use_young_only_phase_seq || !enough_samples_to_use_mixed_seq()) {
@@ -353,9 +347,7 @@ double G1PhaseDependentSeq::predict(const G1Predictions* predictor, bool use_you
 ## 停顿预测模型
 
 ```cpp
-///////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Predictions.hpp //
-///////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Predictions.hpp --- //
 
 class G1Predictions {
  private:
@@ -398,9 +390,7 @@ class G1Predictions {
 ## 衰减平均值和衰减方差
 
 ```cpp
-///////////////////////////////////////////////////////////////
-// src/hotspot/share/utilities/numberSeq.cpp //
-///////////////////////////////////////////////////////////////
+// --- src/hotspot/share/utilities/numberSeq.cpp --- //
 
 /**
  * _num: 列表中元素的数量, 即列表长度
@@ -440,9 +430,7 @@ void AbsSeq::add(double val) {
 ## 衰减标准差
 
 ```cpp
-///////////////////////////////////////////////////////////////
-// src/hotspot/share/utilities/numberSeq.cpp //
-///////////////////////////////////////////////////////////////
+// --- src/hotspot/share/utilities/numberSeq.cpp --- //
 
 double AbsSeq::dsd() const {
   double var = dvariance();

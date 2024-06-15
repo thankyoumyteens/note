@@ -3,9 +3,7 @@
 VMThread 启动后, 会一直执行 VMThread::loop(), 等待处理 VM_Operation, loop()函数会不断读取 `_next_vm_operation` 进行执行。
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/runtime/vmThread.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmThread.cpp --- //
 
 void VMThread::loop() {
   assert(_cur_vm_operation == nullptr, "no current one should be executing");
@@ -32,9 +30,7 @@ void VMThread::loop() {
 ## 等待 VM_Operation
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/runtime/vmThread.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmThread.cpp --- //
 
 /**
  * 等待VM_Operation
@@ -100,9 +96,7 @@ void VMThread::wait_for_operation() {
 ### 定期握手
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/runtime/vmThread.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmThread.cpp --- //
 
 /**
  * 判断是否需要握手
@@ -127,9 +121,7 @@ bool VMThread::handshake_alot() {
   return false;
 }
 
-/////////////////////////////////////////////
-// src/hotspot/share/runtime/handshake.cpp //
-/////////////////////////////////////////////
+// --- src/hotspot/share/runtime/handshake.cpp --- //
 
 /**
  * 执行握手
@@ -146,9 +138,7 @@ void Handshake::execute(HandshakeClosure* hs_cl) {
 ### 定期进入安全点
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/runtime/vmThread.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmThread.cpp --- //
 
 /**
  * 判断是否需要定期进入安全点
@@ -182,9 +172,7 @@ bool SafepointSynchronize::is_cleanup_needed() {
   return false;
 }
 
-////////////////////////////////////////////////
-// src/hotspot/share/runtime/vmOperations.hpp //
-////////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmOperations.hpp --- //
 
 class VM_Cleanup: public VM_EmptyOperation {
  public:
@@ -211,9 +199,7 @@ public:
 ## 执行 VM_Operation
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/runtime/vmThread.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmThread.cpp --- //
 
 /**
  * 执行VM_Operation
@@ -315,9 +301,7 @@ void VMThread::evaluate_operation(VM_Operation* op) {
 VM_Operation 实际要执行的逻辑会写在 doit 函数中。
 
 ```cpp
-///////////////////////////////////////////////
-// src/hotspot/share/runtime/vmOperation.hpp //
-///////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmOperation.hpp --- //
 
 class VM_Operation : public StackObj {
  private:

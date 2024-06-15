@@ -1,9 +1,7 @@
 # 开启并发标记
 
 ```cpp
-//////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 /**
  * 是否需要开启并发标记
@@ -43,9 +41,7 @@ bool G1Policy::about_to_start_mixed_phase() const {
   return _g1h->concurrent_mark()->cm_thread()->in_progress() || collector_state()->in_young_gc_before_mixed();
 }
 
-/////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 /**
  * 执行GC

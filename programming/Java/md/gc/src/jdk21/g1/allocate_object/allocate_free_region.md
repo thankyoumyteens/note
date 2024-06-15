@@ -1,9 +1,7 @@
 # 分配占用 1 个 region 的大对象
 
 ```cpp
-///////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegionManager.cpp //
-///////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegionManager.cpp --- //
 
 /**
  * 寻找一个region用于分配占用1个region的大对象
@@ -36,9 +34,7 @@ HeapRegion* HeapRegionManager::allocate_free_region(HeapRegionType type, uint re
   return hr;
 }
 
-//////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegionSet.inline.hpp //
-//////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegionSet.inline.hpp --- //
 
 /**
  * 取出空闲region列表的第一个region给大对象分配

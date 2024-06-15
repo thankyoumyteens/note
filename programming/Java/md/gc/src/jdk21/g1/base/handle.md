@@ -3,9 +3,7 @@
 如果想要避免某些 oop 在垃圾回收期间被回收, 可以通过 hadle 来分配并使用这些 oop。hadle 被分配在线程本地的 handle area 中。
 
 ```cpp
-///////////////////////////////////////////
-// src/hotspot/share/runtime/handles.hpp //
-///////////////////////////////////////////
+// --- src/hotspot/share/runtime/handles.hpp --- //
 
 class Handle {
  private:
@@ -66,9 +64,7 @@ class Handle {
 对于每种类型的 xxxOop, JVM 也定义了对应的 xxxHandle:
 
 ```cpp
-///////////////////////////////////////////
-// src/hotspot/share/runtime/handles.hpp //
-///////////////////////////////////////////
+// --- src/hotspot/share/runtime/handles.hpp --- //
 
 #define DEF_HANDLE(type, is_a)                   \
   class type##Handle: public Handle {            \

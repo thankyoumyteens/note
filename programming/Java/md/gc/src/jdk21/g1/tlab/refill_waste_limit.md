@@ -17,9 +17,7 @@ TLAB 的剩余空间不足以分配当前对象时, 会分成以下两种情况:
 2. 如果 TLAB 的剩余空间大于 refill_waste_limit, 虽然不够分配当前这个对象, 但是可以用来分配其他小一点的对象, 那么这次就不使用 TLAB 进行分配, 直接返回 null, 让 JVM 去 region 中分配这个对象, 并且增大 refill_waste_limit 的值。这样, refill_waste_limit 就会随着 JVM 的运行不断增大, 从而避免 TLAB 中的一小块剩余空间被一直保留, JVM 频繁去 region 中分配对象的情况
 
 ```cpp
-////////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
-////////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp --- //
 
 /**
  * refill_waste_limit的初始化
@@ -28,9 +26,7 @@ size_t ThreadLocalAllocBuffer::initial_refill_waste_limit() {
   return desired_size() / TLABRefillWasteFraction;
 }
 
-///////////////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp //
-///////////////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp --- //
 
 /**
  * 增大refill_waste_limit的值,

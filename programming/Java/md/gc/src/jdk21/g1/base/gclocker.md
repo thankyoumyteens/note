@@ -7,9 +7,7 @@ GCLocker 是 JNI 线程访问临界区时的加锁机制, 它会影响到垃圾�
 临界区相关的方法:
 
 ```cpp
-//////////////////////////////////////////////
-// src/hotspot/share/runtime/javaThread.hpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/runtime/javaThread.hpp --- //
 
 /**
  * 进入临界区
@@ -52,9 +50,7 @@ GCLocker 中两个重要的属性:
 ![](../../../img/gc_locker_lock.png)
 
 ```cpp
-/////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/gcLocker.inline.hpp //
-/////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/gcLocker.inline.hpp --- //
 
 void GCLocker::lock_critical(JavaThread* thread) {
   // 如果线程是首次进入临界区,
@@ -76,9 +72,7 @@ void GCLocker::lock_critical(JavaThread* thread) {
   thread->enter_critical();
 }
 
-//////////////////////////////////////////////
-// src/hotspot/share/gc/shared/gcLocker.cpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/gcLocker.cpp --- //
 
 void GCLocker::jni_lock(JavaThread* thread) {
   assert(!thread->in_critical(), "shouldn't currently be in a critical region");
@@ -105,9 +99,7 @@ void GCLocker::jni_lock(JavaThread* thread) {
 ![](../../../img/gc_locker_gc.png)
 
 ```cpp
-//////////////////////////////////////////////
-// src/hotspot/share/gc/shared/gcLocker.cpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/gcLocker.cpp --- //
 
 /**
  * Young GC/Mixed GC 和 Full GC 执行前, 都需要调用这个方法
@@ -142,9 +134,7 @@ bool GCLocker::check_active_before_gc() {
 ![](../../../img/gc_locker_unlock.png)
 
 ```cpp
-/////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/gcLocker.inline.hpp //
-/////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/gcLocker.inline.hpp --- //
 
 void GCLocker::unlock_critical(JavaThread* thread) {
   // 当前退出的临界区是线程进入的最后一个临界区
@@ -160,9 +150,7 @@ void GCLocker::unlock_critical(JavaThread* thread) {
   thread->exit_critical();
 }
 
-//////////////////////////////////////////////
-// src/hotspot/share/gc/shared/gcLocker.cpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/gcLocker.cpp --- //
 
 void GCLocker::jni_unlock(JavaThread* thread) {
   assert(thread->in_last_critical(), "should be exiting critical region");

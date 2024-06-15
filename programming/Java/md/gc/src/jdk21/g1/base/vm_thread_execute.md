@@ -3,9 +3,7 @@
 execute 函数会把传入的 VM_Operation 放入 VM_Operation 队列。 JVM 使用两个指针 `_cur_vm_operation` 和 `_next_vm_operation` 维护 VM_Operation 队列, `_next_vm_operation` 指向下一个要执行的 VM_Operation。
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/runtime/vmThread.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/runtime/vmThread.cpp --- //
 
 void VMThread::execute(VM_Operation* op) {
   // 获取当前正在执行的线程

@@ -5,9 +5,7 @@
 可以通过参数 -XX:G1HeapRegionSize 来手动设置 region 的大小, 手动设置的 region 大小需要在 1M 到 512M 之间。如果没有手动指定 region 的大小, G1 会在 1M 到 32M 的范围内计算出一个合适的 region 大小。
 
 ```cpp
-////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegion.cpp //
-////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegion.cpp --- //
 
 // 调用栈:
 // HeapRegion::setup_heap_region_size(unsigned long) heapRegion.cpp:65
@@ -76,9 +74,7 @@ void HeapRegion::setup_heap_region_size(size_t max_heap_size) {
   }
 }
 
-///////////////////////////////////////////////////////
-// src/hotspot/share/utilities/globalDefinitions.hpp //
-///////////////////////////////////////////////////////
+// --- src/hotspot/share/utilities/globalDefinitions.hpp --- //
 
 /**
  * 返回在[min, max]之内的值:

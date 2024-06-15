@@ -8,9 +8,7 @@
 ![](../../../img/compute_pause_time_ratios.png)
 
 ```cpp
-//////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 /**
  * GC结束后会记录相关的时间
@@ -48,9 +46,7 @@ void G1Policy::update_gc_pause_time_ratios(G1GCPauseType gc_type, double start_t
   }
 }
 
-/////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Analytics.cpp //
-/////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Analytics.cpp --- //
 
 /**
  * 记录GC暂停时间占程序执行总时间的比例
@@ -131,9 +127,7 @@ TruncatedSeq 在队列满了的时候, 如果还有新元素入队, 会把最早
    ```
 
 ```cpp
-///////////////////////////////////////////////
-// src/hotspot/share/utilities/numberSeq.cpp //
-///////////////////////////////////////////////
+// --- src/hotspot/share/utilities/numberSeq.cpp --- //
 
 /**
  * 队列中的元素全部初始化为0

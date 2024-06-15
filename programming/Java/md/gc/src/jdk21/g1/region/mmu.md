@@ -5,9 +5,7 @@
 MMU(Minimum Mutator Utilization): 在一段时间(\_time_slice)内 mutator 运行时间的最小百分比。例如, 设定 MMU 为 95%, 表示在一个指定的时间段内, mutator 最多只能被停顿 5% 的时间。
 
 ```cpp
-//////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 /**
  * 根据mmu计算期望的eden region数
@@ -20,9 +18,7 @@ uint G1Policy::calculate_desired_eden_length_by_mmu() const {
   return (uint) ceil(alloc_rate_ms * when_ms);
 }
 
-//////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1MMUTracker.hpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1MMUTracker.hpp --- //
 
 class G1MMUTracker: public CHeapObj<mtGC> {
   double when_max_gc_sec(double current_time) {
@@ -30,9 +26,7 @@ class G1MMUTracker: public CHeapObj<mtGC> {
   }
 };
 
-//////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1MMUTracker.cpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1MMUTracker.cpp --- //
 
 /**
  * 在堆空间初始化阶段, 由于没有历史GC暂停时间, 这个函数会直接返回0

@@ -1,9 +1,7 @@
 # 直接在 region 中分配
 
 ```cpp
-//////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
 /**
  * 直接在region中分配对象内存
@@ -21,9 +19,7 @@ HeapWord* MemAllocator::mem_allocate_outside_tlab(Allocation& allocation) const 
   return mem;
 }
 
-/////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 HeapWord*
 G1CollectedHeap::mem_allocate(size_t word_size,

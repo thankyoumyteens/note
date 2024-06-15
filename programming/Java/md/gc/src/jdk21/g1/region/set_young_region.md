@@ -3,9 +3,7 @@
 G1 首先会预测出下一次 GC 会用到的卡表和 rset 的大小, 然后根据这两个值以及前面计算的预期范围预测出新生代的大小。再根据这个预测的大小确定新生代的实际大小。
 
 ```cpp
-//////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 void G1Policy::update_young_length_bounds() {
   assert(!Universe::is_fully_initialized() || SafepointSynchronize::is_at_safepoint(), "must be");
@@ -65,9 +63,7 @@ MMU: 在一段时间(\_time_slice)内 mutator 运行时间的最小百分比。�
 基准时间: 包括处理 rset 的时间, 处理整个新生代的的固定花费的时间, 处理 refinement 缓存的时间, 把对象复制到 survovor 的时间等, 基本上包含除了复制 eden region 之外的所有时间。
 
 ```cpp
-//////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 uint G1Policy::calculate_young_desired_length(size_t pending_cards, size_t rs_length) const {
   // 取出新生代的预期范围
@@ -181,9 +177,7 @@ G1 默认会保留 10% 的空闲 region, 确定新生代的实际 region 数量�
 3. 当前空闲的 region 数量充足, 足够满足预期的新生代 region 数量分配, G1 也可以保留 10% 的空闲 region
 
 ```cpp
-//////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
   // 堆中已经有的新生代region个数
@@ -293,9 +287,7 @@ uint G1Policy::calculate_young_target_length(uint desired_young_length) const {
 ## 计算新生代 region 的最大数量
 
 ```cpp
-//////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 uint G1Policy::calculate_young_max_length(uint target_young_length) const {
   uint expansion_region_num = 0;

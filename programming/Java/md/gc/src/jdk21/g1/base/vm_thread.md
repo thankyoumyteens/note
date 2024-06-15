@@ -7,9 +7,7 @@ VMThread 会开启一个无限循环, 然后不断地从一个 VM_Operation 队�
 VM_Operation 是通过其他线程放入到队列中的, 最常见的就是执行 GC。比如 GCLocker 执行 GC 的时候, 会调用对应的 CollectedHeap 中的 collect 函数:
 
 ```cpp
-/////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 void G1CollectedHeap::collect(GCCause::Cause cause) {
   try_collect(cause, collection_counters(this));

@@ -1,9 +1,7 @@
 # 类的初始化
 
 ```cpp
-//////////////////////////////////////////////////////////////
-// src/hotspot/share/oops/instanceKlass.cpp //
-//////////////////////////////////////////////////////////////
+// --- src/hotspot/share/oops/instanceKlass.cpp --- //
 
 void InstanceKlass::initialize(TRAPS) {
   if (this->should_be_initialized()) {

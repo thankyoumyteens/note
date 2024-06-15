@@ -1,9 +1,7 @@
 # 扩容后重新分配
 
 ```cpp
-///////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegionManager.cpp //
-///////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegionManager.cpp --- //
 
 HeapRegion* HeapRegionManager::expand_and_allocate_humongous(uint num_regions) {
   return allocate_humongous_allow_expand(num_regions);
@@ -119,9 +117,7 @@ void HeapRegionManager::commit_regions(uint index, size_t num_regions, WorkerThr
   _cardtable_mapper->commit_regions(index, num_regions, pretouch_workers);
 }
 
-//////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegionManager.inline.hpp //
-//////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegionManager.inline.hpp --- //
 
 inline HeapRegion* HeapRegionManager::allocate_free_regions_starting_at(uint first, uint num_regions) {
   // 获取索引对应的region

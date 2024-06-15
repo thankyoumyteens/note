@@ -1,9 +1,7 @@
 # 在当前 region 分配
 
 ```cpp
-//////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
-//////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp --- //
 
 inline HeapWord* G1AllocRegion::attempt_allocation(size_t min_word_size,
                                                    size_t desired_word_size,
@@ -30,9 +28,7 @@ inline HeapWord* G1AllocRegion::par_allocate(HeapRegion* alloc_region,
   return alloc_region->par_allocate(min_word_size, desired_word_size, actual_word_size);
 }
 
-///////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegion.inline.hpp //
-///////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegion.inline.hpp --- //
 
 inline HeapWord* HeapRegion::par_allocate(size_t min_word_size,
                                           size_t desired_word_size,

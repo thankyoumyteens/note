@@ -20,18 +20,14 @@ region 的 3 种状态:
 ![](../../../img/region_state.png)
 
 ```cpp
-///////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegionManager.hpp //
-///////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegionManager.hpp --- //
 
 class HeapRegionManager: public CHeapObj<mtGC> {
   // 记录当前处于committed状态的region
   G1CommittedRegionMap _committed_map;
 }
 
-//////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CommittedRegionMap.hpp //
-//////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CommittedRegionMap.hpp --- //
 
 class G1CommittedRegionMap : public CHeapObj<mtGC> {
   // 使用位图标记region的状态, true表示Active, false表示Inactive

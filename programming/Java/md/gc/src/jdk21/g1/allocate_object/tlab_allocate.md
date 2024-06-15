@@ -7,9 +7,7 @@ Java 堆(region)是所有线程共享的, 为了避免每次分配对象时都�
 只有在为线程分配一个新的 TLAB 时, 才需要锁住 Java 堆, 而在 TLAB 中分配对象时, 是不需要加锁的, 所以对象在 TLAB 中的分配称为快速分配。
 
 ```cpp
-//////////////////////////////////////////
-// src/hotspot/share/runtime/thread.hpp //
-//////////////////////////////////////////
+// --- src/hotspot/share/runtime/thread.hpp --- //
 
 // 每个线程都有一个自己的tlab
 class Thread: public ThreadShadow {
@@ -22,9 +20,7 @@ class Thread: public ThreadShadow {
 TLAB 使用指针碰撞分配内存: 所有被使用过的内存都被放在一边, 空闲的内存被放在另一边, 中间放着一个指针作为分界点的指示器, 分配内存就仅仅是把指针向空闲空间方向挪动一段与对象大小相等的距离。
 
 ```cpp
-////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/threadLocalAllocBuffer.hpp //
-////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.hpp --- //
 
 // 3个指针在tlab中的定义
 class ThreadLocalAllocBuffer: public CHeapObj<mtThread> {
@@ -42,9 +38,7 @@ private:
 当一个线程的 TLAB 满了(比如上图线程 1 的 TLAB1), 线程只要向 JVM 申请一个新的 TLAB 即可。因为 TLAB 只是 Eden 区的一块空闲内存, 线程不需要对满了的 TLAB 做额外的处理。
 
 ```cpp
-///////////////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp //
-///////////////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp --- //
 
 inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
   // void invariants() const {
@@ -74,9 +68,7 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
   return nullptr;
 }
 
-///////////////////////////////////////////////////////////////////////
-// src/hotspot/share/utilities/globalDefinitions.hpp //
-///////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/utilities/globalDefinitions.hpp --- //
 
 inline size_t pointer_delta(const HeapWord* left, const HeapWord* right) {
   return pointer_delta(left, right, sizeof(HeapWord));

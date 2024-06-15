@@ -3,9 +3,7 @@
 在加锁分配对象内存空间时, 会判断是否需要执行 GC, 如果需要执行 GC, 则会调用 do_collection_pause()函数执行 GC 并分配对象内存空间.
 
 ```cpp
-/////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 HeapWord* G1CollectedHeap::do_collection_pause(size_t word_size,
                                                uint gc_count_before,

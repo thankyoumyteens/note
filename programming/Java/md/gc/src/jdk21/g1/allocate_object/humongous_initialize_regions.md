@@ -1,9 +1,7 @@
 # 初始化 region 空间
 
 ```cpp
-/////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 HeapWord*
 G1CollectedHeap::humongous_obj_allocate_initialize_regions(HeapRegion* first_hr,
@@ -146,9 +144,7 @@ void G1CollectedHeap::set_humongous_metadata(HeapRegion* first_hr,
          "Miscalculation in humongous allocation");
 }
 
-////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/heapRegion.cpp //
-////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/heapRegion.cpp --- //
 
 void HeapRegion::hr_clear(bool clear_space) {
   set_top(bottom());

@@ -1,9 +1,7 @@
 # 类的连接
 
 ```cpp
-//////////////////////////////////////////////////////////////
-// src/hotspot/share/oops/instanceKlass.cpp //
-//////////////////////////////////////////////////////////////
+// --- src/hotspot/share/oops/instanceKlass.cpp --- //
 
 void InstanceKlass::link_class(TRAPS) {
   // bool is_loaded() const {

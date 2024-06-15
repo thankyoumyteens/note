@@ -1,9 +1,7 @@
 # 扩容新生代
 
 ```cpp
-////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Allocator.inline.hpp //
-////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Allocator.inline.hpp --- //
 
 inline HeapWord* G1Allocator::attempt_allocation_force(size_t word_size) {
   uint node_index = current_node_index();
@@ -12,9 +10,7 @@ inline HeapWord* G1Allocator::attempt_allocation_force(size_t word_size) {
   return mutator_alloc_region(node_index)->attempt_allocation_force(word_size);
 }
 
-//////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
-//////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp --- //
 
 inline HeapWord* G1AllocRegion::attempt_allocation_force(size_t word_size) {
   assert_alloc_region(_alloc_region != nullptr, "not initialized properly");
@@ -32,9 +28,7 @@ inline HeapWord* G1AllocRegion::attempt_allocation_force(size_t word_size) {
   return nullptr;
 }
 
-///////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1AllocRegion.cpp //
-///////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1AllocRegion.cpp --- //
 
 HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
                                                        bool force) {

@@ -3,9 +3,7 @@
 如果从 TLAB 中分配内存空间失败, 就会开始慢速分配。JVM 会再次尝试从 TLAB 中分配内存, 如果还是失败, 则会进入真正的慢速分配过程。
 
 ```cpp
-//////////////////////////////////////////////////////////
-// src/hotspot/share/interpreter/interpreterRuntime.cpp //
-//////////////////////////////////////////////////////////
+// --- src/hotspot/share/interpreter/interpreterRuntime.cpp --- //
 
 JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool, int index))
   // 从常量池中取出klass对象
@@ -27,9 +25,7 @@ JRT_ENTRY(void, InterpreterRuntime::_new(JavaThread* current, ConstantPool* pool
   current->set_vm_result(obj);
 JRT_END
 
-//////////////////////////////////////////////
-// src/hotspot/share/oops/instanceKlass.cpp //
-//////////////////////////////////////////////
+// --- src/hotspot/share/oops/instanceKlass.cpp --- //
 
 instanceOop InstanceKlass::allocate_instance(TRAPS) {
   // 这个类如果有一个非空的finalize()方法,
@@ -50,9 +46,7 @@ instanceOop InstanceKlass::allocate_instance(TRAPS) {
   return i;
 }
 
-//////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/collectedHeap.inline.hpp //
-//////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/collectedHeap.inline.hpp --- //
 
 inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
   ObjAllocator allocator(klass, size, THREAD);
@@ -60,9 +54,7 @@ inline oop CollectedHeap::obj_allocate(Klass* klass, size_t size, TRAPS) {
   return allocator.allocate();
 }
 
-//////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
 /**
  * 给对象分配内存空间
@@ -86,9 +78,7 @@ oop MemAllocator::allocate() const {
   return obj;
 }
 
-//////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
 /**
  * 给对象分配内存空间
@@ -110,9 +100,7 @@ HeapWord* MemAllocator::mem_allocate(Allocation& allocation) const {
 ## 开始慢速分配过程
 
 ```cpp
-//////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
 /**
  * 在TLAB中分配失败, 开始慢速分配

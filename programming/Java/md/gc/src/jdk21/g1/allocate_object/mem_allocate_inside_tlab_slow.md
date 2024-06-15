@@ -1,9 +1,7 @@
 # 申请新的 TLAB
 
 ```cpp
-//////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/memAllocator.cpp //
-//////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
 /**
  * 申请一个新的TLAB, 并在新的TLAB中分配对象内存
@@ -93,9 +91,7 @@ HeapWord* MemAllocator::mem_allocate_inside_tlab_slow(Allocation& allocation) co
   return mem;
 }
 
-////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
-////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp --- //
 
 void ThreadLocalAllocBuffer::fill(HeapWord* start,
                                   HeapWord* top,

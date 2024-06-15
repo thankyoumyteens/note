@@ -3,18 +3,14 @@
 在分配对象内存时, 如果当前 region 的剩余空间不足以分配这个对象时, 会申请一个新的 region 来分配。
 
 ```cpp
-///////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1AllocRegion.cpp //
-///////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1AllocRegion.cpp --- //
 
 HeapRegion* MutatorAllocRegion::allocate_new_region(size_t word_size,
                                                     bool force) {
   return _g1h->new_mutator_alloc_region(word_size, force, _node_index);
 }
 
-/////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 HeapRegion* G1CollectedHeap::new_mutator_alloc_region(size_t word_size,
                                                       bool force,
@@ -41,9 +37,7 @@ HeapRegion* G1CollectedHeap::new_mutator_alloc_region(size_t word_size,
   return nullptr;
 }
 
-//////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Policy.cpp //
-//////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Policy.cpp --- //
 
 /**
  * 判断新生代region是否达到阈值
@@ -55,9 +49,7 @@ bool G1Policy::should_allocate_mutator_region() const {
   return young_list_length < young_list_target_length();
 }
 
-/////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 /**
  * 把新分配的region标记为eden
@@ -71,9 +63,7 @@ void G1CollectedHeap::set_region_short_lived_locked(HeapRegion* hr) {
 ## 分配一个新 region
 
 ```cpp
-/////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1CollectedHeap.cpp //
-/////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 /**
  * 分配一个新region
@@ -121,9 +111,7 @@ HeapRegion* G1CollectedHeap::new_region(size_t word_size,
 ## 更新 rset 的状态
 
 ```cpp
-////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1RemSetTrackingPolicy.cpp //
-////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1RemSetTrackingPolicy.cpp --- //
 
 void G1RemSetTrackingPolicy::update_at_allocate(HeapRegion* r) {
   if (r->is_young()) {

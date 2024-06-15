@@ -1,9 +1,7 @@
 # 拿到锁后分配
 
 ```cpp
-////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1Allocator.inline.hpp //
-////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1Allocator.inline.hpp --- //
 
 /**
  * 拿到锁后, 首先尝试分配对象
@@ -17,9 +15,7 @@ inline HeapWord* G1Allocator::attempt_allocation_locked(size_t word_size) {
   return result;
 }
 
-//////////////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp //
-//////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp --- //
 
 inline HeapWord* G1AllocRegion::attempt_allocation_locked(size_t word_size) {
   size_t temp;

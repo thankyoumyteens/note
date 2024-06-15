@@ -17,9 +17,7 @@ hotspot 有两个解释器, 基于 C++ 的解释器和基于汇编的模板解�
 基于 C++ 的解释器更加清晰直观, 便于理解。
 
 ```cpp
-////////////////////////////////////////////////////////////////
-// src/hotspot/share/interpreter/zero/bytecodeInterpreter.cpp //
-////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/interpreter/zero/bytecodeInterpreter.cpp --- //
 
 CASE(_new): {
   u2 index = Bytes::get_Java_u2(pc+1);
@@ -95,9 +93,7 @@ CASE(_new): {
   UPDATE_PC_AND_TOS_AND_CONTINUE(3, 1);
 }
 
-//////////////////////////////////////////////////////////////
-// src/hotspot/share/oops/instanceKlass.hpp //
-//////////////////////////////////////////////////////////////
+// --- src/hotspot/share/oops/instanceKlass.hpp --- //
 
 class InstanceKlass: public Klass {
   // 判断klass是否支持快速分配内存空间
@@ -108,6 +104,9 @@ class InstanceKlass: public Klass {
   //  - 这个类的大小超过了FastAllocateSizeLimit
   //  - 这个类是java.lang.Class, java.lang.Class不能直接分配内存空间
   bool can_be_fastpath_allocated() const {
+    // klass的_layout_helper变量中保存了是否支持快速分配的标志
+    // layout_helper_needs_slow_path 在
+    // (_layout_helper & 0x01) != 0 时 返回 true
     return !layout_helper_needs_slow_path(layout_helper());
   }
 }
@@ -116,9 +115,7 @@ class InstanceKlass: public Klass {
 ## 模板解释器
 
 ```cpp
-///////////////////////////////////////////////////////
-// src/hotspot/cpu/aarch64/templateTable_aarch64.cpp //
-///////////////////////////////////////////////////////
+// --- src/hotspot/cpu/aarch64/templateTable_aarch64.cpp --- //
 
 void TemplateTable::_new() {
   transition(vtos, atos);

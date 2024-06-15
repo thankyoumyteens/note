@@ -1,9 +1,7 @@
 # 注册 finalizer
 
 ```cpp
-//////////////////////////////////////////////////////////////////////////
-// src/hotspot/share/interpreter/interpreterRuntime.cpp //
-//////////////////////////////////////////////////////////////////////////
+// --- src/hotspot/share/interpreter/interpreterRuntime.cpp --- //
 
 instanceOop InstanceKlass::register_finalizer(instanceOop i, TRAPS) {
   // 打印注册finalizer相关日志

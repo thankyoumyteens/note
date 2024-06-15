@@ -1,9 +1,7 @@
 # 初始化 TLAB
 
 ```cpp
-///////////////////////////////////////////////////////////
-// src/hotspot/share/memory/universe.cpp //
-///////////////////////////////////////////////////////////
+// --- src/hotspot/share/memory/universe.cpp --- //
 
 void Universe::initialize_tlab() {
   ThreadLocalAllocBuffer::set_max_size(Universe::heap()->max_tlab_size());
@@ -13,9 +11,7 @@ void Universe::initialize_tlab() {
   }
 }
 
-////////////////////////////////////////////////////////////
-// src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp //
-////////////////////////////////////////////////////////////
+// --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.cpp --- //
 
 void ThreadLocalAllocBuffer::startup_initialization() {
   ThreadLocalAllocStats::initialize();
