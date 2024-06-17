@@ -34,3 +34,55 @@
 ![](../img/tl2.jpg)
 
 例题 2
+
+<!--
+\begin{align}
+& 求极限: \\
+& \quad\;\; \lim_{x \to 0} \frac{e^{\tan x} - e^{\sin x}}{x \arcsin ^{2} x} \\
+& \; \, \; // 分母是两个无穷小相乘的话, 用等价无穷小替换 \\
+& \; \, \; // \arcsin x 替换成 x \\
+& \; \, = \lim_{x \to 0} \frac{e^{\tan x} - e^{\sin x}}{x^{3}} \\
+& \; \, \; // 遇到 e^{\Delta} 时, 先把它写成 e^{\Delta} - 1 试试 \\
+& \; \, \; // 提取出 e^{\sin x} \\
+& \; \, = \lim_{x \to 0} e^{\sin x} \frac{e^{\tan x - \sin x} - 1}{x^{3}} \\
+& \; \, \; // 分子是两个无穷小相乘, 用等价无穷小替换, e^{x} - 1 替换成 x \\
+& \; \, = \lim_{x \to 0} e^{\sin x} \frac{\tan x - \sin x}{x^{3}} \\
+& \; \, = 1 \times \lim_{x \to 0} \frac{\tan x - \sin x}{x^{3}} \\
+& \; \, \; // 相加不能用等价无穷小替换, 把分子转化成相乘, 提取出 \tan x \\
+& \; \, = \lim_{x \to 0} \frac{\tan x (1 - \cos x)}{x^{3}} \\
+& \; \, = \lim_{x \to 0} \frac{\tan x}{x} \times \frac{1 - \cos x}{x^{2}} \\
+& \; \, = \lim_{x \to 0} \frac{\tan x}{x} \times \lim_{x \to 0} \frac{1 - \cos x}{x^{2}} \\
+& \; \, \; // 用等价无穷小替换 \\
+& \; \, = \lim_{x \to 0} \frac{x}{x} \times \lim_{x \to 0} \frac{\frac{1}{2} x^{2}}{x^{2}} \\
+& \; \, = \frac{1}{2} \\
+\end{align}
+-->
+
+![](../img/tl3.jpg)
+
+例题 3
+
+<!--
+\begin{align}
+& 求极限: \\
+& \quad\;\; \lim_{x \to 0} \frac{\sqrt{1 + x \cos x} - \sqrt{1 + x}}{x^{3}} \\
+& \; \, \; // 分子是两个根号相减, 要先分子有理化 \\
+& \; \, \; // 用平方差公式 \\
+& \; \, = \lim_{x \to 0} \frac{\frac{(\sqrt{1 + x \cos x})^{2} - (\sqrt{1 + x})^2}{(\sqrt{1 + x \cos x})^{2} - (\sqrt{1 + x})^2} (\sqrt{1 + x \cos x} - \sqrt{1 + x})}{x^{3}} \\
+& \; \, = \lim_{x \to 0} \frac{\frac{(1 + x \cos x) - (1 + x)}{(\sqrt{1 + x \cos x} - \sqrt{1 + x})(\sqrt{1 + x \cos x} + \sqrt{1 + x})} (\sqrt{1 + x \cos x} - \sqrt{1 + x})}{x^{3}} \\
+& \; \, = \lim_{x \to 0} \frac{\frac{(1 + x \cos x) - (1 + x)}{\sqrt{1 + x \cos x} + \sqrt{1 + x}}}{x^{3}} \\
+& \; \, = \lim_{x \to 0} \frac{1}{\sqrt{1 + x \cos x} + \sqrt{1 + x}} \times \frac{x \cos x - x}{x^{3}} \\
+& \; \, \; // 乘号左边是确定型, 把极限(本题是0)带进去, 能算出结果的就是确定型 \\
+& \; \, \; // 确定型直接算 \\
+& \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{x \cos x - x}{x^{3}} \\
+& \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{x (\cos x - 1)}{x^{3}} \\
+& \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{\cos x - 1}{x^{2}} \\
+& \; \, \; // 用等价无穷小替换 \\
+& \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{- \frac{1}{2} x^{2}}{x^{2}} \\
+& \; \, = - \frac{1}{4} \\
+\end{align}
+-->
+
+![](../img/tl4.jpg)
+
+例题 4
