@@ -69,7 +69,7 @@
       - [实例数据](./memory/object/instance.md)
       - [指针压缩](./memory/object/compress.md)
     - [对象的访问定位](./memory/object/locate_objects.md)
-  - [引用](./jdk21/g1/base/reference_obj.md)
+  - [引用](./memory/object/reference_obj.md)
     - [Reference](./memory/object/base_reference.md)
     - [ReferenceHandler](./memory/object/reference_handler.md)
     - [FinalReference](./memory/object/final_reference.md)
