@@ -127,12 +127,6 @@
     - [Reference](./jdk21/g1/base/Reference.md)
     - [ReferenceHandler](./jdk21/g1/base/ReferenceHandler.md)
     - [FinalReference](./jdk21/g1/base/FinalReference.md)
-  - [Java对象内存布局](./jdk21/g1/base/Java对象内存布局.md)
-    - [JOL工具](./jdk21/g1/base/JOL工具.md)
-    - [对象头](./jdk21/g1/base/对象头.md)
-      - [锁升级](./jdk21/g1/base/锁升级.md)
-    - [实例数据](./jdk21/g1/base/实例数据.md)
-    - [指针压缩](./jdk21/g1/base/指针压缩.md)
 
 ## 附录
 
