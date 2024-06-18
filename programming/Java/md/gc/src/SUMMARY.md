@@ -65,6 +65,7 @@
   - [定期清理任务](./jdk21/g1/safepoint/cleanup.md)
 - [字节码文件](./jdk21/g1/class_file/class_file.md)
   - [解析字节码文件](./jdk21/g1/class_file/parse_class_file.md)
+  - [运行时常量池](./jdk21/g1/class_file/parse_class_file.md)
 - [Handle](./jdk21/g1/base/handle.md)
 - [全局卡表](./jdk21/g1/base/global_card_table.md)
 - [反射](./jdk21/g1/reflection/reflection.md)

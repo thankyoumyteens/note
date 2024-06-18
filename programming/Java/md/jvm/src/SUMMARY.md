@@ -63,6 +63,11 @@
   - [对象](./memory/object/object.md)
     - [对象的创建](./memory/object/create_object.md)
     - [对象的内存布局](./memory/object/object_layout.md)
+      - [JOL工具](./memory/object/jol.md)
+      - [对象头](./memory/object/obj_header.md)
+      - [锁升级](./memory/object/lock.md)
+      - [实例数据](./memory/object/instance.md)
+      - [指针压缩](./memory/object/compress.md)
     - [对象的访问定位](./memory/object/locate_objects.md)
 
 - [垃圾回收](./garbage_collection/gc.md)
