@@ -2,7 +2,7 @@
 
 1. 创建 `src/components/UrlEncoder/UrlEncoder.tsx`:
 
-```tsx
+```jsx
 import React from "react";
 
 class UrlEncoder extends React.Component {
@@ -16,7 +16,7 @@ export default UrlEncoder;
 
 2. 在 `src/App.tsx` 中使用:
 
-```tsx
+```jsx
 import React from "react";
 import "./App.css";
 import UrlEncoder from "./components/UrlEncoder/UrlEncoder";

@@ -4,7 +4,7 @@ JSX 允许 HTML 与 JavaScript 混写
 
 遇到 HTML 标签(以 `<` 开头), 就用 HTML 规则解析。遇到代码块(以 `{` 开头), 就用 JavaScript 规则解析。
 
-```tsx
+```jsx
 import React from "react";
 
 const isShow = true;
@@ -27,7 +27,7 @@ export default App;
 
 样式的类名不要用`class`, 要用`className`
 
-```tsx
+```jsx
 import React from "react";
 import "./App.css";
 
@@ -42,7 +42,7 @@ export default App;
 
 内联样式, 要用`style={{key:value}}`的形式, 并且 key 要使用驼峰
 
-```tsx
+```jsx
 import React from "react";
 
 function App() {
@@ -62,7 +62,7 @@ export default App;
 
 也可以写成
 
-```tsx
+```jsx
 import React from "react";
 
 const myStyle = {
@@ -82,7 +82,7 @@ export default App;
 
 若标签首字母以小写字母开头, react 就会把它作为 html 标签渲染, 若 html 中无该标签, 则报错。若标签首字母以大写字母开头, react 就会把它作为组件渲染, 若组件没有定义, 则报错。
 
-```tsx
+```jsx
 import React from "react";
 
 class HelloWorld extends React.Component {
@@ -106,7 +106,7 @@ export default App;
 
 使用大括号可以直接给 html 标签的属性赋值
 
-```tsx
+```jsx
 import React from "react";
 
 const imgPath = require("./images/1.jpg");
@@ -124,7 +124,7 @@ export default App;
 
 ## 渲染列表
 
-```tsx
+```jsx
 import React from "react";
 
 const listData = [
@@ -164,7 +164,7 @@ export default App;
 
 ## 事件处理
 
-```tsx
+```jsx
 import React from "react";
 
 function App() {
@@ -184,7 +184,7 @@ export default App;
 
 ## 更新数据
 
-```tsx
+```jsx
 import React from "react";
 
 function App() {
