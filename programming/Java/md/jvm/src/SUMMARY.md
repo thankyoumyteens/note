@@ -69,6 +69,10 @@
       - [实例数据](./memory/object/instance.md)
       - [指针压缩](./memory/object/compress.md)
     - [对象的访问定位](./memory/object/locate_objects.md)
+  - [引用](./jdk21/g1/base/reference_obj.md)
+    - [Reference](./memory/object/base_reference.md)
+    - [ReferenceHandler](./memory/object/reference_handler.md)
+    - [FinalReference](./memory/object/final_reference.md)
 
 - [垃圾回收](./garbage_collection/gc.md)
   - [判断对象是否存活](./garbage_collection/object_alive.md)

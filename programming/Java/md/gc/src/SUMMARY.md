@@ -4,7 +4,7 @@
   - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [大端和小端](./jdk21/g1/base/endianness.md)
   - [mutator](./jdk21/g1/base/mutator.md)
-  - [串行并行和并发](./jdk21/g1/base/串行并行和并发.md)
+  - [串行并行和并发](./jdk21/g1/base/gc_threads.md)
   - [GCLocker](./jdk21/g1/base/gclocker.md)
   - [NUMA](./jdk21/g1/base/numa.md)
 
@@ -123,10 +123,6 @@
 
 
 - [MMU](./jdk21/g1/region/mmu.md)
-  - [引用](./jdk21/g1/base/引用.md)
-    - [Reference](./jdk21/g1/base/Reference.md)
-    - [ReferenceHandler](./jdk21/g1/base/ReferenceHandler.md)
-    - [FinalReference](./jdk21/g1/base/FinalReference.md)
 
 ## 附录
 
