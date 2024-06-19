@@ -86,3 +86,67 @@
 ![](../img/tl4.jpg)
 
 例题 4
+
+<!--
+\begin{align}
+& 求极限: \\
+& \quad\;\; \lim_{x \to 0} (1 - \sin 2x^{2})^{{\frac{1}{x^2}}} \\
+& \; \, \; // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式 \\
+& \; \, \; // - \sin 2x^{2} 作为 \Delta \\
+& \; \, = \lim_{x \to 0} \left [ (1 - \sin 2x^{2})^{\frac{1}{- \sin 2x^{2}}} \right ] ^{{\frac{1}{x^2}}(- \sin 2x^{2})} \\
+& \; \, = e^{\lim_{x \to 0} {\frac{1}{x^2}}(- \sin 2x^{2})} \\
+& \; \, = e^{- \lim_{x \to 0} {\frac{\sin 2x^{2}}{x^2}}} \\
+& \; \, \; // 等价无穷小替换 \\
+& \; \, = e^{- \lim_{x \to 0} {\frac{2x^{2}}{x^2}}} \\
+& \; \, = e^{-2} \\
+\end{align}
+-->
+
+![](../img/tl5.jpg)
+
+例题 5
+
+<!--
+\begin{align}
+& 求极限: \\
+& \quad\;\; \lim_{x \to 0} (\cos x)^{\frac{1}{x \ln (1 - x)}} \\
+& \; \, \; // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式 \\
+& \; \, \; // \cos x - 1 作为 \Delta \\
+& \; \, = \lim_{x \to 0} \left [ (1 + \cos x - 1)^{\frac{1}{\cos x - 1}} \right ] ^{\frac{\cos x - 1}{x \ln (1 - x)}} \\
+& \; \, = e^{\lim_{x \to 0} \frac{\cos x - 1}{x \ln (1 - x)}} \\
+& \; \, \; // 分子用等价无穷小替换 \\
+& \; \, = e^{\lim_{x \to 0} \frac{- \frac{1}{2} x^{2}}{x \ln (1 - x)}} \\
+& \; \, \; // 分母是无穷小相乘, 也可以用等价无穷小替换 \\
+& \; \, = e^{\lim_{x \to 0} \frac{- \frac{1}{2} x^{2}}{x \cdot (-x)}} \\
+& \; \, = e^{\frac{1}{2}} \\
+\end{align}
+-->
+
+![](../img/tl6.jpg)
+
+例题 6
+
+<!--
+\begin{align}
+& 求极限: \\
+& \quad\;\; \lim_{x \to 0} (\frac{1 + \tan x}{1 + \sin x})^{\frac{1}{x^{3}}} \\
+& \; \, \; // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式 \\
+& \; \, \; // \frac{1 + \tan x}{1 + \sin x} - 1 作为 \Delta \\
+& \; \, = \lim_{x \to 0} \left [ (1 + \frac{1 + \tan x}{1 + \sin x} - 1)^{\frac{1}{\frac{1 + \tan x}{1 + \sin x} - 1}} \right ] ^{\frac{\frac{1 + \tan x}{1 + \sin x} - 1}{x^{3}}} \\
+& \; \, = e^{\lim_{x \to 0} \frac{\frac{1 + \tan x}{1 + \sin x} - 1}{x^{3}}} \\
+& \; \, = e^{\lim_{x \to 0} \frac{\frac{\tan x - \sin x}{1 + \sin x}}{x^{3}}} \\
+& \; \, \; // 提取出确定型 \frac{1}{1 + \sin x} \\
+& \; \, = e^{\lim_{x \to 0} \frac{1}{1 + \sin x} \frac{\tan x - \sin x}{x^{3}}} \\
+& \; \, = e^{\lim_{x \to 0} \frac{\tan x - \sin x}{x^{3}}} \\
+& \; \, \; // 分子是相减的, 不能用等价无穷小替换 \\
+& \; \, \; // 把分子转化成相乘, 提取出 \tan x \\
+& \; \, = e^{\lim_{x \to 0} \frac{\tan x (1 - \cos x)}{x^{3}}} \\
+& \; \, = e^{\lim_{x \to 0} \frac{\tan x}{x} \times \frac{1 - \cos x}{x^{2}}} \\
+& \; \, = e^{\lim_{x \to 0} \frac{\tan x}{x} \times \lim_{x \to 0} \frac{1 - \cos x}{x^{2}}} \\
+& \; \, \; // 用等价无穷小替换 \\
+& \; \, = e^{\lim_{x \to 0} \frac{x}{x} \times \lim_{x \to 0} \frac{\frac{1}{2} x^{2}}{x^{2}}} \\
+& \; \, = e^{\frac{1}{2}} \\
+\end{align}
+-->
+
+![](../img/tl7.jpg)
