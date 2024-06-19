@@ -1,6 +1,38 @@
 # 使用组件
 
-1. 创建 `src/components/UrlEncoder/UrlEncoder.tsx`:
+## 函数形式
+
+1. 创建 `src/components/UrlEncoder/UrlEncoder.js`:
+
+```jsx
+import React from "react";
+
+function UrlEncoder() {
+  return <div>UrlEncoder</div>;
+}
+
+export default UrlEncoder;
+```
+
+2. 在 `src/App.js` 中使用:
+
+```jsx
+import UrlEncoder from "./components/UrlEncoder/UrlEncoder";
+
+function App() {
+  return (
+    <div>
+      <UrlEncoder />
+    </div>
+  );
+}
+
+export default App;
+```
+
+## 类形式
+
+1. 创建 `src/components/UrlEncoder/UrlEncoder.js`:
 
 ```jsx
 import React from "react";
@@ -14,18 +46,18 @@ class UrlEncoder extends React.Component {
 export default UrlEncoder;
 ```
 
-2. 在 `src/App.tsx` 中使用:
+2. 在 `src/App.js` 中使用:
 
 ```jsx
-import React from "react";
-import "./App.css";
 import UrlEncoder from "./components/UrlEncoder/UrlEncoder";
 
-const App: React.FC = () => (
-  <div>
-    <UrlEncoder />
-  </div>
-);
+function App() {
+  return (
+    <div>
+      <UrlEncoder />
+    </div>
+  );
+}
 
 export default App;
 ```

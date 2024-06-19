@@ -2,7 +2,8 @@
 
 ```sh
 # 创建
-npx create-react-app hello --template typescript
+npm install -g create-react-app
+create-react-app hello
 cd hello
 # 运行
 npm start
