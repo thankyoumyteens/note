@@ -22,6 +22,7 @@
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
   - [explain](./mysql/explain.md)
+  - [索引](./mysql/index.md)
 
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)

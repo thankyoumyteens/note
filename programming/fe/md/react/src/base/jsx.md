@@ -181,23 +181,3 @@ function App() {
 
 export default App;
 ```
-
-## 更新数据
-
-```jsx
-import React from "react";
-
-function App() {
-  // count 初始化为0
-  const [count, setCount] = React.useState(0);
-
-  return (
-    <div>
-      <p>{count}</p>
-      <button onClick={() => setCount(count + 1)}>加一</button>
-    </div>
-  );
-}
-
-export default App;
-```
