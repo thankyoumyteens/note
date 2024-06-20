@@ -150,3 +150,41 @@
 -->
 
 ![](../img/tl7.jpg)
+
+例题 7
+
+<!--
+\begin{align}
+& 求极限: \\
+& \quad\;\; \lim_{x \to \infty} \left ( \frac{2x^{2} + 3x + 1}{x - 1} - 2x \right ) \\
+& \; \, \; // 无穷大加/减无穷大型的极限, 且有分母 \to 通分 \\
+& \; \, = \lim_{x \to \infty} \frac{2x^{2} + 3x + 1 - 2x(x - 1)}{x - 1} \\
+& \; \, = \lim_{x \to \infty} \frac{5x + 1}{x - 1} \\
+& \; \, \; // 把x放到分母中, 分子分母同时除x \\
+& \; \, = \lim_{x \to \infty} \frac{5 + \frac{1}{x}}{1 - \frac{1}{x}} \\
+& \; \, = 5 \\
+\end{align}
+-->
+
+![](../img/tl8.jpg)
+
+例题 8
+
+<!--
+\begin{align}
+& 求极限: \\
+& \quad\;\; \lim_{x \to + \infty} \left ( \sqrt{x^{2} + 4x + 1} - x \right ) \\
+& \; \, \; // 无穷大减无穷大型的极限, 且没有分母有根号 \to 有理化 \\
+& \; \, \; // 乘一个极限内的表达式的平方差公式 \\
+& \; \, = \lim_{x \to + \infty} (\sqrt{x^{2} + 4x + 1} - x) \times \frac{(\sqrt{x^{2} + 4x + 1} + x)(\sqrt{x^{2} + 4x + 1} - x)}{(\sqrt{x^{2} + 4x + 1} + x)(\sqrt{x^{2} + 4x + 1} - x)} \\
+& \; \, = \lim_{x \to + \infty} \frac{(\sqrt{x^{2} + 4x + 1} + x)(\sqrt{x^{2} + 4x + 1} - x)}{\sqrt{x^{2} + 4x + 1} + x} \\
+& \; \, = \lim_{x \to + \infty} \frac{x^{2} + 4x + 1 - x^{2}}{\sqrt{x^{2} + 4x + 1} + x} \\
+& \; \, = \lim_{x \to + \infty} \frac{4x + 1}{\sqrt{x^{2} + 4x + 1} + x} \\
+& \; \, \; // 把x放到分母中, 分子分母同时除x \\
+& \; \, = \lim_{x \to + \infty} \frac{4 + \frac{1}{x}}{\frac{\sqrt{x^{2} + 4x + 1}}{x} + 1} \\
+& \; \, = \lim_{x \to + \infty} \frac{4 + \frac{1}{x}}{\sqrt{1 + \frac{4}{x} + \frac{1}{x^{2}}} + 1} \\
+& \; \, = 2 \\
+\end{align}
+-->
+
+![](../img/tl9.jpg)

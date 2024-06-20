@@ -16,3 +16,4 @@
   - [无穷小与无穷大](./further_mathematics/infinity.md)
   - [极限存在准则](./further_mathematics/limit_existence_criterion.md)
   - [两个重要极限](./further_mathematics/two_limit.md)
+  - [连续与间断](./further_mathematics/continuous_and_discontinuous.md)
