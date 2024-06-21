@@ -76,3 +76,57 @@ function App() {
 
 export default App;
 ```
+
+## 多次更新的问题
+
+多次调用 setCount 时, count 的值不会累加:
+
+```jsx
+import React from "react";
+
+function App() {
+  // count 初始化为0
+  const [count, setCount] = React.useState(0);
+
+  const changeCount = () => {
+    // 这么写,只会加一
+    setCount(count + 1);
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => changeCount()}>加二</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+正确写法:
+
+```jsx
+import React from "react";
+
+function App() {
+  // count 初始化为0
+  const [count, setCount] = React.useState(0);
+
+  const changeCount = () => {
+    // 写成函数的形式, 后面的函数可以获取到前一个函数修改的最新的count值
+    setCount((count) => count + 1);
+    setCount((count) => count + 1);
+  };
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => changeCount()}>加二</button>
+    </div>
+  );
+}
+
+export default App;
+```

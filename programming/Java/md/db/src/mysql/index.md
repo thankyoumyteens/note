@@ -66,3 +66,51 @@ B+ 树在 B 树的基础上做了调整, 使其更适合实现外存储索引结
 ![](../img/i2.jpg)
 
 ## 回表查询
+
+```sql
+select * from my_table where account = 'user12'
+```
+
+这条 sql 语句会先从二级索引中找到 account 为 user12 的 key, key 的数据只有主键 12。所以 mysql 还要去聚集索引中查找 key 为 12 的节点, 最终找到了整行的数据。这个过程称为回表查询。
+
+```sql
+select * from my_table where id = 12
+```
+
+这条 sql 使用主键查询, mysql 就可以去聚集索引中查找 key 为 12 的节点, 并找到整行的数据, 这样就不需要回表查询。
+
+## 覆盖索引
+
+覆盖索引: 查询时使用了索引, 并且需要返回的列在该索引中全部能找到。
+
+比如:
+
+```sql
+select * from my_table where id = 12
+select id, account from my_table account = 'user12'
+```
+
+非覆盖索引(需要回表查询):
+
+```sql
+select id, account, role_id from my_table account = 'user12'
+```
+
+## 覆盖索引优化超大分页
+
+```sql
+select * from my_table order by id limit 9999900, 10
+```
+
+在执行这个分页查询时, 需要线把 9999910 条数据先排序, 再返回 9999900 到 9999910 的数据, 很耗费性能。
+
+优化: 通过覆盖索引 + 子查询:
+
+```sql
+select *
+from my_table a
+inner join (
+    -- 覆盖索引, 不用回表
+    select id from my_table order by id limit 9999900, 10
+) b on a.id = b.id
+```
