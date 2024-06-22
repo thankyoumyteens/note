@@ -55,3 +55,35 @@
 ![](../img/cad4.jpg)
 
 例题 1
+
+<!--
+\begin{align}
+& 设函数 f(x) = \begin{cases}
+\frac{\sin ax + e^{2x} - 1}{x}, & x \lt 0 \\
+4, & x = 0 \\
+\frac{b\arctan x + \ln (1 - x)}{x}, & x \gt 0
+\end{cases}, 在 x= 0 处连续, 求常数 a, b 的值 \\
+\\
+& \;\;\;\; \lim_{x \to 0^{-}} f(x) \\
+& = \lim_{x \to 0^{-}} \frac{\sin ax}{x} + \lim_{x \to 0^{-}} \frac{e^{2x} - 1}{x} \\
+& \;\;\;\; // 等价无穷小替换 \\
+& = \lim_{x \to 0^{-}} \frac{ax}{x} + \lim_{x \to 0^{-}} \frac{2x}{x} \\
+& = a + 2 \\
+\\
+& \;\;\;\; f(0) = 0 \\
+\\
+& \;\;\;\; \lim_{x \to 0^{+}} f(x) \\
+& = b \lim_{x \to 0^{+}} \frac{\arctan x}{x} + \lim_{x \to 0^{+}} \frac{\ln (1 - x)}{x} \\
+& \;\;\;\; // 等价无穷小替换 \\
+& = b \lim_{x \to 0^{+}} \frac{x}{x} + \lim_{x \to 0^{+}} \frac{-x}{x} \\
+& = b - 1 \\
+\\
+& 因为 f(x) 在 x= 0 处连续, 所以 \lim_{x \to 0^{-}} f(x) = \lim_{x \to 0^{+}} f(x) = f(0) \\
+& \;\, a + 2 = b - 1 = 4 \\
+& \;\, a = 2, b = 5 \\
+\end{align}
+-->
+
+![](../img/cad5.jpg)
+
+例题 2
