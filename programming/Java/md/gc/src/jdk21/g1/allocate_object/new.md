@@ -49,7 +49,7 @@ CASE(_new): {
       if (result != nullptr) {
         // 把对象的内存空间用0填充:
         //   - 如果TLAB在创建时已经把自己的内存格式化成0, 这步就可以跳过
-        //   - 在debug模式下, 这块内存空间会受ThreadLocalAllocBuffer::allocate影响,
+        //   - 在debug模式下, 这块内存空间会被ThreadLocalAllocBuffer::allocate修改,
         //     所以不管TLAB有没有格式化, 都要重新填充一遍
         if (DEBUG_ONLY(true ||) !ZeroTLAB) {
           size_t hdr_size = oopDesc::header_size();

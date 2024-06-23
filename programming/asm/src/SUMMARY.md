@@ -30,4 +30,5 @@
   - [AT&T汇编和Intel汇编](./x86/at_and_t.md)
   
 - [Apple Silicon汇编](./aarch64/aarch64.md)
+  - [寄存器](./aarch64/register.md)
   - [汇编程序结构](./aarch64/asm_program.md)
