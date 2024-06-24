@@ -87,3 +87,28 @@
 ![](../img/cad5.jpg)
 
 例题 2
+
+<!--
+\begin{align}
+& 设 f(x) = \frac{x^{2} + x - 2}{x^{2} - 1} e^{\frac{1}{x}}, 求函数 f(x) 的间断点并分类 \\
+\\
+& \;\, x = -1, x = 0, x = 1 时 分母为0, 所以 -1, 0, 1 是间断点 \\
+\\
+& \lim_{x \to -1} f(x) 时, 分母趋于0, 分子趋于 -2, \lim_{x \to -1} e^{\frac{1}{x}} 是个正数 \\
+& \lim_{x \to -1} f(x) = \infty, 极限不存在, -1 是第二类间断点 \\
+\\
+& \lim_{x \to 0} f(x) 时, e^{\frac{1}{0}} 不存在, 要分左右极限 \\
+& \lim_{x \to 0^{-}} f(x) = 2\lim_{x \to 0^{-}} e^{\frac{1}{x}} = 0 \\
+& \lim_{x \to 0^{+}} f(x) = 2\lim_{x \to 0^{+}} e^{\frac{1}{x}} = + \infty \\
+& 所以 0 是第二类间断点 \\
+\\
+& \lim_{x \to 1} f(x) = \lim_{x \to 1} \frac{(x - 1)(x + 2)}{(x - 1)(x + 1)} e^{\frac{1}{x}} \\
+& \qquad \quad \;\;\, = \lim_{x \to 1} \frac{x + 2}{x + 1} e^{\frac{1}{x}} \\
+& \qquad \quad \;\;\, = \frac{3}{2} e \\
+& 左右极限存在且相等, 1 是可去间断点 \\
+\end{align}
+-->
+
+![](../img/cad6.jpg)
+
+例题 3
