@@ -32,6 +32,7 @@
   - [ubuntu 安装 git](./Linux/Ubuntu/ubuntu安装git.md)
   - [ubuntu 安装 nginx](./Linux/Ubuntu/ubuntu安装nginx.md)
   - [ubuntu 安装 redis](./Linux/Ubuntu/ubuntu安装redis.md)
+  - [ununtu 安装 mysql](./Linux/Ubuntu/ununtu_mysql_.md)
   - [ununtu 安装 mariadb](./Linux/Ubuntu/ununtu安装mariadb.md)
   - [ubuntu 配置 jdk17](./Linux/Ubuntu/ubuntu配置jdk17.md)
   - [ubuntu 配置 maven](./Linux/Ubuntu/ubuntu配置maven.md)
