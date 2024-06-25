@@ -112,3 +112,31 @@
 ![](../img/cad6.jpg)
 
 例题 3
+
+<!--
+\begin{align}
+& 设 f(x) = \frac{\ln |x|}{x^{2} - 1}, 求 f(x) 的间断点 \\
+\\
+& 间断点是 -1, 0, 1 \\
+\\
+& \lim_{x \to -1} f(x) = \lim_{x \to -1} \frac{1}{x - 1} \times \frac{\ln -x}{x + 1} \\
+& \qquad\qquad\; = - \frac{1}{2} \lim_{x \to -1} \frac{\ln -x}{x + 1} \\
+& \qquad\qquad\; = - \frac{1}{2} \lim_{x \to -1} \frac{\ln [1 - (x + 1)]}{x + 1} \\
+& \qquad\qquad\; = - \frac{1}{2} \lim_{x \to -1} \frac{- (x + 1)}{x + 1} \\
+& \qquad\qquad\; = \frac{1}{2} \\
+& 左右极限存在且相等, -1 是可去间断点 \\
+\\
+& \lim_{x \to 0} f(x), 分母趋于 -1, 分子: 由于 |x| 趋于0^{+}, 所以 ln|x| 趋于 - \infty \\
+& 所以 \lim_{x \to 0} f(x) = + \infty \\
+& 极限不存在, 0 是第二类间断点 \\
+\\
+& \lim_{x \to 1} f(x) = \lim_{x \to -1} \frac{1}{x + 1} \times \frac{\ln x}{x - 1} \\
+& \qquad\qquad\; = \frac{1}{2} \lim_{x \to -1} \frac{\ln x}{x - 1} \\
+& \qquad\qquad\; = \frac{1}{2} \lim_{x \to -1} \frac{\ln [1 + (x - 1)]}{x - 1} \\
+& \qquad\qquad\; = \frac{1}{2} \lim_{x \to -1} \frac{x - 1}{x - 1} \\
+& \qquad\qquad\; = \frac{1}{2} \\
+& 左右极限存在且相等, 11 是可去间断点 \\
+\end{align}
+-->
+
+![](../img/cad7.jpg)

@@ -24,6 +24,7 @@
   - [explain](./mysql/explain.md)
   - [索引](./mysql/index.md)
   - [联合索引](./mysql/compound_indexes.md)
+  - [索引失效](./mysql/indexes_unused.md)
 
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)
