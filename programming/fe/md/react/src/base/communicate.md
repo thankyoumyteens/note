@@ -15,6 +15,16 @@ function Child({ parentCount, parentChangeCount }) {
     </div>
   );
 }
+// 也可以写成:
+// function Child(props) {
+//   return (
+//     <div>
+//       <button onClick={() => props.parentChangeCount(props.parentCount + 1)}>
+//         Increment
+//       </button>
+//     </div>
+//   );
+// }
 
 function Parent() {
   const [count, setCount] = React.useState(0);
@@ -27,6 +37,8 @@ function Parent() {
     <div>
       <p>Count: {count}</p>
       {/* 父组件传递 变量count和函数changeCount 给子组件 */}
+      {/* parentCount是count在子组件中的名称 */}
+      {/* parentChangeCount是changeCount在子组件中的名称 */}
       {/* count的值变化后, parentCount会同步变化 */}
       <Child parentCount={count} parentChangeCount={changeCount} />
     </div>
