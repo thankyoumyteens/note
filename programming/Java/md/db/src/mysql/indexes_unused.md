@@ -89,4 +89,14 @@ explain select * from `test_user` where `username` = 'ccc' and `status` = 1;
 
 key_len 和查询条件只有 `username` 时的值一致。
 
-## 范围查询右边的列, 不能使用索引
+## 在索引列上进行运算时, 索引失效
+
+```sql
+explain select * from `test_user` where substring(`username`, 1, 2) = 'cc';
+```
+
+| id  | select_type | table     | partitions | type | possible_keys | key | key_len | ref | rows | filtered | Extra       |
+| --- | ----------- | --------- | ---------- | ---- | ------------- | --- | ------- | --- | ---- | -------- | ----------- |
+| 1   | SIMPLE      | test_user |            | ALL  |               |     |         |     | 3    | 100.0    | Using where |
+
+## 以%开头的 like 查询, 索引失效

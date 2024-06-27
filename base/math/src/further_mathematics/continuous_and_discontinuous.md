@@ -175,3 +175,16 @@
 ![](../img/cad9.jpg)
 
 例题 2
+
+<!--
+\begin{align}
+& 设 f(x) 在 [0, 2] 上连续, f(0) + 2 \cdot f(1) + 3 \cdot f(2) = 6, 证明: 存在 \xi \in [0, 2], 使 f(\xi) = 1 \\
+& // 闭区间连续, 函数值相加 \Rightarrow 使用介值定理 \\
+& 因为  f(x) 在 [0, 2] 上连续, 所以存在最大值 M 和最小值 m \\
+& 因为 6 \cdot m \le f(0) + 2 \cdot f(1) + 3 \cdot f(2) \le 6 \cdot M \\
+& 所以 6 \cdot m \le 6 \le 6 \cdot M \Rightarrow m \le 1 \le M \\
+& 根据介值定理, 一定存在 \xi \in [0, 2], 使 f(\xi) = 1 \\
+\end{align}
+-->
+
+![](../img/cad10.jpg)
