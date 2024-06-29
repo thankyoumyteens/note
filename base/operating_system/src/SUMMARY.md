@@ -33,3 +33,4 @@
     - [读者-写者问题](./process/readers_writers_problem.md)
     - [哲学家进餐问题](./process/dining_philosophers_problem.md)
     - [管程](./process/monitor.md)
+    - [死锁](./process/deadlock.md)

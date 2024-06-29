@@ -100,3 +100,22 @@ explain select * from `test_user` where substring(`username`, 1, 2) = 'cc';
 | 1   | SIMPLE      | test_user |            | ALL  |               |     |         |     | 3    | 100.0    | Using where |
 
 ## 以%开头的 like 查询, 索引失效
+
+```sql
+-- 索引生效
+explain select * from `test_user` where `username` like 'c%';
+```
+
+| id  | select_type | table     | partitions | type  | possible_keys     | key               | key_len | ref | rows | filtered | Extra                 |
+| --- | ----------- | --------- | ---------- | ----- | ----------------- | ----------------- | ------- | --- | ---- | -------- | --------------------- |
+| 1   | SIMPLE      | test_user |            | range | test_user_index_1 | test_user_index_1 | 202     |     | 1    | 100.0    | Using index condition |
+
+```sql
+-- 索引失效
+explain select * from `test_user` where `username` like '%c';
+explain select * from `test_user` where `username` like '%c%';
+```
+
+| id  | select_type | table     | partitions | type | possible_keys | key | key_len | ref | rows | filtered | Extra       |
+| --- | ----------- | --------- | ---------- | ---- | ------------- | --- | ------- | --- | ---- | -------- | ----------- |
+| 1   | SIMPLE      | test_user |            | ALL  |               |     |         |     | 3    | 33.33    | Using where |
