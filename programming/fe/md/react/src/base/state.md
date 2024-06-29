@@ -130,3 +130,56 @@ function App() {
 
 export default App;
 ```
+
+## 清除数据问题
+
+按钮点击后, inpu 输入的内容不会清空。因为 react 检测到新的组件还是 input 后, 会直接复用原来的组件:
+
+```jsx
+import React from "react";
+
+function App() {
+  const [isShow, setIsShow] = React.useState(true);
+
+  return (
+    <div>
+      <div>
+        {isShow ? (
+          <input type="text" style={{ color: "blue" }} />
+        ) : (
+          <input type="text" style={{ color: "orange" }} />
+        )}
+      </div>
+      {/* 点击后, inpu 输入的内容不会清空 */}
+      <button onClick={() => setIsShow(!isShow)}>切换</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+解决方法: 设置 key, 只要 key 发生变化, 原来的组件就会销毁:
+
+```jsx
+import React from "react";
+
+function App() {
+  const [isShow, setIsShow] = React.useState(true);
+
+  return (
+    <div>
+      <div>
+        {isShow ? (
+          <input type="text" key={isShow} style={{ color: "blue" }} />
+        ) : (
+          <input type="text" key={isShow} style={{ color: "orange" }} />
+        )}
+      </div>
+      <button onClick={() => setIsShow(!isShow)}>切换</button>
+    </div>
+  );
+}
+
+export default App;
+```
