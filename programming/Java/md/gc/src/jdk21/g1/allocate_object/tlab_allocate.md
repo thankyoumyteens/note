@@ -1,7 +1,5 @@
 # 从 TLAB 中分配对象
 
-new 字节码指令首先会尝试从TLAB中分配对象的内存空间。
-
 Java 堆(region)是所有线程共享的, 为了避免每次分配对象时都要加锁, JVM 使用 TLAB 来优先分配对象, 只有当无法在 TLAB 中分配对象时, JVM 才需要加锁分配。
 
 只有在为线程分配一个新的 TLAB 时, 才需要锁住 Java 堆, 而在 TLAB 中分配对象时, 是不需要加锁的, 所以对象在 TLAB 中的分配称为快速分配。
@@ -36,6 +34,8 @@ private:
 ![](../../../img/tlab.png)
 
 当一个线程的 TLAB 满了(比如上图线程 1 的 TLAB1), 线程只要向 JVM 申请一个新的 TLAB 即可。因为 TLAB 只是 Eden 区的一块空闲内存, 线程不需要对满了的 TLAB 做额外的处理。
+
+new 字节码指令首先会尝试从 TLAB 中分配对象的内存空间:
 
 ```cpp
 // --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp --- //
