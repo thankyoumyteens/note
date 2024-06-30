@@ -50,3 +50,35 @@
 ![](../img/dad3.jpg)
 
 例题 2
+
+<!--
+\begin{align}
+& 设函数 f(x) = \begin{cases}
+\ln (e + 2x), & x \gt 0 \\
+1, & x = 0 \\
+\frac{1}{1 + x^{2}}, & x \lt 0 \\
+\end{cases}, 求 f(x) 在 x = 0 处的可导性 \\
+\\
+& f'_{+}(0) = \lim_{x \to 0^{+}} \frac{f(x) - f(0)}{x - 0} \\
+& \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln (e + 2x) - 1}{x} \\
+& \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln (e + 2x) - \ln e}{x} \\
+& \quad\quad \,\, // 对数运算法则: \ln (a \div b) = \ln a - \ln b \\
+& \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln \frac{e + 2x}{e}}{x} \\
+& \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln (1 + \frac{2x}{e})}{x} \\
+& \quad\quad \,\, // 等价无穷小替换 \\
+& \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\frac{2x}{e}}{x} \\
+& \quad\quad \,\, = \frac{2}{e} \\
+\\
+& f'_{-}(0) = \lim_{x \to 0^{-}} \frac{f(x) - f(0)}{x - 0} \\
+& \quad\quad \,\, = \lim_{x \to 0^{-}} \frac{\frac{1}{1 + x^{2}} - 1}{x} \\
+& \quad\quad \,\, = \lim_{x \to 0^{-}} \frac{\frac{-x^{2}}{1 + x^{2}}}{x} \\
+& \quad\quad \,\, = \lim_{x \to 0^{-}} \frac{-x}{1 + x^{2}} \\
+& \quad\quad \,\, = 0 \\
+\\
+& 所以 f(x) 在 x = 0 处不可导 \\
+\end{align}
+-->
+
+![](../img/dad4.jpg)
+
+## 微分
