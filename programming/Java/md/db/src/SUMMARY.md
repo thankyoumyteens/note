@@ -35,5 +35,6 @@
   - [生成随机数](./oracle/生成随机数.md)
   - [遍历表中所有记录](./oracle/遍历表中所有记录.md)
   - [从表中随机取出一条数据](./oracle/从表中随机取出一条数据.md)
+  - [数组](./oracle/数组.md)
   - [sleep](./oracle/sleep.md)
   - [数字转字符串](./oracle/number2str.md)

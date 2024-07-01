@@ -17,6 +17,7 @@
     - [基本使用](./echarts/quick_start.md)
     - [不显示也不报错](./echarts/不显示也不报错.md)
     - [柱状堆叠图](./echarts/堆叠图.md)
+    - [环形图中间显示文字](./echarts/环形图中间显示文字.md)
     - [x轴禁止隐藏坐标](./echarts/x轴禁止隐藏坐标.md)
     - [y轴禁止显示小数](./echarts/y轴禁止显示小数.md)
 

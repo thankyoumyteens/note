@@ -19,6 +19,7 @@
     - [访达显示隐藏文件](./macos/finder_hidden.md)
     - [访达跳转到指定目录](./macos/finder_goto.md)
     - [删除开机启动项](./macos/open_on_startup.md)
+    - [屏幕取色](./macos/take_color.md)
 
 - [Debian](./Linux/debian/debian.md)
   - [安装debian](./Linux/debian/install_os.md)
