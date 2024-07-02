@@ -99,6 +99,9 @@
 <!--
 \begin{align}
 & 1. \; 函数在一个点可导和函数在一个点可微是等价的, 即可导必可微, 可微必可导 \\
-&
+& 2. \; 如果 \mathrm{d}y \bigg| _{x = x_{0}} = A\mathrm{d}x, 则 f'(x_{0}) = A \\
+& 3. \; 设 y = f(x) 处处可导, 则 \mathrm{d}y = \mathrm{d}f(x) = f'(x)\mathrm{d}x \\
 \end{align}
 -->
+
+![](../img/dad6.jpg)

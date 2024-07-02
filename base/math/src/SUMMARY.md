@@ -18,3 +18,4 @@
   - [两个重要极限](./further_mathematics/two_limit.md)
   - [连续与间断](./further_mathematics/continuous_and_discontinuous.md)
   - [导数与微分](./further_mathematics/derivatives_and_differentials.md)
+  - [求导工具](./further_mathematics/derivative.md)
