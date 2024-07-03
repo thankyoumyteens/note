@@ -35,6 +35,8 @@
   - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
 
 - [SpringBoot](./springboot/springboot.md)
+  - [项目搭建](./springboot/create_project.md)
+  - [使用WebSocket](./springboot/ws_project.md)
   - [多环境配置](./springboot/profiles.md)
   - [整合Kafka](./springboot/kafka.md)
   - [重写FeignClient输出日志](./springboot/重写FeignClient输出日志.md)
