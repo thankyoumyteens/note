@@ -27,6 +27,8 @@
   - [索引失效](./mysql/indexes_unused.md)
   - [事务](./mysql/transaction.md)
   - [MVCC](./mysql/mvcc.md)
+  - [主从同步](./mysql/master_slave.md)
+  - [分库分表](./mysql/sharding.md)
 
 - [Oracle](./oracle/oracle.md)
   - [日期操作](./oracle/date.md)

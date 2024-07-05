@@ -30,5 +30,19 @@
 ## 导数的四则运算法则
 
 <!--
+\begin{align}
+& 1. \; (u \pm v)' = u' \pm v' \\
+& 2. \; (u \cdot v)' = u'v + uv' \\
+& 3. \; (ku)' = ku', k 为常数 \\
+& 4. \; (u \cdot v \cdot w)' = u'vw + uv'w + uvw' \\
+& 5. \; (\frac{u}{v})' = \frac{u'v + uv'}{v^{2}}, v \ne 0 \\
+\end{align}
+-->
+
+![](../img/d2.jpg)
+
+## 复合函数求导
+
+<!--
 
 -->
