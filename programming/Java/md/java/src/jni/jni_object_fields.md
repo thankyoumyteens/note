@@ -1,4 +1,4 @@
-# 访问的对象字段
+# 访问对象的字段
 
 1. 创建 `src/main/java/org/example/jnidemo/TestJNIInstanceVariable.java` 文件:
 

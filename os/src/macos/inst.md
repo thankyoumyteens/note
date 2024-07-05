@@ -200,7 +200,7 @@ source ~/.zshrc
 ```sh
 # chrome
 brew install --cask google-chrome
-# subversion
+# svn
 brew install subversion
 # vlc
 brew install vlc
@@ -226,7 +226,6 @@ brew install wget
 - [AnotherRedisDesktopManager](https://gitee.com/qishibo/AnotherRedisDesktopManager/releases)
 - [dbeaver](https://github.com/dbeaver/dbeaver/releases)
 - [tabby](https://github.com/Eugeny/tabby/releases)
-- [parallels desktop](https://www.parallels.cn/products/desktop/download/) 虚拟机
 - [UTM](https://github.com/utmapp/UTM/releases) 虚拟机
 - [Snipaste](https://zh.snipaste.com/download.html) 截图
 - [obs](https://github.com/obsproject/obs-studio/releases) 录屏

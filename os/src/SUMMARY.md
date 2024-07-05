@@ -12,6 +12,7 @@
     - [tar使用](./macos/tar.md)
     - [zip使用](./macos/zip.md)
     - [7z使用](./macos/7zz.md)
+    - [svn使用](./macos/svn.md)
     - [更改文件的默认打开方式](./macos/default_app.md)
     - [外接键盘调换cmmand和option的键位](./macos/keyboard.md)
     - [ParallelsDesktop按键映射](./macos/pd_keyboard.md)

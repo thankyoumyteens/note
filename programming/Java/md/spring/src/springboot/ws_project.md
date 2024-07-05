@@ -34,29 +34,48 @@ public class WebSocketConfiguration {
 ```java
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import demo.model.dto.MyDTO;
+import demo.service.MyService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Component
-// 连接地址 ws://ip:端口/wsDemo/用户Id
-@ServerEndpoint("/wsDemo/{userId}")
-public class WsDemoServer {
+@ServerEndpoint("/myWs") // 连接地址 -> ws://IP:端口/myWs
+public class MyWebSocketServer {
 
-    private static final ConcurrentHashMap<String, WsDemoServer> CLIENTS = new ConcurrentHashMap<>();
+    @Resource
+    private MyService myService;
+
+    // 解决Component 注入Service 为 null
+    // 通过serviceHandler使用service
+    private static MyWebSocketServer serviceHandler;
+
+    @PostConstruct
+    public void init() {
+        serviceHandler = this;
+        serviceHandler.myService = this.myService;
+    }
+
+    private static final ConcurrentHashMap<String, MyWebSocketServer> CLIENTS = new ConcurrentHashMap<>();
 
     private Session session;
 
     private String userId;
 
     @OnOpen
-    public void onOpen(Session session, @PathParam("userId") String userId) {
+    public void onOpen(Session session) {
+        String userId = UUID.randomUUID().toString();
         this.session = session;
         this.userId = userId;
         if (CLIENTS.containsKey(userId)) {
@@ -65,40 +84,35 @@ public class WsDemoServer {
         } else {
             CLIENTS.put(userId, this);
         }
-        log.info("新连接: {}", userId);
+        log.info("新连接 userId: {}", userId);
         try {
             sendMessage("连接成功");
         } catch (IOException e) {
-            log.error("用户{}连接失败", userId, e);
+            log.error("用户 {} 连接失败", userId, e);
         }
     }
 
     @OnClose
     public void onClose() {
         CLIENTS.remove(userId);
-        log.info("用户{}断开连接", userId);
+        serviceHandler.myService.clearCache(userId);
+        log.info("用户 {} 断开连接", userId);
     }
 
     @OnMessage
     public void onMessage(String message, Session session) {
-        log.info("用户消息:" + userId + ",报文:" + message);
+        log.info("用户: {}, 消息: {}", userId, message);
         try {
-            JSONObject jsonObject = JSON.parseObject(message);
-            jsonObject.put("fromUserId", this.userId);
-            String toUserId = jsonObject.getString("toUserId");
-            if (CLIENTS.containsKey(toUserId)) {
-                CLIENTS.get(toUserId).sendMessage(jsonObject.toJSONString());
-            } else {
-                log.error("userId:{}不存在", toUserId);
-            }
+            MyDTO p = JSON.parseObject(message, MyDTO.class);
+            serviceHandler.myService.doSth(userId, session, p);
         } catch (Exception e) {
-            log.error("{}发送消息失败", userId, e);
+            log.error("用户 {} 发送消息失败", userId, e);
         }
     }
 
     @OnError
     public void onError(Session session, Throwable error) {
-        log.error("异常:{},原因:{}", this.userId, error.getMessage());
+        log.error("用户: {} , 异常: {}", this.userId, error.getMessage());
     }
 
     public void sendMessage(String message) throws IOException {

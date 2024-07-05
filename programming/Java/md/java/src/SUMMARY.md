@@ -45,8 +45,9 @@
     - [JNI字符串操作](./jni/jni_str_op.md)
   - [访问基本类型数组](./jni/jni_primitive_array.md)
     - [JNI基本类型数组操作](./jni/jni_pa_op.md)
-  - [访问的对象字段](./jni/jni_object_fields.md)
+  - [访问对象的字段](./jni/jni_object_fields.md)
     - [JNI对象字段操作](./jni/jni_fields_op.md)
+  - [访问类变量](./jni/jni_static_vars.md)
 
 - [编译期注解处理器](./bytecode/AbstractProcessor.md)
 

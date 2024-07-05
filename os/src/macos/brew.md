@@ -58,6 +58,7 @@ brew install 软件名
 ```sh
 brew update
 brew upgrade
+brew upgrade 软件名
 ```
 
 ## 卸载软件
