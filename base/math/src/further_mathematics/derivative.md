@@ -44,5 +44,12 @@
 ## 复合函数求导
 
 <!--
-
+\begin{align}
+& \; y = f(u) 可导, u = \varphi (x) 可导, 且 \varphi '(x) \ne 0, \\
+& 则 \frac{\mathrm{d} y}{\mathrm{d} x}
+= \frac{\mathrm{d} y}{\mathrm{d} u} \cdot \frac{\mathrm{d} u}{\mathrm{d} x}
+= f'(u) \cdot \varphi '(x) = f'[\varphi (x)] \varphi '(x) \\
+\end{align}
 -->
+
+![](../img/d3.jpg)
