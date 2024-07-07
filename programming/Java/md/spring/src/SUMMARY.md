@@ -5,12 +5,12 @@
   - [添加Filter](./servlet/add_filter.md)
   - [使用包装类修改请求和响应数据](./servlet/wrapper.md)
 
-- [MyBatis](./mybatis/MyBatis.md)
-  - [include标签传参](./mybatis/include标签传参.md)
-  - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
-
 - [Spring](./spring/spring.md)
-  - [自动装配](./spring/use/自动装配.md)
+  - [单例bean的线程安全](./spring/use/bean_concurrency.md)
+  - [AOP](./spring/use/aop.md)
+  - [事务](./spring/use/transaction.md)
+
+  <!-- - [自动装配](./spring/use/自动装配.md)
   - [Aware 接口](./spring/use/aware.md)
   - [初始化 bean](./spring/use/initializeBean.md)
   - [constructor-arg](./spring/use/constructor-arg.md)
@@ -22,7 +22,7 @@
     - [BeanDefinitionParser 实现](./spring/use/BeanDefinitionParser.md)
   - [自定义属性](./spring/use/自定义属性.md)
   - [自定义子标签](./spring/use/自定义子标签.md)
-  - [属性编辑器](./spring/use/属性编辑器.md)
+  - [属性编辑器](./spring/use/属性编辑器.md) -->
 
 - [SpringBoot](./springboot/springboot.md)
   - [项目搭建](./springboot/create_project.md)
@@ -32,6 +32,10 @@
   - [重写FeignClient输出日志](./springboot/重写FeignClient输出日志.md)
   - [Hibernate Validator](./springboot/validator.md)
     - [SpringBoot集成](./springboot/validator_with_sb.md)
+
+- [MyBatis](./mybatis/MyBatis.md)
+  - [include标签传参](./mybatis/include标签传参.md)
+  - [根据参数生成临时表](./mybatis/根据参数生成临时表.md)
 
 - [Spring源码分析](./spring/Spring源码分析.md)
   - [Spring整体架构](./spring/Spring整体架构.md)
