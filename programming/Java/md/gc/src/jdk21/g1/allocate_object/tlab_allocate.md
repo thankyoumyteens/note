@@ -1,6 +1,6 @@
 # 从 TLAB 中分配对象
 
-Java 堆(region)是所有线程共享的, 为了避免每次分配对象时都要加锁, JVM 使用 TLAB 来优先分配对象, 只有当无法在 TLAB 中分配对象时, JVM 才需要加锁分配。
+Java 堆(region)是所有线程共享的, 为了避免每次分配对象时都要加锁, JVM 使用 TLAB 来优先分配对象, 只有当无法在 TLAB 中分配对象时, JVM 才需要直接在堆(region)中加锁分配。
 
 只有在为线程分配一个新的 TLAB 时, 才需要锁住 Java 堆, 而在 TLAB 中分配对象时, 是不需要加锁的, 所以对象在 TLAB 中的分配称为快速分配。
 
@@ -56,7 +56,12 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
     // Skip mangling the space corresponding to the object header to
     // ensure that the returned space is not considered parsable by
     // any concurrent GC thread.
+    // 填充新对象的内存区域
+    // 为了让并发的GC线程扫描时可以直接跳过这个新分配的对象
+    
+    // 跳过对象头
     size_t hdr_size = oopDesc::header_size();
+    // 把对象用 0xBAADBABE 填充
     Copy::fill_to_words(obj + hdr_size, size - hdr_size, badHeapWordVal);
 #endif // ASSERT
     // 移动_top指针, 增加这个对象大小

@@ -1,4 +1,6 @@
-# 直接在 region 中分配
+# 直接在堆中分配
+
+当对象太大或者 JVM 判断现有的 TLAB 还可以分配更多小一点的对象时, 当前对象会直接在 TLAB 外面(堆中)分配。
 
 ```cpp
 // --- src/hotspot/share/gc/shared/memAllocator.cpp --- //

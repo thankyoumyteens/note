@@ -148,7 +148,7 @@ HeapWord* MemAllocator::mem_allocate_slow(Allocation& allocation) const {
       return mem;
     }
   }
-  // 对象太大或内存不足, 直接在TLAB外面分配对象内存
+  // 对象太大或内存不足, 直接在TLAB外面(堆中)分配对象内存
   return mem_allocate_outside_tlab(allocation);
 }
 ```
