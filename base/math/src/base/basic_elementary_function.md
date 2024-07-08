@@ -23,12 +23,13 @@
 
 <!--
 \begin{align}
-& \ln a = \log_{10}{a} \\
+& \, \ln a = \log_{10}{a} \\
 \\
 & 对数的运算法则: \\
-& \ln (a \times b) = \ln a + \ln b \\
-& \ln (a \div b) = \ln a - \ln b \\
-& \ln a^{n} = n \ln a \\
+& \, \ln (a \times b) = \ln a + \ln b \\
+& \, \ln (a \div b) = \ln a - \ln b \\
+& \, \ln a^{n} = n \ln a \\
+& \;\, a^{b} = e^{b \ln a} \\
 \end{align}
 -->
 

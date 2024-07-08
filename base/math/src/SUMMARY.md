@@ -19,3 +19,4 @@
   - [连续与间断](./further_mathematics/continuous_and_discontinuous.md)
   - [导数与微分](./further_mathematics/derivatives_and_differentials.md)
   - [求导工具](./further_mathematics/derivative.md)
+  - [隐函数](./further_mathematics/implicit_function.md)
