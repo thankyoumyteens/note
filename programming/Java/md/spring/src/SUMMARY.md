@@ -9,6 +9,7 @@
   - [单例bean的线程安全](./spring/use/bean_concurrency.md)
   - [AOP](./spring/use/aop.md)
   - [事务](./spring/use/transaction.md)
+  - [事务失效的场景](./spring/use/transaction_bug.md)
 
   <!-- - [自动装配](./spring/use/自动装配.md)
   - [Aware 接口](./spring/use/aware.md)
