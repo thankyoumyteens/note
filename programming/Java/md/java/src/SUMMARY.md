@@ -48,6 +48,7 @@
   - [访问对象的字段](./jni/jni_object_fields.md)
     - [JNI对象字段操作](./jni/jni_fields_op.md)
   - [访问类变量](./jni/jni_static_vars.md)
+  - [访问对象的方法](./jni/jni_obj_method.md)
 
 - [编译期注解处理器](./bytecode/AbstractProcessor.md)
 
@@ -60,8 +61,7 @@
   - [泛型](./bytecode/asm/signature.md)
   - [Label](./bytecode/asm/Label.md)
   - [visitXxxInsn方法](./bytecode/asm/visitInsn.md)
-  - [自己的AsmUtil](./bytecode/asm/AsmUtil.md)
-    - [复制一个类的字段](./bytecode/asm/copy_fields.md)
+  - [复制一个类的字段](./bytecode/asm/copy_fields.md)
 
 - [Javassist](./bytecode/javassist/javassist.md)
   - [基本用法](./bytecode/javassist/quick_start.md)
