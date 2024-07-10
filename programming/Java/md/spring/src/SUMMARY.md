@@ -8,6 +8,7 @@
 - [Spring](./spring/spring.md)
   - [单例bean的线程安全](./spring/use/bean_concurrency.md)
   - [bean的生命周期](./spring/use/bean_life_cycle.md)
+  - [bean的循环依赖](./spring/use/bean_circular_dependencies.md)
   - [AOP](./spring/use/aop.md)
   - [事务](./spring/use/transaction.md)
   - [事务失效的场景](./spring/use/transaction_bug.md)

@@ -1,5 +1,12 @@
 # 安装软件
 
+## app store
+
+```
+QuickRec-Screen Recording
+bob
+```
+
 ## 初始化 git
 
 git 在安装 Command Line Tools (CLT) for Xcode 时自带:
@@ -228,7 +235,6 @@ brew install wget
 - [tabby](https://github.com/Eugeny/tabby/releases)
 - [UTM](https://github.com/utmapp/UTM/releases) 虚拟机
 - [Snipaste](https://zh.snipaste.com/download.html) 截图
-- [obs](https://github.com/obsproject/obs-studio/releases) 录屏
 - [downkyicore](https://github.com/yaobiao131/downkyicore/releases)
 - [drawio](https://github.com/jgraph/drawio-desktop/releases)
 - [Motrix](https://github.com/agalwood/Motrix/releases)
