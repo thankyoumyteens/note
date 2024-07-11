@@ -13,7 +13,7 @@ demo_dir
 
 ```py
 import zipfile
-rom pathlib import Path
+from pathlib import Path
 
 def make_zipfile(source_dir, output_file_path):
     with zipfile.ZipFile(output_file_path, "w") as zipf:
@@ -34,7 +34,7 @@ zip 包中的结构:
 
 ```py
 import zipfile
-rom pathlib import Path
+from pathlib import Path
 
 def make_zipfile(source_dir, output_file_path):
     with zipfile.ZipFile(output_file_path, "w") as zipf:
