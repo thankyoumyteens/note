@@ -56,5 +56,15 @@
 例题 3
 
 <!--
-
+\begin{align}
+& 设 2^{xy} = 3x + y 确定 y 是 x 的函数, 求 y'(0) \\
+\\
+& \;\, x = 0 时, 解出 y = 1 \\
+& \;\, // 把 y 看成是 x 的函数, 等式两边对 x 求导 \\
+& \;\, 2^{xy} \ln 2 \cdot (y + x \frac{\mathrm{d} y}{\mathrm{d} x}) = 3 + \frac{\mathrm{d} y}{\mathrm{d} x} \\
+& \;\, // 把 x = 0, y = 1 带进去 \\
+& \;\, y'(0) = \ln 2 - 3 \\
+\end{align}
 -->
+
+![](../img/if4.jpg)

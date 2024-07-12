@@ -20,3 +20,4 @@
   - [导数与微分](./further_mathematics/derivatives_and_differentials.md)
   - [求导工具](./further_mathematics/derivative.md)
   - [隐函数](./further_mathematics/implicit_function.md)
+  - [参数方程](./further_mathematics/parametric_equation.md)
