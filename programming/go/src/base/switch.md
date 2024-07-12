@@ -1,6 +1,8 @@
-# if 和 switch
+# 分支
 
 ## if
+
+if 的条件表达式不加括号。
 
 ```go
 username := "test"
@@ -12,13 +14,11 @@ if username == "test" && age > 10 {
 } else {
 	fmt.Printf("3")
 }
-// 输出:
-// 2
 ```
 
 ## switch
 
-在 go 中 case 是一个独立的代码块, 执行完毕后不会紧接着执行下一个 case。
+case 执行完毕后不会紧接着执行下一个 case。
 
 ```go
 x := 2
@@ -38,7 +38,7 @@ default:
 
 ## fallthrough
 
-使用 fallthrough 会强制执行后面的 case 语句。
+使用 fallthrough 会继续执行后面的 case 语句。
 
 ```go
 x := 2

@@ -2,11 +2,13 @@
 
 切片(slice)是动态数组, 长度会动态扩展。
 
+- `var 变量名 []类型`
+
 ```go
 var s []string
-// 可以不初始化就使用
-s = append(s, "element1", "element2")
-// element1
+// 追加元素
+s = append(s, "e1", "e2")
+// 使用元素
 fmt.Println(s[0])
 ```
 
@@ -15,8 +17,6 @@ fmt.Println(s[0])
 ```go
 // 创建并初始化切片
 s := []string{"a", "b", "c", "d", "e"}
-// [a b c d e]
-fmt.Println(s)
 
 // 创建切片, 并设置初始空间
 s := make([]int, 3)
