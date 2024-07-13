@@ -55,5 +55,3 @@ function App() {
 
 export default App;
 ```
-
-## 子组件向父组件传递数据

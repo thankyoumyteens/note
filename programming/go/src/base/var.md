@@ -3,8 +3,29 @@
 定义变量的 3 种方式:
 
 - `var 变量名 变量类型 = 变量值`, 变量值可选
+  ```go
+  var name string = "zhangsan"
+  var age int
+  ```
 - `var 变量名 = 变量值`
-- `变量 := 变量值`, 这种方式只能在函数里用, 不能用于全局变量
+  ```go
+  var name = "zhangsan"
+  ```
+- `变量 := 变量值`, 这种方式只能声明函数里的局部变量, 不能用于全局变量
+  ```go
+  name := "zhangsan"
+  ```
+
+## 变量块
+
+把同一类功能用到的变量定义在一起, 增强可读性:
+
+```go
+var (
+    name string = "zhangsan"
+    age  int    = 10
+)
+```
 
 ## 匿名变量
 
@@ -18,16 +39,4 @@ func main() {
     value, _ := getTwoValue()
     fmt.Println(value)
 }
-```
-
-## 定义多个变量
-
-```go
-var a, b, c = "a", true, 100
-fmt.Println(a, b, c)
-var (
-    d = 1
-    e = 2
-)
-fmt.Println(d, e)
 ```
