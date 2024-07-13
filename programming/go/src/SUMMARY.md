@@ -6,6 +6,7 @@
   - [语法](./base/syntax.md)
     - [变量](./base/var.md)
     - [常量](./base/const.md)
+    - [枚举](./base/enum.md)
     - [字符串操作](./base/str.md)
     - [分支](./base/switch.md)
     - [循环](./base/for.md)
