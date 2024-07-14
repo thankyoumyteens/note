@@ -1,40 +1,22 @@
 # 字符串
 
-## 字符串拼接
+## 拼接
 
 ```go
-// Sprintf 性能差
-username := "test"
-age := 10
-str1 := fmt.Sprintf("username=%s, age=%d", username, age)
-fmt.Println(str1)
-
-// string builder 性能好
-username := "test"
-age := 10
-var sb strings.Builder
-sb.WriteString("username=")
-sb.WriteString(username)
-sb.WriteString(", ")
-sb.WriteString("age=")
-sb.WriteString(strconv.Itoa(age))
-
-str1 := sb.String()
-fmt.Println(str1)
+str1 := "a"
+// 拼接字符串
+str2 := str1 + "b"
+// 拼接其它类型
+str3 := str1 + strconv.Itoa(100)
 ```
 
 ## 比较
 
 ```go
-// 等于
 str1 := "str1"
 str2 := "str2"
 // false
 fmt.Println(str1 == str2)
-
-// 大小
-str1 := "str1"
-str2 := "str2"
 // false
 fmt.Println(str1 > str2)
 ```
@@ -103,4 +85,19 @@ fmt.Println(strings.Trim(str1, " "))
 fmt.Println(strings.ToLower("TEST"))
 // TEST
 fmt.Println(strings.ToUpper("test"))
+```
+
+## string builder
+
+```go
+username := "test"
+age := 10
+var sb strings.Builder
+sb.WriteString("username=")
+sb.WriteString(username)
+sb.WriteString(", ")
+sb.WriteString("age=")
+sb.WriteString(strconv.Itoa(age))
+
+str1 := sb.String()
 ```
