@@ -15,6 +15,7 @@
 
 - [SpringBoot](./springboot/springboot.md)
   - [SpringMVC的执行流程](./springboot/mvc.md)
+  - [自动配置原理](./springboot/auto_config.md)
   - [项目搭建](./springboot/create_project.md)
   - [使用WebSocket](./springboot/ws_project.md)
   - [多环境配置](./springboot/profiles.md)

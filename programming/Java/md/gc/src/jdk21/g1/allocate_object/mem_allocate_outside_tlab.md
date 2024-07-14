@@ -10,17 +10,30 @@
  */
 HeapWord* MemAllocator::mem_allocate_outside_tlab(Allocation& allocation) const {
   allocation._allocated_outside_tlab = true;
+  // 在堆中分配对象内存, 由于使用的是G1GC,
+  // Universe::heap()返回的是G1CollectedHeap的对象
   HeapWord* mem = Universe::heap()->mem_allocate(_word_size, &allocation._overhead_limit_exceeded);
   if (mem == nullptr) {
+    // 堆中分配失败
     return mem;
   }
 
   size_t size_in_bytes = _word_size * HeapWordSize;
+  // 更新线程的_allocated_bytes属性
+  // _allocated_bytes记录了这个线程一共分配了多少内存
+  // void incr_allocated_bytes(jlong size) { _allocated_bytes += size; }
   _thread->incr_allocated_bytes(size_in_bytes);
 
   return mem;
 }
+```
 
+在堆中分配的对象也分两种情况
+
+1. 对象特别大, 需要分配到 humongous region 中, humongous region 由 1 个或多个 region 组成
+2. 不那么大的对象, 分配到新生代 region 中
+
+```cpp
 // --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 HeapWord*
@@ -36,6 +49,14 @@ G1CollectedHeap::mem_allocate(size_t word_size,
   // 分配普通对象
   return attempt_allocation(word_size, word_size, &dummy);
 }
+```
+
+## 分配普通对象
+
+JVM 会先使用 CAS 分配对象的内存, 如果 CAS 失败, 才会真正加锁分配。
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
 inline HeapWord* G1CollectedHeap::attempt_allocation(size_t min_word_size,
                                                      size_t desired_word_size,
