@@ -32,3 +32,6 @@
 - [Apple Silicon汇编](./aarch64/aarch64.md)
   - [寄存器](./aarch64/register.md)
   - [汇编程序结构](./aarch64/asm_program.md)
+  - [赋值指令](./aarch64/move.md)
+  - [计算指令](./aarch64/calc.md)
+  - [寻址方式](./aarch64/addressing_modes.md)

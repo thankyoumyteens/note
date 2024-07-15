@@ -1,8 +1,8 @@
 # VMThread
 
-VMThread 就是 JVM 线程自身, JVM 线程在 JVM 的运行过程中只会被创建一次(只有一个实例), 并且随着 JVM 销毁而被销毁。
+在 JVM 创建时，将会在全局范围内创建一个单例原生线程 VMThread(虚拟机线程)。该线程的一个重要职责是：维护一个虚拟机操作队列(VMOperationQueue)，接受其他线程请求虚拟机级别的操作 (VM_Operation)，如执行 GC 等任务。
 
-VMThread 会开启一个无限循环, 然后不断地从一个 VM_Operation 队列中取出 VM_Operation 并且执行这个 VM_Operation。
+VMThread 会开启一个无限循环, 然后不断地从虚拟机操作队列中取出 VM_Operation 并且执行这个 VM_Operation。
 
 VM_Operation 是通过其他线程放入到队列中的, 最常见的就是执行 GC。比如 GCLocker 执行 GC 的时候, 会调用对应的 CollectedHeap 中的 collect 函数:
 
