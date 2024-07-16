@@ -407,4 +407,8 @@ CallJavaMainInNewThread(jlong stack_size, void* args) {
     pthread_attr_destroy(&attr);
     return rslt;
 }
+
+static void* ThreadJavaMain(void* args) {
+    return (void*)(intptr_t)JavaMain(args);
+}
 ```

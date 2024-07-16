@@ -72,6 +72,7 @@
 
 - [启动](./jdk21/g1/launcher/launcher.md)
   - [main函数](./jdk21/g1/launcher/main_function.md)
+  - [JavaMain](./jdk21/g1/launcher/java_main.md)
 
 ## todo
 
