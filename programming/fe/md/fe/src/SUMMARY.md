@@ -5,6 +5,7 @@
   - [不显示也不报错](./echarts/不显示也不报错.md)
   - [隐藏图例](./echarts/隐藏图例.md)
   - [x轴禁止隐藏坐标](./echarts/x轴禁止隐藏坐标.md)
+  - [x轴滚动条](./echarts/scroll_x.md)
   - [y轴禁止显示小数](./echarts/y轴禁止显示小数.md)
   - [柱状图](./echarts/柱状图.md)
     - [柱状堆叠图](./echarts/堆叠图.md)

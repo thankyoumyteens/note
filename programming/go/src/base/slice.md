@@ -2,86 +2,51 @@
 
 切片(slice)是动态数组, 长度会动态扩展。
 
-- `var 变量名 []类型`
-
-```go
-var s []string
-// 追加元素
-s = append(s, "e1", "e2")
-// 使用元素
-fmt.Println(s[0])
-```
-
-## 初始化
-
-```go
-// 创建并初始化切片
-s := []string{"a", "b", "c", "d", "e"}
-
-// 创建切片, 并设置初始空间
-s := make([]int, 3)
-s[2] = 1
-// [0 0 1]
-fmt.Println(s)
-
-// 从数组/切片中创建
-arr := [5]string{"a", "b", "c", "d", "e"}
-// 取数组索引[0,2)的元素创建切片
-s := arr[0:2]
-// [a b]
-fmt.Println(s)
-```
-
-## append
-
-使用 append()函数向 slice 中追加一个元素。append()返回一个新的 slice, 原始的 slice 会保留不变。
-
-```go
-s1 := []int{0, 1}
-s2 := []int{100, 200}
-
-s1 = append(s1, 2)
-s1 = append(s1, 3, 4, 5)
-s1 = append(s1, s2...)
-s1 = append(s1, s2[1:]...)
-// [0 1 2 3 4 5 100 200 200]
-fmt.Println(s1)
-```
-
-## 复制
-
-```go
-s := []int{0, 1}
-
-copy1 := s
-copy2 := make([]int, 2)
-copy(copy2, s)
-
-// [0 1]
-fmt.Println(copy1)
-// [0 1]
-fmt.Println(copy2)
-
-// 修改源切片, 使用copy函数复制的切片不会受影响
-s[0] = -1
-// [-1 1]
-fmt.Println(copy1)
-// [0 1]
-fmt.Println(copy2)
-```
-
-## 实现方式
-
 slice 底层结构是 struct, 包含三个字段:
 
 ```go
 type slice struct {
-	array unsafe.Pointer
-	len   int
-	cap   int
+    array unsafe.Pointer
+    len   int
+    cap   int
 }
 ```
 
 - array 指向底层数组
 - len 表示切片的长度
 - cap 表示切片的容量
+
+## 切片的基本使用
+
+```go
+// var 变量名 []类型
+var s []string
+// 追加元素, append返回一个新的 slice, 原始的 slice 不变
+s = append(s, "e1", "e2")
+// 使用元素
+fmt.Println(s[0])
+```
+
+## 初始化方式
+
+```go
+// 创建并初始化切片
+s := []string{"a", "b", "c", "d", "e"}
+
+// 使用make创建切片, 并设置初始长度(len)为5, 容量(cap)为10
+// 初始值为数据类型的默认值
+s := make([]int, 5, 10)
+```
+
+## 切片化
+
+```go
+s1 := []string{"a", "b", "c", "d", "e"}
+s2 := s1[1:3]
+fmt.Println(s2)
+// 输出: [b c]
+```
+
+## 底层实现
+
+![](../img/slice.jpg)

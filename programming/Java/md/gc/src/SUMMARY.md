@@ -70,6 +70,9 @@
 - [全局卡表](./jdk21/g1/base/global_card_table.md)
 - [反射](./jdk21/g1/reflection/reflection.md)
 
+- [启动](./jdk21/g1/launcher/launcher.md)
+  - [main函数](./jdk21/g1/launcher/main_function.md)
+
 ## todo
 
 - [JDK8的G1](./g1/g1.md)
