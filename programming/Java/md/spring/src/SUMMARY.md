@@ -25,8 +25,9 @@
     - [SpringBoot集成](./springboot/validator_with_sb.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
-  - [include标签传参](./mybatis/include.md)
   - [延迟加载](./mybatis/lazy.md)
+  - [缓存](./mybatis/cache.md)
+  - [include标签传参](./mybatis/include.md)
   - [根据参数生成临时表](./mybatis/tmp_table.md)
 
 - [Spring源码分析](./spring/spring_src.md)
