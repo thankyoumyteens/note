@@ -22,6 +22,7 @@
   - [执行GC并分配对象](./jdk21/g1/allocate_object/do_collection_pause.md)
   - [在全局卡表中标记](./jdk21/g1/allocate_object/dirty_young_block.md)
   - [初始化对象](./jdk21/g1/allocate_object/initialize_object.md)
+
 - [分配大对象](./jdk21/g1/allocate_object/allocate_humongous.md)
   - [开启并发标记](./jdk21/g1/allocate_object/start_conc_mark.md)
   - [分配大对象](./jdk21/g1/allocate_object/humongous_obj_allocate.md)
@@ -30,6 +31,7 @@
   - [寻找多个region](./jdk21/g1/allocate_object/allocate_from_free_list.md)
   - [扩容后重新分配](./jdk21/g1/allocate_object/expand_and_allocate_humongous.md)
   - [初始化region空间](./jdk21/g1/allocate_object/humongous_initialize_regions.md)
+
 - [region](./jdk21/g1/region/region.md)
   - [region的3种状态](./jdk21/g1/region/region_state.md)
   - [初始化region的大小](./jdk21/g1/region/setup_heap_region_size.md)
@@ -44,30 +46,40 @@
   - [申请新region](./jdk21/g1/region/allocate_new_region.md)
     - [从空闲region列表获取region](./jdk21/g1/region/allocate_from_frl.md)
     - [扩大堆空间](./jdk21/g1/region/expand_single_region.md)
+
 - [TLAB](./jdk21/g1/tlab/tlab.md)
   - [初始化TLAB](./jdk21/g1/tlab/init_tlab.md)
   - [refill_waste_limit](./jdk21/g1/tlab/refill_waste_limit.md)
   - [计算新的TLAB大小](./jdk21/g1/tlab/compute_size.md)
   - [填充dummy对象](./jdk21/g1/tlab/fill_with_dummy_object.md)
   - [创建新的TLAB](./jdk21/g1/tlab/allocate_new_tlab.md)
+
 - [类的加载](./jdk21/g1/load_class/load_class.md)
   - [类的初始化](./jdk21/g1/load_class/initialize_class.md)
   - [类的连接](./jdk21/g1/load_class/link_class.md)
   - [注册finalizer](./jdk21/g1/load_class/register_finalizer.md)
+
 - [垃圾回收](./jdk21/g1/gc/gc.md)
   - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
+
 - [VMThread](./jdk21/g1/base/vm_thread.md)
   - [VMThread::execute](./jdk21/g1/base/vm_thread_execute.md)
   - [VMThread::loop](./jdk21/g1/base/vm_thread_loop.md)
+
 - [线程握手](./jdk21/g1/base/handshake.md)
   - [VM_HandshakeAllThreads](./jdk21/g1/base/handshake_op.md)
+
 - [安全点](./jdk21/g1/safepoint/safepoint.md)
   - [定期清理任务](./jdk21/g1/safepoint/cleanup.md)
+
 - [字节码文件](./jdk21/g1/class_file/class_file.md)
   - [解析字节码文件](./jdk21/g1/class_file/parse_class_file.md)
   - [运行时常量池](./jdk21/g1/class_file/parse_class_file.md)
+
 - [Handle](./jdk21/g1/base/handle.md)
+
 - [全局卡表](./jdk21/g1/base/global_card_table.md)
+
 - [反射](./jdk21/g1/reflection/reflection.md)
 
 - [启动](./jdk21/g1/launcher/launcher.md)

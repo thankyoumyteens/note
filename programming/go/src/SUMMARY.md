@@ -12,9 +12,12 @@
     - [循环](./base/for.md)
     - [goto](./base/goto.md)
     - [函数](./base/func.md)
-    - [defer](./base/defer.md)
+    - [自动释放资源](./base/defer.md)
   - [集合](./base/collections.md)
     - [数组](./base/array.md)
     - [切片](./base/slice.md)
     - [map](./base/map.md)
+  - [包](./base/package.md)
+
+- [常用操作](./base/op.md)
   - [字符串操作](./base/str.md)
