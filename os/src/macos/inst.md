@@ -225,6 +225,7 @@ brew install wget
 - [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
 - [Jetbrains PyCharm](https://www.jetbrains.com/pycharm/download/other.html)
 - [Jetbrains WebStorm](https://www.jetbrains.com/webstorm/download/other.html)
+- [Jetbrains GoLand](https://www.jetbrains.com/go/download/other.html)
 - [Android Studio](https://developer.android.google.cn/studio?hl=zh-cn)
 - [vscodium](https://github.com/VSCodium/vscodium/releases)
 - [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)

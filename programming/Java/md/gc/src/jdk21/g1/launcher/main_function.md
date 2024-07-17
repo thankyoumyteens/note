@@ -155,8 +155,6 @@ main(int argc, char **argv)
 
 ## JLI_Launch
 
-LoadJavaVM 创建虚拟机。JVMInit 初始化 JVM 并在新线程中继续执行。
-
 ```c
 // --- src/java.base/share/native/libjli/java.c --- //
 
@@ -275,6 +273,56 @@ JLI_Launch(int argc, char ** argv,              /* main argc, argv */
     SetJavaLauncherProp();
 
     return JVMInit(&ifn, threadStackSize, argc, argv, mode, what, ret);
+}
+```
+
+## LoadJavaVM
+
+在 LoadJavaVM 中会把创建虚拟机(CreateJavaVM)等函数指针赋值给 ifn, 这样一来, 在主线程 JavaMain 中就可以通过 ifn 来调用相应的函数创建 JVM 了。
+
+```cpp
+// --- src/java.base/macosx/native/libjli/java_md_macosx.m --- //
+
+jboolean
+LoadJavaVM(const char *jvmpath, InvocationFunctions *ifn)
+{
+    void *libjvm;
+
+    JLI_TraceLauncher("JVM path is %s\n", jvmpath);
+
+#ifndef STATIC_BUILD
+    libjvm = dlopen(jvmpath, RTLD_NOW + RTLD_GLOBAL);
+#else
+    libjvm = dlopen(NULL, RTLD_FIRST);
+#endif
+    if (libjvm == NULL) {
+        JLI_ReportErrorMessage(DLL_ERROR1, __LINE__);
+        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());
+        return JNI_FALSE;
+    }
+
+    ifn->CreateJavaVM = (CreateJavaVM_t)
+        dlsym(libjvm, "JNI_CreateJavaVM");
+    if (ifn->CreateJavaVM == NULL) {
+        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());
+        return JNI_FALSE;
+    }
+
+    ifn->GetDefaultJavaVMInitArgs = (GetDefaultJavaVMInitArgs_t)
+        dlsym(libjvm, "JNI_GetDefaultJavaVMInitArgs");
+    if (ifn->GetDefaultJavaVMInitArgs == NULL) {
+        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());
+        return JNI_FALSE;
+    }
+
+    ifn->GetCreatedJavaVMs = (GetCreatedJavaVMs_t)
+    dlsym(libjvm, "JNI_GetCreatedJavaVMs");
+    if (ifn->GetCreatedJavaVMs == NULL) {
+        JLI_ReportErrorMessage(DLL_ERROR2, jvmpath, dlerror());
+        return JNI_FALSE;
+    }
+
+    return JNI_TRUE;
 }
 ```
 

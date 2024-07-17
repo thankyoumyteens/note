@@ -10,6 +10,8 @@
 
 ## InvocationFunctions
 
+InvocationFunctions 中定义了 3 个函数指针.
+
 ```c
 // --- src/java.base/share/native/libjli/java.h --- //
 
@@ -21,6 +23,8 @@ typedef struct {
 ```
 
 ## JavaVM
+
+JavaVM 是一个结构体，它包含了一组函数。这几个函数为 JVM 提供了诸如连接线程、断开线程和销毁虚拟机等重要功能。
 
 ```cpp
 // --- build/macosx-aarch64-serverANDclient-slowdebug/support/modules_include/java.base/jni.h --- //
@@ -77,6 +81,12 @@ struct JNIEnv_ {
 ```
 
 ## JavaMain 的执行流程
+
+1. 调用 InitializeJVM 初始化虚拟机，将 JavaVM 和 JNIEnv 类型的成员指向正确的 jni 函数
+2. 调用 LoadMainClass 获取应用程序主类(main class)
+3. 获取应用程序主方法(java 的 main 方法)的 MethodID
+4. 传递应用程序参数并执行主方法
+5. 主方法执行完毕后，调用 DetachCurrentThread 与主线程断开连接, 等待非守护线程结束，然后调用 DestroyJavaVM 销毁 JVM
 
 ```c
 // --- src/java.base/share/native/libjli/java.c --- //
@@ -293,4 +303,51 @@ JavaMain(void* _args)
 
     LEAVE();
 }
+
+/*
+ * Always detach the main thread so that it appears to have ended when
+ * the application's main method exits.  This will invoke the
+ * uncaught exception handler machinery if main threw an
+ * exception.  An uncaught exception handler cannot change the
+ * launcher's return code except by calling System.exit.
+ *
+ * Wait for all non-daemon threads to end, then destroy the VM.
+ * This will actually create a trivial new Java waiter thread
+ * named "DestroyJavaVM", but this will be seen as a different
+ * thread from the one that executed main, even though they are
+ * the same C thread.  This allows mainThread.join() and
+ * mainThread.isAlive() to work as expected.
+ */
+#define LEAVE() \
+    do { \
+        if ((*vm)->DetachCurrentThread(vm) != JNI_OK) { \
+            JLI_ReportErrorMessage(JVM_ERROR2); \
+            ret = 1; \
+        } \
+        if (JNI_TRUE) { \
+            (*vm)->DestroyJavaVM(vm); \
+            return ret; \
+        } \
+    } while (JNI_FALSE)
+
+#define CHECK_EXCEPTION_NULL_LEAVE(CENL_exception) \
+    do { \
+        if ((*env)->ExceptionOccurred(env)) { \
+            JLI_ReportExceptionDescription(env); \
+            LEAVE(); \
+        } \
+        if ((CENL_exception) == NULL) { \
+            JLI_ReportErrorMessage(JNI_ERROR); \
+            LEAVE(); \
+        } \
+    } while (JNI_FALSE)
+
+#define CHECK_EXCEPTION_LEAVE(CEL_return_value) \
+    do { \
+        if ((*env)->ExceptionOccurred(env)) { \
+            JLI_ReportExceptionDescription(env); \
+            ret = (CEL_return_value); \
+            LEAVE(); \
+        } \
+    } while (JNI_FALSE)
 ```

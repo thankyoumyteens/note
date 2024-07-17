@@ -8,11 +8,11 @@ if 的条件表达式不加括号。
 username := "test"
 age := 10
 if username == "test" && age > 10 {
-	fmt.Printf("1")
+    fmt.Printf("1")
 } else if username == "test" && age > 5 {
-	fmt.Printf("2")
+    fmt.Printf("2")
 } else {
-	fmt.Printf("3")
+    fmt.Printf("3")
 }
 ```
 
@@ -25,13 +25,13 @@ x := 2
 
 switch x {
 case 1:
-	fmt.Printf("1")
+    fmt.Printf("1")
 case 2:
-	fmt.Printf("2")
+    fmt.Printf("2")
 case 3:
-	fmt.Printf("3")
+    fmt.Printf("3")
 default:
-	fmt.Printf("default")
+    fmt.Printf("default")
 }
 // 输出: 2
 ```
@@ -44,13 +44,13 @@ default:
 x := 2
 switch x {
 case 1:
-	fmt.Printf("1")
-	fallthrough
+    fmt.Printf("1")
+    fallthrough
 case 2:
-	fmt.Printf("2")
-	fallthrough
+    fmt.Printf("2")
+    fallthrough
 case 3:
-	fmt.Printf("3")
+    fmt.Printf("3")
 }
 // 输出: 23
 ```
