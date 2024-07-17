@@ -1,20 +1,16 @@
-# JDK 动态代理的用法
+# JDK 动态代理
 
-DemoInterface 接口
+1. 接口
 
 ```java
-package org.example;
-
 public interface DemoInterface {
     void call();
 }
 ```
 
-DemoInterface 接口的实现类
+2. 接口的实现类
 
 ```java
-package org.example;
-
 public class DemoInterfaceImpl implements DemoInterface {
     public void call() {
         System.out.println("ok");
@@ -22,10 +18,9 @@ public class DemoInterfaceImpl implements DemoInterface {
 }
 ```
 
-实现动态代理
+3. 实现动态代理
 
 ```java
-package org.example;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -52,10 +47,9 @@ public class DemoProxy implements InvocationHandler {
 }
 ```
 
-使用动态代理
+4. 使用动态代理
 
 ```java
-package org.example;
 import java.lang.reflect.Proxy;
 
 public class App {
@@ -68,17 +62,7 @@ public class App {
 }
 ```
 
-输出
-
-```
-pre
-ok
-post
-
-Process finished with exit code 0
-```
-
-# 把动态生成的代理类保存到磁盘
+## 把动态生成的代理类保存到磁盘
 
 在程序入口加下下面一行
 
@@ -102,7 +86,7 @@ public class App {
 
 ![](./img/generated_proxy_class.png)
 
-# 反编译动态生成的代理类
+## 反编译动态生成的代理类
 
 ```java
 //

@@ -20,7 +20,7 @@
   - [使用WebSocket](./springboot/ws_project.md)
   - [多环境配置](./springboot/profiles.md)
   - [整合Kafka](./springboot/kafka.md)
-  - [重写FeignClient输出日志](./springboot/重写FeignClient输出日志.md)
+  - [重写FeignClient输出日志](./springboot/feign_log.md)
   - [Hibernate Validator](./springboot/validator.md)
     - [SpringBoot集成](./springboot/validator_with_sb.md)
 
@@ -29,8 +29,8 @@
   - [延迟加载](./mybatis/lazy.md)
   - [根据参数生成临时表](./mybatis/tmp_table.md)
 
-- [Spring源码分析](./spring/Spring源码分析.md)
-  - [Spring整体架构](./spring/Spring整体架构.md)
+- [Spring源码分析](./spring/spring_src.md)
+  - [Spring整体架构](./spring/spring_overview.md)
   - [ApplicationContext](./spring/ac/ApplicationContext.md)
     - [ClassPathXmlApplicationContext](./spring/ac/ClassPathXmlApplicationContext.md)
       - [refresh的准备工作](./spring/ac/prepareRefresh.md)

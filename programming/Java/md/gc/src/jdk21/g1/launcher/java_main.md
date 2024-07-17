@@ -10,6 +10,72 @@
 
 ## InvocationFunctions
 
+```c
+// --- src/java.base/share/native/libjli/java.h --- //
+
+typedef struct {
+    CreateJavaVM_t CreateJavaVM;
+    GetDefaultJavaVMInitArgs_t GetDefaultJavaVMInitArgs;
+    GetCreatedJavaVMs_t GetCreatedJavaVMs;
+} InvocationFunctions;
+```
+
+## JavaVM
+
+```cpp
+// --- build/macosx-aarch64-serverANDclient-slowdebug/support/modules_include/java.base/jni.h --- //
+
+typedef JavaVM_ JavaVM;
+
+struct JavaVM_ {
+    const struct JNIInvokeInterface_ *functions;
+
+    jint DestroyJavaVM() {
+        return functions->DestroyJavaVM(this);
+    }
+    jint AttachCurrentThread(void **penv, void *args) {
+        return functions->AttachCurrentThread(this, penv, args);
+    }
+    jint DetachCurrentThread() {
+        return functions->DetachCurrentThread(this);
+    }
+
+    jint GetEnv(void **penv, jint version) {
+        return functions->GetEnv(this, penv, version);
+    }
+    jint AttachCurrentThreadAsDaemon(void **penv, void *args) {
+        return functions->AttachCurrentThreadAsDaemon(this, penv, args);
+    }
+};
+```
+
+## JNIEnv
+
+JNIEnv 中包含了大量的 JNI 函数以供 JVM 和用户的 JNI 代码调用。
+
+```cpp
+// --- build/macosx-aarch64-serverANDclient-slowdebug/support/modules_include/java.base/jni.h --- //
+
+typedef JNIEnv_ JNIEnv;
+
+struct JNIEnv_ {
+    const struct JNINativeInterface_ *functions;
+
+    // ...
+    jclass GetObjectClass(jobject obj) {
+        return functions->GetObjectClass(this,obj);
+    }
+
+    // ...
+
+    jmethodID GetMethodID(jclass clazz, const char *name,
+                          const char *sig) {
+        return functions->GetMethodID(this,clazz,name,sig);
+    }
+    // ...
+};
+```
+
 ## JavaMain 的执行流程
 
 ```c

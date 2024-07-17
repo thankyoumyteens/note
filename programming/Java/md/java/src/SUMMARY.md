@@ -1,11 +1,11 @@
 # Summary
 
 - [Java](./java/java.md)
-  - [正则表达式](./java/正则表达式.md)
+  - [正则表达式](./java/regex.md)
   - [路径和文件](./java/path_and_file.md)
     - [路径操作](./java/path.md)
     - [文件操作](./java/file.md)
-  - [日期操作](./java/日期操作.md)
+  - [日期操作](./java/date.md)
   - [BigDecimal](./java/BigDecimal.md)
   - [集合](./java/collection.md)
     - [List去重](./java/list_distinct.md)
@@ -22,8 +22,8 @@
     - [异步IO](./java/io/aio.md)
 
 - [动态代理](./proxy/proxy.md)
-  - [JDK 动态代理](./proxy/JDK动态代理.md)
-  - [CGLIB 动态代理](./proxy/CGLIB动态代理.md)
+  - [JDK动态代理](./proxy/jdk_proxy.md)
+  - [CGLIB动态代理](./proxy/cglib_proxy.md)
 
 - [JAR文件](./jar/jar.md)
   - [MANIFEST.MF文件](./jar/mf.md)
