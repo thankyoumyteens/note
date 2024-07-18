@@ -8,6 +8,7 @@
     - [常量](./base/const.md)
     - [枚举](./base/enum.md)
     - [结构体](./base/struct.md)
+    - [指针](./base/pointer.md)
     - [分支](./base/switch.md)
     - [循环](./base/for.md)
     - [goto](./base/goto.md)
