@@ -3,22 +3,29 @@
 用来实现和 java 类的实例方法类似的功能。
 
 ```go
-type Test struct{}
+package main
 
-func (t Test) methodA() int {
-    // t相当于this
-    return 1
+import "fmt"
+
+type Test struct {
+    name string
 }
 
-func (t *Test) methodB(a, b int) int {
+// 为Test添加方法
+func (t Test) getName() string {
     // t相当于this
-    return 1
+    return t.name
 }
-```
 
-使用方法
+// 为Test添加方法
+func (t *Test) setName(name string) {
+    // t相当于this
+    t.name = name
+}
 
-```go
-t1 := Test{}
-r := t1.methodA()
+func main() {
+    var t Test
+    t.setName("kevin")
+    fmt.Println(t.getName())
+}
 ```
