@@ -24,6 +24,9 @@
   - [Hibernate Validator](./springboot/validator.md)
     - [SpringBoot集成](./springboot/validator_with_sb.md)
 
+- [Spring Cloud](./springcloud/springcloud.md)
+  - [注册中心](./springcloud/registry.md)
+
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)
   - [缓存](./mybatis/cache.md)
