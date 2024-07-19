@@ -86,7 +86,13 @@
   - [main函数](./jdk21/g1/launcher/main_function.md)
   - [JavaMain](./jdk21/g1/launcher/java_main.md)
   - [InitializeJVM](./jdk21/g1/launcher/initialize_jvm.md)
+  - [create_vm](./jdk21/g1/launcher/create_vm.md)
   - [调用java主方法](./jdk21/g1/launcher/call_java_main_method.md)
+
+- [退出](./jdk21/g1/exit/exit.md)
+  - [jni_DestroyJavaVM](./jdk21/g1/exit/jni_destroy_java_vm.md)
+  - [vm_exit](./jdk21/g1/exit/vm_exit.md)
+  - [destroy_vm](./jdk21/g1/exit/destroy_vm.md)
 
 ## todo
 
