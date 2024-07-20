@@ -1,6 +1,7 @@
 # Summary
 
-- [基础语法](./base/base.md)
+- [基础](./base/base.md)
+  - [输入输出](./base/cin_cout.md)
   - [使用异或交换两个变量的值](./base/xor/swap_value.md)
   - [使用位运算判断一个数是奇数还是偶数](./base/bitwise_operations/odd.md)
   - [动态内存分配](./base/allocation/allocation.md)

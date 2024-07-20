@@ -26,6 +26,7 @@
 
 - [Spring Cloud](./springcloud/springcloud.md)
   - [注册中心](./springcloud/registry.md)
+  - [负载均衡](./springcloud/load_balancer.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)
