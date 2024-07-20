@@ -26,7 +26,7 @@ func main() {
 
 ## 等待协程执行完闭
 
-使用 `sync.WaitGroup`, 有三个方法:
+使用 `sync.WaitGroup`:
 
 1. Add: 设置计数
 2. Done: 计数减一
@@ -56,5 +56,46 @@ func main() {
     }
     // 等待协程执行完
     eg.Wait()
+}
+```
+
+## 互斥锁
+
+使用 `sync.Mutex`:
+
+1. Lock: 加锁
+2. Unlock: 解锁
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+func main() {
+    sharedMap := make(map[int]string)
+
+    var (
+        eg   sync.WaitGroup
+        // 锁
+        lock sync.Mutex
+    )
+    eg.Add(10)
+    for i := 0; i < 10; i++ {
+        go func(indexFromLoop int) {
+            defer func() {
+                // 解锁
+                lock.Unlock()
+                eg.Done()
+            }()
+            // 加锁
+            lock.Lock()
+            sharedMap[indexFromLoop] = "ok"
+        }(i)
+    }
+    eg.Wait()
+    fmt.Println(sharedMap)
 }
 ```
