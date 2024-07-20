@@ -1,7 +1,6 @@
 # Summary
 
 - [操作系统概述](./overview/overview.md)
-
   - [内核程序和应用程序](./overview/mode.md)
   - [中断](./overview/interrupt.md)
   - [系统调用](./overview/system_call.md)
@@ -34,3 +33,5 @@
     - [哲学家进餐问题](./process/dining_philosophers_problem.md)
     - [管程](./process/monitor.md)
     - [死锁](./process/deadlock.md)
+
+- [内存](./memory/memory.md)
