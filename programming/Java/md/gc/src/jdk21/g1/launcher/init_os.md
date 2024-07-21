@@ -101,6 +101,17 @@ void os::Bsd::initialize_system_info() {
 
 ## init_2
 
+OS 模块还有一部分配置是允许外部参数进行控制的。当解析完全局参数后，就可以根据参数进行配置。
+
+1. 快速线程时钟初始化
+2. 使用 mmap 分配共享内存，配置大页内存
+3. 初始化内核信号，安装信号处理函数 SR_handler，用作线程执行过程中的 suspended/resumed 处理。操作系统信号(signal)，作为进程间通信的一种手段，用来通知进程发生了某种类型的系统事件
+4. 配置线程栈：设置栈大小、分配线程初始栈等
+5. 设置文件描述符数量
+6. 初始化时钟，用来串行化线程创建
+7. 向系统注册 atexit 函数
+8. 初始化线程优先级策略
+
 ```cpp
 // --- src/hotspot/os/bsd/os_bsd.cpp --- //
 
@@ -123,9 +134,10 @@ jint os::init_2(void) {
   }
 
   // Not supported.
-  FLAG_SET_ERGO(UseNUMA, false);
+  FLAG_SET_ERGO(UseNUMA, false); // 使用NUMA
   FLAG_SET_ERGO(UseNUMAInterleaving, false);
 
+  // 最大文件描述符数量
   if (MaxFDLimit) {
     // set the number of file descriptors to max. print out error
     // if getrlimit/setrlimit fails but continue regardless.
@@ -155,6 +167,7 @@ jint os::init_2(void) {
   // call to exit(3C). There can be only 32 of these functions registered
   // and atexit() does not set errno.
 
+  // 允许向系统注册atexit函数
   if (PerfAllowAtExitRegistration) {
     // only register atexit functions if PerfAllowAtExitRegistration is set.
     // atexit functions can be delayed until process exit time, which
@@ -179,6 +192,27 @@ jint os::init_2(void) {
     objc_registerThreadWithCollectorFunction = (objc_registerThreadWithCollector_t) dlsym(handleLibObjc, OBJC_GCREGISTER);
   }
 #endif
+
+  return JNI_OK;
+}
+
+// -- src/hotspot/os/posix/signals_posix.cpp -- //
+
+int PosixSignals::init() {
+  // initialize suspend/resume support - must do this before signal_sets_init()
+  if (SR_initialize() != 0) {
+    vm_exit_during_initialization("SR_initialize failed");
+    return JNI_ERR;
+  }
+
+  signal_sets_init();
+
+  // Initialize data for jdk.internal.misc.Signal and BREAK_SIGNAL's handler.
+  if (!ReduceSignalUsage) {
+    jdk_misc_signal_init();
+  }
+
+  install_signal_handlers();
 
   return JNI_OK;
 }

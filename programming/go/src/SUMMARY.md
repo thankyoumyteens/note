@@ -22,6 +22,7 @@
     - [map](./base/map.md)
   - [包](./base/package.md)
   - [协程](./base/coroutine.md)
+  - [协程通信](./base/coroutine_communicate.md)
 
 - [常用操作](./base/op.md)
   - [字符串操作](./base/str.md)

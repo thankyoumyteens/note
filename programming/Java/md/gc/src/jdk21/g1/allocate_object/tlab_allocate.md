@@ -29,7 +29,7 @@ private:
 }
 ```
 
-图中灰色表示已分配对象的空间, 白色表示空闲的空间, start 指针和 end 指针分别指向了一个 tlab 的起始位置和结束位置, top 指针指向已分配内存的边界, 在 tlab 中分配对象只需要移动 top 指针就可以了:
+图中灰色表示已分配对象的空间, 白色表示空闲的空间, start 指针和 end 指针分别指向了一个 tlab 的起始位置和结束位置, top 指针指向已分配内存的边界, 在 tlab 中分配对象只需要向 end 方向移动 top 指针就可以了:
 
 ![](../../../img/tlab.png)
 
@@ -58,7 +58,7 @@ inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
     // any concurrent GC thread.
     // 填充新对象的内存区域
     // 为了让并发的GC线程扫描时可以直接跳过这个新分配的对象
-    
+
     // 跳过对象头
     size_t hdr_size = oopDesc::header_size();
     // 把对象用 0xBAADBABE 填充
