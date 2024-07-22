@@ -4,11 +4,10 @@
 
 线程通信的方法:
 
-1. volatile
-2. synchronized 临界区
-3. ReentrantLock/Condition 消息队列
-4. CountDownLatch
-5. LockSupport
-6. Socket
-7. 信号量机制 Semaphore
-8. 管道通信
+1. synchronized 临界区
+2. ReentrantLock/Condition 消息队列
+3. CountDownLatch
+4. LockSupport
+5. Socket
+6. 信号量机制 Semaphore
+7. 管道通信

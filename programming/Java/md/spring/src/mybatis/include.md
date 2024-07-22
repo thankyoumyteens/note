@@ -10,9 +10,6 @@ mybatis 的 include 标签主要是用于 sql 语句的可重用, 并且可以�
     <if test="demoParam != null">
         #{demoParam}
     </if>
-    <if test="demoParam == null">
-        'none'
-    </if>
 </sql>
 
 <select id="test2" resultType="java.lang.String">

@@ -26,7 +26,7 @@ func main() {
 
 ## 等待协程执行完闭
 
-使用 `sync.WaitGroup`:
+使用 `sync.WaitGroup`, 类似于 java 中的 CountDownLatch:
 
 1. Add: 设置计数
 2. Done: 计数减一

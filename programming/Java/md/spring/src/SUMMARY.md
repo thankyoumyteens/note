@@ -19,15 +19,18 @@
   - [项目搭建](./springboot/create_project.md)
   - [使用WebSocket](./springboot/ws_project.md)
   - [多环境配置](./springboot/profiles.md)
-  - [整合Kafka](./springboot/kafka.md)
   - [重写FeignClient输出日志](./springboot/feign_log.md)
-  - [Hibernate Validator](./springboot/validator.md)
-    - [SpringBoot集成](./springboot/validator_with_sb.md)
+  - [HibernateValidator](./springboot/validator.md)
+
+- [SpringBoot集成](./springboot/integration/integration.md)
+  - [集成HibernateValidator](./springboot/integration/validator_with_sb.md)
+  - [集成Kafka](./springboot/integration/kafka.md)
 
 - [Spring Cloud](./springcloud/springcloud.md)
   - [注册中心](./springcloud/registry.md)
   - [负载均衡](./springcloud/load_balancer.md)
   - [熔断](./springcloud/fuse.md)
+  - [微服务监控](./springcloud/monitoring.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)
