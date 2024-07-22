@@ -13,3 +13,6 @@
   - [圆环图](./echarts/圆环图.md)
     - [圆环图中间显示文字](./echarts/环形图中间显示文字.md)
     - [视觉引导线](./echarts/视觉引导线.md)
+  - [折线图](./echarts/line.md)
+    - [平滑曲线图](./echarts/smooth_line.md)
+    - [曲线下方区域颜色渐变](./echarts/smooth_line_with_color.md)
