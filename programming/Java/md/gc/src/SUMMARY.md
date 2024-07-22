@@ -88,6 +88,8 @@
   - [InitializeJVM](./jdk21/g1/launcher/initialize_jvm.md)
   - [create_vm](./jdk21/g1/launcher/create_vm.md)
   - [初始化OS模块](./jdk21/g1/launcher/init_os.md)
+  - [加载代理库](./jdk21/g1/launcher/load_agents.md)
+  - [启动线程](./jdk21/g1/launcher/threads.md)
   - [调用java主方法](./jdk21/g1/launcher/call_java_main_method.md)
 
 - [退出](./jdk21/g1/exit/exit.md)

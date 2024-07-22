@@ -13,6 +13,8 @@
   - [泛型](./java/parameterized_type.md)
     - [获取字段的参数化类型](./java/field_parameterized_type.md)
     - [获取方法的参数化类型](./java/method_parameterized_type.md)
+  - [线程](./java/thread/thread.md)
+    - [线程通信](./java/thread/thread_communicate.md)
   - [IO模型](./java/io/io.md)
     - [文件描述符](./java/io/fd.md)
     - [同步阻塞IO](./java/io/bio.md)

@@ -1,4 +1,8 @@
-# IDEA常用设置(IDEA2023.1.3)
+# IDEA 常用设置(IDEA2023.1.3)
+
+xml 文本粘贴保持原有文本的缩进格式: Editor -> Code Style -> XML -> Other 页签 -> 勾选“Keep white spaces”
+
+---
 
 Ctrl+鼠标滚轮修改字体大小: File -> Settings -> Editor -> General : Mouse Control -> Change font size with Ctrl+Mouse Wheel in
 
@@ -38,4 +42,4 @@ Ctrl+鼠标滚轮修改字体大小: File -> Settings -> Editor -> General : Mou
 
 ---
 
-显示文件扩展名: File -> Settings -> Editor -> General -> Editor Tabs : 勾选Show file extension
+显示文件扩展名: File -> Settings -> Editor -> General -> Editor Tabs : 勾选 Show file extension
