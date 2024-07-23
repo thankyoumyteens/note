@@ -38,4 +38,4 @@ public void testCache1() throws Exception{
 <cache/>
 ```
 
-3. 配置之后，xxxMapper.xml 文件中的 select 语句将会被缓存，而 insert、update、delete 则会刷新缓存。
+3. 配置之后, xxxMapper.xml 文件中的 select 语句将会被缓存, 而 insert、update、delete 则会刷新缓存。

@@ -50,7 +50,7 @@ typedef class     typeArrayOopDesc* typeArrayOop;
 
 ## Klass
 
-klass 包含元数据和方法信息，用来描述 Java 类或者 JVM 内部自带的 C++类型信息。Java 类的继承信息、成员变量、静态变量、成员方法、构造方法等信息都在 klass 中保存，JVM 据此便可以在运行期反射出 Java 类的全部结构信息。
+klass 包含元数据和方法信息, 用来描述 Java 类或者 JVM 内部自带的 C++类型信息。Java 类的继承信息、成员变量、静态变量、成员方法、构造方法等信息都在 klass 中保存, JVM 据此便可以在运行期反射出 Java 类的全部结构信息。
 
 Klass 主要提供了两个功能:
 
@@ -193,6 +193,6 @@ class     TypeArrayKlass;
 
 ## java_mirror
 
-类加载的最终结果便是在 JVM 的方法区创建一个与 Java 类对应的 instanceKlass 对象，但是 JVM 在创建完 instanceKlass 之后，还会创建这个 instanceKlass 的镜像对象(java_mirror)。instanceKlass 和它的 java_mirror 之间保存了指针来互相访问。
+类加载的最终结果便是在 JVM 的方法区创建一个与 Java 类对应的 instanceKlass 对象, 但是 JVM 在创建完 instanceKlass 之后, 还会创建这个 instanceKlass 的镜像对象(java_mirror)。instanceKlass 和它的 java_mirror 之间保存了指针来互相访问。
 
-JVM 创建镜像是为了给 Java 程序使用的，而 instanceKlass 则只在 JVM 内部使用。所以，JVM 直接暴露给 Java 的是 java_mirror, 而不是 InstanceKlass。JDK 类库中所提供的反射等工具类，其实都基于 java_mirror 这个内部镜像实现的。
+JVM 创建镜像是为了给 Java 程序使用的, 而 instanceKlass 则只在 JVM 内部使用。所以, JVM 直接暴露给 Java 的是 java_mirror, 而不是 InstanceKlass。JDK 类库中所提供的反射等工具类, 其实都基于 java_mirror 这个内部镜像实现的。

@@ -1,8 +1,8 @@
 # 延迟加载
 
-延迟加载(懒加载)是指在进行关联查询时，不会执行对关联对象的查询, 而是在真正访问关联对象的信息时才去查询。
+延迟加载(懒加载)是指在进行关联查询时, 不会执行对关联对象的查询, 而是在真正访问关联对象的信息时才去查询。
 
-Mybatis 在实现懒加载时要使用 resultMap，不能使用 resultType。resultMap 中, 一对一关联的 association 和一对多的 collection 可以实现懒加载。
+Mybatis 在实现懒加载时要使用 resultMap, 不能使用 resultType。resultMap 中, 一对一关联的 association 和一对多的 collection 可以实现懒加载。
 
 ## 实现原理
 

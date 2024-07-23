@@ -1,6 +1,6 @@
 # VMThread
 
-在 JVM 创建时，将会在全局范围内创建一个单例原生线程 VMThread(虚拟机线程)。该线程的一个重要职责是：维护一个虚拟机操作队列(VMOperationQueue)，接受其他线程请求虚拟机级别的操作 (VM_Operation)，如执行 GC 等任务。
+在 JVM 创建时, 将会在全局范围内创建一个单例原生线程 VMThread(虚拟机线程)。该线程的一个重要职责是: 维护一个虚拟机操作队列(VMOperationQueue), 接受其他线程请求虚拟机级别的操作 (VM_Operation), 如执行 GC 等任务。
 
 VMThread 会开启一个无限循环, 然后不断地从虚拟机操作队列中取出 VM_Operation 并且执行这个 VM_Operation。
 

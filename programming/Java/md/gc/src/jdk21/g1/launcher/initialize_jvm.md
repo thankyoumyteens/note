@@ -41,9 +41,9 @@ InitializeJVM(JavaVM **pvm, JNIEnv **penv, InvocationFunctions *ifn)
 
 创建 JVM 的程序模块是 JNI_CreateJavaVM。
 
-JNI_CreateJavaVM 主要任务是调用 Threads 模块的 create_vm 函数，以完成最终的虚拟机创建和初始化工作。
+JNI_CreateJavaVM 主要任务是调用 Threads 模块的 create_vm 函数, 以完成最终的虚拟机创建和初始化工作。
 
-在 Threads 模块中，实现了对虚拟机各个模块的初始化，以及创建虚拟机线程。
+在 Threads 模块中, 实现了对虚拟机各个模块的初始化, 以及创建虚拟机线程。
 
 `JavaVM *vm` 和 `JNIEnv *env` 也是在 JNI_CreateJavaVM 中完成赋值的。
 

@@ -22,7 +22,7 @@ public @interface EnableAutoConfiguration {
 
 其中的 `@Import(AutoConfigurationImportSelector.class)` 会加载 `AutoConfigurationImportSelector` 类。
 
-`AutoConfigurationImportSelector` 类实现了 `DeferredImportSelector` 接口，Spring 容器在启动时，会在解析完其他所有项目中定义的配置类之后，会调用 `selectImports` 方法，然后把该方法返回的类名对应的类作为配置类进行解析。`AutoConfigurationImportSelector` 类的 `selectImports` 方法会读取当前项目和项目依赖的 jar 包的 classpath 路径下的 `META-INF/spring.factories` 文件。
+`AutoConfigurationImportSelector` 类实现了 `DeferredImportSelector` 接口, Spring 容器在启动时, 会在解析完其他所有项目中定义的配置类之后, 会调用 `selectImports` 方法, 然后把该方法返回的类名对应的类作为配置类进行解析。`AutoConfigurationImportSelector` 类的 `selectImports` 方法会读取当前项目和项目依赖的 jar 包的 classpath 路径下的 `META-INF/spring.factories` 文件。
 
 `spring.factories` 文件中记录了配置类的类全名, 这些配置类会根据条件注解来决定是否需要加载到 spring 中。
 

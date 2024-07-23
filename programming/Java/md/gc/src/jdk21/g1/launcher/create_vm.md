@@ -16,13 +16,13 @@
 12. 创建主线程并加入线程队列
 13. 创建虚拟机线程
 14. 初始化 JDK 核心类,如 java.lang.String、java.util.HashMap 等
-15. 初始化系统类加载器模块，并初始化系统字典
+15. 初始化系统类加载器模块, 并初始化系统字典
 16. 启动 SLT(SurrogateLockerThread)线程
 17. 启动 Signal Dispatcher 线程
 18. 启动 Attach Listener 线程
 19. 初始化即时编译器
 20. 初始化 Chunk 模块
-21. 初始化 Management 模块，启动 Service Thread 线程
+21. 初始化 Management 模块, 启动 Service Thread 线程
 22. 启动 Watcher Thread 线程
 
 ```cpp

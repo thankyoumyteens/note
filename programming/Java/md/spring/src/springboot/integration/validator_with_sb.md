@@ -32,7 +32,7 @@ public class ValidatorConfig {
     public Validator validator() {
         ValidatorFactory factory = Validation.byProvider(HibernateValidator.class)
                 // failFast: 快速失败模式,
-                // 在校验过程中，当遇到第一个不满足条件的参数时就立即返回，不再继续后面参数的校验
+                // 在校验过程中, 当遇到第一个不满足条件的参数时就立即返回, 不再继续后面参数的校验
                 .configure().failFast(true).buildValidatorFactory();
         return factory.getValidator();
     }

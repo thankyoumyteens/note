@@ -1,6 +1,6 @@
 # 调用 java 主方法
 
-在 JavaMain 中，虚拟机得到初始化之后，接下来就将执行应用程序的主方法。通过 env 调用 CallStaticVoidMethod 函数，可以执行一个由“static”和“void”修饰的方法，即 Java 应用程序主类的 main 方法。
+在 JavaMain 中, 虚拟机得到初始化之后, 接下来就将执行应用程序的主方法。通过 env 调用 CallStaticVoidMethod 函数, 可以执行一个由“static”和“void”修饰的方法, 即 Java 应用程序主类的 main 方法。
 
 ```cpp
 // --- src/java.base/share/native/libjli/java.c --- //
@@ -14,7 +14,7 @@ break;
 
 CallStaticVoidMethod 指向 jni_CallStaticVoidMethod 函数。
 
-为了执行主类的 main 方法，将在 jni_invoke_static 中通过调用 JavaCalls 模块完成 Java 方法的执行。在 HotSpot 中，所有对 Java 方法的调用都需要通过 JavaCalls 类来完成。
+为了执行主类的 main 方法, 将在 jni_invoke_static 中通过调用 JavaCalls 模块完成 Java 方法的执行。在 HotSpot 中, 所有对 Java 方法的调用都需要通过 JavaCalls 类来完成。
 
 ```cpp
 // --- src/hotspot/share/prims/jni.cpp --- //

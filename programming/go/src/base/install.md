@@ -8,8 +8,8 @@
 ## mac 安装
 
 1. 下载 `go1.23rc1.darwin-arm64.pkg`
-2. 下载完成后，直接点击安装包进行安装，默认会安装到 `/usr/local/go` 文件夹下
-3. 安装完成后，打开 Terminal，输入 `go version`
+2. 下载完成后, 直接点击安装包进行安装, 默认会安装到 `/usr/local/go` 文件夹下
+3. 安装完成后, 打开 Terminal, 输入 `go version`
 
 或者
 
