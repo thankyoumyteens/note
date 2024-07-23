@@ -126,3 +126,25 @@
 -->
 
 ![](../img/mvt8.jpg)
+
+例题 3
+
+<!--
+\begin{align}
+& 求 \lim_{x \to +\infty} x^{2}(\sin \frac{1}{x - 1} - \sin \frac{1}{x + 1}) \\
+\\
+& \;\, // 看到 f(b) - f(a), 使用拉格朗日定理 \\
+& 令 f(t) = \sin t, 则 f'(t) = \cos t \\
+& 则 \sin \frac{1}{x - 1} - \sin \frac{1}{x + 1} = f(\frac{1}{x - 1}) - f(\frac{1}{x + 1}) \\
+& \;\, f(\frac{1}{x - 1}) - f(\frac{1}{x + 1}) = f'(\xi)(\frac{1}{x - 1} - \frac{1}{x + 1}) \\
+& \;\, = \frac{2}{x^{2} - 1} \cos \xi, \quad \frac{1}{x - 1} < \xi < \frac{1}{x + 1} \\
+& \;\, \lim_{x \to +\infty} x^{2}(\sin \frac{1}{x - 1} - \sin \frac{1}{x + 1}) \\
+& \;\, = \lim_{x \to +\infty} x^{2}(\frac{2}{x^{2} - 1} \cos \xi) \\
+& \;\, = \lim_{x \to +\infty} \frac{2x^{2}}{x^{2} - 1} \cos \xi \\
+& \;\, = 2 \lim_{x \to +\infty} \cos \xi \\
+& \;\, x 趋于 +\infty 时, \frac{1}{x - 1} 和 \frac{1}{x + 1} 都趋于 0, 所以 \xi 也趋于 0 \\
+& 所以 2 \lim_{x \to +\infty} \cos \xi = 2 \times 1 = 2 \\
+\end{align}
+-->
+
+![](../img/mvt9.jpg)
