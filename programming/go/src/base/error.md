@@ -6,14 +6,14 @@
 package main
 
 import (
-	"errors"
-	"fmt"
+    "errors"
+    "fmt"
 )
 
 func main() {
-	error1 := errors.New("error1")
-	fmt.Println(error1)
-	error2 := fmt.Errorf("error%d", 2)
-	fmt.Println(error2)
+    error1 := errors.New("error1")
+    fmt.Println(error1)
+    error2 := fmt.Errorf("error%d", 2)
+    fmt.Println(error2)
 }
 ```

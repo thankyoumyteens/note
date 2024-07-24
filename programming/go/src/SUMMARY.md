@@ -18,7 +18,7 @@
     - [接口](./base/interface.md)
   - [错误处理](./base/exception.md)
     - [error](./base/error.md)
-  - [错误处理](./base/exception.md)
+    - [自定义error](./base/custom_error.md)
   - [集合](./base/collections.md)
     - [数组](./base/array.md)
     - [切片](./base/slice.md)
