@@ -8,6 +8,7 @@
   - [maven依赖全部红线](./idea/解决maven依赖全部红线.md)
   - [删除IDEA托盘图标](./idea/删除IDEA托盘图标.md)
   - [LiveTemplates](./idea/LiveTemplates.md)
+  - [禁止部分代码格式化](./idea/disable_format.md)
 
 - [git](./use_git/git.md)
   - [分支操作](./use_git/branch.md)

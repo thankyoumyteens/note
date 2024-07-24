@@ -1,4 +1,4 @@
-# ReentrantLock/Condition 消息队列
+# ReentrantLock
 
 通过保证多个线程互斥访问临界区（共享存储）, 使用 Condition 的 `await`, `signal`, `signalAll` 方法来实现线程间的通信。
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Demo2 {
+public class Demo {
     public static void main(String[] args) {
         // 锁对象
         ReentrantLock lock = new ReentrantLock();

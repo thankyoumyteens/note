@@ -4,8 +4,8 @@
 
 线程通信的方法:
 
-1. synchronized 临界区
-2. ReentrantLock/Condition 消息队列
+1. synchronized
+2. ReentrantLock
 3. CountDownLatch
 4. LockSupport
 5. Socket

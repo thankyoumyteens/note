@@ -1,4 +1,4 @@
-# synchronized 临界区
+# synchronized
 
 通过保证多个线程互斥访问临界区（共享存储）, 使用 `wait`, `notify`, `notifyAll` 方法来实现线程间的通信。
 
@@ -6,7 +6,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Demo1 {
+public class Demo {
     public static void main(String[] args) {
         // 锁对象
         Object lock = new Object();

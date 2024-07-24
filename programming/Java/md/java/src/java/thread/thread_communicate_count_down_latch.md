@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-public class Demo3 {
+public class Demo {
     public static void main(String[] args) {
         // CountDownLatch
         CountDownLatch countDownLatch = new CountDownLatch(1);

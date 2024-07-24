@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.LockSupport;
 
-public class Demo4 {
+public class Demo {
     public static void main(String[] args) {
         // 共享资源
         List<String> list = new ArrayList<>();
