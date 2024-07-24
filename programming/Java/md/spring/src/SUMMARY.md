@@ -31,6 +31,7 @@
   - [负载均衡](./springcloud/load_balancer.md)
   - [熔断](./springcloud/fuse.md)
   - [微服务监控](./springcloud/monitoring.md)
+  - [限流](./springcloud/rate_limiting.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)
