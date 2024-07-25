@@ -186,3 +186,33 @@ static void create_initial_thread(Handle thread_group, JavaThread* thread,
 ```
 
 ## 创建 VMThread
+
+VMThread 是在 JVM 内部执行 VMOperation 的线程。VMOperation 实现了 JVM 内部的核心操作。当 VMThread 线程创建成功后，在整个运行期间不断等待, 接受并执行指定的 VMOperation。
+
+```cpp
+// --- src/hotspot/share/runtime/threads.cpp#create_vm --- //
+
+// Create the VMThread
+{ TraceTime timer("Start VMThread", TRACETIME_LOG(Info, startuptime));
+
+  VMThread::create();
+  VMThread* vmthread = VMThread::vm_thread();
+
+  if (!os::create_thread(vmthread, os::vm_thread)) {
+    vm_exit_during_initialization("Cannot create VM thread. "
+                                  "Out of system resources.");
+  }
+
+  // Wait for the VM thread to become ready, and VMThread::run to initialize
+  // Monitors can have spurious returns, must always check another state flag
+  {
+    MonitorLocker ml(Notify_lock);
+    os::start_thread(vmthread);
+    while (!vmthread->is_running()) {
+      ml.wait();
+    }
+  }
+}
+```
+
+## 创建守护线程
