@@ -173,3 +173,18 @@
 -->
 
 ![](../img/mvt10.jpg)
+
+## 柯西中值定理
+
+<!--
+\begin{align}
+& 设函数 f(x), g(x) 满足: \\
+& \; 1. f(x), g(x) 在 [a, b] 上连续 \\
+& \; 2. f(x), g(x) 在 (a, b) 内可导 \\
+& \; 3. g'(x) \ne 0, \quad a < x < b \\
+& 则存在 \xi \in (a, b), \\
+& 使得 \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)} \\
+\end{align}
+-->
+
+![](../img/mvt11.jpg)
