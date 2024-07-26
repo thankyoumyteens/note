@@ -115,3 +115,6 @@
 - [JSON](./json/json.md)
   - [Jackson](./json/jackson.md)
     - [首个单词为单个字母时驼峰识别失效](./json/jackson_bug.md)
+
+- [GraalVM](./graalvm/graalvm.md)
+  - [基本使用](./graalvm/quick_start.md)
