@@ -216,3 +216,5 @@ VMThread 是在 JVM 内部执行 VMOperation 的线程。VMOperation 实现了 J
 ```
 
 ## 创建守护线程
+
+守护线程包括 `Signal Dispatcher`, `Attach Listener`, `Watcher Thread` 等。
