@@ -67,3 +67,58 @@ server {
 ```
 
 ## 网关限流
+
+Spring Cloud Gateway 是 Spring Cloud 推出的第二代网关框架，取代 Zuul 网关。
+
+Spring Cloud Gateway 自带了限流方案，依赖 redis 与内置的 RedisRateLimiter 过滤器进行限流操作，默认限流算法为令牌桶算法。
+
+1. 引入 redis 依赖
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+</dependency>
+```
+
+2. 配置 redis
+
+```yaml
+redis:
+  host: 127.0.0.1
+  port: 6379
+```
+
+3. 注入 KeyResolver
+
+```java
+@Configuration
+public class GatewayResolver {
+  @Bean("myKeyResolver")
+  public KeyResolver hostAddrKeyResolver() {
+    return exchange -> {
+      // 根据url限流
+      String url = exchange.getRequest().getPath().toString();
+      return Mono.just(url);
+    };
+  }
+}
+```
+
+4. 配置文件
+
+```yaml
+spring:
+  cloud:
+    gateway:
+      - id: test
+        uri: http://httpbin.org:80/get
+        filters:
+          - name: RequestRateLimiter
+            args:
+              key-resolver: "#{@myKeyResolver}"
+              # 令牌桶恢复速度，即每秒访问个数
+              redis-rate-limiter.replenishRate: 1
+              # 令牌桶大小，即峰值流量来临时最大可访问数
+              redis-rate-limiter.burstCapacity: 3
+```
