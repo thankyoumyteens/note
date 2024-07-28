@@ -79,7 +79,7 @@ inline HeapWord* G1AllocRegion::attempt_allocation(size_t min_word_size,
 
 和 tlab 类似, bottom 指针和 end 指针分别指向了一个 region 的起始位置和结束位置, top 指针指向已分配内存的边界, 在 region 中分配对象只需要向 end 方向移动 top 指针就可以了, 区别是 region 中需要考虑线程同步问题。
 
-![](../../../img/)
+![](../../../img/region_pointer.jpg)
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp --- //
@@ -114,7 +114,7 @@ inline HeapWord* HeapRegion::par_allocate_impl(size_t min_word_size,
     // 计算这个region还有多大的空闲内存
     size_t available = pointer_delta(end(), obj);
     size_t want_to_allocate = MIN2(available, desired_word_size);
-    // 判断这个region够不够分配这个对象
+    // 判断够不够分配这个对象
     if (want_to_allocate >= min_word_size) {
       // 堆中也是使用指针碰撞分配内存, 分配对象内存时只需要移动top指针即可
       HeapWord* new_top = obj + want_to_allocate;
