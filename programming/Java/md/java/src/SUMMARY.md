@@ -1,6 +1,7 @@
 # Summary
 
 - [Java](./java/java.md)
+  - [SuppressWarnings](./java/SuppressWarnings.md)
   - [正则表达式](./java/regex.md)
   - [路径和文件](./java/path_and_file.md)
     - [路径操作](./java/path.md)
@@ -9,7 +10,6 @@
   - [BigDecimal](./java/BigDecimal.md)
   - [集合](./java/collection.md)
     - [List去重](./java/list_distinct.md)
-  - [SuppressWarnings](./java/SuppressWarnings.md)
   - [泛型](./java/parameterized_type.md)
     - [获取字段的参数化类型](./java/field_parameterized_type.md)
     - [获取方法的参数化类型](./java/method_parameterized_type.md)
@@ -29,6 +29,9 @@
     - [IO多路复用](./java/io/io_multiplexing.md)
     - [实时信号驱动IO](./java/io/rtsig.md)
     - [异步IO](./java/io/aio.md)
+  - [Java NIO](./java/io/java_nio.md)
+    - [Buffer](./java/io/java_buffer.md)
+    - [Channel](./java/io/java_channel.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK动态代理](./proxy/jdk_proxy.md)
