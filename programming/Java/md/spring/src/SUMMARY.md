@@ -32,6 +32,7 @@
   - [熔断](./springcloud/fuse.md)
   - [微服务监控](./springcloud/monitoring.md)
   - [限流](./springcloud/rate_limiting.md)
+  - [CAP定理](./springcloud/cap.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)
