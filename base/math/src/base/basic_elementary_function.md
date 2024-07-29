@@ -30,6 +30,9 @@
 & \, \ln (a \div b) = \ln a - \ln b \\
 & \, \ln a^{n} = n \ln a \\
 & \;\, a^{b} = e^{b \ln a} \\
+& \;\, \ln e = \log_{e}{e} = 1 \\
+& \;\, a = e^{\ln a} \\
+& \;\, \ln e^{a} = a \\
 \end{align}
 -->
 
