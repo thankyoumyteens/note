@@ -252,3 +252,14 @@
 -->
 
 ![](../img/mvt13.jpg)
+
+例题 3
+
+<!--
+\begin{align}
+& 设函数 f(x) 在 [a, b] 上连续, (a, b) 内可导, a > 0 \\
+& 证明: 存在 \xi \in (a, b), 使 f(b) - f(a) = \xi f'(\xi)\ln \frac{b}{a} \\
+\\
+& \;\, // 有中值 \xi, 有 a 和 b, 而且 \xi 和 a, b 可以分开 \\
+\end{align}
+-->

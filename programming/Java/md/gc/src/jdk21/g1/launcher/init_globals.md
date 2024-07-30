@@ -79,6 +79,10 @@ void management_init() {
 
 ## CodeCache
 
+Code Cache 是指代码高速缓存，主要用来生成和存储本地代码。这些代码片段包括已编译好的 Java 方法和 RuntimeStubs 等。
+
+通过 VM 选项 CodeCacheExpansionSize, InitialCodeCacheSize 和 ReservedCodeCacheSize 可以配置该空间大小。
+
 ```cpp
 // --- src/hotspot/share/code/codeCache.cpp --- //
 
@@ -86,3 +90,5 @@ void codeCache_init() {
   CodeCache::initialize();
 }
 ```
+
+## StubRoutines

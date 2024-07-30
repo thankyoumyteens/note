@@ -33,6 +33,7 @@
   - [微服务监控](./springcloud/monitoring.md)
   - [限流](./springcloud/rate_limiting.md)
   - [CAP定理](./springcloud/cap.md)
+  - [分布式事务](./springcloud/distributed_transaction.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)
