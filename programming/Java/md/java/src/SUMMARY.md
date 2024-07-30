@@ -32,6 +32,7 @@
   - [Java NIO](./java/io/java_nio.md)
     - [Buffer](./java/io/java_buffer.md)
     - [Channel](./java/io/java_channel.md)
+    - [Selector](./java/io/java_selector.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK动态代理](./proxy/jdk_proxy.md)
