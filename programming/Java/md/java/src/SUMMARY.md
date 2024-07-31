@@ -120,5 +120,9 @@
   - [Jackson](./json/jackson.md)
     - [首个单词为单个字母时驼峰识别失效](./json/jackson_bug.md)
 
+- [日志](./log/log.md)
+  - [slf4j](./log/slf4j.md)
+    - [log4j](./log/log4j.md)
+
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)

@@ -258,8 +258,20 @@
 <!--
 \begin{align}
 & 设函数 f(x) 在 [a, b] 上连续, (a, b) 内可导, a > 0 \\
-& 证明: 存在 \xi \in (a, b), 使 f(b) - f(a) = \xi f'(\xi)\ln \frac{b}{a} \\
+& 证明: 存在 \xi \in (a, b), 使 f(b) - f(a) = \xi f'(\xi) \ln \frac{b}{a} \\
 \\
 & \;\, // 有中值 \xi, 有 a 和 b, 而且 \xi 和 a, b 可以分开 \\
+& \;\, // 如果可以变形成 \frac{f(b) - f(a)}{b - a}, 则使用拉格朗日定理 \\
+& \;\, // 如果可以变形成 \frac{f(b) - f(a)}{g(b) - g(a)}, 则使用柯西定理 \\
+& \;\, f(b) - f(a) = \xi f'(\xi) \ln \frac{b}{a} \Rightarrow
+\frac{f(b) - f(a)}{\ln \frac{b}{a}} = \xi f'(\xi) \\
+& \;\, \frac{f(b) - f(a)}{\ln b - \ln a} = \xi f'(\xi) \\
+& \;\, // 使用柯西定理 \\
+& 令 g(x) = \ln x, g'(x) = \frac{1}{x} \ne 0 \\
+& 所以存在 \xi \in (a, b), 使 \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)}
+= \frac{f'(\xi)}{\frac{1}{\xi}} = \xi f'(\xi) \\
+& \;\, f(b) - f(a) = \xi f'(\xi) [g(b) - g(a)]= \xi f'(\xi) \ln \frac{b}{a} \\
 \end{align}
 -->
+
+![](../img/mvt14.jpg)
