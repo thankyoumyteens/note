@@ -92,3 +92,59 @@ void codeCache_init() {
 ```
 
 ## StubRoutines
+
+`StubRoutines` 主要用于处理那些不能直接通过编译后的字节码指令完成的操作。它提供了一系列的“stub”方法或例程，这些方法通常是由 JVM 调用来执行特定的任务。
+
+比如：
+
+1. 当 JVM 需要调用一个方法，但该方法的实际地址未知时（例如，在接口方法调用或虚方法调用中），会使用 stub 来间接进行调用
+2. 当字节码指令遇到可能抛出异常的情况时，如除以零、数组越界等，会跳转到相应的 stub 例程来处理异常
+3. 在运行时，JIT 编译器可能会生成特定的代码段来替代原有的解释执行过程，这些代码段也被称为 stubs
+
+```cpp
+// --- src/hotspot/share/runtime/stubRoutines.cpp --- //
+
+void initial_stubs_init()      { StubRoutines::initialize_initial_stubs(); }
+
+// must happen before universe::genesis
+void StubRoutines::initialize_initial_stubs() {
+  if (_initial_stubs_code == nullptr) {
+    _initial_stubs_code = initialize_stubs(StubCodeGenerator::Initial_stubs,
+                                           _initial_stubs_code_size, 10,
+                                           "StubRoutines generation initial stubs",
+                                           "StubRoutines (initial stubs)",
+                                           "_initial_stubs_code_size");
+  }
+}
+
+static BufferBlob* initialize_stubs(StubCodeGenerator::StubsKind kind,
+                                    int code_size, int max_aligned_stubs,
+                                    const char* timer_msg,
+                                    const char* buffer_name,
+                                    const char* assert_msg) {
+  ResourceMark rm;
+  TraceTime timer(timer_msg, TRACETIME_LOG(Info, startuptime));
+  // Add extra space for large CodeEntryAlignment
+  int size = code_size + CodeEntryAlignment * max_aligned_stubs;
+  BufferBlob* stubs_code = BufferBlob::create(buffer_name, size);
+  if (stubs_code == nullptr) {
+    vm_exit_out_of_memory(code_size, OOM_MALLOC_ERROR, "CodeCache: no room for %s", buffer_name);
+  }
+  CodeBuffer buffer(stubs_code);
+  StubGenerator_generate(&buffer, kind);
+  // When new stubs added we need to make sure there is some space left
+  // to catch situation when we should increase size again.
+  assert(code_size == 0 || buffer.insts_remaining() > 200, "increase %s", assert_msg);
+
+  LogTarget(Info, stubs) lt;
+  if (lt.is_enabled()) {
+    LogStream ls(lt);
+    ls.print_cr("%s\t [" INTPTR_FORMAT ", " INTPTR_FORMAT "] used: %d, free: %d",
+                buffer_name, p2i(stubs_code->content_begin()), p2i(stubs_code->content_end()),
+                buffer.total_content_size(), buffer.insts_remaining());
+  }
+  return stubs_code;
+}
+```
+
+## Universe

@@ -15,6 +15,7 @@
   - [切换到某个tag](./use_git/tag.md)
   - [删除git提交时的校验](./use_git/dh.md)
   - [显示未合并的冲突文件](./use_git/show_unmerged_files.md)
+  - [将本地分支恢复为远程分支](./use_git/reset_local.md)
 
 - [postman](./postman/postman.md)
   - [禁止更新](./postman/禁止更新.md)
