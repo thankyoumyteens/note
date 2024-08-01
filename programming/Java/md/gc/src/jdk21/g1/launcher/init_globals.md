@@ -148,3 +148,111 @@ static BufferBlob* initialize_stubs(StubCodeGenerator::StubsKind kind,
 ```
 
 ## Universe
+
+Universe 模块将按照两个阶段进行初始化。
+
+1. 第一阶段，根据 VM 选项配置的 GC 策略及算法，选择垃圾回收器和堆的种类，初始化堆。根据 VM 选项 UseCompressedOops 进行相关配置。若 VM 选项 UseTLAB 开启 TLAB，则初始化 TLAB
+2. 第二阶段，将对共享空间进行配置以及初始化 vmSymbols 和 SystemDictionary 等全局数据结构
+
+```cpp
+// --- src/hotspot/share/memory/universe.cpp --- //
+
+jint universe_init() {
+  assert(!Universe::_fully_initialized, "called after initialize_vtables");
+  guarantee(1 << LogHeapWordSize == sizeof(HeapWord),
+         "LogHeapWordSize is incorrect.");
+  guarantee(sizeof(oop) >= sizeof(HeapWord), "HeapWord larger than oop?");
+  guarantee(sizeof(oop) % sizeof(HeapWord) == 0,
+            "oop size is not not a multiple of HeapWord size");
+
+  TraceTime timer("Genesis", TRACETIME_LOG(Info, startuptime));
+
+  initialize_global_behaviours();
+
+  GCLogPrecious::initialize();
+
+#ifdef _LP64
+  MetaspaceShared::adjust_heap_sizes_for_dumping();
+#endif // _LP64
+
+  GCConfig::arguments()->initialize_heap_sizes();
+
+  jint status = Universe::initialize_heap();
+  if (status != JNI_OK) {
+    return status;
+  }
+
+  Universe::initialize_tlab();
+
+  Metaspace::global_initialize();
+
+  // Initialize performance counters for metaspaces
+  MetaspaceCounters::initialize_performance_counters();
+
+  // Checks 'AfterMemoryInit' constraints.
+  if (!JVMFlagLimit::check_all_constraints(JVMFlagConstraintPhase::AfterMemoryInit)) {
+    return JNI_EINVAL;
+  }
+
+  // Create memory for metadata.  Must be after initializing heap for
+  // DumpSharedSpaces.
+  ClassLoaderData::init_null_class_loader_data();
+
+  // We have a heap so create the Method* caches before
+  // Metaspace::initialize_shared_spaces() tries to populate them.
+  Universe::_finalizer_register_cache = new LatestMethodCache();
+  Universe::_loader_addClass_cache    = new LatestMethodCache();
+  Universe::_throw_illegal_access_error_cache = new LatestMethodCache();
+  Universe::_throw_no_such_method_error_cache = new LatestMethodCache();
+  Universe::_do_stack_walk_cache = new LatestMethodCache();
+
+#if INCLUDE_CDS
+  DynamicArchive::check_for_dynamic_dump();
+  if (UseSharedSpaces) {
+    // Read the data structures supporting the shared spaces (shared
+    // system dictionary, symbol table, etc.)
+    MetaspaceShared::initialize_shared_spaces();
+  }
+  if (Arguments::is_dumping_archive()) {
+    MetaspaceShared::prepare_for_dumping();
+  }
+#endif
+
+  SymbolTable::create_table();
+  StringTable::create_table();
+
+  if (strlen(VerifySubSet) > 0) {
+    Universe::initialize_verify_flags();
+  }
+
+  ResolvedMethodTable::create_table();
+
+  return JNI_OK;
+}
+```
+
+## 解释器
+
+初始化解释器(interpreter)，并注册 StubQueue。解释器初始化分为两部分, 另一部分在 `init_globals2` 函数中。
+
+```cpp
+// --- src/hotspot/share/interpreter/interpreter.cpp --- //
+
+// The reason that interpreter initialization is split into two parts is that the first part
+// needs to run before methods are loaded (which with CDS implies linked also), and the other
+// part needs to run after. The reason is that when methods are loaded (with CDS) or linked
+// (without CDS), the i2c adapters are generated that assert we are currently in the interpreter.
+// Asserting that requires knowledge about where the interpreter is in memory. Therefore,
+// establishing the interpreter address must be done before methods are loaded. However,
+// we would like to actually generate the interpreter after methods are loaded. That allows
+// us to remove otherwise hardcoded offsets regarding fields that are needed in the interpreter
+// code. This leads to a split if 1. reserving the memory for the interpreter, 2. loading methods
+// and 3. generating the interpreter.
+void interpreter_init_stub() {
+  Interpreter::initialize_stub();
+}
+```
+
+## 模板表
+
+初始化模板表模块，将创建模版解释器使用的模板表。

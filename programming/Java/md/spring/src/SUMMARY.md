@@ -34,6 +34,7 @@
   - [限流](./springcloud/rate_limiting.md)
   - [CAP定理](./springcloud/cap.md)
   - [分布式事务](./springcloud/distributed_transaction.md)
+  - [接口幂等性](./springcloud/idempotent.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)

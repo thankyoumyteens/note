@@ -54,6 +54,10 @@ public class SSSelectorDemo {
                 // 判断是就绪的是什么事件
                 if (next.isAcceptable()) {
                     // 是连接就绪事件, 则获取客户端的连接
+                    //     连接就绪事件同一个客户端只会触发一次
+                    //     但是读就绪事件可能触发多次
+                    //     所以这里不能用 try-with-resource
+                    //     避免客户端连接被自动关闭
                     SocketChannel clientChannel = channel.accept();
                     // 把客户端的连接设置为非阻塞
                     clientChannel.configureBlocking(false);
