@@ -1,32 +1,12 @@
 # Oop-Klass 对象模型
 
-一个 Klass 对象代表一个 Java 类的元数据。oop 指的是 Ordinary Object Pointer(普通对象指针), 它用来指向一个 Java 对象。
+一个 Klass 对象代表一个 Java 类。oop 指的是 Ordinary Object Pointer(普通对象指针), 它用来指向一个 Java 对象。
+
+对于 oop 来说，主要作用就是表示对象的实例数据，没必要持有任何虚函数。而在描述 Java 类的 Klass 对象中含有 VTBL (虚方法表)，那么，Klass 就能够根据 Java 对象的实际类型进行分派，这样一来，oop 只需要通过相应的 Klass 便可以找到所有的虚函数。这就避免了在每个对象中都分配一个 C++ VTBL 指针。
 
 ## oop
 
-一个 Java 对象分为三个部分: 对象头, 实例数据, 对齐填充。
-
-对象头在 JVM 中使用 oopDesc 类表示:
-
-```cpp
-class oopDesc {
-  // Mark Word
-  // 用于存储对象的运行时记录信息,
-  // 如哈希值、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID等
-  volatile markOop  _mark;
-  // 元数据指针
-  // 指向一个存储类的元数据的 Klass 对象
-  union _metadata {
-    // 未压缩的 Klass 指针
-    Klass*      _klass;
-    // 压缩的 Klass 指针
-    narrowKlass _compressed_klass;
-  } _metadata;
-
-  // 对象头不一定只有这几个成员变量,
-  // oopDesc的子类可能有自己的成员变量
-};
-```
+在 Java 应用程序运行过程中，每创建一个 Java 对象，在 JVM 内部也会相应地创建一个新的 oopDesc 对象来表示 Java 对象。
 
 oop 在 JVM 中的层级:
 
@@ -34,6 +14,7 @@ oop 在 JVM 中的层级:
 // --- src/hotspot/share/oops/oopsHierarchy.hpp --- //
 
 // 用缩进表示继承关系, oopDesc是下面所有类的父类
+
 //            指向Java对象的指针
 typedef class oopDesc* oop;
 //              普通Java对象
@@ -46,7 +27,34 @@ typedef class     objArrayOopDesc* objArrayOop;
 typedef class     typeArrayOopDesc* typeArrayOop;
 ```
 
-每次 new 一个 Java 对象时, JVM 就会创建一个新的 oopDesc 对象。
+在虚拟机内部，通过 instanceOopDesc 来表示一个常规的 Java 对象。对象在内存中的布局可以分为连续的两部分：instanceOopDesc 和实例数据。
+
+其中，instanceOopDesc(或其它的 oopDesc)又被称为对象头，instanceOopDesc 对象头包括以下两部分信息:
+
+1. Mark Word：instanceOopDesc 中的 `_mark` 变量，存储对象运行时的信息，如 hashCode, GC 分代年龄, 锁状态标志, 线程持有的锁, 偏向锁的线程 ID, 偏向时间戳等，`_mark` 的数据类型为 markOop，占用内存大小与虚拟机位长一致，比如在 64 位虚拟机上长度也为 64 位。
+2. 元数据指针：指向 Klass 对象的指针，Klass 对象包含了对象所属类型的元数据(meta data)，因此该字段称为元数据指针。虚拟机在运行时将频繁使用这个指针定位到位于方法区内的类型信息
+
+```cpp
+// --- src/hotspot/share/oops/oop.hpp --- //
+
+class oopDesc {
+  // Mark Word
+  volatile markOop  _mark;
+  // 元数据指针
+  union _metadata {
+    // 未压缩的 Klass 指针
+    Klass*      _klass;
+    // 压缩的 Klass 指针
+    narrowKlass _compressed_klass;
+  } _metadata;
+
+
+};
+```
+
+对象头不一定只有这几个成员变量, oopDesc 的子类可以有自己的成员变量, 比如 instanceOopDesc 与 arrayOopDesc 都拥有继承自共同基类 oopDesc 的 mark word 和元数据指针。但 arrayOop 增加了一个描述数组长度的字段。
+
+![](../../../img/oop.jpg)
 
 ## Klass
 
@@ -172,6 +180,7 @@ JVM 中 Klass 的层级:
 // --- src/hotspot/share/oops/oopsHierarchy.hpp --- //
 
 // 用缩进表示继承关系, Klass是下面所有类的父类
+
 class Klass;
 //      代表一个普通的Java类
 class   InstanceKlass;
