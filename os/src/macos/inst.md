@@ -221,29 +221,29 @@ brew install ffmpeg
 brew install wget
 ```
 
-- [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/other.html)
-- [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
-- [Jetbrains PyCharm](https://www.jetbrains.com/pycharm/download/other.html)
-- [Jetbrains WebStorm](https://www.jetbrains.com/webstorm/download/other.html)
-- [Jetbrains GoLand](https://www.jetbrains.com/go/download/other.html)
 - [Android Studio](https://developer.android.google.cn/studio?hl=zh-cn)
-- [vscodium](https://github.com/VSCodium/vscodium/releases)
-- [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)
-- [gradle](https://mirrors.cloud.tencent.com/gradle/)
-- [maven](https://repo.huaweicloud.com/apache/maven/maven-3/)
 - [AnotherRedisDesktopManager](https://gitee.com/qishibo/AnotherRedisDesktopManager/releases)
+- [calibre](https://github.com/kovidgoyal/calibre/releases)
 - [dbeaver](https://github.com/dbeaver/dbeaver/releases)
-- [tabby](https://github.com/Eugeny/tabby/releases)
-- [UTM](https://github.com/utmapp/UTM/releases) 虚拟机
-- [Snipaste](https://zh.snipaste.com/download.html) 截图
 - [downkyicore](https://github.com/yaobiao131/downkyicore/releases)
 - [drawio](https://github.com/jgraph/drawio-desktop/releases)
-- [Motrix](https://github.com/agalwood/Motrix/releases)
-- [Whisky](https://github.com/Whisky-App/Whisky/releases) wine
-- [upscayl](https://github.com/upscayl/upscayl/releases) 图片放大
-- [tinyImage](https://github.com/focusbe/tinyImage/releases) 图片压缩
-- [mactex](https://www.tug.org/mactex/mactex-download.html) latex
-- [texstudio](https://github.com/texstudio-org/texstudio/releases) latex 编辑器
+- [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)
 - [GIMP](https://www.gimp.org/downloads/) 修图
+- [gradle](https://mirrors.cloud.tencent.com/gradle/)
+- [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
+- [Jetbrains GoLand](https://www.jetbrains.com/go/download/other.html)
+- [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/other.html)
+- [Jetbrains PyCharm](https://www.jetbrains.com/pycharm/download/other.html)
+- [Jetbrains WebStorm](https://www.jetbrains.com/webstorm/download/other.html)
 - [kdenlive](https://kdenlive.org/zh/download-zh/) 剪视频
-- [calibre](https://github.com/kovidgoyal/calibre/releases)
+- [mactex](https://www.tug.org/mactex/mactex-download.html) latex
+- [maven](https://repo.huaweicloud.com/apache/maven/maven-3/)
+- [Motrix](https://github.com/agalwood/Motrix/releases)
+- [Snipaste](https://zh.snipaste.com/download.html) 截图
+- [tabby](https://github.com/Eugeny/tabby/releases)
+- [texstudio](https://github.com/texstudio-org/texstudio/releases) latex 编辑器
+- [tinyImage](https://github.com/focusbe/tinyImage/releases) 图片压缩
+- [upscayl](https://github.com/upscayl/upscayl/releases) 图片放大
+- [UTM](https://github.com/utmapp/UTM/releases) 虚拟机
+- [vscodium](https://github.com/VSCodium/vscodium/releases)
+- [Whisky](https://github.com/Whisky-App/Whisky/releases) wine
