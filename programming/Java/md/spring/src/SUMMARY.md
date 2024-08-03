@@ -35,12 +35,17 @@
   - [CAP定理](./springcloud/cap.md)
   - [分布式事务](./springcloud/distributed_transaction.md)
   - [接口幂等性](./springcloud/idempotent.md)
+  - [任务调度](./springcloud/xxl_job.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
   - [延迟加载](./mybatis/lazy.md)
   - [缓存](./mybatis/cache.md)
   - [include标签传参](./mybatis/include.md)
   - [根据参数生成临时表](./mybatis/tmp_table.md)
+
+- [消息队列](./mq/mq.md)
+  - [RabbitMQ](./mq/rabbit/rabbit.md)
+    - [如何保证消息不丢失](./mq/rabbit/not_lost.md)
 
 - [Spring源码分析](./spring/spring_src.md)
   - [Spring整体架构](./spring/spring_overview.md)
