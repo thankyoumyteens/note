@@ -32,7 +32,7 @@ typedef class     typeArrayOopDesc* typeArrayOop;
 其中，instanceOopDesc(或其它的 oopDesc)又被称为对象头，instanceOopDesc 对象头包括以下两部分信息:
 
 1. Mark Word：instanceOopDesc 中的 `_mark` 变量，存储对象运行时的信息，如 hashCode, GC 分代年龄, 锁状态标志, 线程持有的锁, 偏向锁的线程 ID, 偏向时间戳等，`_mark` 的数据类型为 markOop，占用内存大小与虚拟机位长一致，比如在 64 位虚拟机上长度也为 64 位。
-2. 元数据指针：指向 Klass 对象的指针，Klass 对象包含了对象所属类型的元数据(meta data)，因此该字段称为元数据指针。虚拟机在运行时将频繁使用这个指针定位到位于方法区内的类型信息
+2. 元数据指针：指向 Klass 对象的指针，Klass 对象包含了对象所属类型的元数据(meta data)，因此该字段称为元数据指针。虚拟机在运行时将频繁使用这个指针定位到位于方法区内的类型信息。JVM 参数 `-XX:UseCompressedOops` 可以使类元数据指针在 64 位 JVM 上使用 32 位指针存储, 以降低开销
 
 ```cpp
 // --- src/hotspot/share/oops/oop.hpp --- //
@@ -44,7 +44,7 @@ class oopDesc {
   union _metadata {
     // 未压缩的 Klass 指针
     Klass*      _klass;
-    // 压缩的 Klass 指针
+    // 压缩的 Klass 指针: typedef juint  narrowKlass;
     narrowKlass _compressed_klass;
   } _metadata;
 
