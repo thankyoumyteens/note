@@ -5,7 +5,13 @@
 此时需要加锁分配, 加锁分配的过程:
 
 1. 获取锁, 如果锁被其他线程持有, 本线程会阻塞等待
-2. 
+2. 在当前线索等待锁的过程中, 其它线索可能已经申请了垃圾回收, 并且 JVM 执行完成了垃圾回收
+3. 所以当前线程获取到锁后, 首先再尝试一次对象分配
+4. 如果还是分配失败, 那么就表示没有其它线程发起垃圾回收, 或者内存空间确实不足了
+5. 此时线程会准备执行一次垃圾回收
+6. 在执行垃圾回收之前, 当前线程会判断一下 GCLocker 是否会执行垃圾回收
+7. 如果 GCLocker 会在稍后执行垃圾回收, 那么本线程就不需要重复执行了, 只需要阻塞等待 GCLocker 执行完垃圾回收后再分配对象即可。在阻塞之前本线程还会再尝试一下: 如果新生代还没用完(还可以申请新的 region), 本线程会扩容新生代(申请一个新 region), 并在新申请的 region 中分配对象。还是失败的话, 就会开始阻塞等待 GCLocker 的垃圾回收了
+8. 如果 GCLocker 不行垃圾回收, 那么本线程会自己执行垃圾回收并分配对象的内存
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
@@ -52,7 +58,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
       //   return young_list_length < young_list_max_length();
       // }
       if (GCLocker::is_active_and_needs_gc() && policy()->can_expand_young_list()) {
-        // 申请新region并分配对象
+        // 扩容新生代并分配对象
         result = _allocator->attempt_allocation_force(word_size);
         if (result != nullptr) {
           return result;
@@ -64,7 +70,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
       // 获取之前已经执行的GC次数
       gc_count_before = total_collections();
 
-      // x脱离作用域, MutexLocker的析构函数会自动解锁
+      // x脱离作用域, MutexLocker的析构函数会自动释放锁
     }
 
     // 是否需要执行GC
@@ -107,7 +113,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
     // 有两种可能会导致代码执行到这里:
     // 1. GC被其他线程打断
     // 2. GC被GCLocker阻止
-    // 此时, 其他线程可能已经执行完了GC, 回收了内存空间,
+    // 此时, 其他线程或GCLocker可能已经执行完了GC, 回收了内存空间,
     // 所以再次尝试分配对象内存,
     // 先使用CAS分配, 如果CAS失败, 就会由下一轮循环进行加锁分配
     size_t dummy = 0;
@@ -127,5 +133,43 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
 
   ShouldNotReachHere();
   return nullptr;
+}
+```
+
+## 拿到锁后, 尝试分配对象
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1Allocator.inline.hpp --- //
+
+/**
+ * 拿到锁后, 首先尝试分配对象
+ */
+inline HeapWord* G1Allocator::attempt_allocation_locked(size_t word_size) {
+  uint node_index = current_node_index();
+  HeapWord* result = mutator_alloc_region(node_index)->attempt_allocation_locked(word_size);
+
+  assert(result != nullptr || mutator_alloc_region(node_index)->get() == nullptr,
+         "Must not have a mutator alloc region if there is no memory, but is " PTR_FORMAT, p2i(mutator_alloc_region(node_index)->get()));
+  return result;
+}
+
+// --- src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp --- //
+
+inline HeapWord* G1AllocRegion::attempt_allocation_locked(size_t word_size) {
+  size_t temp;
+  return attempt_allocation_locked(word_size, word_size, &temp);
+}
+
+inline HeapWord* G1AllocRegion::attempt_allocation_locked(size_t min_word_size,
+                                                          size_t desired_word_size,
+                                                          size_t* actual_word_size) {
+  // 在当前region分配对象
+  HeapWord* result = attempt_allocation(min_word_size, desired_word_size, actual_word_size);
+  if (result != nullptr) {
+    return result;
+  }
+
+  // 申请一个新的region, 并在其中分配对象
+  return attempt_allocation_using_new_region(min_word_size, desired_word_size, actual_word_size);
 }
 ```

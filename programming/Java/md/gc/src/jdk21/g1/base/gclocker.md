@@ -2,7 +2,7 @@
 
 GCLocker 是 JNI 线程访问临界区时的加锁机制, 它会影响到垃圾回收(GC)的执行。
 
-临界区(Critical Section)是指在多线程环境下, 一段需要确保同一时刻只有一个线程能够访问的代码区域。每个线程都可以进入多个临界区, 线程类中有一个属性 `_jni_active_critical`, 用来记录当前线程进入的临界区个数, 如果 `_jni_active_critical > 0`, 说明该线程已经在临界区内。
+临界区(Critical Section)是指在多线程环境下, 一段需要确保同一时刻只有一个线程能够访问的代码区域。比如调用 JNI 函数 `GetStringCritical` 后, 就会进入临界区。每个线程都可以进入多个临界区, 线程类中有一个属性 `_jni_active_critical`, 用来记录当前线程进入的临界区个数, 如果 `_jni_active_critical > 0`, 说明该线程已经在临界区内。
 
 临界区相关的方法:
 
