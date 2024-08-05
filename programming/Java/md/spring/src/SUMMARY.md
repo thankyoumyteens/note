@@ -46,6 +46,7 @@
 - [消息队列](./mq/mq.md)
   - [RabbitMQ](./mq/rabbit/rabbit.md)
     - [如何保证消息不丢失](./mq/rabbit/not_lost.md)
+    - [重复消费](./mq/rabbit/repeated_consumption.md)
 
 - [Spring源码分析](./spring/spring_src.md)
   - [Spring整体架构](./spring/spring_overview.md)

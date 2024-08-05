@@ -8,6 +8,8 @@
 
 在 Java 应用程序运行过程中，每创建一个 Java 对象，在 JVM 内部也会相应地创建一个新的 oopDesc 对象来表示 Java 对象。
 
+田于 HotSpot 内部将频緊便用 oopDesc 指针，为了简化 oopDesc 类型的指针的使用，在 HotSpot 内部定义了它们的别名: oop。
+
 oop 在 JVM 中的层级:
 
 ```cpp
@@ -64,6 +66,32 @@ Klass 主要提供了两个功能:
 
 1. klass 提供一个与 Java 类对等的 C++ 类型描述。Klass 中保存了一个 Java 类的元数据(类型信息, 包括类名、限定符、常量池等)。一个 class 文件被 JVM 加载之后, 就会被解析成一个 Klass 对象存储在内存中
 2. klass 提供 JVM 内部的函数分发机制。klass 会保存虚方法表, 用于在运行期找到真正要执行的函数
+
+JVM 中 Klass 的层级:
+
+```cpp
+// --- src/hotspot/share/oops/oopsHierarchy.hpp --- //
+
+// 用缩进表示继承关系, Klass是下面所有类的父类
+
+class Klass;
+//      代表一个普通的Java类
+class   InstanceKlass;
+//        代表java.lang.Class
+class     InstanceMirrorKlass;
+//        代表java.lang.ClassLoader
+class     InstanceClassLoaderKlass;
+//        代表java.lang.ref.Reference及其子类
+class     InstanceRefKlass;
+//      代表数组类型的Java类, 该Java类是JVM内部自动创建的, 由数组维数和数组基础类型唯一确定
+class   ArrayKlass;
+//        代表对象类型的数组所对应的类, 比如String[].class
+class     ObjArrayKlass;
+//        代表Java基础数据类型的一维数组所对应的类, 比如int[].class
+class     TypeArrayKlass;
+```
+
+当 JVM 加载一个 Java 类时, 它会在内部创建一个对应的 Klass 对象, 用来存放该 Java 类的各种信息。而在 Klass 对象创建过程中, 也会计算该 Java 类所创建的 Java 对象需要多大内存空间, 该计算结果会被保存到 Klass 对象的 `_layout_helper` 变量中, 这样当运行时需要创建 Java 对象时, 直接根据这个字段的值分配一块内存就好了。
 
 ```cpp
 // --- src/hotspot/share/oops/klass.hpp --- //
@@ -173,32 +201,6 @@ class Klass : public Metadata {
 
 };
 ```
-
-JVM 中 Klass 的层级:
-
-```cpp
-// --- src/hotspot/share/oops/oopsHierarchy.hpp --- //
-
-// 用缩进表示继承关系, Klass是下面所有类的父类
-
-class Klass;
-//      代表一个普通的Java类
-class   InstanceKlass;
-//        代表java.lang.Class
-class     InstanceMirrorKlass;
-//        代表java.lang.ClassLoader
-class     InstanceClassLoaderKlass;
-//        代表java.lang.ref.Reference及其子类
-class     InstanceRefKlass;
-//      代表数组类型的Java类, 该Java类是JVM内部自动创建的, 由数组维数和数组基础类型唯一确定
-class   ArrayKlass;
-//        代表对象类型的数组所对应的类, 比如String[].class
-class     ObjArrayKlass;
-//        代表Java基础数据类型的一维数组所对应的类, 比如int[].class
-class     TypeArrayKlass;
-```
-
-当 JVM 加载一个 Java 类时, 它会在内部创建一个对应的 Klass 对象, 用来存放该 Java 类的各种信息。而在 Klass 对象创建过程中, 也会计算该 Java 类所创建的 Java 对象需要多大内存空间, 该计算结果会被保存到 Klass 对象中的\_layout_helper 字段中, 这样当运行时需要创建 Java 对象时, 直接根据这个字段的值分配一块内存就好了。
 
 ## java_mirror
 
