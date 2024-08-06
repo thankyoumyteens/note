@@ -106,22 +106,19 @@ class Klass : public Metadata {
   // for better cache behavior (may not make much of a difference but sure won't hurt)
   enum { _primary_super_limit = 8 };
 
-  // The "layout helper" is a combined descriptor of object layout.
-  // For klasses which are neither instance nor array, the value is zero.
+  // _layout_helper使用4个字节存储
   //
   // 如果是一个普通对象, _layout_helper的值是正数, 表示对象需要占用的内存大小
   // 如果这个对象不支持快速分配(在TLAB里分配), 那么它的低位比特会被设置成特殊的值
   //
   // 如果是一个数组, _layout_helper的值是负数
-  // containing four
-  // distinct bytes, as follows:
-  //    MSB:[tag, hsz, ebt, log2(esz)]:LSB
+  // 其4个字节的布局如下:
   //    最高有效位:[tag, hsz, ebt, log2(esz)]:最低有效位
-  // where:
-  //    tag is 0x80 if the elements are oops, 0xC0 if non-oops
-  //    hsz is array header size in bytes (i.e., offset of first element)
-  //    ebt is the BasicType of the elements
-  //    esz is the element size in bytes
+  // 每个字节的含义:
+  //    tag: 如果值为 0x80 则表示数据元素是对象, 如果值为 0xC0 则表示数组元素是基本类型
+  //    hsz 数组头的大小(单位是字节), 同时指明数组的第一个元素应该偏移多少
+  //    ebt 数组元素是基本类型的话, 它表示具体是哪个类型
+  //    esz 数组元素的大小(单位是字节)
   // This packed word is arranged so as to be quickly unpacked by the
   // various fast paths that use the various subfields.
   //

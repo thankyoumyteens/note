@@ -35,7 +35,7 @@ public class ValidatorDemo {
             Demo demo = new Demo();
             demo.setStr("123");
             demo.setNumber(11);
-            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+
             Validator validator = factory.getValidator();
 
             // 验证所有字段
