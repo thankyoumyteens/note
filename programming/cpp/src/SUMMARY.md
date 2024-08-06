@@ -5,6 +5,7 @@
   - [变量](./base/variable.md)
   - [常量](./base/const.md)
   - [枚举](./base/enum.md)
+  - [typedef](./base/typedef.md)
   - [使用异或交换两个变量的值](./base/xor/swap_value.md)
   - [使用位运算判断一个数是奇数还是偶数](./base/bitwise_operations/odd.md)
   - [动态内存分配](./base/allocation/allocation.md)
