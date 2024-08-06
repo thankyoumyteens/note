@@ -337,3 +337,32 @@ o((x - x_{0})^{n}), & 佩亚诺型余项
 ![](../img/mvt17.jpg)
 
 例题 2
+
+<!--
+\begin{align}
+& 求极限 \lim_{x \to 0} \frac{e^{- \frac{x^{2}}{2}} - 1 + \frac{x^{2}}{2}}{x^{2} - \sin ^{2} x} \\
+\\
+& \;\, e^{x} = 1 + x + \frac{x^{2}}{2} + o(x^{2}) \\
+& \;\, // 把 - \frac{x^{2}}{2} 代进去 \\
+& \;\, e^{- \frac{x^{2}}{2}} = 1 - \frac{x^{2}}{2} + \frac{x^{4}}{8} + o(x^{4}) \\
+& \;\, e^{- \frac{x^{2}}{2}} - 1 + \frac{x^{2}}{2} = \frac{x^{4}}{8} + o(x^{4}) 等价于 \frac{x^{4}}{8} \\
+& \;\,\;\,\;\,\, \lim_{x \to 0} \frac{e^{- \frac{x^{2}}{2}} - 1 + \frac{x^{2}}{2}}{x^{2} - \sin ^{2} x} \\
+& \;\, = \lim_{x \to 0} \frac{\frac{x^{4}}{8}}{x^{2} - \sin ^{2} x} \\
+& \;\, = \frac{1}{8} \lim_{x \to 0} \frac{x^{4}}{x^{2} - \sin ^{2} x} \\
+& \;\, = \frac{1}{8} \lim_{x \to 0} \frac{x^{4}}{(x + \sin x)(x - \sin x)} \\
+& \;\, = \frac{1}{8} \lim_{x \to 0} \frac{x}{x + \sin x} \times \frac{x^{3}}{x - \sin x} \\
+& \;\, // 左边把 \sin x 等价无穷小替换成 x 后, \\
+& \;\, // 分母变成 2x 还是1次方, 分子分母同阶, 都是1次方, \\
+& \;\, // 所以可以用等价无穷小替换 \\
+& \;\, // 右边替换后不同阶, 所以不能替换 \\
+& \;\, = \frac{1}{8} \lim_{x \to 0} \frac{x}{x + x} \times \frac{x^{3}}{x - \sin x} \\
+& \;\, = \frac{1}{16} \lim_{x \to 0} \frac{x^{3}}{x - \sin x} \\
+& 因为 \sin x = x - \frac{x^{3}}{3!} + o(x^{3}) \\
+& 所以 x - \sin x = \frac{x^{3}}{3!} + o(x^{3}) 等价于 \frac{x^{3}}{6} \\
+& 所以原式 = \frac{1}{16} \lim_{x \to 0} \frac{x^{3}}{\frac{x^{3}}{6}} = \frac{1}{16} \times 6 = \frac{3}{8} \\
+\end{align}
+-->
+
+![](../img/mvt18.jpg)
+
+例题 3

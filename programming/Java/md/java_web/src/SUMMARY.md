@@ -61,3 +61,4 @@
     - [重复消费](./mq/rabbit/repeated_consumption.md)
     - [死信队列](./mq/rabbit/dead_letter.md)
     - [延迟队列](./mq/rabbit/delay_queue.md)
+    - [消息堆积](./mq/rabbit/pile_up.md)
