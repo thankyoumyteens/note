@@ -176,7 +176,7 @@ class Klass : public Metadata {
   OopHandle   _java_mirror;
   // 父类
   Klass*      _super;
-  // 子类链表的头节点, 通过next_sibling可以找到下一个子类
+  // 子类链表的头节点, 通过_subklass->next_sibling()可以找到下一个子类
   Klass* volatile _subklass;
   // 兄弟类, 父类可以通过这个链表找到所它的有子类
   Klass* volatile _next_sibling;
