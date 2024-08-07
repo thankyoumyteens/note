@@ -62,3 +62,5 @@
     - [死信队列](./mq/rabbit/dead_letter.md)
     - [延迟队列](./mq/rabbit/delay_queue.md)
     - [消息堆积](./mq/rabbit/pile_up.md)
+    - [高可用](./mq/rabbit/high_availability.md)
+  - [Kafka](./mq/kafka/kafka.md)
