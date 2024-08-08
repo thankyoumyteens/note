@@ -60,7 +60,7 @@ class oopDesc {
 
 ## Klass
 
-klass 包含元数据和方法信息, 用来描述 Java 类或者 JVM 内部自带的 C++类型信息。Java 类的继承信息、成员变量、静态变量、成员方法、构造方法等信息都在 klass 中保存, JVM 据此便可以在运行期反射出 Java 类的全部结构信息。
+klass 用来在 JVM 层表示 Java 类。它的所有成员可以包含虚拟机内部运行一个 Java 类所需的所有信息。
 
 Klass 主要提供了两个功能:
 
