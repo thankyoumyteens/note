@@ -64,3 +64,5 @@
     - [消息堆积](./mq/rabbit/pile_up.md)
     - [高可用](./mq/rabbit/high_availability.md)
   - [Kafka](./mq/kafka/kafka.md)
+    - [如何保证消息不丢失](./mq/kafka/not_lost.md)
+    - [重复消费](./mq/kafka/repeated_consumption.md)

@@ -22,3 +22,4 @@
   - [隐函数](./further_mathematics/implicit_function.md)
   - [参数方程](./further_mathematics/parametric_equation.md)
   - [中值定理](./further_mathematics/mean_value_theorem.md)
+  - [洛必达法则](./further_mathematics/l_hospital_s_rule.md)

@@ -19,3 +19,6 @@
 
 - [服务调用](./http_clients/http_clients.md)
   - [Feign](./http_clients/feign/feign.md)
+
+- [配置中心](./config/config.md)
+  - [Spring Cloud Config](./config/spring_config/spring_config.md)
