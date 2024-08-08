@@ -61,11 +61,11 @@ Log4j 支持两种配置文件格式:
 
 ```conf
 log4j.rootLogger = level, appenderName1, appenderName2, ...
-# 表示Logger不会在父Logger的appender里输出，默认为true
+# 表示Logger不会在父Logger的appender里输出, 默认为true
 log4j.additivity.org.apache=true
 ```
 
-- level: 设定日志记录的最低级别，可设的值有 OFF, FATAL, ERROR, WARN, INFO, DEBUG, ALL 或者自定义的级别
+- level: 设定日志记录的最低级别, 可设的值有 OFF, FATAL, ERROR, WARN, INFO, DEBUG, ALL 或者自定义的级别
 - appenderNameX: 设置 Appender, Appender 用来控制日志输出的位置
 
 ## Appender
@@ -76,7 +76,7 @@ Appender 用来控制日志输出的位置。
 log4j.appender.appenderName = className
 ```
 
-- appenderName：Appender 的名称, 自定义。在 log4j.rootLogger 中使用
+- appenderName: Appender 的名称, 自定义。在 log4j.rootLogger 中使用
 - className: 指定 Appender 类, 可选的值:
   - org.apache.log4j.ConsoleAppender: 输出到控制台
   - org.apache.log4j.FileAppender: 输出到文件
@@ -141,7 +141,7 @@ log4j.appender.appender1.Append=false
 log4j.appender.appender1.Encoding=UTF-8
 # 日志文件路径
 log4j.appender.appender1.File=/my_projct/logs/main.log
-# 在日志文件达到10MB时，将原来的内容移到main.log.1文件中
+# 在日志文件达到10MB时, 将原来的内容移到main.log.1文件中
 log4j.appender.appender1.MaxFileSize=10MB
 # 可以产生的滚动文件的最大数量
 # 设为2则可以产生main.log.1, main.log.2两个滚动文件和一个main.log文件
@@ -156,7 +156,7 @@ Log4j 可以在 Appenders 的后面附加 Layouts 来指定日志输出的样式
 log4j.appender.appenderName.layout = className
 ```
 
-- appenderName：Appender 的名称, 自定义。在 log4j.rootLogger 中使用
+- appenderName: Appender 的名称, 自定义。在 log4j.rootLogger 中使用
 - className: 指定 Layouts 类, 可选的值:
   - org.apache.log4j.HTMLLayout: 以 HTML 表格形式布局
   - org.apache.log4j.PatternLayout: 自定义布局模式
@@ -177,11 +177,11 @@ log4j.appender.appender1.layout.ConversionPattern=[%p] %m %n
 
 ## ConversionPattern 配置
 
-- `%p`: 输出日志的级别，即 DEBUG，INFO，WARN，ERROR，FATAL
+- `%p`: 输出日志的级别, 即 DEBUG, INFO, WARN, ERROR, FATAL
 - `%d`: 输出日志发生时间, 可以在其后指定格式, 如: `%d{yyyy/MM/dd HH:mm:ss,SSS}`
 - `%r`: 输出自应用程序启动到输出该 log 信息耗费的毫秒数
 - `%t`: 输出产生该日志事件的线程名
-- `%l`: 输出日志事件的发生位置，相当于 `%c.%M(%F:%L)` 的组合，包括类全名、方法、文件名以及在代码中的行数
+- `%l`: 输出日志事件的发生位置, 相当于 `%c.%M(%F:%L)` 的组合, 包括类全名、方法、文件名以及在代码中的行数
 - `%c`: 输出日志信息所属的类全名
 - `%M`: 输出产生日志信息的方法名
 - `%F`: 输出日志消息产生时所在的文件名称
@@ -191,7 +191,7 @@ log4j.appender.appender1.layout.ConversionPattern=[%p] %m %n
 - `%x`: 输出和当前线程相关联的 NDC(嵌套诊断环境)
 - `%%`: 输出一个 `%` 字符
 
-另外，还可以在 `%` 与格式字符之间加上修饰符来控制其最小长度, 最大长度, 和文本的对齐方式。如:
+另外, 还可以在 `%` 与格式字符之间加上修饰符来控制其最小长度, 最大长度, 和文本的对齐方式。如:
 
 1. `%100c`: 类全名的最小长度为 100 个字符, 不足的用空格补全, 内容右对齐
 2. `%-100c`: 类全名的最小长度为 100 个字符, 不足的用空格补全, 内容左对齐

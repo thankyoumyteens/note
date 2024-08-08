@@ -1,7 +1,5 @@
 # 服务发现
 
-服务发现: 客户端服务进程向注册中心发起查询, 来获取服务的信息。服务发现的一个重要作用就是提供给客户端一个可用的服务列表。
-
 1. 修改服务提供方的启动类
 
 ```java
@@ -12,9 +10,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 // 开启服务发现功能
 @EnableDiscoveryClient
-public class EurekaClientDemo {
+public class ConsulClientDemo {
     public static void main(String[] args) {
-        SpringApplication.run(EurekaClientDemo.class, args);
+        SpringApplication.run(ConsulClientDemo.class, args);
     }
 }
 ```
@@ -51,5 +49,5 @@ public class ServiceInfoController {
 3. 接口返回
 
 ```json
-["eureka-client-demo"]
+["consul", "consul-client-demo"]
 ```

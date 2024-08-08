@@ -1,6 +1,6 @@
 # Direct
 
-1. 配置类, 声明交换机和两队列，并将两个队列与该交换机和不同的路由键进行绑定
+1. 配置类, 声明交换机和两队列, 并将两个队列与该交换机和不同的路由键进行绑定
 
 ```java
 import org.springframework.amqp.core.*;
@@ -73,7 +73,7 @@ public class DirectProducer {
 }
 ```
 
-3. 创建两个消费者，分表对两个队列进行监听
+3. 创建两个消费者, 分表对两个队列进行监听
 
 ```java
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

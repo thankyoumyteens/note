@@ -56,10 +56,10 @@ JMX(Java Management Extensions) 用来管理和监测 Java 程序。
 
 JMX 分为 4 个主要模块
 
-1. Management 模块：启动名为 `Service Thread` 的守护线程。若系统开启了选项-XX：ManagementServer，则加载并创建 `sun.management.Agent` 类，执行其 startAgent 方法启动 JMX Server
-2. RuntimeService 模块：提供运行时模块的性能监控和管理服务，如 applicationTime, jvmCapabilities 等
-3. ThreadService 模块：提供线程和内部同步系统的性能监控和管理服务，包括维护线程列表、线程相关的性能统计、线程快照、线程堆栈跟踪和线程转储等功能
-4. ClassLoadingService：提供类加载模块的性能监控和管理服务
+1. Management 模块: 启动名为 `Service Thread` 的守护线程。若系统开启了选项-XX: ManagementServer, 则加载并创建 `sun.management.Agent` 类, 执行其 startAgent 方法启动 JMX Server
+2. RuntimeService 模块: 提供运行时模块的性能监控和管理服务, 如 applicationTime, jvmCapabilities 等
+3. ThreadService 模块: 提供线程和内部同步系统的性能监控和管理服务, 包括维护线程列表、线程相关的性能统计、线程快照、线程堆栈跟踪和线程转储等功能
+4. ClassLoadingService: 提供类加载模块的性能监控和管理服务
 
 ```CPP
 // --- src/hotspot/share/services/management.cpp --- //
@@ -79,7 +79,7 @@ void management_init() {
 
 ## CodeCache
 
-Code Cache 是指代码高速缓存，主要用来生成和存储本地代码。这些代码片段包括已编译好的 Java 方法和 RuntimeStubs 等。
+Code Cache 是指代码高速缓存, 主要用来生成和存储本地代码。这些代码片段包括已编译好的 Java 方法和 RuntimeStubs 等。
 
 通过 VM 选项 CodeCacheExpansionSize, InitialCodeCacheSize 和 ReservedCodeCacheSize 可以配置该空间大小。
 
@@ -93,13 +93,13 @@ void codeCache_init() {
 
 ## StubRoutines
 
-`StubRoutines` 主要用于处理那些不能直接通过编译后的字节码指令完成的操作。它提供了一系列的“stub”方法或例程，这些方法通常是由 JVM 调用来执行特定的任务。
+`StubRoutines` 主要用于处理那些不能直接通过编译后的字节码指令完成的操作。它提供了一系列的“stub”方法或例程, 这些方法通常是由 JVM 调用来执行特定的任务。
 
-比如：
+比如: 
 
-1. 当 JVM 需要调用一个方法，但该方法的实际地址未知时（例如，在接口方法调用或虚方法调用中），会使用 stub 来间接进行调用
-2. 当字节码指令遇到可能抛出异常的情况时，如除以零、数组越界等，会跳转到相应的 stub 例程来处理异常
-3. 在运行时，JIT 编译器可能会生成特定的代码段来替代原有的解释执行过程，这些代码段也被称为 stubs
+1. 当 JVM 需要调用一个方法, 但该方法的实际地址未知时（例如, 在接口方法调用或虚方法调用中）, 会使用 stub 来间接进行调用
+2. 当字节码指令遇到可能抛出异常的情况时, 如除以零、数组越界等, 会跳转到相应的 stub 例程来处理异常
+3. 在运行时, JIT 编译器可能会生成特定的代码段来替代原有的解释执行过程, 这些代码段也被称为 stubs
 
 ```cpp
 // --- src/hotspot/share/runtime/stubRoutines.cpp --- //
@@ -151,8 +151,8 @@ static BufferBlob* initialize_stubs(StubCodeGenerator::StubsKind kind,
 
 Universe 模块将按照两个阶段进行初始化。
 
-1. 第一阶段，根据 VM 选项配置的 GC 策略及算法，选择垃圾回收器和堆的种类，初始化堆。根据 VM 选项 UseCompressedOops 进行相关配置。若 VM 选项 UseTLAB 开启 TLAB，则初始化 TLAB
-2. 第二阶段，将对共享空间进行配置以及初始化 vmSymbols 和 SystemDictionary 等全局数据结构
+1. 第一阶段, 根据 VM 选项配置的 GC 策略及算法, 选择垃圾回收器和堆的种类, 初始化堆。根据 VM 选项 UseCompressedOops 进行相关配置。若 VM 选项 UseTLAB 开启 TLAB, 则初始化 TLAB
+2. 第二阶段, 将对共享空间进行配置以及初始化 vmSymbols 和 SystemDictionary 等全局数据结构
 
 ```cpp
 // --- src/hotspot/share/memory/universe.cpp --- //
@@ -233,7 +233,7 @@ jint universe_init() {
 
 ## 解释器
 
-初始化解释器(interpreter)，并注册 StubQueue。解释器初始化分为两部分, 另一部分在 `init_globals2` 函数中。
+初始化解释器(interpreter), 并注册 StubQueue。解释器初始化分为两部分, 另一部分在 `init_globals2` 函数中。
 
 ```cpp
 // --- src/hotspot/share/interpreter/interpreter.cpp --- //
@@ -255,4 +255,4 @@ void interpreter_init_stub() {
 
 ## 模板表
 
-初始化模板表模块，将创建模版解释器使用的模板表。
+初始化模板表模块, 将创建模版解释器使用的模板表。

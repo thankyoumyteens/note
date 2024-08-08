@@ -1,6 +1,6 @@
 # Selector
 
-Selector 是 Java NIO 中实现多路复用的关键，可以基于 selector 对象实现一个线程管理多个 channel, 避免线程之间上下文切换带来的开销, 减少多个线程占用的系统资源。
+Selector 是 Java NIO 中实现多路复用的关键, 可以基于 selector 对象实现一个线程管理多个 channel, 避免线程之间上下文切换带来的开销, 减少多个线程占用的系统资源。
 
 使用步骤
 

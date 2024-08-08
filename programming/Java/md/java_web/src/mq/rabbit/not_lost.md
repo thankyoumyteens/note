@@ -31,26 +31,26 @@ mq 默认使用内存保存消息, 开启持久化可以保证 mq 宕机后消�
 
 需要设置三个持久化:
 
-1. 交换机持久化，在声明时指定 durable 为 true
+1. 交换机持久化, 在声明时指定 durable 为 true
    ```java
    // 三个参数分别为 交换器名、交换器类型、是否持久化
    channel.exchangeDeclare(EXCHANGE_NAME, "topic", true);
    ```
-2. 队列持久化，在声明时指定 durable 为 true
+2. 队列持久化, 在声明时指定 durable 为 true
    ```java
-   // 参数1 queue ：队列名
-   // 参数2 durable ：是否持久化
-   // 参数3 exclusive ：仅创建者可以使用的私有队列，断开后自动删除
-   // 参数4 autoDelete : 当所有消费客户端连接断开后，是否自动删除队列
+   // 参数1 queue : 队列名
+   // 参数2 durable : 是否持久化
+   // 参数3 exclusive : 仅创建者可以使用的私有队列, 断开后自动删除
+   // 参数4 autoDelete : 当所有消费客户端连接断开后, 是否自动删除队列
    // 参数5 arguments
    channel.queueDeclare(QUEUE_NAME, true, false, false, null);
    ```
-3. 消息持久化，在投递时指定 delivery_mode=2
+3. 消息持久化, 在投递时指定 delivery_mode=2
    ```java
-   // 参数1 exchange ：交换器
-   // 参数2 routingKey ： 路由键
-   // 参数3 props ： 消息的其他参数,其中 MessageProperties.PERSISTENT_TEXT_PLAIN 表示持久化
-   // 参数4 body ： 消息体
+   // 参数1 exchange : 交换器
+   // 参数2 routingKey :  路由键
+   // 参数3 props :  消息的其他参数,其中 MessageProperties.PERSISTENT_TEXT_PLAIN 表示持久化
+   // 参数4 body :  消息体
    channel.basicPublish(EXCHANGE_NAME, QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
    ```
 

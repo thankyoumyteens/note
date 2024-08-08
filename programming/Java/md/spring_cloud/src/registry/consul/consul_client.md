@@ -1,4 +1,4 @@
-# 创建注册中心
+# 创建服务提供方
 
 1. 创建子项目
 
@@ -16,10 +16,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>eureka-server-demo</artifactId>
+    <artifactId>consul-client-demo</artifactId>
     <packaging>jar</packaging>
 
-    <name>eureka-server-demo</name>
+    <name>consul-client-demo</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,7 +28,11 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
 </project>
@@ -38,21 +42,16 @@
 
 ```yaml
 server:
-  port: 27431
+  port: 27433
 
 spring:
   application:
-    name: eureka-server-demo
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    # 默认也会将自己作为客户端来尝试注册, 手动关闭
-    # 是否将自己注册到Eureka Server中
-    registerWithEureka: false
-    # 是否从Eureka Server中获取注册的服务信息
-    fetchRegistry: false
+    name: consul-client-demo
+  cloud:
+    # 服务注册中心的地址
+    consul:
+      host: 121.36.27.58
+      port: 8500
 ```
 
 3. 启动类
@@ -60,16 +59,13 @@ eureka:
 ```java
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
-// 开启Eureka服务端功能
-@EnableEurekaServer
-public class EurekaServerDemo {
+public class ConsulClientDemo {
     public static void main(String[] args) {
-        SpringApplication.run(EurekaServerDemo.class, args);
+        SpringApplication.run(ConsulClientDemo.class, args);
     }
 }
 ```
 
-4. 项目启动后, 访问 http://localhost:27431/ 打开管理页面
+4. 项目启动后, 访问 http://localhost:8500/ui/ 打开管理页面, 可以看到 consul-client-demo 已经注册上去了

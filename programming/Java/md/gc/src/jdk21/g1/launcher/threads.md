@@ -20,9 +20,9 @@ JDK 中的 6 种线程状态:
 4. `-thread_in_Java`: 表示运行 Java 代码
 5. `-thread_blocked`: 表示阻塞
 
-为了支持内部状态转换，还补充定义了其他几种过渡状态：`_<thread_state_type>_trans`，其中 thread_state_type 分别表示上述 5 种基本状态类型。
+为了支持内部状态转换, 还补充定义了其他几种过渡状态: `_<thread_state_type>_trans`, 其中 thread_state_type 分别表示上述 5 种基本状态类型。
 
-在 HotSpot 中，定义了如下几种线程类型:
+在 HotSpot 中, 定义了如下几种线程类型:
 
 ```cpp
 // --- src/hotspot/share/runtime/os.hpp --- //
@@ -42,7 +42,7 @@ enum ThreadType {
 
 主线程(main thread)是执行 `public static void main (String[] args)` 方法的线程。对应 OS 线程 ID 为 1 的名为 `main` 的线程。
 
-系统初始化时，虚拟机首先创建的线程就是主线程。
+系统初始化时, 虚拟机首先创建的线程就是主线程。
 
 ```cpp
 // --- src/hotspot/share/runtime/threads.cpp#create_vm --- //
@@ -71,13 +71,13 @@ main_thread->stack_overflow_state()->create_stack_guard_pages();
 ```
 
 1. JVM 创建一个 JavaThread 类型的线程变量(刚创建时状态为 `_thread_new`)
-2. 将线程状态设置为 `_thread_in_vm`，表明该线程正处于在 JVM 中执行的状态
+2. 将线程状态设置为 `_thread_in_vm`, 表明该线程正处于在 JVM 中执行的状态
 3. 记录线程栈的基址和大小, 初始化线程本地存储区(TLS)
 4. 为线程设置 JNI 句柄
 5. 通过 OS 模块创建原始线程(OSThread), 并设置为可运行状态
 6. 初始化主线程栈
 
-现在 main_thread 实际上是一个 JVM 内部线程，其状态为 JVM 内部定义的线程状态 `_thread_in_vm`。
+现在 main_thread 实际上是一个 JVM 内部线程, 其状态为 JVM 内部定义的线程状态 `_thread_in_vm`。
 
 接下来需要把它对应到 java 层的 java.lang.Thread
 
@@ -187,7 +187,7 @@ static void create_initial_thread(Handle thread_group, JavaThread* thread,
 
 ## 创建 VMThread
 
-VMThread 是在 JVM 内部执行 VMOperation 的线程。VMOperation 实现了 JVM 内部的核心操作。当 VMThread 线程创建成功后，在整个运行期间不断等待, 接受并执行指定的 VMOperation。
+VMThread 是在 JVM 内部执行 VMOperation 的线程。VMOperation 实现了 JVM 内部的核心操作。当 VMThread 线程创建成功后, 在整个运行期间不断等待, 接受并执行指定的 VMOperation。
 
 ```cpp
 // --- src/hotspot/share/runtime/threads.cpp#create_vm --- //

@@ -2,13 +2,13 @@
 
 一个 Klass 对象代表一个 Java 类。oop 指的是 Ordinary Object Pointer(普通对象指针), 它用来指向一个 Java 对象。
 
-对于 oop 来说，主要作用就是表示对象的实例数据，没必要持有任何虚函数。而在描述 Java 类的 Klass 对象中含有 VTBL (虚方法表)，那么，Klass 就能够根据 Java 对象的实际类型进行分派，这样一来，oop 只需要通过相应的 Klass 便可以找到所有的虚函数。这就避免了在每个对象中都分配一个 C++ VTBL 指针。
+对于 oop 来说, 主要作用就是表示对象的实例数据, 没必要持有任何虚函数。而在描述 Java 类的 Klass 对象中含有 VTBL (虚方法表), 那么, Klass 就能够根据 Java 对象的实际类型进行分派, 这样一来, oop 只需要通过相应的 Klass 便可以找到所有的虚函数。这就避免了在每个对象中都分配一个 C++ VTBL 指针。
 
 ## oop
 
-在 Java 应用程序运行过程中，每创建一个 Java 对象，在 JVM 内部也会相应地创建一个新的 oopDesc 对象来表示 Java 对象。
+在 Java 应用程序运行过程中, 每创建一个 Java 对象, 在 JVM 内部也会相应地创建一个新的 oopDesc 对象来表示 Java 对象。
 
-田于 HotSpot 内部将频緊便用 oopDesc 指针，为了简化 oopDesc 类型的指针的使用，在 HotSpot 内部定义了它们的别名: oop。
+田于 HotSpot 内部将频緊便用 oopDesc 指针, 为了简化 oopDesc 类型的指针的使用, 在 HotSpot 内部定义了它们的别名: oop。
 
 oop 在 JVM 中的层级:
 
@@ -29,12 +29,12 @@ typedef class     objArrayOopDesc* objArrayOop;
 typedef class     typeArrayOopDesc* typeArrayOop;
 ```
 
-在虚拟机内部，通过 instanceOopDesc 来表示一个常规的 Java 对象。对象在内存中的布局可以分为连续的两部分：instanceOopDesc 和实例数据。
+在虚拟机内部, 通过 instanceOopDesc 来表示一个常规的 Java 对象。对象在内存中的布局可以分为连续的两部分: instanceOopDesc 和实例数据。
 
-其中，instanceOopDesc(或其它的 oopDesc)又被称为对象头，instanceOopDesc 对象头包括以下两部分信息:
+其中, instanceOopDesc(或其它的 oopDesc)又被称为对象头, instanceOopDesc 对象头包括以下两部分信息:
 
-1. Mark Word：instanceOopDesc 中的 `_mark` 变量，存储对象运行时的信息，如 hashCode, GC 分代年龄, 锁状态标志, 线程持有的锁, 偏向锁的线程 ID, 偏向时间戳等，`_mark` 的数据类型为 markOop，占用内存大小与虚拟机位长一致，比如在 64 位虚拟机上长度也为 64 位。
-2. 元数据指针：指向 Klass 对象的指针，Klass 对象包含了对象所属类型的元数据(meta data)，因此该字段称为元数据指针。虚拟机在运行时将频繁使用这个指针定位到位于方法区内的类型信息。JVM 参数 `-XX:UseCompressedOops` 可以使类元数据指针在 64 位 JVM 上使用 32 位指针存储, 以降低开销
+1. Mark Word: instanceOopDesc 中的 `_mark` 变量, 存储对象运行时的信息, 如 hashCode, GC 分代年龄, 锁状态标志, 线程持有的锁, 偏向锁的线程 ID, 偏向时间戳等, `_mark` 的数据类型为 markOop, 占用内存大小与虚拟机位长一致, 比如在 64 位虚拟机上长度也为 64 位。
+2. 元数据指针: 指向 Klass 对象的指针, Klass 对象包含了对象所属类型的元数据(meta data), 因此该字段称为元数据指针。虚拟机在运行时将频繁使用这个指针定位到位于方法区内的类型信息。JVM 参数 `-XX:UseCompressedOops` 可以使类元数据指针在 64 位 JVM 上使用 32 位指针存储, 以降低开销
 
 ```cpp
 // --- src/hotspot/share/oops/oop.hpp --- //

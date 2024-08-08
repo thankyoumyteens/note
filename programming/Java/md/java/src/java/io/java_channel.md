@@ -1,13 +1,13 @@
 # Channel
 
-NIO 是基于通道（Channel）和缓冲区（Buffer）进行操作，数据总是从 Channel 读取到 Buffer 中，或者从 Buffer 写入到 Channel 中。
+NIO 是基于通道（Channel）和缓冲区（Buffer）进行操作, 数据总是从 Channel 读取到 Buffer 中, 或者从 Buffer 写入到 Channel 中。
 
 常用的 Channel
 
-- FileChannel：从文件中读写数据
-- DatagramChannel：通过 UDP 读写网络中的数据
-- SocketChannel：通过 TCP 读写网络中的数据
-- ServerSocketChannel： 监听新进来的 TCP 连接
+- FileChannel: 从文件中读写数据
+- DatagramChannel: 通过 UDP 读写网络中的数据
+- SocketChannel: 通过 TCP 读写网络中的数据
+- ServerSocketChannel:  监听新进来的 TCP 连接
 
 ## FileChannel
 
