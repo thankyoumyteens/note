@@ -15,3 +15,7 @@
 
 - [负载均衡](./load_balancer/load_balancer.md)
   - [LoadBalancerClient](./load_balancer/load_balancer_client/load_balancer_client.md)
+  - [Ribbon](./load_balancer/load_balancer_client/ribbon_client.md)
+
+- [服务调用](./http_clients/http_clients.md)
+  - [Feign](./http_clients/feign/feign.md)

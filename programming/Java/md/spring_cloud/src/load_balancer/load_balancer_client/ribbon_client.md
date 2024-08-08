@@ -1,8 +1,8 @@
-# LoadBalancerClient
+# Ribbon
 
-LoadBalancerClient 是 SpringCloud 提供的一种负载均衡客户端。
+Ribbon 使用起来更加方便, 它的 url 格式: `http://服务名/接口`, 它能够在进行调用的时候，自动选取服务实例，并将服务名替换成实际要请求的 IP 地址和端口，从而完成服务接口的调用。省略了 LoadBalancerClient 选取服务实例和拼接 URL 的步骤，直接通过 RestTemplate 发起请求。
 
-LoadBalancerClient 在初始化时会通过 Eureka Client 向 Eureka 服务端获取所有服务实例的注册信息并缓存在本地, 并且每 10 秒向 EurekaClient 发送 “ping”, 来判断服务的可用性。如果服务的可用性发生了改变或者服务数量和之前的不一致, 则更新或者重新拉取。最后, 在得到服务列表后, ILoadBalancer 会根据 IRule 的策略进行负载均衡（默认策略为轮询）。
+ribbon 已经停止更新, 最新版本是 2.2.10.RELEASE。
 
 1. 创建子项目
 
@@ -20,10 +20,10 @@ LoadBalancerClient 在初始化时会通过 Eureka Client 向 Eureka 服务端�
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>lbc-demo</artifactId>
+    <artifactId>ribbon-demo</artifactId>
     <packaging>jar</packaging>
 
-    <name>lbc-demo</name>
+    <name>ribbon-demo</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,8 +39,9 @@ LoadBalancerClient 在初始化时会通过 Eureka Client 向 Eureka 服务端�
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <version>2.2.10.RELEASE</version>
         </dependency>
     </dependencies>
 </project>
@@ -50,11 +51,11 @@ LoadBalancerClient 在初始化时会通过 Eureka Client 向 Eureka 服务端�
 
 ```yaml
 server:
-  port: 27434
+  port: 27435
 
 spring:
   application:
-    name: lbc-demo
+    name: ribbon-demo
 
 eureka:
   client:
@@ -73,9 +74,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 // 开启服务发现功能
 @EnableDiscoveryClient
-public class LbcDemo {
+public class RibbonDemo {
     public static void main(String[] args) {
-        SpringApplication.run(LbcDemo.class, args);
+        SpringApplication.run(RibbonDemo.class, args);
     }
 }
 ```
@@ -83,21 +84,24 @@ public class LbcDemo {
 4. 添加 RestTemplate
 
 ```java
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class LdcConfig {
+public class RConfig {
 
     @Bean
+    // 开启Ribbon负载均衡
+    @LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 }
 ```
 
-5. 通过 LoadBalancerClient 获取服务提供方并调用
+5. 通过 Ribbon 调用服务提供方
 
 ```java
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,21 +114,16 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ldc")
-public class LdcController {
-
-    @Autowired
-    private LoadBalancerClient loadBalancerClient;
+@RequestMapping("/ribbon")
+public class RController {
 
     @Autowired
     private RestTemplate restTemplate;
 
     @RequestMapping("/test")
     public void test() {
-        // 根据 service ID 获取服务提供方
-        ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client-demo");
-        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/service/list";
-        // 调用
+        // 直接通过服务名调用
+        String url = "http://eureka-client-demo/service/list";
         List serviceList = restTemplate.getForObject(url, List.class);
         for (Object service : serviceList) {
             System.out.println(service);
