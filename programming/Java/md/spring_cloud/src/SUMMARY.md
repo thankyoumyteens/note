@@ -35,3 +35,4 @@
     - [集成Feign](./fallback/hystrix/feign.md)
 
 - [网关](./gateway/gateway.md)
+  - [Zuul](./gateway/zuul/zuul.md)
