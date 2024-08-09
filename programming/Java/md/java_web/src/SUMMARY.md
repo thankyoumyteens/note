@@ -66,3 +66,4 @@
   - [Kafka](./mq/kafka/kafka.md)
     - [如何保证消息不丢失](./mq/kafka/not_lost.md)
     - [重复消费](./mq/kafka/repeated_consumption.md)
+    - [保证消息的顺序](./mq/kafka/order.md)
