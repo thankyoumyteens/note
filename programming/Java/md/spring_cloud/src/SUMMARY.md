@@ -36,3 +36,4 @@
 
 - [网关](./gateway/gateway.md)
   - [Zuul](./gateway/zuul/zuul.md)
+    - [路由配置](./gateway/zuul/route.md)
