@@ -22,3 +22,7 @@
 
 - [配置中心](./config/config.md)
   - [Spring Cloud Config](./config/spring_config/spring_config.md)
+    - [Config Server](./config/spring_config/config_server.md)
+    - [获取配置](./config/spring_config/config_client.md)
+    - [高可用](./config/spring_config/ha.md)
+    - [配置刷新](./config/spring_config/refresh.md)
