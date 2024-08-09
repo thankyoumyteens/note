@@ -29,3 +29,6 @@
 
 - [服务降级](./fallback/fallback.md)
   - [Hystrix](./fallback/hystrix/hystrix.md)
+    - [服务降级](./fallback/hystrix/fallback.md)
+    - [线程隔离](./fallback/hystrix/thread_isolation.md)
+    - [断路器](./fallback/hystrix/circuit_breaker.md)

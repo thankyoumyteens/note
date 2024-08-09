@@ -1,8 +1,4 @@
-# Ribbon
-
-Ribbon 使用起来更加方便, 它的 url 格式: `http://服务名/接口`, 它能够在进行调用的时候，自动选取服务实例，并将服务名替换成实际要请求的 IP 地址和端口，从而完成服务接口的调用。省略了 LoadBalancerClient 选取服务实例和拼接 URL 的步骤，直接通过 RestTemplate 发起请求。
-
-Ribbon 已经停止更新, 最新版本是 2.2.10.RELEASE。
+# 服务降级
 
 1. 创建子项目
 
@@ -20,10 +16,10 @@ Ribbon 已经停止更新, 最新版本是 2.2.10.RELEASE。
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ribbon-demo</artifactId>
+    <artifactId>hystrix-demo</artifactId>
     <packaging>jar</packaging>
 
-    <name>ribbon-demo</name>
+    <name>hystrix-demo</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,6 +39,11 @@ Ribbon 已经停止更新, 最新版本是 2.2.10.RELEASE。
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
             <version>2.2.10.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <version>2.2.10.RELEASE</version>
+        </dependency>
     </dependencies>
 </project>
 ```
@@ -51,11 +52,11 @@ Ribbon 已经停止更新, 最新版本是 2.2.10.RELEASE。
 
 ```yaml
 server:
-  port: 27435
+  port: 27439
 
 spring:
   application:
-    name: ribbon-demo
+    name: hystrix-demo
 
 eureka:
   client:
@@ -70,18 +71,21 @@ eureka:
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
 @SpringBootApplication
 // 开启服务发现功能
 @EnableDiscoveryClient
-public class RibbonDemo {
+// 开启断路器功能, 也可以用@EnableCircuitBreaker
+@EnableHystrix
+public class HystrixDemo {
     public static void main(String[] args) {
-        SpringApplication.run(RibbonDemo.class, args);
+        SpringApplication.run(HystrixDemo.class, args);
     }
 }
 ```
 
-4. 添加 RestTemplate
+4. 设置负载均衡
 
 ```java
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -90,7 +94,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class RConfig {
+public class HConfig {
 
     @Bean
     // 开启Ribbon负载均衡
@@ -101,12 +105,11 @@ public class RConfig {
 }
 ```
 
-5. 通过 Ribbon 调用服务提供方
+5. 在调用服务的方法上使用 `@HystrixCommand` 注解来指定服务降级方法
 
 ```java
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -114,20 +117,32 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ribbon")
-public class RController {
+@RequestMapping("/hystrix")
+public class HController {
 
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     * 服务降级方法
+     */
+    public String fallback() {
+        return "请稍后重试";
+    }
+
     @RequestMapping("/test")
-    public void test() {
+    // 指定服务降级方法
+    @HystrixCommand(fallbackMethod = "fallback")
+    public String test() {
         // 直接通过服务名调用
         String url = "http://eureka-client-demo/service/list";
         List serviceList = restTemplate.getForObject(url, List.class);
         for (Object service : serviceList) {
             System.out.println(service);
         }
+        return "ok";
     }
 }
 ```
+
+6. 在服务提供方加上 `Thread.sleep(10000);` 来模拟请求超时, 触发降级
