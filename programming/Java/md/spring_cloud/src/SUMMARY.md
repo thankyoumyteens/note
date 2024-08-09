@@ -26,3 +26,6 @@
     - [获取配置](./config/spring_config/config_client.md)
     - [高可用](./config/spring_config/ha.md)
     - [配置刷新](./config/spring_config/refresh.md)
+
+- [服务降级](./fallback/fallback.md)
+  - [Hystrix](./fallback/hystrix/hystrix.md)
