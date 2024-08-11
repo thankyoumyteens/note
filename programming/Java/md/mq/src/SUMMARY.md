@@ -10,3 +10,6 @@
     - [Fanout](./rabbit/springboot/fanout.md)
     - [Direct](./rabbit/springboot/direct.md)
     - [Topic](./rabbit/springboot/topic.md)
+
+- [Kafka](./kafka/kafka.md)
+  - [Kafka的消息存储结构](./kafka/struct.md)
