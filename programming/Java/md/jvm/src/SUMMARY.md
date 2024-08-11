@@ -19,7 +19,7 @@
     - [字段](./load_class/class_file/fields.md)
     - [方法](./load_class/class_file/methods.md)
     - [属性表](./load_class/class_file/attributes.md)
-      - [Code属性表](./load_class/class_file/attributes_code.md)
+      - [Code属性](./load_class/class_file/attributes_code.md)
       - [LineNumberTable属性](./load_class/class_file/attributes_lnt.md)
       - [LocalVariableTable属性](./load_class/class_file/attributes_lvt.md)
       - [SourceFile属性](./load_class/class_file/attributes_sf.md)

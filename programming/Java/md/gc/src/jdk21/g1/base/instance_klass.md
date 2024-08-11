@@ -7,19 +7,6 @@ class InstanceKlass: public Klass {
  public:
   static const KlassKind Kind = InstanceKlassKind;
 
- public:
-  // See "The Java Virtual Machine Specification" section 2.16.2-5 for a detailed description
-  // of the class loading & initialization procedure, and the use of the states.
-  enum ClassState : u1 {
-    allocated,                          // allocated (but not yet linked)
-    loaded,                             // loaded and inserted in class hierarchy (but not linked yet)
-    being_linked,                       // currently running verifier and rewriter
-    linked,                             // successfully linked/verified (but not initialized yet)
-    being_initialized,                  // currently running class initializer
-    fully_initialized,                  // initialized (successful final state)
-    initialization_error                // error happened during initialization
-  };
-
  protected:
   // If you add a new field that points to any metaspace object, you
   // must add this field to InstanceKlass::metaspace_pointers_do().

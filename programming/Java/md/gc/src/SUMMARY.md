@@ -54,6 +54,7 @@
   - [创建新的TLAB](./jdk21/g1/tlab/allocate_new_tlab.md)
 
 - [类的加载](./jdk21/g1/load_class/load_class.md)
+  - [类的状态](./jdk21/g1/load_class/class_state.md)
   - [类的初始化](./jdk21/g1/load_class/initialize_class.md)
   - [类的连接](./jdk21/g1/load_class/link_class.md)
   - [注册finalizer](./jdk21/g1/load_class/register_finalizer.md)
