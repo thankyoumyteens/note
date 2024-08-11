@@ -136,7 +136,10 @@ HeapWord* G1CollectedHeap::attempt_allocation_slow(size_t word_size) {
 }
 ```
 
-## 拿到锁后, 尝试分配对象
+## 拿到锁后, 再尝试分配一次对象
+
+1. 首先试着再当前的 region 中分配(复用 CAS 分配对象的函数)
+2. 如果失败了, 则会申请一个新的 region, 并在其中分配对象
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1Allocator.inline.hpp --- //
