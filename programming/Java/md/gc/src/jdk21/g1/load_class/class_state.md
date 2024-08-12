@@ -4,12 +4,12 @@
 // --- src/hotspot/share/oops/instanceKlass.hpp.InstanceKlass --- //
 
 enum ClassState : u1 {
-  allocated,                          // allocated (but not yet linked)
-  loaded,                             // loaded and inserted in class hierarchy (but not linked yet)
-  being_linked,                       // currently running verifier and rewriter
-  linked,                             // successfully linked/verified (but not initialized yet)
-  being_initialized,                  // currently running class initializer
-  fully_initialized,                  // initialized (successful final state)
-  initialization_error                // error happened during initialization
+  allocated,           // 已分配, 还没链接
+  loaded,              // 加载完成
+  being_linked,        // 正在链接
+  linked,              // 链接完成, 还没初始化
+  being_initialized,   // 正在初始化
+  fully_initialized,   // 完成初始化
+  initialization_error // 初始化过程中出错
 };
 ```
