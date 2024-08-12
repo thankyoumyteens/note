@@ -25,6 +25,9 @@
     - [管道](./java/thread/thread_communicate_pipe.md)
 
 - [IO](./java/io/io.md)
+  - [虚拟内存](./java/io/virtual_memory.md)
+  - [内核空间和用户空间](./java/io/space.md)
+  - [数据传输机制](./java/io/transfer.md)
   - [文件描述符](./java/io/fd.md)
   - [IO模型](./java/io/io_model.md)
     - [同步阻塞IO](./java/io/bio.md)
