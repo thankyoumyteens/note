@@ -70,3 +70,6 @@
     - [高可用](./mq/kafka/high_availability.md)
     - [数据清理机制](./mq/kafka/cleaner.md)
     - [高性能设计](./mq/kafka/high_performance.md)
+
+- [集合](./collections/collections.md)
+  - [ArrayList](./collections/array_list.md)

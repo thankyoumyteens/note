@@ -117,5 +117,17 @@
 例题 1
 
 <!--
-
+\begin{align}
+& 求极限 \lim_{x \to + \infty} \frac{\ln ^{2} x}{2x^{2} + x + 3} \\
+\\
+& \;\,\;\,\;\,\, \lim_{x \to + \infty} \frac{\ln ^{2} x}{2x^{2} + x + 3} \\
+& \;\, = \lim_{x \to + \infty} \frac{x^{2}}{2x^{2} + x + 3} \times \frac{\ln ^{2} x}{x^{2}} \\
+& \;\, // 左边是两个多项式相除的极限, m = n 时, 极限为最高次的系数相除 \\
+& \;\, = \frac{1}{2} \lim_{x \to + \infty} \frac{\ln ^{2} x}{x^{2}} \\
+& \;\, // 趋于 +\infty 的速度: c^{x} > x^{b} > \ln ^{a} x \\
+& \;\, = \frac{1}{2} \times 0 \\
+& \;\, = 0 \\
+\end{align}
 -->
+
+![](../img/lhsr7.jpg)
