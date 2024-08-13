@@ -42,6 +42,7 @@
   - [零拷贝](./java/io/zero_copy.md)
     - [mmap+write实现零拷贝](./java/io/mmap_write.md)
     - [sendfile实现零拷贝](./java/io/sendfile.md)
+    - [splice实现零拷贝](./java/io/splice.md)
 
 - [动态代理](./proxy/proxy.md)
   - [JDK动态代理](./proxy/jdk_proxy.md)
