@@ -8,6 +8,7 @@
     - [创建注册中心](./registry/eureka/eureka_server.md)
     - [创建服务提供方](./registry/eureka/eureka_client.md)
     - [服务发现](./registry/eureka/eureka_discovery.md)
+    - [集群](./registry/eureka/cluster.md)
   - [Consul](./registry/consul/consul.md)
     - [安装](./registry/consul/install.md)
     - [创建服务提供方](./registry/consul/consul_client.md)
@@ -39,3 +40,13 @@
     - [搭建](./gateway/zuul/base.md)
     - [路由配置](./gateway/zuul/route.md)
     - [过滤器](./gateway/zuul/filter.md)
+
+- [总线](./bus/bus.md)
+  - [Spring Cloud Bus](./bus/spring_bus.md)
+    - [配置自动刷新](./bus/spring_bus/refresh.md)
+
+- [Nacos](./registry/nacos/nacos.md)
+  - [注册中心](./registry/nacos/registry.md)
+    - [服务提供方](./registry/nacos/producer.md)
+    - [服务消费方](./registry/nacos/consumer.md)
+  - [配置中心](./registry/nacos/config.md)
