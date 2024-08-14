@@ -70,3 +70,40 @@ private void ensureExplicitCapacity(int minCapacity) {
 ```java
 int newCapacity = oldCapacity + (oldCapacity >> 1);
 ```
+
+## 和数组互转
+
+数组用 `Arrays.asList` 转成 List 后, 修改数组, List 也会受影响。
+
+```java
+public class Arrays {
+    // ...
+
+    public static <T> List<T> asList(T... a) {
+        // 返回的是Arrays.ArrayList, 不是java.util.ArrayList
+        return new ArrayList<>(a);
+    }
+
+    private static class ArrayList<E> extends AbstractList<E>
+        implements RandomAccess, java.io.Serializable
+    {
+        private static final long serialVersionUID = -2764017481108945198L;
+        private final E[] a;
+
+        ArrayList(E[] array) {
+            // 直接把引用赋值了, 所以会受影响
+            a = Objects.requireNonNull(array);
+        }
+        // ...
+    }
+}
+```
+
+List 用 `toArray` 转成数组后, 修改 List, 数组不会受影响。
+
+```java
+public Object[] toArray() {
+    // 复制了一个新数组返回, 所以不会受影响
+    return Arrays.copyOf(elementData, size);
+}
+```
