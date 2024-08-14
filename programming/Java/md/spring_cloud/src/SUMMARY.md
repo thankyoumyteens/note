@@ -15,11 +15,14 @@
     - [服务发现](./registry/consul/consul_discovery.md)
 
 - [负载均衡](./load_balancer/load_balancer.md)
+  - [启动多个服务提供方](./load_balancer/load_balancer_client/multi_producer.md)
   - [LoadBalancerClient](./load_balancer/load_balancer_client/load_balancer_client.md)
   - [Ribbon](./load_balancer/load_balancer_client/ribbon_client.md)
+  - [Spring Cloud Loadbalancer](./load_balancer/load_balancer_client/loadbalancer/loadbalancer.md)
 
 - [服务调用](./http_clients/http_clients.md)
   - [Feign](./http_clients/feign/feign.md)
+  - [OpenFeign](./http_clients/open_feign/open_feign.md)
 
 - [配置中心](./config/config.md)
   - [Spring Cloud Config](./config/spring_config/spring_config.md)
