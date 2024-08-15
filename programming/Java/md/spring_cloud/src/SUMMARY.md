@@ -1,7 +1,8 @@
 # Summary
 
-- [Spring Cloud](./spring_cloud.md)
-  - [父项目搭建](./project.md)
+- [Spring Cloud Hoxton.SR12 + Spring Boot 2.3.12.RELEASE](./spring_cloud.md)
+
+- [父项目搭建](./project.md)
 
 - [注册中心](./registry/registry.md)
   - [Eureka](./registry/eureka/eureka.md)
@@ -47,6 +48,8 @@
 - [总线](./bus/bus.md)
   - [Spring Cloud Bus](./bus/spring_bus.md)
     - [配置自动刷新](./bus/spring_bus/refresh.md)
+
+- [链路追踪](./tracing/tracing.md)
 
 - [Nacos](./registry/nacos/nacos.md)
   - [注册中心](./registry/nacos/registry.md)

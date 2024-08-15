@@ -58,6 +58,8 @@
   - [类的初始化](./jdk21/g1/load_class/initialize_class.md)
   - [类的连接](./jdk21/g1/load_class/link_class.md)
   - [注册finalizer](./jdk21/g1/load_class/register_finalizer.md)
+  - [加载](./jdk21/g1/load_class/load/load.md)
+    - [解析class文件](./jdk21/g1/load_class/load/parse_class.md)
 
 - [垃圾回收](./jdk21/g1/gc/gc.md)
   - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
