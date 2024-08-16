@@ -11,17 +11,22 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
 
   // BEGIN STREAM PARSING
   stream->guarantee_more(8, CHECK);  // magic, major, minor
-  // Magic value
+  // 读取魔数
   const u4 magic = stream->get_u4_fast();
   guarantee_property(magic == JAVA_CLASSFILE_MAGIC,
                      "Incompatible magic value %u in class file %s",
                      magic, CHECK);
 
-  // Version numbers
+  // 读取主、次版本号
   _minor_version = stream->get_u2_fast();
   _major_version = stream->get_u2_fast();
 
-  // Check version numbers - we check this even with verifier off
+  // 校验版本号, 必须符合下面的某一条规则
+  // 1. 45 <= major_version < 56, 且 minor_version 可以取任意值
+  // 2. 56 <= major_version <= JVM_CLASSFILE_MAJOR_VERSION, 且 minor_version 取 0
+  //    JDK21中, JVM_CLASSFILE_MAJOR_VERSION是65
+  // 3. major_version = JVM_CLASSFILE_MAJOR_VERSION, 且 minor_version = 65535, 
+  //    且提供了 --enable-preview
   verify_class_version(_major_version, _minor_version, _class_name, CHECK);
 
   stream->guarantee_more(3, CHECK); // length, first cp tag
