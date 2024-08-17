@@ -9,8 +9,8 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
   assert(stream != nullptr, "invariant");
   assert(_class_name != nullptr, "invariant");
 
-  // BEGIN STREAM PARSING
-  stream->guarantee_more(8, CHECK);  // magic, major, minor
+  // 确保字节码中包含 magic, major, minor, 否则抛出异常
+  stream->guarantee_more(8, CHECK);
   // 读取魔数
   const u4 magic = stream->get_u4_fast();
   guarantee_property(magic == JAVA_CLASSFILE_MAGIC,
@@ -25,11 +25,12 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
   // 1. 45 <= major_version < 56, 且 minor_version 可以取任意值
   // 2. 56 <= major_version <= JVM_CLASSFILE_MAJOR_VERSION, 且 minor_version 取 0
   //    JDK21中, JVM_CLASSFILE_MAJOR_VERSION是65
-  // 3. major_version = JVM_CLASSFILE_MAJOR_VERSION, 且 minor_version = 65535, 
+  // 3. major_version = JVM_CLASSFILE_MAJOR_VERSION, 且 minor_version = 65535,
   //    且提供了 --enable-preview
   verify_class_version(_major_version, _minor_version, _class_name, CHECK);
 
   stream->guarantee_more(3, CHECK); // length, first cp tag
+  // 读取常量池大小
   u2 cp_size = stream->get_u2_fast();
 
   guarantee_property(
@@ -40,23 +41,22 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
   if (is_hidden()) { // Add a slot for hidden class name.
     cp_size++;
   }
-
+  // 创建常量池对象
   _cp = ConstantPool::allocate(_loader_data,
                                cp_size,
                                CHECK);
 
   ConstantPool* const cp = _cp;
-
+  // 解析常量池
   parse_constant_pool(stream, cp, _orig_cp_size, CHECK);
 
   assert(cp_size == (const u2)cp->length(), "invariant");
 
-  // ACCESS FLAGS
   stream->guarantee_more(8, CHECK);  // flags, this_class, super_class, infs_len
 
-  // Access flags
+  // 读取 Access flags
   jint flags;
-  // JVM_ACC_MODULE is defined in JDK-9 and later.
+  // JDK9 及后续版本要包含 ACC_MODULE
   if (_major_version >= JAVA_9_VERSION) {
     flags = stream->get_u2_fast() & (JVM_RECOGNIZED_CLASS_MODIFIERS | JVM_ACC_MODULE);
   } else {
@@ -64,7 +64,8 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
   }
 
   if ((flags & JVM_ACC_INTERFACE) && _major_version < JAVA_6_VERSION) {
-    // Set abstract bit for old class files for backward compatibility
+    // 兼容旧版 JDK
+    // 新版 JDK 的接口和者抽象类都需要设置 ACC_ABSTRACT
     flags |= JVM_ACC_ABSTRACT;
   }
 

@@ -14,6 +14,10 @@
     - [安装](./registry/consul/install.md)
     - [创建服务提供方](./registry/consul/consul_client.md)
     - [服务发现](./registry/consul/consul_discovery.md)
+  - [Nacos](./registry/nacos/nacos.md)
+    - [安装](./registry/nacos/install.md)
+    - [服务提供方](./registry/nacos/producer.md)
+    - [服务消费方](./registry/nacos/consumer.md)
 
 - [负载均衡](./load_balancer/load_balancer.md)
   - [启动多个服务提供方](./load_balancer/load_balancer_client/multi_producer.md)
@@ -31,6 +35,8 @@
     - [获取配置](./config/spring_config/config_client.md)
     - [高可用](./config/spring_config/ha.md)
     - [配置刷新](./config/spring_config/refresh.md)
+  - [Nacos](./config/nacos/nacos.md)
+    - [配置中心](./config/nacos/config.md)
 
 - [服务降级](./fallback/fallback.md)
   - [Hystrix](./fallback/hystrix/hystrix.md)
@@ -38,6 +44,8 @@
     - [线程隔离](./fallback/hystrix/thread_isolation.md)
     - [断路器](./fallback/hystrix/circuit_breaker.md)
     - [集成Feign](./fallback/hystrix/feign.md)
+  - [Resilience4j](./fallback/resilience4j/resilience4j.md)
+  - [Sentinel](./fallback/sentinel/sentinel.md)
 
 - [网关](./gateway/gateway.md)
   - [Zuul](./gateway/zuul/zuul.md)
@@ -50,9 +58,3 @@
     - [配置自动刷新](./bus/spring_bus/refresh.md)
 
 - [链路追踪](./tracing/tracing.md)
-
-- [Nacos](./registry/nacos/nacos.md)
-  - [注册中心](./registry/nacos/registry.md)
-    - [服务提供方](./registry/nacos/producer.md)
-    - [服务消费方](./registry/nacos/consumer.md)
-  - [配置中心](./registry/nacos/config.md)
