@@ -81,14 +81,14 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
 
   _access_flags.set_flags(flags);
 
-  // This class and superclass
+  // 读取当前类索引
   _this_class_index = stream->get_u2_fast();
   check_property(
     valid_cp_range(_this_class_index, cp_size) &&
       cp->tag_at(_this_class_index).is_unresolved_klass(),
     "Invalid this class index %u in constant pool in class file %s",
     _this_class_index, CHECK);
-
+  // 并按索引在常量池中找到当前类的全限定名
   Symbol* const class_name_in_cp = cp->klass_name_at(_this_class_index);
   assert(class_name_in_cp != nullptr, "class_name can't be null");
 
@@ -156,8 +156,9 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
     }
   }
 
-  // SUPERKLASS
+  // 读取父类索引
   _super_class_index = stream->get_u2_fast();
+  // 按索引在常量池中找到父类的全限定名和父类的klass对象
   _super_klass = parse_super_class(cp,
                                    _super_class_index,
                                    _need_verify,
