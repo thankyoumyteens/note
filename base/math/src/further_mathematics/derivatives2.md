@@ -122,3 +122,21 @@ x > 2 时, f'(x) < 0 \\
 -->
 
 ![](../img/d2_8.jpg)
+
+例题 3
+
+<!--
+\begin{align}
+& 函数 f(x) 可导, f'(1) = 0, \lim_{x \to 1} \frac{f'(x)}{\sin ^3 \pi x} = 2, 求 x = 1 是什么点 \\
+\\
+& 因为 \lim_{x \to 1} \frac{f'(x)}{\sin ^3 \pi x} > 0 \\
+& 所以存在 \delta > 0, 当 0 < |x - 1| < \delta 时, \frac{f'(x)}{\sin ^3 \pi x} > 0 \\
+& 当 x \in (1 - \delta, 1) 时, \pi x 比 \pi 小一点, 所以角在第二象限, 正弦值大于 0 \\
+& 为了满足 \frac{f'(x)}{\sin ^3 \pi x} > 0, f'(x) 就只能大于 0 \\
+& 当 x \in (1, 1 + \delta) 时, \pi x 比 \pi 大一点, 所以角在第三象限, 正弦值小于 0 \\
+& 为了满足 \frac{f'(x)}{\sin ^3 \pi x} > 0, f'(x) 就只能小于 0 \\
+& 所以 x = 1 是极大点 \\
+\end{align}
+-->
+
+![](../img/d2_9.jpg)

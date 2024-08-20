@@ -7,6 +7,8 @@
   - [枚举](./base/enum.md)
   - [typedef](./base/typedef.md)
   - [位运算](./base/bit_operation.md)
+    - [取出一个数指定位的值](./base/xor/bit_value.md)
+    - [两个数拼在一起](./base/xor/concat_value.md)
     - [交换两个变量的值](./base/xor/swap_value.md)
     - [判断一个数是奇数还是偶数](./base/bitwise_operations/odd.md)
   - [动态内存分配](./base/allocation/allocation.md)
