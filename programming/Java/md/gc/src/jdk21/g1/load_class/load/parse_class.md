@@ -1,6 +1,64 @@
 # 解析 class 文件
 
 ```cpp
+// --- src/hotspot/share/classfile/klassFactory.cpp --- //
+
+InstanceKlass* KlassFactory::create_from_stream(ClassFileStream* stream,
+                                                Symbol* name,
+                                                ClassLoaderData* loader_data,
+                                                const ClassLoadInfo& cl_info,
+                                                TRAPS) {
+  assert(stream != nullptr, "invariant");
+  assert(loader_data != nullptr, "invariant");
+
+  ResourceMark rm(THREAD);
+  HandleMark hm(THREAD);
+
+  JvmtiCachedClassFileData* cached_class_file = nullptr;
+
+  ClassFileStream* old_stream = stream;
+
+  // increment counter
+  THREAD->statistical_info().incr_define_class_count();
+
+  // Skip this processing for VM hidden classes
+  if (!cl_info.is_hidden()) {
+    stream = check_class_file_load_hook(stream,
+                                        name,
+                                        loader_data,
+                                        cl_info.protection_domain(),
+                                        &cached_class_file,
+                                        CHECK_NULL);
+  }
+
+  ClassFileParser parser(stream,
+                         name,
+                         loader_data,
+                         &cl_info,
+                         ClassFileParser::BROADCAST, // publicity level
+                         CHECK_NULL);
+
+  const ClassInstanceInfo* cl_inst_info = cl_info.class_hidden_info_ptr();
+  // 创建instanceKlass
+  InstanceKlass* result = parser.create_instance_klass(old_stream != stream, *cl_inst_info, CHECK_NULL);
+  assert(result != nullptr, "result cannot be null with no pending exception");
+
+  if (cached_class_file != nullptr) {
+    // JVMTI: we have an InstanceKlass now, tell it about the cached bytes
+    result->set_cached_class_file(cached_class_file);
+  }
+
+  JFR_ONLY(ON_KLASS_CREATION(result, parser, THREAD);)
+
+#if INCLUDE_CDS
+  if (Arguments::is_dumping_archive()) {
+    ClassLoader::record_result(THREAD, result, stream, old_stream != stream);
+  }
+#endif // INCLUDE_CDS
+
+  return result;
+}
+
 // --- src/hotspot/share/classfile/classFileParser.cpp --- //
 
 ClassFileParser::ClassFileParser(ClassFileStream* stream,

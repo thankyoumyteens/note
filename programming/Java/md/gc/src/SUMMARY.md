@@ -62,6 +62,8 @@
     - [解析class文件](./jdk21/g1/load_class/load/parse_class.md)
     - [解析字节流](./jdk21/g1/load_class/load/parse_stream.md)
     - [解析常量池](./jdk21/g1/load_class/load/parse_constant_pool.md)
+    - [后续处理](./jdk21/g1/load_class/load/post_process_parsed_stream.md)
+    - [创建instanceKlass](./jdk21/g1/load_class/load/create_instance_klass.md)
 
 - [垃圾回收](./jdk21/g1/gc/gc.md)
   - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)

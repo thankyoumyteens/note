@@ -188,7 +188,7 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
 
   assert(_temp_field_info != nullptr, "invariant");
 
-  // Methods
+  // 解析方法
   parse_methods(stream,
                 _access_flags.is_interface(),
                 &_has_localvariable_table,
