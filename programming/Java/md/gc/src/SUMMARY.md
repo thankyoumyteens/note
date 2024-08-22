@@ -64,6 +64,7 @@
     - [解析常量池](./jdk21/g1/load_class/load/parse_constant_pool.md)
     - [后续处理](./jdk21/g1/load_class/load/post_process_parsed_stream.md)
     - [创建instanceKlass](./jdk21/g1/load_class/load/create_instance_klass.md)
+  - [链接](./jdk21/g1/load_class/link/link.md)
 
 - [垃圾回收](./jdk21/g1/gc/gc.md)
   - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
