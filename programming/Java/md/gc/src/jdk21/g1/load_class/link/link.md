@@ -38,10 +38,11 @@ bool InstanceKlass::link_class_impl(TRAPS) {
   // timer handles recursion
   JavaThread* jt = THREAD;
 
-  // link super class before linking this class
+  // 先链接父类
   Klass* super_klass = super();
   if (super_klass != nullptr) {
-    if (super_klass->is_interface()) {  // check if super class is an interface
+    if (super_klass->is_interface()) {
+      // 父类是接口, 抛异常
       ResourceMark rm(THREAD);
       Exceptions::fthrow(
         THREAD_AND_LOCATION,
@@ -54,14 +55,16 @@ bool InstanceKlass::link_class_impl(TRAPS) {
     }
 
     InstanceKlass* ik_super = InstanceKlass::cast(super_klass);
+    // 递归完成父类的链接
     ik_super->link_class_impl(CHECK_false);
   }
 
-  // link all interfaces implemented by this class before linking this class
+  // 先链接实现的所有接口
   Array<InstanceKlass*>* interfaces = local_interfaces();
   int num_interfaces = interfaces->length();
   for (int index = 0; index < num_interfaces; index++) {
     InstanceKlass* interk = interfaces->at(index);
+    // 递归完成接口的链接
     interk->link_class_impl(CHECK_false);
   }
 
