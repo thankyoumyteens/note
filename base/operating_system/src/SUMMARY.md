@@ -35,3 +35,4 @@
     - [死锁](./process/deadlock.md)
 
 - [内存](./memory/memory.md)
+  - [进程的内存布局](./memory/memory_struct.md)

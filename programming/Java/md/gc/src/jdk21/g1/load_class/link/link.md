@@ -97,6 +97,7 @@ bool InstanceKlass::link_class_impl(TRAPS) {
           assert(!verified_at_dump_time(), "must be");
         }
         {
+          // 验证字节码
           bool verify_ok = verify_code(THREAD);
           if (!verify_ok) {
             return false;
@@ -111,14 +112,18 @@ bool InstanceKlass::link_class_impl(TRAPS) {
         }
 
         // also sets rewritten
+        // 重写是为了更好的解释器运行性能，向常量池添加缓存(cache)，
+        // 并调整相应字节码的常量池索引重新指向常量池Cache索引
         rewrite_class(CHECK_false);
       } else if (is_shared()) {
         SystemDictionaryShared::check_verification_constraints(this, CHECK_false);
       }
 
       // relocate jsrs and link methods after they are all rewritten
+      // 方法链接是为Java方法配置编译器或解释器入口
       link_methods(CHECK_false);
 
+      // 由于方法被重写后会产生新的methodOops，在这里需要初始化虚函数表vtable和接口表itable
       // Initialize the vtable and interface table after
       // methods have been rewritten since rewrite may
       // fabricate new Method*s.
@@ -143,6 +148,7 @@ bool InstanceKlass::link_class_impl(TRAPS) {
       // In case itable verification is ever added.
       // itable().verify(tty, true);
 #endif
+      // 设置该类状态为已链接
       set_initialization_state_and_notify(linked, THREAD);
       if (JvmtiExport::should_post_class_prepare()) {
         JvmtiExport::post_class_prepare(THREAD, this);
