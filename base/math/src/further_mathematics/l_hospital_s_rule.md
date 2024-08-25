@@ -80,13 +80,13 @@
 & 求极限 \lim_{x \to 0} \frac{\arcsin x - x}{x^{2} \ln (1 + 2x)} \\
 \\
 & \;\,\;\,\;\,\, \lim_{x \to 0} \frac{\arcsin x - x}{x^{2} \ln (1 + 2x)} \\
-& \;\, // 分母是两个式子相乘, 可以用等价无穷小替换 \\
+& \;\, {\color{Green} // 分母是两个式子相乘, 可以用等价无穷小替换} \\
 & \;\, = \lim_{x \to 0} \frac{\arcsin x - x}{x^{2} \times 2x} \\
 & \;\, = \lim_{x \to 0} \frac{1}{2} \frac{\arcsin x - x}{x^{3}} \\
-& \;\, // 用洛必达法则 \\
+& \;\, {\color{Green} // 用洛必达法则} \\
 & \;\, = \lim_{x \to 0} \frac{1}{2} \frac{\frac{1}{\sqrt{1 - x^{2}}} - 1}{3x^{2}} \\
 & \;\, = \lim_{x \to 0} \frac{1}{2} \frac{(1 - x^{2})^{- \frac{1}{2}} - 1}{3x^{2}} \\
-& \;\, // 用等价无穷小替换 (1 + x)^{a} - 1 \sim ax \\
+& \;\, {\color{Green} // 用等价无穷小替换 (1 + x)^{a} - 1 \sim ax} \\
 & \;\, = \lim_{x \to 0} \frac{1}{2} \frac{- \frac{1}{2}(-x^{2})}{3x^{2}} \\
 & \;\, = \lim_{x \to 0} \frac{1}{2} \frac{\frac{1}{2}x^{2}}{3x^{2}} \\
 & \;\, = \lim_{x \to 0} \frac{1}{12} \\
@@ -122,9 +122,9 @@
 \\
 & \;\,\;\,\;\,\, \lim_{x \to + \infty} \frac{\ln ^{2} x}{2x^{2} + x + 3} \\
 & \;\, = \lim_{x \to + \infty} \frac{x^{2}}{2x^{2} + x + 3} \times \frac{\ln ^{2} x}{x^{2}} \\
-& \;\, // 左边是两个多项式相除的极限, m = n 时, 极限为最高次的系数相除 \\
+& \;\, {\color{Green} // 左边是两个多项式相除的极限, m = n 时, 极限为最高次的系数相除} \\
 & \;\, = \frac{1}{2} \lim_{x \to + \infty} \frac{\ln ^{2} x}{x^{2}} \\
-& \;\, // 趋于 +\infty 的速度: c^{x} > x^{b} > \ln ^{a} x \\
+& \;\, {\color{Green} // 趋于 +\infty 的速度: c^{x} > x^{b} > \ln ^{a} x} \\
 & \;\, = \frac{1}{2} \times 0 \\
 & \;\, = 0 \\
 \end{align}

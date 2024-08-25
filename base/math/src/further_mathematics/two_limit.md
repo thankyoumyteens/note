@@ -17,13 +17,13 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to 0} \frac{1 - \cos ^{3} x}{x \ln (1 + 2x)} \\
-& \; \, \; // 分母是两个无穷小相乘的话, 用等价无穷小替换 \\
-& \; \, \; // \ln (1 + 2x) 替换成 2x \\
+& \; \, \; {\color{Green} // 分母是两个无穷小相乘的话, 用等价无穷小替换} \\
+& \; \, \; {\color{Green} // \ln (1 + 2x) 替换成 2x} \\
 & \; \, = \lim_{x \to 0} \frac{1 - \cos ^{3} x}{x \cdot 2x} \\
 & \; \, = \frac{1}{2} \lim_{x \to 0} \frac{1 - \cos ^{3} x}{x^{2}} \\
-& \; \, \; // 使用立方差公式 \\
+& \; \, \; {\color{Green} // 使用立方差公式} \\
 & \; \, = \frac{1}{2} \lim_{x \to 0} (1 + \cos x + \cos ^{2} x) \frac{1 - \cos x}{x^{2}} \\
-& \; \, \; // 分子用等价无穷小替换 \\
+& \; \, \; {\color{Green} // 分子用等价无穷小替换} \\
 & \; \, = \frac{1}{2} \lim_{x \to 0} (1 + \cos x + \cos ^{2} x) \frac{\frac{1}{2}x^{2}}{x^{2}} \\
 & \; \, = \frac{1}{4} \lim_{x \to 0} (1 + \cos x + \cos ^{2} x) \\
 & \; \, = \frac{1}{4} \lim_{x \to 0} (1 + 1 + 1) \\
@@ -39,20 +39,20 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to 0} \frac{e^{\tan x} - e^{\sin x}}{x \arcsin ^{2} x} \\
-& \; \, \; // 分母是两个无穷小相乘的话, 用等价无穷小替换 \\
-& \; \, \; // \arcsin x 替换成 x \\
+& \; \, \; {\color{Green} // 分母是两个无穷小相乘的话, 用等价无穷小替换} \\
+& \; \, \; {\color{Green} // \arcsin x 替换成 x} \\
 & \; \, = \lim_{x \to 0} \frac{e^{\tan x} - e^{\sin x}}{x^{3}} \\
-& \; \, \; // 遇到 e^{\Delta} 时, 先把它写成 e^{\Delta} - 1 试试 \\
-& \; \, \; // 提取出 e^{\sin x} \\
+& \; \, \; {\color{Green} // 遇到 e^{\Delta} 时, 先把它写成 e^{\Delta} - 1 试试} \\
+& \; \, \; {\color{Green} // 提取出 e^{\sin x}} \\
 & \; \, = \lim_{x \to 0} e^{\sin x} \frac{e^{\tan x - \sin x} - 1}{x^{3}} \\
-& \; \, \; // 分子是两个无穷小相乘, 用等价无穷小替换, e^{x} - 1 替换成 x \\
+& \; \, \; {\color{Green} // 分子是两个无穷小相乘, 用等价无穷小替换, e^{x} - 1 替换成 x} \\
 & \; \, = \lim_{x \to 0} e^{\sin x} \frac{\tan x - \sin x}{x^{3}} \\
 & \; \, = 1 \times \lim_{x \to 0} \frac{\tan x - \sin x}{x^{3}} \\
-& \; \, \; // 相加不能用等价无穷小替换, 把分子转化成相乘, 提取出 \tan x \\
+& \; \, \; {\color{Green} // 相加不能用等价无穷小替换, 把分子转化成相乘, 提取出 \tan x} \\
 & \; \, = \lim_{x \to 0} \frac{\tan x (1 - \cos x)}{x^{3}} \\
 & \; \, = \lim_{x \to 0} \frac{\tan x}{x} \times \frac{1 - \cos x}{x^{2}} \\
 & \; \, = \lim_{x \to 0} \frac{\tan x}{x} \times \lim_{x \to 0} \frac{1 - \cos x}{x^{2}} \\
-& \; \, \; // 用等价无穷小替换 \\
+& \; \, \; {\color{Green} // 用等价无穷小替换} \\
 & \; \, = \lim_{x \to 0} \frac{x}{x} \times \lim_{x \to 0} \frac{\frac{1}{2} x^{2}}{x^{2}} \\
 & \; \, = \frac{1}{2} \\
 \end{align}
@@ -66,18 +66,18 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to 0} \frac{\sqrt{1 + x \cos x} - \sqrt{1 + x}}{x^{3}} \\
-& \; \, \; // 分子是两个根号相减, 要先分子有理化 \\
-& \; \, \; // 用平方差公式 \\
+& \; \, \; {\color{Green} // 分子是两个根号相减, 要先分子有理化} \\
+& \; \, \; {\color{Green} // 用平方差公式} \\
 & \; \, = \lim_{x \to 0} \frac{\frac{(\sqrt{1 + x \cos x})^{2} - (\sqrt{1 + x})^2}{(\sqrt{1 + x \cos x})^{2} - (\sqrt{1 + x})^2} (\sqrt{1 + x \cos x} - \sqrt{1 + x})}{x^{3}} \\
 & \; \, = \lim_{x \to 0} \frac{\frac{(1 + x \cos x) - (1 + x)}{(\sqrt{1 + x \cos x} - \sqrt{1 + x})(\sqrt{1 + x \cos x} + \sqrt{1 + x})} (\sqrt{1 + x \cos x} - \sqrt{1 + x})}{x^{3}} \\
 & \; \, = \lim_{x \to 0} \frac{\frac{(1 + x \cos x) - (1 + x)}{\sqrt{1 + x \cos x} + \sqrt{1 + x}}}{x^{3}} \\
 & \; \, = \lim_{x \to 0} \frac{1}{\sqrt{1 + x \cos x} + \sqrt{1 + x}} \times \frac{x \cos x - x}{x^{3}} \\
-& \; \, \; // 乘号左边是确定型, 把极限(本题是0)带进去, 能算出结果的就是确定型 \\
-& \; \, \; // 确定型直接算 \\
+& \; \, \; {\color{Green} // 乘号左边是确定型, 把极限(本题是0)带进去, 能算出结果的就是确定型} \\
+& \; \, \; {\color{Green} // 确定型直接算} \\
 & \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{x \cos x - x}{x^{3}} \\
 & \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{x (\cos x - 1)}{x^{3}} \\
 & \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{\cos x - 1}{x^{2}} \\
-& \; \, \; // 用等价无穷小替换 \\
+& \; \, \; {\color{Green} // 用等价无穷小替换} \\
 & \; \, = \frac{1}{2} \times \lim_{x \to 0} \frac{- \frac{1}{2} x^{2}}{x^{2}} \\
 & \; \, = - \frac{1}{4} \\
 \end{align}
@@ -91,12 +91,12 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to 0} (1 - \sin 2x^{2})^{{\frac{1}{x^2}}} \\
-& \; \, \; // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式 \\
-& \; \, \; // - \sin 2x^{2} 作为 \Delta \\
+& \; \, \; {\color{Green} // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式} \\
+& \; \, \; {\color{Green} // - \sin 2x^{2} 作为 \Delta} \\
 & \; \, = \lim_{x \to 0} \left [ (1 - \sin 2x^{2})^{\frac{1}{- \sin 2x^{2}}} \right ] ^{{\frac{1}{x^2}}(- \sin 2x^{2})} \\
 & \; \, = e^{\lim_{x \to 0} {\frac{1}{x^2}}(- \sin 2x^{2})} \\
 & \; \, = e^{- \lim_{x \to 0} {\frac{\sin 2x^{2}}{x^2}}} \\
-& \; \, \; // 等价无穷小替换 \\
+& \; \, \; {\color{Green} // 等价无穷小替换} \\
 & \; \, = e^{- \lim_{x \to 0} {\frac{2x^{2}}{x^2}}} \\
 & \; \, = e^{-2} \\
 \end{align}
@@ -110,13 +110,13 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to 0} (\cos x)^{\frac{1}{x \ln (1 - x)}} \\
-& \; \, \; // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式 \\
-& \; \, \; // \cos x - 1 作为 \Delta \\
+& \; \, \; {\color{Green} // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式} \\
+& \; \, \; {\color{Green} // \cos x - 1 作为 \Delta} \\
 & \; \, = \lim_{x \to 0} \left [ (1 + \cos x - 1)^{\frac{1}{\cos x - 1}} \right ] ^{\frac{\cos x - 1}{x \ln (1 - x)}} \\
 & \; \, = e^{\lim_{x \to 0} \frac{\cos x - 1}{x \ln (1 - x)}} \\
-& \; \, \; // 分子用等价无穷小替换 \\
+& \; \, \; {\color{Green} // 分子用等价无穷小替换} \\
 & \; \, = e^{\lim_{x \to 0} \frac{- \frac{1}{2} x^{2}}{x \ln (1 - x)}} \\
-& \; \, \; // 分母是无穷小相乘, 也可以用等价无穷小替换 \\
+& \; \, \; {\color{Green} // 分母是无穷小相乘, 也可以用等价无穷小替换} \\
 & \; \, = e^{\lim_{x \to 0} \frac{- \frac{1}{2} x^{2}}{x \cdot (-x)}} \\
 & \; \, = e^{\frac{1}{2}} \\
 \end{align}
@@ -130,20 +130,20 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to 0} (\frac{1 + \tan x}{1 + \sin x})^{\frac{1}{x^{3}}} \\
-& \; \, \; // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式 \\
-& \; \, \; // \frac{1 + \tan x}{1 + \sin x} - 1 作为 \Delta \\
+& \; \, \; {\color{Green} // 凑成 \lim_{\Delta \to 0} (1 + \Delta)^{\frac{1}{\Delta}} = e 的形式} \\
+& \; \, \; {\color{Green} // \frac{1 + \tan x}{1 + \sin x} - 1 作为 \Delta} \\
 & \; \, = \lim_{x \to 0} \left [ (1 + \frac{1 + \tan x}{1 + \sin x} - 1)^{\frac{1}{\frac{1 + \tan x}{1 + \sin x} - 1}} \right ] ^{\frac{\frac{1 + \tan x}{1 + \sin x} - 1}{x^{3}}} \\
 & \; \, = e^{\lim_{x \to 0} \frac{\frac{1 + \tan x}{1 + \sin x} - 1}{x^{3}}} \\
 & \; \, = e^{\lim_{x \to 0} \frac{\frac{\tan x - \sin x}{1 + \sin x}}{x^{3}}} \\
-& \; \, \; // 提取出确定型 \frac{1}{1 + \sin x} \\
+& \; \, \; {\color{Green} // 提取出确定型 \frac{1}{1 + \sin x}} \\
 & \; \, = e^{\lim_{x \to 0} \frac{1}{1 + \sin x} \frac{\tan x - \sin x}{x^{3}}} \\
 & \; \, = e^{\lim_{x \to 0} \frac{\tan x - \sin x}{x^{3}}} \\
-& \; \, \; // 分子是相减的, 不能用等价无穷小替换 \\
-& \; \, \; // 把分子转化成相乘, 提取出 \tan x \\
+& \; \, \; {\color{Green} // 分子是相减的, 不能用等价无穷小替换} \\
+& \; \, \; {\color{Green} // 把分子转化成相乘, 提取出 \tan x} \\
 & \; \, = e^{\lim_{x \to 0} \frac{\tan x (1 - \cos x)}{x^{3}}} \\
 & \; \, = e^{\lim_{x \to 0} \frac{\tan x}{x} \times \frac{1 - \cos x}{x^{2}}} \\
 & \; \, = e^{\lim_{x \to 0} \frac{\tan x}{x} \times \lim_{x \to 0} \frac{1 - \cos x}{x^{2}}} \\
-& \; \, \; // 用等价无穷小替换 \\
+& \; \, \; {\color{Green} // 用等价无穷小替换} \\
 & \; \, = e^{\lim_{x \to 0} \frac{x}{x} \times \lim_{x \to 0} \frac{\frac{1}{2} x^{2}}{x^{2}}} \\
 & \; \, = e^{\frac{1}{2}} \\
 \end{align}
@@ -157,10 +157,10 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to \infty} \left ( \frac{2x^{2} + 3x + 1}{x - 1} - 2x \right ) \\
-& \; \, \; // 无穷大加/减无穷大型的极限, 且有分母 \to 通分 \\
+& \; \, \; {\color{Green} // 无穷大加/减无穷大型的极限, 且有分母 \to 通分} \\
 & \; \, = \lim_{x \to \infty} \frac{2x^{2} + 3x + 1 - 2x(x - 1)}{x - 1} \\
 & \; \, = \lim_{x \to \infty} \frac{5x + 1}{x - 1} \\
-& \; \, \; // 把x放到分母中, 分子分母同时除x \\
+& \; \, \; {\color{Green} // 把x放到分母中, 分子分母同时除x} \\
 & \; \, = \lim_{x \to \infty} \frac{5 + \frac{1}{x}}{1 - \frac{1}{x}} \\
 & \; \, = 5 \\
 \end{align}
@@ -174,13 +174,13 @@
 \begin{align}
 & 求极限: \\
 & \quad\;\; \lim_{x \to + \infty} \left ( \sqrt{x^{2} + 4x + 1} - x \right ) \\
-& \; \, \; // 无穷大减无穷大型的极限, 且没有分母有根号 \to 有理化 \\
-& \; \, \; // 乘一个极限内的表达式的平方差公式 \\
+& \; \, \; {\color{Green} // 无穷大减无穷大型的极限, 且没有分母有根号 \to 有理化} \\
+& \; \, \; {\color{Green} // 乘一个极限内的表达式的平方差公式} \\
 & \; \, = \lim_{x \to + \infty} (\sqrt{x^{2} + 4x + 1} - x) \times \frac{(\sqrt{x^{2} + 4x + 1} + x)(\sqrt{x^{2} + 4x + 1} - x)}{(\sqrt{x^{2} + 4x + 1} + x)(\sqrt{x^{2} + 4x + 1} - x)} \\
 & \; \, = \lim_{x \to + \infty} \frac{(\sqrt{x^{2} + 4x + 1} + x)(\sqrt{x^{2} + 4x + 1} - x)}{\sqrt{x^{2} + 4x + 1} + x} \\
 & \; \, = \lim_{x \to + \infty} \frac{x^{2} + 4x + 1 - x^{2}}{\sqrt{x^{2} + 4x + 1} + x} \\
 & \; \, = \lim_{x \to + \infty} \frac{4x + 1}{\sqrt{x^{2} + 4x + 1} + x} \\
-& \; \, \; // 把x放到分母中, 分子分母同时除x \\
+& \; \, \; {\color{Green} // 把x放到分母中, 分子分母同时除x} \\
 & \; \, = \lim_{x \to + \infty} \frac{4 + \frac{1}{x}}{\frac{\sqrt{x^{2} + 4x + 1}}{x} + 1} \\
 & \; \, = \lim_{x \to + \infty} \frac{4 + \frac{1}{x}}{\sqrt{1 + \frac{4}{x} + \frac{1}{x^{2}}} + 1} \\
 & \; \, = 2 \\

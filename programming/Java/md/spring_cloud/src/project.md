@@ -1,5 +1,7 @@
 # 父项目搭建
 
+版本: Spring Cloud Hoxton.SR12 + Spring Boot 2.3.12.RELEASE。
+
 1. 父 pom:
 
 ```xml

@@ -124,7 +124,7 @@
 & \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,
 = \lim_{x \to a} (AB) + \lim_{x \to a} (A\beta + B\alpha + \beta\alpha) \\
 & \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,
-// 常数乘无穷小还是无穷小 \\
+{\color{Green} // 常数乘无穷小还是无穷小} \\
 & \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,
 = \lim_{x \to a} (AB) + 0 \\
 & \qquad\qquad\qquad\qquad\qquad\qquad\;\;\,\,\,\,

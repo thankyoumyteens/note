@@ -1,7 +1,5 @@
 # Summary
 
-- [Spring Cloud Hoxton.SR12 + Spring Boot 2.3.12.RELEASE](./spring_cloud.md)
-
 - [父项目搭建](./project.md)
 
 - [注册中心](./registry/registry.md)

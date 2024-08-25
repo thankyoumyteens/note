@@ -66,7 +66,7 @@
 \\
 & \;\;\;\; \lim_{x \to 0^{-}} f(x) \\
 & = \lim_{x \to 0^{-}} \frac{\sin ax}{x} + \lim_{x \to 0^{-}} \frac{e^{2x} - 1}{x} \\
-& \;\;\;\; // 等价无穷小替换 \\
+& \;\;\;\; {\color{Green} // 等价无穷小替换} \\
 & = \lim_{x \to 0^{-}} \frac{ax}{x} + \lim_{x \to 0^{-}} \frac{2x}{x} \\
 & = a + 2 \\
 \\
@@ -74,7 +74,7 @@
 \\
 & \;\;\;\; \lim_{x \to 0^{+}} f(x) \\
 & = b \lim_{x \to 0^{+}} \frac{\arctan x}{x} + \lim_{x \to 0^{+}} \frac{\ln (1 - x)}{x} \\
-& \;\;\;\; // 等价无穷小替换 \\
+& \;\;\;\; {\color{Green} // 等价无穷小替换} \\
 & = b \lim_{x \to 0^{+}} \frac{x}{x} + \lim_{x \to 0^{+}} \frac{-x}{x} \\
 & = b - 1 \\
 \\
@@ -179,7 +179,7 @@
 <!--
 \begin{align}
 & 设 f(x) 在 [0, 2] 上连续, f(0) + 2 \cdot f(1) + 3 \cdot f(2) = 6, 证明: 存在 \xi \in [0, 2], 使 f(\xi) = 1 \\
-& // 闭区间连续, 函数值相加 \Rightarrow 使用介值定理 \\
+& {\color{Green} // 闭区间连续, 函数值相加 \Rightarrow 使用介值定理} \\
 & 因为  f(x) 在 [0, 2] 上连续, 所以存在最大值 M 和最小值 m \\
 & 因为 6 \cdot m \le f(0) + 2 \cdot f(1) + 3 \cdot f(2) \le 6 \cdot M \\
 & 所以 6 \cdot m \le 6 \le 6 \cdot M \Rightarrow m \le 1 \le M \\

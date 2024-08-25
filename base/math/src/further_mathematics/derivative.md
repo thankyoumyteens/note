@@ -58,16 +58,14 @@
 
 <!--
 \begin{align}
-& 求下列函数的导数
-\\
 & y = x^{2} e^{\sin \frac{1}{x}} \\
 & y' = 2x \cdot e^{\sin \frac{1}{x}} + x^{2} \cdot (e^{\sin \frac{1}{x}})' \\
-& \;\;\; // 右面是复合函数: e^{u} 和 u = \sin v 和 v = \frac{1}{x} \\
-& \;\;\; // \;\; (e^{u})' = e^{u}, u' = \cos v 和 v' = -\frac{1}{x^{2}} \\
+& \;\;\; {\color{Green} // 右面是复合函数: e^{u} 和 u = \sin v 和 v = \frac{1}{x}} \\
+& \;\;\; {\color{Green} // \;\; (e^{u})' = e^{u}, u' = \cos v 和 v' = -\frac{1}{x^{2}}} \\
 & \;\;\, = 2x \cdot e^{\sin \frac{1}{x}} + x^{2} \cdot (e^{\sin \frac{1}{x}} \cdot \cos \frac{1}{x} \cdot (-\frac{1}{x^{2}})) \\
 \\
 & y = (1 + \sin 2x)^{\ln (1 - x)} \\
-& // 使用公式: a^{b} = e^{b \ln a} \\
+& {\color{Green} // 使用公式: a^{b} = e^{b \ln a}} \\
 & y = e^{\ln (1 - x) \ln (1 + \sin 2x)} \\
 & y' = e^{\ln (1 - x) \ln (1 + \sin 2x)} \cdot [\ln (1 - x) \ln (1 + \sin 2x)]' \\
 & y' = e^{\ln (1 - x) \ln (1 + \sin 2x)} \cdot

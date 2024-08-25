@@ -62,10 +62,10 @@
 & f'_{+}(0) = \lim_{x \to 0^{+}} \frac{f(x) - f(0)}{x - 0} \\
 & \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln (e + 2x) - 1}{x} \\
 & \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln (e + 2x) - \ln e}{x} \\
-& \quad\quad \,\, // 对数运算法则: \ln (a \div b) = \ln a - \ln b \\
+& \quad\quad \,\, {\color{Green} // 对数运算法则: \ln (a \div b) = \ln a - \ln b} \\
 & \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln \frac{e + 2x}{e}}{x} \\
 & \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\ln (1 + \frac{2x}{e})}{x} \\
-& \quad\quad \,\, // 等价无穷小替换 \\
+& \quad\quad \,\, {\color{Green} // 等价无穷小替换} \\
 & \quad\quad \,\, = \lim_{x \to 0^{+}} \frac{\frac{2x}{e}}{x} \\
 & \quad\quad \,\, = \frac{2}{e} \\
 \\
