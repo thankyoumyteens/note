@@ -30,7 +30,8 @@ inline HeapWord* G1AllocRegion::attempt_allocation_using_new_region(size_t min_w
 dummy region: 不是真正的 region 只是一个标记。它不是 java 堆的一部分, 它的 top 和 end 指针相等, 不可以分配任何对象。JVM 用 `_alloc_region` 指针指向当前正在分配对象的 region。当 `_alloc_region` 指向 dummy region 时, 表示当前没有可用的 region。
 
 1. 将当前 region 的剩余空间全部填充为 dummy 对象, 避免其它线程继续在其中分配任何对象
-2. 废弃当前 region
+2. 设置 `_pre_dummy_top` 指针, 指向有效对象的最后一位地址, 用来区分出正常的对象和 dummy 对象
+3. 废弃当前 region
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1AllocRegion.cpp --- //
@@ -105,7 +106,7 @@ size_t G1AllocRegion::fill_up_remaining_space(HeapRegion* alloc_region) {
       // allocation was in old any necessary BOT updates will be done.
       // 填充dummy对象
       alloc_region->fill_with_dummy_object(dummy, free_word_size);
-      // 标记有效对象的最后一位地址, 用来区分出正常的对象和dummy对象
+      // 设置_pre_dummy_top指针
       alloc_region->set_pre_dummy_top(dummy);
       result += free_word_size * HeapWordSize;
       break;
@@ -126,6 +127,11 @@ size_t G1AllocRegion::fill_up_remaining_space(HeapRegion* alloc_region) {
 
 ## 申请新 region
 
+1. 申请一个新 region
+2. 把 `_pre_dummy_top` 指针指向 null
+3. 在新的 region 中分配对象
+4. 设置 `_alloc_region` 指向这个新的 region, 以后都会在这个 region 中分配对象
+
 ```cpp
 // --- src/hotspot/share/gc/g1/g1AllocRegion.cpp --- //
 
@@ -138,11 +144,8 @@ HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
   // 申请一个新region
   HeapRegion* new_alloc_region = allocate_new_region(word_size, force);
   if (new_alloc_region != nullptr) {
-    // 重置新region的_pre_dummy_top指针
-    // _pre_dummy_top的作用:
-    // 当本线程需要舍弃一个region时, 其他的线程可能还准备向这个region中分配对象,
-    // JVM会在这个要舍弃的region末尾分配一个dummy对象, 用来表示它已经不再使用,
-    // _pre_dummy_top指针指向最后一个非dummy对象, 便于查找这个region中的最后一个对象
+    // 把_pre_dummy_top指针指向null
+    // void reset_pre_dummy_top() { _pre_dummy_top = nullptr; }
     new_alloc_region->reset_pre_dummy_top();
     // 记录region已经使用的空间大小
     _used_bytes_before = new_alloc_region->used();
@@ -152,7 +155,7 @@ HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
 
     OrderAccess::storestore();
     // 设置_alloc_region指向这个新的region
-    // _alloc_region指向的region是当前正在用于分配对象内存的region
+    // _alloc_region指向的region是当前正在用于分配对象的region
     update_alloc_region(new_alloc_region);
     trace("region allocation successful");
     return result;
@@ -165,6 +168,8 @@ HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
 ```
 
 ## 分配对象
+
+由于此时线程已经持有锁, 直接修改 top 指针即可。
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp --- //

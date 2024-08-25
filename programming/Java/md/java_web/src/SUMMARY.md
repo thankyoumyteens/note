@@ -77,3 +77,4 @@
 
 - [线程](./thread/thread.md)
   - [创建线程的方式](./thread/create_thread.md)
+  - [线程的状态](./thread/state.md)
