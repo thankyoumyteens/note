@@ -50,6 +50,8 @@
     - [搭建](./gateway/zuul/base.md)
     - [路由配置](./gateway/zuul/route.md)
     - [过滤器](./gateway/zuul/filter.md)
+  - [Spring Cloud Gateway](./gateway/gateway/gateway.md)
+    - [搭建](./gateway/gateway/base.md)
 
 - [总线](./bus/bus.md)
   - [Spring Cloud Bus](./bus/spring_bus.md)
