@@ -221,3 +221,26 @@ x \in (1 + \frac{1}{\sqrt[]{2}}, + \infty) 时, & f''(x) > 0 \\
 ![](../img/d2_13.jpg)
 
 ## 渐近线
+
+<!--
+\begin{align}
+& 水平渐近线: 设曲线 L: y = f(x), 若 \lim_{x \to \infty} f(x) = A, \\
+& 则称直线 y = A 为曲线 L 的水平渐近线 \\
+\\
+& 铅直渐近线: 设曲线 L: y = f(x), \\
+& 若下列任意情况成立 \begin{cases}
+\lim_{x \to a} f(x) = \infty \\
+\lim_{x \to a^-} f(x) = \infty \\
+\lim_{x \to a^+} f(x) = \infty \\
+\end{cases} \\
+& 则称直线 x = a 为曲线 L 的铅直渐近线 \\
+\\
+& 斜渐近线: 设曲线 L: y = f(x), 若 \lim_{x \to \infty} \frac{f(x)}{x} = a (a \ne 0, a \ne \infty), \\
+& \lim_{x \to \infty} [f(x) - ax] = b, \\
+& 则称直线 y = ax + b 为曲线 L 的斜渐近线 \\
+\end{align}
+-->
+
+![](../img/d2_14.jpg)
+
+![](../img/d2_15.jpg)

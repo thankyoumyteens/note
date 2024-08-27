@@ -80,3 +80,4 @@
   - [线程的状态](./thread/state.md)
   - [保证线程的执行顺序](./thread/join.md)
   - [notify和notifyAll的区别](./thread/notify.md)
+  - [wait和sleep的区别](./thread/wait.md)
