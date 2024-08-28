@@ -57,11 +57,14 @@ void InstanceKlass::initialize_impl(TRAPS) {
       return;
     }
 
+    // (5)如果instanceKlass处于错误状态,
+    // 则释放class对象上的锁并抛出NoClassDefFoundError
     // Step 5
     if (is_in_error_state()) {
       throw_error = true;
     } else {
-
+      // 否则，设置instanceKlass状态为being_initialized，
+      // 并释放该instanceKlass对象上的锁
       // Step 6
       set_init_state(being_initialized);
       set_init_thread(jt);
