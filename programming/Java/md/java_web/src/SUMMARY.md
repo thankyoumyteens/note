@@ -82,3 +82,4 @@
   - [notify和notifyAll的区别](./thread/notify.md)
   - [wait和sleep的区别](./thread/wait.md)
   - [停止一个正在运行的线程](./thread/exit.md)
+  - [synchronized原理](./thread/monitor.md)
