@@ -52,6 +52,8 @@
     - [过滤器](./gateway/zuul/filter.md)
   - [Spring Cloud Gateway](./gateway/gateway/gateway.md)
     - [搭建](./gateway/gateway/base.md)
+    - [Predicate](./gateway/gateway/predicate.md)
+    - [Filter](./gateway/gateway/filter.md)
 
 - [总线](./bus/bus.md)
   - [Spring Cloud Bus](./bus/spring_bus.md)
