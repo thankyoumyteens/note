@@ -88,8 +88,8 @@ void InstanceKlass::initialize_impl(TRAPS) {
   }
 
   // Step 7
-  // Next, if C is a class rather than an interface, initialize it's super class and super
-  // interfaces.
+  // 如果该instanceKlass是一个类(而非接口)，并且该类的父类尚未被初始化，
+  // 则对父类递归地执行初始化
   if (!is_interface()) {
     Klass* super_klass = super();
     if (super_klass != nullptr && super_klass->should_be_initialized()) {
