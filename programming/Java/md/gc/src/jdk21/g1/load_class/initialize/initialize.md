@@ -121,6 +121,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
 
 
   // Step 8
+  // 执行 <clinit>()
   {
     DTRACE_CLASSINIT_PROBE_WAIT(clinit, -1, wait);
     if (class_initializer() != nullptr) {
@@ -144,6 +145,8 @@ void InstanceKlass::initialize_impl(TRAPS) {
 
   // Step 9
   if (!HAS_PENDING_EXCEPTION) {
+    // 如果初始化正常地结束，则将这个instanceKlass状态位置为fully_initialized
+    // 通知所有正在等待的线程
     set_initialization_state_and_notify(fully_initialized, THREAD);
     debug_only(vtable().verify(tty, true);)
   }
@@ -155,6 +158,8 @@ void InstanceKlass::initialize_impl(TRAPS) {
     // JVMTI internal flag reset is needed in order to report ExceptionInInitializerError
     JvmtiExport::clear_detected_exception(jt);
     {
+      // 如果初始化异常，则将这个instanceKlass状态位置为initialization_error
+      // 通知所有正在等待的线程, 最后抛出异常
       EXCEPTION_MARK;
       add_initialization_error(THREAD, e);
       set_initialization_state_and_notify(initialization_error, THREAD);

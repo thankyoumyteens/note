@@ -2,8 +2,6 @@
 
 在 mark word 中, 锁标志位占用 2 个 bit, 结合 1bit 的是否偏向锁标志位, 就能用来标识当前对象持有的锁的状态。
 
-![](../../../img/mark_word_64bit.png)
-
 ```java
 public class DemoObj {
 
@@ -16,7 +14,7 @@ public class DemoObj {
 
 ## 无锁
 
-对象处于无锁状态时, mark word 为 0x0000000000000001: 
+对象处于无锁状态时, mark word 为 0x0000000000000001:
 
 ```java
 demo.DemoObj object internals:
@@ -30,7 +28,7 @@ Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 
 ## 偏向锁
 
-在 JVM 启动后 4 秒后创建的对象才会开启偏向锁, 可以使用参数 -XX:BiasedLockingStartupDelay=0 取消这个延迟时间。开启偏向锁后, mark word 变为 0x0000000000000005(最后 3 位是 101): 
+在 JVM 启动后 4 秒后创建的对象才会开启偏向锁, 可以使用参数 -XX:BiasedLockingStartupDelay=0 取消这个延迟时间。开启偏向锁后, mark word 变为 0x0000000000000005(最后 3 位是 101):
 
 ```java
 demo.DemoObj object internals:
@@ -61,7 +59,7 @@ public class DemoObj {
 }
 ```
 
-输出: 
+输出:
 
 ```java
 demo.DemoObj object internals:
@@ -109,7 +107,7 @@ public class DemoObj {
 }
 ```
 
-输出: 
+输出:
 
 ```java
 demo.DemoObj object internals:
@@ -138,7 +136,7 @@ Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 ```
 
 1. 首先进入偏向锁, mark word 为 0x000002cbd23cd805
-2. thread 线程等待主线程释放锁后获得锁, 并把锁升级成轻量级锁, mark word 为 0x000000f2cc4fefa0
+2. thread 线程自旋等待主线程释放锁后获得锁, 并把锁升级成轻量级锁, mark word 为 0x000000f2cc4fefa0
 3. thread 线程释放锁后, obj 无线程竞争, 恢复为无锁。如果之后有线程再尝试获取 user 对象的锁, 会直接加轻量级锁, 而不是偏向锁
 
 ## 重量级锁
@@ -179,7 +177,7 @@ public class DemoObj {
 }
 ```
 
-输出: 
+输出:
 
 ```java
 demo.DemoObj object internals:
@@ -199,4 +197,26 @@ Instance size: 16 bytes
 Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 ```
 
-在两个线程同时竞争锁时, 会升级为重量级锁, mark word 为 0x000002927e4e440a,  最后两位是 10。
+在两个线程同时竞争锁时, 会升级为重量级锁, mark word 为 0x000002927e4e440a, 最后两位是 10。
+
+## Lock Record
+
+Lock Record 用于偏向锁优化和轻量级锁优化。它保存 mark word 的原始值，还包含识别锁对象所必需的元数据。
+
+jvm 中对应的代码:
+
+```cpp
+class BasicObjectLock {
+ private:
+  BasicLock _lock; // mark word 的原始值
+  oop       _obj; // 持有锁的对象
+};
+
+
+class BasicLock {
+ private:
+  volatile markOop _displaced_header;
+};
+```
+
+当字节码解释器执行 monitorenter 字节码轻量地锁住一个对象时，就会在获取锁的线程的栈上显式或隐式分配一个 lock record。同一个线程重入同一个锁的话, 会创建多个 lock record(只有最早的一个 lock record 会记录 mark word 的原始值, 但它们的 `_obj` 都会指向这个对象)。
