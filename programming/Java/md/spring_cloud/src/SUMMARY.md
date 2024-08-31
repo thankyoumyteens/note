@@ -17,6 +17,7 @@
     - [服务提供方](./registry/nacos/producer.md)
     - [服务消费方](./registry/nacos/consumer.md)
     - [服务分级存储模型](./registry/nacos/cluster.md)
+    - [命名空间](./registry/nacos/namespace.md)
 
 - [负载均衡](./load_balancer/load_balancer.md)
   - [启动多个服务提供方](./load_balancer/load_balancer_client/multi_producer.md)

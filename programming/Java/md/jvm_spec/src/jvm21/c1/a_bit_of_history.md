@@ -1,13 +1,9 @@
 # 1.1 A Bit of History
 
 Java 语言是一个通用的, 支持并发的面向对象语言。它的语法和 C/C++类似, 但它去掉了 C/C++中复杂难懂和不安全的用法。Java
-平台一开始是为了开发能联网的消费级设备上的软件而设计的。它支持多主机架构并且支持软件组件的安全分发。 为了满足这些要求, 编译后的代码需要通过网络传输, 在任意客户端上安全地运行。
+平台一开始是为了开发能联网的消费级设备上的软件而设计的。它支持多主机架构并且支持软件组件的安全分发。为了满足这些要求, 编译后的代码需要通过网络传输, 在任意客户端上安全地运行。
 
-The popularization of the World Wide Web made these attributes much more
-interesting. Web browsers enabled millions of people to surf the Net and access
-media-rich content in simple ways. At last there was a medium where what you
-saw and heard was essentially the same regardless of the machine you were using
-and whether it was connected to a fast network or a slow modem.
+万维网的普及使这些特性更有趣。浏览器使人们很容易就能在网上浏览各种内容。最终, 不管你使用什么机器, 网速是快还是慢, 你的所见所闻都是一样的。
 
 Web enthusiasts soon discovered that the content supported by the Web's HTML
 document format was too limited. HTML extensions, such as forms, only
