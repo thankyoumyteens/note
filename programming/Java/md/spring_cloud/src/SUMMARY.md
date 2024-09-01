@@ -28,6 +28,9 @@
 - [服务调用](./http_clients/http_clients.md)
   - [Feign](./http_clients/feign/feign.md)
   - [OpenFeign](./http_clients/open_feign/open_feign.md)
+    - [设置超时时间](./http_clients/open_feign/timeout.md)
+    - [打印日志](./http_clients/open_feign/log.md)
+    - [替换默认的httpclient](./http_clients/open_feign/client.md)
 
 - [配置中心](./config/config.md)
   - [Spring Cloud Config](./config/spring_config/spring_config.md)
@@ -46,6 +49,7 @@
     - [集成Feign](./fallback/hystrix/feign.md)
   - [Resilience4j](./fallback/resilience4j/resilience4j.md)
   - [Sentinel](./fallback/sentinel/sentinel.md)
+    - [集成Feign](./fallback/sentinel/feign.md)
 
 - [网关](./gateway/gateway.md)
   - [Zuul](./gateway/zuul/zuul.md)
