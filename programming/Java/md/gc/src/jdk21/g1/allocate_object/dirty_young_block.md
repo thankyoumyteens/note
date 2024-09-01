@@ -1,5 +1,7 @@
 # 在全局卡表中标记
 
+G1 中有一个全局的卡表, 每一个卡片都对应堆中的 512 字节。
+
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp --- //
 
@@ -8,6 +10,8 @@
 // block. It is assumed (and in fact we assert) that the block
 // belongs to a young region.
 // 在全局卡表中标记这个对象属于新生代region
+// start: 对象的起始地址
+// word_size: 对象的大小
 inline void
 G1CollectedHeap::dirty_young_block(HeapWord* start, size_t word_size) {
   assert_heap_not_locked();
@@ -17,7 +21,7 @@ G1CollectedHeap::dirty_young_block(HeapWord* start, size_t word_size) {
   assert(containing_hr->is_in(start), "it should contain start");
   assert(containing_hr->is_young(), "it should be young");
   assert(!containing_hr->is_humongous(), "it should not be humongous");
-  // end指针指向对象内存范围的末尾
+  // end指针指向对象末尾的地址
   HeapWord* end = start + word_size;
   assert(containing_hr->is_in(end - 1), "it should also contain end - 1");
 

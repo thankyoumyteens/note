@@ -1,12 +1,18 @@
 # 扩容新生代
 
+1. 申请新 region 并分配对象, 即使达到新生代的最大 region 个数(`_young_list_target_length`), 也要尝试分配新的 region
+2. 在新 region 中分配对象
+3. 设置 `_alloc_region` 指针指向这个新的 region
+
+<!-- TODO 为什么原来的region没有填充 dummy 对象？ -->
+
 ```cpp
 // --- src/hotspot/share/gc/g1/g1Allocator.inline.hpp --- //
 
 inline HeapWord* G1Allocator::attempt_allocation_force(size_t word_size) {
   uint node_index = current_node_index();
-  // mutator_alloc_region()返回MutatorAllocRegion
-  // MutatorAllocRegion是G1AllocRegion的子类,
+  // mutator_alloc_region()返回MutatorAllocRegion的对象
+  // MutatorAllocRegion是G1AllocRegion的子类
   return mutator_alloc_region(node_index)->attempt_allocation_force(word_size);
 }
 
@@ -38,7 +44,7 @@ HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
   trace("attempting region allocation");
   // 申请一个新region
   // G1AllocRegion中的allocate_new_region()不允许force为true
-  // 这里调用的是MutatorAllocRegion中的allocate_new_region()
+  // 所以这里调用的是MutatorAllocRegion中的allocate_new_region()
   HeapRegion* new_alloc_region = allocate_new_region(word_size, force);
   if (new_alloc_region != nullptr) {
     // 重置新region的_pre_dummy_top指针

@@ -1,5 +1,7 @@
 # 执行 GC 并分配对象
 
+通过 VMThread::execute 执行 GC。
+
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 

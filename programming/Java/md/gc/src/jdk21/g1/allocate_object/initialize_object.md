@@ -1,5 +1,10 @@
 # 初始化对象
 
+1. 初始化 mark word
+2. 设置元数据指针
+3. 设置 GC 分代年龄
+4. 把对象的实例数据用 0 填充
+
 ```cpp
 // --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
@@ -14,7 +19,7 @@ void MemAllocator::mem_clear(HeapWord* mem) const {
   assert(_word_size >= hs, "unexpected object size");
   // 设置GC分代年龄
   oopDesc::set_klass_gap(mem, 0);
-  // 把对象的内存空间用0填充
+  // 把对象的实例数据用0填充
   Copy::fill_to_aligned_words(mem + hs, _word_size - hs);
 }
 
