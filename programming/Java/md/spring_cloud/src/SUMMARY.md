@@ -31,6 +31,7 @@
     - [设置超时时间](./http_clients/open_feign/timeout.md)
     - [打印日志](./http_clients/open_feign/log.md)
     - [替换默认的httpclient](./http_clients/open_feign/client.md)
+    - [开启GZIP](./http_clients/open_feign/gzip.md)
 
 - [配置中心](./config/config.md)
   - [Spring Cloud Config](./config/spring_config/spring_config.md)
@@ -50,6 +51,7 @@
   - [Resilience4j](./fallback/resilience4j/resilience4j.md)
   - [Sentinel](./fallback/sentinel/sentinel.md)
     - [集成Feign](./fallback/sentinel/feign.md)
+    - [Sentinel控制台](./fallback/sentinel/dashboard.md)
 
 - [网关](./gateway/gateway.md)
   - [Zuul](./gateway/zuul/zuul.md)
