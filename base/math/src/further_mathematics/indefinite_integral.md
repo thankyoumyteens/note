@@ -14,3 +14,23 @@
 -->
 
 ![](../img/ii1.jpg)
+
+## 不定积分
+
+<!--
+\begin{align}
+& 函数 f(x) 的所有原函数称为 f(x) 的不定积分, \\
+& 记为 \int f(x) \mathrm{d}x = F(x) + C \\
+\\
+& \;\, 1、\frac{\mathrm{d}}{\mathrm{d} x} \int f(x) \mathrm{d}x = f(x) \\
+& \;\, 2、\int f'(x) \mathrm{d}x = f(x) + C \\
+\end{align}
+-->
+
+![](../img/ii2.jpg)
+
+不定积分的基本性质
+
+<!--
+
+-->
