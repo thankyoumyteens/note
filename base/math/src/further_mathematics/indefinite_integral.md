@@ -32,5 +32,10 @@
 不定积分的基本性质
 
 <!--
-
+\begin{align}
+& \;\, 1、\int [f(x) \pm g(x)] \mathrm{d}x = \int f(x) \mathrm{d}x \pm \int g(x) \mathrm{d}x \\
+& \;\, 2、\int kf(x) \mathrm{d}x = k \int f(x) \mathrm{d}x \; (k 为常数) \\
+\end{align}
 -->
+
+![](../img/ii3.jpg)

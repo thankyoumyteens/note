@@ -38,3 +38,4 @@
   - [进程的内存布局](./memory/memory_struct.md)
   - [内存覆盖与交换](./memory/memory_swap.md)
   - [内存分配方式](./memory/memory_alloc.md)
+  - [分页存储管理](./memory/memory_page.md)
