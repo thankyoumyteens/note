@@ -39,3 +39,25 @@
 -->
 
 ![](../img/ii3.jpg)
+
+不定积分的基本公式
+
+<!--
+\begin{align}
+& \;\, 1、\int k \mathrm{d}x = kx + C \\
+& \;\, 2、\int x^a \mathrm{d}x = \frac{1}{a + 1} x^{a + 1} + C \quad (a \ne -1) \\
+& \;\, 3、\int \frac{1}{x} \mathrm{d}x = \ln |x| + C \\
+& \;\, 4、\int a^x \mathrm{d}x = \frac{1}{\ln a} a^x + C \quad (a \ne e) \\
+& \;\, 5、\int e^x \mathrm{d}x = e^x + C \\
+& \;\, 6、\int \sin x \mathrm{d}x = -\cos x + C \\
+& \;\, 7、\int \cos x \mathrm{d}x = \sin x + C \\
+& \;\, 8、\int \tan x \mathrm{d}x = -\ln |\cos x| + C \\
+& \;\, 9、\int \cot x \mathrm{d}x = \ln |\sin x| + C \\
+& 10、\int \sec x \mathrm{d}x = \ln |\sec x + \tan x| + C \\
+& 11、\int \csc x \mathrm{d}x = \ln |\csc x - \cot x| + C \\
+& 12、\int \sec ^2 x \mathrm{d}x = \tan x + C \\
+& 13、\int \csc ^2 x \mathrm{d}x = -\cot x + C \\
+& 14、\int \sec x \tan x \mathrm{d}x = \sec x + C \\
+& 15、\int \csc x \cot x \mathrm{d}x = -\csc x + C \\
+\end{align}
+-->
