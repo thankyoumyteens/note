@@ -52,7 +52,10 @@
   - [Sentinel](./fallback/sentinel/sentinel.md)
     - [集成Feign](./fallback/sentinel/feign.md)
     - [Sentinel控制台](./fallback/sentinel/dashboard.md)
+    - [定义资源](./fallback/sentinel/resource.md)
     - [流量控制](./fallback/sentinel/flow_control.md)
+    - [熔断](./fallback/sentinel/circuit_breaker.md)
+    - [热点参数限流](./fallback/sentinel/hot.md)
 
 - [网关](./gateway/gateway.md)
   - [Zuul](./gateway/zuul/zuul.md)
