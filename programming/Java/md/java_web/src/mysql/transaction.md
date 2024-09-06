@@ -58,12 +58,12 @@
 3. repeatable read(可重复读): MySQL 默认的隔离级别
 4. serializable(串行化): 禁止事务并发执行, 性能最差
 
-| 隔离级别         | 脏读 | 不可重复读 ｜ 幻读 |
-| ---------------- | ---- | ------------------ | --- |
-| read uncommitted | 有   | 有                 | 有  |
-| read committed   | 无   | 有                 | 有  |
-| repeatable read  | 无   | 无                 | 有  |
-| serializable     | 无   | 无                 | 无  |
+| 隔离级别         | 脏读 | 不可重复读 | 幻读 |
+| ---------------- | ---- | ---------- | ---- |
+| read uncommitted | 有   | 有         | 有   |
+| read committed   | 无   | 有         | 有   |
+| repeatable read  | 无   | 无         | 有   |
+| serializable     | 无   | 无         | 无   |
 
 ## redo log
 
@@ -81,7 +81,7 @@ redo log（重做日志）是 InnoDB 存储引擎中的一种关键机制, 用�
 
 ## undo log
 
-undo log（回滚日志）, 当数据被修改时, 原始的数据值会被记录到 undo log 中, 这样在需要时可以恢复原始状态。它用于以下两个主要目的: 
+undo log（回滚日志）, 当数据被修改时, 原始的数据值会被记录到 undo log 中, 这样在需要时可以恢复原始状态。它用于以下两个主要目的:
 
 1. 事务回滚
 2. 多版本并发控制（MVCC）
