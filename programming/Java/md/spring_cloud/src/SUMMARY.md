@@ -45,6 +45,8 @@
 - [服务降级](./fallback/fallback.md)
   - [限流算法](./fallback/algorithm/algorithm.md)
     - [计数器算法](./fallback/algorithm/counter.md)
+    - [漏桶算法](./fallback/algorithm/leak_bucket.md)
+    - [令牌桶算法](./fallback/algorithm/token_bucket.md)
   - [Hystrix](./fallback/hystrix/hystrix.md)
     - [服务降级](./fallback/hystrix/fallback.md)
     - [线程隔离](./fallback/hystrix/thread_isolation.md)
