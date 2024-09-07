@@ -87,3 +87,4 @@
   - [CAS](./thread/cas.md)
   - [volatile](./thread/volatile.md)
   - [AQS](./thread/aqs.md)
+  - [synchronized和Lock的区别](./thread/lock.md)

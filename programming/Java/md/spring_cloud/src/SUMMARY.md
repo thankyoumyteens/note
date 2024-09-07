@@ -43,6 +43,8 @@
     - [配置中心](./config/nacos/config.md)
 
 - [服务降级](./fallback/fallback.md)
+  - [限流算法](./fallback/algorithm/algorithm.md)
+    - [计数器算法](./fallback/algorithm/counter.md)
   - [Hystrix](./fallback/hystrix/hystrix.md)
     - [服务降级](./fallback/hystrix/fallback.md)
     - [线程隔离](./fallback/hystrix/thread_isolation.md)

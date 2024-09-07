@@ -59,5 +59,16 @@
 & 13、\int \csc ^2 x \mathrm{d}x = -\cot x + C \\
 & 14、\int \sec x \tan x \mathrm{d}x = \sec x + C \\
 & 15、\int \csc x \cot x \mathrm{d}x = -\csc x + C \\
+& 16、\int \frac{1}{\sqrt{1 - x^2}}  \mathrm{d}x = \arcsin x + C \\
+& 17、\int \frac{1}{\sqrt{a^2 - x^2}}  \mathrm{d}x = \arcsin \frac{x}{a} + C \\
+& 18、\int \frac{1}{1 + x^2} \mathrm{d}x = \arctan x + C \\
+& 19、\int \frac{1}{a^2 + x^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + C \\
+& 20、\int \frac{1}{\sqrt{x^2 + a^2}} \mathrm{d}x = \ln (x + \sqrt{x^2 + a^2}) + C \\
+& 21、\int \frac{1}{\sqrt{x^2 - a^2}} \mathrm{d}x = \ln | x + \sqrt{x^2 - a^2} | + C \\
+& 22、\int \frac{1}{x^2 - a^2} \mathrm{d}x = \frac{1}{2a} \ln | \frac{x - a}{x + a} | + C \\
+& 23、\int \sqrt{a^2 - x^2} \mathrm{d}x = \frac{a^2}{2} \arcsin \frac{x}{a} +
+\frac{x}{2} \sqrt{a^2 - x^2} + C \\
 \end{align}
 -->
+
+![](../img/ii4.jpg)

@@ -62,6 +62,7 @@
   - [类的初始化](./jdk21/g1/load_class/initialize_class.md)
   - [类的连接](./jdk21/g1/load_class/link_class.md)
   - [注册finalizer](./jdk21/g1/load_class/register_finalizer.md)
+  - [常量池](./jdk21/g1/load_class/constant_pool.md)
   - [加载](./jdk21/g1/load_class/load/load.md)
     - [解析class文件](./jdk21/g1/load_class/load/parse_class.md)
     - [解析字节流](./jdk21/g1/load_class/load/parse_stream.md)
