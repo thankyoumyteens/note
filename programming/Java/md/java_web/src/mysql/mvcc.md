@@ -4,7 +4,7 @@ MVCC 和排他锁确保了事务的隔离性。
 
 MVCC（Multi-Version Concurrency Control, 多版本并发控制）允许多个事务同时对同一数据进行读取和写入操作, 而不会相互干扰。MVCC 不能解决幻读问题。
 
-InnoDB 通过 undo log 保存每条数据的多个版本, 并且能够找回数据历史版本, 
+InnoDB 通过 undo log 保存每条数据的多个版本, 并且能够找回数据历史版本,
 
 MVCC 只在已提交读和可重复读两个隔离级别下工作, 其他两个隔离级别和 MVCC 是不兼容的。因为未提交读总是读取最新的数据, 而不是读取符合当前事务版本的数据行。而串行化不允许事务并发执行。在可重复读中, 每个事务读到的数据版本可能是不一样的, 在同一个事务中, 用户只能看到该事务创建快照之前已经提交的修改和该事务本身做的修改。
 
@@ -17,7 +17,7 @@ MVCC 只在已提交读和可重复读两个隔离级别下工作, 其他两个�
 - trx_id: 记录操作该行数据事务的事务 ID
 - roll_pointer: 回滚指针, 指向当前记录行的 undo log 信息
 
-undo log 分为两类: 
+undo log 分为两类:
 
 1. insert undo log: insert 时产生的 undo log, 只在事务回滚时需要, 并且在事务提交后就可以立即删除
 2. update undo log: delete 和 update 时产生的 undo log, 不仅在事务回滚时需要, 快照读也需要, 只有当数据库所使用的快照中不涉及该日志记录, 对应的回滚日志才会被删除
@@ -28,7 +28,7 @@ undo log 分为两类:
 
 ![](../img/tc.png)
 
-快照读:  读取的是记录数据的可见版本（有旧的版本）。不加锁,普通的 select 语句都是快照读
+快照读: 读取的是记录数据的可见版本（有旧的版本）。不加锁,普通的 select 语句都是快照读
 
 ```sql
 select * from my_table where id = 1;
@@ -43,7 +43,7 @@ select * from my_table where id = 1 lock in share mode;
 
 ## ReadView
 
-ReadView 是当前事务开启的快照记录
+ReadView 是当前事务开启的快照记录。
 
 ReadView 的几个重要属性:
 
@@ -51,6 +51,11 @@ ReadView 的几个重要属性:
 - low_limit_id: 目前出现过的最大的事务 ID+1(不管提没提交), 即下一个将被分配的事务 ID。如果最大的事务 id 是 10, 那么 low_limit_id 就是 11
 - up_limit_id: trx_ids 中最小的事务 ID, 如果 trx_ids 为空, 则 up_limit_id 为 low_limit_id
 - creator_trx_id: 表示生成该 ReadView 的事务的 id
+
+ReadView 的创建时机:
+
+1. read committed 隔离级别下, 每个 select 都会创建最新的 ReadView
+2. repeatable read 隔离级别下, 则是当事务中的第一个 select 请求才创建 ReadView
 
 访问某条记录的时候, 确定要访问的版本:
 
@@ -61,8 +66,3 @@ ReadView 的几个重要属性:
   - 如果在, 说明创建 ReadView 时生成该版本的事务还是活跃的, 该版本不可以被访问
   - 如果不在, 说明创建 ReadView 时生成该版本的事务已经被提交, 该版本可以被访问
 - 如果最新的数据不符合 ReadView 的可见性规则, 那么就需要去 undo log 中查找历史快照, 直到返回符合规则的数据
-
-ReadView 的创建时机:
-
-1. read committed 隔离级别下, 每个 select 都会创建最新的 ReadView
-2. repeatable read 隔离级别下, 则是当事务中的第一个 select 请求才创建 ReadView

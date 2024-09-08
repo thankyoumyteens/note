@@ -23,8 +23,13 @@
   - [在全局卡表中标记](./jdk21/g1/allocate_object/dirty_young_block.md)
   - [初始化对象](./jdk21/g1/allocate_object/initialize_object.md)
 
+- [VMThread](./jdk21/g1/base/vm_thread.md)
+  - [VMThread::execute](./jdk21/g1/base/vm_thread_execute.md)
+  - [VMThread::loop](./jdk21/g1/base/vm_thread_loop.md)
+
 - [垃圾回收](./jdk21/g1/gc/gc.md)
   - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
+  - [doit函数](./jdk21/g1/gc/doit.md)
 
 - [分配大对象](./jdk21/g1/allocate_object/allocate_humongous.md)
   - [开启并发标记](./jdk21/g1/allocate_object/start_conc_mark.md)
@@ -73,10 +78,6 @@
     - [重写](./jdk21/g1/load_class/link/rewrite.md)
   - [初始化](./jdk21/g1/load_class/initialize/initialize.md)
   - [系统字典](./jdk21/g1/load_class/dict.md)
-
-- [VMThread](./jdk21/g1/base/vm_thread.md)
-  - [VMThread::execute](./jdk21/g1/base/vm_thread_execute.md)
-  - [VMThread::loop](./jdk21/g1/base/vm_thread_loop.md)
 
 - [线程握手](./jdk21/g1/base/handshake.md)
   - [VM_HandshakeAllThreads](./jdk21/g1/base/handshake_op.md)

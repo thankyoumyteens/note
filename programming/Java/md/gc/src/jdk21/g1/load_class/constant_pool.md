@@ -35,3 +35,30 @@ Class 文件中的 constant_pool 表是常量池的静态描述，虚拟机在�
 ## 常量池缓存
 
 如果每次字段或方法的访问都需要解析常量池项的话，将会造成性能下降。为解决这一问题，虚拟机引入了常量池缓存机制。
+
+常量池缓存由一个数组组成，元素类型是常量池缓存项，每个缓存项表示类中引用的一个字段或方法。常量池缓存项有两种类型:
+
+- 字段项：用来支持对类变量和对象的快速访问
+- 方法项：用来支持 invoke 系列的函数调用指令，为这些方法调用指令提供快速定位目标方法的能力
+
+实现常量池 Cache 项的数据结构为 ConstantPoolCacheEntry:
+
+```cpp
+// --- src/hotspot/share/oops/cpCache.hpp --- //
+
+class ConstantPoolCacheEntry {
+
+ private:
+  volatile intx     _indices;  // constant pool index & rewrite bytecodes
+  Metadata* volatile   _f1;       // entry specific metadata field
+  volatile intx        _f2;       // entry specific int/metadata field
+  volatile intx     _flags;    // flags
+  // ...
+}
+```
+
+在函数分发时，对于 invokespecial 和 invokestatic 指令，f2 字段表示目标函数的 methodOop。对于 invokevirtual 指令，若是 final 修饰的函数，f2 字段也直接指向目标函数的 methodOop。
+
+当用到 vtable 时(非 final 的其他 virtual 函数)，f2 字段中则存放目标函数在 vtable 中的索引编号。
+
+在用到 itable 时，虚拟机结合 f1 字段和 f2 字段实现函数分发。对于 invokeinterface 指令，f1 字段指向相应的接口的 klassOop，而 £2 字段中存放的则是方法位于 itable 中的索引编号。虚拟机在执行 invokeinterface 指令时，首先从 f1 字段中得到 klassOop，然后在 itable 的偏移表中，从类实现的接口列表中逐一匹配 klassOop，若匹配失败，说明该类并没有实现该接口，虚拟机将抛出 `java.lang.IncompatibleClassChangeError` 异常。若匹配成功，通过 £2 字段在 itable 的方法表中找到目标方法。
