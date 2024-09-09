@@ -62,3 +62,28 @@ class ConstantPoolCacheEntry {
 当用到 vtable 时(非 final 的其他 virtual 函数)，f2 字段中则存放目标函数在 vtable 中的索引编号。
 
 在用到 itable 时，虚拟机结合 f1 字段和 f2 字段实现函数分发。对于 invokeinterface 指令，f1 字段指向相应的接口的 klassOop，而 £2 字段中存放的则是方法位于 itable 中的索引编号。虚拟机在执行 invokeinterface 指令时，首先从 f1 字段中得到 klassOop，然后在 itable 的偏移表中，从类实现的接口列表中逐一匹配 klassOop，若匹配失败，说明该类并没有实现该接口，虚拟机将抛出 `java.lang.IncompatibleClassChangeError` 异常。若匹配成功，通过 £2 字段在 itable 的方法表中找到目标方法。
+
+为了让 JVM 在判断方法或字段的类型时提高效率，ConstantPoolCacheEntry 中还设计了些状态位字段。为节省空间，这些状态位被设计成共享一个 32 位的字段 flags 中。对于如何区分 ConstantPoolCacheEntry 的类型，便是依靠 flags 字段的一个标志位来确定的:
+
+```cpp
+// 字段类型
+// bit number |31                                           0|
+// _flags     [tos|0|F=1|0|0|0|f|v|0 |0  000 |  field_index  ]
+// bit length [ 4 |1| 1 |1|1|1|1|1|1 |1|--3--|------16-------]
+
+// 方法类型
+// bit number |31                                           0|
+// _flags     [tos|0|F=0|S|A|I|f|0|vf|indy_rf|000|00000|psize]
+// bit length [ 4 |1| 1 |1|1|1|1|1|1 |---4---|----8----|--8--]
+```
+
+- tos: 描述 TosState。TosState 是栈顶缓存优化技术中的一个术语，它的取值表示栈顶缓存元素的数据类型
+- F: 1 表示缓存项类型为字段，0 则表示是缓存项类型为方法
+- A: call site 有附加的参数
+- I: 通过接口调用的, 必须在 vtable 或 vfinal 中查找
+- f: 字段或方法是 final 的
+- v: 字段是 volatile 的
+- vf: final 修饰的虚方法
+- indy_rf: call site 指定的方法解析失败
+- field_index: 字段信息的索引
+- psize: 方法的参数大小, 只在方法类型的 flags 中存在

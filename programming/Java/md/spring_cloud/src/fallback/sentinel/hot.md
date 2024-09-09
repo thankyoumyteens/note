@@ -59,7 +59,7 @@ public class DemoController {
 }
 ```
 
-3. 配置热点规则
+3. 配置热点规则: 热点规则 -> 新增热点限流规则
 
 ![](../../img/s4.png)
 
@@ -82,6 +82,36 @@ curl --location --request GET 'http://localhost:27441/test/demo' \
 curl --location --request GET 'http://localhost:27441/test/demo' \
 --header 'Content-Type: application/json' \
 --data-raw '{
+    "p2": "222"
+}'
+```
+
+## 参数例外项
+
+1. 修改热点规则配置
+
+![](../../img/s5.png)
+
+上面的配置表示: 参数 `p1` 的值为 `333` 时, 这个请求 QPS 放宽到 1 秒请求 2 次以上才会被限流。
+
+2. 请求热点参数 `p1=333`, 连续请求 2 次后限流
+
+```sh
+curl --location --request GET 'http://localhost:27441/test/demo' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "p1": "333",
+    "p2": "222"
+}'
+```
+
+3. 请求热点参数 `p1!=333`, 连续请求 1 次后限流
+
+```sh
+curl --location --request GET 'http://localhost:27441/test/demo' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "p1": "111",
     "p2": "222"
 }'
 ```
