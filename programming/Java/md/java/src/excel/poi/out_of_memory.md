@@ -1,6 +1,6 @@
 # 内存溢出问题
 
-当数据量超出一定限制（如 65536 条）时, 使用 HSSFWorkbook(处理 xls) 或 XSSFWorkbook(处理 xlsx) 会一次性把整个 excel 都加载都内存中, 可能会报 OutOfMemoryError。
+当数据量超出一定限制(如 65536 条)时, 使用 HSSFWorkbook(处理 xls) 或 XSSFWorkbook(处理 xlsx) 会一次性把整个 excel 都加载都内存中, 可能会报 OutOfMemoryError。
 
 ## 解决
 

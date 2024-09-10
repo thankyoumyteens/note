@@ -39,7 +39,7 @@ server {
 
 limit_req_zone 指令用于定义速率限制的参数。
 
-limit_req 在其出现的上下文环境中启用速率限制（比如指向 `/login/` 的所有请求）。
+limit_req 在其出现的上下文环境中启用速率限制(比如指向 `/login/` 的所有请求)。
 
 limit_req_zone 指令通常在 http 模块中定义, 以便其可用于多个上下文。limit_req_zone 指令后面有三个部分: 
 

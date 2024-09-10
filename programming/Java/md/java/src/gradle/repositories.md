@@ -5,7 +5,7 @@
 在 `GRADLE_USER_HOME` 目录(默认是`~/.gradle/`)下创建 `init.gradle` 文件:
 
 ```groovy
-// 应用到项目中所有的子项目（subprojects）
+// 应用到项目中所有的子项目(subprojects)
 allprojects{
     // 项目的仓库设置
     repositories {
@@ -14,7 +14,7 @@ allprojects{
             url 'https://mirrors.huaweicloud.com/repository/maven/'
         }
     }
-    // 配置构建脚本（即 Gradle 自身的类路径和插件）的仓库
+    // 配置构建脚本(即 Gradle 自身的类路径和插件)的仓库
     buildscript {
         repositories {
             // 华为云仓库

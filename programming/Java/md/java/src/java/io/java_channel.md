@@ -1,6 +1,6 @@
 # Channel
 
-NIO 是基于通道（Channel）和缓冲区（Buffer）进行操作, 数据总是从 Channel 读取到 Buffer 中, 或者从 Buffer 写入到 Channel 中。
+NIO 是基于通道(Channel)和缓冲区(Buffer)进行操作, 数据总是从 Channel 读取到 Buffer 中, 或者从 Buffer 写入到 Channel 中。
 
 常用的 Channel
 

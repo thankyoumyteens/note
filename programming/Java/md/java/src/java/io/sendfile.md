@@ -20,6 +20,6 @@ Linux 2.4 版本的内核对 sendfile 系统调用进行修改，为 DMA 拷贝�
 
 1. 用户进程通过 `sendfile()` 函数向内核发起系统调用，上下文从用户态切换为内核态
 2. CPU 利用 DMA 控制器将数据从主存或硬盘拷贝到内核空间的读缓冲区
-3. CPU 把读缓冲区的文件描述符（file descriptor）和数据长度拷贝到 socket 缓冲区
+3. CPU 把读缓冲区的文件描述符(file descriptor)和数据长度拷贝到 socket 缓冲区
 4. 基于已拷贝的文件描述符和数据长度，CPU 利用 DMA 控制器的 gather/scatter 操作直接批量地将数据从内核的读缓冲区拷贝到网卡
 5. 上下文从内核态切换回用户态，sendfile 系统调用返回

@@ -17,7 +17,7 @@ SETNX key value
 
 ### 使用 SETNX 实现分布式锁
 
-1. **设置锁**: 当一个节点想要获取锁时, 它可以通过向 Redis 设置一个键（如`lock_key`）来实现。这个键的值通常是当前节点的标识符（例如一个 UUID）, 并且会设置一个过期时间, 以防止持有锁的节点崩溃而无法释放锁
+1. **设置锁**: 当一个节点想要获取锁时, 它可以通过向 Redis 设置一个键(如`lock_key`)来实现。这个键的值通常是当前节点的标识符(例如一个 UUID), 并且会设置一个过期时间, 以防止持有锁的节点崩溃而无法释放锁
 
    ```shell
    SET lock_key uuid NX PX 30000
@@ -50,7 +50,7 @@ public class RedisDistributedLock {
 
     // 锁的过期时间, 这里设置为 10 秒
     private static final int LOCK_EXPIRE_MS = 10000;
-    // 锁续期时间（以毫秒为单位）, 不能超过锁超时时间
+    // 锁续期时间(以毫秒为单位), 不能超过锁超时时间
     private static final int LOCK_RENEWAL_MS = 3000;
 
     /**
@@ -76,7 +76,7 @@ public class RedisDistributedLock {
             // 只有持有锁的客户端才能释放锁
             // 使用Lua脚本保证操作原子性
             String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
-            // KEYS[1] 是锁的键, ARGV[1] 是锁的值（uuid）
+            // KEYS[1] 是锁的键, ARGV[1] 是锁的值(uuid)
             jedis.eval(script, 1, "lock_key", uuid);
         } finally {
             // 锁被成功释放, 中断续期线程

@@ -2,7 +2,7 @@
 
 继承 `DefaultHandler` 类, 重写 `startElement()`, `characters()`, `endElement()` 方法。
 
-- `startElement()` 获取单元格的类型（如日期、数字、字符串等）
+- `startElement()` 获取单元格的类型(如日期、数字、字符串等)
 - `characters()` 获取该单元格对应的索引值或是内容值。如果单元格类型是字符串则获取的是字符串池的索引值, 其它类型则获取的就是内容
 - `endElement()` 根据 `startElement()` 的单元格类型和 `characters()` 的索引值或内容值, 最终得出单元格的内容
 

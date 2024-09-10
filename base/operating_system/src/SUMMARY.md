@@ -39,3 +39,4 @@
   - [内存覆盖与交换](./memory/memory_swap.md)
   - [内存分配方式](./memory/memory_alloc.md)
   - [分页存储管理](./memory/memory_page.md)
+  - [分段存储管理](./memory/memory_seg.md)

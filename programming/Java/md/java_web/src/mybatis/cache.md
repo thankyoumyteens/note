@@ -26,7 +26,7 @@ public void testCache1() throws Exception{
 
 二级缓存需要手动开启。
 
-1. 在 MyBatis 配置文件（一般是 mybatis-config.xml）中开启二级缓存
+1. 在 MyBatis 配置文件(一般是 mybatis-config.xml)中开启二级缓存
 
 ```xml
 <setting name="cacheEnabled" value="true"/>

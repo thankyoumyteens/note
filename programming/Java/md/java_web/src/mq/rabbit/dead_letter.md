@@ -17,7 +17,7 @@
 
 ## TTL
 
-TTL（Time To Live）, 一条消息如果在 TTL 时间内没有被消费, 则会成为死信。
+TTL(Time To Live), 一条消息如果在 TTL 时间内没有被消费, 则会成为死信。
 
 TTL 超时的情况:
 

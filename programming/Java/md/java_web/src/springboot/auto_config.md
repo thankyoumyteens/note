@@ -34,7 +34,7 @@ public @interface EnableAutoConfiguration {
 @ConditionalOnClass({RedisOperations.class})
 // 导入在 application.properties 中配置的redis连接信息
 @EnableConfigurationProperties({RedisProperties.class})
-// 导入连接池信息（如果存在的话）
+// 导入连接池信息(如果存在的话)
 @Import({LettuceConnectionConfiguration.class, JedisConnectionConfiguration.class})
 public class RedisAutoConfiguration {
     // ...

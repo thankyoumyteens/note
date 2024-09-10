@@ -13,7 +13,7 @@ void *memset(void *str, int c, size_t n);
 ## 参数
 
 1. `str`: 指向要填充的内存块的起始地址的指针。
-2. `c`: 要设置的值, 必须是一个整数（通常是 `unsigned char` 类型）, 并且会被转换为 `unsigned char`。
+2. `c`: 要设置的值, 必须是一个整数(通常是 `unsigned char` 类型), 并且会被转换为 `unsigned char`。
 3. `n`: 要设置的字节数。
 
 ### 返回值

@@ -8,7 +8,7 @@
 
 buffer 中有三个指针: 
 
-- capacity: buffer 的容量, 一旦 Buffer 满了, 需要将其清空（通过读数据或者清除数据）才能继续往里写数据
+- capacity: buffer 的容量, 一旦 Buffer 满了, 需要将其清空(通过读数据或者清除数据)才能继续往里写数据
 - position: 当前的位置。初始的 position 值为 0。数据写到 Buffer 后, position 会向前移动一步。调用 flip 方法后, position 会被重置为 0。当从 position 处读取数据时, position 也会向前移动一步。position 最大是 capacity – 1
 - limit: 限制可以从 Buffer 里读取多少数据(或者向 Buffer 里写取多少数据), 初始和 capacity 相等。调用 flip 方法后, limit 会被设置成当前的 position 值
 

@@ -63,3 +63,20 @@
 -->
 
 ![](../img/ii23.jpg)
+
+例题 4
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{x}{4 + x^4} \mathrm{d}x \\
+& {\color{Green} // 把 x 放到 d 后面} \\
+& = \frac{1}{2} \int \frac{1}{4 + x^4} \mathrm{d}(x^2) \\
+& {\color{Green} // 把分母的 x 写成和 d 后面的 x 一样} \\
+& = \frac{1}{2} \int \frac{1}{2^2 + (x^2)^2} \mathrm{d}(x^2) \\
+& {\color{Green} // 把 x^2 看成一个整体,}  \\
+& {\color{Green} // 使用公式: \int \frac{1}{a^2 + x^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + C}  \\
+& = \frac{1}{4} \arctan \frac{x^2}{2} + C \\
+\end{align}
+-->
+
+![](../img/ii24.jpg)
