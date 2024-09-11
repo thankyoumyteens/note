@@ -22,7 +22,7 @@
 \end{align}
 -->
 
-![](../img/ii21.jpg)
+![](../img/ii2_1.jpg)
 
 例题 2
 
@@ -42,7 +42,7 @@
 \end{align}
 -->
 
-![](../img/ii22.jpg)
+![](../img/ii2_2.jpg)
 
 例题 3
 
@@ -62,7 +62,7 @@
 \end{align}
 -->
 
-![](../img/ii23.jpg)
+![](../img/ii2_3.jpg)
 
 例题 4
 
@@ -79,4 +79,22 @@
 \end{align}
 -->
 
-![](../img/ii24.jpg)
+![](../img/ii2_4.jpg)
+
+例题 5
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{\sqrt{x} (1 + x)} \\
+& {\color{Green} // 凑成公式: \int \frac{1}{2 \sqrt{x}} \mathrm{d}x = \sqrt{x} + C} \\
+& = 2 \int \frac{\mathrm{d}x}{2 \sqrt{x} (1 + x)} \\
+& {\color{Green} // 把\frac{1}{2 \sqrt{x}} 放到 d 后面} \\
+& = 2 \int \frac{\mathrm{d}(\sqrt{x})}{1 + x} \\
+& {\color{Green} // 凑成公式: \int \frac{1}{1 + x^2} \mathrm{d}x = \arctan x + C}  \\
+& = 2 \int \frac{\mathrm{d}(\sqrt{x})}{1 + (\sqrt{x})^2} \\
+& {\color{Green} // 把 \sqrt{x} 看成一个整体}  \\
+& = 2 \arctan \sqrt{x} + C \\
+\end{align}
+-->
+
+![](../img/ii2_5.jpg)
