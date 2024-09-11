@@ -34,3 +34,23 @@ public ThreadPoolExecutor(int corePoolSize,
 - CallerRunsPolicy: 哪个线程发起的任务, 哪个线程自己去执行这个任务
 - DiscardOldestPolicy: 丢弃 workQueue 中最老的一个任务, 并将新任务加入
 - DiscardPolicy: 直接丢弃任务, 不做任何操作
+
+## 常用的阻塞队列
+
+- ArrayBlockingQueue: 基于数组实现的有界阻塞队列(创建时必须指定容量), 按照先进先出原则对元素进行排序。ArrayBlockingQueue 使用同一个锁来控制入队和出队
+- LinkedBlockingQueue: 基于链表实现的有界阻塞队列, 但它的容量默认为 `Integer.MAX_VALUE`, 是一个非常大的值, 也可以认为是无界队列。LinkedBlockingQueue 采用了两个独立的锁来分别控制入队和出队, 队列的并发性能更高
+- PriorityBlockingQueue: 支持优先级的无界队列, 元素在默认情况下采用自然顺序升序排列。可以自定义实现 compareTo 方法来指定元素的排序规则
+- SynchronousQueue: 不存储元素的阻塞队列。每个 put 操作都必须等待一个 take 操作完成, 否则不能继续添加元素
+- DelayQueue: 支持延时获取元素的无界阻塞队列
+
+## 确定核心线程数
+
+程序分为两种:
+
+1. IO 密集型任务: 比如文件读写, 网络请求, 数据库读写
+2. CPU 密集型任务: 比如计算型代码, 复杂的算法
+
+设置核心线程数:
+
+1. IO 密集型任务: 核心线程数为 `2n + 1`, n 是 CPU 的核心数。多开一些线程来处理 IO 请求
+2. CPU 密集型任务: 核心线程数为 `n + 1`, n 是 CPU 的核心数。减少线程的切换来增加效率

@@ -77,6 +77,7 @@
     - [创建instanceKlass](./jdk21/g1/load_class/load/create_instance_klass.md)
   - [链接](./jdk21/g1/load_class/link/link.md)
     - [重写](./jdk21/g1/load_class/link/rewrite.md)
+    - [将符号引用转换成直接引用](./jdk21/g1/load_class/link/parse.md)
   - [初始化](./jdk21/g1/load_class/initialize/initialize.md)
   - [系统字典](./jdk21/g1/load_class/dict.md)
 
