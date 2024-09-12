@@ -63,6 +63,7 @@
     - [系统自适应保护](./fallback/sentinel/sys.md)
     - [黑白名单](./fallback/sentinel/black_list.md)
     - [自定义限流时返回的信息](./fallback/sentinel/custom.md)
+    - [限流规则持久化](./fallback/sentinel/persistence.md)
 
 - [网关](./gateway/gateway.md)
   - [Zuul](./gateway/zuul/zuul.md)

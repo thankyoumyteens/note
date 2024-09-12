@@ -98,3 +98,22 @@
 -->
 
 ![](../img/ii2_5.jpg)
+
+例题 6
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\tan ^2 \sqrt{x}}{\sqrt{x}} \mathrm{d}x \\
+& {\color{Green} // 凑成公式: \int \frac{1}{2 \sqrt{x}} \mathrm{d}x = \sqrt{x} + C} \\
+& = 2 \int \frac{\tan ^2 \sqrt{x}}{2\sqrt{x}} \mathrm{d}x \\
+& {\color{Green} // 把\frac{1}{2 \sqrt{x}} 放到 d 后面} \\
+& = 2 \int (\tan ^2 \sqrt{x}) \mathrm{d}(\sqrt{x}) \\
+& {\color{Green} // 三角恒等式: \tan ^{2} x + 1 = \sec ^{2} x}  \\
+& = 2 \int (\sec ^{2} \sqrt{x} - 1) \mathrm{d}(\sqrt{x}) \\
+& = 2 \int (\sec ^{2} \sqrt{x}) \mathrm{d}(\sqrt{x}) - 2 \int 1 \mathrm{d}(\sqrt{x}) \\
+& {\color{Green} // (\tan x)' = \sec^{2} x}  \\
+& = 2 \tan \sqrt{x} - 2\sqrt{x} + C \\
+\end{align}
+-->
+
+![](../img/ii2_6.jpg)
