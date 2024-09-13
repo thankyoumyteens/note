@@ -93,3 +93,8 @@
   - [线程池](./thread/thread_pool.md)
   - [控制某个方法并发访问线程的数量](./thread/semaphore.md)
   - [ThreadLocal](./thread/thread_local.md)
+
+- [JVM](./jvm/jvm.md)
+  - [引用](./jvm/ref.md)
+  - [调优参数](./jvm/params.md)
+  - [调优工具](./jvm/tools.md)

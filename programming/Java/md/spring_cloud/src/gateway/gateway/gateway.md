@@ -1,11 +1,11 @@
 # Spring Cloud Gateway
 
-路由(Route)的组成:
+路由(Route)是 gateway 的基本模块。它由 ID、目标 URI、断言集合和过滤器集合组成。如果聚合断言结果为真，则匹配到该路由。
 
-- id
+- id: 区分不同的路由
 - uri: 该路由转发的目标地址
 - 断言(Predicate): 用于匹配请求, 如果为 true, 则执行路由
-- 过滤器(Filter): 用于修改请求和响应
+- 过滤器(Filter): 用于修改请求和响应的内容
 
 ```yaml
 spring:

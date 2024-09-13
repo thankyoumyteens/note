@@ -1,6 +1,6 @@
-# Predicate
+# 断言
 
-在 Gateway 中，有一些的内置 Predicate Factory，在运行时，Gateway 会自动根据需要创建对应的 Pridicate 对象。
+Predicate 来自于 java8 的接口。Predicate 接受一个输入参数，返回一个布尔值结果。在 Gateway 中，有一些的内置 Predicate Factory，在运行时，Gateway 会自动根据需要创建对应的 Pridicate 对象。
 
 ## Path
 

@@ -117,3 +117,35 @@
 -->
 
 ![](../img/ii2_6.jpg)
+
+例题 7
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{e^x}{4 + e^{2x}} \mathrm{d}x \\
+& {\color{Green} // 凑成公式: \int \frac{1}{a^2 + x^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + C} \\
+& = \int \frac{1}{2^2 + (e^{x})^2} \mathrm{d}(e^x) \\
+& = \frac{1}{2} \arctan \frac{e^x}{2} + C \\
+\end{align}
+-->
+
+![](../img/ii2_7.jpg)
+
+例题 8
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{1}{1 + e^x} \mathrm{d}x \\
+& {\color{Green} // 提取 e^x} \\
+& = \int \frac{1}{e^x(e^{-x} + 1)} \mathrm{d}x \\
+& = \int \frac{e^{-x}}{e^{-x} + 1} \mathrm{d}x \\
+& {\color{Green} // e^{-x}放到 d 后面} \\
+& = \int \frac{1}{e^{-x} + 1} \mathrm{d}(-e^{-x}) \\
+& = - \int \frac{1}{e^{-x} + 1} \mathrm{d}(e^{-x}) \\
+& {\color{Green} // d 后面可以随意加减常数, 给它 +1 和分母一致} \\
+& = - \int \frac{1}{e^{-x} + 1} \mathrm{d}(e^{-x} + 1) \\
+& = - \ln (e^{-x} + 1) + C \\
+\end{align}
+-->
+
+![](../img/ii2_8.jpg)

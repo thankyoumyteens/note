@@ -8,7 +8,20 @@
 
 先把可能需要保护的资源定义好，之后再配置规则。也可以理解为，只要有了资源，我们就可以在任何时候灵活地定义各种流量控制规则。在编码的时候，只需要考虑这个代码是否需要保护，如果需要保护，就将之定义为一个资源。
 
-对于主流的框架，Sentinel 会默认定义提供的服务，方法等为资源。
+对于主流的框架，Sentinel 会默认定义提供的服务，方法等为资源, 比如:
+
+```java
+@RestController
+@RequestMapping("/test")
+public class DemoController {
+    @RequestMapping("/demo")
+    public String demo(@RequestBody Map<String, String> map) {
+        return demoService.demo(map.get("p1"), map.get("p2"));
+    }
+}
+```
+
+会自动创建一个名为 `/test/demo` 的资源。
 
 ## 通过注解定义资源
 
