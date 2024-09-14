@@ -98,3 +98,5 @@
   - [引用](./jvm/ref.md)
   - [调优参数](./jvm/params.md)
   - [调优工具](./jvm/tools.md)
+  - [内存泄漏排查](./jvm/dump.md)
+  - [CPU占用过高排查](./jvm/cpu.md)

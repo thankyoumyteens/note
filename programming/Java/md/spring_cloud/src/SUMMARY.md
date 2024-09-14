@@ -1,6 +1,8 @@
 # Summary
 
 - [父项目搭建](./project.md)
+  - [Hoxton.SR12](./project_old.md)
+  - [2023.0.1](./project_2023_0_1.md)
 
 - [注册中心](./registry/registry.md)
   - [Eureka](./registry/eureka/eureka.md)
@@ -84,3 +86,4 @@
     - [配置自动刷新](./bus/spring_bus/refresh.md)
 
 - [链路追踪](./tracing/tracing.md)
+  - [Spring Cloud Sleuth](./tracing/sleuth/sleuth.md)

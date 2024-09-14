@@ -12,3 +12,5 @@
 ```
 
 OpenFeign 从 2.2.0.RELEASE 开始，增加了 Spring Cloud Loadbalancer 的依赖, 同时保留了 ribbon 的依赖。在 3.0.x，删除了 ribbon，只留下了 Loadbalancer。
+
+注意: 新版本 spring-cloud-starter-openfeign 移除了负载均衡依赖，所以需要手动添加 spring-cloud-loadbalancer。

@@ -8,11 +8,17 @@
 // --- src/hotspot/share/interpreter/linkResolver.hpp --- //
 
 class LinkInfo : public StackObj {
+  // 方法名
   Symbol*     _name;            // extracted from JVM_CONSTANT_NameAndType
+  // 方法签名
   Symbol*     _signature;
+  // 待解析方法所在的类
+  // 在执行方法解析的时候，所在类应当是已解析的，故称为resolved_klass
   Klass*      _resolved_klass;  // class that the constant pool entry points to
+  // 常量池所在的类
   Klass*      _current_klass;   // class that owns the constant pool
   methodHandle _current_method;  // sending method
+  // 是否执行可访问性检查
   bool        _check_access;
   bool        _check_loader_constraints;
   constantTag _tag;
@@ -20,6 +26,8 @@ class LinkInfo : public StackObj {
 ```
 
 ## 解析类方法
+
+1. 首先检查 resolved_klass 类型是否正确。如果 resolved_klass 是接口类型, 则抛出 java.lang.IncompatibleClassChangeError
 
 ```cpp
 // --- src/hotspot/share/interpreter/linkResolver.cpp --- //
