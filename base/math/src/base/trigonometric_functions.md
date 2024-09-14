@@ -70,6 +70,32 @@
 
 ![](../img/tf10.jpg)
 
+## 辅助角公式
+
+<!--
+\begin{align}
+& 1、 a \sin x + b \cos x = \sqrt{a^2 + b^2} \sin (x + \arctan \frac{b}{a}), (a > 0) \\
+& 2、 a \sin x + b \cos x = \sqrt{a^2 + b^2} \cos (x - \arctan \frac{a}{b}), (b > 0) \\
+\end{align}
+-->
+
+![](../img/tf17.jpg)
+
+## 和角差角公式
+
+<!--
+\begin{align}
+& 1、 \sin (a + b) = \sin a \cos b + \cos a \sin b \\
+& 2、 \sin (a - b) = \sin a \cos b - \cos a \sin b \\
+& 3、 \cos (a + b) = \cos a \cos b - \sin a \sin b \\
+& 4、 \cos (a - b) = \cos a \cos b + \sin a \sin b \\
+& 5、 \tan (a + b) = \frac{\tan a + \tan b}{1 - \tan a \tan b} \\
+& 6、 \tan (a - b) = \frac{\tan a - \tan b}{1 + \tan a \tan b} \\
+\end{align}
+-->
+
+![](../img/tf18.jpg)
+
 ## 反三角函数
 
 <!-- y = \arcsin x 在 x \in [−1, 1], y \in [-\frac{\pi}{2},\frac{\pi}{2}]上的图像 -->

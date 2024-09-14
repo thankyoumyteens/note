@@ -149,3 +149,32 @@
 -->
 
 ![](../img/ii2_8.jpg)
+
+例题 9
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\sin x}{\sin x + \cos x} \mathrm{d}x \\
+& {\color{Green} // 辅助角公式 a \sin x + b \cos x = \sqrt{a^2 + b^2} \sin (x + \arctan \frac{b}{a}), (a > 0)} \\
+& {\color{Green} // 或者 a \sin x + b \cos x = \sqrt{a^2 + b^2} \cos (x - \arctan \frac{a}{b}), (b > 0)} \\
+& = \int \frac{\sin x}{\sqrt{1^2 + 1^2} \cos (x - \arctan 1)} \mathrm{d}x \\
+& {\color{Green} // \arctan 1 = \frac{\pi}{4}} \\
+& = \frac{1}{\sqrt{2}} \int \frac{\sin x}{\cos (x - \frac{\pi}{4})} \mathrm{d}x \\
+& = \frac{1}{\sqrt{2}} \int \frac{\sin [(x - \frac{\pi}{4}) + \frac{\pi}{4}]}{\cos (x - \frac{\pi}{4})} \mathrm{d}x \\
+& = \frac{1}{\sqrt{2}} \int \frac{\sin [(x - \frac{\pi}{4}) + \frac{\pi}{4}]}{\cos (x - \frac{\pi}{4})} \mathrm{d}(x - \frac{\pi}{4}) \\
+& {\color{Green} // 和差化积公式 \sin (a + b) = \sin a \cos b + \cos a \sin b} \\
+& = \frac{1}{\sqrt{2}} \int \frac{\sin (x - \frac{\pi}{4}) \cos \frac{\pi}{4} + \cos (x - \frac{\pi}{4}) \sin \frac{\pi}{4}}{\cos (x - \frac{\pi}{4})} \mathrm{d}(x - \frac{\pi}{4}) \\
+& {\color{Green} // \cos \frac{\pi}{4} = \sin \frac{\pi}{4} = \frac{1}{\sqrt{2}}} \\
+& = \frac{1}{\sqrt{2}} \int \frac{\frac{1}{\sqrt{2}} [\sin (x - \frac{\pi}{4}) + \cos (x - \frac{\pi}{4})]}{\cos (x - \frac{\pi}{4})} \mathrm{d}(x - \frac{\pi}{4}) \\
+& = \frac{1}{2} \int \frac{\sin (x - \frac{\pi}{4}) + \cos (x - \frac{\pi}{4})}{\cos (x - \frac{\pi}{4})} \mathrm{d}(x - \frac{\pi}{4}) \\
+& = \frac{1}{2} \int \frac{\sin (x - \frac{\pi}{4})}{\cos (x - \frac{\pi}{4})} \mathrm{d}(x - \frac{\pi}{4}) + \frac{1}{2} \int \frac{\cos (x - \frac{\pi}{4})}{\cos (x - \frac{\pi}{4})} \mathrm{d}(x - \frac{\pi}{4}) \\
+& = \frac{1}{2} \int \tan (x - \frac{\pi}{4}) \mathrm{d}(x - \frac{\pi}{4}) + \frac{1}{2} \int 1 \mathrm{d}(x - \frac{\pi}{4}) \\
+& = \frac{1}{2} \int \tan (x - \frac{\pi}{4}) \mathrm{d}(x - \frac{\pi}{4}) + \frac{1}{2} (x - \frac{\pi}{4}) \\
+& {\color{Green} // \int \tan x \mathrm{d}x = -\ln |\cos x| + C} \\
+& = -\frac{1}{2} \ln |\cos (x - \frac{\pi}{4})| + \frac{1}{2} (x - \frac{\pi}{4}) + C \\
+& {\color{Green} // \frac{1}{2} \times (- \frac{\pi}{4}) 是常数, 合并到 C 中} \\
+& = -\frac{1}{2} \ln |\cos (x - \frac{\pi}{4})| + \frac{1}{2} x + C \\
+\end{align}
+-->
+
+![](../img/ii2_9.jpg)
