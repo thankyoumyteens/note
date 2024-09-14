@@ -75,6 +75,9 @@
     - [搭建](./gateway/gateway/base.md)
     - [断言](./gateway/gateway/predicate.md)
     - [过滤器](./gateway/gateway/filter.md)
+    - [全局异常处理](./gateway/gateway/ex.md)
+    - [网关限流](./gateway/gateway/sentinel.md)
+    - [自定义限流异常信息](./gateway/gateway/msg.md)
 
 - [总线](./bus/bus.md)
   - [Spring Cloud Bus](./bus/spring_bus.md)

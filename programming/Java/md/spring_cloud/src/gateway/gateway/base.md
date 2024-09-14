@@ -56,6 +56,7 @@ spring:
       routes:
         - id: myRoute1
           # 格式 lb://服务名
+          # 通过全局过滤器LoadBalancerClientFilter负责路由寻址和负载均衡
           uri: lb://nacos-client-demo
           predicates:
             - Path=/test/**

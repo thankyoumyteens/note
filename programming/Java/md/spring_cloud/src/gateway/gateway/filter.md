@@ -163,3 +163,31 @@ spring:
           filters:
             - CheckAuth=myParam1
 ```
+
+## 自定义全局过滤器
+
+全局过滤器不必在路由上配置，注入到 IOC 容器中即可全局生效
+
+```java
+@Component
+@Order(value = Integer.MIN_VALUE)
+public class AccessLogGlobalFilter implements GlobalFilter {
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        // filter的前置处理
+        ServerHttpRequest request = exchange.getRequest();
+        String path = request.getPath().pathWithinApplication().value();
+        InetSocketAddress remoteAddress = request.getRemoteAddress();
+        return chain
+               // 继续调用filter
+               .filter(exchange)
+               // filter的后置处理
+               .then(Mono.fromRunnable(() -> {
+                    ServerHttpResponse response = exchange.getResponse();
+                    HttpStatus statusCode = response.getStatusCode();
+                    log.info("请求路径:{},远程IP地址:{},响应码:{}", path, remoteAddress, statusCode);
+               }));
+    }
+}
+```
