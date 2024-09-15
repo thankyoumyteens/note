@@ -8,7 +8,9 @@
     - [类型转换](./base/type/cast.md)
   - [变量](./base/var/var.md)
     - [声明变量](./base/var/declare.md)
-    - [快速声明变量](./base/var/quick_declare.md)
+    - [简短变量声明](./base/var/short_declare.md)
+    - [指针](./base/var/pointer.md)
+    - [常量](./base/var/constant.md)
 
 - [基本语法](./base/syntax.md)
   - [变量](./base/var.md)
