@@ -48,9 +48,9 @@ public:
 class VM_CollectForAllocation : public VM_GC_Operation {
  protected:
   // 要分配的对象大小
-  size_t    _word_size; // Size of object to be allocated (in number of words)
+  size_t    _word_size;
   // 指向对象首地址的指针, 如果分配失败则是null
-  HeapWord* _result;    // Allocation result (null if allocation failed)
+  HeapWord* _result;
 
  public:
   VM_CollectForAllocation(size_t word_size, uint gc_count_before, GCCause::Cause cause);

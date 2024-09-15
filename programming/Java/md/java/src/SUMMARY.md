@@ -15,6 +15,8 @@
     - [获取方法的参数化类型](./java/method_parameterized_type.md)
 
 - [线程](./java/thread/thread.md)
+  - [start方法](./java/thread/start.md)
+  - [线程的实现方式](./java/thread/impl.md)
   - [线程间通信](./java/thread/thread_communicate.md)
     - [synchronized](./java/thread/thread_communicate_synchronized.md)
     - [ReentrantLock](./java/thread/thread_communicate_reentrant_lock.md)

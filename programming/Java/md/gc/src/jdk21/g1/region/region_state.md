@@ -2,7 +2,7 @@
 
 G1 可使用的堆大小取决于 JVM 参数 MaxHeapSize, 但是 G1 不会一开始就把所有堆都分配成 region, 而是根据需要才分配, 没有分配成 region 的内存处于 Uncommitted 状态, Uncommitted 状态的内存不可以使用。已经分配成 region 的内存处于 Commited 状态, Commited 状态又分为 Active 状态和 Inactive 状态, 只有处于 Active 状态的 region 才可以用于分配对象。
 
-G1 使用 HeapRegionManager 对象管理堆空间, 它使用字段 \_committed_map 记录堆中属于 Committed 状态的 region。如果不需要那么多的 region, G1 也会重新把一些 region 变回 Uncommitted 状态。
+G1 使用 HeapRegionManager 对象管理堆空间, 它使用字段 `_committed_map` 记录堆中属于 Committed 状态的 region。如果不需要那么多的 region, G1 也会重新把一些 region 变回 Uncommitted 状态。
 
 region 的 3 种状态:
 

@@ -1,29 +1,22 @@
 # 运行 go 程序
 
-1. 初始化
+1. 创建 hello.go 文件
 
 ```sh
-mkdir test
-cd test
-# go mod init 模块名
-go mod init hello_world
-# 程序入口
-touch hello.go
-
+vim hello.go
 ```
 
-2. hello.go 内容
+2. 内容
 
 ```go
-// 包名
 package main
 
-// 标准库
-import "fmt"
+import (
+	"fmt"
+)
 
-// 程序入口
 func main() {
-    fmt.Println("Hello World!")
+	fmt.Println("Hello, World!")
 }
 ```
 

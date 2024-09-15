@@ -27,20 +27,41 @@ void VM_G1CollectForAllocation::doit() {
 
   if (_gc_succeeded) {
     if (_word_size > 0) {
-      // An allocation had been requested. Do it, eventually trying a stronger
-      // kind of GC.
+      // 分配对象
       _result = g1h->satisfy_failed_allocation(_word_size, &_gc_succeeded);
     } else if (g1h->should_upgrade_to_full_gc()) {
-      // There has been a request to perform a GC to free some space. We have no
-      // information on how much memory has been asked for. In case there are
-      // absolutely no regions left to allocate into, do a full compaction.
+      // 执行Full GC
       _gc_succeeded = g1h->upgrade_to_full_collection();
     }
   }
 }
 ```
 
-## attempt_allocation_at_safepoint
+## 判断是否需要执行 Full GC
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.hpp --- //
+
+// Returns true if an incremental GC should be upgrade to a full gc. This
+// is done when there are no free regions and the heap can't be expanded.
+bool should_upgrade_to_full_gc() const {
+  return is_maximal_no_gc() && num_free_regions() == 0;
+}
+
+bool is_maximal_no_gc() const override {
+  // _hrm.available(): 未提交的region个数
+  // _regions.length() - _committed_map.num_active()
+  return _hrm.available() == 0;
+}
+
+// The number of regions that are completely free.
+uint num_free_regions() const {
+  // _free_list.length()
+  return _hrm.num_free_regions();
+}
+```
+
+## GC 前的分配尝试
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
@@ -52,10 +73,13 @@ HeapWord* G1CollectedHeap::attempt_allocation_at_safepoint(size_t word_size,
          "the current alloc region was unexpectedly found to be non-null");
 
   if (!is_humongous(word_size)) {
+    // 复用加锁分后配的代码(此时在安全点中, 没有线程安全问题, 无需获取锁)
     return _allocator->attempt_allocation_locked(word_size);
   } else {
+    // 分配大对象
     HeapWord* result = humongous_obj_allocate(word_size);
     if (result != nullptr && policy()->need_to_start_conc_mark("STW humongous allocation")) {
+      // Young GC结束后开始并发标记
       collector_state()->set_initiate_conc_mark_if_possible(true);
     }
     return result;
