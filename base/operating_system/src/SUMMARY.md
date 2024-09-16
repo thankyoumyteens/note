@@ -43,3 +43,4 @@
   - [基本段页式管理](./memory/memory_seg_page.md)
   - [虚拟内存](./memory/vm/vm.md)
     - [请求分页管理方式](./memory/vm/page.md)
+    - [页面置换算法](./memory/vm/alg.md)

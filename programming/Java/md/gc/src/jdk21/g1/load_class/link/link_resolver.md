@@ -116,6 +116,13 @@ Method* LinkResolver::resolve_method(const LinkInfo& link_info,
 
 ## 解析接口方法
 
+1. 首先判断该方法是否是接口方法，若不是，则抛出 java.lang.IncompatibleClassChangeError
+2. 接下来，通过 lookup_method_in_klasses 函数在方法表中査找实例方法
+3. 若没找到，则通过 lookup_method_in_interfaces 函数在所有超类接口中查找
+4. 函数 lookup_method_in_all_interfaces 首先在接口表 `_transitive_interfaces` 中找到所有父接口，然后将每个父接口转化成 instanceKlass 并调用 lookup_method 函数寻找，若找到则返回方法句柄
+5. 若仍然没有找到，则抛出 java.lang.NoSuchMethodError
+6. 与解析类方法类似，接下来是访问权限检查，包括检查调用类是否具有对该方法的访问权限，以及通过调用 SystemDictionary::check_signature_loaders，检查当前类和已解析类的加载器以及该方法的签名等信息，以检验是否违反类加载器约束。若违反约束，则抛出 java.lang.LinkageError
+
 ```cpp
 // --- src/hotspot/share/interpreter/linkResolver.cpp --- //
 

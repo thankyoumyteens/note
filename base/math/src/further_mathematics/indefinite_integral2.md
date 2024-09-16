@@ -178,3 +178,27 @@
 -->
 
 ![](../img/ii2_9.jpg)
+
+例题 10
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{x^2 + 2x + 5} \\
+& {\color{Green} // 分母没法因式分解, 使用配方} \\
+& = \int \frac{\mathrm{d}x}{4 + (x + 1)^2} \\
+& = \int \frac{\mathrm{d}x}{2^2 + (x + 1)^2} \\
+& = \int \frac{\mathrm{d}(x + 1)}{2^2 + (x + 1)^2} \\
+& {\color{Green} // \int \frac{1}{a^2 + x^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + C} \\
+& = \frac{1}{2} \arctan \frac{x + 1}{2} + C \\
+\end{align}
+-->
+
+![](../img/ii2_10.jpg)
+
+例题 11
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{x^2 - x - 2} \\
+\end{align}
+-->
