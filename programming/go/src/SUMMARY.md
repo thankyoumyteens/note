@@ -34,4 +34,7 @@
     - [比较结构体](./base/struct/compare.md)
     - [可访问性](./base/struct/accessibility.md)
     - [指针引用和值引用](./base/struct/ref.md)
-  - [接口](./base/struct/interface.md)
+  - [接口](./base/interface/interface.md)
+    - [方法](./base/interface/method.md)
+    - [定义接口](./base/interface/declare.md)
+    - [将接口作为参数传递](./base/interface/params.md)
