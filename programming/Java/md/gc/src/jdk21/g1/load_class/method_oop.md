@@ -2,6 +2,18 @@
 
 JVM 内部是通过 Method 描述一个方法的。
 
+// A Method represents a Java method.
+//
+// Note that most applications load thousands of methods, so keeping the size of this
+// class small has a big impact on footprint.
+//
+// Note that native_function and signature_handler have to be at fixed offsets
+// (required by the interpreter)
+//
+//  Method embedded field layout (after declared fields):
+//   [EMBEDDED native_function       (present only if native) ]
+//   [EMBEDDED signature_handler     (present only if native) ]
+
 ```cpp
 // --- src/hotspot/share/oops/method.hpp --- //
 

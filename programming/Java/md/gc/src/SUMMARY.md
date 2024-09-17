@@ -69,6 +69,7 @@
   - [注册finalizer](./jdk21/g1/load_class/register_finalizer.md)
   - [常量池](./jdk21/g1/load_class/constant_pool.md)
   - [方法](./jdk21/g1/load_class/method_oop.md)
+    - [ConstMethod](./jdk21/g1/load_class/const_method.md)
   - [加载](./jdk21/g1/load_class/load/load.md)
     - [解析class文件](./jdk21/g1/load_class/load/parse_class.md)
     - [解析字节流](./jdk21/g1/load_class/load/parse_stream.md)

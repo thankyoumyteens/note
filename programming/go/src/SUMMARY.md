@@ -29,3 +29,4 @@
     - [切片](./base/collection/slice.md)
     - [映射](./base/collection/map.md)
   - [结构体](./base/struct/struct.md)
+    - [创建结构体](./base/struct/declare.md)
