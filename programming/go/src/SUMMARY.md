@@ -30,3 +30,5 @@
     - [映射](./base/collection/map.md)
   - [结构体](./base/struct/struct.md)
     - [创建结构体](./base/struct/declare.md)
+    - [嵌套结构体](./base/struct/nested.md)
+    - [比较结构体](./base/struct/compare.md)
