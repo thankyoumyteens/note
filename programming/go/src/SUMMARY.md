@@ -32,3 +32,6 @@
     - [创建结构体](./base/struct/declare.md)
     - [嵌套结构体](./base/struct/nested.md)
     - [比较结构体](./base/struct/compare.md)
+    - [可访问性](./base/struct/accessibility.md)
+    - [指针引用和值引用](./base/struct/ref.md)
+  - [接口](./base/struct/interface.md)

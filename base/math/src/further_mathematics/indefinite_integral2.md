@@ -200,5 +200,24 @@
 <!--
 \begin{align}
 & \;\;\;\; \int \frac{\mathrm{d}x}{x^2 - x - 2} \\
+& {\color{Green} // 分母可以因式分解} \\
+& = \int \frac{\mathrm{d}x}{(x - 2)(x + 1)} \\
+& {\color{Green} // 拆项, 并确保分子中没有x} \\
+& = \int \frac{\frac{1}{3} [x + 1 - (x - 2)]}{(x - 2)(x + 1)} \mathrm{d}x \\
+& = \frac{1}{3} \int \frac{1}{x - 2} - \frac{1}{x + 1} \mathrm{d}x \\
+& = \frac{1}{3} (\int \frac{\mathrm{d}x}{x - 2} - \int \frac{\mathrm{d}x}{x + 1} ) \\
+& = \frac{1}{3} [\int \frac{\mathrm{d}(x - 2)}{x - 2} - \int \frac{\mathrm{d}(x + 1)}{x + 1} ] \\
+& = \frac{1}{3} (\ln |x - 2| - \ln |x + 1|) + C \\
+& = \frac{1}{3} \ln |\frac{x - 2}{x + 1}| + C \\
+\end{align}
+-->
+
+![](../img/ii2_11.jpg)
+
+例题 12
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{\sqrt{x} (4 + x)} \\
 \end{align}
 -->
