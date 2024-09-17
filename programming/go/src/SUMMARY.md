@@ -38,3 +38,6 @@
     - [方法](./base/interface/method.md)
     - [定义接口](./base/interface/declare.md)
     - [将接口作为参数传递](./base/interface/params.md)
+  - [字符串操作](./base/str/str.md)
+  - [错误处理](./base/error/error.md)
+    - [创建错误](./base/error/create.md)
