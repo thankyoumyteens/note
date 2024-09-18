@@ -52,3 +52,7 @@
     - [使用第三方包](./base/package/go_get.md)
     - [使用本地包](./base/package/local_pack.md)
   - [命令行程序](./base/cli/cli.md)
+    - [读取输入](./base/cli/scan.md)
+    - [读取命令行参数](./base/cli/args.md)
+    - [解析命令行参数](./base/cli/parse.md)
+    - [创建子命令](./base/cli/sub_cmd.md)
