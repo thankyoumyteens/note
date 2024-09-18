@@ -19,6 +19,7 @@
   - [线程的实现方式](./java/thread/impl.md)
   - [线程的创建方式](./java/thread/create/create.md)
     - [继承Thread](./java/thread/create/extend.md)
+    - [实现Runnable](./java/thread/create/runnable.md)
   - [线程的创建方式](./java/thread/create/create.md)
   - [线程间通信方式](./java/thread/thread_communicate.md)
     - [synchronized](./java/thread/thread_communicate_synchronized.md)
