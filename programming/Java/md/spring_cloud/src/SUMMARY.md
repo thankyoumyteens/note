@@ -87,3 +87,7 @@
 
 - [链路追踪](./tracing/tracing.md)
   - [Spring Cloud Sleuth](./tracing/sleuth/sleuth.md)
+  - [ZipKin](./tracing/zip_kin/zip_kin.md)
+    - [服务端搭建](./tracing/zip_kin/server.md)
+    - [客户端搭建](./tracing/zip_kin/client.md)
+    - [切换数据传输方式](./tracing/zip_kin/use_mq.md)
