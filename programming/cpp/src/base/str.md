@@ -71,3 +71,19 @@ int main() {
     return 0;
 }
 ```
+
+## 替换
+
+```cpp
+#include <iostream>
+
+using std::string;
+
+int main() {
+    string a = "123123";
+    // 从索引1开始长度为2的字符串, 替换成abc
+    std::cout << a.replace(1, 2, "abc") << std::endl;
+    // 输出: 1abc123
+    return 0;
+}
+```

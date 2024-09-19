@@ -219,5 +219,28 @@
 <!--
 \begin{align}
 & \;\;\;\; \int \frac{\mathrm{d}x}{\sqrt{x} (4 + x)} \\
+& {\color{Green} // 分母有 \sqrt{x}, 就用公式: \int \frac{1}{2 \sqrt{x}} \mathrm{d}x = \sqrt{x} + C} \\
+& = \int \frac{2 \mathrm{d}(\sqrt{x})}{4 + x} \\
+& = 2 \int \frac{\mathrm{d}(\sqrt{x})}{2^2 + (\sqrt{x})^2} \\
+& {\color{Green} // \int \frac{1}{a^2 + x^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + C} \\
+& = 2(\frac{1}{2} \arctan \frac{\sqrt{x}}{2}) + C \\
+& = \arctan \frac{\sqrt{x}}{2} + C \\
 \end{align}
 -->
+
+![](../img/ii2_12.jpg)
+
+例题 13
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{x \ln ^2 x} \\
+& {\color{Green} // \frac{1}{x} 放到 d 后面} \\
+& = \int \frac{\mathrm{d}（\ln x）}{\ln ^2 x} \\
+& = - \frac{1}{\ln x} + C \\
+\end{align}
+-->
+
+![](../img/ii2_13.jpg)
+
+### 第二类换元积分法
