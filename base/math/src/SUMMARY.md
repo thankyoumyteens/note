@@ -26,4 +26,4 @@
     - [导数的应用](./further_mathematics/derivatives2.md)
     - [弧微分](./further_mathematics/arc_differential.md)
   - [不定积分](./further_mathematics/indefinite_integral.md)
-    - [不定积分的积分法](./further_mathematics/indefinite_integral2.md)
+    - [换元积分法](./further_mathematics/indefinite_integral2.md)

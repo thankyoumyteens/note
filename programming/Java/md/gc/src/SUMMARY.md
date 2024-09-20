@@ -116,6 +116,8 @@
   - [vm_exit](./jdk21/g1/exit/vm_exit.md)
   - [destroy_vm](./jdk21/g1/exit/destroy_vm.md)
 
+- [性能监控数据区](./jdk21/g1/perf_data/perf_data.md)
+
 ## todo
 
 - [JDK8的G1](./g1/g1.md)

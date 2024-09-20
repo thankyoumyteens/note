@@ -97,3 +97,33 @@ for _, file := range dir {
 }
 fmt.Println(files)
 ```
+
+## 判断是不是文件
+
+```go
+destPath := "/home/demo2/1_copy.txt"
+stat, _ := os.Stat(destPath)
+isFile := !stat.IsDir()
+fmt.Println(isFile)
+```
+
+## 判断是不是文件夹
+
+```go
+destPath := "/home/demo2/1_copy.txt"
+stat, _ := os.Stat(destPath)
+isDir := stat.IsDir()
+fmt.Println(isDir)
+```
+
+## 判断文件或文件夹是否存在
+
+```go
+destPath := "/home/demo2/1_copy.txt"
+_, err := os.Stat(destPath)
+if err != nil {
+    fmt.Println("不存在")
+} else {
+    fmt.Println("存在")
+}
+```
