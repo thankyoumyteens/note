@@ -142,3 +142,17 @@ settings set target.load-cwd-lldbinit true
 ```sh
 br set -n main -o true -G true -C "pro hand -p true -s false SIGILL"
 ```
+
+## 更新 xcode 后运行报错
+
+1. 关闭 CLion
+2. 重新编译
+
+```sh
+make clean
+bash ./configure --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.13.2/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.13.2/include --with-jvm-variants=server,client --disable-warnings-as-errors --with-debug-level=slowdebug
+make
+make compile-commands
+```
+
+3. 打开 CLion, 会自动重新索引

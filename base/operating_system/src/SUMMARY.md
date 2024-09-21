@@ -46,3 +46,5 @@
     - [页面置换算法](./memory/vm/alg.md)
     - [页面分配策略](./memory/vm/rule.md)
     - [内存映射文件](./memory/vm/mm.md)
+
+- [文件](./file/file.md)

@@ -119,6 +119,7 @@
   - [destroy_vm](./jdk21/g1/exit/destroy_vm.md)
 
 - [性能监控数据区](./jdk21/g1/perf_data/perf_data.md)
+  - [PerfMemory](./jdk21/g1/perf_data/perf_memory.md)
 
 ## todo
 

@@ -244,3 +244,21 @@
 ## 第二类换元积分法
 
 对于被积函数含平方和或平方差，或者被积函数为无理函数时，一般使用第二类换元积分法，即将 x 表示为一个含 t 的表达式。
+
+<!--
+\begin{align}
+& 设 x = \varphi (t) 单调、可导且 \varphi '(t) \ne 0, 再令 f[\varphi (t)]\varphi '(t) 的原函数为 G(t), \\
+& 则 \int f(x) \mathrm{d}x = \int f[\varphi (t)]\varphi '(t) \mathrm{d}t =
+G(t) + C = G[\varphi ^{-1}(x)] + C \\
+\end{align}
+-->
+
+![](../img/ii2_14.jpg)
+
+被积函数是无理且无法积出来的情况, 需要通过第二类换元积分法换成有理
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{1 + \sqrt{x}} \\
+\end{align}
+-->
