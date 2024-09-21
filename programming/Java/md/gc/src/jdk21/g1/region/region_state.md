@@ -7,7 +7,7 @@ G1 使用 HeapRegionManager 对象管理堆空间, 它使用字段 `_committed_m
 region 的 3 种状态:
 
 1. Uncommitted: 未分配的内存
-2. Active: 准备分配对象的 region
+2. Active: 可以用来分配对象的 region
 3. Inactive: 准备转换成 Uncommit 状态的 region
 
 3 种状态之间的转换:
