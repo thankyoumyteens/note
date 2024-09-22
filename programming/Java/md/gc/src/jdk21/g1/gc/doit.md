@@ -87,7 +87,7 @@ HeapWord* G1CollectedHeap::attempt_allocation_at_safepoint(size_t word_size,
     // 分配大对象
     HeapWord* result = humongous_obj_allocate(word_size);
     if (result != nullptr && policy()->need_to_start_conc_mark("STW humongous allocation")) {
-      // Young GC结束后开始并发标记
+      // 开始并发标记
       collector_state()->set_initiate_conc_mark_if_possible(true);
     }
     return result;

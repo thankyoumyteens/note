@@ -255,10 +255,21 @@ G(t) + C = G[\varphi ^{-1}(x)] + C \\
 
 ![](../img/ii2_14.jpg)
 
-被积函数是无理且无法积出来的情况, 需要通过第二类换元积分法换成有理
+被积函数是无理且无法积出来的情况, 需要通过第二类换元积分法把无理转换成有理
 
 <!--
 \begin{align}
 & \;\;\;\; \int \frac{\mathrm{d}x}{1 + \sqrt{x}} \\
+& {\color{Green} // 设 x = t^2} \\
+& = \int \frac{\mathrm{d}(t^2)}{1 + t} \\
+& = \int \frac{2t\mathrm{d}t}{1 + t} \\
+& = 2 \int \frac{t}{1 + t} \mathrm{d}t \\
+& = 2 \int (1 - \frac{1}{1 + t}) \mathrm{d}t \\
+& = 2 (\int 1 \mathrm{d}t - \int \frac{1}{1 + t} \mathrm{d}t) \\
+& = 2 (t - \int \frac{1}{1 + t} \mathrm{d}t) \\
+& = 2 (t - \ln |1 + t|) + C \\
+& = 2 \sqrt{x} - 2 \ln (1 + \sqrt{x}) + C \\
 \end{align}
 -->
+
+![](../img/ii2_15.jpg)

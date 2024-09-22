@@ -23,6 +23,7 @@
     - [实现Callable](./java/thread/create/callable.md)
     - [Executors](./java/thread/create/executors.md)
     - [ThreadPoolTaskExecutor](./java/thread/create/thread_pool_task_executor.md)
+  - [守护线程](./java/thread/daemon.md)
   - [线程间通信方式](./java/thread/thread_communicate.md)
     - [synchronized](./java/thread/thread_communicate_synchronized.md)
     - [ReentrantLock](./java/thread/thread_communicate_reentrant_lock.md)

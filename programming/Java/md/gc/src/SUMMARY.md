@@ -32,6 +32,7 @@
 - [垃圾回收](./jdk21/g1/gc/gc.md)
   - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
   - [doit函数](./jdk21/g1/gc/doit.md)
+  - [Young GC](./jdk21/g1/gc/ygc/ygc.md)
 
 - [分配大对象](./jdk21/g1/allocate_object/allocate_humongous.md)
   - [开启并发标记](./jdk21/g1/allocate_object/start_conc_mark.md)
