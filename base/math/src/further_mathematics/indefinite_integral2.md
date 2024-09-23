@@ -273,3 +273,13 @@ G(t) + C = G[\varphi ^{-1}(x)] + C \\
 -->
 
 ![](../img/ii2_15.jpg)
+
+三角代换
+
+<!--
+\begin{align}
+& 1、被积函数表达式: \sqrt{a^2 - x^2} \\
+& \quad\;\, 三角换元替换式: 令 x = a \sin t \\
+& \quad\;\, 则: \sqrt{a^2 - x^2} = a \cos t \\
+\end{align}
+-->

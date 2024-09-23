@@ -77,3 +77,10 @@
     - [获取日期](./base/date/now.md)
     - [日期格式化](./base/date/format.md)
   - [类型转换](./base/cast/cast.md)
+
+- [wails](./wails/wails.md)
+  - [Hello World](./wails/quick_start.md)
+  - [交叉编译](./wails/compile.md)
+  - [前后端交互](./wails/communicate.md)
+    - [使用字符串](./wails/communicate_str.md)
+    - [使用结构体](./wails/communicate_struct.md)

@@ -3,6 +3,9 @@
 1. 创建 hello.go 文件
 
 ```sh
+mkdir hello/
+cd hello/
+go mod init hello
 vim hello.go
 ```
 
