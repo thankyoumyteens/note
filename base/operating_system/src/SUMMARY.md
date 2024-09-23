@@ -48,3 +48,4 @@
     - [内存映射文件](./memory/vm/mm.md)
 
 - [文件](./file/file.md)
+  - [文件的逻辑结构](./file/struct.md)

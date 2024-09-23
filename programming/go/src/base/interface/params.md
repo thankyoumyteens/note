@@ -24,7 +24,7 @@ func (m *MK2000) PowerOn() string {
 	return m.id + " Power On"
 }
 
-// 将接口作为参数
+// 将接口作为参数(不能用指针)
 func runRobot(instance Robot) {
 	fmt.Println(instance.PowerOn())
 	fmt.Println(instance.PowerOff())

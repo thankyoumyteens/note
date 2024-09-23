@@ -5,7 +5,7 @@
   - [Hello World](./base/quick_start.md)
   - [数据类型](./base/type/type.md)
     - [类型检查](./base/type/type_of.md)
-    - [类型转换](./base/type/cast.md)
+    - [字符串类型转换](./base/type/cast.md)
   - [变量](./base/var/var.md)
     - [声明变量](./base/var/declare.md)
     - [简短变量声明](./base/var/short_declare.md)
@@ -76,3 +76,4 @@
   - [日期](./base/date/date.md)
     - [获取日期](./base/date/now.md)
     - [日期格式化](./base/date/format.md)
+  - [类型转换](./base/cast/cast.md)

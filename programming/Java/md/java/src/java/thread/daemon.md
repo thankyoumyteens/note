@@ -5,3 +5,18 @@
 守护线程, 是指在程序运行的时候在后台提供一种通用服务的线程, 比如垃圾回收线程就是一个守护线程。如果用户线程全部退出运行, 程序就会终止了, 同时会杀死进程中的所有守护线程。
 
 将线程转换为守护线程可以通过调用 Thread 对象的 setDaemon 方法来实现, 必须在执行 start 方法之前设置。
+
+```java
+public class Tester {
+
+    public static void main(String[] args) {
+        Thread t1 = new Thread(() -> {
+            while (true) {
+                System.out.println("Hello, World!");
+            }
+        });
+        t1.setDaemon(true);
+        t1.start();
+    }
+}
+```
