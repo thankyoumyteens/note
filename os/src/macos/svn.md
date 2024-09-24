@@ -1,6 +1,6 @@
 # svn 使用
 
-1. 代码检出
+## 代码检出
 
 ```sh
 svn checkout svn://xxx.com/xxx/xxx
@@ -8,7 +8,7 @@ svn checkout svn://xxx.com/xxx/xxx
 svn checkout svn://xxx.com/xxx/xxx target_dir
 ```
 
-2. 更新代码
+## 更新代码
 
 ```sh
 svn update
@@ -16,7 +16,7 @@ svn update
 svn update -r xxx
 ```
 
-3. 添加文件
+## 添加文件
 
 ```sh
 # 添加指定文件或目录
@@ -25,19 +25,26 @@ svn add /path/to/file-or-dir
 svn add *.java
 ```
 
-4. 提交代码
+## 删除文件
+
+```sh
+# 删除指定文件或目录, 必须要用命令, 不能在本地直接删除
+svn delete /path/to/file-or-dir
+```
+
+## 提交代码
 
 ```sh
 svn commit -m "提交描述"
 ```
 
-5. 查看状态
+## 查看状态
 
 ```sh
 svn status
 ```
 
-6. 查看日志
+## 查看日志
 
 ```sh
 # 只输出最新的 5 条日志

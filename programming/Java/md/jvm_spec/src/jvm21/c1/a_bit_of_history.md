@@ -5,15 +5,9 @@ Java 语言是一个通用的, 支持并发的面向对象语言。它的语法�
 
 万维网的普及使这些特性更有趣。浏览器使人们很容易就能在网上浏览各种内容。最终, 不管你使用什么机器, 网速是快还是慢, 你的所见所闻都是一样的。
 
-Web爱好者很快发现HTML格式的文档限制太大了。 HTML extensions, such as forms, only
-highlighted those limitations, while making it clear that no browser could include
-all the features users wanted. 解决方案是可扩展性。
+Web 爱好者很快发现 HTML 格式的文档限制太大了。HTML 的扩展, 像 form 表单, 突出了这些限制, 同时明确表示: 没有任何浏览器能够包含用户想要的所有特性。解决方案是可扩展性。
 
-The HotJava browser first showcased the interesting properties of the Java
-programming language and platform by making it possible to embed programs
-inside HTML pages. Programs are transparently downloaded into the browser
-along with the HTML pages in which they appear. Before being accepted by the
-browser, programs are carefully checked to make sure they are safe. Like HTML
+HotJava 浏览器首次展示了 Java 可以在 HTML 页面中嵌入程序的有趣特性。有程序出现的 HTML 页面会透明地下载到浏览器. 在浏览器检查之前, 程序就会确保安全性。Like HTML
 pages, compiled programs are network- and host-independent. The programs
 behave the same way regardless of where they come from or what kind of machine
 they are being loaded into and run on.
