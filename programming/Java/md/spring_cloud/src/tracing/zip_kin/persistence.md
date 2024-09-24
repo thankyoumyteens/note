@@ -66,3 +66,5 @@ CREATE TABLE IF NOT EXISTS zipkin_dependencies (
   PRIMARY KEY (`day`, `parent`, `child`)
 ) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;
 ```
+
+2. 服务端配置 MySQL

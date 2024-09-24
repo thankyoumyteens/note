@@ -40,12 +40,12 @@ NaN 用来表示某些非法的操作, 比如零除以零。`float` 和 `double`
 
 有穷的非零浮点值都可以用这个公式表示: s ⋅ m ⋅ 2<sup>(e - N + 1)</sup>, 其中:
 
-- s 是 1 或-1
+- s 是 1 或 -1, 用来控制正负
 - m 是一个比 2<sup>N</sup> 小的正整数
 - e 是一个在闭区间 E<sub>min</sub> = -(2<sup>K-1</sup>-2) 和 E<sub>max</sub> = 2<sup>K-1</sup>-1 之间的整数
 - N 和 K 是取决于具体类型的参数
 
-使用上面的公式, 某些值可以有多种表示形式。例如, 设一个浮点值 v 通过使用 s, m, 和 e 中的某些值可以表示成上面的形式, 如果 m 是偶数, 且 e 比 2<sup>K-1</sup>小, 可以将 m 减半, 并把 e 加 1, 就可以生成和 v 值相同的第二种表示形式。
+使用上面的公式, 某些值可以有多种表示形式。例如, 设一个浮点值 v 通过使用 s, m, 和 e 中的某些值可以使用上述公式表示, 如果 m 是偶数, 且 e 比 2<sup>K-1</sup>小, 可以将 m 减半, 并把 e 加 1, 就可以生成和 v 值相同的第二种表示形式。
 
 如果 m ≥ 2<sup>N-1</sup>, 则这种表示法称为标准表示法(normalized), 否则称为次标准表示法(subnormal)。如果一个浮点值不能被 m ≥ 2<sup>N-1</sup> 的表示法表示, 那么这个值被称为次标准值(subnormal value), 因为它的值小于最小的标准值。
 
@@ -60,22 +60,48 @@ NaN 用来表示某些非法的操作, 比如零除以零。`float` 和 `double`
 
 除了 NaN, 浮点值都是有序的。从小到大排序: 负无穷, 非零有穷负数, 正负零, 非零有穷正数, 正无穷。
 
-IEEE 754 allows multiple distinct NaN values for each of its binary32 and binary64
-floating-point formats. However, the Java SE Platform generally treats NaN values
-of a given floating-point type as though collapsed into a single canonical value,
-and hence this specification normally refers to an arbitrary NaN as though to a
-canonical value.
+IEEE 754 允许为每一个 binary32 和 binary64 的浮点格式提供许多不同的 NaN 值。然而, Java SE 平台已办会把不同浮点类型的 NaN 值统一成一个单个的典型值, 因此本规范也会把任意的 NaN 都当作典型值。
 
-Under IEEE 754, a floating-point operation with non-NaN arguments may generate
-a NaN result. IEEE 754 specifies a set of NaN bit patterns, but does not mandate
-which particular NaN bit pattern is used to represent a NaN result; this is left to the
-hardware architecture. A programmer can create NaNs with different bit patterns to
-encode, for example, retrospective diagnostic information. These NaN values can be
-created with the Float.intBitsToFloat and Double.longBitsToDouble methods for
-float and double, respectively. Conversely, to inspect the bit patterns of NaN values,
-the Float.floatToRawIntBits and Double.doubleToRawLongBits methods can be
-used for float and double, respectively.
+在 IEEE 754 中, 一个带有非 NaN 参数的浮点操作可能生成一个 NaN 的结果。IEEE 754 规定了一组 NaN 位模式(bit patterns)[^2], 但是并没有要求使用哪一个特定的 NaN 位模式用来表示结果; 而是留给了具体的硬件架构去决定。程序开发人员可以通过不同的位模式创建许多 NaN, 例如, 回顾性诊断信息(retrospective diagnostic information)。可以使用 `Float.intBitsToFloat` 和 `Double.longBitsToDouble` 方法分别为 `float` 和 `double` 创建 NaN。 反过来, 要检查 NaN 值的位模式, 可以分别使用 `Float.floatToRawIntBits` 和 `Double.doubleToRawLongBits` 方法。
+
+正零和负零的值相等, 但是可以通过不同的操作来区分它们; 例如, 1.0 除以 0.0 的结果是正无穷, 而 1.0 除以 -0.0 的结果是负无穷。
+
+NaN 是无序的, so numerical comparisons and tests for numerical equality have
+the value false if either or both of their operands are NaN. In particular, a test for
+numerical equality of a value against itself has the value false if and only if the
+value is NaN. A test for numerical inequality has the value true if either operand
+is NaN.
+
+## returnAddress 类型
+
+The `returnAddress` type is used by the Java Virtual Machine's jsr, ret, and jsr_w
+instructions (§jsr, §ret, §jsr_w). The values of the `returnAddress` type are pointers
+to the opcodes of Java Virtual Machine instructions. Unlike the numeric primitive types, the `returnAddress` type does not correspond to any Java programming
+language type and cannot be modified by the running program.
+
+## boolean 类型
+
+Although the Java Virtual Machine defines a boolean type, it only provides
+very limited support for it. There are no Java Virtual Machine instructions solely
+dedicated to operations on boolean values. Instead, expressions in the Java
+programming language that operate on boolean values are compiled to use values
+of the Java Virtual Machine int data type.
+
+The Java Virtual Machine does directly support boolean arrays. Its _`newarray`_
+instruction enables creation of boolean arrays. Arrays of type
+boolean are accessed and modified using the byte array instructions _`baload`_ and
+_`bastore`_ .
+
+In Oracle’s Java Virtual Machine implementation, boolean arrays in the Java
+programming language are encoded as Java Virtual Machine byte arrays, using 8 bits per
+boolean element.
+
+The Java Virtual Machine encodes boolean array components using 1 to represent
+true and 0 to represent false. Where Java programming language boolean values
+are mapped by compilers to values of Java Virtual Machine type int, the compilers
+must use the same encoding.
 
 ## 注释
 
 [^1]: Basic Multilingual Plane（BMP）是 Unicode 编码的第一部分，它包含了从 `U+0000` 到 `U+FFFF` 的字符，覆盖了大多数现代语言的字符，包括拉丁字母、希腊字母、西里尔字母、希伯来字母、阿拉伯字母、汉字、日文假名、韩文字母等。Unicode 是一种用于文本表示、编码、传输和处理的国际标准，它为世界上大多数的书写系统提供了一个唯一的数字编码。Unicode 的编码空间被分为多个平面，每个平面包含 65536 个代码点（即字符位置）。BMP 是第一个平面，也是最常用的平面，因为它包含了大多数常用的字符。
+[^2]: bit patterns 指的是二进制数的序列，其中的每一位（bit）可以是 0 或 1。在 IEEE 754 标准的浮点数表示中，bit patterns 特指用于表示特定浮点数值的二进制位序列。这些位序列遵循一定的格式，包括符号位、指数位和尾数位。

@@ -280,6 +280,20 @@ G(t) + C = G[\varphi ^{-1}(x)] + C \\
 \begin{align}
 & 1、被积函数表达式: \sqrt{a^2 - x^2} \\
 & \quad\;\, 三角换元替换式: 令 x = a \sin t \\
-& \quad\;\, 则: \sqrt{a^2 - x^2} = a \cos t \\
+& \quad\;\, 则: \sqrt{a^2 - x^2} \Rightarrow a \cos t \\
+& 2、被积函数表达式: \sqrt{x^2 + a^2} \\
+& \quad\;\, 三角换元替换式: 令 x = a \tan t \\
+& \quad\;\, 则: \sqrt{x^2 + a^2} \Rightarrow a \sec t \\
+& 3、被积函数表达式: \sqrt{x^2 - a^2} \\
+& \quad\;\, 三角换元替换式: 令 x = a \sec t \\
+& \quad\;\, 则: \sqrt{x^2 - a^2} \Rightarrow a \tan t \\
 \end{align}
+-->
+
+![](../img/ii2_16.jpg)
+
+例题
+
+<!--
+
 -->
