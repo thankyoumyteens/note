@@ -66,38 +66,31 @@ IEEE 754 允许为每一个 binary32 和 binary64 的浮点格式提供许多不
 
 正零和负零的值相等, 但是可以通过不同的操作来区分它们; 例如, 1.0 除以 0.0 的结果是正无穷, 而 1.0 除以 -0.0 的结果是负无穷。
 
-NaN 是无序的, so numerical comparisons and tests for numerical equality have
-the value false if either or both of their operands are NaN. In particular, a test for
-numerical equality of a value against itself has the value false if and only if the
-value is NaN. A test for numerical inequality has the value true if either operand
-is NaN.
+NaN 是无序的, 所以比较两个 NaN 是否相等的结果为 false。如果一个变量的值是 NaN, 那么它和自己比较是否相等的结果也是 false。
 
 ## returnAddress 类型
 
-The `returnAddress` type is used by the Java Virtual Machine's jsr, ret, and jsr_w
-instructions (§jsr, §ret, §jsr_w). The values of the `returnAddress` type are pointers
-to the opcodes of Java Virtual Machine instructions. Unlike the numeric primitive types, the `returnAddress` type does not correspond to any Java programming
-language type and cannot be modified by the running program.
+`returnAddress` 类型是给 _`jsr`_, _`ret`_, 和 _`jsr_w`_ 指令使用的。`returnAddress` 类型的值是指向操作码的指针。与数值类型不同, `returnAddress` 类型不对应任何 Java 中的类型, 并且不会在程序运行期间被修改。
 
 ## boolean 类型
 
-Although the Java Virtual Machine defines a boolean type, it only provides
+Although the Java Virtual Machine defines a `boolean` type, it only provides
 very limited support for it. There are no Java Virtual Machine instructions solely
-dedicated to operations on boolean values. Instead, expressions in the Java
-programming language that operate on boolean values are compiled to use values
+dedicated to operations on `boolean` values. Instead, expressions in the Java
+programming language that operate on `boolean` values are compiled to use values
 of the Java Virtual Machine int data type.
 
-The Java Virtual Machine does directly support boolean arrays. Its _`newarray`_
-instruction enables creation of boolean arrays. Arrays of type
-boolean are accessed and modified using the byte array instructions _`baload`_ and
+The Java Virtual Machine does directly support `boolean` arrays. Its _`newarray`_
+instruction enables creation of `boolean` arrays. Arrays of type
+`boolean` are accessed and modified using the byte array instructions _`baload`_ and
 _`bastore`_ .
 
-In Oracle’s Java Virtual Machine implementation, boolean arrays in the Java
+In Oracle’s Java Virtual Machine implementation, `boolean` arrays in the Java
 programming language are encoded as Java Virtual Machine byte arrays, using 8 bits per
-boolean element.
+`boolean` element.
 
-The Java Virtual Machine encodes boolean array components using 1 to represent
-true and 0 to represent false. Where Java programming language boolean values
+The Java Virtual Machine encodes `boolean` array components using 1 to represent
+true and 0 to represent false. Where Java programming language `boolean` values
 are mapped by compilers to values of Java Virtual Machine type int, the compilers
 must use the same encoding.
 

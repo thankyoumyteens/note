@@ -1,6 +1,12 @@
 # Hello World
 
-1. 安装
+1. 配置环境变量:
+
+```sh
+export PATH=~/go/bin:$PATH
+```
+
+2. 安装
 
 ```sh
 go install github.com/wailsapp/wails/v2/cmd/wails@latest
@@ -8,7 +14,7 @@ go install github.com/wailsapp/wails/v2/cmd/wails@latest
 wails doctor
 ```
 
-2. 创建项目
+3. 创建项目
 
 ```sh
 wails init -n myproject -t vue

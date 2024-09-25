@@ -26,6 +26,7 @@
   - [守护线程](./java/thread/daemon.md)
   - [常用方法](./java/thread/methods.md)
     - [join方法](./java/thread/join.md)
+    - [yield方法](./java/thread/yield.md)
   - [线程间通信方式](./java/thread/thread_communicate.md)
     - [synchronized](./java/thread/thread_communicate_synchronized.md)
     - [ReentrantLock](./java/thread/thread_communicate_reentrant_lock.md)

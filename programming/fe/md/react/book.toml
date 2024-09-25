@@ -1,6 +1,0 @@
-[book]
-authors = ["zhaosz"]
-language = "en"
-multilingual = false
-src = "src"
-title = "react"

@@ -31,6 +31,7 @@
   - [结构体](./base/struct/struct.md)
     - [创建结构体](./base/struct/declare.md)
     - [嵌套结构体](./base/struct/nested.md)
+    - [实现继承](./base/struct/extend.md)
     - [比较结构体](./base/struct/compare.md)
     - [可访问性](./base/struct/accessibility.md)
     - [指针引用和值引用](./base/struct/ref.md)
@@ -80,6 +81,7 @@
 
 - [wails](./wails/wails.md)
   - [Hello World](./wails/quick_start.md)
+  - [使用Element Plus](./wails/element.md)
   - [交叉编译](./wails/compile.md)
   - [前后端交互](./wails/communicate.md)
     - [使用字符串](./wails/communicate_str.md)
