@@ -292,8 +292,27 @@ G(t) + C = G[\varphi ^{-1}(x)] + C \\
 
 ![](../img/ii2_16.jpg)
 
-例题
+例题 1
 
 <!--
-
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{\sqrt{x^ + a^2}} \\
+& {\color{Green} // 令 x = a \tan t} \\
+& = \int \frac{\mathrm{d}(a \tan t)}{a \sec t} \\
+& {\color{Green} // (\tan x)' = \sec^{2} x} \\
+& = \int \frac{a \sec^{2} x}{a \sec t} \mathrm{d}t \\
+& = \int \sec t \mathrm{d}t \\
+& {\color{Green} // \int \sec x \mathrm{d}x = \ln |\sec x + \tan x| + C} \\
+& = \ln |\sec t + \tan t| + C \\
+& {\color{Green} // x = a \tan t \Rightarrow \tan t = \frac{x}{a}} \\
+& {\color{Green} // 画一个直角三角形, 两个直角边是 x 和 a, 斜边就是 \sqrt{x^ + a^2}} \\
+& {\color{Green} // \sec t = \frac{1}{\cos t} = \frac{\sqrt{x^ + a^2}}{a}} \\
+& = \ln |\frac{\sqrt{x^ + a^2}}{a} + \frac{x}{a}| + C \\
+& = \ln \frac{\sqrt{x^ + a^2} + x}{a} + C \\
+& = \ln (\sqrt{x^ + a^2} + x) - \ln a + C \\
+& {\color{Green} // - \ln a 是常数, 合并到 C 中} \\
+& = \ln (\sqrt{x^ + a^2} + x) + C \\
+\end{align}
 -->
+
+![](../img/ii2_17.jpg)

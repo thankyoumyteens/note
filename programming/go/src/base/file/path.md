@@ -119,11 +119,17 @@ fmt.Println(isDir)
 ## 判断文件或文件夹是否存在
 
 ```go
-destPath := "/home/demo2/1_copy.txt"
-_, err := os.Stat(destPath)
-if err != nil {
-    fmt.Println("不存在")
-} else {
-    fmt.Println("存在")
+func PathExists(path string) (bool, error) {
+    _, err := os.Stat(path)
+    if err == nil {
+        // 存在
+        return true, nil
+    }
+    if os.IsNotExist(err) {
+        // 不存在
+        return false, nil
+    }
+    // 其它异常
+    return false, err
 }
 ```
