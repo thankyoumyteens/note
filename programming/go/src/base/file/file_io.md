@@ -41,7 +41,7 @@ for {
 ```go
 destPath := "/home/1.txt"
 // O_CREATE: 如果文件不存在则会自动创建
-file, _ := os.OpenFile(destPath, os.O_CREATE|os.O_WRONLY, 0)
+file, _ := os.OpenFile(destPath, os.O_CREATE|os.O_WRONLY, os.ModePerm)
 defer file.Close()
 
 writer := bufio.NewWriter(file)

@@ -33,10 +33,16 @@
 2. resources 下创建 log4j.properties 文件
 
 ```conf
-log4j.rootLogger=INFO,CONSOLE
-log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
-log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
-log4j.appender.CONSOLE.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+log4j.rootLogger=INFO,fileLog,consoleLog
+log4j.appender.fileLog=org.apache.log4j.FileAppender
+log4j.appender.fileLog.Append=true
+log4j.appender.fileLog.Encoding=UTF-8
+log4j.appender.fileLog.File=./main.log
+log4j.appender.fileLog.layout=org.apache.log4j.PatternLayout
+log4j.appender.fileLog.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] %l => %m %n
+log4j.appender.consoleLog=org.apache.log4j.ConsoleAppender
+log4j.appender.consoleLog.layout=org.apache.log4j.PatternLayout
+log4j.appender.consoleLog.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] %l => %m %n
 ```
 
 3. 输出日志
