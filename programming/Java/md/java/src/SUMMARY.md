@@ -151,6 +151,7 @@
     - [Layouts](./log/log4j/layouts.md)
   - [logback](./log/logback/logback.md)
     - [基本使用](./log/logback/quick_start.md)
+    - [配置文件](./log/logback/config.md)
 
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)

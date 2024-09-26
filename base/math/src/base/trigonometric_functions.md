@@ -29,14 +29,9 @@
 
 <!--
 \begin{align}
-& 毕达哥拉斯定理: \\
-& \sin ^{2} x + \cos ^{2} x = 1 \\
-\\
-& 两边同除 \cos^{2} x: \\
-& \tan ^{2} x + 1 = \sec ^{2} x \\
-\\
-& 两边同除 \sin^{2} x: \\
-& 1 + \cot ^{2} x = \csc ^{2} x \\
+& 1、 毕达哥拉斯定理: \sin ^{2} x + \cos ^{2} x = 1 \\
+& 2、 \tan ^{2} x + 1 = \sec ^{2} x {\color{Green} \quad // 两边同除 \cos^{2} x} \\
+& 3、 1 + \cot ^{2} x = \csc ^{2} x {\color{Green} \quad // 两边同除 \sin^{2} x} \\
 \end{align}
 -->
 

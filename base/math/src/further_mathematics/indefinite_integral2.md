@@ -296,7 +296,7 @@ G(t) + C = G[\varphi ^{-1}(x)] + C \\
 
 <!--
 \begin{align}
-& \;\;\;\; \int \frac{\mathrm{d}x}{\sqrt{x^ + a^2}} \\
+& \;\;\;\; \int \frac{\mathrm{d}x}{\sqrt{x^2 + a^2}} \\
 & {\color{Green} // 令 x = a \tan t} \\
 & = \int \frac{\mathrm{d}(a \tan t)}{a \sec t} \\
 & {\color{Green} // (\tan x)' = \sec^{2} x} \\
@@ -305,14 +305,38 @@ G(t) + C = G[\varphi ^{-1}(x)] + C \\
 & {\color{Green} // \int \sec x \mathrm{d}x = \ln |\sec x + \tan x| + C} \\
 & = \ln |\sec t + \tan t| + C \\
 & {\color{Green} // x = a \tan t \Rightarrow \tan t = \frac{x}{a}} \\
-& {\color{Green} // 画一个直角三角形, 两个直角边是 x 和 a, 斜边就是 \sqrt{x^ + a^2}} \\
-& {\color{Green} // \sec t = \frac{1}{\cos t} = \frac{\sqrt{x^ + a^2}}{a}} \\
-& = \ln |\frac{\sqrt{x^ + a^2}}{a} + \frac{x}{a}| + C \\
-& = \ln \frac{\sqrt{x^ + a^2} + x}{a} + C \\
-& = \ln (\sqrt{x^ + a^2} + x) - \ln a + C \\
+& {\color{Green} // 画一个直角三角形, 两个直角边是 x 和 a, 斜边就是 \sqrt{x^2 + a^2}} \\
+& {\color{Green} // \sec t = \frac{1}{\cos t} = \frac{\sqrt{x^2 + a^2}}{a}} \\
+& = \ln |\frac{\sqrt{x^2 + a^2}}{a} + \frac{x}{a}| + C \\
+& = \ln \frac{\sqrt{x^2 + a^2} + x}{a} + C \\
+& = \ln (\sqrt{x^2 + a^2} + x) - \ln a + C \\
 & {\color{Green} // - \ln a 是常数, 合并到 C 中} \\
-& = \ln (\sqrt{x^ + a^2} + x) + C \\
+& = \ln (\sqrt{x^2 + a^2} + x) + C \\
 \end{align}
 -->
 
 ![](../img/ii2_17.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{\mathrm{d}x}{x^2 \sqrt{1 - x^2}} \\
+& {\color{Green} // 令 x = \sin t} \\
+& = \int \frac{\mathrm{d}(\sin t)}{\sin ^2 t \sqrt{1 - \sin ^2 t}} \\
+& {\color{Green} // (\sin x)' = \cos x} \\
+& = \int \frac{\cos t}{\sin ^2 t \sqrt{1 - \sin ^2 t}} \mathrm{d}t \\
+& {\color{Green} // 毕达哥拉斯定理: \sin ^{2} x + \cos ^{2} x = 1} \\
+& = \int \frac{\cos t}{\sin ^2 t \cos t} \mathrm{d}t \\
+& = \int \frac{1}{\sin ^2 t} \mathrm{d}t \\
+& {\color{Green} // \csc x = \frac{1}{\sin x} \Rightarrow \csc ^2 x = \frac{1}{\sin ^2 x}} \\
+& = \int \csc ^2 t \mathrm{d}t \\
+& {\color{Green} // \int \csc ^2 x \mathrm{d}x = -\cot x + C} \\
+& = -\cot t + C \\
+& {\color{Green} // 画一个直角三角形, 对边是 x 斜边是 1, 邻边就是 \sqrt{1 + x^2}} \\
+& {\color{Green} // \cot 是临比对} \\
+& = -\frac{\sqrt{1 + x^2}}{x} + C \\
+\end{align}
+-->
+
+![](../img/ii2_18.jpg)

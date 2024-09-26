@@ -27,11 +27,14 @@ spring:
 ```
 
 3. resource 下新建 mapper 文件夹
-4. 配置 mybatis 的 xml
+4. 配置 mybatis
 
 ```yaml
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
+  # 打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
 5. 配置包扫描
