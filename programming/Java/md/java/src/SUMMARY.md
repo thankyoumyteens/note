@@ -144,7 +144,13 @@
 
 - [日志](./log/log.md)
   - [slf4j](./log/slf4j.md)
-    - [log4j](./log/log4j.md)
+  - [log4j](./log/log4j/log4j.md)
+    - [基本使用](./log/log4j/quick_start.md)
+    - [配置文件](./log/log4j/config.md)
+    - [Appender](./log/log4j/appender.md)
+    - [Layouts](./log/log4j/layouts.md)
+  - [logback](./log/logback/logback.md)
+    - [基本使用](./log/logback/quick_start.md)
 
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)
