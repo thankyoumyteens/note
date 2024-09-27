@@ -1,0 +1,9 @@
+# 运行时数据区
+
+The Java Virtual Machine defines various run-time data areas that are used during
+execution of a program. Some of these data areas are created on Java Virtual
+Machine start-up and are destroyed only when the Java Virtual Machine terminates.
+Other data areas are per thread. Per-thread data areas are created when a thread is
+created and destroyed when the thread terminates.
+
+## PC 寄存器

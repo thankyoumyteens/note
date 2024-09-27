@@ -5,3 +5,4 @@
     - [数据类型](./jvm21/structure/data_types.md)
     - [原始类型](./jvm21/structure/primitive_types.md)
     - [引用类型](./jvm21/structure/reference_types.md)
+    - [运行时数据区](./jvm21/structure/run_time_data_areas.md)
