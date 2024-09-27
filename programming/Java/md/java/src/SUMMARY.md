@@ -152,6 +152,9 @@
   - [logback](./log/logback/logback.md)
     - [基本使用](./log/logback/quick_start.md)
     - [配置文件](./log/logback/config.md)
+    - [Appender](./log/logback/appender.md)
+    - [Logger](./log/logback/logger.md)
+    - [Encoder](./log/logback/encoder.md)
 
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)

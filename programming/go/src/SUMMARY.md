@@ -78,6 +78,8 @@
     - [获取日期](./base/date/now.md)
     - [日期格式化](./base/date/format.md)
   - [类型转换](./base/cast/cast.md)
+    - [断言类型转换](./base/cast/type_assertions.md)
+    - [显式类型转换](./base/cast/conversions.md)
 
 - [wails](./wails/wails.md)
   - [Hello World](./wails/quick_start.md)

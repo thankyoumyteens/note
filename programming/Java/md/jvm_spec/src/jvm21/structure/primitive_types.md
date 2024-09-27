@@ -74,25 +74,14 @@ NaN 是无序的, 所以比较两个 NaN 是否相等的结果为 false。如果
 
 ## boolean 类型
 
-Although the Java Virtual Machine defines a `boolean` type, it only provides
-very limited support for it. There are no Java Virtual Machine instructions solely
-dedicated to operations on `boolean` values. Instead, expressions in the Java
-programming language that operate on `boolean` values are compiled to use values
-of the Java Virtual Machine int data type.
+尽管 JVM 定义了 `boolean` 类型, 但却只提供了有限的支持。JVM 没有专门操作 `boolean` 类型值的指令。对 `boolean` 类型值的操作在编译后都会转换成对 `int` 类型值的操作。
 
-The Java Virtual Machine does directly support `boolean` arrays. Its _`newarray`_
-instruction enables creation of `boolean` arrays. Arrays of type
-`boolean` are accessed and modified using the byte array instructions _`baload`_ and
-_`bastore`_ .
+JVM 直接支持 `boolean` 数组。_`newarray`_ 指令可以创建 `boolean` 数组。`boolean` 数组使用 _`baload`_ 和
+_`bastore`_ 指令进行访问和修改。
 
-In Oracle’s Java Virtual Machine implementation, `boolean` arrays in the Java
-programming language are encoded as Java Virtual Machine byte arrays, using 8 bits per
-`boolean` element.
+在 Oracle 的 JVM 实现中, `boolean` 数组被编码成 `byte` 类型的数组, 每个 `boolean` 元素占用 8 比特。
 
-The Java Virtual Machine encodes `boolean` array components using 1 to represent
-true and 0 to represent false. Where Java programming language `boolean` values
-are mapped by compilers to values of Java Virtual Machine type int, the compilers
-must use the same encoding.
+JVM 用 1 和 0 编码 `boolean` 数组的组件, 1 表示 `true`, 0 表示 `false`。Java 语言编译器把 `boolean` 值编译成了`int` 值, 其它编译器也需要遵守。
 
 ## 注释
 
