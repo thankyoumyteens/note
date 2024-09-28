@@ -166,7 +166,7 @@ inline HeapWord* G1AllocRegion::attempt_allocation_locked(size_t word_size) {
 inline HeapWord* G1AllocRegion::attempt_allocation_locked(size_t min_word_size,
                                                           size_t desired_word_size,
                                                           size_t* actual_word_size) {
-  // 在当前region分配对象
+  // 在当前region分配对象(复用CAS分配的代码)
   HeapWord* result = attempt_allocation(min_word_size, desired_word_size, actual_word_size);
   if (result != nullptr) {
     return result;
