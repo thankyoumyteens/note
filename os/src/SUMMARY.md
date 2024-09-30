@@ -13,7 +13,6 @@
     - [zip使用](./macos/zip.md)
     - [7z使用](./macos/7zz.md)
     - [svn使用](./macos/svn.md)
-    - [AI换脸facefusion](./macos/facefusion.md)
     - [更改文件的默认打开方式](./macos/default_app.md)
     - [外接键盘调换cmmand和option的键位](./macos/keyboard.md)
     - [ParallelsDesktop按键映射](./macos/pd_keyboard.md)
@@ -22,6 +21,8 @@
     - [访达跳转到指定目录](./macos/finder_goto.md)
     - [删除开机启动项](./macos/open_on_startup.md)
     - [屏幕取色](./macos/take_color.md)
+  - [FaceFusion](./macos/facefusion.md)
+  - [LivePortrait](./macos/live_portrait.md)
 
 - [Debian](./Linux/debian/debian.md)
   - [安装debian](./Linux/debian/install_os.md)

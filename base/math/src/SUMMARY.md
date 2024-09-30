@@ -27,3 +27,4 @@
     - [弧微分](./further_mathematics/arc_differential.md)
   - [不定积分](./further_mathematics/indefinite_integral.md)
     - [换元积分法](./further_mathematics/indefinite_integral2.md)
+    - [分部积分法](./further_mathematics/indefinite_integral3.md)
