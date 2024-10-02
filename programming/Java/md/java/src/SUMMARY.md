@@ -28,6 +28,7 @@
     - [join方法](./java/thread/join.md)
     - [yield方法](./java/thread/yield.md)
     - [interrupt方法](./java/thread/interrupt.md)
+    - [wait方法](./java/thread/wait.md)
   - [线程间通信方式](./java/thread/thread_communicate.md)
     - [synchronized](./java/thread/thread_communicate_synchronized.md)
     - [ReentrantLock](./java/thread/thread_communicate_reentrant_lock.md)
