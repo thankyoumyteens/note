@@ -34,6 +34,9 @@ public class Tester {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            // 中断正在阻塞的线程, isInterrupted为false
+            boolean interrupted = Thread.currentThread().isInterrupted();
+
         });
 
         t1.start();

@@ -67,4 +67,8 @@ CREATE TABLE IF NOT EXISTS zipkin_dependencies (
 ) ENGINE=InnoDB ROW_FORMAT=COMPRESSED CHARACTER SET=utf8 COLLATE utf8_general_ci;
 ```
 
-2. 服务端配置 MySQL
+2. 服务端启动时连接 MySQL
+
+```sh
+java -jar zipkin-server-2.27.1-exec.jar --STORAGE_TYPE=mysql --MYSQL_HOST=127.0.0.1 --MYSQL_TCP_PORT=3306 --MYSQL_DB=数据库名 --MYSQL_USER=root --MYSQL_PASS=123456
+```
