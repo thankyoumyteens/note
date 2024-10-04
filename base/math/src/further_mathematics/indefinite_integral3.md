@@ -58,3 +58,32 @@
 -->
 
 ![](../img/ii3_3.jpg)
+
+使用场景 3: 幂函数乘三角函数
+
+<!--
+\begin{align}
+& \;\;\;\; \int x^2 \sin 2x \mathrm{d}x \\
+& {\color{Green} // 幂函数乘三角函数, 使用分部积分, 把三角函数放到 d 后面} \\
+& = \int x^2 \mathrm{d}(- \frac{1}{2} \cos 2x) \\
+& = - \frac{1}{2} \int x^2 \mathrm{d}(\cos 2x) \\
+& {\color{Green} // \int u \mathrm{d}v = uv - \int v \mathrm{d}u} \\
+& = - \frac{1}{2} [x^2 \cos2x - \int \cos 2x \mathrm{d}(x^2)] \\
+& = - \frac{1}{2} (x^2 \cos2x - \int 2x \cos 2x \mathrm{d}x) \\
+& = - \frac{1}{2} (x^2 \cos2x - 2\int x \cos 2x \mathrm{d}x) \\
+& = - \frac{x^2}{2} \cos2x + \int x \cos 2x \mathrm{d}x \\
+& {\color{Green} // 右边还是幂函数乘三角函数, 继续使用分部积分} \\
+& = - \frac{x^2}{2} \cos2x + \frac{1}{2} \int x \mathrm{d}(\sin 2x) \\
+& = - \frac{x^2}{2} \cos2x + \frac{1}{2} (x \sin 2x - \int \sin 2x \mathrm{d}x) \\
+& = - \frac{x^2}{2} \cos2x + \frac{x}{2} \sin 2x + \frac{1}{4} \cos 2x + C \\
+\end{align}
+-->
+
+![](../img/ii3_4.jpg)
+
+<!--
+\begin{align}
+& \;\;\;\; \int x \tan ^2 x \mathrm{d}x \\
+& {\color{Green} // 幂函数乘三角函数, 使用分部积分, 把三角函数放到 d 后面} \\
+\end{align}
+-->
