@@ -51,3 +51,4 @@
   - [文件的逻辑结构](./file/struct.md)
   - [文件目录](./file/folder.md)
   - [文件的物理结构](./file/store.md)
+  - [文件存储空间管理](./file/store2.md)
