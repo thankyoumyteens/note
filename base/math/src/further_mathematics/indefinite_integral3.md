@@ -85,5 +85,47 @@
 \begin{align}
 & \;\;\;\; \int x \tan ^2 x \mathrm{d}x \\
 & {\color{Green} // 幂函数乘三角函数, 使用分部积分, 把三角函数放到 d 后面} \\
+& {\color{Green} // \tan ^2 x 的原函数不知道, 需要转换一下} \\
+& {\color{Green} // 毕达哥拉斯定理: \tan ^{2} x + 1 = \sec ^{2} x} \\
+& = \int x (\sec ^2 x - 1) \mathrm{d}x \\
+& = \int x \sec ^2 x - x \mathrm{d}x \\
+& = \int x \sec ^2 x \mathrm{d}x - \int x \mathrm{d}x \\
+& {\color{Green} // \sec ^2 x 的原函数有公式, 可以把三角函数放到 d 后面了} \\
+& = \int x \mathrm{d}(\tan x) - \int x \mathrm{d}x \\
+& {\color{Green} // \int u \mathrm{d}v = uv - \int v \mathrm{d}u} \\
+& = x \tan x - \int \tan x \mathrm{d}x - \int x \mathrm{d}x \\
+& = x \tan x + \ln |\cos x| - \int x \mathrm{d}x \\
+& = x \tan x + \ln |\cos x| - \frac{1}{2} x^2 + C \\
 \end{align}
+-->
+
+![](../img/ii3_5.jpg)
+
+使用场景 4: 幂函数乘反三角函数
+
+<!--
+\begin{align}
+& \;\;\;\; \int x \arctan x \mathrm{d}x \\
+& {\color{Green} // 幂函数乘反三角函数, 使用分部积分, 把幂函数放到 d 后面} \\
+& = \int \arctan x \mathrm{d}(\frac{x^2}{2}) \\
+& {\color{Green} // \int u \mathrm{d}v = uv - \int v \mathrm{d}u} \\
+& = \frac{x^2}{2} \arctan x - \int \frac{x^2}{2} \mathrm{d}(\arctan x) \\
+& = \frac{x^2}{2} \arctan x - \frac{1}{2} \int x^2 \mathrm{d}(\arctan x) \\
+& {\color{Green} // (\arctan x)' = \frac{1}{1 + x^{2}}} \\
+& = \frac{x^2}{2} \arctan x - \frac{1}{2} \int x^2 \frac{1}{1 + x^2} \mathrm{d}x \\
+& = \frac{x^2}{2} \arctan x - \frac{1}{2} \int \frac{x^2}{1 + x^2} \mathrm{d}x \\
+& {\color{Green} // \frac{x^2}{1 + x^2} 可以写成 1 - \frac{1}{1 + x^2}} \\
+& = \frac{x^2}{2} \arctan x - \frac{1}{2} \int (1 - \frac{1}{1 + x^2}) \mathrm{d}x \\
+& = \frac{x^2}{2} \arctan x - \frac{1}{2} \int 1 \mathrm{d}x + \frac{1}{2} \int \frac{1}{1 + x^2} \mathrm{d}x \\
+& = \frac{x^2}{2} \arctan x - \frac{x}{2} + \frac{1}{2} \int \frac{1}{1 + x^2} \mathrm{d}x \\
+& = \frac{x^2}{2} \arctan x - \frac{x}{2} + \frac{1}{2} \arctan x + C \\
+\end{align}
+-->
+
+![](../img/ii3_6.jpg)
+
+使用场景 5: e<sup>ax</sup>cosbx 或者 e<sup>ax</sup>sinbx
+
+<!--
+
 -->
