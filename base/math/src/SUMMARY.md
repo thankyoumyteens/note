@@ -28,3 +28,4 @@
   - [不定积分](./further_mathematics/indefinite_integral.md)
     - [换元积分法](./further_mathematics/indefinite_integral2.md)
     - [分部积分法](./further_mathematics/indefinite_integral3.md)
+    - [两类特殊函数的不定积分](./further_mathematics/indefinite_integral4.md)

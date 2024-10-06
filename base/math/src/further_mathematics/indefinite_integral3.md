@@ -127,5 +127,24 @@
 使用场景 5: e<sup>ax</sup>cosbx 或者 e<sup>ax</sup>sinbx
 
 <!--
-
+\begin{align}
+& \;\;\;\; \int e^{2x} \cos x \mathrm{d}x \\
+& {\color{Green} // e^{ax} \cos bx 或者 e^{ax} \sin bx, 使用分部积分, 把谁放到 d 后面都行} \\
+& = \int e^{2x} \mathrm{d}(\sin x) \\
+& {\color{Green} // \int u \mathrm{d}v = uv - \int v \mathrm{d}u} \\
+& = e^{2x} \sin x - \int \sin x \mathrm{d}(e^{2x}) \\
+& = e^{2x} \sin x - 2 \int e^{2x} \sin x \mathrm{d}(x) \\
+& {\color{Green} // 继续分部积分} \\
+& = e^{2x} \sin x - 2 \int e^{2x} \mathrm{d}(- \cos x) \\
+& = e^{2x} \sin x + 2 \int e^{2x} \mathrm{d}(\cos x) \\
+& = e^{2x} \sin x + 2 (e^{2x} \cos x - 2 \int e^{2x} \cos x \mathrm{d}x) \\
+& = e^{2x} \sin x + 2 e^{2x} \cos x - 4 \int e^{2x} \cos x \mathrm{d}x \\
+& {\color{Green} // \int e^{2x} \cos x \mathrm{d}x 就是原式} \\
+& 令 \int e^{2x} \cos x \mathrm{d}x = I \\
+& 则 I = e^{2x} \sin x + 2 e^{2x} \cos x - 4 I \\
+& \;\, 5 I = e^{2x} \sin x + 2 e^{2x} \cos x \\
+& \;\, I = \frac{1}{5} (e^{2x} \sin x + 2 e^{2x} \cos x) + C \\
+\end{align}
 -->
+
+![](../img/ii3_7.jpg)
