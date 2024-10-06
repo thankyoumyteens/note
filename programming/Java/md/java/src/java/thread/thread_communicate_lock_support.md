@@ -1,6 +1,6 @@
 # LockSupport
 
-park 阻塞线程, unpark 唤醒线程。
+park 阻塞当前线程, unpark 唤醒指定线程。
 
 ```java
 import java.util.ArrayList;
