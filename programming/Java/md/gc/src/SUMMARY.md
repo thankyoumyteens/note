@@ -11,6 +11,7 @@
   - [串行并行和并发](./jdk21/g1/base/gc_threads.md)
   - [GCLocker](./jdk21/g1/base/gclocker.md)
   - [NUMA](./jdk21/g1/base/numa.md)
+  - [统一JVM日志记录](./jdk21/g1/base/log.md)
 
 - [对象的分配](./jdk21/g1/allocate_object/new.md)
   - [从TLAB中分配对象](./jdk21/g1/allocate_object/tlab_allocate.md)
