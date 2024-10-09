@@ -38,6 +38,7 @@
     - [Socket](./java/thread/thread_communicate_lock_socket.md)
     - [信号量](./java/thread/thread_communicate_semaphore.md)
     - [管道](./java/thread/thread_communicate_pipe.md)
+  - [线程的状态](./java/thread/state.md)
 
 - [IO](./java/io/io.md)
   - [虚拟内存](./java/io/virtual_memory.md)
