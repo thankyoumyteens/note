@@ -14,4 +14,4 @@ follower 分为两种:
 1. ISR: leader 会同步复制数据
 2. 普通: leader 会异步复制数据, 数据可能会丢失
 
-选举新 leader 时, 会优先从 ISR 中选举, ISA 中没有才会从普通 follower 中选举。
+选举新 leader 时, 会优先从 ISR 中选举, ISR 中没有才会从普通 follower 中选举。
