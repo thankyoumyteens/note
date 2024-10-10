@@ -1,11 +1,8 @@
 # Summary
 
 - [操作系统概述](./overview/overview.md)
-  - [内核程序和应用程序](./overview/mode.md)
-  - [中断](./overview/interrupt.md)
-  - [系统调用](./overview/system_call.md)
 
-- [进程](./process/process.md)
+- [进程管理](./process/process.md)
   - [进程的状态转换](./process/process_state.md)
   - [进程间通信](./process/process_communicate.md)
   - [线程](./process/thread.md)

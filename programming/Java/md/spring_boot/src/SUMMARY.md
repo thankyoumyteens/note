@@ -4,6 +4,8 @@
   - [项目搭建(JDK8)](./base/create_project.md)
   - [项目搭建(JDK21)](./base/create_project_21.md)
   - [命令行项目](./base/cli.md)
+  - [Web项目](./base/web.md)
+  - [全局异常处理](./base/exception_handler.md)
   - [多环境配置](./base/profiles.md)
   - [logback配置](./base/logback.md)
   - [重写FeignClient输出日志](./base/feign_log.md)
@@ -11,6 +13,10 @@
 
 - [SpringBoot集成](./integration/integration.md)
   - [集成Mybatis](./integration/mybatis.md)
+  - [集成MybatisPlus](./integration/mybatis_plus.md)
   - [集成HibernateValidator](./integration/validator_with_sb.md)
   - [集成Kafka](./integration/kafka.md)
   - [集成WebSocket](./integration/ws_project.md)
+
+- [MybatisPlus](./mybatis_plus/mybatis_plus.md)
+  - [分页](./mybatis_plus/page.md)
