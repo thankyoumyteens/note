@@ -31,7 +31,11 @@
 & \;\, \qquad\qquad 则: A(2x - 1) + B(x + 1) = 3x + 2 \\
 & \;\, \qquad\qquad 求出 A 和 B: A = \frac{1}{3}, B = \frac{7}{3}  \\
 & \;\, \qquad\qquad 最终结果: \frac{\frac{1}{3}}{x + 1} + \frac{\frac{7}{3}}{2x - 1} \\
-& \;\, \qquad 情形2: R(x) = , \\
-
+& \;\, \qquad 情形2: R(x) = \frac{x^2 - 3x + 1}{(x + 1)^2 (2x - 1)}, \\
+& \;\, \qquad\qquad 把它拆成: \frac{A}{x + 1} + \frac{B}{(x + 1)^2} + \frac{C}{2x - 1} \\
+& \;\, \qquad 情形3: R(x) = \frac{2x^2 - 1}{(x - 1)^2 (x^2 + 1)}, \\
+& \;\, \qquad\qquad 把它拆成: \frac{A}{x - 1} + \frac{B}{(x - 1)^2} + \frac{Cx + D}{x^2 + 1} \\
 \end{align}
 -->
+
+![](../img/ii4_3.jpg)
