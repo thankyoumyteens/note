@@ -8,6 +8,10 @@
     <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
     <version>3.5.7</version>
 </dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+</dependency>
 ```
 
 2. 配置数据源
@@ -53,6 +57,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 // 可以手动指定表名
 @TableName("words_info")
 public class Words {
+    // 指定主键
+    @TableId(value = "words_id", type = IdType.NONE)
     private Integer wordsId;
     private String createTime;
     private String updateTime;

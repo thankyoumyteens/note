@@ -82,8 +82,7 @@
 3. 创建启动类 `src/main/java/org/example/App.java`:
 
 ```java
-package org.example;
-
+package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
