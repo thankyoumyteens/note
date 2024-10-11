@@ -25,6 +25,7 @@
 - [Vue2](./vue2/vue2.md)
   - [创建项目](./vue2/quick_start.md)
   - [集成echarts](./vue2/echarts.md)
+  - [集成axios](./vue2/axios.md)
   - [axios实现文件下载](./vue2/axios_down.md)
   - [visible.sync](./vue2/visible_sync.md)
   - [组件通信](./vue2/communicate/communicate.md)

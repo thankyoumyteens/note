@@ -6,6 +6,7 @@
   - [命令行项目](./base/cli.md)
   - [Web项目](./base/web.md)
   - [全局异常处理](./base/exception_handler.md)
+  - [跨域](./base/cors.md)
   - [多环境配置](./base/profiles.md)
   - [logback配置](./base/logback.md)
   - [重写FeignClient输出日志](./base/feign_log.md)
