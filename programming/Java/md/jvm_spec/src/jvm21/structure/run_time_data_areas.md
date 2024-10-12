@@ -8,7 +8,7 @@ JVM 支持许多线程同时执行。每个 JVM 线程有它自己的 `pc` (prog
 
 ## Java Virtual Machine Stacks
 
-每个 JVM 线程都有一个私有的 JVM 栈, JVM 栈和线程同时创建。JVM 栈中存储的是栈帧。JVM 栈和常规编程语言(比如 C 语言)的栈类似: 它持有局部变量和中间结果, 并在方法的调用和返回中发挥作用。由于除了压入和弹出栈帧之外，JVM 栈从来不会被直接操作，所以在具体实现上可能会选择在堆内存中分配栈帧，而不是在传统意义上的栈内存中分配。JVM 栈空间的内存不需要是连续的。
+每个 JVM 线程都有一个私有的 JVM 栈, JVM 栈和线程同时创建。JVM 栈中存储的是栈帧。JVM 栈和传统编程语言(比如 C 语言)的栈类似: 它持有局部变量和中间结果, 并在方法的调用和返回中发挥作用。由于除了压入和弹出栈帧之外，JVM 栈从来不会被直接操作，所以在具体实现上可能会选择在堆内存中分配栈帧，而不是在传统意义上的栈内存中分配。JVM 栈空间的内存不需要是连续的。
 
 在第一版的 JVM 规范中, JVM 栈被称为 Java 栈。
 
@@ -35,38 +35,19 @@ JVM 有一个所有 JVM 线程共享的 _堆_。 堆是用来给所有的对象�
 
 ## Method Area
 
-The Java Virtual Machine has a _方法区_ that is shared among all Java
-Virtual Machine threads. The method area is analogous to the storage area for
-compiled code of a conventional language or analogous to the "text" segment in
-an operating system process. It stores per-class structures such as the run-time
-constant pool, field and method data, and the code for methods and constructors,
-including the special methods used in class and interface initialization and in
-instance initialization.
+JVM 的 _方法区_ 是所有 JVM 线程共享的。方法区类似于传统编程语言中存储编译后的代码的区域, 或者类似于操作系统中进程的代码段。这里存储着每个类的结构, 例如运行时常量池, 字段和方法的数据, 方法和构造器的代码, 包括类和接口初始化以及实例初始化中使用的特殊方法。
 
-The method area is created on virtual machine start-up. Although the method area
-is logically part of the heap, simple implementations may choose not to either
-garbage collect or compact it. This specification does not mandate the location of
-the method area or the policies used to manage compiled code. The method area
-may be of a fixed size or may be expanded as required by the computation and may
-be contracted if a larger method area becomes unnecessary. The memory for the
-method area does not need to be contiguous.
+方法区在 JVM 启动时创建。尽管方法区在逻辑上是堆的一部分, 但是简单的 JVM 实现可能不会对其进行垃圾回收或空间压缩。本规范并不指定方法区的实现位置, 或者已编译代码的管理策略。方法区可以是固定大小, 也可以动态扩展和收缩。方法区的内存不需要是连续的。
 
-A Java Virtual Machine implementation may provide the programmer or the user control
-over the initial size of the method area, as well as, in the case of a varying-size method area,
-control over the maximum and minimum method area size.
+一个 JVM 实现可以让程序员或用户控制方法区的初始大小, 对于可以动态扩展和收缩的方法区, 可以控制方法区的最大值和最小值。
 
-The following exceptional condition is associated with the method area:
+以下是和方法区相关的异常情况:
 
-- If memory in the method area cannot be made available to satisfy an allocation request, the Java Virtual Machine throws an `OutOfMemoryError`
+- 如果方法区的可用空间大小不满足一个新的分配请求, JVM 会抛出 `OutOfMemoryError`
 
 ## Run-Time Constant Pool
 
-A _运行时常量池_ is a per-class or per-interface run-time representation
-of the `constant_pool` table in a `class` file. It contains several kinds of
-constants, ranging from numeric literals known at compile-time to method and field
-references that must be resolved at run-time. The run-time constant pool serves a
-function similar to that of a symbol table for a conventional programming language,
-although it contains a wider range of data than a typical symbol table.
+一个 _运行时常量池_ 是一个类(或者接口)对 `.class` 文件中常量池的运行时表示。它包含几种常量, 范围从 "在编译时已知的数值字面量" 到 "必须在运行时解析的方法和字段的引用"。运行时常量池提供的功能类似于传统编程语言的符号表, 但是比起典型的符号表, 运行时常量池有更宽的数据范围。
 
 Each run-time constant pool is allocated from the Java Virtual Machine's method
 area. The run-time constant pool for a class or interface is constructed

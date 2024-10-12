@@ -24,6 +24,10 @@
 
 - [Vue2](./vue2/vue2.md)
   - [创建项目](./vue2/quick_start.md)
+  - [集成vuex](./vue2/vuex.md)
+  - [集成vue-router](./vue2/vue_router.md)
+    - [动态配置路由](./vue2/vue_router_d.md)
+    - [登陆校验](./vue2/vue_router_l.md)
   - [集成echarts](./vue2/echarts.md)
   - [集成axios](./vue2/axios.md)
   - [axios实现文件下载](./vue2/axios_down.md)

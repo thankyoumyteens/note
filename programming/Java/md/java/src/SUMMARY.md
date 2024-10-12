@@ -160,5 +160,8 @@
     - [Logger](./log/logback/logger.md)
     - [Encoder](./log/logback/encoder.md)
 
+- [JGit](./jgit/jgit.md)
+  - [基本使用](./jgit/quick_start.md)
+
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)

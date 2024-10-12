@@ -10,3 +10,68 @@ Java 线程定义了 6 种状态, 线程在任何时刻只能处于其中一种�
 - 终止(TERMINATED): 已经结束执行(run 方法执行完了)的线程
 
 ![](../../img/thread_state.png)
+
+使用 Lock 接口等待锁时, 线程处于 WAITING 状态, 而不是 BLOCKED 状态:
+
+```java
+public class LockDemo {
+
+    public static void main(String[] args) throws InterruptedException {
+        Lock lock = new ReentrantLock();
+
+        Thread t1 = new Thread(() -> {
+            lock.lock();
+            while (true) {
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            lock.lock();
+            lock.unlock();
+        });
+
+        t1.start();
+        Thread.sleep(1000);
+        t2.start();
+
+        // RUNNABLE
+        System.out.println(t1.getState());
+        // WAITING
+        System.out.println(t2.getState());
+
+    }
+}
+```
+
+使用 synchronized:
+
+```java
+public class LockDemo {
+
+    public static void main(String[] args) throws InterruptedException {
+        Object lock = new Object();
+
+        Thread t1 = new Thread(() -> {
+            synchronized (lock) {
+                while (true) {
+                }
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("t2 get lock");
+            }
+        });
+        t1.start();
+        Thread.sleep(1000);
+        t2.start();
+
+        // RUNNABLE
+        System.out.println(t1.getState());
+        // BLOCKED
+        System.out.println(t2.getState());
+
+    }
+}
+```
