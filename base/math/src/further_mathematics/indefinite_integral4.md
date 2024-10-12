@@ -12,7 +12,7 @@
 
 ![](../img/ii4_1.jpg)
 
-多项式除法(每一次都要消掉最大次项):
+多项式除法(每一次都要消掉最大次项, 一直除到余数的最大次数比除数低为止):
 
 ![](../img/ii4_2.jpg)
 
@@ -39,3 +39,23 @@
 -->
 
 ![](../img/ii4_3.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{3 - x - 2x^2}{2x + 1} \mathrm{d}x \\
+& {\color{Green} // 假分式, 用多项式除法得到: 商是 -x, 余数是 3} \\
+& = \int (-x + \frac{3}{2x + 1}) \mathrm{d}x \\
+& {\color{Green} // 右边变成了真分式, 而最大是1次, 所以不用因式分解} \\
+& = \int (-x + \frac{3}{2x + 1}) \mathrm{d}x \\
+& = - \int x \mathrm{d}x + \int \frac{3}{2x + 1} \mathrm{d}x \\
+& = - \frac{x^2}{2} + \int \frac{3}{2x + 1} \mathrm{d}x \\
+& = - \frac{x^2}{2} + 3 \int \frac{1}{2x + 1} \mathrm{d}x \\
+& = - \frac{x^2}{2} + 3 \int \frac{\frac{1}{2}}{2x + 1} \mathrm{d}(2x + 1) \\
+& = - \frac{x^2}{2} + \frac{3}{2} \int \frac{1}{2x + 1} \mathrm{d}(2x + 1) \\
+& = - \frac{x^2}{2} + \frac{3}{2} \ln |2x + 1| + C \\
+\end{align}
+-->
+
+![](../img/ii4_4.jpg)

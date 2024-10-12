@@ -80,3 +80,7 @@ ________
 - C<sub>in</sub>是低位的进位
 - S 是加法运算的输出
 - C<sub>out</sub>是向高位的进位
+
+将多个一位全加器连接起来, 就能计算多位二进制了:
+
+![](../img/4-bit_ripple_carry_adder.jpg)
