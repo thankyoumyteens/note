@@ -23,6 +23,7 @@ void G1YoungCollector::collect() {
   // Young GC internal pause timing
   G1YoungGCNotifyPauseMark npm(this);
 
+  // 设置worker, worker是GC工作线程
   // Verification may use the workers, so they must be set up before.
   // Individual parallel phases may override this.
   set_young_collection_default_active_worker_threads();

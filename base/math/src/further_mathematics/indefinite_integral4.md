@@ -59,3 +59,41 @@
 -->
 
 ![](../img/ii4_4.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{5x - 8}{2x^2 - x - 1} \mathrm{d}x \\
+& {\color{Green} // 真分式, 把分母因式分解} \\
+& = \int \frac{5x - 8}{（x - 1）(2x + 1)} \mathrm{d}x \\
+& {\color{Green} // 符合情形1, 拆成 \frac{A}{x - 1} + \frac{B}{2x + 1}} \\
+& {\color{Green} // \;\, A(2x + 1) + B(x - 1) = 5x - 8} \\
+& {\color{Green} // \;\, 2Ax + A + Bx - B = 5x - 8} \\
+& {\color{Green} // \;\, (2A + B)x + (A - B) = 5x - 8} \\
+& {\color{Green} // \;\, \begin{cases}
+2A + B = 5 \\
+A - B = -8
+\end{cases}} \\
+& {\color{Green} // \;\, \begin{cases}
+A = -1 \\
+B = 7
+\end{cases}} \\
+& = \int (\frac{-1}{x - 1} + \frac{7}{2x + 1}) \mathrm{d}x \\
+& = - \int \frac{1}{x - 1} \mathrm{d}x + \int \frac{7}{2x + 1} \mathrm{d}x \\
+& = - \int \frac{1}{x - 1} \mathrm{d}(x - 1) + \int \frac{7}{2x + 1} \mathrm{d}x \\
+& = - \int \frac{1}{x - 1} \mathrm{d}(x - 1) + 7 \int \frac{1}{2x + 1} \mathrm{d}x \\
+& = - \int \frac{1}{x - 1} \mathrm{d}(x - 1) + \frac{7}{2} \int \frac{1}{2x + 1} \mathrm{d}(2x + 1) \\
+& = - \ln |x - 1| + \frac{7}{2} \ln |2x + 1| + C \\
+\end{align}
+-->
+
+![](../img/ii4_5.jpg)
+
+例题 3
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{2x^2 - x + 3}{(x - 1)(x^2 + 1)} \mathrm{d}x \\
+\end{align}
+-->

@@ -86,6 +86,9 @@ void G1Policy::decide_on_concurrent_start_pause() {
     if ((cause != GCCause::_wb_breakpoint) && ConcurrentGCBreakpoints::is_controlled()) {
       log_debug(gc, ergo)("Do not initiate concurrent cycle (whitebox controlled)");
     } else if (!about_to_start_mixed_phase() && collector_state()->in_young_only_phase()) {
+      // bool G1Policy::about_to_start_mixed_phase() const {
+      //   return _g1h->concurrent_mark()->cm_thread()->in_progress() || collector_state()->in_young_gc_before_mixed();
+      // }
       // 当前没有正在执行的并发标记, 且处于执行 Mixed GC 之前的 Young GC 阶段
       // 则启动新的并发标记过程
       // void G1Policy::initiate_conc_mark() {
@@ -99,17 +102,18 @@ void G1Policy::decide_on_concurrent_start_pause() {
                (cause == GCCause::_codecache_GC_aggressive) ||
                (cause == GCCause::_wb_breakpoint)) {
       // 启动并发标记
-      // A concurrent start must be a young only GC,
-      // so the collector state must be updated to reflect this.
+      // 并发标记只能在 young only GC 阶段开始
+      // 因为 Mixed GC 也会复用 Young GC 的代码,
+      // 所以把只执行 Young GC 的阶段称为 young only GC
       collector_state()->set_in_young_only_phase(true);
       collector_state()->set_in_young_gc_before_mixed(false);
 
-      // We might have ended up coming here about to start a mixed phase with a collection set
-      // active. The following remark might change the change the "evacuation efficiency" of
-      // the regions in this set, leading to failing asserts later.
-      // Since the concurrent cycle will recreate the collection set anyway, simply drop it here.
+      // 最终执行到这里时, 可能即将开始一个带有CSet的混合阶段
+      // 后续的再标记阶段可能会改变这个CSet中分区的 "撤离效率", 并导致后来的断言失败
+      // 既然并发标记会重建CSet, 在这里只需直接丢弃即可
       abandon_collection_set_candidates();
       abort_time_to_mixed_tracking();
+      // 启动新的并发标记过程
       initiate_conc_mark();
       log_debug(gc, ergo)("Initiate concurrent cycle (%s requested concurrent cycle)",
                           (cause == GCCause::_wb_breakpoint) ? "run_to breakpoint" : "user");
@@ -129,7 +133,7 @@ void G1Policy::decide_on_concurrent_start_pause() {
       log_debug(gc, ergo)("Do not initiate concurrent cycle (concurrent cycle already in progress)");
     }
   }
-  // Result consistency checks.
+  // 结果一致性检查
   // We do not allow concurrent start to be piggy-backed on a mixed GC.
   assert(!collector_state()->in_concurrent_start_gc() ||
          collector_state()->in_young_only_phase(), "sanity");
