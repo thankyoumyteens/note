@@ -38,6 +38,13 @@
     - [使用props和事件通信](./vue2/communicate/pc.md)
     - [使用EventBus通信](./vue2/communicate/event_bus.md)
 
+- [Vue3](./vue3/vue3.md)
+  - [创建项目](./vue3/quick_start.md)
+  - [Options API和Composition API](./vue3/api_change.md)
+  - [setup](./vue3/setup.md)
+  - [实现响应式数据](./vue3/responsive/responsive.md)
+    - [ref](./vue3/responsive/ref.md)
+
 - [React](./react/react.md)
   - [基础](./react/base/base.md)
     - [创建项目](./react/base/quick_start.md)
