@@ -95,5 +95,34 @@ B = 7
 <!--
 \begin{align}
 & \;\;\;\; \int \frac{2x^2 - x + 3}{(x - 1)(x^2 + 1)} \mathrm{d}x \\
+& {\color{Green} // 真分式, 分母已经因式分解好了} \\
+& {\color{Green} // 符合情形3, 拆成 \frac{A}{x - 1} + \frac{Bx + C}{x^2 + 1}} \\
+& {\color{Green} // \;\, A(x^2 + 1) + (x - 1)(Bx + C) = 2x^2 - x + 3} \\
+& {\color{Green} // \;\, Ax^2 + A + Bx^2 - Bx + Cx - C = 2x^2 - x + 3} \\
+& {\color{Green} // \;\, (A + B)x + (C - B)x + (A - C) = 2x^2 - x + 3} \\
+& {\color{Green} // \;\, \begin{cases}
+A + B = 2 \\
+C - B = -1 \\
+A - C = 3
+\end{cases}} \\
+& {\color{Green} // \;\, \begin{cases}
+A = 2 \\
+B = 0 \\
+C = -1
+\end{cases}} \\
+& = \int (\frac{2}{x - 1} + \frac{-1}{x^2 + 1}) \mathrm{d}x \\
+& = 2 \int \frac{1}{x - 1} \mathrm{d}x - \int \frac{1}{x^2 + 1} \mathrm{d}x \\
+& = 2 \int \frac{1}{x - 1} \mathrm{d}(x - 1) - \int \frac{1}{x^2 + 1} \mathrm{d}x \\
+& = 2 \ln |x - 1| - \arctan x + C \\
+\end{align}
+-->
+
+![](../img/ii4_6.jpg)
+
+例题 4
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{1}{x^2 + x + 1} \mathrm{d}x \\
 \end{align}
 -->
