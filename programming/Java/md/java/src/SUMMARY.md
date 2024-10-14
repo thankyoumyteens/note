@@ -40,6 +40,7 @@
     - [管道](./java/thread/thread_communicate_pipe.md)
   - [线程的状态](./java/thread/state.md)
   - [线程池](./java/thread/pool/pool.md)
+    - [Executor](./java/thread/pool/executor.md)
 
 - [IO](./java/io/io.md)
   - [虚拟内存](./java/io/virtual_memory.md)
