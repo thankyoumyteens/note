@@ -44,6 +44,7 @@
   - [setup](./vue3/setup.md)
   - [实现响应式数据](./vue3/responsive/responsive.md)
     - [ref](./vue3/responsive/ref.md)
+    - [reactive](./vue3/responsive/reactive.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)
