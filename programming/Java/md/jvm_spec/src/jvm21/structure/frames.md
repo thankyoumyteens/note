@@ -6,21 +6,11 @@ _栈帧_ 用来存储数据和部分结果, 以及执行动态链接, 为方法�
 
 栈帧可能会增加额外的执行信息, 比如调试信息。
 
-本地变量数组和操作数栈的大小 are determined at
-compile-time and are supplied along with the code for the method associated with
-the frame. Thus the size of the frame data structure depends only on the
-implementation of the Java Virtual Machine, and the memory for these structures
-can be allocated simultaneously on method invocation.
+本地变量数组和操作数栈的大小在编译时确定, 并且随着栈帧所属的方法的代码一起提供。因此栈帧数据结构的大小只会取决于 JVM 的实现, 并且这些结构的内存会在调用方法的同时被分配。
 
-Only one frame, the frame for the executing method, is active at any point in a given
-thread of control. This frame is referred to as the _current frame_, and its method is
-known as the _current method_. The class in which the current method is defined is
-the _current class_. Operations on local variables and the operand stack are typically
-with reference to the current frame.
+在任何时候, 一个线程只会有一个激活的栈帧, 这个栈帧是当前正在执行的方法的栈帧。这个栈帧被称为 _当前栈帧_, 这个栈帧所属的方法被称为 _当前方法_。这个方法所属的类称为 _当前类_。通常, JVM 操作的是当前栈帧的本地变量表和操作数栈。
 
-A frame ceases to be current if its method invokes another method or if its method
-completes. When a method is invoked, a new frame is created and becomes current
-when control transfers to the new method. On method return, the current frame
+如果一个栈帧所属的方法调用另一个方法, 或者执行完成, 这个栈帧就不是当前栈帧了。当一个方法执行时, 一个新的栈帧会被创建, 如果这个新方法获得控制权, 这个栈帧就成为当前栈帧。On method return, the current frame
 passes back the result of its method invocation, if any, to the previous frame. The
 current frame is then discarded as the previous frame becomes the current one.
 
