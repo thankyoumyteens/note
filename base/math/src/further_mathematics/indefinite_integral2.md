@@ -183,6 +183,11 @@
 \begin{align}
 & \;\;\;\; \int \frac{\mathrm{d}x}{x^2 + 2x + 5} \\
 & {\color{Green} // 分母没法因式分解, 使用配方} \\
+& {\color{Green} // 配方: x^2 + 2ax + a^2 = (x + a)^2} \\
+& {\color{Green} // 分母是 x^2 + 2x + 5} \\
+& {\color{Green} // 所以 2a = 2 \Rightarrow a = 1} \\
+& {\color{Green} // 所以把分母写成 (x + 1)^2} \\
+& {\color{Green} // 再把少的值加上 (x + 1)^2 + 4} \\
 & = \int \frac{\mathrm{d}x}{4 + (x + 1)^2} \\
 & = \int \frac{\mathrm{d}x}{2^2 + (x + 1)^2} \\
 & = \int \frac{\mathrm{d}(x + 1)}{2^2 + (x + 1)^2} \\

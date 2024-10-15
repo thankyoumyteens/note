@@ -40,3 +40,6 @@
 
 - [JSON](./json/json.md)
     - [illegal identifier : \pos 1, line 1, column 2](./json/escape.md)
+
+- [正则表达式](./re/re.md)
+    - [Illegal repetition](./re/illegal_repetition.md)

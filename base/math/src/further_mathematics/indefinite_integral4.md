@@ -124,5 +124,17 @@ C = -1
 <!--
 \begin{align}
 & \;\;\;\; \int \frac{1}{x^2 + x + 1} \mathrm{d}x \\
+& {\color{Green} // 真分式, 分母没法因式分解, 需要配方} \\
+& {\color{Green} // 配方: x^2 + 2ax + a^2 = (x + a)^2} \\
+& {\color{Green} // 分母是 x^2 + x + 1} \\
+& {\color{Green} // 所以 2a = 1 \Rightarrow a = \frac{1}{2}} \\
+& = \int \frac{1}{(\frac{\sqrt{3}}{2})^2 + (x + \frac{1}{2})^2} \mathrm{d}x \\
+& = \int \frac{1}{(\frac{\sqrt{3}}{2})^2 + (x + \frac{1}{2})^2} \mathrm{d}(x + \frac{1}{2}) \\
+& {\color{Green} // \int \frac{1}{a^2 + x^2} \mathrm{d}x = \frac{1}{a} \arctan \frac{x}{a} + C} \\
+& = \frac{2}{\sqrt{3}} \arctan \frac{x + \frac{1}{2}}{\frac{\sqrt{3}}{2}} + C \\
 \end{align}
 -->
+
+![](../img/ii4_7.jpg)
+
+例题 5
