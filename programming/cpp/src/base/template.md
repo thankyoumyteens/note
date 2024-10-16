@@ -1,6 +1,4 @@
-# 泛型
-
-函数模版:
+# 函数模版
 
 ```cpp
 #include <iostream>

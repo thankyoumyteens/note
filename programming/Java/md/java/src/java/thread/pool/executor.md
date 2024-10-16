@@ -19,7 +19,7 @@ public ThreadPoolExecutor(int corePoolSize,
 - 保持活动时间(keepAliveTime)：允许非核心线程(临时线程)空闲多久, 超过这个时间还是空闲就会被销毁
 - 时间单位(unit)：保持活动时间的时间单位
 - 工作队列(workQueue)：当没有空闲的核心线程时, 用于存放新来的待执行任务的阻塞队列
-- 线程工厂(threadFactory)：用于定制线程对象的创建
+- 线程工厂(threadFactory)：用于定制线程对象的创建(实现 ThreadFactory 接口, 并重写 newThread 方法)
 - 拒绝策略(handler)：当任务太多，无法被线程池及时处理时，采取的策略
 
 ```java
@@ -37,7 +37,7 @@ public class Demo {
                 /* keepAliveTime */ 0,
                 /* unit */ TimeUnit.MILLISECONDS,
                 /* workQueue */ new LinkedBlockingQueue<>(),
-                /*threadFactory*/ Thread::new,
+                /*threadFactory*/ Executors.defaultThreadFactory(),
                 /*handler*/ new ThreadPoolExecutor.AbortPolicy()
         );
 
@@ -56,3 +56,10 @@ public class Demo {
     }
 }
 ```
+
+## 内置的拒绝策略
+
+- AbortPolicy: 丢弃任务, 并抛出 RejectedExecutionException 异常
+- CallerRunsPolicy: 哪个线程发起的任务, 哪个线程自己去执行这个任务
+- DiscardOldestPolicy: 丢弃 workQueue 中最老的一个任务, 并将新任务加入
+- DiscardPolicy: 直接丢弃任务, 不做任何操作
