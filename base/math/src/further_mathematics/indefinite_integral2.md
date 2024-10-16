@@ -206,8 +206,10 @@
 & {\color{Green} // 分母可以因式分解} \\
 & = \int \frac{\mathrm{d}x}{(x - 2)(x + 1)} \\
 & {\color{Green} // 拆项, 并确保分子中没有x} \\
+& {\color{Green} // 因为 \frac{1}{x - 2} - \frac{1}{x + 1} = \frac{x + 1 - (x - 2)}{(x - 2)(x + 1)} = \frac{3}{(x - 2)(x + 1)}} \\
+& {\color{Green} // 所以需要补个 \frac{1}{3}} \\
 & = \int \frac{\frac{1}{3} [x + 1 - (x - 2)]}{(x - 2)(x + 1)} \mathrm{d}x \\
-& = \frac{1}{3} \int \frac{1}{x - 2} - \frac{1}{x + 1} \mathrm{d}x \\
+& = \frac{1}{3} \int (\frac{1}{x - 2} - \frac{1}{x + 1}) \mathrm{d}x \\
 & = \frac{1}{3} (\int \frac{\mathrm{d}x}{x - 2} - \int \frac{\mathrm{d}x}{x + 1} ) \\
 & = \frac{1}{3} [\int \frac{\mathrm{d}(x - 2)}{x - 2} - \int \frac{\mathrm{d}(x + 1)}{x + 1} ] \\
 & = \frac{1}{3} (\ln |x - 2| - \ln |x + 1|) + C \\

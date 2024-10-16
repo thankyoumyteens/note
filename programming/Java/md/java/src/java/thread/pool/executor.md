@@ -57,9 +57,21 @@ public class Demo {
 }
 ```
 
-## 内置的拒绝策略
+## 线程池的执行过程
+
+1. 一开始, 线程池会创建 corePoolSize 个线程来执行任务
+2. 当任务的数量超过 corePoolSize 时, 后续的任务将会进入 workQueue 排队
+3. 当 workQueue 也满了之后, 线程池会继续创建临时线程来执行新到的任务, 线程池中的线程总数不会超过 maximumPoolSize
+4. 如果新到的任务处理完成, 临时线程会继续处理 workQueue 中排队的任务, 如果临时线程线程在空闲状态(任务都处理完了)超过 keepAliveTime, 就会被自动销毁
+5. 当工作线程的数量到达 maximumPoolSize, 且 workQueue 还是满的时侯, 将根据设置的拒绝策略处理新到的任务
+
+## JDK 内置的拒绝策略
 
 - AbortPolicy: 丢弃任务, 并抛出 RejectedExecutionException 异常
 - CallerRunsPolicy: 哪个线程发起的任务, 哪个线程自己去执行这个任务
 - DiscardOldestPolicy: 丢弃 workQueue 中最老的一个任务, 并将新任务加入
 - DiscardPolicy: 直接丢弃任务, 不做任何操作
+
+## 自定义拒绝策略
+
+可以通过实现 RejectedExecutionHandler 接口, 自定义拒绝策略。

@@ -45,6 +45,9 @@
   - [实现响应式数据](./vue3/responsive/responsive.md)
     - [ref](./vue3/responsive/ref.md)
     - [reactive](./vue3/responsive/reactive.md)
+    - [ref和reactive的区别](./vue3/responsive/compare.md)
+    - [toRefs](./vue3/responsive/to_refs.md)
+  - [计算属性](./vue3/computed/computed.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)

@@ -138,3 +138,57 @@ C = -1
 ![](../img/ii4_7.jpg)
 
 例题 5
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{x - 2}{x^2 + x + 1} \mathrm{d}x \\
+& {\color{Green} // 真分式, 分母没法因式分解} \\
+& {\color{Green} // 分母 x^2 + x + 1 的导数是 2x + 1, 和分子次数一样} \\
+& {\color{Green} // 想办法在分子中凑出 2x + 1} \\
+& {\color{Green} // 先搞出 2x: 分子提取 \frac{1}{2}} \\
+& = \int \frac{\frac{1}{2}(2x - 4)}{x^2 + x + 1} \mathrm{d}x \\
+& = \frac{1}{2} \int \frac{2x - 4}{x^2 + x + 1} \mathrm{d}x \\
+& {\color{Green} // 再搞出 2x + 1} \\
+& = \frac{1}{2} \int \frac{(2x + 1) - 5}{x^2 + x + 1} \mathrm{d}x \\
+& = \frac{1}{2} \int \frac{2x + 1}{x^2 + x + 1} \mathrm{d}x - \frac{1}{2} \int \frac{5}{x^2 + x + 1} \mathrm{d}x \\
+& {\color{Green} // 把 2x + 1 移到 d 后面} \\
+& = \frac{1}{2} \int \frac{1}{x^2 + x + 1} \mathrm{d}(x^2 + x) - \frac{1}{2} \int \frac{5}{x^2 + x + 1} \mathrm{d}x \\
+& = \frac{1}{2} \int \frac{1}{x^2 + x + 1} \mathrm{d}(x^2 + x + 1) - \frac{1}{2} \int \frac{5}{x^2 + x + 1} \mathrm{d}x \\
+& = \frac{1}{2} \ln (x^2 + x + 1) - \frac{1}{2} \int \frac{5}{x^2 + x + 1} \mathrm{d}x \\
+& {\color{Green} // 减号右边和例题4一样} \\
+& = \frac{1}{2} \ln (x^2 + x + 1) - \frac{5}{2} \int \frac{1}{x^2 + x + 1} \mathrm{d}x \\
+& = \frac{1}{2} \ln (x^2 + x + 1) - \frac{5}{2} \times \frac{2}{\sqrt{3}} \arctan \frac{x + \frac{1}{2}}{\frac{\sqrt{3}}{2}} + C \\
+\end{align}
+-->
+
+![](../img/ii4_8.jpg)
+
+例题 6
+
+<!--
+\begin{align}
+& \;\;\;\; \int \frac{1}{x(x^2 + 4)} \mathrm{d}x \\
+& 解法1: \\
+& {\color{Green} // 真分式, 分母没法因式分解} \\
+& {\color{Green} // 符合情形3, 拆成 \frac{A}{x} + \frac{Bx + C}{x^2 + 4}} \\
+& {\color{Green} // 后面略} \\
+& 解法2: \\
+& {\color{Green} // 分子分母同乘 x} \\
+& = \int \frac{x}{x^2(x^2 + 4)} \mathrm{d}x \\
+& {\color{Green} // 分子的 x 移到 d 后面} \\
+& = \frac{1}{2} \int \frac{1}{x^2(x^2 + 4)} \mathrm{d}(x^2) \\
+& {\color{Green} // 把 x^2 看成 t, 拆项} \\
+& = \frac{1}{2} \int \frac{1}{t(t + 4)} \mathrm{d}t \\
+& {\color{Green} // 因为 \frac{1}{t} - \frac{1}{t + 4} = \frac{t + 4 - t}{t(t + 4)} = \frac{4}{t(t + 4)}} \\
+& {\color{Green} // 所以需要补个 \frac{1}{4}} \\
+& = \frac{1}{2} \int \frac{\frac{1}{4} (t + 4 - t)}{t(t + 4)} \mathrm{d}t \\
+& = \frac{1}{8} \int \frac{t + 4 - t}{t(t + 4)} \mathrm{d}t \\
+& = \frac{1}{8} \int (\frac{1}{t} - \frac{1}{t + 4}) \mathrm{d}t \\
+& {\color{Green} // 把 t 换回 x^2} \\
+& = \frac{1}{8} \int (\frac{1}{x^2} - \frac{1}{x^2 + 4}) \mathrm{d}(x^2) \\
+& = \frac{1}{8} \int \frac{1}{x^2} \mathrm{d}(x^2) - \frac{1}{8} \int \frac{1}{x^2 + 4} \mathrm{d}(x^2) \\
+& = \frac{1}{8} \ln(x^2) - \frac{1}{8} \ln (x^2 + 4) + C \\
+\end{align}
+-->
+
+![](../img/ii4_9.jpg)
