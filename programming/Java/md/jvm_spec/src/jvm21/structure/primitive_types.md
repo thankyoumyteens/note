@@ -21,7 +21,7 @@ JVM 支持的原始类型包括: 数值类型, `boolean` 类型, 和 `returnAddr
 
 `returnAddress` 类型的值是指向 JVM 字节码中操作码的指针。在原始类型中, 只有 `returnAddress` 类型不关联 Java 中的类型。
 
-## 整数类型
+## Integral Types and Values
 
 整数类型的取值范围:
 
@@ -31,7 +31,7 @@ JVM 支持的原始类型包括: 数值类型, `boolean` 类型, 和 `returnAddr
 - `long`, 从 -9223372036854775808 到 9223372036854775807 (-2<sup>63</sup> 到 2<sup>63</sup> - 1), 闭区间
 - `char`, 从 0 到 65535, 闭区间
 
-## 浮点数类型
+## Floating-Point Types and Values
 
 浮点数类型包括 `float` 和 `double`, 它们的格式和操作和 IEEE 754 标准的定义相同。Java SE 15 及后续版本使用的是 2019 版本的 IEEE 754 标准, Java SE 15 之前的版本使用的是 1985 版本的 IEEE 754 标准。
 
@@ -68,11 +68,11 @@ IEEE 754 允许为每一个 binary32 和 binary64 的浮点格式提供许多不
 
 NaN 是无序的, 所以比较两个 NaN 是否相等的结果为 false。如果一个变量的值是 NaN, 那么它和自己比较是否相等的结果也是 false。
 
-## returnAddress 类型
+## The returnAddress Type and Values
 
 `returnAddress` 类型是给 _`jsr`_, _`ret`_, 和 _`jsr_w`_ 指令使用的。`returnAddress` 类型的值是指向操作码的指针。与数值类型不同, `returnAddress` 类型不对应任何 Java 中的类型, 并且不会在程序运行期间被修改。
 
-## boolean 类型
+## The boolean Type
 
 尽管 JVM 定义了 `boolean` 类型, 但却只提供了有限的支持。JVM 没有专门操作 `boolean` 类型值的指令。对 `boolean` 类型值的操作在编译后都会转换成对 `int` 类型值的操作。
 

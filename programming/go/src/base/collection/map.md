@@ -41,3 +41,15 @@ func main() {
 	fmt.Println(dict)
 }
 ```
+
+## 判断 key 是否存在
+
+```go
+if _, ok := map[key]; ok {
+    // 存在
+}
+
+if _, ok := map[key]; !ok {
+    // 不存在
+}
+```

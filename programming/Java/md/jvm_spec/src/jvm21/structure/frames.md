@@ -16,29 +16,15 @@ _栈帧_ 用来存储数据和部分结果, 以及执行动态链接, 为方法�
 
 ## Local Variables
 
-每个栈帧内部都有一个变量的数组, 称为它的 _本地变量表_。The length of the local variable array of a frame is determined at compile-time and
-supplied in the binary representation of a class or interface along with the code for
-the method associated with the frame.
+每个栈帧内部都有一个变量的数组, 称为它的 _本地变量表_。一个栈帧中本地变量数组的长度是在编译时就确定的, 并且随着 .class 文件的方法中的 code 属性一起提供。
 
-A single local variable can hold a value of type `boolean`, `byte`, `char`, `short`, `int`,
-`float`, `reference`, or `returnAddress`. A pair of local variables can hold a value
-of type `long` or `double`.
+一个本地变量可以保存一个 `boolean`, `byte`, `char`, `short`, `int`, `float`, `reference`, 或 `returnAddress` 类型的值。一对(两个)本地变量可以保存一个 `long` 或 `double` 类型的值。
 
-Local variables are addressed by indexing. The index of the first local variable is
-zero. An integer is considered to be an index into the local variable array if and only
-if that integer is between zero and one less than the size of the local variable array.
+本地变量表按索引编址。第 1 个本地变量的索引是 0。如果一个整数的范围在 0 到本地变量数组长度的范围内, 它就被认为是本地变量数组的索引。
 
-A value of type `long` or type `double` occupies two consecutive local variables.
-Such a value may only be addressed using the lesser index. For example, a value of
-type `double` stored in the local variable array at index n actually occupies the local
-variables with indices n and n+1; however, the local variable at index n+1 cannot
-be loaded from. It can be stored into. However, doing so invalidates the contents
-of local variable n.
+一个 `long` 或 `double` 类型的值占用两个连续的本地变量。这种值的索引使用的是较小的索引值。例如, 一个 `double` 类型的值存储在本地变量数组索引为 n 的位置, 但它实际占用的索引是 n 和 n+1; 但是索引 n+1 的本地变量是不能读取, 只能存储的。然而, 这样做(指的是向索引 n+1 中存储新的本地变量)会使索引为 n 的本地变量失效。
 
-The Java Virtual Machine does not require n to be even. In intuitive terms, values
-of types `long` and `double` need not be 64-bit aligned in the local variables array.
-Implementors are free to decide the appropriate way to represent such values using
-the two local variables reserved for the value.
+JVM 不要求 n 是偶数。用直观的术语来说, `long` 和 `double` 类型的值在本地变量数组中不需要按 64 位对齐。JVM 实现者可以自由决定以哪种适合的方式用两个本地变量来保存这两种类型的值。
 
 The Java Virtual Machine uses local variables to pass parameters on method
 invocation. On class method invocation, any parameters are passed in consecutive
@@ -47,3 +33,44 @@ local variable 0 is always used to pass a reference to the object on which the
 instance method is being invoked (`this` in the Java programming language). Any
 parameters are subsequently passed in consecutive local variables starting from
 local variable 1.
+
+## Operand Stacks
+
+Each frame contains a last-in-first-out (LIFO) stack known as its _operand stack_. The maximum depth of the operand stack of a frame is determined at
+compile-time and is supplied along with the code for the method associated with
+the frame.
+
+Where it is clear by context, we will sometimes refer to the operand stack of the
+current frame as simply the operand stack.
+
+The operand stack is empty when the frame that contains it is created. The
+Java Virtual Machine supplies instructions to load constants or values from local
+variables or fields onto the operand stack. Other Java Virtual Machine instructions
+take operands from the operand stack, operate on them, and push the result back
+onto the operand stack. The operand stack is also used to prepare parameters to be
+passed to methods and to receive method results.
+
+For example, the _iadd_ instruction adds two `int` values together. It requires
+that the `int` values to be added be the top two values of the operand stack, pushed
+there by previous instructions. Both of the `int` values are popped from the operand
+stack. They are added, and their sum is pushed back onto the operand stack.
+Subcomputations may be nested on the operand stack, resulting in values that can
+be used by the encompassing computation.
+
+Each entry on the operand stack can hold a value of any Java Virtual Machine type,
+including a value of type `long` or type `double`.
+
+Values from the operand stack must be operated upon in ways appropriate to their
+types. It is not possible, for example, to push two `int` values and subsequently treat
+them as a `long` or to push two `float` values and subsequently add them with an
+_iadd_ instruction. A small number of Java Virtual Machine instructions (the _dup_
+instructions and _swap_) operate on run-time data areas as raw values
+without regard to their specific types; these instructions are defined in such a way
+that they cannot be used to modify or break up individual values. These restrictions
+on operand stack manipulation are enforced through `class` file verification.
+
+At any point in time, an operand stack has an associated depth, where a value of
+type `long` or `double` contributes two units to the depth and a value of any other
+type contributes one unit.
+
+## Dynamic Linking

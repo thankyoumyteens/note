@@ -75,3 +75,38 @@ public class Demo {
 ## 自定义拒绝策略
 
 可以通过实现 RejectedExecutionHandler 接口, 自定义拒绝策略。
+
+```java
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class MyHandler implements RejectedExecutionHandler {
+
+    /**
+     * 自定义拒绝策略
+     *
+     * @param r        被拒绝的任务
+     * @param executor 线程池
+     */
+    @Override
+    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+        System.out.println("MyHandler: rejectedExecution");
+        // 获取线程池的工作队列
+        BlockingQueue<Runnable> queue = executor.getQueue();
+        try {
+            // 尝试将被拒绝的任务重新放入队列
+            // 如果队列已满，则会等待100秒
+            // 如果100秒内队列有空闲，则将任务放入队列并返回true
+            // 如果100秒后队列仍然是满的，则返回false
+            boolean success = queue.offer(r, 100, TimeUnit.SECONDS);
+            if (!success) {
+                throw new RuntimeException("队列已满");
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
