@@ -48,6 +48,7 @@
     - [ref和reactive的区别](./vue3/responsive/compare.md)
     - [toRefs](./vue3/responsive/to_refs.md)
   - [计算属性](./vue3/computed/computed.md)
+  - [watch](./vue3/watch/watch.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)
