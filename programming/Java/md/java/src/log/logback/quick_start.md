@@ -34,7 +34,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!--设置格式-->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -42,7 +42,7 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <!--设置格式-->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
             <charset>utf8</charset>
         </encoder>
         <!--文件路径-->
