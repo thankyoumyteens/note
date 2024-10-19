@@ -49,6 +49,10 @@
     - [toRefs](./vue3/responsive/to_refs.md)
   - [计算属性](./vue3/computed/computed.md)
   - [watch](./vue3/watch/watch.md)
+    - [watchEffect](./vue3/watch/watch_effect.md)
+  - [标签的ref属性](./vue3/watch/tag_ref.md)
+    - [HTML标签](./vue3/watch/tag_ref_html.md)
+    - [组件标签](./vue3/watch/tag_ref_com.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)

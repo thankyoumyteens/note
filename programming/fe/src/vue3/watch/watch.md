@@ -121,8 +121,10 @@ let student = reactive({
 });
 
 watch(
+  //[student.name, student.age], // ref对象的写法, 不需要用函数
   [() => student.name, () => student.age], // 把要监听的多个数据合并成一个数组
   (newVal, oldVal) => {
+    // 此时newVal和oldVal都是包含name和age值的数组
     console.log("student name or age changed", newVal, oldVal);
   }
 );

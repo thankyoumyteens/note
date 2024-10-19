@@ -83,6 +83,7 @@ export default {
 </script>
 <script lang="ts" setup>
 // setup中不能用this
+// import 导入的其它组件会自动注册, 不需要再写 components: {XxxXxx,}, 了
 
 // 定义data
 // 注意: 此时msg是一个局部变量，不是响应式的
