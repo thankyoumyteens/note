@@ -1,22 +1,41 @@
 # ubuntu22 调试 OpenJDK21
 
-## 下载 Bootstrap JDK
+## 下载 OPENJDK 源码
 
 ```sh
-cd ~/src_pack/
-wget https://download.bell-sw.com/java/21.0.1+12/bellsoft-jdk21.0.1+12-linux-amd64.tar.gz
-mv bellsoft-jdk21.0.1+12-linux-amd64.tar.gz ~/jdk/
-tar -zxvf bellsoft-jdk21.0.1+12-linux-amd64.tar.gz
+git clone https://gitee.com/mirrors/openjdk.git
+cd openjdk/
+git checkout -b jdk-21-ga jdk-21-ga
 ```
 
-## 编译 OpenJDK21
+## 下载 Bootstrap JDK
+
+[bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz](https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz)
+
+[华为云 openjdk 镜像](https://mirrors.huaweicloud.com/openjdk/21.0.2/openjdk-21.0.2_macos-aarch64_bin.tar.gz)
+
+[清华 Adoptium 镜像](https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jdk/aarch64/mac/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.3_9.tar.gz)
+
+## 安装其他依赖:
 
 ```sh
-sudo apt-get install -y libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libfreetype6-dev libasound2-dev autoconf
-cd /jdk_root # JDK源码根目录
-bash ./configure --with-target-bits=64 --with-boot-jdk=/home/walter/jdk/jdk-21.0.1 --with-debug-level=slowdebug
+sudo apt-get install -y libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev libxcursor-dev libcups2-dev libfreetype6-dev libasound2-dev autoconf
+```
+
+## 编译
+
+进入 openjdk 源码根目录
+
+```sh
+bash ./configure --with-boot-jdk="/software/jdk-21.0.4+7" --with-target-bits=64 --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
 make
 make compile-commands
+```
+
+## 验证
+
+```sh
+./build/linux-x86_64-server-slowdebug/jdk/bin/java -version
 ```
 
 ## 配置 IDE

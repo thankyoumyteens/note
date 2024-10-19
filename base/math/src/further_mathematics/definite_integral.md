@@ -42,11 +42,50 @@
 
 ![](../img/di_3.jpg)
 
-例题
+例题 1
 
 <!--
 \begin{align}
 & \;\;\;\; \lim_{n \to \infty} \left ( \frac{1}{\sqrt{n^2 + 1^2}} + \frac{1}{\sqrt{n^2 + 2^2}} + ... + \frac{1}{\sqrt{n^2 + n^2}} \right ) \\
-& =
+& {\color{Green} // 分子都是1次方是齐的, 分母都是2次方也是齐的, 不能用夹逼定理} \\
+& {\color{Green} // 用定积分的定义} \\
+& = \lim_{n \to \infty} \sum_{i=1}^{n} \frac{1}{\sqrt{n^2 + i^2}} \\
+& {\color{Green} // 提出 \frac{1}{n}} \\
+& = \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^{n} \frac{1}{\sqrt{1 + \left ( \frac{i}{n} \right ) ^2}} \\
+& {\color{Green} // \lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^{n} f(\frac{i}{n}) = \int_{0}^{1} f(x) \mathrm{d}x, \frac{i}{n} 就是 x} \\
+& = \int_{0}^{1} \frac{1}{\sqrt{1 + x^2}} \mathrm{d}x \\
+& {\color{Green} // 解定积分先略过} \\
+& = \ln (1 + \sqrt{2})
+\end{align} \\
+-->
+
+![](../img/di_4.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& \;\;\;\; \lim_{n \to \infty} \left ( \frac{\sqrt{n^4 - 1^4}}{n^4} + \frac{2\sqrt{n^4 - 2^4}}{n^4} + ... + \frac{n\sqrt{n^4 - n^4}}{n^4} \right ) \\
+& {\color{Green} // 分子都是4次方是齐的, 分母都是4次方也是齐的, 不能用夹逼定理} \\
+& {\color{Green} // 用定积分的定义} \\
+& = \lim_{n \to \infty} \sum_{i=1}^{n} \frac{i\sqrt{n^4 - i^4}}{n^4} \\
+& {\color{Green} // 提出两个 \frac{1}{n}} \\
+& = \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^{n} \frac{i}{n} \frac{\sqrt{1 - \left ( \frac{i}{n} \right ) ^4}}{n^2} \\
+& {\color{Green} // \lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^{n} f(\frac{i}{n}) = \int_{0}^{1} f(x) \mathrm{d}x, \frac{i}{n} 就是 x} \\
+& = \int_{0}^{1} x \sqrt{1 - x^4} \mathrm{d}x \\
+& {\color{Green} // 解定积分先略过} \\
+& = \frac{\pi}{8} \\
+\end{align}
+-->
+
+![](../img/di_5.jpg)
+
+例题 3
+
+<!--
+\begin{align}
+& \;\;\;\; \lim_{n \to \infty} \left ( \frac{1}{n^2 + 1^2} + \frac{2}{n^2 + 2^2} + ... + \frac{n}{n^2 + n^2} \right ) \\
+& {\color{Green} // 分子都是1次方是齐的, 分母都是2次方也是齐的, 不能用夹逼定理} \\
+& {\color{Green} // 用定积分的定义} \\
 \end{align}
 -->

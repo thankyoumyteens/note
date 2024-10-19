@@ -27,6 +27,11 @@
 - [Debian](./Linux/debian/debian.md)
   - [安装debian](./Linux/debian/install_os.md)
   - [安装sudo](./Linux/debian/sudo.md)
+  - [安装git](./Linux/debian/git.md)
+  - [安装jdk](./Linux/debian/jdk.md)
+  - [安装mariadb](./Linux/debian/mariadb.md)
+  - [安装nginx](./Linux/debian/nginx.md)
+  - [安装mdbook](./Linux/debian/mdbook.md)
 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
   - [ubuntu 软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)

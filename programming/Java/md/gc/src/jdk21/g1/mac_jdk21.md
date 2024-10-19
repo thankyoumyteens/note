@@ -4,6 +4,7 @@
 
 ```sh
 git clone https://gitee.com/mirrors/openjdk.git
+cd openjdk/
 git checkout -b jdk-21-ga jdk-21-ga
 ```
 
@@ -37,7 +38,7 @@ brew install freetype
 进入 openjdk 源码根目录
 
 ```sh
-bash ./configure --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.13.2/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.13.2/include --with-jvm-variants=server,client --disable-warnings-as-errors --with-debug-level=slowdebug
+bash ./configure --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.13.2/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.13.2/include --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
 make
 make compile-commands
 ```
@@ -45,7 +46,7 @@ make compile-commands
 ## 验证
 
 ```sh
-./build/macosx-aarch64-serverANDclient-slowdebug/jdk/bin/java -version
+./build/macosx-aarch64-server-slowdebug/jdk/bin/java -version
 ```
 
 ## 报错: Only bundled freetype can be specified on Mac and Windows
