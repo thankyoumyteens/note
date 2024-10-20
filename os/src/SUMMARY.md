@@ -43,8 +43,6 @@
   - [nginx](./Linux/Ubuntu/ubuntu安装nginx.md)
   - [redis](./Linux/Ubuntu/ubuntu安装redis.md)
   - [mysql](./Linux/Ubuntu/ununtu_mysql_.md)
-  - [mariadb](./Linux/Ubuntu/ununtu安装mariadb.md)
-  - [jdk17](./Linux/Ubuntu/ubuntu配置jdk17.md)
   - [maven](./Linux/Ubuntu/ubuntu配置maven.md)
   - [python3](./Linux/Ubuntu/ubuntu安装python3.md)
   - [node](./Linux/Ubuntu/ubuntu安装node.md)
