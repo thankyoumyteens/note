@@ -87,5 +87,16 @@
 & \;\;\;\; \lim_{n \to \infty} \left ( \frac{1}{n^2 + 1^2} + \frac{2}{n^2 + 2^2} + ... + \frac{n}{n^2 + n^2} \right ) \\
 & {\color{Green} // 分子都是1次方是齐的, 分母都是2次方也是齐的, 不能用夹逼定理} \\
 & {\color{Green} // 用定积分的定义} \\
+& = \lim_{n \to \infty} \sum_{i=1}^{n} \frac{i}{n^2 + i^2} \\
+& {\color{Green} // 提出两个 \frac{1}{n}} \\
+& = \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^{n} \frac{\frac{i}{n}}{1 + \left ( \frac{i}{n} \right ) ^2} \\
+& {\color{Green} // \lim_{n \to \infty} \frac{1}{n} \sum_{i = 1}^{n} f(\frac{i}{n}) = \int_{0}^{1} f(x) \mathrm{d}x, \frac{i}{n} 就是 x} \\
+& = \int_{0}^{1} \frac{x}{1 + x^2} \mathrm{d}x \\
+& {\color{Green} // 解定积分先略过} \\
+& = \frac{1}{2} \ln 2 \\
 \end{align}
 -->
+
+![](../img/di_6.jpg)
+
+## 定积分的一般性质

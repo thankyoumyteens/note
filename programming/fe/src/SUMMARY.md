@@ -22,6 +22,15 @@
     - [平滑曲线图](./echarts/smooth_line.md)
     - [曲线下方区域颜色渐变](./echarts/smooth_line_with_color.md)
 
+- [TypeScript](./ts/ts.md)
+  - [编译](./ts/compile.md)
+  - [数据类型](./ts/types.md)
+  - [变量](./ts/variables.md)
+  - [对象](./ts/obj.md)
+  - [函数](./ts/func.md)
+  - [枚举](./ts/enum.md)
+  - [自定义类型](./ts/typedef.md)
+
 - [Vue2](./vue2/vue2.md)
   - [创建项目](./vue2/quick_start.md)
   - [集成vuex](./vue2/vuex.md)
