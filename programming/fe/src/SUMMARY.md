@@ -30,6 +30,9 @@
   - [函数](./ts/func.md)
   - [枚举](./ts/enum.md)
   - [自定义类型](./ts/typedef.md)
+  - [类](./ts/class.md)
+  - [接口](./ts/interface.md)
+  - [泛型](./ts/t.md)
 
 - [Vue2](./vue2/vue2.md)
   - [创建项目](./vue2/quick_start.md)
@@ -62,6 +65,8 @@
   - [标签的ref属性](./vue3/watch/tag_ref.md)
     - [HTML标签](./vue3/watch/tag_ref_html.md)
     - [组件标签](./vue3/watch/tag_ref_com.md)
+  - [使用ts](./vue3/ts.md)
+  - [props](./vue3/props/props.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)
