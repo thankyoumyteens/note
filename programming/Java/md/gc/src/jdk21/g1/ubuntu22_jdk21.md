@@ -19,7 +19,7 @@ git checkout -b jdk-21-ga jdk-21-ga
 ## 安装其他依赖:
 
 ```sh
-sudo apt-get install -y libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev libxcursor-dev libcups2-dev libfreetype6-dev libasound2-dev autoconf
+sudo apt-get install -y build-essential autoconf zip unzip libasound2-dev libcups2-dev libfontconfig1-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 ```
 
 ## 编译
@@ -27,7 +27,7 @@ sudo apt-get install -y libx11-dev libxext-dev libxrender-dev libxrandr-dev libx
 进入 openjdk 源码根目录
 
 ```sh
-bash ./configure --with-boot-jdk="/software/jdk-21.0.4+7" --with-target-bits=64 --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
+bash ./configure --with-boot-jdk="/jdk/jdk-21.0.5+11" --with-target-bits=64 --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
 make
 make compile-commands
 ```

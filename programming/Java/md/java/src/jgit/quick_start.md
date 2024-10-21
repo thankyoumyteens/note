@@ -32,7 +32,7 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws GitAPIException, IOException {
-        File rootDir = new File("/demo/jgit-demo");
+        File rootDir = new File("/Users/walter/walter/tmp/jgit-demo");
         // 初始化本地仓库
         Git git = Git.init().setDirectory(rootDir).call();
 

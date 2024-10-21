@@ -164,6 +164,15 @@
 
 - [JGit](./jgit/jgit.md)
   - [基本使用](./jgit/quick_start.md)
+  - [创建本地仓库](./jgit/init.md)
+  - [打开git仓库](./jgit/open.md)
+  - [添加远程仓库](./jgit/remote.md)
+  - [设置ssh认证](./jgit/ssh.md)
+  - [git clone](./jgit/clone.md)
+  - [git pull](./jgit/pull.md)
+  - [git add](./jgit/add.md)
+  - [git commit](./jgit/commit.md)
+  - [git push](./jgit/push.md)
 
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)

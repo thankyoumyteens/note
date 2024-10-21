@@ -10,7 +10,7 @@ tar -zxvf redis-7.2.4.tar.gz
 2. 修改 `src/Makefile` 文件:
 
 ```sh
-# 改成安装路径
+# 修改安装路径
 PREFIX?=/Users/walter/walter/software/redis
 INSTALL_BIN=$(PREFIX)
 ```
