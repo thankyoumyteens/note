@@ -100,3 +100,30 @@
 ![](../img/di_6.jpg)
 
 ## 定积分的一般性质
+
+<!--
+\begin{align}
+& 1、\int_{a}^{b} [k_1 f(x) + k_2 g(x)] \mathrm{d}x
+= k_1 \int_{a}^{b} f(x) \mathrm{d}x + k_2 \int_{a}^{b} g(x) \mathrm{d}x
+\quad (k_1 和 k_2 为任意常数) \\
+& 2、\int_{a}^{b} f(x) \mathrm{d}x
+= \int_{a}^{c} f(x) \mathrm{d}x + \int_{c}^{b} f(x) \mathrm{d}x \\
+& 3、\int_{a}^{b} 1 \mathrm{d}x = b - a \\
+& 4、(1) 如果 f(x) \ge 0 \; (a \le x \le b), 则 \int_{a}^{b} f(x) \mathrm{d}x \ge 0 \\
+& \;\;\;\;\;\;\,\,(2) 如果 f(x) \ge g(x) \; (a \le x \le b),
+则 \int_{a}^{b} f(x) \mathrm{d}x \ge \int_{a}^{b} g(x) \mathrm{d}x \\
+& \;\;\;\;\;\;\,\,(3) 如果 f(x) 和 |f(x)| 在 [a, b] 上可积,
+则 | \int_{a}^{b} f(x) \mathrm{d}x | \le \int_{a}^{b} |f(x)| \mathrm{d}x \\
+& 5、积分中值定理: \\
+& \;\;\;\;\; 如果 f(x) 在 [a, b] 上连续, 则 存在 \xi \in [a, b],
+使 \int_{a}^{b} f(x) \mathrm{d}x = f(\xi)(b - a) \\
+\end{align}
+-->
+
+![](../img/di_7.jpg)
+
+![](../img/Integral_example.png)
+
+<!--
+
+-->
