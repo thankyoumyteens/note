@@ -65,8 +65,10 @@
   - [标签的ref属性](./vue3/watch/tag_ref.md)
     - [HTML标签](./vue3/watch/tag_ref_html.md)
     - [组件标签](./vue3/watch/tag_ref_com.md)
-  - [使用ts](./vue3/ts.md)
+  - [在vue中使用ts](./vue3/ts.md)
   - [props](./vue3/props/props.md)
+    - [基本使用](./vue3/props/base.md)
+    - [props默认值](./vue3/props/default.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)

@@ -1,4 +1,4 @@
-# 使用 ts
+# 在 vue 中使用 ts
 
 ts:
 
@@ -21,10 +21,4 @@ const student: Demo = {
   age: 18,
 };
 </script>
-
-<template>
-  <div>ok</div>
-</template>
-
-<style scoped></style>
 ```

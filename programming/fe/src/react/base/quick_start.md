@@ -2,9 +2,8 @@
 
 ```sh
 # 创建
-npm install -g create-react-app
-create-react-app hello
-cd hello
+npx create-react-app react-demo
+cd react-demo
 # 运行
 npm start
 # 打包
