@@ -13,8 +13,6 @@ let student = reactive({
   age: 18,
 });
 
-let nameInH2 = ref();
-
 function getName() {
   return student.name;
 }
@@ -27,10 +25,7 @@ defineExpose({
 </script>
 
 <template>
-  <div>
-    <h1 ref="nameInH2">{{ student.name }}</h1>
-    <button @click="getName">button</button>
-  </div>
+  <div></div>
 </template>
 
 <style scoped></style>
@@ -40,22 +35,23 @@ defineExpose({
 
 ```vue
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import Child from "./components/Child.vue";
 import { ref } from "vue";
 
-const hello = ref();
+// 相当于 let demo = this.$refs['demo']
+const demo = ref();
 
-const getHello = () => {
+const test = () => {
   // 使用子组件暴露出的变量和函数
-  console.log(hello.value.student.name);
-  console.log(hello.value.getName());
+  console.log(demo.value.student.name);
+  console.log(demo.value.getName());
 };
 </script>
 
 <template>
   <div>
-    <HelloWorld ref="hello" />
-    <button @click="getHello">button</button>
+    <Child ref="demo" />
+    <button @click="test">button</button>
   </div>
 </template>
 

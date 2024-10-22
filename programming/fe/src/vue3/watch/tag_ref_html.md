@@ -2,26 +2,20 @@
 
 ```vue
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 
-let student = reactive({
-  name: "Tom",
-  age: 18,
-});
+// 相当于 let demo = this.$refs['demo']
+const demo = ref();
 
-// 相当于 let nameInH2 = this.$refs['nameInH2']
-let nameInH2 = ref();
-
-function getName() {
-  student.name = "Jerry";
-  console.log(nameInH2.value);
-}
+setTimeout(() => {
+  // <p>ok</p>
+  console.log(demo.value);
+}, 1000);
 </script>
 
 <template>
   <div>
-    <h1 ref="nameInH2">{{ student.name }}</h1>
-    <button @click="getName">button</button>
+    <p ref="demo">ok</p>
   </div>
 </template>
 

@@ -30,3 +30,4 @@
     - [分部积分法](./further_mathematics/indefinite_integral3.md)
     - [两类特殊函数的不定积分](./further_mathematics/indefinite_integral4.md)
   - [定积分](./further_mathematics/definite_integral.md)
+    - [定积分基本定理与特殊性质](./further_mathematics/definite_integral1.md)

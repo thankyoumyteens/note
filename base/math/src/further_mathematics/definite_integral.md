@@ -124,6 +124,18 @@
 
 ![](../img/Integral_example.png)
 
-<!--
+例题 1
 
+<!--
+\begin{align}
+& 设 f(x) 在 [0, 1] 上连续, 在 (0, 1) 内可导, f(1) = 4 \int_{0}^{\frac{1}{4}} f(x) \mathrm{d}x, \\
+& 证明: 存在 \xi \in (0, 1), 使 f'(\xi) = 0 \\
+\\
+& 因为 f(x) 在 [0, \frac{1}{4}] 上连续, 则根据积分中值定理, \\
+& 存在 c \in [0, \frac{1}{4}], 使 \int_{0}^{\frac{1}{4}} f(x) \mathrm{d}x = f(c)(\frac{1}{4} - 0) \\
+& 两边同乘4: \quad 4 \int_{0}^{\frac{1}{4}} f(x) \mathrm{d}x = f(c) = f(1) \\
+& 根据罗尔定理, 存在 \xi \in (0, 1), 使 f'(\xi) = 0 \\
+\end{align}
 -->
+
+![](../img/di_8.jpg)

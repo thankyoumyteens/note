@@ -69,6 +69,7 @@
   - [props](./vue3/props/props.md)
     - [基本使用](./vue3/props/base.md)
     - [props默认值](./vue3/props/default.md)
+  - [组件的生命周期](./vue3/lc.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)
