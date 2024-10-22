@@ -13,10 +13,6 @@
     - [常量](./base/var/constant.md)
   - [函数](./base/func/func.md)
     - [函数的结构](./base/func/declare.md)
-    - [返回单个值](./base/func/return1.md)
-    - [返回多个值](./base/func/return2.md)
-    - [可变数量的参数](./base/func/args.md)
-    - [具名返回值](./base/func/return3.md)
     - [递归函数](./base/func/recursive.md)
     - [将函数作为值传递](./base/func/func_pointer.md)
   - [分支和循环](./base/control/control.md)
@@ -82,6 +78,10 @@
   - [类型转换](./base/cast/cast.md)
     - [断言类型转换](./base/cast/type_assertions.md)
     - [显式类型转换](./base/cast/conversions.md)
+
+- [oracle](./oracle/oracle.md)
+  - [go-ora](./oracle/go_ora/go_ora.md)
+    - [查询结果转成map](./oracle/go_ora/list_map.md)
 
 - [wails](./wails/wails.md)
   - [Hello World](./wails/quick_start.md)

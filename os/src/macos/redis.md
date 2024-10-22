@@ -5,6 +5,7 @@
 ```sh
 wget https://mirrors.huaweicloud.com/redis/redis-7.2.4.tar.gz
 tar -zxvf redis-7.2.4.tar.gz
+cd redis-7.2.4
 ```
 
 2. 修改 `src/Makefile` 文件:

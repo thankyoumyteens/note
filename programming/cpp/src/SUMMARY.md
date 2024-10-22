@@ -2,6 +2,7 @@
 
 - [基础](./base/base.md)
   - [输入输出](./base/cin_cout.md)
+  - [基本数据类型](./base/type.md)
   - [变量](./base/variable.md)
   - [常量](./base/const.md)
   - [枚举](./base/enum.md)
