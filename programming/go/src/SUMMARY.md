@@ -13,6 +13,7 @@
     - [常量](./base/var/constant.md)
   - [函数](./base/func/func.md)
     - [函数的结构](./base/func/declare.md)
+    - [可变数量的参数](./base/func/args.md)
     - [递归函数](./base/func/recursive.md)
     - [将函数作为值传递](./base/func/func_pointer.md)
   - [分支和循环](./base/control/control.md)

@@ -77,7 +77,7 @@ class ConstantPoolCacheEntry {
 // bit length [ 4 |1| 1 |1|1|1|1|1|1 |---4---|----8----|--8--]
 ```
 
-- tos: 描述 TosState。TosState 是栈顶缓存优化技术中的一个术语，它的取值表示栈顶缓存元素的数据类型
+- tos: 描述 TosState。TosState 是栈顶缓存优化技术中的一个术语，它的取值表示栈顶缓存元素的数据类型。栈顶缓存(Top-of-Stack Cashing，简称 ToS)技术主要关注对频繁访问栈顶元素操作的性能优化, ToS 通过将频繁访问的栈顶元素缓存在 CPU 硬件寄存器中，能够大幅度减少内存访问次数，达到提高性能的目的
 - F: 1 表示缓存项类型为字段，0 则表示是缓存项类型为方法
 - A: call site 有附加的参数
 - I: 通过接口调用的, 必须在 vtable 或 vfinal 中查找
@@ -87,3 +87,16 @@ class ConstantPoolCacheEntry {
 - indy_rf: call site 指定的方法解析失败
 - field_index: 字段信息的索引
 - psize: 方法的参数大小, 只在方法类型的 flags 中存在
+
+HotSpot 的 TosState 类型:
+
+- btos: 0, 栈顶缓存 byte 类型数据
+- ztos: 1, 栈顶缓存 bool 类型数据
+- ctos: 2, 栈顶缓存 char 类型数据
+- stos: 3, 栈顶缓存 short 类型数据
+- itos: 4, 栈顶缓存 int 类型数据
+- ltos: 5, 栈顶缓存 long 类型数据
+- ftos: 6, 栈顶缓存 float 类型数据
+- dtos: 7, 栈顶缓存 double 类型数据
+- atos: 8, 栈顶缓存 object 类型数据
+- vtos: 9, 栈顶缓存 tos 类型数据

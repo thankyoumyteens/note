@@ -6,27 +6,6 @@ func 函数名(参数名1 参数类型1, 参数名2 参数类型2, ...) 返回�
 }
 ```
 
-## 可变数量的参数
-
-```go
-package main
-
-import "fmt"
-
-// 变量numbers是一个包含所有参数的切片
-func sum(numbers ...int) int {
-	total := 0
-	for _, number := range numbers {
-		total += number
-	}
-	return total
-}
-
-func main() {
-	fmt.Println(sum(1, 2, 3, 4, 5))
-}
-```
-
 ## 返回单个值
 
 ```go
