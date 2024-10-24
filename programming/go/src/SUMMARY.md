@@ -73,12 +73,15 @@
     - [查找](./base/search/search.md)
     - [分组](./base/search/group.md)
     - [替换](./base/search/replace.md)
-  - [日期](./base/date/date.md)
-    - [获取日期](./base/date/now.md)
-    - [日期格式化](./base/date/format.md)
   - [类型转换](./base/cast/cast.md)
     - [断言类型转换](./base/cast/type_assertions.md)
     - [显式类型转换](./base/cast/conversions.md)
+
+- [日期操作](./base/date/date.md)
+  - [获取日期](./base/date/now.md)
+  - [日期加减](./base/date/add.md)
+  - [日期比较](./base/date/compare.md)
+  - [日期格式化](./base/date/format.md)
 
 - [oracle](./oracle/oracle.md)
   - [go-ora](./oracle/go_ora/go_ora.md)
