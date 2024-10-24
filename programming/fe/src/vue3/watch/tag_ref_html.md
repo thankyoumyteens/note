@@ -1,16 +1,16 @@
 # HTML 标签
 
-```vue
+```html
 <script lang="ts" setup>
-import { ref } from "vue";
+  import { ref } from "vue";
 
-// 相当于 let demo = this.$refs['demo']
-const demo = ref();
+  // 相当于 let demo = this.$refs['demo']
+  const demo = ref();
 
-setTimeout(() => {
-  // <p>ok</p>
-  console.log(demo.value);
-}, 1000);
+  setTimeout(() => {
+    // <p>ok</p>
+    console.log(demo.value);
+  }, 1000);
 </script>
 
 <template>

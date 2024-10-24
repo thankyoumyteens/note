@@ -1,21 +1,21 @@
 # 计算属性
 
-```vue
+```html
 <script lang="ts" setup>
-import { reactive, computed } from "vue";
+  import { reactive, computed } from "vue";
 
-let student = reactive({
-  name: "Tom",
-  age: 18,
-});
+  let student = reactive({
+    name: "Tom",
+    age: 18,
+  });
 
-let studentInfo = computed(() => {
-  return `${student.name} is ${student.age} years old`;
-});
+  let studentInfo = computed(() => {
+    return `${student.name} is ${student.age} years old`;
+  });
 
-function changeName() {
-  student.name = "Jerry";
-}
+  function changeName() {
+    student.name = "Jerry";
+  }
 </script>
 
 <template>

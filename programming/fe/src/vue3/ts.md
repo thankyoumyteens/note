@@ -11,14 +11,14 @@ export interface Demo {
 
 vue:
 
-```vue
+```html
 <script lang="ts" setup>
-// ts接口前面需要加 type
-import { type Demo } from "@/types/demo";
+  // ts接口前面需要加 type
+  import { type Demo } from "@/types/demo";
 
-const student: Demo = {
-  name: "Tom",
-  age: 18,
-};
+  const student: Demo = {
+    name: "Tom",
+    age: 18,
+  };
 </script>
 ```

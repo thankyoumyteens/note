@@ -9,41 +9,41 @@
 - beforeDestroy: 被 onBeforeUnmount 替代
 - destroyed: 被 onUnmounted 替代
 
-```vue
+```html
 <script lang="ts" setup>
-import {
-  onBeforeMount,
-  onBeforeUnmount,
-  onBeforeUpdate,
-  onMounted,
-  onUnmounted,
-  onUpdated,
-} from "vue";
+  import {
+    onBeforeMount,
+    onBeforeUnmount,
+    onBeforeUpdate,
+    onMounted,
+    onUnmounted,
+    onUpdated,
+  } from "vue";
 
-console.log("setup");
+  console.log("setup");
 
-onBeforeMount(() => {
-  console.log("onBeforeMount");
-});
+  onBeforeMount(() => {
+    console.log("onBeforeMount");
+  });
 
-onMounted(() => {
-  console.log("onMounted");
-});
+  onMounted(() => {
+    console.log("onMounted");
+  });
 
-onBeforeUpdate(() => {
-  console.log("onBeforeUpdate");
-});
+  onBeforeUpdate(() => {
+    console.log("onBeforeUpdate");
+  });
 
-onUpdated(() => {
-  console.log("onUpdated");
-});
+  onUpdated(() => {
+    console.log("onUpdated");
+  });
 
-onBeforeUnmount(() => {
-  console.log("onBeforeUnmount");
-});
+  onBeforeUnmount(() => {
+    console.log("onBeforeUnmount");
+  });
 
-onUnmounted(() => {
-  console.log("onUnmounted");
-});
+  onUnmounted(() => {
+    console.log("onUnmounted");
+  });
 </script>
 ```

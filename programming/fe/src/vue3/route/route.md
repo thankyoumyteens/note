@@ -45,7 +45,7 @@ app.mount("#app");
 
 4. 修改 src/App.vue
 
-```vue
+```html
 <script lang="ts" setup></script>
 
 <template>

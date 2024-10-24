@@ -2,26 +2,26 @@
 
 父组件只能获取到子组件对外暴露的变量。
 
-子组件暴露部分变量:
+1. 子组件暴露部分变量:
 
-```vue
+```html
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+  import { reactive, ref } from "vue";
 
-let student = reactive({
-  name: "Tom",
-  age: 18,
-});
+  let student = reactive({
+    name: "Tom",
+    age: 18,
+  });
 
-function getName() {
-  return student.name;
-}
+  function getName() {
+    return student.name;
+  }
 
-// 暴露部分变量和函数
-defineExpose({
-  student,
-  getName,
-});
+  // 暴露部分变量和函数
+  defineExpose({
+    student,
+    getName,
+  });
 </script>
 
 <template>
@@ -31,21 +31,21 @@ defineExpose({
 <style scoped></style>
 ```
 
-父组件使用:
+2. 父组件使用:
 
-```vue
+```html
 <script setup lang="ts">
-import Child from "./components/Child.vue";
-import { ref } from "vue";
+  import Child from "./components/Child.vue";
+  import { ref } from "vue";
 
-// 相当于 let demo = this.$refs['demo']
-const demo = ref();
+  // 相当于 let demo = this.$refs['demo']
+  const demo = ref();
 
-const test = () => {
-  // 使用子组件暴露出的变量和函数
-  console.log(demo.value.student.name);
-  console.log(demo.value.getName());
-};
+  const test = () => {
+    // 使用子组件暴露出的变量和函数
+    console.log(demo.value.student.name);
+    console.log(demo.value.getName());
+  };
 </script>
 
 <template>

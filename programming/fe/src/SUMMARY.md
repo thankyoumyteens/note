@@ -72,9 +72,13 @@
   - [组件的生命周期](./vue3/lc.md)
   - [VueRouter](./vue3/route/route.md)
     - [路由模式](./vue3/route/mode.md)
+    - [router-link](./vue3/route/router_link.md)
+    - [router-link传参](./vue3/route/params.md)
+    - [编程式路由导航](./vue3/route/js.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)
+    - [在HTML中使用](./react/base/html.md)
     - [创建项目](./react/base/quick_start.md)
     - [使用组件](./react/base/component.md)
     - [JSX](./react/base/jsx.md)

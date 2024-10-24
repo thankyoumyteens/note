@@ -9,31 +9,31 @@ watch 函数的第一个参数是要监听的对象。取值类型是以下几�
 
 ## 监听 ref 对象
 
-```vue
+```html
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+  import { ref, watch } from "vue";
 
-let student = ref({
-  name: "Tom",
-  age: 18,
-});
+  let student = ref({
+    name: "Tom",
+    age: 18,
+  });
 
-let studentInfo = ref("");
+  let studentInfo = ref("");
 
-watch(
-  student,
-  (newVal, oldVal) => {
-    studentInfo.value = `Name: ${newVal.name}, Age: ${newVal.age}`;
-  },
-  {
-    deep: true, // 如果要在对象内部的字段变化时触发, 需要加上这行
-    immediate: true, // 数据初始化时立即执行
+  watch(
+    student,
+    (newVal, oldVal) => {
+      studentInfo.value = `Name: ${newVal.name}, Age: ${newVal.age}`;
+    },
+    {
+      deep: true, // 如果要在对象内部的字段变化时触发, 需要加上这行
+      immediate: true, // 数据初始化时立即执行
+    }
+  );
+
+  function changeName() {
+    student.value.name = "Jerry";
   }
-);
-
-function changeName() {
-  student.value.name = "Jerry";
-}
 </script>
 
 <template>
@@ -48,22 +48,22 @@ function changeName() {
 
 ## 监听 reactive 对象
 
-```vue
+```html
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
+  import { reactive, watch } from "vue";
 
-let student = reactive({
-  name: "Tom",
-  age: 18,
-});
+  let student = reactive({
+    name: "Tom",
+    age: 18,
+  });
 
-watch(student, (newVal, oldVal) => {
-  console.log("student changed", newVal, oldVal);
-}); // 不需要加 deep: true 对象内部的字段变化就可以触发
+  watch(student, (newVal, oldVal) => {
+    console.log("student changed", newVal, oldVal);
+  }); // 不需要加 deep: true 对象内部的字段变化就可以触发
 
-function changeName() {
-  student.name = "Jerry";
-}
+  function changeName() {
+    student.name = "Jerry";
+  }
 </script>
 
 <template>
@@ -78,25 +78,25 @@ function changeName() {
 
 ## 监听 reactive 对象里的某个字段
 
-```vue
+```html
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
+  import { reactive, watch } from "vue";
 
-let student = reactive({
-  name: "Tom",
-  age: 18,
-});
+  let student = reactive({
+    name: "Tom",
+    age: 18,
+  });
 
-watch(
-  () => student.name, // 要写成函数形式
-  (newVal, oldVal) => {
-    console.log("student name changed", newVal, oldVal);
+  watch(
+    () => student.name, // 要写成函数形式
+    (newVal, oldVal) => {
+      console.log("student name changed", newVal, oldVal);
+    }
+  );
+
+  function changeName() {
+    student.name = "Jerry";
   }
-);
-
-function changeName() {
-  student.name = "Jerry";
-}
 </script>
 
 <template>
@@ -111,27 +111,27 @@ function changeName() {
 
 ## 监听多个数据
 
-```vue
+```html
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
+  import { reactive, watch } from "vue";
 
-let student = reactive({
-  name: "Tom",
-  age: 18,
-});
+  let student = reactive({
+    name: "Tom",
+    age: 18,
+  });
 
-watch(
-  //[student.name, student.age], // ref对象的写法, 不需要用函数
-  [() => student.name, () => student.age], // 把要监听的多个数据合并成一个数组
-  (newVal, oldVal) => {
-    // 此时newVal和oldVal都是包含name和age值的数组
-    console.log("student name or age changed", newVal, oldVal);
+  watch(
+    //[student.name, student.age], // ref对象的写法, 不需要用函数
+    [() => student.name, () => student.age], // 把要监听的多个数据合并成一个数组
+    (newVal, oldVal) => {
+      // 此时newVal和oldVal都是包含name和age值的数组
+      console.log("student name or age changed", newVal, oldVal);
+    }
+  );
+
+  function changeName() {
+    student.name = "Jerry";
   }
-);
-
-function changeName() {
-  student.name = "Jerry";
-}
 </script>
 
 <template>
