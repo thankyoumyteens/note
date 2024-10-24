@@ -19,3 +19,36 @@
 ![](../img/di1_1.jpg)
 
 ## 定积分基本定理
+
+<!--
+\begin{align}
+& 设函数 f(x) 在 [a, b] 上连续, 它的积分上限函数 \Phi (x) = \int_{a}^{x} f(t) \mathrm{d}t, \\
+& 则 \Phi '(x) = \frac{\mathrm{d} }{\mathrm{d} x} \Phi (x) = f(x) \\
+\end{align}
+-->
+
+![](../img/di1_2.jpg)
+
+证明
+
+<!--
+\begin{align}
+& \Delta \Phi (x) = \Phi (x + \Delta x) - \Phi (x) \\
+& = \int_{a}^{x + \Delta x} f(t) \mathrm{d}t - \int_{a}^{x} f(t) \mathrm{d}t \\
+& = \int_{a}^{x} f(t) \mathrm{d}t + \int_{x}^{x + \Delta x} f(t) \mathrm{d}t - \int_{a}^{x} f(t) \mathrm{d}t \\
+& = \int_{x}^{x + \Delta x} f(t) \mathrm{d}t \\
+& 因为 f(x) 在 [a, b] 上连续, 根据积分中值定理 \\
+& 存在 \xi \in [x, x + \Delta x] \subset [a, b], \\
+& 使 \int_{x}^{x + \Delta x} f(t) \mathrm{d}t = f(\xi)\Delta x \\
+& 把 \Delta x 移到左边: \frac{\Delta \Phi (x)}{\Delta x}  = f(\xi) \\
+& 两边取极限 \lim_{\Delta x \to 0} \frac{\Delta \Phi (x)}{\Delta x} = \lim_{\Delta x \to 0} f(\xi) \\
+& 因为 \xi \in [x, x + \Delta x], 所以当 \Delta x \to 0 时, \xi \to x \\
+& 所以 \lim_{\Delta x \to 0} \frac{\Delta \Phi (x)}{\Delta x} = \lim_{\xi \to x} f(\xi) \\
+& 因为 f(x) 在 [a, b] 上连续, \\
+& 所以极限值等于函数值: \lim_{\xi \to x} f(\xi) = f(x) \\
+& 所以 \lim_{\Delta x \to 0} \frac{\Delta \Phi (x)}{\Delta x} = f(x) \\
+& 根据导数的定义: \Phi '(x) = \frac{\mathrm{d} }{\mathrm{d} x} \Phi (x) = f(x) \\
+\end{align}
+-->
+
+![](../img/di1_3.jpg)
