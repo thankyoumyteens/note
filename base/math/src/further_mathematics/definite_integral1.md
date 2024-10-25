@@ -52,3 +52,14 @@
 -->
 
 ![](../img/di1_3.jpg)
+
+<!--
+\begin{align}
+& 1、若 f(x) 在 [a, b] 上连续, 则 f(x) 一定存在原函数 \\
+& 2、\Phi (x) = \int_{a}^{x} f(t) \mathrm{d}t 就是 f(x) 的一个原函数 \\
+& 3、\frac{\mathrm{d}}{\mathrm{d} x} \int_{a}^{\Phi (x)} f(t) \mathrm{d}t
+= f[\Phi (x)] \Phi '(x) \\
+\end{align}
+-->
+
+![](../img/di1_4.jpg)
