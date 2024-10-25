@@ -3,6 +3,7 @@
 - [基础](./base/base.md)
   - [安装go](./base/install.md)
   - [Hello World](./base/quick_start.md)
+  - [交叉编译](./base/compile.md)
   - [数据类型](./base/type/type.md)
     - [类型检查](./base/type/type_of.md)
     - [字符串类型转换](./base/type/cast.md)

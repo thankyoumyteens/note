@@ -19,13 +19,13 @@ public class HelloWorld {
 2. 编译
 
 ```sh
-javac HelloWorld.java
+graalvm-jdk-21.0.5+9.1/Contents/Home/bin/javac HelloWorld.java
 ```
 
 3. 生成可执行文件
 
 ```sh
-/graalvm-jdk-21.0.4+8.1/Contents/Home/bin/native-image HelloWorld
+graalvm-jdk-21.0.5+9.1/Contents/Home/bin/native-image HelloWorld
 ```
 
 4. 执行
