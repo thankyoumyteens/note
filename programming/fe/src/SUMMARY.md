@@ -75,6 +75,8 @@
     - [router-link](./vue3/route/router_link.md)
     - [router-link传参](./vue3/route/params.md)
     - [编程式路由导航](./vue3/route/js.md)
+    - [重定向](./vue3/route/redirect.md)
+  - [Pinia](./vue3/pinia/pinia.md)
 
 - [React](./react/react.md)
   - [基础](./react/base/base.md)
