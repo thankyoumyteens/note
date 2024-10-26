@@ -42,27 +42,41 @@ spring:
         # 省略...
 ```
 
-3. 切换数据源
+3. 数据源 oracle01 的 mapper
 
 ```java
-// @DS 可以注解在方法上或类上，同时存在就近原则 方法上注解 优先于 类上注解。
+// @DS可以注解在方法上或类上，同时存在的话, 方法上的注解优先于类上的注解
 // 没有@DS时, 使用默认数据源
-@Service
+@DS("oracle01")
+public public interface WordsMapper extends BaseMapper<Words> {
+}
+```
+
+4. 数据源 mysql01 的 mapper
+
+```java
 @DS("mysql01")
-public class UserServiceImpl implements UserService {
+public interface BookMapper extends BaseMapper<Book> {
+}
+```
 
+5. 使用不同的 mapper
+
+```java
+@Component
+public class ConsoleApp implements CommandLineRunner {
     @Autowired
-    private OrderMapper orderMapper;
+    private WordsMapper wordsMapper;
     @Autowired
-    private ProductMapper productMapper;
+    private BookMapper bookMapper;
 
-    public List queryOrder() {
-        return orderMapper.queryAll();
-    }
-
-    @DS("oracle01")
-    public List queryProduct() {
-        return productMapper.queryAll();
+    @Override
+    public void run(String... args) throws Exception {
+        List<Words> words = wordsMapper.selectList(Wrappers.<Words>query());
+        System.out.println(words);
+        System.out.println("--------------------------------------------------");
+        List<Book> books = bookMapper.selectList(Wrappers.<Book>query());
+        System.out.println(books);
     }
 }
 ```

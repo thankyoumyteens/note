@@ -56,7 +56,7 @@ flush privileges;
 6. 允许远程连接
 
 ```sh
-vim mariadb.conf.d/50-server.cnf
+vim /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # 在 [mysqld] 下添加:
 # bind-address = 0.0.0.0

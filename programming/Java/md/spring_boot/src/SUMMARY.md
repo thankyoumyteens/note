@@ -13,6 +13,7 @@
   - [HibernateValidator](./base/validator.md)
 
 - [SpringBoot集成](./integration/integration.md)
+  - [连接数据库](./integration/datasource.md)
   - [集成Mybatis](./integration/mybatis.md)
   - [集成MybatisPlus](./integration/mybatis_plus.md)
   - [集成JPA](./integration/jpa.md)

@@ -1,7 +1,8 @@
 # 安装 git
 
 ```sh
-apt-get install git
+sudo apt-get install git
+git -v
 ```
 
 # 初始化git
