@@ -46,7 +46,7 @@ sudo mysql -u root -p
 -- 创建数据库
 create database `db_test`;
 -- 创建用户
-create user '用户名'@'%' identified by '密码';
+create user 用户名@'%' identified by '密码';
 -- 授权
 grant SELECT, INSERT, UPDATE, REFERENCES, DELETE, CREATE, DROP, ALTER, INDEX, CREATE VIEW, SHOW VIEW on `db_test`.* to '用户名'@'%';
 -- 刷新权限

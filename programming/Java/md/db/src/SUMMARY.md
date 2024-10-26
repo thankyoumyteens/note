@@ -1,6 +1,12 @@
 # Summary
 
 - [MySQL](./mysql/mysql.md)
+  - [用户](./mysql/user/user.md)
+    - [查询用户](./mysql/user/select.md)
+    - [创建用户](./mysql/user/create.md)
+    - [修改密码](./mysql/user/change_pwd.md)
+    - [锁定用户](./mysql/user/lock.md)
+    - [删除用户](./mysql/user/delete.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 
