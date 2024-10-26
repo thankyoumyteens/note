@@ -21,6 +21,9 @@
   - [集成Kafka](./integration/kafka.md)
   - [集成WebSocket](./integration/ws_project.md)
 
+- [Mybatis](./mybatis/mybatis.md)
+  - [多数据源](./mybatis/dynamic_datasource.md)
+
 - [Mybatis Plus](./mybatis_plus/mybatis_plus.md)
   - [分页](./mybatis_plus/page.md)
   - [多数据源](./mybatis_plus/dynamic_datasource.md)
