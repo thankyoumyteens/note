@@ -77,6 +77,10 @@
     - [编程式路由导航](./vue3/route/js.md)
     - [重定向](./vue3/route/redirect.md)
   - [Pinia](./vue3/pinia/pinia.md)
+    - [创建state](./vue3/pinia/create.md)
+    - [读取state的值](./vue3/pinia/get.md)
+    - [修改state的值](./vue3/pinia/set.md)
+    - [actions](./vue3/pinia/actions.md)
 
 - [React](./react/react.md)
   - [在HTML中使用](./react/base/html.md)
