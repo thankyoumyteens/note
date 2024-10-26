@@ -10,16 +10,18 @@ git checkout -b jdk-21-ga jdk-21-ga
 
 ## 下载 Bootstrap JDK
 
-[bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz](https://download.bell-sw.com/java/21.0.2+14/bellsoft-jdk21.0.2+14-macos-aarch64.tar.gz)
+[华为云 openjdk 镜像](https://mirrors.huaweicloud.com/openjdk/)
 
-[华为云 openjdk 镜像](https://mirrors.huaweicloud.com/openjdk/21.0.2/openjdk-21.0.2_macos-aarch64_bin.tar.gz)
-
-[清华 Adoptium 镜像](https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jdk/aarch64/mac/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.3_9.tar.gz)
+[清华 Adoptium 镜像](https://mirrors.tuna.tsinghua.edu.cn/Adoptium/)
 
 ## 安装其他依赖:
 
 ```sh
-sudo apt-get install -y build-essential autoconf zip unzip libasound2-dev libcups2-dev libfontconfig1-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+sudo apt-get update
+
+sudo apt-get install -y build-essential autoconf zip unzip
+
+sudo apt-get install -y libasound2-dev libcups2-dev libfontconfig1-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 ```
 
 ## 编译

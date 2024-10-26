@@ -81,6 +81,7 @@
     - [读取state的值](./vue3/pinia/get.md)
     - [修改state的值](./vue3/pinia/set.md)
     - [actions](./vue3/pinia/actions.md)
+    - [getters](./vue3/pinia/getters.md)
 
 - [React](./react/react.md)
   - [在HTML中使用](./react/base/html.md)

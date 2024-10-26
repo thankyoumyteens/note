@@ -1,7 +1,7 @@
 # 安装 git
 
 ```sh
-sudo apt-get install git
+sudo apt-get install -y git
 git -v
 ```
 
