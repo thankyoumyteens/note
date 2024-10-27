@@ -63,3 +63,29 @@
 -->
 
 ![](../img/di1_4.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& \;\;\;\; \lim_{x \to 0} \frac{\int_{0}^{x} e^{-t^2} \mathrm{d}t - x}{x^3} \\
+& {\color{Green} // 被积函数和 x 无关, 用洛必达法则对 x 求导} \\
+& = \lim_{x \to 0} \frac{(\int_{0}^{x} e^{-t^2} \mathrm{d}t - x)'}{3x^2} \\
+& {\color{Green} // \frac{\mathrm{d}}{\mathrm{d} x} \int_{a}^{\Phi (x)} f(t) \mathrm{d}t
+= f[\Phi (x)] \Phi '(x)} \\
+& = \lim_{x \to 0} \frac{ e^{-x^2} - 1}{3x^2} \\
+& = \frac{1}{3} \lim_{x \to 0} \frac{ e^{-x^2} - 1}{x^2} \\
+& {\color{Green} // 继续用洛必达法则} \\
+& = \frac{1}{3} \lim_{x \to 0} \frac{ -2x e^{-x^2}}{2x} \\
+& = - \frac{1}{3} \lim_{x \to 0} e^{-x^2} \\
+& = - \frac{1}{3} \\
+\end{align}
+-->
+
+![](../img/di1_5.jpg)
+
+例题 2
+
+<!--
+
+-->
