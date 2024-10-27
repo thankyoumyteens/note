@@ -82,6 +82,9 @@
     - [修改state的值](./vue3/pinia/set.md)
     - [actions](./vue3/pinia/actions.md)
     - [getters](./vue3/pinia/getters.md)
+    - [subscribe](./vue3/pinia/subscribe.md)
+    - [使用组合式API创建state](./vue3/pinia/create2.md)
+  - [组件通信](./vue3/communicate/communicate.md)
 
 - [React](./react/react.md)
   - [在HTML中使用](./react/base/html.md)
