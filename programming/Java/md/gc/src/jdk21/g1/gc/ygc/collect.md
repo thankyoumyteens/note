@@ -32,22 +32,27 @@ void G1YoungCollector::collect() {
 
   G1YoungGCVerifierMark vm(this);
   {
-    // Actual collection work starts and is executed (only) in this scope.
+    // 这里是实际开始回收的地方
 
     // 记录 Young GC 实际开始的时间
     policy()->record_young_collection_start();
-
+    // 选择回收集
     pre_evacuate_collection_set(jtm.evacuation_info());
-
-    G1ParScanThreadStateSet per_thread_states(_g1h,
+    // 记录每个worker线程执行GC的结果
+    G1ParScanThreadStateSet per_thread_states(_g1h, // G1堆的指针
+                                              // worker线程数
                                               workers()->active_workers(),
+                                              // 回收集
                                               collection_set(),
+                                              //用来记录每个分区是否疏散(evacuation)失败
+                                              // 并记录疏散失败的原因
+                                              // 用来加快 post evacuation 阶段的处理速度
                                               &_evac_failure_regions);
 
     // 进行 Mixed GC 时, 会有部分老年代分区加入到回收集, 这些老年代分区称为 optional region
     bool may_do_optional_evacuation = collection_set()->optional_region_length() != 0;
-    // Actually do the work of evacuating the parts of the collection set.
-    // The has_optional_evacuation_work flag for the initial collection set
+    // 实际执行疏散回收集的工作
+    // The may_do_optional_evacuation flag for the initial collection set
     // evacuation indicates whether one or more optional evacuation steps may
     // follow.
     // If not set, G1 can avoid clearing the card tables of regions that we scan
@@ -82,6 +87,40 @@ void G1YoungCollector::collect() {
   TASKQUEUE_STATS_ONLY(_g1h->task_queues()->print_and_reset_taskqueue_stats("Oop Queue");)
 }
 
+```
+
+## 设置 worker 线程数
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
+
+void G1YoungCollector::set_young_collection_default_active_worker_threads(){
+  uint active_workers = WorkerPolicy::calc_active_workers(workers()->max_workers(),
+                                                          workers()->active_workers(),
+                                                          Threads::number_of_non_daemon_threads());
+  active_workers = workers()->set_active_workers(active_workers);
+  log_info(gc,task)("Using %u workers of %u for evacuation", active_workers, workers()->max_workers());
+}
+```
+
+## 等待根分区扫描完成
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
+
+void G1YoungCollector::wait_for_root_region_scanning() {
+  Ticks start = Ticks::now();
+  // We have to wait until the CM threads finish scanning the
+  // root regions as it's the only way to ensure that all the
+  // objects on them have been correctly scanned before we start
+  // moving them during the GC.
+  bool waited = concurrent_mark()->wait_until_root_region_scan_finished();
+  Tickspan wait_time;
+  if (waited) {
+    wait_time = (Ticks::now() - start);
+  }
+  phase_times()->record_root_region_scan_wait_time(wait_time.seconds() * MILLIUNITS);
+}
 ```
 
 ## 选择回收集
