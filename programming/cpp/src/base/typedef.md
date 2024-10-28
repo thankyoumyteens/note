@@ -1,6 +1,6 @@
-# typedef
+# 类型别名
 
-为 int 取一个别名 MyInt:
+为 int 取一个别名 MyInt 的三种方法:
 
 1. `#define MyInt int`
 2. `typedef int MyInt;`

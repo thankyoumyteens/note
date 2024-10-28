@@ -7,6 +7,7 @@
     - [修改密码](./mysql/user/change_pwd.md)
     - [锁定用户](./mysql/user/lock.md)
     - [删除用户](./mysql/user/delete.md)
+  - [权限](./mysql/grant/grant.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 

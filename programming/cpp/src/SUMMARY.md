@@ -7,7 +7,7 @@
   - [变量](./base/variable.md)
   - [常量](./base/const.md)
   - [枚举](./base/enum.md)
-  - [typedef](./base/typedef.md)
+  - [类型别名](./base/typedef.md)
   - [位运算](./base/bit_operation.md)
     - [取出一个数指定位的值](./base/xor/bit_value.md)
     - [两个数拼在一起](./base/xor/concat_value.md)
