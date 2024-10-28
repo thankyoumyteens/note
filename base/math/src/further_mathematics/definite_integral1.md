@@ -87,5 +87,32 @@
 例题 2
 
 <!--
+\begin{align}
+& \;\;\;\; f(x) 连续, f(0) = 0, f'(0) = \pi,
+求 \lim_{x \to 0} \frac{\int_{0}^{x} f(t) \mathrm{d}t}{x - \ln(1 + x)} \\
+& {\color{Green} // 麦克劳林公式 \ln(1 + x) = x - \frac{x^{2}}{2} + \frac{x^{3}}{3} - ... + o(x^{n})} \\
+& {\color{Green} // 用一个 x 把分母的 x 消掉, 再多加一个 - \frac{x^{2}}{2} 就不需要继续写了} \\
+& {\color{Green} // 写成: \ln(1 + x) = x - \frac{x^{2}}{2} + o(x^2)} \\
+& {\color{Green} // 分母等价于: x - \ln(1 + x) = \frac{x^{2}}{2} + o(x^2)} \\
+& = \lim_{x \to 0} \frac{\int_{0}^{x} f(t) \mathrm{d}t}{\frac{x^{2}}{2} + o(x^2)} \\
+& {\color{Green} // 由于是求极限, 所以可以去掉高阶无穷小} \\
+& = \lim_{x \to 0} \frac{\int_{0}^{x} f(t) \mathrm{d}t}{\frac{x^{2}}{2}} \\
+& {\color{Green} // 被积函数和 x 无关, 用洛必达法则对 x 求导} \\
+& = \lim_{x \to 0} \frac{(\int_{0}^{x} f(t) \mathrm{d}t)'}{x} \\
+& {\color{Green} // \frac{\mathrm{d}}{\mathrm{d} x} \int_{a}^{\Phi (x)} f(t) \mathrm{d}t
+= f[\Phi (x)] \Phi '(x)} \\
+& = \lim_{x \to 0} \frac{f(x)}{x} \\
+& {\color{Green} // 用导数的定义} \\
+& = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = f'(0) = \pi \\
+\end{align}
+-->
 
+![](../img/di1_6.jpg)
+
+例题 3
+
+<!--
+\begin{align}
+& \;\;\;\; 设函数 f(x) 连续, \varphi (x) = \int_{0}^{x} (x - t)f(t) \mathrm{d}t, 求 \varphi ''(x) \\
+\end{align}
 -->

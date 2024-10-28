@@ -88,6 +88,12 @@
   - [go-ora](./oracle/go_ora/go_ora.md)
     - [查询结果转成map](./oracle/go_ora/list_map.md)
 
+- [模版渲染](./template/template.md)
+  - [访问结构体的字段](./template/struct.md)
+  - [声明变量](./template/var.md)
+  - [内置函数](./template/func.md)
+  - [分支](./template/if.md)
+
 - [wails](./wails/wails.md)
   - [Hello World](./wails/quick_start.md)
   - [使用Element Plus](./wails/element.md)
