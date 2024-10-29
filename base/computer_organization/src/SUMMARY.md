@@ -11,3 +11,4 @@
   - [定点数](./number_system/fixed_point_number/fixed_point_number.md)
     - [补码](./number_system/fixed_point_number/complement.md)
     - [溢出](./number_system/fixed_point_number/overflow.md)
+    - [移位运算](./number_system/fixed_point_number/shift_operation.md)
