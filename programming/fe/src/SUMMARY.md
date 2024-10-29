@@ -87,6 +87,8 @@
   - [组件通信](./vue3/communicate/communicate.md)
     - [通过props](./vue3/communicate/props.md)
     - [自定义事件](./vue3/communicate/event.md)
+    - [mitt](./vue3/communicate/mitt.md)
+    - [v-model](./vue3/communicate/v_model.md)
 
 - [React](./react/react.md)
   - [在HTML中使用](./react/base/html.md)
