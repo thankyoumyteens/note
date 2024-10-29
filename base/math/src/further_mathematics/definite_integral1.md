@@ -114,5 +114,27 @@
 <!--
 \begin{align}
 & \;\;\;\; 设函数 f(x) 连续, \varphi (x) = \int_{0}^{x} (x - t)f(t) \mathrm{d}t, 求 \varphi ''(x) \\
+& {\color{Green} // 被积函数中有 x, 需要把 x 处理掉} \\
+& {\color{Green} // 积分变量是 t, x 可以当作常数} \\
+& \;\;\;\; \int_{0}^{x} (x - t)f(t) \mathrm{d}t \\
+& = \int_{0}^{x} xf(t) \mathrm{d}t - \int_{0}^{x} tf(t) \mathrm{d}t \\
+& {\color{Green} // x 算常数, 把它提出去} \\
+& = x \int_{0}^{x} f(t) \mathrm{d}t - \int_{0}^{x} tf(t) \mathrm{d}t \\
+& {\color{Green} // 对 x 求导} \\
+& \;\;\;\; \varphi '(x) = = (x \int_{0}^{x} f(t) \mathrm{d}t)' - (\int_{0}^{x} tf(t) \mathrm{d}t)' \\
+& {\color{Green} // \frac{\mathrm{d}}{\mathrm{d} x} \int_{a}^{\Phi (x)} f(t) \mathrm{d}t
+= f[\Phi (x)] \Phi '(x)} \\
+& = [\int_{0}^{x} f(t) \mathrm{d}t + x f(x)] - x f(x) \\
+& = \int_{0}^{x} f(t) \mathrm{d}t \\
+& \;\;\;\; \varphi ''(x) = = (\int_{0}^{x} f(t) \mathrm{d}t)' \\
+& = f(x) \\
 \end{align}
+-->
+
+![](../img/di1_7.jpg)
+
+### 牛顿一莱布尼茨公式
+
+<!--
+
 -->
