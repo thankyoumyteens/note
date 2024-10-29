@@ -8,6 +8,7 @@
     - [锁定用户](./mysql/user/lock.md)
     - [删除用户](./mysql/user/delete.md)
   - [权限](./mysql/grant/grant.md)
+    - [授权](./mysql/grant/p.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 

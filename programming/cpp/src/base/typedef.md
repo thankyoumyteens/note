@@ -12,6 +12,7 @@
 #include <iostream>
 
 typedef int (*MyAdd)(int, int);
+using MyAdd = int (*)(int, int);
 
 int add(int a, int b) {
     return a + b;

@@ -93,6 +93,7 @@
   - [声明变量](./template/var.md)
   - [内置函数](./template/func.md)
   - [分支](./template/if.md)
+  - [遍历](./template/for.md)
 
 - [wails](./wails/wails.md)
   - [Hello World](./wails/quick_start.md)
