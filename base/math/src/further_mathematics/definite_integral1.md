@@ -136,5 +136,31 @@
 ### 牛顿一莱布尼茨公式
 
 <!--
-
+\begin{align}
+& 设 f(x) 在 [a, b] 上连续, 且 F(x) 是 f(x) 的原函数, \\
+& 则 \int_{a}^{b} f(x) \mathrm{d}x = F(b) - F(a) \\
+\end{align}
 -->
+
+![](../img/di1_8.jpg)
+
+证明
+
+<!--
+\begin{align}
+& 令 \Phi (x) = \int_{a}^{x} f(t) \mathrm{d}t, F'(x) = f(x), \\
+& 因为 \Phi '(x) = f(x), 所以 \Phi (x) 和 F(x) 是 f(x) 的两个原函数, \\
+& 因为同一个函数的任意两个原函数之差都是常数, \\
+& 所以 F(x) - \Phi (x) = C \\
+& 而 x 的取值不影响两个原函数的差, \\
+& 所以 F(a) - \Phi (a) = F(b) - \Phi (b) = C \\
+& 而 \Phi (a) = \int_{a}^{a} f(t) \mathrm{d}t, 是一条线段, 面积为 0, \\
+& 所以 \Phi (a) = 0 \\
+& 所以 F(a) = F(b) - \Phi (b) \\
+& 变形 F(b) - F(a) = \Phi (b) \\
+& 而 \Phi (b) = \int_{a}^{b} f(t) \mathrm{d}t \\
+& 所以 F(b) - F(a) = \int_{a}^{b} f(t) \mathrm{d}t \\
+\end{align}
+-->
+
+![](../img/di1_9.jpg)

@@ -12,3 +12,5 @@
     - [补码](./number_system/fixed_point_number/complement.md)
     - [溢出](./number_system/fixed_point_number/overflow.md)
     - [移位运算](./number_system/fixed_point_number/shift_operation.md)
+    - [乘法](./number_system/fixed_point_number/mul.md)
+    - [除法](./number_system/fixed_point_number/div.md)
