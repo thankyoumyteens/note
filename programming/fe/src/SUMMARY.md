@@ -89,6 +89,10 @@
     - [自定义事件](./vue3/communicate/event.md)
     - [mitt](./vue3/communicate/mitt.md)
     - [v-model](./vue3/communicate/v_model.md)
+  - [插槽](./vue3/slot/slot.md)
+    - [默认插槽](./vue3/slot/default.md)
+    - [具名插槽](./vue3/slot/name.md)
+    - [作用域插槽](./vue3/slot/scope.md)
 
 - [React](./react/react.md)
   - [在HTML中使用](./react/base/html.md)
