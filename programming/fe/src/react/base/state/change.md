@@ -10,13 +10,16 @@ class MyApp extends React.Component {
       name: "React",
     };
   }
+  changeValue() {
+    // 使用 setState 函数修改state中的数据
+    //参数的对象中只需要传入要修改的数据即可
+    this.setState({ name: "World" });
+  }
   render() {
     return (
       <div>
         <span>Hello {this.state.name}</span>
-        {/* 使用 setState 函数修改state中的数据 */}
-        {/* 参数的对象中只需要传入要修改的数据即可 */}
-        <button onClick={() => this.setState({ name: "World" })}>Change</button>
+        <button onClick={this.changeValue.bind(this)}>Change</button>
       </div>
     );
   }
