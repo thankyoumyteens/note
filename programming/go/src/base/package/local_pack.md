@@ -71,16 +71,15 @@ module hello
 
 go 1.23.1
 
+// => 左边的名字随便取
+// => 右边使用绝对路径和相对路径都行
 replace project2 => ../project2
+
+// 版本号随便写, 但是必须是 vX.X.X 的形式, 至少要两个点
+require project2 v1.0.0
 ```
 
-4. 在 project1 下执行
-
-```sh
-go mod tidy
-```
-
-5. hello.go
+4. hello.go
 
 ```go
 package main
@@ -93,6 +92,12 @@ import (
 func main() {
 	fmt.Println(test.Test())
 }
+```
+
+5. 在 project1 下执行
+
+```sh
+go mod tidy
 ```
 
 6. 运行
