@@ -94,6 +94,7 @@
   - [内置函数](./template/func.md)
   - [分支](./template/if.md)
   - [遍历](./template/for.md)
+  - [自定义函数](./template/cfunc.md)
 
 - [wails](./wails/wails.md)
   - [Hello World](./wails/quick_start.md)

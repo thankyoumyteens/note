@@ -4,6 +4,9 @@
 
 ```sql
 grant 权限 on 权限级别 to 用户;
+
+-- 比如
+grant all on *.* to test@'%';
 ```
 
 ## 权限级别
@@ -13,7 +16,7 @@ grant 权限 on 权限级别 to 用户;
 - 单表级别: `数据库名.表名`, 存储位置: mysql.tables_priv
 - 列级别: `select(列名1,列名2,...)`, 存储位置: mysql.columns_priv
 
-## 权限列表
+## 权限
 
 查看全部可用的权限列表:
 
@@ -27,7 +30,7 @@ show privileges;
 - 开发: `Create, Create routine, Create temporary tables, Create view, Delete, Event, Execute, Insert, References, Select, Show databases, Show view, Trigger, Update`
 - 业务: `Delete, Insert, Select, Update`
 
-全部可用的权限列表:
+全部可用的权限:
 
 | Privilege                | Context                               | Comment                                                            |
 | ------------------------ | ------------------------------------- | ------------------------------------------------------------------ |

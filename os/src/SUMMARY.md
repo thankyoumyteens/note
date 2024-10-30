@@ -13,6 +13,7 @@
     - [IDE设置](./macos/ide_settings.md)
     - [UTM安装Win11Arm](./macos/win11_arm.md)
   - [使用](./macos/u.md)
+    - [ls结果显示颜色](./macos/ls_color.md)
     - [终端中的快捷键](./macos/terminal_shortcut.md)
     - [端口占用](./macos/port.md)
     - [tar使用](./macos/tar.md)
