@@ -86,6 +86,8 @@
 
 - [oracle](./oracle/oracle.md)
   - [go-ora](./oracle/go_ora/go_ora.md)
+    - [增删改](./oracle/go_ora/update.md)
+    - [查](./oracle/go_ora/select.md)
     - [查询结果转成map](./oracle/go_ora/list_map.md)
 
 - [模版渲染](./template/template.md)
