@@ -93,3 +93,4 @@
     - [切换数据传输方式](./tracing/zip_kin/use_mq.md)
     - [持久化](./tracing/zip_kin/persistence.md)
   - [SkyWalking](./tracing/sky_walking/sky_walking.md)
+    - [服务端搭建](./tracing/sky_walking/server.md)
