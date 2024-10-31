@@ -1,5 +1,7 @@
 # 定积分基本定理与特殊性质
 
+变积分限的函数
+
 <!--
 \begin{align}
 & 不定积分 \int f(x) \mathrm{d}x \ne \int f(t) \mathrm{d}t \ne \int f(u) \mathrm{d}u \\
@@ -164,3 +166,17 @@
 -->
 
 ![](../img/di1_9.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& \;\;\;\; \int_{0}^{1} \frac{x}{1 + x^4} \mathrm{d}x \\
+& = \frac{1}{2} \int_{0}^{1} \frac{1}{1 + (x^2)^2} \mathrm{d}(x^2) \\
+& = \frac{1}{2} \arctan x^2 \big|_{0}^{1} \\
+& = \frac{1}{2} \arctan 1^2 - \frac{1}{2} \arctan 0^2 \\
+& = \frac{\pi}{8}
+\end{align}
+-->
+
+![](../img/di1_10.jpg)
