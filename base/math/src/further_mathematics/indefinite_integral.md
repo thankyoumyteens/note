@@ -68,6 +68,7 @@
 & 22、\int \frac{1}{x^2 - a^2} \mathrm{d}x = \frac{1}{2a} \ln | \frac{x - a}{x + a} | + C \\
 & 23、\int \sqrt{a^2 - x^2} \mathrm{d}x = \frac{a^2}{2} \arcsin \frac{x}{a} +
 \frac{x}{2} \sqrt{a^2 - x^2} + C \\
+& 24、\int \frac{1}{2\sqrt{x}} \mathrm{d}x = \sqrt{x} + C \\
 \end{align}
 -->
 
