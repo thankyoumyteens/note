@@ -14,3 +14,4 @@
     - [移位运算](./number_system/fixed_point_number/shift_operation.md)
     - [乘法](./number_system/fixed_point_number/mul.md)
     - [除法](./number_system/fixed_point_number/div.md)
+  - [浮点数](./number_system/floating_point_number/floating_point_number.md)

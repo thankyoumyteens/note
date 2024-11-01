@@ -109,6 +109,8 @@
   - [this指向问题](./react/base/this.md)
   - [props](./react/base/props/props.md)
     - [基本用法](./react/base/props/base.md)
+    - [限制props类型](./react/base/props/prop_type.md)
+    - [props默认值](./react/base/props/default_props.md)
   - [reducer](./react/base/reducer.md)
   - [onClick 传参](./react/base/event_func_params.md)
   - [阻止事件冒泡](./react/base/stop_propagation.md)
