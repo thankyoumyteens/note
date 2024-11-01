@@ -1,7 +1,7 @@
 # this 指向问题
 
 ```jsx
-class MyApp extends React.Component {
+class App extends React.Component {
   constructor(props) {
     // constructor中的this指向MyApp组件的实例
     super(props);

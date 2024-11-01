@@ -13,7 +13,7 @@ export default Home;
 2. 在 App.js 中使用:
 
 ```jsx
-import Home from "./components/Home";
+import Home from "./Home";
 
 function App() {
   return (
