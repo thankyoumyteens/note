@@ -4,89 +4,71 @@
 // --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
 
 void G1YoungCollector::collect() {
-  // Do timing/tracing/statistics/pre- and post-logging/verification work not
-  // directly related to the collection. They should not be accounted for in
-  // collection work timing.
+    // Do timing/tracing/statistics/pre- and post-logging/verification work not
+    // directly related to the collection. They should not be accounted for in
+    // collection work timing.
 
-  // The G1YoungGCTraceTime message depends on collector state, so must come after
-  // determining collector state.
-  G1YoungGCTraceTime tm(this, _gc_cause);
+    // The G1YoungGCTraceTime message depends on collector state, so must come after
+    // determining collector state.
+    G1YoungGCTraceTime tm(this, _gc_cause);
 
-  // JFR
-  G1YoungGCJFRTracerMark jtm(gc_timer_stw(), gc_tracer_stw(), _gc_cause);
-  // JStat/MXBeans
-  G1YoungGCMonitoringScope ms(monitoring_support(),
-                              !collection_set()->candidates()->is_empty() /* all_memory_pools_affected */);
-  // Create the heap printer before internal pause timing to have
-  // heap information printed as last part of detailed GC log.
-  G1HeapPrinterMark hpm(_g1h);
-  // Young GC internal pause timing
-  G1YoungGCNotifyPauseMark npm(this);
+    // JFR, JFR 是 Java Flight Recorder 的缩写，它是 Java 平台的一个性能诊断工具，用于收集应用程序运行时的数据
+    G1YoungGCJFRTracerMark jtm(gc_timer_stw(), gc_tracer_stw(), _gc_cause);
+    // JStat/MXBeans
+    G1YoungGCMonitoringScope ms(monitoring_support(),
+                                !collection_set()->candidates()->is_empty() /* all_memory_pools_affected */);
+    // Create the heap printer before internal pause timing to have
+    // heap information printed as last part of detailed GC log.
+    G1HeapPrinterMark hpm(_g1h);
+    // Young GC internal pause timing
+    G1YoungGCNotifyPauseMark npm(this);
 
-  // 设置worker线程数, 并启动worker线程
-  // worker是实际执行GC的工作线程
-  set_young_collection_default_active_worker_threads();
+    // 设置worker线程数, 并启动worker线程
+    // worker是实际执行GC的工作线程
+    set_young_collection_default_active_worker_threads();
 
-  // 在进行其它操作之前, 先等待根分区扫描完成
-  wait_for_root_region_scanning();
+    // 在进行其它操作之前, 先等待根分区扫描完成
+    wait_for_root_region_scanning();
 
-  G1YoungGCVerifierMark vm(this);
-  {
-    // 这里是实际开始回收的地方
+    G1YoungGCVerifierMark vm(this);
+    {
+        // 这里是实际开始回收的地方
 
-    // 记录 Young GC 实际开始的时间
-    policy()->record_young_collection_start();
-    // 选择回收集
-    pre_evacuate_collection_set(jtm.evacuation_info());
-    // 记录每个worker线程执行GC的结果
-    G1ParScanThreadStateSet per_thread_states(_g1h, // G1堆的指针
-                                              // worker线程数
-                                              workers()->active_workers(),
-                                              // 回收集
-                                              collection_set(),
-                                              //用来记录每个分区是否疏散(evacuation)失败
-                                              // 并记录疏散失败的原因
-                                              // 用来加快 post evacuation 阶段的处理速度
-                                              &_evac_failure_regions);
+        // 记录 Young GC 实际开始的时间
+        policy()->record_young_collection_start();
 
-    // 进行 Mixed GC 时, 会有部分老年代分区加入到回收集, 这些老年代分区称为 optional region
-    bool may_do_optional_evacuation = collection_set()->optional_region_length() != 0;
-    // 实际执行疏散回收集的工作
-    // The may_do_optional_evacuation flag for the initial collection set
-    // evacuation indicates whether one or more optional evacuation steps may
-    // follow.
-    // If not set, G1 can avoid clearing the card tables of regions that we scan
-    // for roots from the heap: when scanning the card table for dirty cards after
-    // all remembered sets have been dumped onto it, for optional evacuation we
-    // mark these cards as "Scanned" to know that we do not need to re-scan them
-    // in the additional optional evacuation passes. This means that in the "Clear
-    // Card Table" phase we need to clear those marks. However, if there is no
-    // optional evacuation, g1 can immediately clean the dirty cards it encounters
-    // as nobody else will be looking at them again, saving the clear card table
-    // work later.
-    // This case is very common (young only collections and most mixed gcs), so
-    // depending on the ratio between scanned and evacuated regions (which g1 always
-    // needs to clear), this is a big win.
-    evacuate_initial_collection_set(&per_thread_states, may_do_optional_evacuation);
+        // 选择回收集
+        pre_evacuate_collection_set(jtm.evacuation_info());
 
-    if (may_do_optional_evacuation) {
-      evacuate_optional_collection_set(&per_thread_states);
+        // 记录每个worker线程执行GC的结果
+        // _g1h G1堆的指针
+        // workers()->active_workers() worker线程数
+        // collection_set() 回收集
+        // _evac_failure_regions 用来记录每个分区是否疏散(evacuation)失败,
+        //                       并记录疏散失败的原因, 用来加快 post evacuation 阶段的处理速度
+        G1ParScanThreadStateSet per_thread_states(_g1h,
+                                                  workers()->active_workers(),
+                                                  collection_set(),
+                                                  &_evac_failure_regions);
+
+        // 进行 Mixed GC 时, 会有部分老年代分区加入到回收集, 这些老年代分区称为 optional region
+        bool may_do_optional_evacuation = collection_set()->optional_region_length() != 0;
+        // 实际执行回收
+        evacuate_initial_collection_set(&per_thread_states, may_do_optional_evacuation);
+
+        if (may_do_optional_evacuation) {
+            // 回收老年代分区, Young GC 阶段不会执行到这里
+            evacuate_optional_collection_set(&per_thread_states);
+        }
+        // 后续处理工作
+        post_evacuate_collection_set(jtm.evacuation_info(), &per_thread_states);
+
+        _concurrent_operation_is_full_mark = policy()->concurrent_operation_is_full_mark("Revise IHOP");
+        jtm.report_pause_type(collector_state()->young_gc_pause_type(_concurrent_operation_is_full_mark));
+        policy()->record_young_collection_end(_concurrent_operation_is_full_mark, evacuation_failed());
     }
-    post_evacuate_collection_set(jtm.evacuation_info(), &per_thread_states);
-
-    // Refine the type of a concurrent mark operation now that we did the
-    // evacuation, eventually aborting it.
-    _concurrent_operation_is_full_mark = policy()->concurrent_operation_is_full_mark("Revise IHOP");
-
-    // Need to report the collection pause now since record_collection_pause_end()
-    // modifies it to the next state.
-    jtm.report_pause_type(collector_state()->young_gc_pause_type(_concurrent_operation_is_full_mark));
-
-    policy()->record_young_collection_end(_concurrent_operation_is_full_mark, evacuation_failed());
-  }
-  TASKQUEUE_STATS_ONLY(_g1h->task_queues()->print_and_reset_taskqueue_stats("Oop Queue");)
+    TASKQUEUE_STATS_ONLY(_g1h->task_queues()->print_and_reset_taskqueue_stats("Oop Queue");)
 }
-
 ```
 
 ## 设置 worker 线程数
@@ -94,12 +76,94 @@ void G1YoungCollector::collect() {
 ```cpp
 // --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
 
-void G1YoungCollector::set_young_collection_default_active_worker_threads(){
-  uint active_workers = WorkerPolicy::calc_active_workers(workers()->max_workers(),
-                                                          workers()->active_workers(),
-                                                          Threads::number_of_non_daemon_threads());
-  active_workers = workers()->set_active_workers(active_workers);
-  log_info(gc,task)("Using %u workers of %u for evacuation", active_workers, workers()->max_workers());
+void G1YoungCollector::set_young_collection_default_active_worker_threads() {
+    // 计算要使用的worker线程数
+    // max_workers 在G1堆初始化时被设置成JVM参数ParallelGCThreads指定的值(不指定则是0)
+    // active_workers 默认为0
+    // number_of_non_daemon_threads 用于记录JVM中非守护线程的线程数
+    uint active_workers = WorkerPolicy::calc_active_workers(workers()->max_workers(),
+                                                            workers()->active_workers(),
+                                                            Threads::number_of_non_daemon_threads());
+    // 启动worker线程
+    active_workers = workers()->set_active_workers(active_workers);
+    log_info(gc, task)("Using %u workers of %u for evacuation", active_workers, workers()->max_workers());
+}
+```
+
+### 计算要使用的 worker 线程数
+
+```cpp
+// --- src/hotspot/share/gc/shared/workerPolicy.cpp --- //
+
+uint WorkerPolicy::calc_active_workers(uintx total_workers,
+                                       uintx active_workers,
+                                       uintx application_workers) {
+    // If the user has specifically set the number of GC threads, use them.
+
+    // If the user has turned off using a dynamic number of GC threads
+    // or the users has requested a specific number, set the active
+    // number of workers to all the workers.
+
+    uint new_active_workers;
+    if (!UseDynamicNumberOfGCThreads || !FLAG_IS_DEFAULT(ParallelGCThreads)) {
+        new_active_workers = total_workers;
+    } else {
+        uintx min_workers = (total_workers == 1) ? 1 : 2;
+        new_active_workers = calc_default_active_workers(total_workers,
+                                                         min_workers,
+                                                         active_workers,
+                                                         application_workers);
+    }
+    assert(new_active_workers > 0, "Always need at least 1");
+    return new_active_workers;
+}
+```
+
+### 启动 worker 线程
+
+```cpp
+// --- src/hotspot/share/gc/shared/workerThread.cpp --- //
+
+uint WorkerThreads::set_active_workers(uint num_workers) {
+  assert(num_workers > 0 && num_workers <= _max_workers,
+         "Invalid number of active workers %u (should be 1-%u)",
+         num_workers, _max_workers);
+
+  while (_created_workers < num_workers) {
+    WorkerThread* const worker = create_worker(_created_workers);
+    if (worker == nullptr) {
+      log_error(gc, task)("Failed to create worker thread");
+      break;
+    }
+
+    _workers[_created_workers] = worker;
+    _created_workers++;
+  }
+
+  _active_workers = MIN2(_created_workers, num_workers);
+
+  log_trace(gc, task)("%s: using %d out of %d workers", _name, _active_workers, _max_workers);
+
+  return _active_workers;
+}
+
+WorkerThread* WorkerThreads::create_worker(uint name_suffix) {
+  if (is_init_completed() && InjectGCWorkerCreationFailure) {
+    return nullptr;
+  }
+
+  WorkerThread* const worker = new WorkerThread(_name, name_suffix, &_dispatcher);
+
+  if (!os::create_thread(worker, os::gc_thread)) {
+    delete worker;
+    return nullptr;
+  }
+
+  on_create_worker(worker);
+
+  os::start_thread(worker);
+
+  return worker;
 }
 ```
 
@@ -256,5 +320,93 @@ double G1CollectionSet::finalize_young_part(double target_pause_time_ms, G1Survi
   phase_times()->record_young_cset_choice_time_ms((Ticks::now() - start_time).seconds() * 1000.0);
 
   return remaining_time_ms;
+}
+```
+
+## 实际执行回收
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
+
+void G1YoungCollector::evacuate_initial_collection_set(G1ParScanThreadStateSet *per_thread_states,
+                                                       bool has_optional_evacuation_work) {
+    G1GCPhaseTimes *p = phase_times();
+
+    {
+        Ticks start = Ticks::now();
+        rem_set()->merge_heap_roots(true /* initial_evacuation */);
+        p->record_merge_heap_roots_time((Ticks::now() - start).seconds() * 1000.0);
+    }
+
+    Tickspan task_time;
+    const uint num_workers = workers()->active_workers();
+
+    Ticks start_processing = Ticks::now();
+    {
+        G1RootProcessor root_processor(_g1h, num_workers);
+        G1EvacuateRegionsTask g1_par_task(_g1h,
+                                          per_thread_states,
+                                          task_queues(),
+                                          &root_processor,
+                                          num_workers,
+                                          has_optional_evacuation_work);
+        task_time = run_task_timed(&g1_par_task);
+        // Closing the inner scope will execute the destructor for the
+        // G1RootProcessor object. By subtracting the WorkerThreads task from the total
+        // time of this scope, we get the "NMethod List Cleanup" time. This list is
+        // constructed during "STW two-phase nmethod root processing", see more in
+        // nmethod.hpp
+    }
+    Tickspan total_processing = Ticks::now() - start_processing;
+
+    p->record_initial_evac_time(task_time.seconds() * 1000.0);
+    p->record_or_add_nmethod_list_cleanup_time((total_processing - task_time).seconds() * 1000.0);
+
+    rem_set()->complete_evac_phase(has_optional_evacuation_work);
+}
+```
+
+## 后续处理工作
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
+
+void G1YoungCollector::post_evacuate_collection_set(G1EvacInfo *evacuation_info,
+                                                    G1ParScanThreadStateSet *per_thread_states) {
+    G1GCPhaseTimes *p = phase_times();
+
+    // Process any discovered reference objects - we have
+    // to do this _before_ we retire the GC alloc regions
+    // as we may have to copy some 'reachable' referent
+    // objects (and their reachable sub-graphs) that were
+    // not copied during the pause.
+    process_discovered_references(per_thread_states);
+
+    G1STWIsAliveClosure is_alive(_g1h);
+    G1KeepAliveClosure keep_alive(_g1h);
+
+    WeakProcessor::weak_oops_do(workers(), &is_alive, &keep_alive, p->weak_phase_times());
+
+    allocator()->release_gc_alloc_regions(evacuation_info);
+
+    post_evacuate_cleanup_1(per_thread_states);
+
+    post_evacuate_cleanup_2(per_thread_states, evacuation_info);
+
+    _evac_failure_regions.post_collection();
+
+    assert_used_and_recalculate_used_equal(_g1h);
+
+    _g1h->rebuild_free_region_list();
+
+    _g1h->record_obj_copy_mem_stats();
+
+    evacuation_info->set_bytes_used(_g1h->bytes_used_during_gc());
+
+    _g1h->prepare_for_mutator_after_young_collection();
+
+    _g1h->gc_epilogue(false);
+
+    _g1h->expand_heap_after_young_collection();
 }
 ```

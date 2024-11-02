@@ -42,3 +42,25 @@
 ![](../img/di2_1.jpg)
 
 例题 2
+
+<!--
+\begin{align}
+& \;\;\;\; \int_{0}^{2} x e^{-x^2} \mathrm{d}x \\
+& = \frac{1}{2} \int_{0}^{2}e^{-x^2} \mathrm{d}x(x^2) \\
+& {\color{Green} // 令 x^2 = t} \\
+& {\color{Green} // 0到2是x的积分上下限, 需要换成t的} \\
+& {\color{Green} // x取0时 t = 0} \\
+& {\color{Green} // x取2时 t = 4} \\
+& = \frac{1}{2} \int_{0}^{4}e^{-t} \mathrm{d}xt \\
+& = - \frac{1}{2} e^{-t} \big|_{0}^{4} \\
+& = \frac{1}{2} (1 - e^{-4}) \\
+\end{align}
+-->
+
+![](../img/di2_2.jpg)
+
+例题 3
+
+<!--
+
+-->
