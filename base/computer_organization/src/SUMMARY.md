@@ -15,3 +15,4 @@
     - [乘法](./number_system/fixed_point_number/mul.md)
     - [除法](./number_system/fixed_point_number/div.md)
   - [浮点数](./number_system/floating_point_number/floating_point_number.md)
+    - [IEEE754](./number_system/floating_point_number/ieee754.md)
