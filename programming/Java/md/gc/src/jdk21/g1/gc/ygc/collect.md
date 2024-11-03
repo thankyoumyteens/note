@@ -27,7 +27,8 @@ void G1YoungCollector::collect() {
     // worker是实际执行GC的工作线程
     set_young_collection_default_active_worker_threads();
 
-    // 在进行其它操作之前, 先等待根分区扫描完成
+    // 在进行其它操作之前, 先等待并发标记线程的根分区扫描执行完成
+    // 避免在并发标记线程扫描时, Young GC把对象移走
     wait_for_root_region_scanning();
 
     G1YoungGCVerifierMark vm(this);
@@ -80,7 +81,7 @@ void G1YoungCollector::set_young_collection_default_active_worker_threads() {
     // 计算要使用的worker线程数
     // max_workers 在G1堆初始化时被设置成JVM参数ParallelGCThreads指定的值(不指定则是0)
     // active_workers 默认为0
-    // number_of_non_daemon_threads 用于记录JVM中非守护线程的线程数
+    // number_of_non_daemon_threads 用于记录JVM中不是守护线程的Java线程数
     uint active_workers = WorkerPolicy::calc_active_workers(workers()->max_workers(),
                                                             workers()->active_workers(),
                                                             Threads::number_of_non_daemon_threads());
@@ -98,22 +99,74 @@ void G1YoungCollector::set_young_collection_default_active_worker_threads() {
 uint WorkerPolicy::calc_active_workers(uintx total_workers,
                                        uintx active_workers,
                                        uintx application_workers) {
-    // If the user has specifically set the number of GC threads, use them.
+    // 如果用户通过JVM参数ParallelGCThreads指定了GC线程的数量, 则直接使用
 
-    // If the user has turned off using a dynamic number of GC threads
-    // or the users has requested a specific number, set the active
-    // number of workers to all the workers.
+    // JVM参数UseDynamicNumberOfGCThreads表示动态改变GC线程数
+    // 如果是false, 则使用所有的worker线程
 
     uint new_active_workers;
     if (!UseDynamicNumberOfGCThreads || !FLAG_IS_DEFAULT(ParallelGCThreads)) {
         new_active_workers = total_workers;
     } else {
         uintx min_workers = (total_workers == 1) ? 1 : 2;
+        // 计算需要多少worker线程
         new_active_workers = calc_default_active_workers(total_workers,
                                                          min_workers,
                                                          active_workers,
                                                          application_workers);
     }
+    assert(new_active_workers > 0, "Always need at least 1");
+    return new_active_workers;
+}
+
+// 计算规则:
+//   根据Java线程数计算需要的GC线程数
+//   根据堆的大小计算需要的GC线程数
+//   取二者最大值
+uint WorkerPolicy::calc_default_active_workers(uintx total_workers,
+                                               const uintx min_workers,
+                                               uintx active_workers,
+                                               uintx application_workers) {
+
+    uintx new_active_workers = total_workers;
+    uintx prev_active_workers = active_workers;
+    uintx active_workers_by_JT = 0;
+    uintx active_workers_by_heap_size = 0;
+
+    // 根据Java线程数计算需要的GC线程数
+    // GCWorkersPerJavaThread的值是2
+    active_workers_by_JT =
+            MAX2((uintx) GCWorkersPerJavaThread * application_workers,
+                 min_workers);
+
+    // 根据堆的大小计算需要的GC线程数
+    active_workers_by_heap_size =
+            MAX2((size_t) 2U, Universe::heap()->capacity() / HeapSizePerGCThread);
+
+    // 取二者最大值
+    uintx max_active_workers =
+            MAX2(active_workers_by_JT, active_workers_by_heap_size);
+
+    new_active_workers = MIN2(max_active_workers, (uintx) total_workers);
+
+    // Increase GC workers instantly but decrease them more
+    // slowly.
+    if (new_active_workers < prev_active_workers) {
+        new_active_workers =
+                MAX2(min_workers, (prev_active_workers + new_active_workers) / 2);
+    }
+
+    // Check once more that the number of workers is within the limits.
+    assert(min_workers <= total_workers, "Minimum workers not consistent with total workers");
+    assert(new_active_workers >= min_workers, "Minimum workers not observed");
+    assert(new_active_workers <= total_workers, "Total workers not observed");
+
+    log_trace(gc, task)("WorkerPolicy::calc_default_active_workers() : "
+                        "active_workers(): " UINTX_FORMAT "  new_active_workers: " UINTX_FORMAT "  "
+                        "prev_active_workers: " UINTX_FORMAT "\n"
+                        " active_workers_by_JT: " UINTX_FORMAT "  active_workers_by_heap_size: " UINTX_FORMAT,
+                        active_workers, new_active_workers, prev_active_workers,
+                        active_workers_by_JT, active_workers_by_heap_size);
     assert(new_active_workers > 0, "Always need at least 1");
     return new_active_workers;
 }
@@ -167,7 +220,7 @@ WorkerThread* WorkerThreads::create_worker(uint name_suffix) {
 }
 ```
 
-## 等待根分区扫描完成
+## 先等待并发标记线程的根分区扫描执行完成
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
