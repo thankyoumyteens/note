@@ -62,5 +62,32 @@
 例题 3
 
 <!--
-
+\begin{align}
+& \;\;\;\; f(x) 连续, f(0) = 0, f'(0) = 4,
+求 \lim_{x \to 0} \frac{\int_{0}^{x} tf(x^2 - t^2) \mathrm{d}t}{x^4} \\
+& {\color{Green} // 被积函数中有x, 需要处理掉} \\
+& {\color{Green} // \;\;\;\; \int_{0}^{x} tf(x^2 - t^2) \mathrm{d}t} \\
+& {\color{Green} // = \frac{1}{2} \int_{0}^{x} f(x^2 - t^2) \mathrm{d}(t^2)} \\
+& {\color{Green} // = - \frac{1}{2} \int_{0}^{x} f(x^2 - t^2) \mathrm{d}(-t^2)} \\
+& {\color{Green} // 对于这个积分, x算常数, d里面可以随意加减} \\
+& {\color{Green} // = - \frac{1}{2} \int_{0}^{x} f(x^2 - t^2) \mathrm{d}(x^2 - t^2)} \\
+& {\color{Green} // 令 x^2 - t^2 = u} \\
+& {\color{Green} // t取0时 u = x^2} \\
+& {\color{Green} // t取2时 u = 0} \\
+& {\color{Green} // = - \frac{1}{2} \int_{x^2}^{0} f(u) \mathrm{d}u} \\
+& {\color{Green} // 去掉负号, 需要把积分限对调} \\
+& {\color{Green} // = \frac{1}{2} \int_{0}^{x^2} f(u) \mathrm{d}u} \\
+& {\color{Green} // 现在被积函数没有 x 了, 用洛必达法则对 x 求导} \\
+& = \lim_{x \to 0} \frac{(\frac{1}{2} \int_{0}^{x^2} f(u) \mathrm{d}u)'}{4x^3} \\
+& = \lim_{x \to 0} \frac{\frac{1}{2} f(x^2) \cdot 2x}{4x^3} \\
+& = \frac{1}{4} \lim_{x \to 0} \frac{xf(x^2)}{x^3} \\
+& = \frac{1}{4} \lim_{x \to 0} \frac{f(x^2)}{x^2} \\
+& {\color{Green} // f(0) = 0, 用导数的定义} \\
+& {\color{Green} // x \to 0 \Rightarrow x^2 \to 0} \\
+& = \frac{1}{4} \lim_{x^2 \to 0} \frac{f(x^2) - f(0)}{x^2 - 0} \\
+& = \frac{1}{4} f'(0) \\
+& = 1 \\
+\end{align}
 -->
+
+![](../img/di2_3.jpg)
