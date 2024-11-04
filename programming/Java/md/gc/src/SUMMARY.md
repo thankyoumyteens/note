@@ -4,14 +4,17 @@
 
 - [基础知识](./jdk21/g1/base/base.md)
   - [总览](./jdk21/g1/base/overview.md)
-  - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
-    - [InstanceKlass](./jdk21/g1/base/instance_klass.md)
   - [大端和小端](./jdk21/g1/base/endianness.md)
   - [mutator](./jdk21/g1/base/mutator.md)
   - [串行并行和并发](./jdk21/g1/base/gc_threads.md)
   - [GCLocker](./jdk21/g1/base/gclocker.md)
   - [NUMA](./jdk21/g1/base/numa.md)
   - [JVM统一日志框架](./jdk21/g1/base/log.md)
+
+- [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
+  - [oop](./jdk21/g1/base/oop.md)
+  - [Klass](./jdk21/g1/base/klass.md)
+    - [InstanceKlass](./jdk21/g1/base/instance_klass.md)
 
 - [对象的分配](./jdk21/g1/allocate_object/new.md)
   - [从TLAB中分配对象](./jdk21/g1/allocate_object/tlab_allocate.md)

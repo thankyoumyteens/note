@@ -8,3 +8,4 @@
     - [运行时数据区](./jvm21/structure/run_time_data_areas.md)
     - [栈帧](./jvm21/structure/frames.md)
     - [对象的表示](./jvm21/structure/representation_of_objects.md)
+    - [浮点数运算](./jvm21/structure/floating_point_arithmetic.md)

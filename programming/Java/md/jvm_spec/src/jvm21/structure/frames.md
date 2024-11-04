@@ -55,17 +55,8 @@ JVM 在方法调用时, 使用本地变量表来传递参数。在类方法调�
 
 一个方法的调用如果没有抛出异常(不管是 JVM 直接抛出还是通过 `throw` 语句显式抛出), 就是 _正常完成_。如果当前方法正常执行完成, 随后可能会有一个返回值给调用方。当调用的方法执行了返回指令, 就会有返回值, 调用的返回指令需要符合返回值的类型。
 
-在这种情况下, 当前栈帧要用来恢复调用方的状态, 包括它的本地变量表和操作数栈, with the program counter of the
-invoker appropriately incremented to skip past the method invocation instruction.
-Execution then continues normally in the invoking method's frame with the
-returned value (if any) pushed onto the operand stack of that frame.
+在这种情况下, 当前栈帧要用来恢复调用方的状态, 包括它的本地变量表和操作数栈, 并且把调用方的程序计数器增加到调用本方法的指令的下一条指令。然后把返回值(如果有的话)放入调用方栈帧的操作数栈。
 
 ## Abrupt Method Invocation Completion
 
-A method invocation _completes abruptly_ if execution of a Java Virtual Machine
-instruction within the method causes the Java Virtual Machine to throw an
-exception, and that exception is not handled within the method. Execution
-of an _athrow_ instruction also causes an exception to be explicitly thrown
-and, if the exception is not caught by the current method, results in abrupt method
-invocation completion. A method invocation that completes abruptly never returns
-a value to its invoker.
+如果在方法中 JVM 抛出异常, 并且方法内没有处理这个异常, 这个方法的执行就是 _异常完成_。 通过 _athrow_ 指令显式地抛出异常, 并且当前方法没有捕获, 也会导致方法异常完成。方法异常完成不会给调用方提供返回值。
