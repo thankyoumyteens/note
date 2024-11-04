@@ -32,3 +32,4 @@
   - [定积分](./further_mathematics/definite_integral.md)
     - [定积分基本定理与特殊性质](./further_mathematics/definite_integral1.md)
     - [换元积分法](./further_mathematics/definite_integral2.md)
+    - [分部积分法](./further_mathematics/definite_integral3.md)

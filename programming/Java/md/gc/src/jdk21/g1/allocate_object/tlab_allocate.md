@@ -1,4 +1,4 @@
-# 从 TLAB 中分配对象
+# 从 TLAB 中快速分配对象
 
 Java 堆(region)是所有线程共享的, 为了避免每次分配对象时都要加锁, JVM 使用 TLAB 来优先分配对象, 只有当无法在 TLAB 中分配对象时, JVM 才需要直接在堆(region)中加锁分配。只有在为线程分配一个新的 TLAB 时, 才需要锁住 Java 堆, 而在 TLAB 中分配对象时, 是不需要加锁的。
 
@@ -9,9 +9,8 @@ Java 堆(region)是所有线程共享的, 为了避免每次分配对象时都�
 
 // 每个线程都有一个自己的tlab
 class Thread: public ThreadShadow {
- private:
-  // tlab是在eden区中分配的
-  ThreadLocalAllocBuffer _tlab; // Thread-local eden
+    // tlab是在eden区中分配的
+    ThreadLocalAllocBuffer _tlab;
 }
 ```
 
@@ -22,10 +21,9 @@ TLAB 使用指针碰撞分配内存: 所有被使用过的内存都被放在一�
 
 // 3个指针在tlab中的定义
 class ThreadLocalAllocBuffer: public CHeapObj<mtThread> {
-private:
-  HeapWord* _start; // address of TLAB
-  HeapWord* _top; // address after last allocation
-  HeapWord* _end;
+    HeapWord* _start;
+    HeapWord* _top;
+    HeapWord* _end;
 }
 ```
 
@@ -40,51 +38,52 @@ new 字节码指令首先会尝试从 TLAB 中分配对象的内存空间:
 ```cpp
 // --- src/hotspot/share/gc/shared/threadLocalAllocBuffer.inline.hpp --- //
 
-inline HeapWord* ThreadLocalAllocBuffer::allocate(size_t size) {
-  // void invariants() const {
-  //   assert(top() >= start() && top() <= end(), "invalid tlab");
-  // }
-  invariants();
-  // TLAB的范围: _start ~ _end
-  // 已分配的区域: _start ~ _top
-  // 未分配的区域: _top ~ _end
-  HeapWord* obj = top();
-  // 判断TLAB剩余空间够不够分配这个对象
-  if (pointer_delta(end(), obj) >= size) {
-    // TLAB剩余空间大于这个对象所需的空间
-#ifdef ASSERT
-    // Skip mangling the space corresponding to the object header to
-    // ensure that the returned space is not considered parsable by
-    // any concurrent GC thread.
-    // 填充新对象的内存区域
-    // 为了让并发的GC线程扫描时可以直接跳过这个新分配的对象
-
-    // 跳过对象头
-    size_t hdr_size = oopDesc::header_size();
-    // 把对象用 0xBAADBABE 填充
-    Copy::fill_to_words(obj + hdr_size, size - hdr_size, badHeapWordVal);
-#endif // ASSERT
-    // 移动_top指针, 增加这个对象大小
-    set_top(obj + size);
-
+inline HeapWord *ThreadLocalAllocBuffer::allocate(size_t size) {
+    // 校验top是否在start和end之间
     invariants();
-    return obj;
-  }
-  return nullptr;
+    // TLAB的范围: _start ~ _end
+    // 已分配的区域: _start ~ _top
+    // 未分配的区域: _top ~ _end
+    HeapWord *obj = top();
+    // 判断TLAB剩余空间够不够分配这个对象
+    if (pointer_delta(end(), obj) >= size) {
+        // successful thread-local allocation
+        // TLAB剩余空间大于这个对象所需的空间
+#ifdef ASSERT
+        // Skip mangling the space corresponding to the object header to
+        // ensure that the returned space is not considered parsable by
+        // any concurrent GC thread.
+        // 填充新对象的内存区域
+        // 为了让并发的GC线程扫描时可以直接跳过这个新分配的对象
+        // 填充时跳过对象头
+        size_t hdr_size = oopDesc::header_size();
+        // 把对象用 0xBAADBABE 填充
+        Copy::fill_to_words(obj + hdr_size, size - hdr_size, badHeapWordVal);
+#endif // ASSERT
+        // This addition is safe because we know that top is
+        // at least size below end, so the add can't wrap.
+        // 移动top指针, 给这个对象分配内存
+        set_top(obj + size);
+
+        invariants();
+        return obj;
+    }
+    return nullptr;
 }
 
 // --- src/hotspot/share/utilities/globalDefinitions.hpp --- //
 
-inline size_t pointer_delta(const HeapWord* left, const HeapWord* right) {
-  return pointer_delta(left, right, sizeof(HeapWord));
+inline size_t pointer_delta(const HeapWord *left, const HeapWord *right) {
+    // 计算left和right之间有多少个HeapWord
+    return pointer_delta(left, right, sizeof(HeapWord));
 }
 
-inline size_t pointer_delta(const volatile void* left,
-                            const volatile void* right,
+// 求两个指针之间的距离
+inline size_t pointer_delta(const volatile void *left,
+                            const volatile void *right,
                             size_t element_size) {
-  assert(left >= right, "avoid underflow - left: " PTR_FORMAT " right: " PTR_FORMAT, p2i(left), p2i(right));
-  // 计算left和right之间有多少个HeapWord
-  return (((uintptr_t) left) - ((uintptr_t) right)) / element_size;
+    assert(left >= right, "avoid underflow - left: " PTR_FORMAT " right: " PTR_FORMAT, p2i(left), p2i(right));
+    return (((uintptr_t) left) - ((uintptr_t) right)) / element_size;
 }
 ```
 

@@ -1,17 +1,13 @@
-# 直接在堆中分配
+# 直接在堆中分配对象
 
 当对象太大或者 JVM 判断现有的 TLAB 还可以分配更多小一点的对象时, 当前对象会直接在 TLAB 外面(堆中)分配。
 
 ```cpp
 // --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
-/**
- * 直接在region中分配对象内存
- */
 HeapWord* MemAllocator::mem_allocate_outside_tlab(Allocation& allocation) const {
   allocation._allocated_outside_tlab = true;
-  // 在堆中分配对象内存, 由于使用的是G1GC,
-  // Universe::heap()返回的是G1CollectedHeap的对象
+  // 在堆中分配对象内存
   HeapWord* mem = Universe::heap()->mem_allocate(_word_size, &allocation._overhead_limit_exceeded);
   if (mem == nullptr) {
     // 堆中分配失败
@@ -77,7 +73,7 @@ inline HeapWord* G1CollectedHeap::attempt_allocation(size_t min_word_size,
   if (result != nullptr) {
     // 对象分配成功
     assert(*actual_word_size != 0, "Actual size must have been set here");
-    // 在全局卡表中标记这个对象属于新生代region
+    // 分配成功, 把卡表中对应的卡片标记为dirty
     dirty_young_block(result, *actual_word_size);
   } else {
     *actual_word_size = 0;

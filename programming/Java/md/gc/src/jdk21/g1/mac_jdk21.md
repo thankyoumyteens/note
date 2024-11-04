@@ -51,7 +51,7 @@ make compile-commands
 
 ## 报错: Only bundled freetype can be specified on Mac and Windows
 
-1. 打开 make/autoconf/lib-freetype.m4, 找到这一句
+1. 打开 make/autoconf/lib-freetype.m4, 找到这一句(131行)
 2. 注释或删除这一段 if
 
 ## 报错: 无法打开"xxx", 因为无法验证开发者。
@@ -63,7 +63,7 @@ make compile-commands
 ## 使用 CLion 调试
 
 1. File -> Open
-2. 选择 jdk 源码根目录下的 build/macosx-aarch64-serverANDclient-slowdebug/compile_commands.json
+2. 选择 jdk 源码根目录下的 build/macosx-aarch64-server-slowdebug/compile_commands.json
 3. 在弹窗中选择 Open as Project
 4. Tools -> Compilation Database -> Change Project Root
 5. 选择 jdk 源码根目录
@@ -73,20 +73,20 @@ make compile-commands
    2. Build -> ... -> +
       1. Name: make_project
       2. Program: make
-      3. ArguMents: CONF=macosx-aarch64-serverANDclient-slowdebug
+      3. ArguMents: CONF=macosx-aarch64-server-slowdebug
       4. Working directory: 选择 jdk 源码根目录
    3. Clean -> ... -> +
       1. Name: clean_project
       2. Program: make
-      3. ArguMents: CONF=macosx-aarch64-serverANDclient-slowdebug clean
+      3. ArguMents: CONF=macosx-aarch64-server-slowdebug clean
       4. Working directory: 选择 jdk 源码根目录
 
 7. Add Configuration... -> Edit Configurations... -> + -> Custom Build Application
 
    1. Target: 选择 slow_debug
-   2. Executable: 选择 jdk 源码根目录下的 build/macosx-aarch64-serverANDclient-slowdebug/jdk/bin/java
+   2. Executable: 选择 jdk 源码根目录下的 build/macosx-aarch64-server-slowdebug/jdk/bin/java
 
-8. 创建 java 文件:
+8. 创建 Test.java 文件:
 
 ```java
 import java.util.LinkedList;
@@ -120,7 +120,7 @@ public class Test {
 9. 编译成 class
 
 ```sh
-javac Test.java
+./build/macosx-aarch64-server-slowdebug/jdk/bin/javac Test.java
 ```
 
 10. Clion -> 右上角 Edit Configurations...

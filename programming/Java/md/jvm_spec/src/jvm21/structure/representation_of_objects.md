@@ -1,7 +1,6 @@
 # 对象的表示
 
-The Java Virtual Machine does not mandate any particular internal structure for
-objects.
+JVM 没有对对象的内部数据结构做详细的要求。
 
 In some of Oracle’s implementations of the Java Virtual Machine, a reference to a class
 instance is a pointer to a _handle_ that is itself a pair of pointers: one to a table containing
