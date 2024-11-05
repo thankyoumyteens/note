@@ -10,6 +10,7 @@ function App() {
   });
 
   const changePerson = () => {
+    // 修改对象中的属性
     setPerson({
       ...person,
       name: "李四",
