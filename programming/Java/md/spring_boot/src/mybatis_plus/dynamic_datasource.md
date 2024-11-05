@@ -80,3 +80,7 @@ public class ConsoleApp implements CommandLineRunner {
     }
 }
 ```
+
+## @DS 注解失效的情况
+
+1. 开启了 spring 的事务, 调用不同数据源的方法上不能加 @Transactional 注解
