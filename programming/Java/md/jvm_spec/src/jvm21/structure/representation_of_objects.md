@@ -2,7 +2,4 @@
 
 JVM 没有对对象的内部数据结构做详细的要求。
 
-In some of Oracle’s implementations of the Java Virtual Machine, a reference to a class
-instance is a pointer to a _handle_ that is itself a pair of pointers: one to a table containing
-the methods of the object and a pointer to the `Class` object that represents the type of the
-object, and the other to the memory allocated from the heap for the object data.
+在一些 Oracle 的 JVM 实现中, 类实例的引用是一个指向 _句柄_ 的指针, 句柄中是一对指针: 一个指向一张包含对象方法的表和一个指向 `Class` 对象的指针, 这个 `Class` 对象代表对象的类型。另一个指向堆中保存对象数据的位置。

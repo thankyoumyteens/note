@@ -30,6 +30,7 @@
     - [屏幕取色](./macos/take_color.md)
   - [FaceFusion](./macos/facefusion.md)
   - [LivePortrait](./macos/live_portrait.md)
+  - [ChatTTS](./macos/chattts.md)
 
 - [Debian](./Linux/debian/debian.md)
   - [安装debian](./Linux/debian/install_os.md)

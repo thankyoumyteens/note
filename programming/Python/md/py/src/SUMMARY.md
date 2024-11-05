@@ -87,3 +87,4 @@
 
 - [anaconda](./anaconda/anaconda.md)
   - [安装anaconda](./anaconda/quick_start.md)
+  - [虚拟环境](./anaconda/venv.md)

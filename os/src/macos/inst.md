@@ -45,6 +45,7 @@ brew install ffmpeg
 brew install wget
 ```
 
+- [Anaconda](https://www.anaconda.com/download/success)
 - [Android Studio](https://developer.android.google.cn/studio?hl=zh-cn)
 - [AnotherRedisDesktopManager](https://gitee.com/qishibo/AnotherRedisDesktopManager/releases)
 - [calibre](https://github.com/kovidgoyal/calibre/releases)

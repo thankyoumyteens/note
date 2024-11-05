@@ -1,69 +1,73 @@
 # 扩容新生代
 
-1. 申请新 region 并分配对象, 即使达到新生代的最大 region 个数(`_young_list_target_length`), 也要尝试分配新的 region
-2. 在新 region 中分配对象
-3. 设置 `_alloc_region` 指针指向这个新的 region
+1. 申请新分区并分配内存, 即使达到新生代的最大分区个数(`_young_list_target_length`), 也要尝试分配新的分区
+2. 在新分区中分配对象
+3. 设置 `_alloc_region` 指针指向这个新的分区
 
-<!-- TODO 为什么原来的region没有填充 dummy 对象？ -->
+<!-- TODO 为什么原来的分区没有填充 dummy 对象？ -->
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1Allocator.inline.hpp --- //
 
-inline HeapWord* G1Allocator::attempt_allocation_force(size_t word_size) {
-  uint node_index = current_node_index();
-  // mutator_alloc_region()返回MutatorAllocRegion的对象
-  // MutatorAllocRegion是G1AllocRegion的子类
-  return mutator_alloc_region(node_index)->attempt_allocation_force(word_size);
+inline HeapWord *G1Allocator::attempt_allocation_force(size_t word_size) {
+    uint node_index = current_node_index();
+    return mutator_alloc_region(node_index)->attempt_allocation_force(word_size);
 }
 
 // --- src/hotspot/share/gc/g1/g1AllocRegion.inline.hpp --- //
 
-inline HeapWord* G1AllocRegion::attempt_allocation_force(size_t word_size) {
-  assert_alloc_region(_alloc_region != nullptr, "not initialized properly");
+inline HeapWord *G1AllocRegion::attempt_allocation_force(size_t word_size) {
+    assert_alloc_region(_alloc_region != nullptr, "not initialized properly");
 
-  trace("forcing alloc", word_size, word_size);
-  // 申请新region并分配对象
-  // 与attempt_allocation_using_new_region()类似
-  // 区别是第二个参数force为true, 表示即使达到最大region个数, 也要尝试分配新的region
-  HeapWord* result = new_alloc_region_and_allocate(word_size, true /* force */);
-  if (result != nullptr) {
-    trace("alloc forced", word_size, word_size, word_size, result);
-    return result;
-  }
-  trace("alloc forced failed", word_size, word_size);
-  return nullptr;
+    trace("forcing alloc", word_size, word_size);
+    // 申请新分区并分配对象
+    // 与attempt_allocation_using_new_region()函数类似
+    // 区别是第二个参数force为true, 表示即使达到新生代最大分区个数, 也要尝试分配新的分区
+    HeapWord *result = new_alloc_region_and_allocate(word_size, true /* force */);
+    if (result != nullptr) {
+        trace("alloc forced", word_size, word_size, word_size, result);
+        return result;
+    }
+    trace("alloc forced failed", word_size, word_size);
+    return nullptr;
 }
 
 // --- src/hotspot/share/gc/g1/g1AllocRegion.cpp --- //
 
-HeapWord* G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
+HeapWord *G1AllocRegion::new_alloc_region_and_allocate(size_t word_size,
                                                        bool force) {
-  assert_alloc_region(_alloc_region == _dummy_region, "pre-condition");
-  assert_alloc_region(_used_bytes_before == 0, "pre-condition");
+    assert_alloc_region(_alloc_region == _dummy_region, "pre-condition");
+    assert_alloc_region(_used_bytes_before == 0, "pre-condition");
 
-  trace("attempting region allocation");
-  // 申请一个新region
-  // G1AllocRegion中的allocate_new_region()不允许force为true
-  // 所以这里调用的是MutatorAllocRegion中的allocate_new_region()
-  HeapRegion* new_alloc_region = allocate_new_region(word_size, force);
-  if (new_alloc_region != nullptr) {
-    // 重置新region的_pre_dummy_top指针
-    new_alloc_region->reset_pre_dummy_top();
-    // 记录region已经使用的空间大小
-    _used_bytes_before = new_alloc_region->used();
-    // 分配对象
-    HeapWord* result = allocate(new_alloc_region, word_size);
-    assert_alloc_region(result != nullptr, "the allocation should succeeded");
+    trace("attempting region allocation");
+    // 申请一个新分区
+    // G1AllocRegion中的allocate_new_region()不允许force为true
+    // 所以这里调用的是MutatorAllocRegion中的allocate_new_region()
+    HeapRegion *new_alloc_region = allocate_new_region(word_size, force);
+    if (new_alloc_region != nullptr) {
+        // 新分区没有dummy对象, 把_pre_dummy_top指针指向null
+        new_alloc_region->reset_pre_dummy_top();
+        // 记录分区的大小
+        _used_bytes_before = new_alloc_region->used();
+        // 分配内存
+        HeapWord *result = allocate(new_alloc_region, word_size);
+        assert_alloc_region(result != nullptr, "the allocation should succeeded");
 
-    OrderAccess::storestore();
-    // 设置_alloc_region指向这个新的region
-    update_alloc_region(new_alloc_region);
-    trace("region allocation successful");
-    return result;
-  } else {
-    trace("region allocation failed");
-    return nullptr;
-  }
-  ShouldNotReachHere();
+        OrderAccess::storestore();
+        // 设置_alloc_region指向这个新的分区
+        // _alloc_region指向的分区是当前正在用于分配内存的分区
+        update_alloc_region(new_alloc_region);
+        trace("region allocation successful");
+        return result;
+    } else {
+        trace("region allocation failed");
+        return nullptr;
+    }
+    ShouldNotReachHere();
+}
+
+HeapRegion *MutatorAllocRegion::allocate_new_region(size_t word_size,
+                                                    bool force) {
+    return _g1h->new_mutator_alloc_region(word_size, force, _node_index);
 }
 ```
