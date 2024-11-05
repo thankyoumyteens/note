@@ -12,6 +12,11 @@
     - [查看权限](./mysql/grant/show.md)
     - [收回权限](./mysql/grant/revoke.md)
     - [角色](./mysql/grant/role.md)
+  - [DDL](./mysql/ddl/ddl.md)
+    - [数据库](./mysql/ddl/db.md)
+      - [查看数据库列表](./mysql/ddl/db_list.md)
+      - [创建数据库](./mysql/ddl/create_db.md)
+      - [删除数据库](./mysql/ddl/del_db.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 

@@ -23,11 +23,12 @@
     - [直接在堆中分配对象](./jdk21/g1/allocate_object/mem_allocate_outside_tlab.md)
   - [使用CAS分配内存](./jdk21/g1/allocate_object/attempt_allocation.md)
   - [加锁分配内存](./jdk21/g1/allocate_object/attempt_allocation_slow.md)
-    - [申请新region分配](./jdk21/g1/allocate_object/alloc_at_new_region.md)
+    - [申请新分区分配](./jdk21/g1/allocate_object/alloc_at_new_region.md)
     - [扩容新生代并分配](./jdk21/g1/allocate_object/attempt_allocation_force.md)
     - [执行GC并分配对象](./jdk21/g1/allocate_object/do_collection_pause.md)
   - [把卡表中对应的卡片标记为dirty](./jdk21/g1/allocate_object/dirty_young_block.md)
   - [初始化对象](./jdk21/g1/allocate_object/initialize_object.md)
+  - [分配大对象](./jdk21/g1/allocate_object/attempt_allocation_humongous.md)
 
 - [VMThread](./jdk21/g1/base/vm_thread.md)
   - [VMThread::execute](./jdk21/g1/base/vm_thread_execute.md)

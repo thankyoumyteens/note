@@ -5,22 +5,21 @@
 ```cpp
 // --- src/hotspot/share/gc/shared/memAllocator.cpp --- //
 
-HeapWord* MemAllocator::mem_allocate_outside_tlab(Allocation& allocation) const {
-  allocation._allocated_outside_tlab = true;
-  // 在堆中分配对象内存
-  HeapWord* mem = Universe::heap()->mem_allocate(_word_size, &allocation._overhead_limit_exceeded);
-  if (mem == nullptr) {
-    // 堆中分配失败
+HeapWord *MemAllocator::mem_allocate_outside_tlab(Allocation &allocation) const {
+    allocation._allocated_outside_tlab = true;
+    // 在堆中分配对象内存
+    HeapWord *mem = Universe::heap()->mem_allocate(_word_size, &allocation._overhead_limit_exceeded);
+    if (mem == nullptr) {
+        // 堆中分配失败
+        return mem;
+    }
+
+    size_t size_in_bytes = _word_size * HeapWordSize;
+    // 更新线程的_allocated_bytes属性
+    // _allocated_bytes记录了这个线程一共分配了多少内存
+    _thread->incr_allocated_bytes(size_in_bytes);
+
     return mem;
-  }
-
-  size_t size_in_bytes = _word_size * HeapWordSize;
-  // 更新线程的_allocated_bytes属性
-  // _allocated_bytes记录了这个线程一共分配了多少内存
-  // void incr_allocated_bytes(jlong size) { _allocated_bytes += size; }
-  _thread->incr_allocated_bytes(size_in_bytes);
-
-  return mem;
 }
 ```
 
@@ -54,31 +53,33 @@ JVM 会先使用 CAS 分配对象的内存, 如果 CAS 失败, 才会真正加�
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
-inline HeapWord* G1CollectedHeap::attempt_allocation(size_t min_word_size,
+inline HeapWord *G1CollectedHeap::attempt_allocation(size_t min_word_size,
                                                      size_t desired_word_size,
-                                                     size_t* actual_word_size) {
-  assert_heap_not_locked_and_not_at_safepoint();
-  assert(!is_humongous(desired_word_size), "attempt_allocation() should not "
-         "be called for humongous allocation requests");
-  // 使用CAS分配对象的内存空间
-  HeapWord* result = _allocator->attempt_allocation(min_word_size, desired_word_size, actual_word_size);
+                                                     size_t *actual_word_size) {
+    assert_heap_not_locked_and_not_at_safepoint();
+    assert(!is_humongous(desired_word_size), "attempt_allocation() should not "
+                                             "be called for humongous allocation requests");
 
-  if (result == nullptr) {
-    *actual_word_size = desired_word_size;
-    // CAS分配失败, 加锁分配
-    result = attempt_allocation_slow(desired_word_size);
-  }
+    // 尝试使用CAS在堆中分配一块内存
+    HeapWord *result = _allocator->attempt_allocation(min_word_size, desired_word_size, actual_word_size);
 
-  assert_heap_not_locked();
-  if (result != nullptr) {
-    // 对象分配成功
-    assert(*actual_word_size != 0, "Actual size must have been set here");
-    // 分配成功, 把卡表中对应的卡片标记为dirty
-    dirty_young_block(result, *actual_word_size);
-  } else {
-    *actual_word_size = 0;
-  }
+    // CAS分配失败
+    if (result == nullptr) {
+        *actual_word_size = desired_word_size;
+        // 在堆中加锁分配一块desired_word_size大小的内存(可能会执行垃圾回收)
+        result = attempt_allocation_slow(desired_word_size);
+    }
 
-  return result;
+    assert_heap_not_locked();
+    if (result != nullptr) {
+        assert(*actual_word_size != 0, "Actual size must have been set here");
+        // 分配成功, 把卡表中对应的卡片标记为dirty
+        dirty_young_block(result, *actual_word_size);
+    } else {
+        // 分配失败, 设置实际分配的大小为0
+        *actual_word_size = 0;
+    }
+
+    return result;
 }
 ```

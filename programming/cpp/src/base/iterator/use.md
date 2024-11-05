@@ -14,7 +14,7 @@ vector<int>::const_iterator begin = v1.begin();
 vector<int>::const_iterator end = v1.end();
 ```
 
-## 迭代器支持的运算
+## 常用的迭代器操作
 
 - `*iter` 返回迭代器 iter 所指元素的值
 - `iter->mem` 访问成员变量, 等价于 `(*iter).mem`
@@ -44,3 +44,23 @@ int main(int argc, char *argv[]) {
 ```
 
 ## cbegin 和 cend
+
+如果对象只需读操作而无须写操作的话最好使用常量类型(比如 const_iterator)。为了便于专门得到 const_iterator 类型的返回值，C++11 新标准引入了两个新函数，分别是 cbegin 和 cend:
+
+```cpp
+#include <iostream>
+
+using std::vector;
+using std::cout;
+
+int main(int argc, char *argv[]) {
+    vector<int> v = {1, 2, 3};
+    // begin和end的类型是vector<int>::const_iterator
+    auto begin = v.cbegin();
+    auto end = v.cend();
+    for (auto it = begin; it != end; ++it) {
+        cout << *it << " ";
+    }
+    return 0;
+}
+```

@@ -83,8 +83,6 @@ oop MemAllocator::allocate() const {
             // 初始化对象(设置ark word等操作)
             obj = initialize(mem);
         } else {
-            // The unhandled oop detector will poison local variable obj,
-            // so reset it to null if mem is null.
             // 对象内存分配失败
             obj = nullptr;
         }
