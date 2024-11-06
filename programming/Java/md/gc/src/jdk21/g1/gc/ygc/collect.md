@@ -12,9 +12,12 @@ void G1YoungCollector::collect() {
     // determining collector state.
     G1YoungGCTraceTime tm(this, _gc_cause);
 
-    // JFR, JFR 是 Java Flight Recorder 的缩写，它是 Java 平台的一个性能诊断工具，用于收集应用程序运行时的数据
+    // JFR
+    // JFR 是 Java Flight Recorder 的缩写，它是 Java 平台的一个性能诊断工具，用于收集应用程序运行时的数据
     G1YoungGCJFRTracerMark jtm(gc_timer_stw(), gc_tracer_stw(), _gc_cause);
     // JStat/MXBeans
+    // JStat 是一个监视 Java 虚拟机的命令行工具，它可以用来监视 Java 虚拟机的各种运行时信息
+    // MXBeans 是 Java Management Extensions 的一部分，它是一种用于管理和监控 Java 虚拟机的标准 API
     G1YoungGCMonitoringScope ms(monitoring_support(),
                                 !collection_set()->candidates()->is_empty() /* all_memory_pools_affected */);
     // Create the heap printer before internal pause timing to have
@@ -54,6 +57,7 @@ void G1YoungCollector::collect() {
 
         // 进行 Mixed GC 时, 会有部分老年代分区加入到回收集, 这些老年代分区称为 optional region
         bool may_do_optional_evacuation = collection_set()->optional_region_length() != 0;
+        // Actually do the work...
         // 实际执行回收
         evacuate_initial_collection_set(&per_thread_states, may_do_optional_evacuation);
 
@@ -64,8 +68,14 @@ void G1YoungCollector::collect() {
         // 后续处理工作
         post_evacuate_collection_set(jtm.evacuation_info(), &per_thread_states);
 
+        // Refine the type of a concurrent mark operation now that we did the
+        // evacuation, eventually aborting it.
         _concurrent_operation_is_full_mark = policy()->concurrent_operation_is_full_mark("Revise IHOP");
+
+        // Need to report the collection pause now since record_collection_pause_end()
+        // modifies it to the next state.
         jtm.report_pause_type(collector_state()->young_gc_pause_type(_concurrent_operation_is_full_mark));
+
         policy()->record_young_collection_end(_concurrent_operation_is_full_mark, evacuation_failed());
     }
     TASKQUEUE_STATS_ONLY(_g1h->task_queues()->print_and_reset_taskqueue_stats("Oop Queue");)

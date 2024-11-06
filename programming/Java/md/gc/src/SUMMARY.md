@@ -34,9 +34,10 @@
   - [VMThread::loop](./jdk21/g1/base/vm_thread_loop.md)
 
 - [垃圾回收](./jdk21/g1/gc/gc.md)
-  - [执行GC并分配对象](./jdk21/g1/gc/do_collection_pause.md)
+  - [执行GC并分配内存](./jdk21/g1/gc/do_collection_pause.md)
   - [doit函数](./jdk21/g1/gc/doit.md)
   - [Young GC](./jdk21/g1/gc/ygc/ygc.md)
+    - [是否作为并发标记的初始标记阶段](./jdk21/g1/gc/ygc/decide_on_concurrent_start_pause.md)
     - [执行GC](./jdk21/g1/gc/ygc/collect.md)
   - [并发标记](./jdk21/g1/gc/cm/cm.md)
 

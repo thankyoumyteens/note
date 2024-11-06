@@ -31,6 +31,7 @@
   - [FaceFusion](./macos/facefusion.md)
   - [LivePortrait](./macos/live_portrait.md)
   - [ChatTTS](./macos/chattts.md)
+  - [GPT-SoVITS](./macos/gpt_so_vits.md)
 
 - [Debian](./Linux/debian/debian.md)
   - [安装debian](./Linux/debian/install_os.md)

@@ -21,7 +21,7 @@ conda activate demo_env
 4. 退出当前环境
 
 ```sh
-deactivate
+conda deactivate
 ```
 
 5. 列出所有环境
