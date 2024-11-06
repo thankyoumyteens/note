@@ -145,6 +145,7 @@ uint WorkerPolicy::calc_default_active_workers(uintx total_workers,
 
     // 根据Java线程数计算需要的GC线程数
     // GCWorkersPerJavaThread的值是2
+    // JT: Java Thread
     active_workers_by_JT =
             MAX2((uintx) GCWorkersPerJavaThread * application_workers,
                  min_workers);
@@ -159,14 +160,14 @@ uint WorkerPolicy::calc_default_active_workers(uintx total_workers,
 
     new_active_workers = MIN2(max_active_workers, (uintx) total_workers);
 
-    // Increase GC workers instantly but decrease them more
-    // slowly.
+    // 如果新的worker线程数小于之前的worker线程数, 则稍微增加一些新的worker线程数
+    // 比如 new_active_workers = 5, prev_active_workers = 10
+    // 则调整后 new_active_workers = (5 + 10) / 2 = 7
     if (new_active_workers < prev_active_workers) {
         new_active_workers =
                 MAX2(min_workers, (prev_active_workers + new_active_workers) / 2);
     }
 
-    // Check once more that the number of workers is within the limits.
     assert(min_workers <= total_workers, "Minimum workers not consistent with total workers");
     assert(new_active_workers >= min_workers, "Minimum workers not observed");
     assert(new_active_workers <= total_workers, "Total workers not observed");
@@ -188,45 +189,48 @@ uint WorkerPolicy::calc_default_active_workers(uintx total_workers,
 // --- src/hotspot/share/gc/shared/workerThread.cpp --- //
 
 uint WorkerThreads::set_active_workers(uint num_workers) {
-  assert(num_workers > 0 && num_workers <= _max_workers,
-         "Invalid number of active workers %u (should be 1-%u)",
-         num_workers, _max_workers);
+    assert(num_workers > 0 && num_workers <= _max_workers,
+           "Invalid number of active workers %u (should be 1-%u)",
+           num_workers, _max_workers);
 
-  while (_created_workers < num_workers) {
-    WorkerThread* const worker = create_worker(_created_workers);
-    if (worker == nullptr) {
-      log_error(gc, task)("Failed to create worker thread");
-      break;
+    while (_created_workers < num_workers) {
+        // 当前worker线程数小于需要的worker线程数
+        // 创建新的worker线程
+        WorkerThread *const worker = create_worker(_created_workers);
+        if (worker == nullptr) {
+            log_error(gc, task)("Failed to create worker thread");
+            break;
+        }
+
+        _workers[_created_workers] = worker;
+        _created_workers++;
     }
 
-    _workers[_created_workers] = worker;
-    _created_workers++;
-  }
+    _active_workers = MIN2(_created_workers, num_workers);
 
-  _active_workers = MIN2(_created_workers, num_workers);
+    log_trace(gc, task)("%s: using %d out of %d workers", _name, _active_workers, _max_workers);
 
-  log_trace(gc, task)("%s: using %d out of %d workers", _name, _active_workers, _max_workers);
-
-  return _active_workers;
+    return _active_workers;
 }
 
-WorkerThread* WorkerThreads::create_worker(uint name_suffix) {
-  if (is_init_completed() && InjectGCWorkerCreationFailure) {
-    return nullptr;
-  }
+WorkerThread *WorkerThreads::create_worker(uint name_suffix) {
+    if (is_init_completed() && InjectGCWorkerCreationFailure) {
+        return nullptr;
+    }
 
-  WorkerThread* const worker = new WorkerThread(_name, name_suffix, &_dispatcher);
+    WorkerThread *const worker = new WorkerThread(_name, name_suffix, &_dispatcher);
 
-  if (!os::create_thread(worker, os::gc_thread)) {
-    delete worker;
-    return nullptr;
-  }
+    // 通过操作系统的系统调用创建worker线程
+    if (!os::create_thread(worker, os::gc_thread)) {
+        delete worker;
+        return nullptr;
+    }
 
-  on_create_worker(worker);
+    on_create_worker(worker);
 
-  os::start_thread(worker);
+    os::start_thread(worker);
 
-  return worker;
+    return worker;
 }
 ```
 
