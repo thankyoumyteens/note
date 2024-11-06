@@ -1,23 +1,19 @@
 # 通过 props 通信
 
-父传子: 通过 props 传递。
-
-子传父: 调用父组件传过来的函数, 并传递参数。
+通过 props 传递。
 
 1. 父组件
 
 ```jsx
-import { useState } from "react";
-import Home from "./Home";
+import Article from "./Article";
 
 function App() {
-  const [data, setData] = useState({
-    title: "标题",
-    content: "内容",
-  });
+  const title = "Title 1";
+  const content = "Content 1";
   return (
     <div>
-      <Home data={data} setData={setData} />
+      {/* 通过props向子组件传值 */}
+      <Article title={title} content={content} />
     </div>
   );
 }
@@ -28,22 +24,16 @@ export default App;
 2. 子组件
 
 ```jsx
-function Home(props) {
-  const { data, setData } = props;
-  const changeData = () => {
-    setData({
-      ...data,
-      content: "新内容",
-    });
-  };
+function Article(props) {
+  // 通过props接收父组件传递过来的值
+  const { title, content } = props;
   return (
     <div>
-      <h1>{data.title}</h1>
-      <p>{data.content}</p>
-      <button onClick={changeData}>切换内容</button>
+      <h1>{title}</h1>
+      <p>{content}</p>
     </div>
   );
 }
 
-export default Home;
+export default Article;
 ```

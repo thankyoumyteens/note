@@ -5,20 +5,19 @@
 1. 父组件
 
 ```jsx
-import { useState } from "react";
-import Home from "./Home";
+import Article from "./Article";
 
 function App() {
-  const [data, setData] = useState({
-    title: "标题",
-    content: "内容",
-  });
+  const articleData = {
+    title: "React",
+    content: "A JavaScript library for building user interfaces",
+  };
   return (
     <div>
-      <Home>
-        <h1>{data.title}</h1>
-        <p>{data.content}</p>
-      </Home>
+      <Article>
+        <h1>{articleData.title}</h1>
+        <p>{articleData.content}</p>
+      </Article>
     </div>
   );
 }
@@ -29,11 +28,57 @@ export default App;
 2. 子组件
 
 ```jsx
-function Home(props) {
+function Article(props) {
   const { children } = props;
-
+  // 直接展示父组件传递的 h1 和 p 标签
   return <div>{children}</div>;
 }
 
-export default Home;
+export default Article;
+```
+
+## 把标签传递到具体的 props 属性中
+
+1. 父组件
+
+```jsx
+import Article from "./Article";
+
+function App() {
+  const articleData = {
+    title: "React",
+    author: "Facebook",
+    content: "A JavaScript library for building user interfaces",
+  };
+  return (
+    <div>
+      <Article
+        title={<h1>{articleData.title}</h1>}
+        author={<h2>{articleData.author}</h2>}
+      >
+        {/* 不指定名称就会传到children中 */}
+        <p>{articleData.content}</p>
+      </Article>
+    </div>
+  );
+}
+
+export default App;
+```
+
+2. 子组件
+
+```jsx
+function Article(props) {
+  const { title, author, children } = props;
+  return (
+    <div>
+      {title}
+      {author}
+      {children}
+    </div>
+  );
+}
+
+export default Article;
 ```
