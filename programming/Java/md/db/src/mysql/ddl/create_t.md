@@ -9,3 +9,9 @@ create table student_info(
     create_time datetime not null default now() comment '创建时间'
 ) engine=innodb charset=utf8mb4 comment '学生信息';
 ```
+
+## 复制表结构
+
+```sql
+create table student_info_copy like student_info;
+```

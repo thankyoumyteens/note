@@ -18,7 +18,11 @@
       - [创建数据库](./mysql/ddl/create_db.md)
       - [删除数据库](./mysql/ddl/del_db.md)
     - [表](./mysql/ddl/table.md)
+      - [查看表列表](./mysql/ddl/t_list.md)
       - [创建表](./mysql/ddl/create_t.md)
+      - [修改表](./mysql/ddl/modify_t.md)
+      - [清空表](./mysql/ddl/t_t.md)
+      - [删除表](./mysql/ddl/del_t.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 
