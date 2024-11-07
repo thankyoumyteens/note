@@ -27,11 +27,11 @@ inline HeapWord *G1AllocRegion::attempt_allocation_using_new_region(size_t min_w
 
 ## 废弃当前分区
 
-dummy region: 不是真正的 region 只是一个标记。它不是 java 堆的一部分, 它的 top 和 end 指针相等, 不可以分配任何内存。JVM 用 `_alloc_region` 指针指向当前正在分配内存的 region。当 `_alloc_region` 指向 dummy region 时, 表示当前没有可用的 region。
+dummy region: 不是真正的分区, 只是一个标记。它不是 java 堆的一部分, 它的 top 和 end 指针相等, 不可以分配任何内存。JVM 用 `_alloc_region` 指针指向当前正在分配内存的分区。当 `_alloc_region` 指向 dummy region 时, 表示当前没有可用的分区。
 
-1. 将当前 region 的剩余空间全部填充为 dummy 对象, 避免其它线程继续在其中分配任何内存
+1. 将当前分区的剩余空间全部填充为 dummy 对象, 避免其它线程继续在其中分配任何内存
 2. 设置 `_pre_dummy_top` 指针, 指向有效内存的最后一位地址, 用来区分出正常的对象和 dummy 对象
-3. 废弃当前 region
+3. 废弃当前分区
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1AllocRegion.cpp --- //
@@ -109,9 +109,9 @@ size_t G1AllocRegion::fill_up_remaining_space(HeapRegion *alloc_region) {
 }
 ```
 
-## 申请新 region
+## 申请新分区
 
-1. 申请一个新 region
+1. 申请一个新分区
 2. 把 `_pre_dummy_top` 指针指向 null
 3. 在新的分区中分配内存
 4. 设置 `_alloc_region` 指向这个新的分区, 以后都会在这个分区中分配
