@@ -240,17 +240,17 @@ WorkerThread *WorkerThreads::create_worker(uint name_suffix) {
 // --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
 
 void G1YoungCollector::wait_for_root_region_scanning() {
-  Ticks start = Ticks::now();
-  // We have to wait until the CM threads finish scanning the
-  // root regions as it's the only way to ensure that all the
-  // objects on them have been correctly scanned before we start
-  // moving them during the GC.
-  bool waited = concurrent_mark()->wait_until_root_region_scan_finished();
-  Tickspan wait_time;
-  if (waited) {
-    wait_time = (Ticks::now() - start);
-  }
-  phase_times()->record_root_region_scan_wait_time(wait_time.seconds() * MILLIUNITS);
+    Ticks start = Ticks::now();
+    // 需要阻塞等待并发标记线程扫描完根分区
+    // 因为在GC期间会移动对象
+    // 所以需要在GC之前确保所有对象都已经被正确扫描
+    bool waited = concurrent_mark()->wait_until_root_region_scan_finished();
+    Tickspan wait_time;
+    if (waited) {
+        // 记录等了多久
+        wait_time = (Ticks::now() - start);
+    }
+    phase_times()->record_root_region_scan_wait_time(wait_time.seconds() * MILLIUNITS);
 }
 ```
 
@@ -330,6 +330,18 @@ void G1YoungCollector::calculate_collection_set(G1EvacInfo* evacuation_info, dou
     collection_set()->iterate(&cl);
     collection_set()->iterate_optional(&cl);
   }
+}
+
+// --- src/hotspot/share/gc/g1/g1Allocator.cpp --- //
+
+void G1Allocator::release_mutator_alloc_regions() {
+    // 遍历所有的mutator_alloc_region
+    // mutator_alloc_region是分配给mutator线程的分区
+    for (uint i = 0; i < _num_alloc_regions; i++) {
+        // 把分区退休, 并加入回收集
+        mutator_alloc_region(i)->release();
+        assert(mutator_alloc_region(i)->get() == nullptr, "post-condition");
+    }
 }
 
 // --- src/hotspot/share/gc/g1/g1CollectionSet.cpp --- //
