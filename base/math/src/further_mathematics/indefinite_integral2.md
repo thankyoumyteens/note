@@ -241,7 +241,7 @@
 \begin{align}
 & \;\;\;\; \int \frac{\mathrm{d}x}{x \ln ^2 x} \\
 & {\color{Green} // \frac{1}{x} 放到 d 后面} \\
-& = \int \frac{\mathrm{d}（\ln x）}{\ln ^2 x} \\
+& = \int \frac{\mathrm{d}(\ln x)}{\ln ^2 x} \\
 & = - \frac{1}{\ln x} + C \\
 \end{align}
 -->

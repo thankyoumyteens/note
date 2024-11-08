@@ -1,6 +1,6 @@
 # Options API 和 Composition API
 
-Options API 是 Vue 2 中的传统方式来定义组件的行为。它是基于选项（如 `data`, `methods`, `computed`, `watch` 等）的对象结构来组织代码的。每个选项都有特定的作用域和生命周期钩子。
+Options API 是 Vue 2 中的传统方式来定义组件的行为。它是基于选项(如 `data`, `methods`, `computed`, `watch` 等)的对象结构来组织代码的。每个选项都有特定的作用域和生命周期钩子。
 
 主要特点包括：
 

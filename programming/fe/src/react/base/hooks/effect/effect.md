@@ -1,6 +1,6 @@
 # useEffect
 
-`useEffect` 用于处理函数组件中的副作用（side effects）。副作用是指那些在组件渲染之外发生的操作，例如数据获取、订阅、手动更改 DOM 等。`useEffect` 类似于类组件中的 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 生命周期方法。
+`useEffect` 用于处理函数组件中的副作用(side effects)。副作用是指那些在组件渲染之外发生的操作，例如数据获取、订阅、手动更改 DOM 等。`useEffect` 类似于类组件中的 `componentDidMount`、`componentDidUpdate` 和 `componentWillUnmount` 生命周期方法。
 
 主要用途：
 

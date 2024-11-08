@@ -30,7 +30,7 @@ huggingface-cli download KwaiVGI/LivePortrait --local-dir pretrained_weights --e
 3. 测试
 
 ```sh
-# 对于搭载Apple Silicon的macOS用户（Intel未测试）。注意：这可能比RTX 4090慢20倍
+# 对于搭载Apple Silicon的macOS用户(Intel未测试)。注意：这可能比RTX 4090慢20倍
 PYTORCH_ENABLE_MPS_FALLBACK=1 python inference.py
 ```
 

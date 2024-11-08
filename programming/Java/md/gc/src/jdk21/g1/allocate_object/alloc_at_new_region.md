@@ -36,19 +36,27 @@ dummy region: 不是真正的分区, 只是一个标记。它不是 java 堆的�
 ```cpp
 // --- src/hotspot/share/gc/g1/g1AllocRegion.cpp --- //
 
-size_t G1AllocRegion::retire(bool fill_up) {
-    assert_alloc_region(_alloc_region != nullptr, "not initialized properly");
-
+size_t MutatorAllocRegion::retire(bool fill_up) {
     size_t waste = 0;
-
     trace("retiring");
-    HeapRegion *alloc_region = _alloc_region;
-    if (alloc_region != _dummy_region) {
-        waste = retire_internal(alloc_region, fill_up);
+    HeapRegion *current_region = get();
+    if (current_region != nullptr) {
+        // Retain the current region if it fits a TLAB and has more
+        // free than the currently retained region.
+        if (should_retain(current_region)) {
+            trace("mutator retained");
+            if (_retained_alloc_region != nullptr) {
+                waste = retire_internal(_retained_alloc_region, true);
+            }
+            _retained_alloc_region = current_region;
+        } else {
+            waste = retire_internal(current_region, fill_up);
+        }
         reset_alloc_region();
     }
-    trace("retired");
 
+    _wasted_bytes += waste;
+    trace("retired");
     return waste;
 }
 
@@ -106,6 +114,29 @@ size_t G1AllocRegion::fill_up_remaining_space(HeapRegion *alloc_region) {
     assert(alloc_region->free() / HeapWordSize < min_word_size_to_fill,
            "post-condition");
     return result;
+}
+
+void MutatorAllocRegion::retire_region(HeapRegion *alloc_region,
+                                       size_t allocated_bytes) {
+    _g1h->retire_mutator_alloc_region(alloc_region, allocated_bytes);
+}
+
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
+
+void G1CollectedHeap::retire_mutator_alloc_region(HeapRegion *alloc_region,
+                                                  size_t allocated_bytes) {
+    assert_heap_locked_or_at_safepoint(true /* should_be_vm_thread */);
+    assert(alloc_region->is_eden(), "all mutator alloc regions should be eden");
+
+    collection_set()->add_eden_region(alloc_region);
+    increase_used(allocated_bytes);
+    _eden.add_used_bytes(allocated_bytes);
+    _hr_printer.retire(alloc_region);
+
+    // We update the eden sizes here, when the region is retired,
+    // instead of when it's allocated, since this is the point that its
+    // used space has been recorded in _summary_bytes_used.
+    monitoring_support()->update_eden_size();
 }
 ```
 

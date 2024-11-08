@@ -4,8 +4,8 @@ Sentinel 默认限流规则是存储在内存中，只要服务重启之后对�
 
 sentinel 提供了两种持久化模式:
 
-- Pull 模式: 扩展写数据源（WritableDataSource）， 客户端主动向某个规则管理中心定期轮询拉取规则，这个规则中心可以是 RDBMS、文件 等
-- Push 模式: 扩展读数据源（ReadableDataSource），规则中心统一推送，客户端通过注册监听器的方式时刻监听变化，即 Sentinel 控制台统一管理配置，然后将规则统一推送到 Nacos 并持久化，最后客户端监听 Nacos，下发配置生成 Rule。生产环境下一般采用 push 模式的数据源
+- Pull 模式: 扩展写数据源(WritableDataSource)， 客户端主动向某个规则管理中心定期轮询拉取规则，这个规则中心可以是 RDBMS、文件 等
+- Push 模式: 扩展读数据源(ReadableDataSource)，规则中心统一推送，客户端通过注册监听器的方式时刻监听变化，即 Sentinel 控制台统一管理配置，然后将规则统一推送到 Nacos 并持久化，最后客户端监听 Nacos，下发配置生成 Rule。生产环境下一般采用 push 模式的数据源
 
 ## 客户端监听 Nacos
 

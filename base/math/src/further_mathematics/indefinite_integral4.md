@@ -66,7 +66,7 @@
 \begin{align}
 & \;\;\;\; \int \frac{5x - 8}{2x^2 - x - 1} \mathrm{d}x \\
 & {\color{Green} // 真分式, 把分母因式分解} \\
-& = \int \frac{5x - 8}{（x - 1）(2x + 1)} \mathrm{d}x \\
+& = \int \frac{5x - 8}{(x - 1)(2x + 1)} \mathrm{d}x \\
 & {\color{Green} // 符合情形1, 拆成 \frac{A}{x - 1} + \frac{B}{2x + 1}} \\
 & {\color{Green} // \;\, A(2x + 1) + B(x - 1) = 5x - 8} \\
 & {\color{Green} // \;\, 2Ax + A + Bx - B = 5x - 8} \\

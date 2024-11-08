@@ -8,6 +8,7 @@
   - [常量](./base/const.md)
   - [枚举](./base/enum.md)
   - [类型别名](./base/typedef.md)
+  - [decltype](./base/decltype.md)
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [迭代器](./base/iterator/iterator.md)
     - [使用迭代器](./base/iterator/use.md)
