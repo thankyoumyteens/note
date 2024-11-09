@@ -29,3 +29,32 @@
 -->
 
 ![](../img/di4_2.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& \;\;\;\; \int_{- \frac{\pi}{4}}^{\frac{\pi}{4}} \frac{1}{1 - \sin x} \mathrm{d}x \\
+& = \int_{0}^{\frac{\pi}{4}} (\frac{1}{1 - \sin x} + \frac{1}{1 - \sin (-x)}) \mathrm{d}x \\
+& = \int_{0}^{\frac{\pi}{4}} (\frac{1}{1 - \sin x} + \frac{1}{1 + \sin x}) \mathrm{d}x \\
+& = \int_{0}^{\frac{\pi}{4}} \frac{1 + \sin x + 1 - \sin x}{(1 - \sin x)(1 + \sin x)} \mathrm{d}x \\
+& = \int_{0}^{\frac{\pi}{4}} \frac{2}{1 - \sin ^2 x} \mathrm{d}x \\
+& = \int_{0}^{\frac{\pi}{4}} \frac{2}{\cos ^2 x} \mathrm{d}x \\
+& = 2 \int_{0}^{\frac{\pi}{4}} \frac{1}{\cos ^2 x} \mathrm{d}x \\
+& = 2 \int_{0}^{\frac{\pi}{4}} \sec ^2 x \mathrm{d}x \\
+& {\color{Green} // \int \sec ^2 x \mathrm{d}x = \tan x + C} \\
+& = 2 \tan x \big|_{0}^{\frac{\pi}{4}} \\
+& = 2 \\
+\end{align}
+-->
+
+![](../img/di4_3.jpg)
+
+## 三角函数的定积分性质
+
+<!--
+\begin{align}
+& 设 f(x) 在 [0, 1] 上连续, 则 \int_{0}^{\frac{\pi}{2}} f(\sin x) \mathrm{d}x
+= \int_{0}^{\frac{\pi}{2}} f(\cos x) \mathrm{d}x \\
+\end{align}
+-->
