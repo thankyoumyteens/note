@@ -281,7 +281,7 @@ G(t) + C = G[\varphi ^{-1}(x)] + C \\
 
 ![](../img/ii2_15.jpg)
 
-三角代换
+### 三角代换
 
 <!--
 \begin{align}
