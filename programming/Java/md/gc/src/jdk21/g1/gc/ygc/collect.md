@@ -334,58 +334,55 @@ void G1YoungCollector::calculate_collection_set(G1EvacInfo *evacuation_info, dou
 // --- src/hotspot/share/gc/g1/g1CollectionSet.cpp --- //
 
 void G1CollectionSet::finalize_initial_collection_set(double target_pause_time_ms, G1SurvivorRegions *survivor) {
-    // 确定新生代分区
+    // 预测新生代分区回收耗时, 返回GC的剩余可用时间
     double time_remaining_ms = finalize_young_part(target_pause_time_ms, survivor);
-    // 内部有判断, 如果是 Young GC 则跳过, 因为Young GC 阶段不会选择老年代分区
+    // 如果是 Young GC 则跳过, 因为Young GC 阶段不会选择老年代分区
+    // 根据剩余可用时间选择一部分老年代分区加入回收集
     finalize_old_part(time_remaining_ms);
 }
 
-double G1CollectionSet::finalize_young_part(double target_pause_time_ms, G1SurvivorRegions* survivors) {
-  Ticks start_time = Ticks::now();
+double G1CollectionSet::finalize_young_part(double target_pause_time_ms, G1SurvivorRegions *survivors) {
+    Ticks start_time = Ticks::now();
 
-  // void G1CollectionSet::finalize_incremental_building() {
-  //   assert(_inc_build_state == Active, "Precondition");
-  //   assert(SafepointSynchronize::is_at_safepoint(), "should be at a safepoint");
-  // }
-  finalize_incremental_building();
+    finalize_incremental_building();
 
-  guarantee(target_pause_time_ms > 0.0,
-            "target_pause_time_ms = %1.6lf should be positive", target_pause_time_ms);
+    guarantee(target_pause_time_ms > 0.0,
+              "target_pause_time_ms = %1.6lf should be positive", target_pause_time_ms);
 
-  // 此时卡表中的脏卡片的数量
-  size_t pending_cards = _policy->pending_cards_at_gc_start();
+    // 此时卡表中的脏卡片的数量
+    size_t pending_cards = _policy->pending_cards_at_gc_start();
 
-  log_trace(gc, ergo, cset)("Start choosing CSet. Pending cards: " SIZE_FORMAT " target pause time: %1.2fms",
-                            pending_cards, target_pause_time_ms);
+    log_trace(gc, ergo, cset)("Start choosing CSet. Pending cards: " SIZE_FORMAT " target pause time: %1.2fms",
+                              pending_cards, target_pause_time_ms);
 
-  // The young list is laid with the survivor regions from the previous
-  // pause are appended to the RHS of the young list, i.e.
-  //   [Newly Young Regions ++ Survivors from last pause].
+    // eden分区数量
+    uint eden_region_length = _g1h->eden_regions_count();
+    // 上一次垃圾回收产生的survivor分区数量
+    uint survivor_region_length = survivors->length();
+    // 保存到G1CollectionSet对象的成员变量中
+    init_region_lengths(eden_region_length, survivor_region_length);
 
-  uint eden_region_length = _g1h->eden_regions_count();
-  uint survivor_region_length = survivors->length();
-  init_region_lengths(eden_region_length, survivor_region_length);
+    verify_young_cset_indices();
 
-  verify_young_cset_indices();
+    // 根据pending_cards预测执行GC要耗费的基础时间
+    double predicted_base_time_ms = _policy->predict_base_time_ms(pending_cards);
+    // 根据eden分区数预测eden区域执行GC要耗费时间
+    double predicted_eden_time = _policy->predict_young_region_other_time_ms(eden_region_length) +
+                                 _policy->predict_eden_copy_time_ms(eden_region_length);
+    // 根据用户指定的期望暂停时间计算剩余可用的时间
+    double remaining_time_ms = MAX2(target_pause_time_ms - (predicted_base_time_ms + predicted_eden_time), 0.0);
 
-  double predicted_base_time_ms = _policy->predict_base_time_ms(pending_cards);
-  // Base time already includes the whole remembered set related time, so do not add that here
-  // again.
-  double predicted_eden_time = _policy->predict_young_region_other_time_ms(eden_region_length) +
-                               _policy->predict_eden_copy_time_ms(eden_region_length);
-  double remaining_time_ms = MAX2(target_pause_time_ms - (predicted_base_time_ms + predicted_eden_time), 0.0);
+    log_trace(gc, ergo, cset)("Added young regions to CSet. Eden: %u regions, Survivors: %u regions, "
+                              "predicted eden time: %1.2fms, predicted base time: %1.2fms, target pause time: %1.2fms, remaining time: %1.2fms",
+                              eden_region_length, survivor_region_length,
+                              predicted_eden_time, predicted_base_time_ms, target_pause_time_ms, remaining_time_ms);
 
-  log_trace(gc, ergo, cset)("Added young regions to CSet. Eden: %u regions, Survivors: %u regions, "
-                            "predicted eden time: %1.2fms, predicted base time: %1.2fms, target pause time: %1.2fms, remaining time: %1.2fms",
-                            eden_region_length, survivor_region_length,
-                            predicted_eden_time, predicted_base_time_ms, target_pause_time_ms, remaining_time_ms);
+    // 把所有survivor分区转换为eden分区
+    survivors->convert_to_eden();
 
-  // Clear the fields that point to the survivor list - they are all young now.
-  survivors->convert_to_eden();
-
-  phase_times()->record_young_cset_choice_time_ms((Ticks::now() - start_time).seconds() * 1000.0);
-
-  return remaining_time_ms;
+    phase_times()->record_young_cset_choice_time_ms((Ticks::now() - start_time).seconds() * 1000.0);
+    // 返回GC的剩余可用时间
+    return remaining_time_ms;
 }
 ```
 
