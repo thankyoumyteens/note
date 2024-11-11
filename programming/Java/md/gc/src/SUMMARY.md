@@ -5,8 +5,6 @@
 - [基础知识](./jdk21/g1/base/base.md)
   - [总览](./jdk21/g1/base/overview.md)
   - [大端和小端](./jdk21/g1/base/endianness.md)
-  - [mutator](./jdk21/g1/base/mutator.md)
-  - [串行并行和并发](./jdk21/g1/base/gc_threads.md)
   - [GCLocker](./jdk21/g1/base/gclocker.md)
   - [NUMA](./jdk21/g1/base/numa.md)
   - [JVM统一日志框架](./jdk21/g1/base/log.md)

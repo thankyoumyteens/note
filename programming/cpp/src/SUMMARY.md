@@ -1,6 +1,7 @@
 # Summary
 
 - [基础](./base/base.md)
+  - [Hello World](./base/quick_start.md)
   - [输入输出](./base/cin_cout.md)
   - [基本数据类型](./base/type.md)
   - [类型转换](./base/type_convert.md)

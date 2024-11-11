@@ -281,6 +281,7 @@ void G1YoungCollector::pre_evacuate_collection_set(G1EvacInfo *evacuation_info) 
     _g1h->gc_prologue(false);
 
     // Initialize the GC alloc regions.
+    // 初始化垃圾回收器分配的分区
     allocator()->init_gc_alloc_regions(evacuation_info);
 
     {
@@ -313,6 +314,7 @@ void G1YoungCollector::pre_evacuate_collection_set(G1EvacInfo *evacuation_info) 
 }
 
 void G1YoungCollector::calculate_collection_set(G1EvacInfo *evacuation_info, double target_pause_time_ms) {
+    // 释放mutator分配的分区
     // 确定回收集之前需要先让当前正在用于分配对象的分区退休(不能再继续用于分配对象)
     // 因为这个分区也可能被选中加入到回收集中
     allocator()->release_mutator_alloc_regions();
@@ -330,7 +332,62 @@ void G1YoungCollector::calculate_collection_set(G1EvacInfo *evacuation_info, dou
         collection_set()->iterate_optional(&cl);
     }
 }
+```
 
+## 释放 mutator 分配的分区
+
+```cpp
+
+// --- src/hotspot/share/gc/g1/g1Allocator.cpp --- //
+
+void G1Allocator::release_mutator_alloc_regions() {
+    // 遍历_mutator_alloc_regions
+    // _mutator_alloc_regions保存分配给mutator线程的分区
+    // _mutator_alloc_regions的长度是NUMA节点的数量
+    // 每一个元素对应一个NUMA内存节点
+    for (uint i = 0; i < _num_alloc_regions; i++) {
+        // 把分区退休
+        mutator_alloc_region(i)->release();
+        assert(mutator_alloc_region(i)->get() == nullptr, "post-condition");
+    }
+}
+
+HeapRegion *MutatorAllocRegion::release() {
+    // 释放当前正在分配内存的分区
+    HeapRegion *ret = G1AllocRegion::release();
+
+    // 释放保留的分配分区
+    if (_retained_alloc_region != nullptr) {
+        _wasted_bytes += retire_internal(_retained_alloc_region, false);
+        _retained_alloc_region = nullptr;
+    }
+    log_debug(gc, alloc, region)("Mutator Allocation stats, regions: %u, wasted size: " SIZE_FORMAT "%s (%4.1f%%)",
+                                 count(),
+                                 byte_size_in_proper_unit(_wasted_bytes),
+                                 proper_unit_for_byte_size(_wasted_bytes),
+                                 percent_of(_wasted_bytes, count() * HeapRegion::GrainBytes));
+    return ret;
+}
+
+HeapRegion *G1AllocRegion::release() {
+    trace("releasing");
+    // _alloc_region指向当前正在分配内存的分区
+    HeapRegion *alloc_region = _alloc_region;
+    // 把_alloc_region分区退休, 并加入到回收集
+    // 分区的剩余空间不填充dummy对象
+    retire(false /* fill_up */);
+    assert_alloc_region(_alloc_region == _dummy_region, "post-condition of retire()");
+    // 重置_alloc_region指针
+    _alloc_region = nullptr;
+    trace("released");
+    // 返回当前正在分配内存的分区
+    return (alloc_region == _dummy_region) ? nullptr : alloc_region;
+}
+```
+
+## 确定回收集
+
+```cpp
 // --- src/hotspot/share/gc/g1/g1CollectionSet.cpp --- //
 
 void G1CollectionSet::finalize_initial_collection_set(double target_pause_time_ms, G1SurvivorRegions *survivor) {
@@ -386,54 +443,33 @@ double G1CollectionSet::finalize_young_part(double target_pause_time_ms, G1Survi
 }
 ```
 
-## release_mutator_alloc_regions
+## 初始化垃圾回收器分配的分区
 
 ```cpp
-
 // --- src/hotspot/share/gc/g1/g1Allocator.cpp --- //
 
-void G1Allocator::release_mutator_alloc_regions() {
-    // 遍历_mutator_alloc_regions
-    // _mutator_alloc_regions保存分配给mutator线程的分区
-    // _mutator_alloc_regions的长度是NUMA节点的数量
+void G1Allocator::init_gc_alloc_regions(G1EvacInfo *evacuation_info) {
+    assert_at_safepoint_on_vm_thread();
+
+    _survivor_is_full = false;
+    _old_is_full = false;
+
+    // 遍历_survivor_gc_alloc_regions
+    // _survivor_gc_alloc_regions是垃圾回收器分配的分区, 用来存放幸存者对象
+    // _survivor_gc_alloc_regions的长度是NUMA节点的数量
     // 每一个元素对应一个NUMA内存节点
     for (uint i = 0; i < _num_alloc_regions; i++) {
-        // 把分区退休
-        mutator_alloc_region(i)->release();
-        assert(mutator_alloc_region(i)->get() == nullptr, "post-condition");
+        // 把 _alloc_region 设置成 _dummy_region
+        survivor_gc_alloc_region(i)->init();
     }
-}
 
-HeapRegion *MutatorAllocRegion::release() {
-    // 释放当前正在分配内存的分区
-    HeapRegion *ret = G1AllocRegion::release();
-
-    // 释放保留的分配分区
-    if (_retained_alloc_region != nullptr) {
-        _wasted_bytes += retire_internal(_retained_alloc_region, false);
-        _retained_alloc_region = nullptr;
-    }
-    log_debug(gc, alloc, region)("Mutator Allocation stats, regions: %u, wasted size: " SIZE_FORMAT "%s (%4.1f%%)",
-                                 count(),
-                                 byte_size_in_proper_unit(_wasted_bytes),
-                                 proper_unit_for_byte_size(_wasted_bytes),
-                                 percent_of(_wasted_bytes, count() * HeapRegion::GrainBytes));
-    return ret;
-}
-
-HeapRegion *G1AllocRegion::release() {
-    trace("releasing");
-    // _alloc_region指向当前正在分配内存的分区
-    HeapRegion *alloc_region = _alloc_region;
-    // 把_alloc_region分区退休, 并加入到回收集
-    // 分区的剩余空间不填充dummy对象
-    retire(false /* fill_up */);
-    assert_alloc_region(_alloc_region == _dummy_region, "post-condition of retire()");
-    // 重置_alloc_region指针
-    _alloc_region = nullptr;
-    trace("released");
-    // 返回当前正在分配内存的分区
-    return (alloc_region == _dummy_region) ? nullptr : alloc_region;
+    // _old_gc_alloc_region也是垃圾回收器分配的分区, 用来存放老年代对象
+    _old_gc_alloc_region.init();
+    // _old_gc_alloc_region在退休后会咱是放到_retained_old_gc_alloc_region中
+    // 如果_retained_old_gc_alloc_region还能用, 就把它重新设置成_old_gc_alloc_region
+    reuse_retained_old_region(evacuation_info,
+                              &_old_gc_alloc_region,
+                              &_retained_old_gc_alloc_region);
 }
 ```
 

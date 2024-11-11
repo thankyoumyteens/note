@@ -1,6 +1,6 @@
 # mutator
 
-mutator 指的是 Java 应用程序线程。mutator 实际进行的操作有以下两种:
+赋值器(mutator)指的是 Java 应用程序线程。mutator 实际进行的操作有以下两种:
 
 1. 创建对象
 2. 更新对象之间的引用关系
