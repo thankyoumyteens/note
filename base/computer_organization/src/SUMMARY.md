@@ -20,3 +20,4 @@
 
 - [存储器](./memory/memory.md)
   - [存储芯片](./memory/chip.md)
+  - [存储芯片和CPU连接](./memory/chip_cpu.md)

@@ -29,3 +29,10 @@
     - [memset](./base/allocation/memset.md)
   - [函数模版](./base/template.md)
   - [字符串操作](./base/str.md)
+
+- [Makefile](./makefile/makefile.md)
+  - [环境搭建](./makefile/env.md)
+  - [基本使用](./makefile/base.md)
+
+- [CMake](./cmake/cmake.md)
+  - [环境搭建](./cmake/env.md)
