@@ -1,6 +1,10 @@
 # 三角函数
 
+常用的值
+
 ![](../img/tf0.jpg)
+
+关系
 
 <!--
 \begin{align}
@@ -18,12 +22,18 @@
 
 ## 函数图像
 
-![](../img/tf1_1.jpg)
-![](../img/tf1_3.jpg)
-![](../img/tf1_5.jpg)
-![](../img/tf1_2.jpg)
-![](../img/tf1_6.jpg)
-![](../img/tf1_4.jpg)
+![](../img/g_sin.jpg)
+![](../img/g_cos.jpg)
+![](../img/g_tan.jpg)
+![](../img/g_cot.jpg)
+
+![](../img/g_sec.jpg)
+![](../img/g_csc.jpg)
+
+![](../img/g_arcsin.jpg)
+![](../img/g_arccos.jpg)
+![](../img/g_arctan.jpg)
+![](../img/g_arccot.jpg)
 
 ## 三角恒等式
 

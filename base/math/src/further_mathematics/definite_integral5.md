@@ -26,3 +26,22 @@
 -->
 
 ![](../img/di5_2.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 判断反常积分 \int_{1}^{+ \infty} \frac{1}{\sqrt{x} (1 + x)} \mathrm{d}x 的敛散性 \\
+& 任取 b > 1, \\
+& \;\;\;\; \int_{1}^{b} \frac{1}{\sqrt{x} (1 + x)} \mathrm{d}x \\
+& {\color{Green} // 把 \frac{1}{\sqrt{x}} 放到 d 后面} \\
+& = 2 \int_{1}^{b} \frac{1}{1 + x} \mathrm{d}(\sqrt{x}) \\
+& = 2 \int_{1}^{b} \frac{1}{1 + (\sqrt{x})^2} \mathrm{d}(\sqrt{x}) \\
+& = 2 \arctan \sqrt{x} \big|_{1}^{b} \\
+& = 2 (\arctan \sqrt{b} - \frac{\pi}{4}) \\
+& \lim_{b \to + \infty} 2 (\arctan \sqrt{b} - \frac{\pi}{4}) = \frac{\pi}{2} \\
+& 所以反常积分收敛于 \frac{\pi}{2} \\
+\end{align}
+-->
+
+![](../img/di5_3.jpg)
