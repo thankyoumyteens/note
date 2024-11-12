@@ -17,7 +17,7 @@
 ```yaml
 spring:
   datasource:
-    url: jdbc:mariadb://127.0.0.1:3306/test_db?characterEncoding=utf-8&useSSL=false&useTimezone=true&serverTimezone=GMT%2B8
+    url: jdbc:mariadb://127.0.0.1:3306/test_db?characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
     driver-class-name: org.mariadb.jdbc.Driver
@@ -40,7 +40,7 @@ spring:
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/test_db?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&allowMultiQueries=true&useOldAliasMetadataBehavior=true&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://127.0.0.1:3306/test_db?characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

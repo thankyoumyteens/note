@@ -174,5 +174,15 @@
   - [git commit](./jgit/commit.md)
   - [git push](./jgit/push.md)
 
+- [JDBC](./jdbc/jdbc.md)
+  - [基本使用](./jdbc/quick_start.md)
+  - [查询](./jdbc/select.md)
+  - [更新](./jdbc/update.md)
+  - [新增后获取自增主键](./jdbc/return_generated_keys.md)
+  - [事务](./jdbc/transaction.md)
+  - [批量执行](./jdbc/batch.md)
+  - [使用HikariCP连接池](./jdbc/pool.md)
+
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)
+  - [编译SpringBoot3](./graalvm/sb3.md)
