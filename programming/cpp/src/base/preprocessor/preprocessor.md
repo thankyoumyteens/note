@@ -1,6 +1,8 @@
 # 预处理器
 
-比如预处理功能 `#include`，当预处理器看到 `#include` 标记时就会用指定的头文件的内容代替 `#include`。
+预处理指令以#字符开始，比如 `#include`，当预处理器看到 `#include <iostream>` 标记时就会提取 `<iostream>` 头文件中的所有内容并提供给当前文件。头文件最常见的用途是声明在其他地方定义的函数。在 C++中，声明通常放在扩展名为 `.h` 的文件中，称为头文件，其定义通常包含在扩展名为 `.cpp` 的文件中，称为源文件。
+
+## 头文件保护符
 
 C++程序还会用到的一项预处理功能是头文件保护符(header guard)，头文件保护符依赖于预处理变量。预处理变量有两种状态：已定义和未定义。
 
@@ -25,3 +27,16 @@ struct Demo {
 ```
 
 第一次包含 my_utils.h 时，`#ifndef` 的检查结果为真，预处理器将顺序执行后面的操作直至遇到 `#endif` 为止。此时，预处理变量 CPP_PRIMER_DEMO_MY_UTILS_H 的值将变为已定义，而且 my_utils.h 也会被拷贝到程序中。后面如果再一次包含 my_utils.h，则 `#ifndef` 的检查结果将为假，编译器将忽略 `#ifndef` 到 `#endif` 之间的部分。
+
+如果编译器支持 `#pragma once` 指令(大多数现代编译器都支持)，可采用以下方法重写上面的代码：
+
+```cpp
+#pragma once
+
+#include <string>
+
+struct Demo {
+    std::string name;
+    int age;
+};
+```

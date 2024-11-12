@@ -341,12 +341,12 @@ void G1YoungCollector::calculate_collection_set(G1EvacInfo *evacuation_info, dou
 // --- src/hotspot/share/gc/g1/g1Allocator.cpp --- //
 
 void G1Allocator::release_mutator_alloc_regions() {
-    // 遍历_mutator_alloc_regions
-    // _mutator_alloc_regions保存分配给mutator线程的分区
+    // 遍历_mutator_alloc_regions数组
     // _mutator_alloc_regions的长度是NUMA节点的数量
     // 每一个元素对应一个NUMA内存节点
+    // _mutator_alloc_regions的每个元素内部的_alloc_region指向mutator分配的分区
     for (uint i = 0; i < _num_alloc_regions; i++) {
-        // 把分区退休
+        // 把分区退休, 并加入回收集
         mutator_alloc_region(i)->release();
         assert(mutator_alloc_region(i)->get() == nullptr, "post-condition");
     }
@@ -454,22 +454,50 @@ void G1Allocator::init_gc_alloc_regions(G1EvacInfo *evacuation_info) {
     _survivor_is_full = false;
     _old_is_full = false;
 
-    // 遍历_survivor_gc_alloc_regions
-    // _survivor_gc_alloc_regions是垃圾回收器分配的分区, 用来存放幸存者对象
+    // 遍历_survivor_gc_alloc_regions数组
     // _survivor_gc_alloc_regions的长度是NUMA节点的数量
     // 每一个元素对应一个NUMA内存节点
+    // _survivor_gc_alloc_regions的每个元素内部的_alloc_region指向垃圾回收器分配的分区,
+    // 用来存放幸存者对象
     for (uint i = 0; i < _num_alloc_regions; i++) {
         // 把 _alloc_region 设置成 _dummy_region
         survivor_gc_alloc_region(i)->init();
     }
 
-    // _old_gc_alloc_region也是垃圾回收器分配的分区, 用来存放老年代对象
+    // _old_gc_alloc_region内部的_alloc_region指向垃圾回收器分配的分区, 用来存放老年代对象
+    // 把_old_gc_alloc_region 的_alloc_region初始化成_dummy_region
     _old_gc_alloc_region.init();
-    // _old_gc_alloc_region在退休后会咱是放到_retained_old_gc_alloc_region中
-    // 如果_retained_old_gc_alloc_region还能用, 就把它重新设置成_old_gc_alloc_region
+    // _old_gc_alloc_region内部指向的分区在退休后会暂时放到_retained_old_gc_alloc_region中
+    // 如果_retained_old_gc_alloc_region还能用, 就让_old_gc_alloc_region重新指向它
     reuse_retained_old_region(evacuation_info,
                               &_old_gc_alloc_region,
                               &_retained_old_gc_alloc_region);
+}
+
+void G1Allocator::reuse_retained_old_region(G1EvacInfo *evacuation_info,
+                                            OldGCAllocRegion *old,
+                                            HeapRegion **retained_old) {
+    HeapRegion *retained_region = *retained_old;
+    *retained_old = nullptr;
+
+    // 如果retained_region符合下面的要求, 就让_old_gc_alloc_region重新指向它
+    // 1. retained_region不在回收集中
+    // 2. retained_region没满
+    // 3. retained_region不是空的
+    // 4. retained_region不是大对象分区
+    if (retained_region != nullptr &&
+        !retained_region->in_collection_set() &&
+        !(retained_region->top() == retained_region->end()) &&
+        !retained_region->is_empty() &&
+        !retained_region->is_humongous()) {
+        // retained_region退休后会加入_old_set
+        // 现在把它从_old_set集合中移除
+        _g1h->old_set_remove(retained_region);
+        // 让_old_gc_alloc_region重新指向retained_region
+        old->set(retained_region);
+        _g1h->hr_printer()->reuse(retained_region);
+        evacuation_info->set_alloc_regions_used_before(retained_region->used());
+    }
 }
 ```
 
