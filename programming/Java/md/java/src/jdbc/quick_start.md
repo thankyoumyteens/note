@@ -23,6 +23,9 @@ public class App {
         String username = "test";
         String password = "123456";
 
+        // 连接oracle的话要加上, 否则打包后会找不到驱动
+        // Class.forName("oracle.jdbc.driver.OracleDriver");
+
         // DriverManager会扫描classpath，找到所有的JDBC驱动，然后根据传入的URL挑选一个合适的驱动
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String query = "select * from student_info where student_name = ?";

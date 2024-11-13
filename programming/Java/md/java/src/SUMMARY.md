@@ -14,6 +14,13 @@
     - [获取字段的参数化类型](./java/field_parameterized_type.md)
     - [获取方法的参数化类型](./java/method_parameterized_type.md)
 
+- [Java模块化系统](./module/jpms.md)
+  - [使用模块](./module/module_demo.md)
+  - [模块传递](./module/module_transitive.md)
+  - [限制导出](./module/module_exports_to.md)
+  - [模块路径](./module/module_path.md)
+  - [服务](./module/module_service.md)
+
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
   - [线程的实现方式](./java/thread/impl.md)
@@ -185,4 +192,5 @@
 
 - [GraalVM](./graalvm/graalvm.md)
   - [基本使用](./graalvm/quick_start.md)
+  - [编译maven项目](./graalvm/mvn.md)
   - [编译SpringBoot3](./graalvm/sb3.md)

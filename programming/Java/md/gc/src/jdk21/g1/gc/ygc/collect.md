@@ -501,6 +501,74 @@ void G1Allocator::reuse_retained_old_region(G1EvacInfo *evacuation_info,
 }
 ```
 
+## G1PrepareEvacuationTask
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
+
+Tickspan G1YoungCollector::run_task_timed(WorkerTask *task) {
+    Ticks start = Ticks::now();
+    workers()->run_task(task);
+    return Ticks::now() - start;
+}
+
+class G1PrepareEvacuationTask : public WorkerTask {
+public:
+    void work(uint worker_id) {
+        G1PrepareRegionsClosure cl(_g1h, this);
+        _g1h->heap_region_par_iterate_from_worker_offset(&cl, &_claimer, worker_id);
+
+        MutexLocker x(G1RareEvent_lock, Mutex::_no_safepoint_check_flag);
+        _all_card_set_stats.add(cl.card_set_stats());
+    }
+};
+
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
+
+void G1CollectedHeap::heap_region_par_iterate_from_worker_offset(HeapRegionClosure *cl,
+                                                                 HeapRegionClaimer *hrclaimer,
+                                                                 uint worker_id) const {
+    _hrm.par_iterate(cl, hrclaimer, hrclaimer->offset_for_worker(worker_id));
+}
+
+// --- src/hotspot/share/gc/g1/heapRegionManager.cpp --- //
+
+void
+HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclaimer, const uint start_index) const {
+    // Every worker will actually look at all regions, skipping over regions that
+    // are currently not committed.
+    // This also (potentially) iterates over regions newly allocated during GC. This
+    // is no problem except for some extra work.
+    const uint n_regions = hrclaimer->n_regions();
+    for (uint count = 0; count < n_regions; count++) {
+        // 要认领的分区索引
+        const uint index = (start_index + count) % n_regions;
+        assert(index < n_regions, "sanity");
+        // Skip over unavailable regions
+        // 如果分区不是active状态，则跳过
+        if (!is_available(index)) {
+            continue;
+        }
+        HeapRegion *r = _regions.get_by_index(index);
+        // We'll ignore regions already claimed.
+        // 如果这个分区被其它worker线程认领了，则跳过
+        if (hrclaimer->is_region_claimed(index)) {
+            continue;
+        }
+        // OK, try to claim it
+        // 尝试认领这个分区(CAS操作)
+        if (!hrclaimer->claim_region(index)) {
+            // 如果认领失败，则跳过
+            continue;
+        }
+        bool res = blk->do_heap_region(r);
+        if (res) {
+            return;
+        }
+    }
+}
+```
+
 ## 实际执行回收
 
 ```cpp

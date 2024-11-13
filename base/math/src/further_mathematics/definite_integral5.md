@@ -45,3 +45,17 @@
 -->
 
 ![](../img/di5_3.jpg)
+
+敛散性判别法
+
+<!--
+\begin{align}
+& 1、如果存在 \alpha > 1, 使得 \lim_{x \to + \infty} x^{\alpha} f(x) 存在, \\
+& \;\;\;\;\; 则反常积分 \int_{a}^{+ \infty} f(x) \mathrm{d}x 收敛 \\
+& 2、如果存在 \alpha \le 1, 使得 \lim_{x \to + \infty} x^{\alpha} f(x) = k \; (k \ne 0), \\
+& \;\;\;\;\; 或者 \lim_{x \to + \infty} x^{\alpha} f(x) = \infty \\
+& \;\;\;\;\; 则反常积分 \int_{a}^{+ \infty} f(x) \mathrm{d}x 发散 \\
+\end{align}
+-->
+
+![](../img/di5_4.jpg)
