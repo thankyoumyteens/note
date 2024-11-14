@@ -11,15 +11,21 @@
 
   <groupId>com.example</groupId>
   <artifactId>demo</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>demo</name>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- 主类的路径 -->
-    <mainClass>com.example.App</mainClass>
+    <mainClass>com.example.MariadbDemo</mainClass>
+    <!-- graalvm插件版本 -->
+    <native.maven.plugin.version>0.10.3</native.maven.plugin.version>
+    <!-- Java版本 -->
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <!-- 要生成的可执行程序名 -->
+    <imageName>demo</imageName>
   </properties>
 
   <dependencies>
@@ -29,61 +35,121 @@
       <version>3.5.0</version>
     </dependency>
     <dependency>
-      <groupId>com.oracle.database.jdbc</groupId>
-      <artifactId>ojdbc6</artifactId>
-      <version>11.2.0.4</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>2.0.16</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.5.7</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.5.7</version>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
+            <version>${native.maven.plugin.version}</version>
+            <executions>
+              <execution>
+                <id>build-native</id>
+                <goals>
+                  <goal>compile-no-fork</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+              <execution>
+                <id>test-native</id>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <phase>test</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <fallback>false</fallback>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <source>21</source>
-          <target>21</target>
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
-      <!-- maven打包插件 -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.5.2</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.1</version>
         <executions>
           <execution>
-            <phase>package</phase>
+            <id>java</id>
             <goals>
-              <goal>shade</goal>
+              <goal>java</goal>
             </goals>
             <configuration>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>${mainClass}</mainClass>
-                </transformer>
-              </transformers>
+              <mainClass>${mainClass}</mainClass>
             </configuration>
           </execution>
         </executions>
       </plugin>
-      <!-- graalvm打包插件 -->
+
       <plugin>
-        <groupId>org.graalvm.buildtools</groupId>
-        <artifactId>native-maven-plugin</artifactId>
-        <version>0.10.3</version>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.source}</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${mainClass}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.6.0</version>
         <executions>
           <execution>
-            <id>build-native</id>
-            <goals>
-              <goal>compile-no-fork</goal>
-            </goals>
             <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
           </execution>
         </executions>
         <configuration>
-          <fallback>false</fallback>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>${mainClass}</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
         </configuration>
       </plugin>
     </plugins>
@@ -98,7 +164,7 @@ package com.example;
 
 import java.sql.*;
 
-public class App {
+public class MariadbDemo {
     public static void main(String[] args) {
         String url = "jdbc:mariadb://lcalhost:3306/db_test?characterEncoding=UTF-8&useSSL=false";
         String username = "test";
@@ -128,7 +194,7 @@ public class App {
 # 要把JAVA_HOME设置成graalvm
 export JAVA_HOME=/Users/walter/walter/jdk/graalvm-jdk-21.0.5+9.1/Contents/Home
 
-mvn package
+mvn -Pnative package
 ```
 
 ### 4. 运行

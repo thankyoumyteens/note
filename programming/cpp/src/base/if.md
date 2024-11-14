@@ -1,6 +1,7 @@
 # if 语句
 
 ```cpp
+int a = 1;
 if (a == 1) {
     std::cout << "ok" << std::endl;
 } else {

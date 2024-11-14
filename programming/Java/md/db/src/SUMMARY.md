@@ -38,3 +38,7 @@
   - [数组](./oracle/数组.md)
   - [sleep](./oracle/sleep.md)
   - [数字转字符串](./oracle/number2str.md)
+
+- [Redis](./redis/redis.md)
+  - [分布式锁](./redis/lock/lock.md)
+    - [RedisTemplate实现](./redis/lock/redis_template.md)
