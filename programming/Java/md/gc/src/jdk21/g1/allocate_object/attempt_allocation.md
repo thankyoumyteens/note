@@ -79,6 +79,21 @@ inline HeapWord* G1AllocRegion::attempt_allocation(size_t min_word_size,
 
 和 tlab 类似, bottom 指针和 end 指针分别指向了一个分区的起始位置和结束位置, top 指针指向已分配内存的边界, 在分区中分配内存只需要向 end 方向移动 top 指针就可以了, 区别是分区中需要考虑线程同步问题。
 
+```cpp
+class HeapRegion : public CHeapObj<mtGC> {
+
+    // 分区的起始地址
+    HeapWord *const _bottom;
+    // 分区的结束地址
+    HeapWord *const _end;
+
+    // _top 为下一个可分配的地址
+    // [_bottom, _top) 为已分配的对象
+    // [_top, _end] 为未分配的空间
+    HeapWord *volatile _top;
+};
+```
+
 ![](../../../img/region_pointer.jpg)
 
 ```cpp

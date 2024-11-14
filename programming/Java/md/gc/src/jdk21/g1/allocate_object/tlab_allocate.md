@@ -21,9 +21,15 @@ TLAB 使用指针碰撞分配内存: 所有被使用过的内存都被放在一�
 
 // 3个指针在tlab中的定义
 class ThreadLocalAllocBuffer: public CHeapObj<mtThread> {
-    HeapWord* _start;
-    HeapWord* _top;
-    HeapWord* _end;
+
+    // TLAB的起始地址
+    HeapWord *_start;
+    // TLAB的结束地址
+    HeapWord *_end;
+    // _top 为下一个可分配的地址
+    // [_start, _top) 为已分配的对象
+    // [_top, _end] 为未分配的空间
+    HeapWord *_top;
 }
 ```
 

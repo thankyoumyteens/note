@@ -561,6 +561,7 @@ HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclai
             // 如果认领失败，则跳过
             continue;
         }
+        // TODO
         bool res = blk->do_heap_region(r);
         if (res) {
             return;

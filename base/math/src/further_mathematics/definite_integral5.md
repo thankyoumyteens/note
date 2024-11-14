@@ -59,3 +59,22 @@
 -->
 
 ![](../img/di5_4.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 判断反常积分 \int_{0}^{+ \infty} \frac{\sqrt{x}}{4 + x^2} \mathrm{d}x 的敛散性 \\
+& {\color{Green} // 要判断 \lim_{x \to + \infty} x^{\alpha} f(x) 是否存在} \\
+& \;\;\;\; \lim_{x \to + \infty} x^{\alpha} \frac{\sqrt{x}}{4 + x^2} \\
+& {\color{Green} // 分子最大是 \frac{1}{2} 次方, 分母是 2次方, 相差 \frac{3}{2} 次方} \\
+& {\color{Green} // 所以 \alpha 取 \frac{3}{2}} \\
+& = \lim_{x \to + \infty} x^{\frac{3}{2}} \frac{\sqrt{x}}{4 + x^2} \\
+& = \lim_{x \to + \infty} x^{\frac{3}{2}} \frac{x^{\frac{1}{2}}}{4 + x^2} \\
+& = \lim_{x \to + \infty} \frac{x^2}{4 + x^2} \\
+& = 1 \\
+& 因为 \alpha = \frac{3}{2} > 1, 且极限存在, 所以反常积分收敛 \\
+\end{align}
+-->
+
+![](../img/di5_5.jpg)
