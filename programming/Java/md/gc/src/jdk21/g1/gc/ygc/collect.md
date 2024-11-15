@@ -568,6 +568,74 @@ HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclai
         }
     }
 }
+
+// --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
+
+class G1PrepareEvacuationTask : public WorkerTask {
+    class G1PrepareRegionsClosure : public HeapRegionClosure {
+        virtual bool do_heap_region(HeapRegion *hr) {
+            // First prepare the region for scanning
+            // 准备进行扫描
+            _g1h->rem_set()->prepare_region_for_scan(hr);
+
+            sample_card_set_size(hr);
+
+            // Now check if region is a humongous candidate
+            if (!hr->is_starts_humongous()) {
+                _g1h->register_region_with_region_attr(hr);
+                return false;
+            }
+
+            uint index = hr->hrm_index();
+            if (humongous_region_is_candidate(hr)) {
+                _g1h->register_humongous_candidate_region_with_region_attr(index);
+                _worker_humongous_candidates++;
+                // We will later handle the remembered sets of these regions.
+            } else {
+                _g1h->register_region_with_region_attr(hr);
+            }
+            log_debug(gc, humongous)(
+                    "Humongous region %u (object size %zu @ " PTR_FORMAT ") remset %zu code roots %zu marked %d reclaim candidate %d type array %d",
+                    index,
+                    cast_to_oop(hr->bottom())->size() * HeapWordSize,
+                    p2i(hr->bottom()),
+                    hr->rem_set()->occupied(),
+                    hr->rem_set()->code_roots_list_length(),
+                    _g1h->concurrent_mark()->mark_bitmap()->is_marked(hr->bottom()),
+                    _g1h->is_humongous_reclaim_candidate(index),
+                    cast_to_oop(hr->bottom())->is_typeArray()
+            );
+            _worker_humongous_total++;
+
+            return false;
+        }
+    };
+};
+
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+void G1RemSet::prepare_region_for_scan(HeapRegion *r) {
+    // 获取当前分区的索引
+    uint hrm_index = r->hrm_index();
+
+    r->prepare_remset_for_scan();
+
+    // Only update non-collection set old regions, others must have already been set
+    // to null (don't scan) in the initialization.
+    if (r->in_collection_set()) {
+        // _scan_top数组中, 索引为hrm_index的元素应该为nullptr
+        assert_scan_top_is_null(hrm_index);
+    } else if (r->is_old_or_humongous()) {
+        // 把_scan_top数组中, 索引为hrm_index的元素的值设置为当前分区的top指针
+        // 当前分区的top指针指向下一个可分配对象的地址
+        _scan_state->set_scan_top(hrm_index, r->top());
+    } else {
+        // _scan_top数组中, 索引为hrm_index的元素应该为nullptr
+        assert_scan_top_is_null(hrm_index);
+        assert(r->is_free(),
+               "Region %u should be free region but is %s", hrm_index, r->get_type_str());
+    }
+}
 ```
 
 ## 实际执行回收

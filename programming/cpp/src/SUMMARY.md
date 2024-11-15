@@ -24,6 +24,8 @@
     - [std::array](./base/array/std_array.md)
     - [std::vector](./base/array/vector.md)
   - [结构化绑定](./base/structured_bindings.md)
+  - [指针](./base/pointer/pointer.md)
+    - [智能指针](./base/pointer/std_ptr.md)
   - [左值和右值](./base/lrvalue.md)
   - [decltype](./base/decltype.md)
   - [迭代器](./base/iterator/iterator.md)

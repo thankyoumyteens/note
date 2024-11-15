@@ -30,9 +30,9 @@ private static final int LOCK_EXPIRE_TIME = 5 * 60 * 1000;
 /**
  * 加锁, 成功返回true
  */
-public static <K, V> boolean lock(RedisTemplate<K, V> rt) {
+public static <K, V> boolean lock(RedisTemplate<K, V> rt, String threadId) {
     String[] keys = {REDIS_LOCK_KEY};
-    Object[] args = {REDIS_LOCK_KEY, LOCK_EXPIRE_TIME};
+    Object[] args = {threadId, LOCK_EXPIRE_TIME};
     RedisScript<Boolean> script = new DefaultRedisScript<>(LOCK_SCRIPT, Boolean.class);
     return rt.execute(script, Arrays.asList(keys), args);
 }
@@ -44,9 +44,9 @@ public static <K, V> boolean lock(RedisTemplate<K, V> rt) {
 /**
  * 解锁, 成功返回true
  */
-public static boolean unlock(RedisTemplate<K, V> rt) {
+public static boolean unlock(RedisTemplate<K, V> rt, String threadId) {
     String[] keys = {REDIS_LOCK_KEY};
-    Object[] args = {REDIS_LOCK_KEY};
+    Object[] args = {threadId};
     RedisScript<Boolean> script = new DefaultRedisScript<>(UNLOCK_SCRIPT, Boolean.class);
     return rt.execute(script, Arrays.asList(keys), args);
 }

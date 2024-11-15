@@ -24,6 +24,7 @@
       - [清空表](./mysql/ddl/t_t.md)
       - [删除表](./mysql/ddl/del_t.md)
   - [索引](./mysql/index/index.md)
+   - [联合索引](./mysql/index/compound_indexes.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 

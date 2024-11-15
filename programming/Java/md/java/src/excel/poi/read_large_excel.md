@@ -1,5 +1,7 @@
 # 超大 excel 读取
 
+按 xml 方式解析 excel。
+
 继承 `DefaultHandler` 类, 重写 `startElement()`, `characters()`, `endElement()` 方法。
 
 - `startElement()` 获取单元格的类型(如日期、数字、字符串等)
@@ -26,16 +28,18 @@ public class ExcelReader {
 
     public static class SheetHandler extends DefaultHandler {
         // 字符串池
-        private final SharedStringsTable stringPool;
+        private final SharedStrings stringPool;
         // 单元格的值或索引
+        // 如果单元格类型是字符串, 则valueOrIndex保存的是字符串池索引
+        // 如果单元格类型是其它类型, 则valueOrIndex保存的是单元格的值
         private String valueOrIndex;
         // 单元格类型是字符串
         private boolean isString;
         // 单元格类型是内联字符串
         private boolean isInlineStr;
 
-        public SheetHandler(SharedStringsTable sst) {
-            this.stringPool = sst;
+        public SheetHandler(SharedStrings sp) {
+            this.stringPool = sp;
         }
 
         /**
@@ -52,27 +56,23 @@ public class ExcelReader {
          */
         @Override
         public void startElement(String uri, String localName, String name, Attributes attributes) {
-            // c => cell 代表单元格
+            // c 代表单元格
             if (name.equals("c")) {
                 // 获取单元格的位置, 如: A1 B1
-                System.out.print(attributes.getValue("r") + " - ");
+                String cellPos = attributes.getValue("r");
+                System.out.print(cellPos + " - ");
+                // 转成数字形式
+                CellReference cellReference = new CellReference(cellPos);
+                int row = cellReference.getRow();
+                int col = cellReference.getCol();
+
                 // 获取单元格类型
                 String cellType = attributes.getValue("t");
 
-                // 字符串类型
-                if (cellType != null && cellType.equals("s")) {
-                    // 标识为true 交给后续endElement处理
-                    isString = true;
-                } else {
-                    isString = false;
-                }
-                // 内联字符串类型
-                if (cellType != null && cellType.equals("inlineStr")) {
-                    // 标识为true 交给后续endElement处理
-                    isInlineStr = true;
-                } else {
-                    isInlineStr = false;
-                }
+                // 字符串类型, 交给后续的endElement方法处理
+                isString = cellType != null && cellType.equals("s");
+                // 内联字符串类型, 交给后续endElement处理
+                isInlineStr = cellType != null && cellType.equals("inlineStr");
             }
             valueOrIndex = "";
         }
@@ -91,21 +91,22 @@ public class ExcelReader {
          */
         @Override
         public void endElement(String uri, String localName, String name) {
+            String cellValue = valueOrIndex;
             if (isString) {
-                // valueOrIndex是索引, 直接取出对应的值
+                // valueOrIndex是索引, 从字符串池中取出对应的值
                 int idx = Integer.parseInt(valueOrIndex);
-                valueOrIndex = stringPool.getItemAt(idx).toString();
+                cellValue = stringPool.getItemAt(idx).toString();
                 isString = false;
             }
 
-            // v => 单元格内容
+            // v: 单元格内容
             if (name.equals("v")) {
-                System.out.println(valueOrIndex);
+                System.out.println(cellValue);
             }
-            // is => 内联字符串内容
+            // is: 内联字符串内容
             if (isInlineStr && name.equals("is")) {
                 isInlineStr = false;
-                System.out.println(valueOrIndex);
+                System.out.println(cellValue);
             }
         }
     }
@@ -116,19 +117,22 @@ public class ExcelReader {
         try (OPCPackage pkg = OPCPackage.open(fileName)) {
             XSSFReader r = new XSSFReader(pkg);
             // 获取excel的字符串池
-            SharedStringsTable sst = r.getSharedStringsTable();
+            SharedStrings sp = r.getSharedStringsTable();
             // 用于解析xml
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
             SAXParser parser = parserFactory.newSAXParser();
             XMLReader reader = parser.getXMLReader();
             // 注册自定义的sheet处理类
-            ContentHandler handler = new SheetHandler(sst);
+            SheetHandler handler = new SheetHandler(sp);
             reader.setContentHandler(handler);
 
             // 遍历读取所有sheet
-            Iterator<InputStream> sheets = r.getSheetsData();
+            XSSFReader.SheetIterator sheets = (XSSFReader.SheetIterator) r.getSheetsData();
             while (sheets.hasNext()) {
                 try (InputStream sheet = sheets.next()) {
+                    String sheetName = sheets.getSheetName();
+                    System.out.println(sheetName);
+
                     InputSource sheetSource = new InputSource(sheet);
                     reader.parse(sheetSource);
                 }
