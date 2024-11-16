@@ -78,3 +78,49 @@
 -->
 
 ![](../img/di5_5.jpg)
+
+### 积分区间左侧无限的反常积分
+
+<!--
+\begin{align}
+& 设函数 f(x) 在 (- \infty, a] 上连续, 对任意一个小于 a 的 b, \\
+& 有 \int_{b}^{a} f(x) \mathrm{d}x = F(a) - F(b), \\
+& 如果极限 \lim_{b \to - \infty} [F(a) - F(b)] = A, \\
+& 则称反常积分 \int_{- \infty}^{a} f(x) \mathrm{d}x 收敛于常数 A, \\
+& 记为 \int_{- \infty}^{a} f(x) \mathrm{d}x = A \\
+& 若极限不存在, 则称反常积分 \int_{- \infty}^{a} f(x) \mathrm{d}x 发散 \\
+\end{align}
+-->
+
+![](../img/di5_6.jpg)
+
+敛散性判别法
+
+<!--
+\begin{align}
+& 1、如果存在 \alpha > 1, 使得 \lim_{x \to - \infty} x^{\alpha} f(x) 存在, \\
+& \;\;\;\;\; 则反常积分 \int_{- \infty}^{a} f(x) \mathrm{d}x 收敛 \\
+& 2、如果存在 \alpha \le 1, 使得 \lim_{x \to - \infty} x^{\alpha} f(x) = k \; (k \ne 0), \\
+& \;\;\;\;\; 或者 \lim_{x \to - \infty} x^{\alpha} f(x) = \infty \\
+& \;\;\;\;\; 则反常积分 \int_{- \infty}^{a} f(x) \mathrm{d}x 发散 \\
+\end{align}
+-->
+
+![](../img/di5_7.jpg)
+
+### Gamma 函数
+
+<!--
+\begin{align}
+& \Gamma 函数: \Gamma (\alpha) = \int_{0}^{+ \infty} x^{\alpha - 1} e^{-x} \mathrm{d}x \\
+& 比如: \int_{0}^{+ \infty} x \sqrt{x} e^{-x} \mathrm{d}x
+= \int_{0}^{+ \infty} x^{\frac{3}{2}} e^{-x} \mathrm{d}x = \Gamma (\frac{5}{2}) \\
+\\
+& 性质: \\
+& 1、\Gamma (\alpha + 1) = \alpha \Gamma (\alpha) \\
+& 2、\Gamma (n + 1) = n! \\
+& 3、\Gamma (\frac{1}{2}) = \sqrt{\pi} \\
+\end{align}
+-->
+
+![](../img/di5_8.jpg)
