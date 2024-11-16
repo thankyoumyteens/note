@@ -54,6 +54,7 @@
   - [注释](./makefile/comment.md)
   - [变量](./makefile/var.md)
   - [隐式规则](./makefile/implicit_rules.md)
+  - [导入其它Makefile](./makefile/import.md)
 
 - [CMake](./cmake/cmake.md)
   - [环境搭建](./cmake/env.md)

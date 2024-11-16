@@ -4,6 +4,7 @@
 
 - [基础知识](./jdk21/g1/base/base.md)
   - [总览](./jdk21/g1/base/overview.md)
+  - [Garbage-First垃圾回收器](./jdk21/g1/base/guide.md)
   - [大端和小端](./jdk21/g1/base/endianness.md)
   - [GCLocker](./jdk21/g1/base/gclocker.md)
   - [NUMA](./jdk21/g1/base/numa.md)
