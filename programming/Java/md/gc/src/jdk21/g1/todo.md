@@ -72,3 +72,17 @@
 ## 标记-整理算法(mark-compact)
 
 ## 引用计数算法(reference counting)
+
+## SATB
+
+原始快照(Snapshot-At-The-Beginning, SATB): 当扫描到灰色对象的引用删除时, 会将这个引用删除前的状态保存成一个快照, 然后放到集合里。等到重新标记阶段, 会扫描这个集合, 把里面的对象标记为灰色。
+
+## Eager Reclaim
+
+提前回收。
+
+## nmethods
+
+nmethods 是指编译后的本地方法（native methods），它是 JIT 编译器生成的机器代码片段。每个 nmethod 对象包含编译后的代码及其相关的元数据，如方法签名、异常处理信息等。
+
+## card set

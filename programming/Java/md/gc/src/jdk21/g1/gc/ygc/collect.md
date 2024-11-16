@@ -291,9 +291,11 @@ void G1YoungCollector::pre_evacuate_collection_set(G1EvacInfo *evacuation_info) 
     }
 
     {
+        // 记录分区中记忆集的状态, 并把符合条件的大对象加入提前回收的候选分区
         G1PrepareEvacuationTask g1_prep_task(_g1h);
         Tickspan task_time = run_task_timed(&g1_prep_task);
 
+        // 记录统计信息
         _g1h->set_young_gen_card_set_stats(g1_prep_task.all_card_set_stats());
         _g1h->set_humongous_stats(g1_prep_task.humongous_total(), g1_prep_task.humongous_candidates());
 
@@ -306,6 +308,7 @@ void G1YoungCollector::pre_evacuate_collection_set(G1EvacInfo *evacuation_info) 
     DerivedPointerTable::clear();
 #endif
 
+    // 是否要开启并发标记
     if (collector_state()->in_concurrent_start_gc()) {
         concurrent_mark()->pre_concurrent_start(_gc_cause);
     }
@@ -501,7 +504,7 @@ void G1Allocator::reuse_retained_old_region(G1EvacInfo *evacuation_info,
 }
 ```
 
-## G1PrepareEvacuationTask
+## 记录分区中记忆集的状态, 并把符合条件的大对象加入提前回收的候选分区
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
@@ -535,10 +538,6 @@ void G1CollectedHeap::heap_region_par_iterate_from_worker_offset(HeapRegionClosu
 
 void
 HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclaimer, const uint start_index) const {
-    // Every worker will actually look at all regions, skipping over regions that
-    // are currently not committed.
-    // This also (potentially) iterates over regions newly allocated during GC. This
-    // is no problem except for some extra work.
     const uint n_regions = hrclaimer->n_regions();
     for (uint count = 0; count < n_regions; count++) {
         // 要认领的分区索引
@@ -561,7 +560,9 @@ HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclai
             // 如果认领失败，则跳过
             continue;
         }
-        // TODO
+        // 认领成功
+        // 记录分区中记忆集的状态
+        // 将符合条件的大对象加入提前回收的候选分区
         bool res = blk->do_heap_region(r);
         if (res) {
             return;
@@ -573,25 +574,61 @@ HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclai
 
 class G1PrepareEvacuationTask : public WorkerTask {
     class G1PrepareRegionsClosure : public HeapRegionClosure {
+        void sample_card_set_size(HeapRegion *hr) {
+            if (hr->is_young() || hr->is_starts_humongous()) {
+                _card_set_stats.add(hr->rem_set()->card_set_memory_stats());
+            }
+        }
+
+        bool humongous_region_is_candidate(HeapRegion *region) const {
+            assert(region->is_starts_humongous(), "Must start a humongous object");
+
+            // region是大对象分区的第一个分区
+
+            // 获取分区中的第一个对象(分区中第一个对象的起始地址和分区的起始地址是相同的)
+            oop obj = cast_to_oop(region->bottom());
+
+            // 检查这个大对象
+
+            if (_g1h->is_obj_dead(obj, region)) {
+                return false;
+            }
+
+            // 判断分区的记忆集是否更新完成
+            if (!region->rem_set()->is_complete()) {
+                return false;
+            }
+            // 判断是否要提前回收(Eager Reclaim)这个大对象
+            // is_typeArray()判断对象是不是原始类型的数组
+            // 对于原始类型的大数组，只要这些大数组不再被其他对象引用, G1在任何GC停顿(包括Young GC)都会尝试进行回收
+            return obj->is_typeArray() &&
+                   _g1h->is_potential_eager_reclaim_candidate(region);
+        }
+    public:
         virtual bool do_heap_region(HeapRegion *hr) {
-            // First prepare the region for scanning
             // 准备进行扫描
             _g1h->rem_set()->prepare_region_for_scan(hr);
 
+            // 收集采样信息
             sample_card_set_size(hr);
 
-            // Now check if region is a humongous candidate
+            // 检查是否是大对象分区的第一个分区, 如果不是则为true
             if (!hr->is_starts_humongous()) {
+                // 记录当前分区的记忆集是否被跟踪
                 _g1h->register_region_with_region_attr(hr);
                 return false;
             }
 
+            // 处理大对象分区的第一个分区
             uint index = hr->hrm_index();
+            // 判断是否加入大对象候选分区(不在回收集中, 但是也要在当前GC中处理)
             if (humongous_region_is_candidate(hr)) {
+                // 标记这个分区是一个大对象候选分区
                 _g1h->register_humongous_candidate_region_with_region_attr(index);
                 _worker_humongous_candidates++;
-                // We will later handle the remembered sets of these regions.
+                // 后续会处理这些分区的记忆集
             } else {
+                // 记录当前分区的记忆集是否被跟踪
                 _g1h->register_region_with_region_attr(hr);
             }
             log_debug(gc, humongous)(
@@ -608,6 +645,10 @@ class G1PrepareEvacuationTask : public WorkerTask {
             _worker_humongous_total++;
 
             return false;
+        }
+
+        G1MonotonicArenaMemoryStats card_set_stats() const {
+            return _card_set_stats;
         }
     };
 };
