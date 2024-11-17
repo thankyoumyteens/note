@@ -124,3 +124,46 @@
 -->
 
 ![](../img/di5_8.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& \;\;\;\; \int_{0}^{+ \infty} x^{7} e^{-x^2} \mathrm{d}x \\
+& {\color{Green} // 先转成 Gamma 函数} \\
+& = \frac{1}{2} \int_{0}^{+ \infty} x^{6} e^{-x^2} \mathrm{d}(x^2) \\
+& = \frac{1}{2} \int_{0}^{+ \infty} (x^2)^3 e^{-x^2} \mathrm{d}(x^2) \\
+& {\color{Green} // 把 x^2 换成 t} \\
+& {\color{Green} // x 取 0 时 t = 0} \\
+& {\color{Green} // x 取 + \infty 时 t = + \infty} \\
+& = \frac{1}{2} \int_{0}^{+ \infty} t^3 e^{-t} \mathrm{d}t \\
+& = \frac{1}{2} \times \Gamma (4) \\
+& {\color{Green} // \Gamma (n + 1) = n!} \\
+& = \frac{1}{2} \times 3! \\
+& = \frac{1}{2} \times 3 \times 2 \times 1 \\
+& = 3 \\
+\end{align}
+-->
+
+![](../img/di5_9.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& \;\;\;\; \int_{0}^{+ \infty} x \sqrt{x} e^{-x} \mathrm{d}x \\
+& = \int_{0}^{+ \infty} x^{\frac{3}{2}} e^{-x} \mathrm{d}x \\
+& = \Gamma (\frac{3}{2} + 1) \\
+& {\color{Green} // \Gamma (\alpha + 1) = \alpha \Gamma (\alpha)} \\
+& = \frac{3}{2} \Gamma (\frac{3}{2}) \\
+& = \frac{3}{2} \Gamma (\frac{1}{2} + 1) \\
+& = \frac{3}{2} \times \frac{1}{2} \Gamma (\frac{1}{2}) \\
+& = \frac{3}{4} \Gamma (\frac{1}{2}) \\
+& {\color{Green} // \Gamma (\frac{1}{2}) = \sqrt{\pi}} \\
+& = \frac{3\sqrt{\pi}}{4} \\
+\end{align}
+-->
+
+![](../img/di5_10.jpg)
+
+## 区间有限的反常积分
