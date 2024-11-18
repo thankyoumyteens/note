@@ -14,7 +14,7 @@ int main() {
 }
 ```
 
-## 列表初始化
+## 统一初始化
 
 ```cpp
 #include <iostream>
