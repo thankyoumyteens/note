@@ -1,12 +1,12 @@
 # 基本使用
 
-1. 安装
+### 1. 安装
 
 ```sh
 npm install react-router-dom
 ```
 
-2. 定义路由 router/index.tsx
+### 2. 定义路由 router/index.tsx
 
 ```tsx
 import { createBrowserRouter } from "react-router-dom";
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
 export default router;
 ```
 
-3. 在 main.tsx 中引入
+### 3. 在 main.tsx 中引入
 
 ```tsx
 import { StrictMode } from "react";

@@ -1,5 +1,7 @@
 # 动态配置路由
 
+### 1.定义路由 router/index.tsx
+
 ```tsx
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import { lazy } from "react";
@@ -34,4 +36,21 @@ menuList.forEach((menu: Menu) => {
 const router = createBrowserRouter(routes);
 
 export default router;
+```
+
+### 2. 在 main.tsx 中引入
+
+```tsx
+import { StrictMode, Suspense } from "react";
+import { createRoot } from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
+  </StrictMode>
+);
 ```

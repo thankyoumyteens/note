@@ -135,4 +135,6 @@
     - [基本使用](./react/zustand/base.md)
   - [ReactRouter](./react/router/router.md)
     - [基本使用](./react/router/base.md)
+    - [编程式跳转](./react/router/js.md)
     - [动态配置路由](./react/router/d.md)
+    - [把菜单按钮固定在页面上](./react/router/fix.md)
