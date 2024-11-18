@@ -2,7 +2,7 @@
 
 实现一个 todo list:
 
-1. 定义类型 type.ts:
+1. 定义类型 types.ts:
 
 ```ts
 export interface TodoItem {

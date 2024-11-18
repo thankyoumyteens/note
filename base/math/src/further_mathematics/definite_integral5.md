@@ -167,3 +167,18 @@
 ![](../img/di5_10.jpg)
 
 ## 区间有限的反常积分
+
+### 区间左端点无界的反常积分
+
+<!--
+\begin{align}
+& 设函数 f(x) 在 (a, b] 上连续, 且 f(a + 0) = \infty, \\
+& 对任意的 \varepsilon > 0, \int_{a + \varepsilon}^{b} f(x) \mathrm{d}x = F(b) - F(a + \varepsilon), \\
+& 如果极限 \lim_{\varepsilon \to 0} [F(b) - F(a + \varepsilon)] = A, \\
+& 则称反常积分 \int_{a}^{b} f(x) \mathrm{d}x 收敛于常数 A, \\
+& 记为 \int_{a}^{b} f(x) \mathrm{d}x = A \\
+& 若极限不存在, 则称反常积分 \int_{a}^{b} f(x) \mathrm{d}x 发散 \\
+\end{align}
+-->
+
+![](../img/di5_11.jpg)
