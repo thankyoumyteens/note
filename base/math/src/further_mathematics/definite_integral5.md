@@ -182,3 +182,37 @@
 -->
 
 ![](../img/di5_11.jpg)
+
+敛散性判别法
+
+<!--
+\begin{align}
+& 1、如果存在 \alpha < 1, 使得 \lim_{x \to a^+} (x - a)^{\alpha} f(x) 存在, \\
+& \;\;\;\;\; 则反常积分 \int_{a}^{b} f(x) \mathrm{d}x 收敛 \\
+& 2、如果存在 \alpha \ge 1, 使得 \lim_{x \to a^+} (x - a)^{\alpha} f(x) = k \; (k \ne 0), \\
+& \;\;\;\;\; 或者 \lim_{x \to a^+} (x - a)^{\alpha} f(x) = \infty \\
+& \;\;\;\;\; 则反常积分 \int_{a}^{b} f(x) \mathrm{d}x 发散 \\
+\end{align}
+-->
+
+![](../img/di5_12.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 判断反常积分 \int_{0}^{\frac{1}{2}} \frac{\mathrm{d}x}{\sqrt{x(1 - x)}} 的敛散性 \\
+& 任取 \varepsilon > 0, \\
+& \;\;\;\; \int_{0 + \varepsilon}^{\frac{1}{2}} \frac{\mathrm{d}x}{\sqrt{x(1 - x)}} \\
+& {\color{Green} // 把 \frac{1}{\sqrt{x}} 放到 d 后面} \\
+& = 2 \int_{\varepsilon}^{\frac{1}{2}} \frac{\mathrm{d}(\sqrt{x})}{\sqrt{1 - x}} \\
+& = 2 \int_{\varepsilon}^{\frac{1}{2}} \frac{\mathrm{d}(\sqrt{x})}{\sqrt{1 - (\sqrt{x})^2}} \\
+& = 2 \arcsin \sqrt{x} \big|_{\varepsilon}^{\frac{1}{2}} \\
+& = 2 (\arcsin \frac{\sqrt{2}}{2} - \arcsin \sqrt{\varepsilon}) \\
+& = 2 (\frac{\pi}{4} - \arcsin \sqrt{\varepsilon}) \\
+& \lim_{\varepsilon \to 0} 2 (\frac{\pi}{4} - \arcsin 0) = \frac{\pi}{2} \\
+& 所以反常积分收敛于 \frac{\pi}{2} \\
+\end{align}
+-->
+
+![](../img/di5_13.jpg)
