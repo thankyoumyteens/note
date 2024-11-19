@@ -25,6 +25,9 @@
       - [删除表](./mysql/ddl/del_t.md)
   - [索引](./mysql/index/index.md)
    - [联合索引](./mysql/index/compound_indexes.md)
+   - [查看表的索引](./mysql/index/show_index.md)
+   - [创建索引](./mysql/index/create_index.md)
+   - [删除索引](./mysql/index/del_index.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 
