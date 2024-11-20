@@ -36,6 +36,7 @@
     - [decltype](./base/type_inference/decltype.md)
   - [类](./base/class/class.md)
   - [字符串](./base/str/str.md)
+    - [数值类型转换](./base/str/cast_number.md)
   - [左值和右值](./base/lrvalue.md)
   - [decltype](./base/decltype.md)
   - [迭代器](./base/iterator/iterator.md)
