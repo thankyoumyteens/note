@@ -109,3 +109,9 @@ G1 最初以每个分区为基础管理记忆集：每个分区都包含一个�
 本节描述了 Garbage-First (G1) 垃圾回收器的一些重要细节。
 
 ### 调整堆大小
+
+G1 在调整 Java 堆大小时遵循标准规则，使用 `-XX:InitialHeapSize` 作为初始 Java 堆大小，`-XX:MaxHeapSize` 作为最大 Java 堆大小，`-XX:MinHeapFreeRatio` 作为最小空闲内存百分比，`-XX:MaxHeapFreeRatio` 用于确定调整大小后的最大空闲内存百分比。G1 仅在重新标记（Remark）和 Full GC 的停顿期间根据这些选项考虑调整 Java 堆大小。此过程可能会向操作系统释放内存或从操作系统申请内存。
+
+堆扩展在回收停顿期间发生，而内存释放则在停顿之后与应用程序并发进行。
+
+#### Young-Only 阶段调整分代的大小

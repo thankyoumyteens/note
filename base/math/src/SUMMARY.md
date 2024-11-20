@@ -35,3 +35,4 @@
     - [分部积分法](./further_mathematics/definite_integral3.md)
     - [定积分特殊性质](./further_mathematics/definite_integral4.md)
     - [反常积分](./further_mathematics/definite_integral5.md)
+    - [定积分的几何应用](./further_mathematics/definite_integral6.md)

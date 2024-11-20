@@ -216,3 +216,58 @@
 -->
 
 ![](../img/di5_13.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& 判断反常积分 \int_{0}^{1} \frac{\mathrm{d}x}{\sqrt{x(x + 1)}} 的敛散性 \\
+& {\color{Green} // 要判断 \lim_{x \to a^+} (x - a)^{\alpha} f(x) 是否存在} \\
+& \;\;\;\; \lim_{x \to 0^+} (x - 0)^{\alpha} \frac{1}{\sqrt{x(x + 1)}} \\
+& {\color{Green} // \alpha 的取值要能把分母中有问题的部分约掉} \\
+& {\color{Green} // \sqrt{x} 不能取0, 所以把 \sqrt{x} 约掉, \alpha 取 \frac{1}{2}} \\
+& = \lim_{x \to 0^+} (x - 0)^{\frac{1}{2}} \frac{1}{\sqrt{x} \times \sqrt{x + 1}} \\
+& = \lim_{x \to 0^+} \sqrt{x} \frac{1}{\sqrt{x} \times \sqrt{x + 1}} \\
+& = \lim_{x \to 0^+} \frac{1}{\sqrt{x + 1}} \\
+& = 1 \\
+& 因为 \alpha = \frac{1}{2} < 1, 且极限存在, 所以反常积分收敛 \\
+\\
+& {\color{Green} // 如果这种反常积分收敛, 求积分时就直接当作正常积分计算} \\
+& \;\;\;\; \int_{0}^{1} \frac{\mathrm{d}x}{\sqrt{x(x + 1)}} \\
+& = 2 \int_{0}^{1} \frac{\mathrm{d}(\sqrt{x})}{\sqrt{x + 1}} \\
+& = 2 \int_{0}^{1} \frac{\mathrm{d}(\sqrt{x})}{\sqrt{(\sqrt{x})^2 + 1}} \\
+& = 2 \ln (\sqrt{x} + \sqrt{(\sqrt{x})^2 + 1}) \big|_{0}^{1} \\
+& = 2 \ln (1 + \sqrt{2}) \\
+\end{align}
+-->
+
+![](../img/di5_14.jpg)
+
+### 区间右端点无界的反常积分
+
+<!--
+\begin{align}
+& 设函数 f(x) 在 [a, b) 上连续, 且 f(b - 0) = \infty, \\
+& 对任意的 \varepsilon > 0, \int_{a}^{b - \varepsilon} f(x) \mathrm{d}x = F(b - \varepsilon) - F(a), \\
+& 如果极限 \lim_{\varepsilon \to 0} [F(b - \varepsilon) - F(a)] = A, \\
+& 则称反常积分 \int_{a}^{b} f(x) \mathrm{d}x 收敛于常数 A, \\
+& 记为 \int_{a}^{b} f(x) \mathrm{d}x = A \\
+& 若极限不存在, 则称反常积分 \int_{a}^{b} f(x) \mathrm{d}x 发散 \\
+\end{align}
+-->
+
+![](../img/di5_15.jpg)
+
+敛散性判别法
+
+<!--
+\begin{align}
+& 1、如果存在 \alpha < 1, 使得 \lim_{x \to b^-} (b - x)^{\alpha} f(x) 存在, \\
+& \;\;\;\;\; 则反常积分 \int_{a}^{b} f(x) \mathrm{d}x 收敛 \\
+& 2、如果存在 \alpha \ge 1, 使得 \lim_{x \to b^-} (b - x)^{\alpha} f(x) = k \; (k \ne 0), \\
+& \;\;\;\;\; 或者 \lim_{x \to b^-} (b - x)^{\alpha} f(x) = \infty \\
+& \;\;\;\;\; 则反常积分 \int_{a}^{b} f(x) \mathrm{d}x 发散 \\
+\end{align}
+-->
+
+![](../img/di5_16.jpg)
