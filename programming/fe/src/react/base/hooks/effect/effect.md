@@ -57,3 +57,23 @@ function App() {
 
 export default App;
 ```
+
+## 组件卸载时调用
+
+```jsx
+function ChildComponent() {
+  useEffect(() => {
+    // 组件挂载完毕后启动定时器
+    const timer = setInterval(() => {
+      console.log("running");
+    }, 1000);
+
+    // 组件卸载时会执行return返回的函数
+    return () => {
+      // 组件卸载前清理定时器
+      clearInterval(timer);
+    };
+  }, []);
+  return <div>子组件</div>;
+}
+```

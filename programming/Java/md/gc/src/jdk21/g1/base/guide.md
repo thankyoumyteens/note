@@ -115,3 +115,43 @@ G1 在调整 Java 堆大小时遵循标准规则，使用 `-XX:InitialHeapSize` 
 堆扩展在回收停顿期间发生，而内存释放则在停顿之后与应用程序并发进行。
 
 #### Young-Only 阶段调整分代的大小
+
+G1 总是在正常新生代回收结束时为下一个 mutator 阶段调整新生代的大小。这样，G1 可以根据实际停顿时间的长期观察来满足使用 `-XX:MaxGCPauseTimeMillis` 和 `-XX:GCPauseIntervalMillis` 设置的目标停顿时间。这个计算考虑了类似大小的新生代疏散所需的时间，包括在回收过程中需要复制的对象数量以及这些对象的互连程度。
+
+`-XX:GCPauseIntervalMillis` 和 `-XX:MaxGCPauseTimeMillis` 选项定义了一个最小的 mutator 利用率(minimum
+mutator utilization, MMU)。G1 将尝试在每一个可能的 `-XX:GCPauseIntervalMillis` 时间范围内，最多使用 `-XX:MaxGCPauseTimeMillis` 毫秒来进行垃圾回收停顿。
+
+如果不受到其他限制，G1 会根据 `-XX:G1NewSizePercent` 和 `-XX:G1MaxNewSizePercent` 确定的值之间自适应地调整新生代的大小，以满足目标停顿时间。有关如何解决长时间停顿的更多信息，请参见《Garbage-First 垃圾回收器调优》。
+
+或者，可以使用 `-XX:NewSize` 结合 `-XX:MaxNewSize` 分别设置新生代的最小和最大大小。注意: 只指定这两个选项中的一个会将新生代的大小固定为通过 `-XX:NewSize` 和 `-XX:MaxNewSize` 分别指定的值。这将禁用停顿时间控制。
+
+#### Space-Reclamation 阶段调整分代的大小
+
+在 space-reclamation 阶段，G1 试图在单次垃圾回收停顿中最大化老年代中回收的空间。新生代的大小通常被设置为允许的最小值，通常由 `-XX:G1NewSizePercent` 确定，但也会考虑到最小 mutator 利用率（MMU）的要求。
+
+在这一阶段的每次混合回收开始时，G1 会选择一组回收集候选分区添加到回收集中。这组额外的老年代分区由三部分组成:
+
+- 使用最小老年代分区集合来确保疏散进度。这个老年代分区集合由回收集候选分区的数量除以 space-reclamation 阶段长度来决定, space-reclamation 阶段长度的由 `-XX:G1MixedGCCountTarget` 确定
+- 如果 G1 预测在回收最小老年代分区集合后仍有剩余时间，则会从回收集候选分区中添加额外的老年代分区。老年代分区会持续添加，直到预测使用的时间达到剩余时间的 80%
+- G1 在疏散了前两部分的分区后，如果此次停顿中仍有剩余时间，还会增量地疏散一组可选的回收集分区
+
+前两组分区在初始回收过程中被回收，而可选回收集中的额外分区则在剩余的停顿时间内进行回收。这种方法确保了空间回收的进度，同时提高了保持停顿时间最短和管理可选回收集的开销最小化的概率。
+
+space-reclamation 阶段在回收集候选分区集合中没有更多分区时结束。
+
+有关 G1 将使用多少个老年代分区以及如何避免长时间的混合回收停顿的更多信息，请参见《Garbage-First 垃圾回收器调优》。
+
+### 周期性的垃圾回收
+
+如果由于应用程序不活跃而导致长时间没有进行垃圾回收，虚拟机可能会长时间持有大量未使用的内存，而这些内存本可以用于其他地方。为了避免这种情况，可以使用 `-XX:G1PeriodicGCInterval` 选项强制 G1 定期进行垃圾回收。此选项决定 G1 考虑执行垃圾回收的最小间隔时间（以毫秒为单位）。如果自上次任何垃圾回收停顿以来已经过去了这个时间间隔，并且没有正在进行的并发周期，G1 会触发额外的垃圾回收，可能的影响包括:
+
+- 在 young-only 阶段: G1 通过并发启动（Concurrent Start）阶段开始并发标记，或者如果指定了 `-XX:-G1PeriodicGCInvokesConcurrent`，则执行一次 Full GC
+- 在 space-reclamation 阶段: G1 继续这个阶段，并触发适合当前进度的垃圾回收停顿类型
+
+`-XX:G1PeriodicGCSystemLoadThreshold` 选项可用于细化是否触发垃圾回收：如果 JVM 的宿主系统（例如，容器）上通过 `getloadavg()` 调用返回的平均一分钟系统负载值高于此阈值，则不会运行定期垃圾回收。
+
+有关定期垃圾收集的更多信息，请参见 [JEP 346: Promptly Return Unused Committed Memory from G1](https://openjdk.org/jeps/346)。
+
+### 确定堆的初始占用
+
+初始堆占用百分比(Initiating Heap Occupancy Percent, IHOP)是触发并发启动回收(Concurrent Start collection)的阈值，它被定义为老年代大小的百分比。

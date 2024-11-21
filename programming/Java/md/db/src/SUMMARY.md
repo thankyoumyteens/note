@@ -29,6 +29,7 @@
    - [创建索引](./mysql/index/create_index.md)
    - [删除索引](./mysql/index/del_index.md)
    - [执行计划](./mysql/index/explain.md)
+   - [索引失效的情况](./mysql/index/indexes_unused.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
 
