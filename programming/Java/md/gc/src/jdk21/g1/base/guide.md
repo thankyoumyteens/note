@@ -154,4 +154,10 @@ space-reclamation 阶段在回收集候选分区集合中没有更多分区时�
 
 ### 确定堆的初始占用
 
-初始堆占用百分比(Initiating Heap Occupancy Percent, IHOP)是触发并发启动回收(Concurrent Start collection)的阈值，它被定义为老年代大小的百分比。
+初始堆占用百分比(Initiating Heap Occupancy Percent, IHOP)是触发 并发启动回收(Concurrent Start collection)的阈值，它被定义为老年代大小的百分比。
+
+G1 默认情况下通过观察标记过程花费多少时间以及在标记周期中老年代通常分配多少内存，来自动确定一个最优的 IHOP。这一功能被称为自适应 IHOP。如果此功能处于激活状态，则 `-XX:InitiatingHeapOccupancyPercent` 选项会确定初始值，该值为当前老年代大小的百分比，直到有足够的观察数据来预测出更好的 IHOP 阈值。使用 `-XX:-G1UseAdaptiveIHOP` 选项可以关闭 G1 的这一行为。在这种情况下，IHOP 的阈值始终是 `-XX:InitiatingHeapOccupancyPercent` 设置的值。
+
+在内部，自适应的 IHOP 试图设置堆的初始占用，使得 space-reclamation 阶段的第一次混合垃圾回收在老年代的内存占用达到当前最大老年代大小减去 `-XX:G1HeapReservePercent` 的值作为额外的缓冲区。
+
+### 标记

@@ -147,8 +147,9 @@
     - [导出表头合并](./excel/easyexcel/merge_header.md)
   - [POI](./excel/poi/poi.md)
     - [内存溢出问题](./excel/poi/out_of_memory.md)
-    - [超大excel写入](./excel/poi/write_large_excel.md)
-    - [超大excel读取](./excel/poi/read_large_excel.md)
+    - [excel读取](./excel/poi/read_large_excel.md)
+    - [excel写入](./excel/poi/write_large_excel.md)
+    - [合并单元格](./excel/poi/merge.md)
     - [设置某些单元格不可编辑](./excel/poi/cell_readonly.md)
 
 - [JSON](./json/json.md)
