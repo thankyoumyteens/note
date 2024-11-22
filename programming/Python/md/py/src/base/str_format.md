@@ -6,8 +6,10 @@ age = 18
 
 # % + 格式指定符
 print("%s今年%d岁" % (name, age))  # 张三今年18岁
+
 # format()函数
 print("{}今年{}岁".format(name, age))  # 张三今年18岁
+
 # f-string
 print(f"{name}今年{age}岁")  # 张三今年18岁
 ```

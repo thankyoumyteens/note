@@ -44,12 +44,12 @@ print(root.tag)
 print(root.attrib)
 ```
 
-## 使用索引访问子标签
+## 使用索引访问子节点
 
 ```py
 root = tree.getroot()
 
-# 获取age标签的子标签value
+# 获取age的子节点value
 age_value = root[1][0]
 
 print(age_value.tag)

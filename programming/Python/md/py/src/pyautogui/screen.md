@@ -4,10 +4,10 @@
 import pyautogui
 
 # 获取屏幕尺寸
-# 返回: Size(width=1920, height=1080)
-pyautogui.size()
+s = pyautogui.size()
+print(s.width, s.height)
 
 # 判断指定坐标 (x,y) 是否在屏幕内
-# 返回: True/False
-pyautogui.onScreen(100, 200)
+b = pyautogui.onScreen(100, 200)
+print(b)
 ```

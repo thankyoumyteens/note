@@ -4,7 +4,8 @@
 import pyautogui
 
 # 返回Pillow/PIL图像对象
-pyautogui.screenshot()
+img = pyautogui.screenshot()
+
 # 返回Pillow/PIL图像对象, 并将其保存到文件
 pyautogui.screenshot('1.png')
 ```
