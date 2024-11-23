@@ -1,11 +1,24 @@
 # 定积分的几何应用
 
+## 面积
+
 <!--
 \begin{align}
+& 设平面区域 D 由 L: y = f(x) 及直线 x = a, x = b 围成, \\
+& 则区域 D 的面积为: A = \int_{a}^{b} f(x) \mathrm{d} x \\
+\\
+& 设平面区域 D 由 L: y = g(x), y = f(x) \; (g(x) \le f(x)) 及直线 x = a, x = b 围成, \\
+& 则区域 D 的面积为: A = \int_{a}^{b} [f(x) - g(x)] \mathrm{d} x \\
+\\
 & 设平面区域 D 由 L: r = r(\theta) 及射线 \theta = \alpha, \theta = \beta 围成, \\
 & 则区域 D 的面积为: A = \frac{1}{2} \int_{\alpha}^{\beta} r^2(\theta) \mathrm{d} \theta \\
+\\
+& 设平面区域 D 由 L_1: r_1 = r_1(\theta), L_2: r_2 = r_2(\theta) \; (r_1(\theta) \le r_2(\theta)) 及射线 \theta = \alpha, \theta = \beta 围成, \\
+& 则区域 D 的面积为: A = \frac{1}{2} \int_{\alpha}^{\beta} [r_2^2(\theta) - r_1^2(\theta)] \mathrm{d} \theta \\
 \end{align}
 -->
+
+![](../img/di6_0.jpg)
 
 例题 1
 
@@ -103,3 +116,56 @@ y = r \sin \theta \\
 -->
 
 ![](../img/di6_3.jpg)
+
+## 体积
+
+<!--
+\begin{align}
+& 设平面区域 D 由 L: y = f(x) 、直线 x = a, x = b 以及 x 轴围成的曲边梯形, \\
+\\
+& 1、区域 D 绕 x 轴旋转一周而成的几何体的体积为: \\
+& \quad \;\;\, V_x = \pi \int_{a}^{b} f^2(x) \mathrm{d} x \\
+\\
+& 2、区域 D 绕 y 轴旋转一周而成的几何体的体积为: \\
+& \quad \;\;\, V_y = 2 \pi \int_{a}^{b} x f(x) \mathrm{d} x \\
+\end{align}
+-->
+
+![](../img/di6_4.jpg)
+
+例题
+
+<!--
+\begin{align}
+& L: y = \sqrt{2x - x^2} \; (0 \le x \le 2), 求 V_x 和 V_y \\
+\\
+& V_x = \pi \int_{a}^{b} f^2(x) \mathrm{d} x \\
+& \;\;\;\, = \pi \int_{0}^{2} \sqrt{2x - x^2}^2 \mathrm{d} x \\
+& \;\;\;\, = \pi \int_{0}^{2} (2x - x^2) \mathrm{d} x \\
+& \;\;\;\, = \pi (\int_{0}^{2} 2x \mathrm{d} x - \int_{0}^{2} x^2 \mathrm{d} x) \\
+& \;\;\;\, = \pi (4 - \frac{8}{3}) \\
+& \;\;\;\, = \frac{4}{3} \pi \\
+\\
+& V_y = 2 \pi \int_{a}^{b} x f(x) \mathrm{d} x \\
+& \;\;\;\, = 2\pi \int_{0}^{2} x \sqrt{2x - x^2} \mathrm{d} x \\
+& {\color{Green} // 配方: x^2 + 2ax + a^2 = (x + a)^2} \\
+& {\color{Green} // 根号里是 -(x^2 - 2x)} \\
+& {\color{Green} // 所以 a = 1 \Rightarrow -(x^2 - 2x + 1 - 1)} \\
+& {\color{Green} // \Rightarrow -(x - 1)^2 + 1} \\
+& \;\;\;\, = 2\pi \int_{0}^{2} x \sqrt{1 - (x - 1)^2} \mathrm{d} x \\
+& \;\;\;\, = 2\pi \int_{0}^{2} (x - 1 + 1) \sqrt{1 - (x - 1)^2} \mathrm{d} x \\
+& \;\;\;\, = 2\pi \int_{0}^{2} (x - 1 + 1) \sqrt{1 - (x - 1)^2} \mathrm{d} (x - 1) \\
+& {\color{Green} // x - 1 换成 t} \\
+& \;\;\;\, = 2\pi \int_{-1}^{1} (t + 1) \sqrt{1 - t^2} \mathrm{d} t \\
+& \;\;\;\, = 2\pi (\int_{-1}^{1} t\sqrt{1 - t^2} \mathrm{d} t + \int_{-1}^{1} \sqrt{1 - t^2} \mathrm{d} t) \\
+& {\color{Green} // 对称区间的定积分性质} \\
+& {\color{Green} // 若 f(-x) = - f(x), 则 \int_{-a}^{a} f(x) \mathrm{d}x = 0} \\
+& {\color{Green} // t\sqrt{1 - t^2} 是奇函数} \\
+& \;\;\;\, = 2\pi (0 + \int_{-1}^{1} \sqrt{1 - t^2} \mathrm{d} t) \\
+& \;\;\;\, = 2\pi \int_{-1}^{1} \sqrt{1 - t^2} \mathrm{d} t \\
+& {\color{Green} // y = \sqrt{1 - t^2} 是单位圆, 函数在一三象限, 所以只要其一半面积} \\
+& \;\;\;\, = \pi ^ 2 \\
+\end{align}
+-->
+
+![](../img/di6_5.jpg)
