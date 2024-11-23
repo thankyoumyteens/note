@@ -25,3 +25,5 @@
   - [多模块存储器](./memory/multi_module_memory.md)
   - [Cache](./memory/cache.md)
   - [虚拟存储器](./memory/virtual_memory.md)
+
+- [指令系统](./instruction/instruction.md)
