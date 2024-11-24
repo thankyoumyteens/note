@@ -17,7 +17,6 @@ public class DemoMain {
      */
     public static void main(String[] args) {
         String fileName = "export.xlsx";
-        // 使用SXSSFWorkbook避免内存溢出
         try (SXSSFWorkbook wb = new SXSSFWorkbook(); FileOutputStream os = new FileOutputStream(fileName)) {
             Sheet sheet = wb.createSheet("sheet1");
 

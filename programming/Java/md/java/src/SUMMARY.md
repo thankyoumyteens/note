@@ -150,6 +150,7 @@
     - [excel读取](./excel/poi/read_large_excel.md)
     - [excel写入](./excel/poi/write_large_excel.md)
     - [合并单元格](./excel/poi/merge.md)
+    - [设置单元格样式](./excel/poi/style.md)
     - [设置某些单元格不可编辑](./excel/poi/cell_readonly.md)
 
 - [JSON](./json/json.md)

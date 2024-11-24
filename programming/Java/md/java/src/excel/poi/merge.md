@@ -1,8 +1,6 @@
 # 合并单元格
 
 ```java
-package com.example.work;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;

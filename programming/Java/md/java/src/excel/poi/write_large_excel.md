@@ -3,8 +3,6 @@
 使用 SXSSFWorkbook 替代 XSSFWorkbook 即可。
 
 ```java
-package com.example.work;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
