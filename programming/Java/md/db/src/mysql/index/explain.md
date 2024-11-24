@@ -29,9 +29,7 @@ desc select * from name_info;
 - key: 当前 sql 实际用到的索引
 - key_len: 索引占用的大小(可以通过计算判断用到了联合索引中的哪几个索引)
 - rows: 本次查询预估要扫描多少行
-- Extra: 额外的优化建议
-  - Using where; Using Index: 查找使用了索引, 需要的数据都在索引中能找到, 不需要回表查询数据
-  - Using index condition: 查找使用了索引, 但是需要回表查询数据
+- Extra: 额外的优化建议, 比如 Using where; Using Index
 
 ## 指定输出格式
 

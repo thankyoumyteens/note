@@ -68,7 +68,7 @@ const ChildComponent = forwardRef((props, refFromParent) => {
 
   return (
     <div>
-      <input ref={inputRef} type="text" placeholder="Type something..." />
+      <input ref={inputRef} type="text" />
     </div>
   );
 });
