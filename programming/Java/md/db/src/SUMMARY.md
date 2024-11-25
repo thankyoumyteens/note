@@ -30,6 +30,7 @@
    - [删除索引](./mysql/index/del_index.md)
    - [执行计划](./mysql/index/explain.md)
     - [Using where](./mysql/index/using_where.md)
+    - [Using index](./mysql/index/using_index.md)
     - [Using filesort](./mysql/index/using_filesort.md)
     - [Using temporary](./mysql/index/using_tmp.md)
    - [索引失效的情况](./mysql/index/indexes_unused.md)

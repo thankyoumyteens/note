@@ -103,25 +103,39 @@
 
 ## 反三角函数
 
+<!--
+\begin{align}
+& 如果 y = \sin x \; (-\frac{\pi}{2} \le x \le \frac{\pi}{2}), 则 x = \arcsin y \\
+& 如果 y = \cos x \; (0 \le x \le \pi), 则 x = \arccos y \\
+& 如果 y = \tan x \; (-\frac{\pi}{2} < x < \frac{\pi}{2}), 则 x = \arctan y \\
+\end{align}
+-->
+
+![](../img/arc_d.jpg)
+
 <!-- y = \arcsin x 在 x \in [−1, 1], y \in [-\frac{\pi}{2},\frac{\pi}{2}]上的图像 -->
 
 ![](../img/tf11.jpg)
-![](../img/tf11_1.gif)
+
+![](../img/g_arcsin.jpg)
 
 <!-- y = \arccos x 在 x \in [−1, 1], y \in [0,\pi]上的图像 -->
 
 ![](../img/tf12.jpg)
-![](../img/tf12_1.gif)
+
+![](../img/g_arccos.jpg)
 
 <!-- 奇函数 y = \arctan x 在 x \in [−\infty, +\infty], y \in [-\frac{\pi}{2},\frac{\pi}{2}]上的图像 -->
 
 ![](../img/tf13.jpg)
-![](../img/tf13_1.gif)
+
+![](../img/g_arctan.jpg)
 
 <!-- y = \operatorname{arccot} x 在 x \in [−\infty, +\infty], y \in [0,\pi]上的图像 -->
 
 ![](../img/tf14.jpg)
-![](../img/tf14_1.gif)
+
+![](../img/g_arccot.jpg)
 
 <!-- \arcsin x + \arccos x = \frac{\pi}{2}, (-1 \le x \le 1) -->
 

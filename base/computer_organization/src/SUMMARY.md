@@ -27,3 +27,4 @@
   - [虚拟存储器](./memory/virtual_memory.md)
 
 - [指令系统](./instruction/instruction.md)
+  - [操作码](./instruction/op.md)

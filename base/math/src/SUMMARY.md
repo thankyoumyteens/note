@@ -37,3 +37,4 @@
     - [反常积分](./further_mathematics/definite_integral5.md)
     - [定积分的几何应用](./further_mathematics/definite_integral6.md)
   - [微分方程](./further_mathematics/differential_equation.md)
+    - [一阶微分方程](./further_mathematics/differential_equation2.md)
