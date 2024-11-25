@@ -32,9 +32,10 @@ LocalDateTime dateTime = LocalDateTime.of(2021, 2, 26, 15, 37, 4, 9999);
 ```java
 LocalDateTime dateTime = LocalDateTime.now();
 
-lastDay.withYear(2000);
-lastDay.withMonth(1);
-lastDay.withDayOfMonth(1);
+dateTime = dateTime.withYear(2000);
+dateTime = dateTime.withMonth(1);
+dateTime = dateTime.withDayOfMonth(1);
+
 dateTime = dateTime.withHour(23);
 dateTime = dateTime.withMinute(59);
 dateTime = dateTime.withSecond(59);

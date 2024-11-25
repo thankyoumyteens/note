@@ -31,6 +31,7 @@
    - [执行计划](./mysql/index/explain.md)
     - [Using where](./mysql/index/using_where.md)
     - [Using filesort](./mysql/index/using_filesort.md)
+    - [Using temporary](./mysql/index/using_tmp.md)
    - [索引失效的情况](./mysql/index/indexes_unused.md)
   - [日期操作](./mysql/date.md)
   - [存储过程](./mysql/func.md)
