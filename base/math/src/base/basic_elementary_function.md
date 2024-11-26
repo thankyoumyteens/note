@@ -26,13 +26,18 @@
 & \, \ln a = \log_{10}{a} \\
 \\
 & 对数的运算法则: \\
-& \, \ln (a \times b) = \ln a + \ln b \\
-& \, \ln (a \div b) = \ln a - \ln b \\
-& \, \ln a^{n} = n \ln a \\
-& \;\, a^{b} = e^{b \ln a} \\
-& \;\, \ln e = \log_{e}{e} = 1 \\
-& \;\, a = e^{\ln a} \\
-& \;\, \ln e^{a} = a \\
+& \, 1、\ln (a \times b) = \ln a + \ln b \\
+& \, 2、\ln (a \div b) = \ln a - \ln b \\
+& \, 3、\ln a^{n} = n \ln a \\
+& \, 4、e^{\ln a} = a \\
+& \, 5、e^{b \ln a} = a^{b} \\
+& \, 6、\ln e = \log_{e}{e} = 1 \\
+& \, 7、a = e^{\ln a} \\
+& \, 8、\ln e^{a} = a \\
+\\
+& 去掉等式 \ln y = x 中的 \ln: \\
+& 1、对等式两边同时取 e 的幂: e^{\ln y} = e^{x} \\
+& 2、因为 e^{\ln a} = a, 所以: y = e^{x} \\
 \end{align}
 -->
 
