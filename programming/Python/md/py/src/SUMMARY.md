@@ -89,5 +89,16 @@
   - [等待元素出现](./selenium/等待元素出现.md)
   - [模拟登录](./selenium/模拟登录.md)
 
+- [numpy](./numpy/numpy.md)
+  - [numpy数组](./numpy/ndarray/ndarray.md)
+    - [创建numpy数组](./numpy/ndarray/create.md)
+    - [获取数组的维度](./numpy/ndarray/shape.md)
+    - [切片](./numpy/ndarray/slice.md)
+    - [数组元素替换](./numpy/ndarray/replace.md)
+  - [矩阵](./numpy/matrix/matrix.md)
+    - [矩阵转置](./numpy/matrix/transpose.md)
+
+- [Matplotlib](./matplotlib/matplotlib.md)
+
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)

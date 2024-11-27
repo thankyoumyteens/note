@@ -44,7 +44,7 @@
   - [安装mdbook](./Linux/debian/mdbook.md)
   - [安装redis](./Linux/debian/redis.md)
   - [安装nacos](./Linux/debian/nacos.md)
-
+<!-- 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
   - [ubuntu 软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)
   - [开启ssh服务](./Linux/Ubuntu/ubuntu开启ssh服务.md)
@@ -60,7 +60,7 @@
   - [docker](./Linux/Ubuntu/ubuntu安装docker.md)
   - [docker-compose](./Linux/Ubuntu/ubuntu安装docker-compose.md)
   - [harbor](./Linux/Ubuntu/ubuntu安装harbor.md)
-  - [rabbitmq](./Linux/Ubuntu/rabbitmq.md)
+  - [rabbitmq](./Linux/Ubuntu/rabbitmq.md) -->
 
 - [Windows 11](./Windows/win11/win11.md)
   - [安装时跳过"让我们为你连接到网络"](./Windows/win11/让我们为你连接到网络.md)

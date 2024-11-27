@@ -2,12 +2,9 @@
 
 ```sh
 # 创建
-npm create vite@latest my-vite-app
-✔ Select a framework: › React
-✔ Select a variant: › TypeScript
+npx create-react-app 项目名 --template typescript
 
 # 运行
-cd my-vite-app
-npm install
-npm run dev
+cd 项目名
+npm start
 ```

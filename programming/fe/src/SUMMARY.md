@@ -14,6 +14,7 @@
 
 - [React](./react/react.md)
   - [创建项目](./react/base/quick_start.md)
+  - [打包使用相对路径](./react/base/build_relative.md)
   - [JSX](./react/base/jsx/jsx.md)
     - [js表达式](./react/base/jsx/exp.md)
     - [渲染列表](./react/base/jsx/for.md)
@@ -71,6 +72,7 @@
     - [编程式跳转](./react/router/js.md)
     - [动态配置路由](./react/router/d.md)
     - [把菜单按钮固定在页面上](./react/router/fix.md)
+    - [createBrowserRouter部署](./react/router/nginx.md)
 
 - [electron](./electron/electron.md)
   - [基本使用](./electron/quick_start.md)
