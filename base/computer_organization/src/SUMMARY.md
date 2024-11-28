@@ -28,3 +28,4 @@
 
 - [指令系统](./instruction/instruction.md)
   - [操作码](./instruction/op.md)
+  - [寻址](./instruction/addressing.md)

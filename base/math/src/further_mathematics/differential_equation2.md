@@ -99,3 +99,21 @@
 -->
 
 ![](../img/de2_5.jpg)
+
+## 一阶齐次线性微分方程
+
+<!--
+\begin{align}
+& 形如 \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = 0 的微分方程，称为一阶齐次线性微分方程 \\
+\\
+& 解法: 将 \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = 0 化为 \frac{\mathrm{d}y}{\mathrm{d}x} = - P(x)y, \\
+& 令显然 y = 0 为微分方程的一个解 \\
+& 当 y \ne 0 时, 原方程化为: \frac{\mathrm{d}y}{y} = - P(x) \mathrm{d}x \\
+& 等号两边积分: \int \frac{\mathrm{d}y}{y} = - \int P(x) \mathrm{d}x + C_0
+\Rightarrow y = \pm e^{C_0} e^{- \int P(x) \mathrm{d}x} \\
+& 令 \pm e^{C_0}, 则 y = C e^{- \int P(x) \mathrm{d}x} \quad (C \ne 0) \\
+& 所以通解为: y = C e^{- \int P(x) \mathrm{d}x} \quad (C 为任意常数) \\
+\end{align}
+-->
+
+![](../img/de2_6.jpg)
