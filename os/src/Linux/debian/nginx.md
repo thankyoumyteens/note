@@ -22,3 +22,12 @@ sudo apt install nginx
 ```
 
 3. 页面在 `/usr/share/nginx/html` 下
+
+## 常用命令
+
+```sh
+# 启动
+nginx
+# 停止
+nginx -s stop
+```

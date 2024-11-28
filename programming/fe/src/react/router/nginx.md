@@ -18,7 +18,7 @@ const router = createBrowserRouter(routes, routeOptions);
 
 ```ini
 server {
-    location /my-app {
+    location /my-app/ {
         alias /usr/share/nginx/html/my-app/;
         try_files $uri $uri/ /my-app/index.html;
         index  index.html;

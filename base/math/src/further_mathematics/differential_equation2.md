@@ -59,3 +59,43 @@
 -->
 
 ![](../img/de2_3.jpg)
+
+## 齐次微分方程
+
+<!--
+\begin{align}
+& 对一阶微分方程 \frac{\mathrm{d}y}{\mathrm{d}x} = f(x, y), \\
+& 若 f(x, y) = \varphi (\frac{y}{x}), \\
+& 则称 \frac{\mathrm{d}y}{\mathrm{d}x} = f(x, y) 为齐次微分方程 \\
+\\
+& 解法: 将 \frac{\mathrm{d}y}{\mathrm{d}x} = f(x, y) 化为 \frac{\mathrm{d}y}{\mathrm{d}x} = \varphi (\frac{y}{x}), \\
+& 令 u = \frac{y}{x}, 则 y = ux, 则 \frac{\mathrm{d}y}{\mathrm{d}x} = (xu)' = u + x \frac{\mathrm{d}u}{\mathrm{d}x} \\
+& 代入得到 x \frac{\mathrm{d}u}{\mathrm{d}x} = \varphi (u) - u, \\
+& 变量分离后积分得到 \int \frac{\mathrm{d}u}{\varphi (u) - u} = \int \frac{\mathrm{d}x}{x} + C, \\
+& 再将 u = \frac{y}{x} 代入即可得到原方程的通解 \\
+\end{align}
+-->
+
+![](../img/de2_4.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 求微分方程 \frac{\mathrm{d}y}{\mathrm{d}x} - \frac{2}{x}y = 1 的通解 \\
+\\
+& \frac{\mathrm{d}y}{\mathrm{d}x} = 2 \frac{y}{x} + 1 \\
+& 令 u = \frac{y}{x}, \frac{\mathrm{d}y}{\mathrm{d}x} = u + x \frac{\mathrm{d}u}{\mathrm{d}x} \\
+& 代入 u + x \frac{\mathrm{d}u}{\mathrm{d}x} = 2 u + 1 \\
+& 整理得到 \frac{\mathrm{d}u}{u + 1} = \frac{\mathrm{d}x}{x} \\
+& 两边积分 \int \frac{\mathrm{d}u}{u + 1} = \int \frac{\mathrm{d}x}{x} + C \\
+& {\color{Green} // 上面的例题2已经讨论过了, \ln 的绝对值可以去掉} \\
+& \ln (u + 1) = \ln x + \ln C \\
+& \ln (u + 1) = \ln Cx \\
+& u + 1 = Cx \\
+& \frac{y}{x} + 1 = Cx \\
+& y = Cx^2 - x \quad (C为任意常数)\\
+\end{align}
+-->
+
+![](../img/de2_5.jpg)
