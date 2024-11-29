@@ -23,10 +23,10 @@ ElementTree 中带命名空间的标签格式:
 from xml.etree import ElementTree as ET
 # 命名空间
 my_ns = '{http://xxxxxxx}'
-# 解析xml
+
 tree = ET.parse('demo.xml')
-# 根节点 my_ns:document
 root = tree.getroot()
+
 # 查找子节点中tag为my_ns:body的标签
 for target in root.iter(f'{my_ns}body'):
     print(target.tag)

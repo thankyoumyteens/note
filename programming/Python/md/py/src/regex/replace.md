@@ -1,29 +1,28 @@
 # 替换
 
-1. re.sub("abcd","m",str1) 将 str1 中的 abcd 全部替换为 m
-2. re.sub("abcd","m",str1,2) 只替换前两个字符
-3. re.sub("\d",func,str1) 用 func()函数的返回值替换
-
-## 将字符串中的数字替换成%
-
 写法 1:
 
-```python
-# 每个数字后面加三个!
+```py
 import re
-s = 'A23GG4HFD567GGG4846'
-print(re.sub('(\d+?)', lambda m : m.group(1) + "!!!", s))
-# A2!!!3!!!GG4!!!HFD5!!!6!!!7!!!GGG4!!!8!!!4!!!6!!!
+
+s = '2021-01-01'
+# 通过 反斜杠+数字 来引用匹配到的组
+s = re.sub(r'(\d{4})-(\d{2})-(\d{2})', r'\1年\2月\3日', s)
+print(s)
 ```
 
 写法 2:
 
-```python
+```py
 import re
 
-def parse(matched):
-    return matched.group(1) + "!!!"
 
-s = 'A23GG4HFD567GGG4846'
-print(re.sub('(\d+?)', parse, s))
+def replace_date(match):
+    year, month, day = match.groups()
+    return f'{year}年{month}月{day}日'
+
+
+s = '2021-01-01'
+s = re.sub(r'(\d{4})-(\d{2})-(\d{2})', replace_date, s)
+print(s)
 ```

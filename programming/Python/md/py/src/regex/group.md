@@ -1,43 +1,20 @@
 # 分组
 
-除了简单地判断是否匹配之外, 正则表达式还有提取子串的强大功能。用小括号表示的就是要提取的分组。比如下面代码分别定义了两个组, 可以直接从匹配的字符串中提取出区号和本地号码
-
 ```python
 m = re.match(r'^(\d{3})-(\d{3,8})$', '010-12345')
-print(m.group(0))
-print(m.group(1))
-print(m.group(2))
-
-# 010-12345
-# 010
-# 12345
+print(m.group(0)) # 010-12345
+print(m.group(1)) # 010
+print(m.group(2)) # 12345
 ```
-如果正则表达式中定义了组, 就可以在Match对象上用group()方法提取出子串来。
 
-注意到group(0)永远是原始字符串, group(1), group(2)表示第1, 2个子串。
+注意: group(0)永远是原始字符串, group(1), group(2)表示第 1, 2 个子串。
 
-## groups
+## 获取所有分组
+
+注意: 不包括 group(0)
 
 ```python
 t = '19:05:30'
 m = re.match(r'^([0-9]{2})\:([0-9]{2})\:([0-9]{2})$', t)
-print(m.groups())
-print(m.group(1))
-
-# ('19', '05', '30')
-```
-
-## 指定group的名字
-
-和其他的RE表达式一样, 但是匹配的子串可以通过group的名字name来获取。即result.group(name)。组名必须是合法的python标识符, 每一个组名在RE表达式中有且只能被定义一次。这样特殊的组仍然被定义了序号, 就像没有命名的组一样(可以通过\number的形式进行访问)。
-
-```python
-sentence = 'cats are fast'
-# 在正则表达式中使用组名: ?P<name>
-regex = re.compile('(?P<animal>\w+) (?P<verb>\w+) (?P<adjective>\w+)')
-matched = re.search(regex, sentence)
-print(matched.groupdict())
-print(matched.group('adjective'))
-
-# {'adjective': 'fast', 'verb': 'are', 'animal': 'cats'}
+print(m.groups()) # ('19', '05', '30')
 ```

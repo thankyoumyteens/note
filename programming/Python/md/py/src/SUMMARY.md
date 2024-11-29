@@ -51,13 +51,16 @@
   - [使用代理](./requests/proxy.md)
 
 - [Excel](./excel/excel.md)
-  - [安装](./excel/install.md)
   - [excel读写](./excel/excel_op.md)
   - [列号的字母数字转换](./excel/convert.md)
 
 - [XML](./xml/xml.md)
-  - [解析xml](./xml/et.md)
   - [解析命名空间](./xml/et_ns.md)
+  - [常用属性](./xml/et.md)
+  - [获取根节点](./xml/root.md)
+  - [使用下标访问子节点](./xml/index.md)
+  - [遍历子节点](./xml/foreach.md)
+  - [查找子节点](./xml/find.md)
 
 - [pyautogui](./pyautogui/pyautogui.md)
   - [安装](./pyautogui/install.md)
@@ -66,28 +69,6 @@
   - [键盘操作](./pyautogui/kb.md)
   - [截图](./pyautogui/screenshot.md)
   - [弹框](./pyautogui/box.md)
-
-<!-- - [PySide6](./pyside/PySide6.md)
-  - [安装Pyside6](./pyside/安装Pyside6.md)
-  - [创建主窗口](./pyside/创建主窗口.md)
-  - [布局](./pyside/布局.md)
-  - [菜单](./pyside/菜单.md)
-  - [建立信号与槽的连接](./pyside/建立信号与槽的连接.md)
-  - [选择文件对话框](./pyside/choose_file.md)
-  - [消息框](./pyside/message_box.md)
-  - [鼠标拖拽事件](./pyside/drag.md)
-  - [自定义组件](./pyside/customize_component.md)
-  - [自定义事件](./pyside/customize_event.md)
-  - [弹出子窗口](./pyside/sub_window.md)
-  - [打包exe](./pyside/打包exe.md) -->
-
-- [selenium](./selenium/selenium.md)
-  - [安装selenium](./selenium/安装selenium.md)
-  - [设置浏览器](./selenium/设置浏览器.md)
-  - [设置代理](./selenium/设置代理.md)
-  - [定位元素](./selenium/定位元素.md)
-  - [等待元素出现](./selenium/等待元素出现.md)
-  - [模拟登录](./selenium/模拟登录.md)
 
 - [numpy](./numpy/numpy.md)
   - [numpy数组](./numpy/ndarray/ndarray.md)
@@ -111,3 +92,25 @@
 
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)
+
+- [selenium](./selenium/selenium.md)
+  - [安装selenium](./selenium/安装selenium.md)
+  - [设置浏览器](./selenium/设置浏览器.md)
+  - [设置代理](./selenium/设置代理.md)
+  - [定位元素](./selenium/定位元素.md)
+  - [等待元素出现](./selenium/等待元素出现.md)
+  - [模拟登录](./selenium/模拟登录.md)
+
+<!-- - [PySide6](./pyside/PySide6.md)
+  - [安装Pyside6](./pyside/安装Pyside6.md)
+  - [创建主窗口](./pyside/创建主窗口.md)
+  - [布局](./pyside/布局.md)
+  - [菜单](./pyside/菜单.md)
+  - [建立信号与槽的连接](./pyside/建立信号与槽的连接.md)
+  - [选择文件对话框](./pyside/choose_file.md)
+  - [消息框](./pyside/message_box.md)
+  - [鼠标拖拽事件](./pyside/drag.md)
+  - [自定义组件](./pyside/customize_component.md)
+  - [自定义事件](./pyside/customize_event.md)
+  - [弹出子窗口](./pyside/sub_window.md)
+  - [打包exe](./pyside/打包exe.md) -->
