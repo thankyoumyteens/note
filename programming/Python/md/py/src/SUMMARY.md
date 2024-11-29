@@ -104,6 +104,10 @@
     - [矩阵的逆](./numpy/matrix/inverse.md)
 
 - [Matplotlib](./matplotlib/matplotlib.md)
+  - [基本使用](./matplotlib/quick_start.md)
+  - [创建画布](./matplotlib/figure.md)
+  - [创建坐标轴](./matplotlib/axes.md)
+  - [图例](./matplotlib/legend.md)
 
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)
