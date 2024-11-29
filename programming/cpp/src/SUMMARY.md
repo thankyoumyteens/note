@@ -43,7 +43,7 @@
     - [使用迭代器](./base/iterator/use.md)
     - [迭代器运算](./base/iterator/op.md)
   - [位运算](./base/bit_operation.md)
-    - [取出一个数指定位的值](./base/xor/bit_value.md)
+    - [取出一个数指定位的值](./base/xor/bit_value.md) 
     - [两个数拼在一起](./base/xor/concat_value.md)
     - [交换两个变量的值](./base/xor/swap_value.md)
     - [判断一个数是奇数还是偶数](./base/bitwise_operations/odd.md)
@@ -57,6 +57,7 @@
   - [new](./allocation/new.md)
   - [memcopy](./allocation/memcopy.md)
   - [memset](./allocation/memset.md)
+  - [数组](./allocation/array.md)
   
 - [Makefile](./makefile/makefile.md)
   - [环境搭建](./makefile/env.md)

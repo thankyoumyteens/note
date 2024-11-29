@@ -95,8 +95,13 @@
     - [获取数组的维度](./numpy/ndarray/shape.md)
     - [切片](./numpy/ndarray/slice.md)
     - [数组元素替换](./numpy/ndarray/replace.md)
+    - [合并数组](./numpy/ndarray/merge.md)
+    - [基本运算](./numpy/ndarray/calc.md)
+    - [函数运算](./numpy/ndarray/func.md)
+    - [统计运算](./numpy/ndarray/stat.md)
   - [矩阵](./numpy/matrix/matrix.md)
     - [矩阵转置](./numpy/matrix/transpose.md)
+    - [矩阵的逆](./numpy/matrix/inverse.md)
 
 - [Matplotlib](./matplotlib/matplotlib.md)
 
