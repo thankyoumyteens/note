@@ -71,7 +71,7 @@
     - [基本使用](./react/router/base.md)
     - [编程式跳转](./react/router/js.md)
     - [动态配置路由](./react/router/d.md)
-    - [把菜单按钮固定在页面上](./react/router/fix.md)
+    - [固定页面部分元素](./react/router/fix.md)
     - [createBrowserRouter部署](./react/router/nginx.md)
 
 - [electron](./electron/electron.md)

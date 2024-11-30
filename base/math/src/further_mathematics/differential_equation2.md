@@ -117,3 +117,52 @@
 -->
 
 ![](../img/de2_6.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 求微分方程 y' + 2xy = 0 的通解 \\
+\\
+& \frac{\mathrm{d}y}{\mathrm{d}x} + 2xy = 0 \\
+& 是一阶齐次线性微分方程, 直接代公式:  \\
+& y = C e^{- \int P(x) \mathrm{d}x} \quad (C 为任意常数) \\
+& y = C e^{- \int 2x \mathrm{d}x} \quad (C 为任意常数) \\
+& y = C e^{- x^2} \quad (C 为任意常数) \\
+\end{align}
+-->
+
+![](../img/de2_7.jpg)
+
+## 一阶非齐次线性微分方程
+
+<!--
+\begin{align}
+& 形如 \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = Q(x) \quad (Q(x) \ne 0) 为一阶非齐次线性微分方程 \\
+\\
+& 解法: 公式为 y = \left [ \int Q(x) e^{\int P(x) \mathrm{d}x} \mathrm{d}x + C \right ] e^{- \int P(x) \mathrm{d}x} \quad (C 为任意常数) \\
+\end{align}
+-->
+
+![](../img/de2_8.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 求微分方程 \frac{\mathrm{d}y}{\mathrm{d}x} - \frac{2}{x} y = -1 的通解 \\
+\\
+& 是一阶非齐次线性微分方程, P(x) = - \frac{2}{x} , Q(x) = -1, 直接代公式:  \\
+& y = \left [ \int Q(x) e^{\int P(x) \mathrm{d}x} \mathrm{d}x + C \right ] e^{- \int P(x) \mathrm{d}x} \quad (C 为任意常数) \\
+& y = \left [ \int (-1) e^{- \int \frac{2}{x} \mathrm{d}x} \mathrm{d}x + C \right ] e^{\int \frac{2}{x} \mathrm{d}x} \quad (C 为任意常数) \\
+& y = \left [ \int (-1) e^{- \int \frac{2}{x} \mathrm{d}x} \mathrm{d}x + C \right ] e^{2 \ln x} \quad (C 为任意常数) \\
+& y = \left [ \int (-1) e^{- \int \frac{2}{x} \mathrm{d}x} \mathrm{d}x + C \right ] e^{\ln x^2} \quad (C 为任意常数) \\
+& y = \left [ \int (-1) e^{- \int \frac{2}{x} \mathrm{d}x} \mathrm{d}x + C \right ] x^2 \quad (C 为任意常数) \\
+& y = \left [ \int (-1) (- \frac{1}{x^2}) \mathrm{d}x + C \right ] x^2 \quad (C 为任意常数) \\
+& y = (\int \frac{1}{x^2} \mathrm{d}x + C) x^2 \quad (C 为任意常数) \\
+& y = (\frac{1}{x} + C) x^2 \quad (C 为任意常数) \\
+& y = C x^2 + x \quad (C 为任意常数) \\
+\end{align}
+-->
+
+![](../img/de2_9.jpg)

@@ -1,4 +1,6 @@
-# 把菜单按钮固定在页面上
+# 固定页面部分元素
+
+使用嵌套路由。
 
 ### 1.定义路由 router/index.tsx
 
@@ -11,7 +13,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    // 定义子路由
+    // 定义嵌套路由
     children: [
       // 注意前面没有/
       { path: "", element: <Home /> },
@@ -34,7 +36,7 @@ function App() {
     <div>
       {/* 展示菜单按钮 */}
       <Menu />
-      {/* 展示子路由的内容 */}
+      {/* 展示嵌套路由的内容 */}
       <Outlet />
     </div>
   );
