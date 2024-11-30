@@ -15,12 +15,17 @@ vim config/kraft/server.properties
 # advertised.listeners=PLAINTEXT://服务器的ip:9092
 ```
 
-### 3. 启动
+### 3. 初始化
 
 ```sh
 # 格式化 kraft 文件夹（新安装后只需执行一次）
 KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
 bin/kafka-storage.sh format -t $KAFKA_CLUSTER_ID -c config/kraft/server.properties
+```
+
+### 4. 启动
+
+```sh
 # 启动
 bin/kafka-server-start.sh -daemon config/kraft/server.properties
 ```
