@@ -1,19 +1,19 @@
 # 安装 mariadb
 
-1. 安装
+### 1. 安装
 
 ```sh
 sudo apt update
 sudo apt-get install -y mariadb-server
 ```
 
-2. 查看运行状态
+### 2. 查看运行状态
 
 ```sh
 sudo systemctl status mariadb
 ```
 
-3. 初始化
+### 3. 初始化
 
 ```sh
 sudo mysql_secure_installation
@@ -34,13 +34,13 @@ Remove test database and access to it? [Y/n] y
 Reload privilege tables now? [Y/n] y
 ```
 
-4. 以 root 身份登录
+### 4. 以 root 身份登录
 
 ```sh
 sudo mysql -u root -p
 ```
 
-5. 创建用户
+### 5. 创建用户
 
 ```sql
 -- 创建数据库
@@ -53,7 +53,7 @@ grant SELECT, INSERT, UPDATE, REFERENCES, DELETE, CREATE, DROP, ALTER, INDEX, CR
 flush privileges;
 ```
 
-6. 允许远程连接
+### 6. 允许远程连接
 
 ```sh
 vim /etc/mysql/mariadb.conf.d/50-server.cnf

@@ -1,6 +1,6 @@
 # 安装 mdbook
 
-1. 安装
+### 1. 安装
 
 ```sh
 mkdir mdbook-v0.4.40
@@ -9,7 +9,7 @@ wget https://github.com/rust-lang/mdBook/releases/download/v0.4.40/mdbook-v0.4.4
 tar -zxvf mdbook-v0.4.40-x86_64-unknown-linux-gnu.tar.gz
 ```
 
-2. 配置环境变量:
+### 2. 配置环境变量:
 
 ```sh
 # 打开配置文件
@@ -23,7 +23,7 @@ export PATH=$MDBOOK_HOME:$PATH
 source /etc/profile
 ```
 
-3. 验证:
+### 3. 验证:
 
 ```sh
 mdbook -V

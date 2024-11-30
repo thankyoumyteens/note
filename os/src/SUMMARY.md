@@ -44,6 +44,8 @@
   - [安装mdbook](./Linux/debian/mdbook.md)
   - [安装redis](./Linux/debian/redis.md)
   - [安装nacos](./Linux/debian/nacos.md)
+  - [安装kafka](./Linux/debian/kafka.md)
+
 <!-- 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
   - [ubuntu 软件源配置](./Linux/Ubuntu/ubuntu软件源配置.md)

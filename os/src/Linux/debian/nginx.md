@@ -1,6 +1,6 @@
 # 安装 nginx
 
-1. 准备
+### 1. 准备
 
 ```sh
 sudo apt install -y curl gnupg2 ca-certificates lsb-release debian-archive-keyring
@@ -15,13 +15,13 @@ echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 
 sudo apt update
 ```
 
-2. 安装
+### 2. 安装
 
 ```sh
 sudo apt install nginx
 ```
 
-3. 页面在 `/usr/share/nginx/html` 下
+### 3. 页面在 `/usr/share/nginx/html` 下
 
 ## 常用命令
 
