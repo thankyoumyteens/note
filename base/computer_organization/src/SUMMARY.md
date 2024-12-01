@@ -30,3 +30,5 @@
   - [操作码](./instruction/op.md)
   - [寻址](./instruction/addressing.md)
   - [CISC和RISC](./instruction/is.md)
+
+- [CPU](./cpu/cpu.md)

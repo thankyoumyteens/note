@@ -166,3 +166,44 @@
 -->
 
 ![](../img/de2_9.jpg)
+
+## 可降阶的高阶微分方程
+
+<!--
+\begin{align}
+& y^{(n)} = f(x) \quad (n \ge 2) 型微分方程 \\
+\\
+& 解法: 将 y^{(n)} = f(x) 进行 n 次不定积分, \\
+& 即可得到该微分方程的通解 \\
+\end{align}
+-->
+
+![](../img/de2_10.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 设 y'' = x e^{2x}, 求该方程的通解 \\
+\\
+& y' = \int x e^{2x} \mathrm{d}x + C_1 \\
+& \;\;\, = \frac{1}{2} \int x \mathrm{d}(e^{2x}) + C_1 \\
+& \;\;\, = \frac{1}{2} x e^{2x} - \frac{1}{2} \int e^{2x} \mathrm{d}x + C_1 \\
+& \;\;\, = \frac{1}{2} x e^{2x} - \frac{1}{4} e^{2x} + C_1 \\
+& y = \int (\frac{1}{2} x e^{2x} - \frac{1}{4} e^{2x} + C_1) \mathrm{d}x + C_2 \\
+& \;\;\, = \frac{1}{2} \int x e^{2x} \mathrm{d}x -
+\frac{1}{4} \int e^{2x} \mathrm{d}x +
+\frac{1}{2} \int C_1 \mathrm{d}x + C_2 \\
+& \;\;\, = \frac{1}{2} \int x e^{2x} \mathrm{d}x -
+\frac{1}{4} \int e^{2x} \mathrm{d}x +
+\frac{1}{2} C_1x + C_2 \\
+& \;\;\, = \frac{1}{2} \int x e^{2x} \mathrm{d}x - \frac{1}{8} e^{2x} + C_1x + C_2 \\
+& \;\;\, = \frac{1}{2} (\frac{1}{2} x e^{2x} - \frac{1}{4} e^{2x}) -
+\frac{1}{8} e^{2x} + C_1x + C_2 \\
+& \;\;\, = \frac{1}{4} x e^{2x} - \frac{1}{8} e^{2x} -
+\frac{1}{8} e^{2x} + C_1x + C_2 \\
+& \;\;\, = \frac{1}{4} x e^{2x} - \frac{1}{4} e^{2x} + C_1x + C_2 \\
+\end{align}
+-->
+
+![](../img/de2_11.jpg)
