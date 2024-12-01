@@ -13,3 +13,13 @@
 
 - [Kafka](./kafka/kafka.md)
   - [Kafka的消息存储结构](./kafka/struct.md)
+  - [kafka-clients](./kafka/kafka_clients/kafka_clients.md)
+    - [topic操作](./kafka/kafka_clients/topic.md)
+      - [连接kafka](./kafka/kafka_clients/create.md)
+      - [创建topic](./kafka/kafka_clients/create_topic.md)
+      - [删除topic](./kafka/kafka_clients/delete_topic.md)
+      - [获取topic列表](./kafka/kafka_clients/list_topic.md)
+      - [获取topic详情](./kafka/kafka_clients/desc_topic.md)
+      - [获取topic配置](./kafka/kafka_clients/config_topic.md)
+      - [修改topic配置](./kafka/kafka_clients/set_config_topic.md)
+      - [增加partition](./kafka/kafka_clients/add_part.md)
