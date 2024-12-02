@@ -97,11 +97,17 @@
   - [删除指定页](./pdf/delete_page.md)
 
 - [selenium](./selenium/selenium.md)
-  - [安装selenium](./selenium/安装selenium.md)
-  - [设置浏览器](./selenium/设置浏览器.md)
-  - [设置代理](./selenium/设置代理.md)
-  - [定位元素](./selenium/定位元素.md)
-  - [等待元素出现](./selenium/等待元素出现.md)
+  - [基本使用](./selenium/quick_start.md)
+  - [浏览器基本操作](./selenium/browser_base/browser_base.md)
+    - [不支持安全连接问题](./selenium/ssl.md)
+    - [浏览器窗口大小](./selenium/browser_base/window.md)
+    - [刷新当前页面](./selenium/browser_base/refresh.md)
+    - [设置代理](./selenium/proxy.md)0
+    - [窗口截图](./selenium/screenshot.md)
+  - [页面操作](./selenium/page/page.md)
+    - [定位HTML标签](./selenium/page/find_element.md)
+    - [定位子标签](./selenium/page/sub_tag.md)
+    - [等待标签出现](./selenium/page/wait.md)
   - [模拟登录](./selenium/模拟登录.md)
 
 <!-- - [PySide6](./pyside/PySide6.md)
