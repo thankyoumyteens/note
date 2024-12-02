@@ -88,7 +88,10 @@
   - [基本使用](./matplotlib/quick_start.md)
   - [创建画布](./matplotlib/figure.md)
   - [创建坐标轴](./matplotlib/axes.md)
+    - [坐标轴刻度](./matplotlib/ticks.md)
   - [图例](./matplotlib/legend.md)
+  - [创建子图](./matplotlib/subplot.md)
+  - [网格线](./matplotlib/grid.md)
 
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)

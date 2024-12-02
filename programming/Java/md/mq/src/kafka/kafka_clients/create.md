@@ -4,6 +4,8 @@
 Properties properties = new Properties();
 // kafka服务器地址
 properties.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+
+// 连接kafka
 AdminClient adminClient = AdminClient.create(properties);
 
 adminClient.close();

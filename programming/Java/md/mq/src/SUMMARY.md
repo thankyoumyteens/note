@@ -23,3 +23,8 @@
       - [获取topic配置](./kafka/kafka_clients/config_topic.md)
       - [修改topic配置](./kafka/kafka_clients/set_config_topic.md)
       - [增加partition](./kafka/kafka_clients/add_part.md)
+    - [producer操作](./kafka/kafka_clients/producer.md)
+      - [连接kafka](./kafka/kafka_clients/producer_create.md)
+      - [异步发送消息](./kafka/kafka_clients/producer_send.md)
+      - [同步发送消息](./kafka/kafka_clients/producer_send_s.md)
+      - [异步发送消息回调](./kafka/kafka_clients/producer_send_cb.md)
