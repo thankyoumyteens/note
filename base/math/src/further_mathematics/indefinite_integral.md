@@ -69,6 +69,7 @@
 & 23、\int \sqrt{a^2 - x^2} \mathrm{d}x = \frac{a^2}{2} \arcsin \frac{x}{a} +
 \frac{x}{2} \sqrt{a^2 - x^2} + C \\
 & 24、\int \frac{1}{2\sqrt{x}} \mathrm{d}x = \sqrt{x} + C \\
+& 25、\int e^{ax} \mathrm{d}x = \frac{1}{a} e^{ax} + C \\
 \end{align}
 -->
 

@@ -32,3 +32,4 @@
   - [CISC和RISC](./instruction/is.md)
 
 - [CPU](./cpu/cpu.md)
+  - [指令执行过程](./cpu/i.md)

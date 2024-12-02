@@ -207,3 +207,40 @@
 -->
 
 ![](../img/de2_11.jpg)
+
+<!--
+\begin{align}
+& f(x, y, 'y'') = 0 缺 y 型微分方程 \\
+\\
+& 解法: 令 y' = p, 则 y'' = \frac{\mathrm{d} p}{\mathrm{d} x}, \\
+& 代入得 f(x, p, \frac{\mathrm{d} p}{\mathrm{d} x}) = 0 \\
+& 解出 p = \varphi (x, C_1), 即 y' = \varphi (x, C_1) \\
+& 则 y = \int y' \mathrm{d} x + C_2 = \int \varphi (x, C_1) \mathrm{d} x + C_2 \\
+\end{align}
+-->
+
+![](../img/de2_12.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 设 y'' + y' = 2 e^x, 求该方程的通解 \\
+\\
+& 令 y' = p, 则 y'' = \frac{\mathrm{d} p}{\mathrm{d} x} \\
+& \; \frac{\mathrm{d} p}{\mathrm{d} x} + p = 2 e^x \\
+& 变成了一阶非齐次线性微分方程 P(x) = 1, Q(x) = 2 e^x \\
+& \; p = \left [ \int 2 e^x e^{\int 1 \mathrm{d}x} \mathrm{d}x + C_1 \right ] e^{- \int 1 \mathrm{d}x} \\
+& \; p = \left [ \int 2 e^x e^{x} \mathrm{d}x + C_1 \right ] e^{- x} \\
+& \; p = ( \int 2 e^{2x} \mathrm{d}x + C_1 ) e^{- x} \\
+& \; p = ( 2 \times \frac{1}{2} e^{2x} + C_1 ) e^{- x} \\
+& \; p = ( e^{2x} + C_1 ) e^{- x} \\
+& \; p = C_1 e^{- x} + e^x \\
+& \; y' = C_1 e^{- x} + e^x \\
+& \; y = \int (C_1 e^{- x} + e^x) \mathrm{d}x + C_2 \\
+& \; y = \int (C_1 e^{- x} + e^x) \mathrm{d}x + C_2 \\
+& \; y = - C_1 e^{- x} + e^x + C_2 \\
+\end{align}
+-->
+
+![](../img/de2_13.jpg)
