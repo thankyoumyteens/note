@@ -108,6 +108,8 @@
     - [定位HTML标签](./selenium/page/find_element.md)
     - [定位子标签](./selenium/page/sub_tag.md)
     - [等待标签出现](./selenium/page/wait.md)
+    - [标签操作](./selenium/page/tag_op.md)
+    - [控制滚动条](./selenium/page/scroll.md)
   - [模拟登录](./selenium/模拟登录.md)
 
 <!-- - [PySide6](./pyside/PySide6.md)
