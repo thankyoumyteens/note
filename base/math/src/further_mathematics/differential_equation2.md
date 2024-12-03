@@ -210,7 +210,7 @@
 
 <!--
 \begin{align}
-& f(x, y, 'y'') = 0 缺 y 型微分方程 \\
+& f(x, y', y'') = 0 缺 y 型微分方程 \\
 \\
 & 解法: 令 y' = p, 则 y'' = \frac{\mathrm{d} p}{\mathrm{d} x}, \\
 & 代入得 f(x, p, \frac{\mathrm{d} p}{\mathrm{d} x}) = 0 \\
@@ -244,3 +244,53 @@
 -->
 
 ![](../img/de2_13.jpg)
+
+<!--
+\begin{align}
+& f(y, y', y'') = 0 缺 x 型微分方程 \\
+\\
+& 解法: 令 y' = p, 则 y'' = \frac{\mathrm{d} p}{\mathrm{d} x} =
+\frac{\mathrm{d} y}{\mathrm{d} x} \frac{\mathrm{d} p}{\mathrm{d} y} =
+p \frac{\mathrm{d} p}{\mathrm{d} y}, \\
+& 代入得 f(y, p, p \frac{\mathrm{d} p}{\mathrm{d} y}) = 0 \\
+& 解出 p = \varphi (y, C_1), 即 y' = \frac{\mathrm{d} y}{\mathrm{d} x} = \varphi (y, C_1) \\
+& 变量分离得 \frac{\mathrm{d} y}{\varphi (y, C_1)} = \mathrm{d} x \\
+& 两边积分得 \int \frac{\mathrm{d} y}{\varphi (y, C_1)} = x + C_2 \\
+\end{align}
+-->
+
+![](../img/de2_14.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 求微分方程 y y'' - y'^2 = 0 满足初值条件 y(0) = y'(0) = 1 的特解 \\
+\\
+& 令 y' = p, 则 y'' = p \frac{\mathrm{d} p}{\mathrm{d} y} \\
+& \; y p \frac{\mathrm{d} p}{\mathrm{d} y} - p^2 = 0 \\
+& 因为 y'(0) = 1, 所以 p \ne 0 \\
+& \; \frac{1}{p} (y p \frac{\mathrm{d} p}{\mathrm{d} y} - p^2) = \frac{1}{p} \times 0 \\
+& \; y \frac{\mathrm{d} p}{\mathrm{d} y} - p = 0 \\
+& 因为 y(0) = 1, 所以 y \ne 0 \\
+& \; \frac{\mathrm{d} p}{\mathrm{d} y} - \frac{1}{y} p = 0 \\
+& 变成了一阶齐次线性微分方程 P(x) = - \frac{1}{y} \\
+& \; p = C_1 e^{- \int (- \frac{1}{y}) \mathrm{d}x} \\
+& \; p = C_1 e^{\int \frac{1}{y} \mathrm{d}x} \\
+& \; p = C_1 e^{\ln |y|} \\
+& 因为 y(0) = 1, 所以 y \ne 0 \\
+& \; p = C_1 e^{\ln y} \\
+& \; p = C_1 y \\
+& \; y' = C_1 y \\
+& 因为 y(0) = y'(0) = 1, 所以 C_1 = 1 \\
+& 所以 y' - y = 0 \\
+& \; \frac{\mathrm{d} y}{\mathrm{d} x} - y = 0 \\
+& 也是一阶齐次线性微分方程 \\
+& \; y = C_2 e^{- \int (-1) \mathrm{d}x} \\
+& \; y = C_2 e^x \\
+& 因为 y(0) = C_2 e^0 = 1, 所以 C_2 = 1 \\
+& 所以 y = e^x \\
+\end{align}
+-->
+
+![](../img/de2_15.jpg)

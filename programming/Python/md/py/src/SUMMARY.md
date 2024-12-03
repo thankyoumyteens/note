@@ -86,6 +86,7 @@
 
 - [Matplotlib](./matplotlib/matplotlib.md)
   - [基本使用](./matplotlib/quick_start.md)
+  - [中文乱码](./matplotlib/zh.md)
   - [创建画布](./matplotlib/figure.md)
   - [创建坐标轴](./matplotlib/axes.md)
     - [坐标轴刻度](./matplotlib/ticks.md)

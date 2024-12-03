@@ -38,3 +38,4 @@
     - [定积分的几何应用](./further_mathematics/definite_integral6.md)
   - [微分方程](./further_mathematics/differential_equation.md)
     - [一阶微分方程](./further_mathematics/differential_equation2.md)
+    - [高阶线性微分方程](./further_mathematics/differential_equation3.md)
