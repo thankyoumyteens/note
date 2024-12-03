@@ -25,6 +25,7 @@
     - [std::vector](./base/array/vector.md)
   - [结构化绑定](./base/structured_bindings.md)
   - [指针](./base/pointer/pointer.md)
+    - [指针运算](./base/pointer/calc.md)
     - [智能指针](./base/pointer/std_ptr.md)
   - [常量](./base/const/const.md)
     - [指向常量的指针](./base/const/pointer_to_const.md)
