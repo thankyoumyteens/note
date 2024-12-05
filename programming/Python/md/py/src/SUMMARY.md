@@ -18,7 +18,13 @@
   - [简写](./base/simplify.md)
 
 - [文件](./io/io.md)
-  - [路径操作](./io/path.md)
+  - [路径操作](./io/path/path.md)
+    - [获取当前路径](./io/path/pwd.md)
+    - [路径转换](./io/path/convert.md)
+    - [拼接拆分路径](./io/path/js.md)
+    - [遍历目录](./io/path/foreach.md)
+    - [复制移到删除](./io/path/modify.md)
+    - [重命名](./io/path/rename.md)
   - [文件操作](./io/file.md)
 
 - [subprocess](./subprocess/subprocess.md)
@@ -93,6 +99,8 @@
   - [图例](./matplotlib/legend.md)
   - [创建子图](./matplotlib/subplot.md)
   - [网格线](./matplotlib/grid.md)
+  - [双轴图](./matplotlib/twinx.md)
+  - [数学表达式](./matplotlib/tex.md)
 
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)
