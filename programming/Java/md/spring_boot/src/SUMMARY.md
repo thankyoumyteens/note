@@ -32,3 +32,9 @@
   - [常规用法](./jpa/base.md)
   - [分页](./jpa/page.md)
   - [手写sql](./jpa/sql.md)
+
+- [Kafka](./kafka/kafka.md)
+  - [消息传递保障](./kafka/guarantee/guarantee.md)
+    - [最多一次](./kafka/guarantee/at_most_once.md)
+    - [至少一次](./kafka/guarantee/at_least_once.md)
+    - [精确一次](./kafka/guarantee/exactly_once.md)
