@@ -13,3 +13,27 @@
 - 送至系统总线的信号: 如控制主存读/写，I/O 操作，中断响应等
 
 ## CPU 内部采用总线方式的控制信号与数据通路
+
+- bus: CPU 内部的总线, 用来在 CPU 内部传输数据
+- Y 和 Z 寄存器: 用于暂时存储参与运算的数据和中间结果
+- 红线: CU 的控制信号
+- 黑线: 数据
+
+![](../img/cu1.jpg)
+
+取指周期:
+
+1. PC 中的数据送入 MAR
+   - PC<sub>out</sub> 和 MAR<sub>in</sub> 有效
+   - (PC) -> bus -> MAR
+2. CU 通过控制总线向主存发送读信号: 1 -> 控制总线 -> R
+3. 把指令从主存送入 MDR:
+   - MDR<sub>in</sub> 有效
+   - M(MAR) -> 数据总线 -> MDR
+4. 把指令从 MDR 送入 IR:
+   - MDR<sub>out</sub> 和 IR<sub>in</sub> 有效
+   - (MDR) -> bus -> IR
+5. 把操作码送入 CU 译码: OP(IR) -> CU
+6. PC 自增: (PC) + 1 -> PC
+
+间指周期:
