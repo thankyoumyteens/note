@@ -11,6 +11,8 @@
   - [校验码](./number_system/verification.md)
   - [定点数](./number_system/fixed_point_number/fixed_point_number.md)
     - [补码](./number_system/fixed_point_number/complement.md)
+      - [补码求负数](./number_system/fixed_point_number/complement1.md)
+      - [补码的加减](./number_system/fixed_point_number/complement2.md)
     - [溢出](./number_system/fixed_point_number/overflow.md)
     - [移位运算](./number_system/fixed_point_number/shift_operation.md)
     - [乘法](./number_system/fixed_point_number/mul.md)

@@ -39,6 +39,12 @@
   - [Young GC](./jdk21/g1/gc/ygc/ygc.md)
     - [是否作为并发标记的初始标记阶段](./jdk21/g1/gc/ygc/decide_on_concurrent_start_pause.md)
     - [执行GC](./jdk21/g1/gc/ygc/collect.md)
+      - [设置worker线程](./jdk21/g1/gc/ygc/worker.md)
+      - [worker线程](./jdk21/g1/gc/ygc/worker_thread.md)
+      - [等待根分区扫描](./jdk21/g1/gc/ygc/wait_for_root_region_scanning.md)
+      - [预备疏散回收集阶段](./jdk21/g1/gc/ygc/pre_evacuate_collection_set.md)
+      - [实际执行回收](./jdk21/g1/gc/ygc/evacuate_initial_collection_set.md)
+      - [疏散回收集后阶段](./jdk21/g1/gc/ygc/post_evacuate_collection_set.md)
   - [并发标记](./jdk21/g1/gc/cm/cm.md)
 
 - [分配大对象](./jdk21/g1/allocate_object/allocate_humongous.md)
