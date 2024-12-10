@@ -110,5 +110,26 @@ y'' + p(x)y' + q(x)y = f_2(x) \\
 \begin{align}
 & 求微分方程 y'' - y' - 2y = (2x - 1)e^x 的特解与通解 \\
 \\
+& 特征方程为 \lambda ^2 - \lambda -2 = 0 \\
+& 因式分解: (x - 2)(x + 1) = 0 \\
+& 所以: \lambda _1 = 2, \lambda _2 = -1 \\
+& 方程 y'' - y' - 2y = 0 的通解为: y = C_1 e^{2 x} + C_2 e^{- x} \\
+\\
+& {\color{Green} // 特解类型1 多项式乘指数函数: f(x) = P(x)e^{kx}} \\
+& {\color{Green} // 因为题目方程的等号右边正好是多项式乘指数函数的形式} \\
+& {\color{Green} // 所以按照等号右边的形式去假设特解} \\
+& {\color{Green} // 多项式换成ax + b, 指数函数不变} \\
+& 令 y_0(x) = (ax + b)e^x \\
+& 令 y_0 '(x) = (ax + a + b)e^x, y_0 ''(x) = (ax + 2a + b)e^x \\
+& 代入方程 y'' - y' - 2y = (2x - 1)e^x \\
+& (ax + 2a + b)e^x - (ax + a + b)e^x - 2(ax + b)e^x = (2x - 1)e^x \\
+& ax + 2a + b - ax - a - b - 2ax - 2b = 2x - 1 \\
+& 2a + b - a - b - 2ax - 2b = 2x - 1 \\
+& {\color{Green} // - 2ax = 2x, 所以 a = -1} \\
+& {\color{Green} // 代入a, 得出 b = 0} \\
+& 所以 y_0(x) = - xe^x \\
+& 所以方程 y'' - y' - 2y = (2x - 1)e^x 的通解为 y = C_1 e^{2 x} + C_2 e^{- x} - xe^x \\
 \end{align}
 -->
+
+![](../img/de3_6.jpg)

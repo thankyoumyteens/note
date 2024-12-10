@@ -37,3 +37,14 @@
 6. PC 自增: (PC) + 1 -> PC
 
 间指周期:
+
+1. 将指令的地址码送入 MAR
+   - IR<sub>out</sub> 和 MAR<sub>in</sub> 有效
+   - Ad(IR) -> bus -> MAR
+2. 向主存发送读命令, 启动主存执行读操作: 1 -> R
+3. 把有效地址从主存送入 MDR
+   - MDR<sub>in</sub> 有效
+   - M(MAR) -> 数据总线 -> MDR
+4. 用有效地址覆盖 IR 中的地址码
+   - IR<sub>in</sub> 有效
+   - MDR -> bus -> Ad(IR)
