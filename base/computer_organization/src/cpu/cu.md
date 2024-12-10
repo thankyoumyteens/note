@@ -12,7 +12,7 @@
 - CPU 内的控制信号: CPU 内的数据传输，或控制 ALU 执行不同的运算等
 - 送至系统总线的信号: 如控制主存读/写，I/O 操作，中断响应等
 
-## CPU 内部采用总线方式的控制信号与数据通路
+## CPU 内部采用单总线方式的数据通路
 
 - bus: CPU 内部的总线, 用来在 CPU 内部传输数据
 - Y 和 Z 寄存器: 用于暂时存储参与运算的数据和中间结果
@@ -21,7 +21,13 @@
 
 ![](../img/cu1.jpg)
 
-取指周期:
+寄存器之间的数据传送, 以 PC 中的数据送入 MAR 为例:
+
+1. PC 中的数据送入 MAR
+   - PC<sub>out</sub> 和 MAR<sub>in</sub> 有效
+   - (PC) -> bus -> MAR
+
+主存与 CPU 的数据传送, 以 CPU 从主存中取指令为例:
 
 1. PC 中的数据送入 MAR
    - PC<sub>out</sub> 和 MAR<sub>in</sub> 有效
@@ -33,18 +39,26 @@
 4. 把指令从 MDR 送入 IR:
    - MDR<sub>out</sub> 和 IR<sub>in</sub> 有效
    - (MDR) -> bus -> IR
-5. 把操作码送入 CU 译码: OP(IR) -> CU
-6. PC 自增: (PC) + 1 -> PC
 
-间指周期:
+执行算术/逻辑运算, 以加法为例:
 
 1. 将指令的地址码送入 MAR
    - IR<sub>out</sub> 和 MAR<sub>in</sub> 有效
    - Ad(IR) -> bus -> MAR
+   - 注意: 取指后 MDR 中保存的也是指令, 所以也可以从 MDR 中把指令送到 MDR: (MDR) -> bus -> MAR
 2. 向主存发送读命令, 启动主存执行读操作: 1 -> R
-3. 把有效地址从主存送入 MDR
+3. 把加法运算的操作数从主存送入 MDR
    - MDR<sub>in</sub> 有效
    - M(MAR) -> 数据总线 -> MDR
-4. 用有效地址覆盖 IR 中的地址码
-   - IR<sub>in</sub> 有效
-   - MDR -> bus -> Ad(IR)
+4. 把操作数送入 Y 中暂存:
+   - Y<sub>in</sub> 和 MDR<sub>out</sub> 有效
+   - (MDR) -> bus -> Y
+5. ACC 中存放的是被加数, 把 ACC 和 Y 相加, 结果暂存到 Z 中:
+   - ALU<sub>in</sub> 和 ACC<sub>out</sub> 有效
+   - CU 向 ALU 发送加法命令
+   - (ACC) + (Y) -> Z
+6. 把 Z 中的结果放回 ACC:
+   - ACC<sub>in</sub> 和 Z<sub>out</sub> 有效
+   - (Z) -> bus -> ACC
+
+由于单总线方式在同一时刻只能进行一次数据传输操作, 而 ALU 同时需要两个输入, 所以要先把一个操作数临时存放到寄存器 Y 中。如果采用多总线方式, 则可以通过另一条内部总线直接把数据送给 ALU。

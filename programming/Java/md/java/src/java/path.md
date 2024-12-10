@@ -213,7 +213,7 @@ Files.deleteIfExists(path);
 ```java
 Path path = Paths.get("/home/demo");
 // 递归删除文件夹
-Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+Files.walkFileTree(path, new SimpleFileVisitor<>() {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         Files.delete(file);

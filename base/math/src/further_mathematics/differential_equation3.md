@@ -120,7 +120,9 @@ y'' + p(x)y' + q(x)y = f_2(x) \\
 & {\color{Green} // 所以按照等号右边的形式去假设特解} \\
 & {\color{Green} // 多项式换成ax + b, 指数函数不变} \\
 & 令 y_0(x) = (ax + b)e^x \\
-& 令 y_0 '(x) = (ax + a + b)e^x, y_0 ''(x) = (ax + 2a + b)e^x \\
+& {\color{Green} // k是1, 而两个特征值里没有1, 所以保持不变} \\
+& 则 y_0(x) = (ax + b)e^x \\
+& 则 y_0 '(x) = (ax + a + b)e^x, y_0 ''(x) = (ax + 2a + b)e^x \\
 & 代入方程 y'' - y' - 2y = (2x - 1)e^x \\
 & (ax + 2a + b)e^x - (ax + a + b)e^x - 2(ax + b)e^x = (2x - 1)e^x \\
 & ax + 2a + b - ax - a - b - 2ax - 2b = 2x - 1 \\
@@ -133,3 +135,35 @@ y'' + p(x)y' + q(x)y = f_2(x) \\
 -->
 
 ![](../img/de3_6.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& 求微分方程 y'' + y' - 2y = (2x + 3)e^x 的特解与通解 \\
+\\
+& 特征方程为 \lambda ^2 + \lambda - 2 = 0 \\
+& 因式分解: (x - 1)(x + 2) = 0 \\
+& 所以: \lambda _1 = 1, \lambda _2 = -2 \\
+& 方程 y'' + y' - 2y = 0 的通解为: y = C_1 e^{x} + C_2 e^{-2x} \\
+\\
+& {\color{Green} // 特解类型1 多项式乘指数函数: f(x) = P(x)e^{kx}} \\
+& {\color{Green} // 因为题目方程的等号右边正好是多项式乘指数函数的形式} \\
+& {\color{Green} // 所以按照等号右边的形式去假设特解} \\
+& {\color{Green} // 多项式换成ax + b, 指数函数不变} \\
+& 令 y_0(x) = (ax + b)e^x \\
+& {\color{Green} // k是1, 而两个特征值里只有 \lambda _1 是1, 所以前面乘一个x} \\
+& 则 y_0(x) = x(ax + b)e^x = (ax^2 + bx)e^x \\
+& 则 y_0 '(x) = (ax^2 + 2ax + bx + b)e^x, y_0 ''(x) = (ax^2 + 4ax + bx + 2a + 2b)e^x \\
+& 代入方程 y'' + y' - 2y = (2x + 3)e^x \\
+& (ax^2 + 4ax + bx + 2a + 2b)e^x + (ax^2 + 2ax + bx + b)e^x - 2(ax^2 + bx)e^x = (2x + 3)e^x \\
+& ax^2 + 4ax + bx + 2a + 2b + ax^2 + 2ax + bx + b - 2ax^2 - 2bx = 2x + 3 \\
+& 6ax + 2a + 3b = 2x + 3 \\
+& {\color{Green} // 6ax = 2x, 所以 a = \frac{1}{3}} \\
+& {\color{Green} // 代入a, 得出 b = \frac{7}{9}} \\
+& 所以 y_0(x) = (\frac{x^2}{3} + \frac{7}{9}x)e^x \\
+& 所以方程 y'' + y' - 2y = (2x + 3)e^x 的通解为 y = C_1 e^{x} + C_2 e^{-2x} + (\frac{x^2}{3} + \frac{7}{9}x)e^x \\
+\end{align}
+-->
+
+![](../img/de3_7.jpg)
