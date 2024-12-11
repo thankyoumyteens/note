@@ -56,6 +56,7 @@ brew install wget
 - [GIMP](https://www.gimp.org/downloads/) 修图
 - [gradle](https://mirrors.cloud.tencent.com/gradle/)
 - [HandBrake](https://github.com/HandBrake/HandBrake/releases) 视频格式转换
+- [localsend](https://github.com/localsend/localsend)
 - [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
 - [Jetbrains GoLand](https://www.jetbrains.com/go/download/other.html)
 - [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/other.html)

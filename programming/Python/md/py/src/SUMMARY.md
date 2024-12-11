@@ -121,6 +121,9 @@
     - [控制滚动条](./selenium/page/scroll.md)
   - [模拟登录](./selenium/模拟登录.md)
 
+- [PaddleOCR](./paddle_ocr/paddle_ocr.md)
+  - [基本使用](./paddle_ocr/quick_start.md)
+
 <!-- - [PySide6](./pyside/PySide6.md)
   - [安装Pyside6](./pyside/安装Pyside6.md)
   - [创建主窗口](./pyside/创建主窗口.md)
