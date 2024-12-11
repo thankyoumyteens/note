@@ -26,8 +26,6 @@ void G1YoungCollector::pre_evacuate_collection_set(G1EvacInfo *evacuation_info) 
     // 记录发生的GC次数
     _g1h->gc_prologue(false);
 
-// TODO
-    // Initialize the GC alloc regions.
     // 初始化垃圾回收器分配的分区
     allocator()->init_gc_alloc_regions(evacuation_info);
 
@@ -291,35 +289,10 @@ void G1Allocator::reuse_retained_old_region(G1EvacInfo *evacuation_info,
 ## 记录分区中记忆集的状态, 并把符合条件的大对象加入提前回收的候选分区
 
 ```cpp
-// --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
-
-Tickspan G1YoungCollector::run_task_timed(WorkerTask *task) {
-    Ticks start = Ticks::now();
-    workers()->run_task(task);
-    return Ticks::now() - start;
-}
-
-class G1PrepareEvacuationTask : public WorkerTask {
-public:
-    void work(uint worker_id) {
-        G1PrepareRegionsClosure cl(_g1h, this);
-        _g1h->heap_region_par_iterate_from_worker_offset(&cl, &_claimer, worker_id);
-
-        MutexLocker x(G1RareEvent_lock, Mutex::_no_safepoint_check_flag);
-        _all_card_set_stats.add(cl.card_set_stats());
-    }
-};
-
-// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
-
-void G1CollectedHeap::heap_region_par_iterate_from_worker_offset(HeapRegionClosure *cl,
-                                                                 HeapRegionClaimer *hrclaimer,
-                                                                 uint worker_id) const {
-    _hrm.par_iterate(cl, hrclaimer, hrclaimer->offset_for_worker(worker_id));
-}
-
 // --- src/hotspot/share/gc/g1/heapRegionManager.cpp --- //
 
+// run_task_timed最终会调用到这里
+// 多个worker线程并行处理
 void
 HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclaimer, const uint start_index) const {
     const uint n_regions = hrclaimer->n_regions();
@@ -327,18 +300,15 @@ HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclai
         // 要认领的分区索引
         const uint index = (start_index + count) % n_regions;
         assert(index < n_regions, "sanity");
-        // Skip over unavailable regions
         // 如果分区不是active状态，则跳过
         if (!is_available(index)) {
             continue;
         }
         HeapRegion *r = _regions.get_by_index(index);
-        // We'll ignore regions already claimed.
         // 如果这个分区被其它worker线程认领了，则跳过
         if (hrclaimer->is_region_claimed(index)) {
             continue;
         }
-        // OK, try to claim it
         // 尝试认领这个分区(CAS操作)
         if (!hrclaimer->claim_region(index)) {
             // 如果认领失败，则跳过
@@ -358,36 +328,6 @@ HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclai
 
 class G1PrepareEvacuationTask : public WorkerTask {
     class G1PrepareRegionsClosure : public HeapRegionClosure {
-        void sample_card_set_size(HeapRegion *hr) {
-            if (hr->is_young() || hr->is_starts_humongous()) {
-                _card_set_stats.add(hr->rem_set()->card_set_memory_stats());
-            }
-        }
-
-        bool humongous_region_is_candidate(HeapRegion *region) const {
-            assert(region->is_starts_humongous(), "Must start a humongous object");
-
-            // region是大对象分区的第一个分区
-
-            // 获取分区中的第一个对象(分区中第一个对象的起始地址和分区的起始地址是相同的)
-            oop obj = cast_to_oop(region->bottom());
-
-            // 检查这个大对象
-
-            if (_g1h->is_obj_dead(obj, region)) {
-                return false;
-            }
-
-            // 判断分区的记忆集是否更新完成
-            if (!region->rem_set()->is_complete()) {
-                return false;
-            }
-            // 判断是否要提前回收(Eager Reclaim)这个大对象
-            // is_typeArray()判断对象是不是原始类型的数组
-            // 对于原始类型的大数组，只要这些大数组不再被其他对象引用, G1在任何GC停顿(包括Young GC)都会尝试进行回收
-            return obj->is_typeArray() &&
-                   _g1h->is_potential_eager_reclaim_candidate(region);
-        }
     public:
         virtual bool do_heap_region(HeapRegion *hr) {
             // 准备进行扫描
@@ -433,6 +373,41 @@ class G1PrepareEvacuationTask : public WorkerTask {
 
         G1MonotonicArenaMemoryStats card_set_stats() const {
             return _card_set_stats;
+        }
+    };
+};
+
+class G1PrepareEvacuationTask : public WorkerTask {
+    class G1PrepareRegionsClosure : public HeapRegionClosure {
+        void sample_card_set_size(HeapRegion *hr) {
+            if (hr->is_young() || hr->is_starts_humongous()) {
+                _card_set_stats.add(hr->rem_set()->card_set_memory_stats());
+            }
+        }
+
+        bool humongous_region_is_candidate(HeapRegion *region) const {
+            assert(region->is_starts_humongous(), "Must start a humongous object");
+
+            // region是大对象分区的第一个分区
+
+            // 获取分区中的第一个对象(分区中第一个对象的起始地址和分区的起始地址是相同的)
+            oop obj = cast_to_oop(region->bottom());
+
+            // 检查这个大对象
+
+            if (_g1h->is_obj_dead(obj, region)) {
+                return false;
+            }
+
+            // 判断分区的记忆集是否更新完成
+            if (!region->rem_set()->is_complete()) {
+                return false;
+            }
+            // 判断是否要提前回收(Eager Reclaim)这个大对象
+            // is_typeArray()判断对象是不是原始类型的数组
+            // 对于原始类型的大数组，只要这些大数组不再被其他对象引用, G1在任何GC停顿(包括Young GC)都会尝试进行回收
+            return obj->is_typeArray() &&
+                   _g1h->is_potential_eager_reclaim_candidate(region);
         }
     };
 };
