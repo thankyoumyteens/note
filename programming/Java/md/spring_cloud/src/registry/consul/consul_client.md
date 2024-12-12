@@ -50,7 +50,7 @@ spring:
   cloud:
     # 服务注册中心的地址
     consul:
-      host: 121.36.27.58
+      host: localhost
       port: 8500
 ```
 

@@ -20,7 +20,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 121.36.27.58:8848
+        server-addr: localhost:8848
     sentinel:
       transport:
         dashboard: localhost:8081
@@ -53,7 +53,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 121.36.27.58:8848
+        server-addr: localhost:8848
     sentinel:
       transport:
         dashboard: localhost:8081

@@ -32,6 +32,7 @@
     - [consumer操作](./kafka/kafka_clients/consumer.md)
       - [连接kafka](./kafka/kafka_clients/consumer_create.md)
       - [订阅topic](./kafka/kafka_clients/consumer_subscribe.md)
+      - [手动提交offset](./kafka/kafka_clients/consumer_commit.md)
   - [消息传递保障](./kafka/guarantee/guarantee.md)
     - [最多一次](./kafka/guarantee/at_most_once.md)
     - [至少一次](./kafka/guarantee/at_least_once.md)
