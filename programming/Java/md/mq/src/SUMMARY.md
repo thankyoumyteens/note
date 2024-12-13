@@ -13,6 +13,7 @@
 
 - [Kafka](./kafka/kafka.md)
   - [Kafka的消息存储结构](./kafka/struct.md)
+  - [消费者组](./kafka/comsumer_group.md)
   - [kafka-clients](./kafka/kafka_clients/kafka_clients.md)
     - [topic操作](./kafka/kafka_clients/topic.md)
       - [连接kafka](./kafka/kafka_clients/create.md)
