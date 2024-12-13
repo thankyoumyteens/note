@@ -1,6 +1,18 @@
 # 多元函数微分学
 
 <!--
+\begin{align}
+& 设 M_0 (x_0, y_0) 为 xOy 平面上的一点, \delta > 0, \\
+& 称区域 \left \{ (x, y) | \sqrt{(x - x_0)^2 + (y - y_0)^2} < \delta \right \} \\
+& 为点 M_0 的 \delta 邻域, 记为 U(M_0,\delta) \\
+& 称区域 \left \{ (x, y) | 0 < \sqrt{(x - x_0)^2 + (y - y_0)^2} < \delta \right \} \\
+& 为点 M_0 的 \delta 去心邻域, 记为 \mathring{U}(M_0,\delta) \\
+\end{align}
+-->
+
+![](../img/mc1.jpg)
+
+<!--
 import matplotlib.pyplot as plt
 import numpy as np
 import mpl_toolkits.axisartist as AA
