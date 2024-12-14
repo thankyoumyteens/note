@@ -63,3 +63,5 @@ plt.show()
 -->
 
 ![](../img/Figure_1.png)
+
+## 二元函数的极限

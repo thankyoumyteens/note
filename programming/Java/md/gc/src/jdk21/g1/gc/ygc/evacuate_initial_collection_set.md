@@ -43,3 +43,27 @@ void G1YoungCollector::evacuate_initial_collection_set(G1ParScanThreadStateSet *
     rem_set()->complete_evac_phase(has_optional_evacuation_work);
 }
 ```
+
+## 合并堆根阶段
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+class G1RemSetScanState : public CHeapObj<mtGC> {
+    void prepare_for_merge_heap_roots() {
+        assert(_next_dirty_regions->size() == 0, "next dirty regions must be empty");
+
+        // 重置堆保留分区的扫描状态
+        // 0表示这个分区还没有被扫描
+        for (size_t i = 0; i < _max_reserved_regions; i++) {
+            _card_table_scan_state[i] = 0;
+        }
+
+        // memset用来给一块指定内存空间进行赋值
+        // 参数1: 指向某一内存空间的指针
+        // 参数2: 要填充的值
+        // 参数3: 要填充的字节数
+        ::memset(_region_scan_chunks, false, _num_total_scan_chunks * sizeof(*_region_scan_chunks));
+    }
+};
+```
