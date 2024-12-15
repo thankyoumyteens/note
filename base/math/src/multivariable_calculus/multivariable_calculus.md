@@ -65,3 +65,16 @@ plt.show()
 ![](../img/Figure_1.png)
 
 ## 二元函数的极限
+
+<!--
+\begin{align}
+& 设二元函数 z = f(x, y) 在点 M_0(x_0, y_0) 的去心邻域内有定义, \\
+& \;\, A 为常数，若对任意的 \varepsilon > 0, 总存在 \delta > 0, \\
+& 当 0 < \sqrt{(x - x_0)^2 + (y - y_0)^2} < \delta 时, \\
+& 有 | f(x, y) - A | < \varepsilon 成立, \\
+& 则称函数 z = f(x, y) 当 (x, y) \to (x_0, y_0) 时以 A 为极限, \\
+& 记为 \lim\limits_{\substack{x \to x_0 \\ y \to y_0}} f(x, y) = A \\
+\end{align}
+-->
+
+![](../img/mc2.jpg)
