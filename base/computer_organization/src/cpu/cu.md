@@ -65,4 +65,34 @@
 
 ### 例题
 
+设有如图所示的单总线结构，分析指令 ADD (R0),R1 的指令流程和控制信号。
+
 ![](../img/cpu6.jpg)
+
+取指周期:
+
+| 时序 | 微操作         | 有效控制信号                               |
+| ---- | -------------- | ------------------------------------------ |
+| 1    | (PC) -> MAR    | PC<sub>out</sub>, MAR<sub>in</sub>         |
+| 2    | M(MAR) -> MDR  | MemR, MAR<sub>out</sub>, MDR<sub>in</sub>E |
+| 3    | (MDR) -> IR    | MDR<sub>out</sub>, IR<sub>in</sub>         |
+| 4    | 指令译码       | -                                          |
+| 5    | (PC) + 1 -> PC | -                                          |
+
+间址周期: 完成取数操作，被加数在主存中，加数已经放在寄存器 R<sub>1</sub> 中
+
+| 时序 | 微操作                 | 有效控制信号                               |
+| ---- | ---------------------- | ------------------------------------------ |
+| 1    | (R<sub>0</sub>) -> MAR | R<sub>0out</sub>, MAR<sub>in</sub>         |
+| 2    | M(MAR) -> MDR          | MemR, MAR<sub>out</sub>, MDR<sub>in</sub>E |
+| 3    | (MDR) -> Y             | MDR<sub>out</sub>, Y<sub>in</sub>          |
+
+执行周期:
+
+| 时序 | 微操作                     | 有效控制信号                                                  |
+| ---- | -------------------------- | ------------------------------------------------------------- |
+| 1    | (R<sub>1</sub>) + (Y) -> Z | R<sub>1out</sub>, ALU<sub>in</sub>, CU 向 ALU 发 ADD 控制信号 |
+| 2    | (Z) -> MDR                 | Z<sub>out</sub>, MDR<sub>in</sub>                             |
+| 3    | (MDR) -> M(MAR)            | MemW, MDR<sub>out</sub>E, MAR<sub>out</sub>                   |
+
+## CPU 内部采用专用数据通路方式
