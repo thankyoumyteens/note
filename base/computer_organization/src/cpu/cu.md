@@ -96,3 +96,5 @@
 | 3    | (MDR) -> M(MAR)            | MemW, MDR<sub>out</sub>E, MAR<sub>out</sub>                   |
 
 ## CPU 内部采用专用数据通路方式
+
+![](../img/cpu7.jpg)

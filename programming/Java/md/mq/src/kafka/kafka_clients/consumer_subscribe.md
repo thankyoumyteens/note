@@ -1,6 +1,7 @@
 # 订阅 topic
 
 ```java
+Consumer<String, String> consumer = new KafkaConsumer<>(properties);
 // 订阅topic
 consumer.subscribe(List.of("topic2"));
 while (true) {

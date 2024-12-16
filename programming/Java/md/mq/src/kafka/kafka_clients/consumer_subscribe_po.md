@@ -1,17 +1,18 @@
-# 订阅 topic 和 partition
+# 从指定的 offset 开始消费
 
 ```java
 Consumer<String, String> consumer = new KafkaConsumer<>(properties);
-consumer.subscribe(List.of("topic2"));
-while (true) {
-    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
-    // 获取所有分区
-    Set<TopicPartition> partitions = records.partitions();
-    // 记录每个分区的offset, 用于提交
-    Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
 
+TopicPartition partition0 = new TopicPartition("topic2", 0);
+consumer.assign(List.of(partition0));
+while (true) {
+    // 从头开始消费partition 0
+    consumer.seek(partition0, 0);
+
+    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
+    Set<TopicPartition> partitions = records.partitions();
+    Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
     for (TopicPartition partition : partitions) {
-        // 获取指定分区的消息
         List<ConsumerRecord<String, String>> recordsInPartition = records.records(partition);
         for (ConsumerRecord<String, String> record : recordsInPartition) {
             System.out.println("topic = " + record.topic() +
@@ -20,13 +21,9 @@ while (true) {
                     ", key = " + record.key() +
                     ", value = " + record.value());
         }
-        // 获取最后一条消息的offset
         long lastOffset = recordsInPartition.get(recordsInPartition.size() - 1).offset();
-        // 记录offset
         offsets.put(partition, new OffsetAndMetadata(lastOffset + 1));
     }
-
-    // 手动提交offset
     consumer.commitSync(offsets);
 }
 ```

@@ -78,3 +78,30 @@ plt.show()
 -->
 
 ![](../img/mc2.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 求极限 \lim\limits_{\substack{x \to 0 \\ y \to 2}} \frac{\sqrt{1 + xy} - \sqrt{1 - xy}}{\sin x} \\
+& {\color{Green} // 分母等价无穷小替换} \\
+& = \lim\limits_{\substack{x \to 0 \\ y \to 2}} \frac{\sqrt{1 + xy} - \sqrt{1 - xy}}{x} \\
+& = \lim\limits_{\substack{x \to 0 \\ y \to 2}} \frac{\sqrt{1 + xy} - \sqrt{1 - xy}}{xy} y \\
+& = \lim\limits_{\substack{x \to 0 \\ y \to 2}} \frac{\sqrt{1 + xy} - \sqrt{1 - xy}}{xy} \lim_{y \to 2} y \\
+& = 2 \lim\limits_{\substack{x \to 0 \\ y \to 2}} \frac{\sqrt{1 + xy} - \sqrt{1 - xy}}{xy} \\
+& {\color{Green} // 令 xy = t, 所以 t \to 0} \\
+& = 2 \lim_{t \to 0} \frac{\sqrt{1 + t} - \sqrt{1 - t}}{t} \\
+& {\color{Green} // 分子有理化} \\
+& = 2 \lim_{t \to 0} \frac{(\sqrt{1 + t})^2 - (\sqrt{1 - t})^2}{(\sqrt{1 + t})^2 - (\sqrt{1 - t})^2}
+\frac{\sqrt{1 + t} - \sqrt{1 - t}}{t} \\
+& = 2 \lim_{t \to 0} \frac{(1 + t) - (1 - t)}{(\sqrt{1 + t} + \sqrt{1 - t})(\sqrt{1 + t} - \sqrt{1 - t})}
+\frac{\sqrt{1 + t} - \sqrt{1 - t}}{t} \\
+& = 2 \lim_{t \to 0} \frac{2t}{\sqrt{1 + t} + \sqrt{1 - t}} \frac{1}{t} \\
+& = 2 \lim_{t \to 0} \frac{2}{\sqrt{1 + t} + \sqrt{1 - t}} \\
+& {\color{Green} // 带入 t = 0} \\
+& = 2 \lim_{t \to 0} \frac{2}{1 + 1} \\
+& = 2 \\
+\end{align}
+-->
+
+![](../img/mc3.jpg)

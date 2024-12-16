@@ -1,17 +1,17 @@
-# 订阅 topic 和 partition
+# 订阅指定 partition
 
 ```java
 Consumer<String, String> consumer = new KafkaConsumer<>(properties);
-consumer.subscribe(List.of("topic2"));
+
+TopicPartition partition0 = new TopicPartition("topic2", 0);
+// 订阅topic下的指定分区
+consumer.assign(List.of(partition0));
 while (true) {
     ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
-    // 获取所有分区
+    // 实际只有partition 0
     Set<TopicPartition> partitions = records.partitions();
-    // 记录每个分区的offset, 用于提交
     Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
-
     for (TopicPartition partition : partitions) {
-        // 获取指定分区的消息
         List<ConsumerRecord<String, String>> recordsInPartition = records.records(partition);
         for (ConsumerRecord<String, String> record : recordsInPartition) {
             System.out.println("topic = " + record.topic() +
@@ -20,13 +20,9 @@ while (true) {
                     ", key = " + record.key() +
                     ", value = " + record.value());
         }
-        // 获取最后一条消息的offset
         long lastOffset = recordsInPartition.get(recordsInPartition.size() - 1).offset();
-        // 记录offset
         offsets.put(partition, new OffsetAndMetadata(lastOffset + 1));
     }
-
-    // 手动提交offset
     consumer.commitSync(offsets);
 }
 ```

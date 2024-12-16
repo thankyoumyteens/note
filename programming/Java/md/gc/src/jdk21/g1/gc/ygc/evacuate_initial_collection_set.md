@@ -105,3 +105,5 @@ class G1RemSetScanState : public CHeapObj<mtGC> {
     }
 };
 ```
+
+### 执行合并堆根任务
