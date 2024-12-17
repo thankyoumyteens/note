@@ -105,3 +105,16 @@ plt.show()
 -->
 
 ![](../img/mc3.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& 设 f(x, y) = \begin{cases}
+\frac{x + y}{|x| + |y|} , & (x, y) \ne (0, 0) \\
+0, & (x, y) = (0, 0)
+\end{cases}, 讨论 \lim\limits_{\substack{x \to 0 \\ y \to 0}} 是否存在 \\
+\\
+& \\
+\end{align}
+-->
