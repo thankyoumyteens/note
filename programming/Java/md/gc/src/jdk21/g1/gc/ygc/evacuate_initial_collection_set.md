@@ -107,3 +107,14 @@ class G1RemSetScanState : public CHeapObj<mtGC> {
 ```
 
 ### 执行合并堆根任务
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+class G1MergeHeapRootsTask : public WorkerTask {
+public:
+    virtual void work(uint worker_id) {
+
+    }
+};
+```
