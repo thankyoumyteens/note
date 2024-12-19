@@ -100,3 +100,13 @@
 在任意两个需要通信的器件之间都建立专用的数据通路
 
 ![](../img/cpu7.jpg)
+
+取指周期:
+
+1. (PC) -> MAR, C<sub>0</sub> 有效
+2. (MAR) -> 主存, C<sub>1</sub> 有效
+3. 1 -> R
+4. M(MAR) -> MDR, C<sub>2</sub> 有效
+5. (MDR) -> IR, C<sub>3</sub> 有效
+6. (PC) + 1 -> PC
+7. Op(IR) -> CU, C<sub>4</sub> 有效

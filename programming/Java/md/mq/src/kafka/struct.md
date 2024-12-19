@@ -1,4 +1,4 @@
-# Kafka 的消息存储结构
+# 消息存储结构
 
 Kafka 有 Topic 和 Partition 两个概念，一个 Topic 可以有多个 Partition。在实际存储的时候，Topic + Partition 对应一个文件夹，这个文件夹对应的是这个 Partition 的数据。
 

@@ -113,8 +113,14 @@ plt.show()
 & 设 f(x, y) = \begin{cases}
 \frac{x + y}{|x| + |y|} , & (x, y) \ne (0, 0) \\
 0, & (x, y) = (0, 0)
-\end{cases}, 讨论 \lim\limits_{\substack{x \to 0 \\ y \to 0}} 是否存在 \\
+\end{cases}, 讨论 \lim\limits_{\substack{x \to 0 \\ y \to 0}} f(x, y) 是否存在 \\
 \\
-& \\
+& 找其中的一个方向, 当 \lim\limits_{\substack{x \to 0 \\ y = 0}} 时 \\
+& \lim\limits_{\substack{x \to 0 \\ y = 0}} f(x, y) = \lim_{x \to 0} \frac{x}{|x|} \\
+& {\color{Green} // x \to 0^- 时极限为 -1, x \to 0^+ 时极限为 1} \\
+& 因为 \lim_{x \to 0} \frac{x}{|x|} 不存在 \\
+& 所以 \lim\limits_{\substack{x \to 0 \\ y \to 0}} f(x, y) 不存在 \\
 \end{align}
 -->
+
+![](../img/mc4.jpg)
