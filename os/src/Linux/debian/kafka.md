@@ -1,4 +1,6 @@
-# kafka
+# 安装 kafka-kraft
+
+kraft 模式架构下不再依赖 zookeeper
 
 ### 1. 安装
 

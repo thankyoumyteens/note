@@ -42,3 +42,5 @@
     - [最多一次](./kafka/guarantee/at_most_once.md)
     - [至少一次](./kafka/guarantee/at_least_once.md)
     - [精确一次](./kafka/guarantee/exactly_once.md)
+  - [集群](./kafka/cluster/cluster.md)
+    - [搭建集群](./kafka/cluster/build.md)

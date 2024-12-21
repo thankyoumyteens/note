@@ -59,7 +59,11 @@
   - [memcopy](./allocation/memcopy.md)
   - [memset](./allocation/memset.md)
   - [数组](./allocation/array.md)
-  
+
+- [对象](./base/obj/obj.md)
+  - [对象赋值](./base/obj/obj_v.md)
+  - [重载赋值运算符](./base/obj/obj_o.md)
+
 - [Makefile](./makefile/makefile.md)
   - [环境搭建](./makefile/env.md)
   - [基本使用](./makefile/base.md)

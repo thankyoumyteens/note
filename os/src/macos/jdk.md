@@ -3,7 +3,7 @@
 1. 下载:
 
    - [Liberica](https://bell-sw.com/pages/downloads/)
-   - [Adoptium](https://adoptium.net/zh-CN/temurin/releases/)
+   - [Adoptium](https://mirrors.tuna.tsinghua.edu.cn/Adoptium)
    - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
    - [Microsoft](https://learn.microsoft.com/zh-cn/java/openjdk/download)
 

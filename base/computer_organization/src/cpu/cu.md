@@ -110,3 +110,5 @@
 5. (MDR) -> IR, C<sub>3</sub> 有效
 6. (PC) + 1 -> PC
 7. Op(IR) -> CU, C<sub>4</sub> 有效
+
+### 例题

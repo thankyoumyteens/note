@@ -44,7 +44,9 @@
   - [安装mdbook](./Linux/debian/mdbook.md)
   - [安装redis](./Linux/debian/redis.md)
   - [安装nacos](./Linux/debian/nacos.md)
-  - [安装kafka](./Linux/debian/kafka.md)
+  - [安装zookeeper](./Linux/debian/zookeeper.md)
+  - [安装kafka-zookeeper](./Linux/debian/kafka_zookeeper.md)
+  - [安装kafka-kraft](./Linux/debian/kafka.md)
 
 <!-- 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)

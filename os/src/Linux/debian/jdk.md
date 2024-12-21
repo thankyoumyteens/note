@@ -3,8 +3,14 @@
 ### 1. 下载:
 
 ```sh
-wget https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.5%2B11/OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
+wget https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jdk/x64/linux/OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
 tar -zxvf OpenJDK21U-jdk_x64_linux_hotspot_21.0.5_11.tar.gz
+
+wget https://mirrors.tuna.tsinghua.edu.cn/Adoptium/21/jdk/aarch64/linux/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.5_11.tar.gz
+tar -zxvf OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.5_11.tar.gz
+
+sudo mkdir /jdk
+sudo mv jdk-21.0.5+11/ /jdk/jdk-21.0.5+11/
 ```
 
 ### 2. 配置环境变量:

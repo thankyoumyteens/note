@@ -43,6 +43,8 @@ brew install mdbook
 brew install ffmpeg
 # wget
 brew install wget
+# ip命令
+brew install iproute2mac
 ```
 
 - [Anaconda](https://www.anaconda.com/download/success)

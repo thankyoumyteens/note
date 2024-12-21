@@ -124,3 +124,30 @@ plt.show()
 -->
 
 ![](../img/mc4.jpg)
+
+## 偏导数
+
+<!--
+\begin{align}
+& 设二元函数 z = f(x, y) \quad (x, y) \in D, 且点 M_0 (x_0, y_0) \in D \\
+& 称: \\
+& \; 1. \Delta z_x = f(x_0 + \Delta x, y_0) - f(x_0, y_0) 或 
+\Delta z_x = f(x, y_0) - f(x_0, y_0) 为函数在点 M_0 处关于 x 的偏增量 \\
+& \; 2. \Delta z_y = f(x_0, y_0 + \Delta y) - f(x_0, y_0) 或 
+\Delta z_y = f(x_0, y) - f(x_0, y_0) 为函数在点 M_0 处关于 y 的偏增量 \\
+\\
+& 若 \lim_{\Delta x \to 0} \frac{\Delta z_x}{\Delta x} 或者 
+\lim_{ x \to x_0} \frac{f(x, y_0) - f(x_0, y_0)}{x - x_0} 存在，则称函数在点 M_0 处关于 x 可偏导, \\
+& 称此极限为函数在点 M_0 处关于 x 的偏导数, 记为 f_x(x_0, y_0) 或者 
+\frac{\partial z}{\partial x} \big|_{(x_0, y_0)} \\
+\\
+& 若 \lim_{\Delta y \to 0} \frac{\Delta z_y}{\Delta y} 或者 
+\lim_{ x \to x_0} \frac{f(x_0, y) - f(x_0, y_0)}{y - y_0} 存在，则称函数在点 M_0 处关于 y 可偏导, \\
+& 称此极限为函数在点 M_0 处关于 y 的偏导数, 记为 f_y(x_0, y_0) 或者 
+\frac{\partial z}{\partial y} \big|_{(x_0, y_0)} \\
+\\
+& 对函数 z = f(x, y), 求 \frac{\partial z}{\partial x} 时, 只需要将 z = f(x, y) 中的 y 视为常数, 对 x 求导即可 \\
+\end{align}
+-->
+
+![](../img/mc5.jpg)
