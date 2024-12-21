@@ -36,3 +36,4 @@
 - [CPU](./cpu/cpu.md)
   - [指令执行过程](./cpu/i.md)
   - [控制器](./cpu/cu.md)
+    - [数据通路](./cpu/dp.md)
