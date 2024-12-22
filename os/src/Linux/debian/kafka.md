@@ -2,7 +2,7 @@
 
 kraft 模式架构下不再依赖 zookeeper
 
-### 1. 安装
+### 1. 下载
 
 ```sh
 wget https://downloads.apache.org/kafka/3.9.0/kafka_2.13-3.9.0.tgz

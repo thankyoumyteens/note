@@ -175,3 +175,30 @@ plt.show()
 ![](../img/mc6.jpg)
 
 ## 有界闭区域上二元连续函数的性质
+
+<!--
+\begin{align}
+& 设 D 为 xOy 平面上的闭区域, 若存在 R > 0, \\
+& 使得 D \subset \left \{ (x, y) | x^2 + y^2 \le R^2 \right \}, \\
+& 则称 D 为有界闭区域 \\
+\\
+& 性质1. 若二元函数 f(x, y) 在有界闭区域 D 上连续，则 f(x, y) 在有界闭区域 D 上取到最小值 m 和最大值 M \\
+& 性质2. 若二元函数 f(x, y) 在有界闭区域 D 上连续，则 f(x, y) 在有界闭区域 D 上有界, \\
+& \quad \quad \quad 即存在 M_0 > 0, 对一切的 (x, y) \in D, 使得 |f(x, y)| \le M_0 \\
+& 性质3. 介值定理: 若二元函数 f(x, y) 在有界闭区域 D 上连续，m 和 M 为 f(x, y) 在 D 上的最小值和最大值, \\
+& \quad \quad \quad 对任意的 \delta \in [m, M], 一定存在 (\xi, \eta) \in D, 使得 f(\xi, \eta) = \delta \\
+\end{align}
+-->
+
+![](../img/mc7.jpg)
+
+## 二阶混合偏导次序无关定理
+
+<!--
+\begin{align}
+& 设二元函数 z = f(x, y）的两个二阶混合偏导数连续，\\
+& 则 \frac{\partial ^2z}{\partial x \partial y} = \frac{\partial ^2z}{\partial y \partial x} \\
+\end{align}
+-->
+
+![](../img/mc8.jpg)

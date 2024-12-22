@@ -44,3 +44,4 @@
     - [精确一次](./kafka/guarantee/exactly_once.md)
   - [集群](./kafka/cluster/cluster.md)
     - [搭建集群](./kafka/cluster/build.md)
+    - [Kafka副本集](./kafka/cluster/replication.md)

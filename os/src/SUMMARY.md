@@ -37,6 +37,7 @@
 - [Debian](./Linux/debian/debian.md)
   - [安装debian](./Linux/debian/install_os.md)
   - [ls结果显示颜色](./Linux/debian/ls_color.md)
+  - [修改ip地址](./Linux/debian/ip.md)
   - [安装git](./Linux/debian/git.md)
   - [安装jdk](./Linux/debian/jdk.md)
   - [安装mariadb](./Linux/debian/mariadb.md)
