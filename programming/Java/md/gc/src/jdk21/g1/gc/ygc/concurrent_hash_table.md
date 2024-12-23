@@ -53,3 +53,44 @@ private:
 
 };
 ```
+
+## 获取元素
+
+```cpp
+// --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
+
+template<typename CONFIG, MEMFLAGS F>
+template<typename LOOKUP_FUNC, typename FOUND_FUNC>
+inline bool ConcurrentHashTable<CONFIG, F>::
+get(Thread *thread, LOOKUP_FUNC &lookup_f, FOUND_FUNC &found_f, bool *grow_hint) {
+    bool ret = false;
+    ScopedCS cs(thread, this);
+    VALUE *val = internal_get(thread, lookup_f, grow_hint);
+    if (val != nullptr) {
+        found_f(val);
+        ret = true;
+    }
+    return ret;
+}
+
+// Always called within critical section
+template<typename CONFIG, MEMFLAGS F>
+template<typename LOOKUP_FUNC>
+inline typename CONFIG::Value *ConcurrentHashTable<CONFIG, F>::
+internal_get(Thread *thread, LOOKUP_FUNC &lookup_f, bool *grow_hint) {
+    bool clean = false;
+    size_t loops = 0;
+    VALUE *ret = nullptr;
+
+    const Bucket *bucket = get_bucket(lookup_f.get_hash());
+    Node *node = get_node(bucket, lookup_f, &clean, &loops);
+    if (node != nullptr) {
+        ret = node->value();
+    }
+    if (grow_hint != nullptr) {
+        *grow_hint = loops > _grow_hint;
+    }
+
+    return ret;
+}
+```
