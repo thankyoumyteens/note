@@ -12,9 +12,15 @@ tar -zxvf kafka_2.13-3.9.0.tgz
 ### 2. 配置
 
 ```sh
-# 云服务器需要开放9092端口
+cd kafka_2.13-3.9.0
 vim config/kraft/server.properties
-# advertised.listeners=PLAINTEXT://服务器的ip:9092
+```
+
+修改:
+
+```conf
+# 云服务器需要开放9092端口
+advertised.listeners=PLAINTEXT://服务器的ip:9092
 ```
 
 ### 3. 初始化

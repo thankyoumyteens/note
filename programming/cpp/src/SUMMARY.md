@@ -35,7 +35,6 @@
   - [类型推断](./base/type_inference/type_inference.md)
     - [auto](./base/type_inference/auto.md)
     - [decltype](./base/type_inference/decltype.md)
-  - [类](./base/class/class.md)
   - [字符串](./base/str/str.md)
     - [数值类型转换](./base/str/cast_number.md)
   - [左值和右值](./base/lrvalue.md)
@@ -59,6 +58,9 @@
   - [memcopy](./allocation/memcopy.md)
   - [memset](./allocation/memset.md)
   - [数组](./allocation/array.md)
+
+- [类](./base/class/class.md)
+  - [友元](./base/class/friend.md)
 
 - [对象](./base/obj/obj.md)
   - [对象赋值](./base/obj/obj_v.md)
