@@ -41,3 +41,4 @@
     - [一阶微分方程](./further_mathematics/differential_equation2.md)
     - [高阶线性微分方程](./further_mathematics/differential_equation3.md)
   - [多元函数微分学](./multivariable_calculus/multivariable_calculus.md)
+    - [全微分](./multivariable_calculus/total_derivative.md)
