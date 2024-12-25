@@ -24,3 +24,32 @@ System.out.println(result2.stripTrailingZeros());
 // 100
 System.out.println(result2.stripTrailingZeros().toPlainString());
 ```
+
+## 求平方根
+
+```java
+/**
+ * 计算平方根(Java 9开始自带sqrt方法)
+ *
+ * @param value 待计算的值
+ * @param scale 保留小数位数
+ * @return 平方根
+ */
+public static BigDecimal sqrt(BigDecimal value, int scale) {
+    BigDecimal ZERO = new BigDecimal("0");
+    if (ZERO.equals(value.stripTrailingZeros())) {
+        return ZERO;
+    }
+    BigDecimal num2 = BigDecimal.valueOf(2);
+    int precision = 100;
+    MathContext mc = new MathContext(precision, RoundingMode.HALF_UP);
+    BigDecimal deviation = value;
+    int cnt = 0;
+    while (cnt < precision) {
+        deviation = (deviation.add(value.divide(deviation, mc))).divide(num2, mc);
+        cnt++;
+    }
+    deviation = deviation.setScale(scale, RoundingMode.HALF_UP);
+    return deviation;
+}
+```
