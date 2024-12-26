@@ -171,6 +171,10 @@
     - [Logger](./log/logback/logger.md)
     - [Encoder](./log/logback/encoder.md)
 
+- [模版渲染](./template/template.md)
+  - [freemarker](./template/freemarker/freemarker.md)
+    - [基本使用](./template/freemarker/quick_start.md)
+
 - [JGit](./jgit/jgit.md)
   - [基本使用](./jgit/quick_start.md)
   - [创建本地仓库](./jgit/init.md)
