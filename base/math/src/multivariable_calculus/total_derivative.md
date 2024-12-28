@@ -14,3 +14,30 @@
 -->
 
 ![](../img/td1.jpg)
+
+<!--
+\begin{align}
+& 如果 \Delta z = A \Delta x + B \Delta y + o(\rho) \\
+& 则 A = \frac{\partial z}{\partial x}\big|_{M_0}, B = \frac{\partial z}{\partial y}\big|_{M_0} \\
+\\
+& 如果 z = f(x, y) 可微 \\
+& 则 \mathrm{d}z = \frac{\partial z}{\partial x}\mathrm{d}x + \frac{\partial z}{\partial y}\mathrm{d}y \\
+&
+\end{align}
+-->
+
+![](../img/td2.jpg)
+
+例题
+
+<!--
+\begin{align}
+& z = x^2 \ln (1 + \tan y), 求 \mathrm{d}z \\
+& \frac{\partial z}{\partial x} = 2x \ln (1 + \tan y) \\
+& \frac{\partial z}{\partial y} = x^2 \frac{\sec ^2 y}{1 + \tan y} \\
+& \mathrm{d}z = \frac{\partial z}{\partial x}\mathrm{d}x + \frac{\partial z}{\partial y}\mathrm{d}y \\
+& \quad = 2x \ln (1 + \tan y) \mathrm{d}x + x^2 \frac{\sec ^2 y}{1 + \tan y} \mathrm{d}y \\
+\end{align}
+-->
+
+![](../img/td3.jpg)

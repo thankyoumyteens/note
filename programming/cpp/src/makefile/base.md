@@ -9,7 +9,7 @@ target : prerequisites
 	...
 ```
 
-- target: 一个或多个可执行文件或者 `.o` 文件，还可以是一个标签（label）
+- target: 一个或多个可执行文件或者 `.o` 文件，还可以是一个标签(label)
 - prerequisites: 生成该 target 需要依赖的文件
 - recipe: 该 target 要执行的任意的 shell 命令, 注意 recipe 前的换行符不能用空格替代
 

@@ -21,7 +21,7 @@ public class AtMostOnceConsumer {
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
-        // 启用自动提交偏移量，并设置较短的提交间隔（例如1秒）
+        // 启用自动提交偏移量，并设置较短的提交间隔(例如1秒)
         props.put("enable.auto.commit", "true");
         props.put("auto.commit.interval.ms", "1000"); // 可根据需要调整
 

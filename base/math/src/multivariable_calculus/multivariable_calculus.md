@@ -196,7 +196,7 @@ plt.show()
 
 <!--
 \begin{align}
-& 设二元函数 z = f(x, y）的两个二阶混合偏导数连续，\\
+& 设二元函数 z = f(x, y)的两个二阶混合偏导数连续，\\
 & 则 \frac{\partial ^2z}{\partial x \partial y} = \frac{\partial ^2z}{\partial y \partial x} \\
 \end{align}
 -->
