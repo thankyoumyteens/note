@@ -46,6 +46,7 @@
       - [实际执行回收](./jdk21/g1/gc/ygc/evacuate_initial_collection_set.md)
         - [合并堆根阶段](./jdk21/g1/gc/ygc/merge_heap_roots.md)
         - [ConcurrentHashTable](./jdk21/g1/gc/ygc/concurrent_hash_table.md)
+        - [GlobalCounter](./jdk21/g1/gc/ygc/global_counter.md)
       - [疏散回收集后阶段](./jdk21/g1/gc/ygc/post_evacuate_collection_set.md)
   - [并发标记](./jdk21/g1/gc/cm/cm.md)
 
