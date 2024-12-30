@@ -36,12 +36,14 @@ RCU(读-拷贝-更新, Read-Copy Update)是一种用于在多线程环境下高�
 4. 等待旧读操作完成: 写操作线程需要等待所有旧读操作完成。这是通过检查各个线程的局部计数器来实现的。对于每个线程，如果其局部计数器的值小于更新后的全局计数器的值，说明这个线程是一个旧读操作线程，正在读取旧版本的数据。写操作线程需要等待这些线程完成读操作，确保它们不会再访问即将被替换的旧数据。对于新的读操作线程，其计数器值相对全局计数器版本较大。这意味着新的读操作线程是在新的数据版本或者新的读写阶段开始的，由于是在新的数据版本基础上进行读取，不会受到当前写操作更新旧数据的影响，所以不需要等待。写操作只需要关注那些已经在旧数据版本上进行读取的线程，并等待它们完成读取后再进行数据更新，以确保数据的一致性
 5. 数据更新: 当所有旧读操作线程完成读取后，写操作线程可以将修改后的数据副本替换原来的共享数据，完成数据的更新操作。这样，后续的读操作线程就能够读取到新的数据版本了
 
+## GlobalCounter 类
+
 ```cpp
 // --- src/hotspot/share/utilities/globalCounter.hpp --- //
 
 class GlobalCounter : public AllStatic {
 private:
-    // 由于不清楚最终在BSS段(Block Started by Symbol)中会和什么相邻
+    // 由于不清楚最终在BSS段中会和什么相邻
     // 所以要通过填充周边内存确保计数器位于单独的缓存行上
     struct PaddedCounter {
         DEFINE_PAD_MINUS_SIZE(0, DEFAULT_CACHE_LINE_SIZE, 0);
@@ -55,10 +57,10 @@ private:
     // 最低位表示激活状态
     // 计数器的值大于等于1为激活
     static const uintx COUNTER_ACTIVE = 1;
-    // Thus we increase counter by 2.
+    // 计数器的值每次加2
     static const uintx COUNTER_INCREMENT = 2;
 
-    // The per thread scanning closure.
+    // 用来实现: 等待所有线程的旧读操作完成
     class CounterThreadCheck;
 
 public:
@@ -68,24 +70,21 @@ public:
     enum class CSContext : uintx {
     };
 
-    // Must be called before accessing the data.  The result must be passed
-    // to the associated call to critical_section_end().  Acts as a full
-    // memory barrier before the code within the critical section.
-    // critical_section_begin 的返回值会传给 critical_section_end 方法
+    // 必须在读取数据之前调用
+    // critical_section_begin 的返回值用来传给 critical_section_end 函数
     static CSContext critical_section_begin(Thread *thread);
 
-    // Must be called after finished accessing the data.  The context
-    // must be the result of the associated initiating critical_section_begin().
-    // Acts as a release memory barrier after the code within the critical
-    // section.
+    // 必须在数据读取完成后调用
     // context 参数必须是 critical_section_begin 方法的返回值
     static void critical_section_end(Thread *thread, CSContext context);
 
-    // Make the data inaccessible to readers before calling. When this call
-    // returns it's safe to reclaim the data.  Acts as a full memory barrier.
+    // 在调用之前, 需要使旧数据对新的读线程不可访问
+    // 函数返回后, 旧数据就可以安全地清理了
     static void write_synchronize();
 
-    // A scoped object for a read-side critical-section.
+    // 用来简化 critical_section_begin 和 critical_section_end 的调用
+    // 构造函数调用 critical_section_begin
+    // 析构函数调用 critical_section_end
     class CriticalSection;
 };
 ```

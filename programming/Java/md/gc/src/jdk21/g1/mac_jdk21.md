@@ -4,6 +4,7 @@
 
 ```sh
 git clone https://gitee.com/mirrors/openjdk.git
+# git clone git@gitee.com:thankyoumyteens/jdk21u.git
 cd openjdk/
 git checkout -b jdk-21-ga jdk-21-ga
 ```
