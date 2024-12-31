@@ -88,3 +88,86 @@ public:
     class CriticalSection;
 };
 ```
+
+## 读操作
+
+```cpp
+// --- src/hotspot/share/utilities/globalCounter.inline.hpp --- //
+
+inline GlobalCounter::CSContext
+GlobalCounter::critical_section_begin(Thread *thread) {
+    assert(thread == Thread::current(), "must be current thread");
+    // 每个线程内部有一个 _rcu_counter 计数器
+    uintx old_cnt = Atomic::load(thread->get_rcu_counter());
+    // 如果当前 _rcu_counter 是激活状态(即大于等于1), 则 _rcu_counter 保持不变
+    // 否则, 把 _rcu_counter 设为激活状态
+    uintx new_cnt = old_cnt;
+    // 判断是否激活(最低位是否等于1)
+    if ((new_cnt & COUNTER_ACTIVE) == 0) {
+        // 设为设为激活状态
+        // 全局计数器的值和 COUNTER_ACTIVE 按位或, 保证值至少是1
+        new_cnt = Atomic::load(&_global_counter._counter) | COUNTER_ACTIVE;
+    }
+    // 把新值存回线程
+    Atomic::release_store_fence(thread->get_rcu_counter(), new_cnt);
+    // 返回旧值, 调用 critical_section_end 函数后会恢复旧值
+    return static_cast<CSContext>(old_cnt);
+}
+
+inline void
+GlobalCounter::critical_section_end(Thread *thread, CSContext context) {
+    assert(thread == Thread::current(), "must be current thread");
+    assert((*thread->get_rcu_counter() & COUNTER_ACTIVE) == COUNTER_ACTIVE, "must be in critical section");
+    // 恢复旧值, 把线程内部的 _rcu_counter 计数器恢复到调用 critical_section_begin 之前的值
+    Atomic::release_store(thread->get_rcu_counter(),
+                          static_cast<uintx>(context));
+}
+
+// 用法:
+// {
+//     GlobalCounter::CriticalSection cs(Thread::current());
+//     do something
+// }
+//
+class GlobalCounter::CriticalSection {
+private:
+    Thread *_thread;
+    CSContext _context;
+public:
+    // 创建对象时, 构造函数调用 critical_section_begin
+    inline CriticalSection(Thread *thread) :
+            _thread(thread),
+            _context(GlobalCounter::critical_section_begin(_thread)) {}
+
+    // 离开作用域时, 析构函数调用 critical_section_end
+    inline  ~CriticalSection() {
+        GlobalCounter::critical_section_end(_thread, _context);
+    }
+};
+```
+
+## 写操作
+
+1. 调用 write_synchronize 之前, 需要先用修改后的数据副本替换原来的共享数据(修改指针), 并保留旧数据
+2. write_synchronize 会将全局计数器+2, 此后的读线程内部计数器全是大于等于全局计数器的, 读取的也是新数据
+3. write_synchronize 等待所有旧读线程读取完毕
+4. write_synchronize 返回之后, 已经没有旧读线程了, 就可以释放旧数据的内存了
+
+```cpp
+// --- src/hotspot/share/utilities/globalCounter.cpp --- //
+
+void GlobalCounter::write_synchronize() {
+    assert((*Thread::current()->get_rcu_counter() & COUNTER_ACTIVE) == 0x0, "must be outside a critcal section");
+    // Atomic::add需要提供StoreLoad内存屏障的功能, 保证_counter的修改对所有线程立即可见
+    uintx gbl_cnt = Atomic::add(&_global_counter._counter, COUNTER_INCREMENT);
+
+    // 等待所有线程的旧读操作完成
+    CounterThreadCheck ctc(gbl_cnt);
+    for (JavaThreadIteratorWithHandle jtiwh; JavaThread *thread = jtiwh.next();) {
+        ctc.do_thread(thread);
+    }
+    for (NonJavaThread::Iterator njti; !njti.end(); njti.step()) {
+        ctc.do_thread(njti.current());
+    }
+}
+```

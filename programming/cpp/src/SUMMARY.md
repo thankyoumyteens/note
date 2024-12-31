@@ -32,6 +32,7 @@
     - [常量指针](./base/const/const_pointer.md)
   - [引用](./base/ref/ref.md)
     - [按引用传递](./base/ref/ref_params.md)
+    - [右值引用](./base/ref/rvalue_reference.md)
   - [类型推断](./base/type_inference/type_inference.md)
     - [auto](./base/type_inference/auto.md)
     - [decltype](./base/type_inference/decltype.md)

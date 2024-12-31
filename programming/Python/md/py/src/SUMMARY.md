@@ -136,7 +136,7 @@
 - [PaddleOCR](./paddle_ocr/paddle_ocr.md)
   - [基本使用](./paddle_ocr/quick_start.md)
 
-<!-- - [PySide6](./pyside/PySide6.md)
+- [PySide6](./pyside/PySide6.md)
   - [安装Pyside6](./pyside/安装Pyside6.md)
   - [创建主窗口](./pyside/创建主窗口.md)
   - [布局](./pyside/布局.md)
@@ -148,4 +148,4 @@
   - [自定义组件](./pyside/customize_component.md)
   - [自定义事件](./pyside/customize_event.md)
   - [弹出子窗口](./pyside/sub_window.md)
-  - [打包exe](./pyside/打包exe.md) -->
+  - [打包exe](./pyside/打包exe.md)
