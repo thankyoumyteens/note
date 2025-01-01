@@ -170,4 +170,25 @@ void GlobalCounter::write_synchronize() {
         ctc.do_thread(njti.current());
     }
 }
+
+class GlobalCounter::CounterThreadCheck : public ThreadClosure {
+private:
+    uintx _gbl_cnt;
+public:
+    CounterThreadCheck(uintx gbl_cnt) : _gbl_cnt(gbl_cnt) {}
+
+    void do_thread(Thread *thread) {
+        SpinYield yield;
+        // 等待thread线程的旧读操作完成
+        while (true) {
+            uintx cnt = Atomic::load_acquire(thread->get_rcu_counter());
+            // (cnt - _gbl_cnt) > (max_uintx / 2) 用于判断是不是新读操作, 如果是新读操作则跳出循环
+            if (((cnt & COUNTER_ACTIVE) != 0) && (cnt - _gbl_cnt) > (max_uintx / 2)) {
+                yield.wait();
+            } else {
+                break;
+            }
+        }
+    }
+};
 ```
