@@ -7,6 +7,8 @@
     - [路径操作](./java/path.md)
     - [文件操作](./java/file.md)
   - [日期操作](./java/date.md)
+  - [字符串操作](./java/str/str.md)
+    - [数字格式化](./java/str/number_format.md)
   - [BigDecimal](./java/BigDecimal.md)
   - [集合](./java/collection.md)
     - [List去重](./java/list_distinct.md)
