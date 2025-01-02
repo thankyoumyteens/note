@@ -15,3 +15,19 @@
 ![](../img/td2_1.jpg)
 
 ## 复合函数求偏导
+
+<!--
+\begin{align}
+& 1. z = f(x^2 + y^2): z是二元函数, f是一元函数, z = f(u), u = x^2 + y^2 \\
+& 2. z = f(t^2, \sin t): z是一元函数, f是二元函数, z = f(u, v), \begin{cases}
+u = t^2 \\
+v = \sin t
+\end{cases} \\
+& 3. z = f(x^2 + y^2, xy): z是二元函数, f是二元函数, z = f(u, v), \begin{cases}
+u = x^2 + y^2 \\
+v = xy
+\end{cases} \\
+\end{align}
+-->
+
+![](../img/td2_2.jpg)
