@@ -3,11 +3,12 @@
 ```py
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 # 每0.5秒尝试一次定位, 等待时间超过100秒则报错
 # 定位到标签后返回该标签
 e = WebDriverWait(driver, 100, 0.5).until(
-    EC.presence_of_element_located(('id', 'btn1'))
+    EC.presence_of_element_located((By.ID, 'btn1'))
 )
 
 print(e)

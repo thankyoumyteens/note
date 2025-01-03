@@ -39,7 +39,7 @@ ser = Service(driver_path)
 driver = webdriver.Chrome(options=opt, service=ser)
 
 # 打开网页
-driver.get('http://www.example.com')
+driver.get('https://www.example.com')
 
 # 关闭浏览器
 driver.quit()

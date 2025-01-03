@@ -184,6 +184,7 @@ public:
             uintx cnt = Atomic::load_acquire(thread->get_rcu_counter());
             // (cnt - _gbl_cnt) > (max_uintx / 2) 用于判断是不是新读操作, 如果是新读操作则跳出循环
             if (((cnt & COUNTER_ACTIVE) != 0) && (cnt - _gbl_cnt) > (max_uintx / 2)) {
+                // 自旋等待
                 yield.wait();
             } else {
                 break;
@@ -191,4 +192,52 @@ public:
         }
     }
 };
+```
+
+## SpinYield
+
+```cpp
+// --- src/hotspot/share/utilities/spinYield.hpp --- //
+
+class SpinYield : public StackObj {
+    Tickspan _sleep_time;
+    uint _spins;
+    uint _yields;
+    uint _spin_limit;
+    uint _yield_limit;
+    uint _sleep_ns;
+
+    void yield_or_sleep();
+
+public:
+    // 执行下一轮延迟操作
+    void wait() {
+        // 简单策略：_spins小于按照配置的次数(_spin_limit)时立即返回（自旋），达到配置的次数后切换为让出处理器（yield）或休眠（sleep）
+        // 未来可能会提供其他策略，例如（1）如果系统未饱和则始终进行自旋，或者（2）如果让出处理器操作无效则进行休眠
+        if (_spins < _spin_limit) {
+            ++_spins;
+            // int SpinPause() {
+            //     return 0;
+            // }
+            SpinPause();
+        } else {
+            yield_or_sleep();
+        }
+    }
+};
+
+// --- src/hotspot/share/utilities/spinYield.cpp --- //
+
+void SpinYield::yield_or_sleep() {
+    if (_yields < _yield_limit) {
+        ++_yields;
+        // 让出处理器
+        os::naked_yield();
+    } else {
+        // 进行休眠
+        Ticks sleep_start = Ticks::now();
+        os::naked_short_nanosleep(_sleep_ns);
+        _sleep_time += Ticks::now() - sleep_start;
+    }
+}
 ```

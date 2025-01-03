@@ -31,3 +31,11 @@ v = xy
 -->
 
 ![](../img/td2_2.jpg)
+
+<!--
+\begin{align}
+& 设 z = f(x^2 \sin y), 其中 f(u) 二阶连续可导, 求 \frac{\partial ^2 z}{\partial x \partial y} \\
+\\
+& \\
+\end{align}
+-->
