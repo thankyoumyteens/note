@@ -32,10 +32,24 @@ v = xy
 
 ![](../img/td2_2.jpg)
 
+例题 1
+
 <!--
 \begin{align}
 & 设 z = f(x^2 \sin y), 其中 f(u) 二阶连续可导, 求 \frac{\partial ^2 z}{\partial x \partial y} \\
 \\
-& \\
+& {\color{Green} // z = f(u), u = x^2 \sin y} \\
+& {\color{Green} // \frac{\partial z}{\partial x} = \frac{\mathrm{d} z}{\mathrm{d} u} \cdot \frac{\partial u}{\partial x}} \\
+& \frac{\partial z}{\partial x} = f'(x^2 \sin y) \cdot 2x \sin y \\
+& \frac{\partial ^2 z}{\partial x \partial y} = \frac{\partial [f'(x^2 \sin y) \cdot 2x \sin y]}{\partial y} \\
+& \qquad \,\,\,\, = f''(x^2 \sin y) x^2 \cos y \cdot 2x \sin y + f'(x^2 \sin y) \cdot 2x \cos y \\
 \end{align}
+-->
+
+![](../img/td2_3.jpg)
+
+例题 2
+
+<!--
+
 -->
