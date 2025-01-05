@@ -51,5 +51,34 @@ v = xy
 例题 2
 
 <!--
+\begin{align}
+& 设 z = f(t^2, \sin t), 其中 z = f(u, v) 二阶连续可偏导, 求 \frac{\mathrm{d} ^2z}{\mathrm{d} t^2} \\
+\\
+& {\color{Green} // z = f(u, v), u = t^2, v = \sin t} \\
+& {\color{Green} // \frac{\partial z}{\partial u} = f_1(t^2, \sin t) = f_1,
+\frac{\partial z}{\partial v} = f_2(t^2, \sin t) = f_2} \\
+& {\color{Green} // \frac{\mathrm{d} z}{\mathrm{d} t} =
+\frac{\partial z}{\partial u} \cdot \frac{\mathrm{d} u}{\mathrm{d} t} +
+\frac{\partial z}{\partial v} \cdot \frac{\mathrm{d} v}{\mathrm{d} t}} \\
+& \frac{\mathrm{d} z}{\mathrm{d} t} = f_1 \cdot 2t + f_2 \cdot \cos t \\
+& \frac{\mathrm{d} ^2z}{\mathrm{d} t^2} = \frac{\mathrm{d} [2t f_1 + \cos t f_2]}{\mathrm{d} t} \\
+& \quad \,\,\,\,\, = 2 f_1 + 2t \frac{\mathrm{d} f_1}{\mathrm{d} t}
+- \sin t f_2 + \cos t \frac{\mathrm{d} f_2}{\mathrm{d} t} \\
+& {\color{Green} // \frac{\mathrm{d} f_1}{\mathrm{d} t} =
+\frac{\partial f_1}{\partial u} \cdot \frac{\mathrm{d} u}{\mathrm{d} t} +
+\frac{\partial f_1}{\partial v} \cdot \frac{\mathrm{d} v}{\mathrm{d} t}} \\
+& {\color{Green} // \frac{\partial f_1}{\partial u} = f_{11}(t^2, \sin t) = f_{11},
+\frac{\partial f_1}{\partial v} = f_{12}(t^2, \sin t) = f_{12}} \\
+& {\color{Green} // f_2 同理} \\
+& \quad \,\,\,\,\, = 2 f_1 + 2t (2t f_{11} + \cos t f_{12})
+- \sin t f_2 + \cos t (2t f_{21} + \cos t f_{22}) \\
+\end{align}
+-->
+
+![](../img/td2_4.jpg)
+
+例题 3
+
+<!--
 
 -->
