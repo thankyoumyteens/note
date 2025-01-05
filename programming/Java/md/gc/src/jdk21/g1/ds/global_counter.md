@@ -70,10 +70,12 @@ public:
     enum class CSContext : uintx {
     };
 
+    // 进入RCU读临界区
     // 必须在读取数据之前调用
     // critical_section_begin 的返回值用来传给 critical_section_end 函数
     static CSContext critical_section_begin(Thread *thread);
 
+    // 退出RCU读临界区
     // 必须在数据读取完成后调用
     // context 参数必须是 critical_section_begin 方法的返回值
     static void critical_section_end(Thread *thread, CSContext context);

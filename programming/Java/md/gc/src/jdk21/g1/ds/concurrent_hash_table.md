@@ -45,7 +45,108 @@ private:
     InternalTable *_table;
     // 扩容时的临时表
     InternalTable *_new_table;
+
+    Mutex *_resize_lock;
+    // 为了能够在调整大小(resize)以及其他批量操作中避免使用写同步(write_synchronize 函数)
+    // _invisible_epoch 用于跟踪哈希表的某个版本是否曾被访问过
+    // _invisible_epoch 只能由 _resize_lock 的持有者使用
+    volatile Thread *_invisible_epoch;
 };
+```
+
+## Node 操作
+
+```cpp
+template<typename CONFIG, MEMFLAGS F>
+template<typename LOOKUP_FUNC>
+typename ConcurrentHashTable<CONFIG, F>::Node *
+ConcurrentHashTable<CONFIG, F>::
+get_node(const Bucket *const bucket, LOOKUP_FUNC &lookup_f,
+         bool *have_dead, size_t *loops) const {
+    size_t loop_count = 0;
+    Node *node = bucket->first();
+    while (node != nullptr) {
+        bool is_dead = false;
+        ++loop_count;
+        if (lookup_f.equals(node->value(), &is_dead)) {
+            break;
+        }
+        if (is_dead && !(*have_dead)) {
+            *have_dead = true;
+        }
+        node = node->next();
+    }
+    if (loops != nullptr) {
+        *loops = loop_count;
+    }
+    return node;
+}
+```
+
+## Bucket 操作
+
+```cpp
+// --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
+
+// Return correct bucket for reading and handles resizing.
+template<typename CONFIG, MEMFLAGS F>
+inline typename ConcurrentHashTable<CONFIG, F>::Bucket *
+ConcurrentHashTable<CONFIG, F>::
+get_bucket(uintx hash) const {
+    InternalTable *table = get_table();
+    Bucket *bucket = get_bucket_in(table, hash);
+    if (bucket->have_redirect()) {
+        table = get_new_table();
+        bucket = get_bucket_in(table, hash);
+    }
+    return bucket;
+}
+```
+
+## RCU 读临界区
+
+```cpp
+// --- src/hotspot/share/utilities/concurrentHashTable.hpp --- //
+
+// Scoped critical section, which also handles the invisible epochs.
+// An invisible epoch/version do not need a write_synchronize().
+class ScopedCS : public StackObj {
+protected:
+    // 读线程
+    Thread *_thread;
+    // 要读取的哈希表
+    ConcurrentHashTable<CONFIG, F> *_cht;
+    // 用于传给 critical_section_end 函数
+    GlobalCounter::CSContext _cs_context;
+public:
+    // 进入RCU读临界区
+    ScopedCS(Thread *thread, ConcurrentHashTable<CONFIG, F> *cht);
+
+    // 退出RCU读临界区
+    ~ScopedCS();
+};
+
+// --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
+
+// 进入RCU读临界区
+template<typename CONFIG, MEMFLAGS F>
+inline ConcurrentHashTable<CONFIG, F>::
+ScopedCS::ScopedCS(Thread *thread, ConcurrentHashTable<CONFIG, F> *cht)
+        : _thread(thread),
+          _cht(cht),
+          _cs_context(GlobalCounter::critical_section_begin(_thread)) {
+    // This version is published now.
+    if (Atomic::load_acquire(&_cht->_invisible_epoch) != nullptr) {
+        Atomic::release_store_fence(&_cht->_invisible_epoch, (Thread *) nullptr);
+    }
+}
+
+// 退出RCU读临界区
+template<typename CONFIG, MEMFLAGS F>
+inline ConcurrentHashTable<CONFIG, F>::
+ScopedCS::~ScopedCS() {
+    GlobalCounter::critical_section_end(_thread, _cs_context);
+}
 ```
 
 ## 获取元素
@@ -53,23 +154,26 @@ private:
 ```cpp
 // --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
 
-// Get methods return true on found item with LOOKUP_FUNC and FOUND_FUNC is
-// called.
+// get 函数会使用 LOOKUP_FUNC 函数来查找指定元素
+// 如果找到了元素则返回true, 并把找到的元素作为参数调用 FOUND_FUNC 函数
 template<typename CONFIG, MEMFLAGS F>
 template<typename LOOKUP_FUNC, typename FOUND_FUNC>
 inline bool ConcurrentHashTable<CONFIG, F>::
 get(Thread *thread, LOOKUP_FUNC &lookup_f, FOUND_FUNC &found_f, bool *grow_hint) {
     bool ret = false;
+    // 进入RCU读临界区
     ScopedCS cs(thread, this);
+    // 查找元素
     VALUE *val = internal_get(thread, lookup_f, grow_hint);
     if (val != nullptr) {
+        // 找到了, 调用 FOUND_FUNC
         found_f(val);
         ret = true;
     }
     return ret;
+    // 退出RCU读临界区
 }
 
-// Always called within critical section
 template<typename CONFIG, MEMFLAGS F>
 template<typename LOOKUP_FUNC>
 inline typename CONFIG::Value *ConcurrentHashTable<CONFIG, F>::
@@ -78,12 +182,18 @@ internal_get(Thread *thread, LOOKUP_FUNC &lookup_f, bool *grow_hint) {
     size_t loops = 0;
     VALUE *ret = nullptr;
 
+    // 根据 lookup_f.get_hash() 返回的哈希值, 从Bucket数组中获取指定的Bucket
     const Bucket *bucket = get_bucket(lookup_f.get_hash());
+    // 根据 lookup_f.equals(), 找到匹配的Node
     Node *node = get_node(bucket, lookup_f, &clean, &loops);
     if (node != nullptr) {
+        // 找到了
         ret = node->value();
     }
     if (grow_hint != nullptr) {
+        // loops: 在Node链表中查找Node时遍历过的节点数
+        // _grow_hint: 扩容的阈值
+        // loops > _grow_hint 时需要扩容(增大Bucket数组的长度以减少Node链表的长度)
         *grow_hint = loops > _grow_hint;
     }
 
