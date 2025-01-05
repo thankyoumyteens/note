@@ -7,7 +7,7 @@ function App() {
   // 创建一个ref对象, 用于绑定到input标签上
   const inputRef = useRef(null);
   // 通过inputRef.current获取input标签的DOM对象
-  // 然后调用input标签的focus方法，使input标签获取焦点
+  // 然后调用input标签的focus方法, 使input标签获取焦点
   const focusInput = () => inputRef.current.focus();
   return (
     <div>

@@ -16,7 +16,7 @@ plt.plot(x, y, linestyle='dashdot')
 
 ## 设置线条宽度
 
-linewidth(或 lw) 用于指定线条的宽度，是一个浮点数。
+linewidth(或 lw) 用于指定线条的宽度, 是一个浮点数。
 
 ```py
 plt.plot(x, y, linewidth=10.0)

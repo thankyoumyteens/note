@@ -9,7 +9,7 @@ let a: MyString = "Hello";
 ## 联合类型
 
 ```ts
-// MyType 既可以是 string 类型，也可以是 number 类型
+// MyType 既可以是 string 类型, 也可以是 number 类型
 type MyType = string | number;
 
 let a: MyType = "Hello";

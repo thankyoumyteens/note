@@ -12,7 +12,7 @@ fmt.Println(re.MatchString("name:zhangsan,age:17"))
 
 ## FindString
 
-FindString 用来返回第一个匹配的结果。如果没有匹配的字符串，那么它回返回一个空的字符串
+FindString 用来返回第一个匹配的结果。如果没有匹配的字符串, 那么它回返回一个空的字符串
 
 ```go
 re := regexp.MustCompile(`age:(\d{2})`)

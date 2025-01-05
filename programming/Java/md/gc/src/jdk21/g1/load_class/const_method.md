@@ -1,6 +1,6 @@
 # ConstMethod
 
-ConstMethod 用来存放或定位方法中的只读数据，如字节码、方法引用、方法名、方法签名和异常表等。
+ConstMethod 用来存放或定位方法中的只读数据, 如字节码、方法引用、方法名、方法签名和异常表等。
 
 // An ConstMethod represents portions of a Java method which are not written to after
 // the classfile is parsed(\*see below). This part of the method can be shared across

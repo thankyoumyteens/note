@@ -1,6 +1,6 @@
 # Ribbon
 
-Ribbon 使用起来更加方便, 它的 url 格式: `http://服务名/接口`, 它能够在进行调用的时候，自动选取服务实例，并将服务名替换成实际要请求的 IP 地址和端口，从而完成服务接口的调用。省略了 LoadBalancerClient 选取服务实例和拼接 URL 的步骤，直接通过 RestTemplate 发起请求。
+Ribbon 使用起来更加方便, 它的 url 格式: `http://服务名/接口`, 它能够在进行调用的时候, 自动选取服务实例, 并将服务名替换成实际要请求的 IP 地址和端口, 从而完成服务接口的调用。省略了 LoadBalancerClient 选取服务实例和拼接 URL 的步骤, 直接通过 RestTemplate 发起请求。
 
 Ribbon 已经停止更新, 最新版本是 2.2.10.RELEASE。
 

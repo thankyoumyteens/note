@@ -14,7 +14,7 @@ class Method : public Metadata {
  private:
   // If you add a new field that points to any metaspace object, you
   // must add this field to Method::metaspace_pointers_do().
-  // 用来存放或定位方法中的只读数据，如字节码、方法引用、方法名、方法签名和异常表等
+  // 用来存放或定位方法中的只读数据, 如字节码、方法引用、方法名、方法签名和异常表等
   ConstMethod*      _constMethod;
   MethodData*       _method_data;
   MethodCounters*   _method_counters;

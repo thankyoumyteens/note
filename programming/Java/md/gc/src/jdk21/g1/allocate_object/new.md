@@ -56,7 +56,7 @@ void BytecodeInterpreter::run(interpreterState istate) {
                             //   - 如果TLAB在创建时已经把自己的内存格式化成0, 这步就可以跳过
                             //   - 在debug模式下, 这块内存空间会被ThreadLocalAllocBuffer::allocate修改,
                             //     所以不管TLAB有没有格式化, 都要重新填充一遍
-                            // 这步操作保证了对象的实例字段在Java代码中可以不赋初始值就直接使用，
+                            // 这步操作保证了对象的实例字段在Java代码中可以不赋初始值就直接使用, 
                             // 程序能访问到这些字段的数据类型所对应的零值
                             if (DEBUG_ONLY(true || ) !ZeroTLAB) {
                                 size_t hdr_size = oopDesc::header_size();

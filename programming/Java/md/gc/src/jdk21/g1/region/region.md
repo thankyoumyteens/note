@@ -65,4 +65,4 @@ public:
 };
 ```
 
-region 使用 bottom、end 和 top 三个指针来描述这段空间，bottom 表示这段空间的开始地址, end 表示这段空间的末尾地址，而 top 则是一个游标，随着空间的分配和释放而移动位置。
+region 使用 bottom、end 和 top 三个指针来描述这段空间, bottom 表示这段空间的开始地址, end 表示这段空间的末尾地址, 而 top 则是一个游标, 随着空间的分配和释放而移动位置。

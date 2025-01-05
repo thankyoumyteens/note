@@ -25,7 +25,7 @@ spring:
         - id: myRoute1
           uri: https://example.org
           filters:
-            # 将/service1/(?.*)重写为{segment}，然后转发到https://example.org
+            # 将/service1/(?.*)重写为{segment}, 然后转发到https://example.org
             # 比如请求localhost:8080/service1/page1, 会转发到https://example.org/page1
             - RewritePath=/service1/(?<segment>.*), /$\{segment}
           predicates:
@@ -114,7 +114,7 @@ public class CheckAuthGatewayFilterFactory extends AbstractGatewayFilterFactory<
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
-            System.out.println("进入自定义过滤器，value：" + config.getValue());
+            System.out.println("进入自定义过滤器, value：" + config.getValue());
             return chain.filter(exchange);
         };
     }
@@ -166,7 +166,7 @@ spring:
 
 ## 自定义全局过滤器
 
-全局过滤器不必在路由上配置，注入到 IOC 容器中即可全局生效
+全局过滤器不必在路由上配置, 注入到 IOC 容器中即可全局生效
 
 ```java
 @Component

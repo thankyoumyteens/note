@@ -164,7 +164,7 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
                                    _need_verify,
                                    CHECK);
 
-  // 读取接口信息，接口类型包括本地接口(local interfaces)和父类传递接口(transitive interfaces)
+  // 读取接口信息, 接口类型包括本地接口(local interfaces)和父类传递接口(transitive interfaces)
   _itfs_len = stream->get_u2_fast();
   parse_interfaces(stream,
                    _itfs_len,
@@ -174,7 +174,7 @@ void ClassFileParser::parse_stream(const ClassFileStream* const stream,
 
   assert(_local_interfaces != nullptr, "invariant");
 
-  // 读取字段信息，并计算出字段大小和偏移量(0op-map)信息，
+  // 读取字段信息, 并计算出字段大小和偏移量(0op-map)信息, 
   // 并根据字段分配策略(-XX：FieldsAllocationStyle)对字段存储顺序进行分配
   // 这些信息都将在后续步骤填入 instanceKlass对象中成为类信息的一部分
   _fac = new FieldAllocationCount();

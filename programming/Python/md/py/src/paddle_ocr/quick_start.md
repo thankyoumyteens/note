@@ -18,7 +18,7 @@ from paddleocr import PaddleOCR
 # whl包会自动下载ppocr轻量级模型作为默认模型
 ocr = PaddleOCR(use_angle_cls=True, lang="ch")
 img_path = './demo.png'
-# 结果是一个list，每个item包含了文本框，文字和识别置信度
+# 结果是一个list, 每个item包含了文本框, 文字和识别置信度
 result = ocr.ocr(img_path, cls=True)
 for idx in range(len(result)):
     res = result[idx]

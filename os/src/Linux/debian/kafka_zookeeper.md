@@ -17,7 +17,7 @@ mv kafka_2.13-3.9.0 kafka
 ```sh
 sudo mkdir /kafka
 sudo chmod -R 777 /kafka
-# 创建三个文件夹，代表三个服务器
+# 创建三个文件夹, 代表三个服务器
 mkdir -p /kafka/server1 /kafka/server2 /kafka/server3
 # 日志目录
 mkdir -p /kafka/log1 /kafka/log2 /kafka/log3
@@ -31,7 +31,7 @@ vim kafka/config/server.properties
 # 集群中每个节点的brokerId必须唯一
 broker.id=1
 port=9092
-# 服务器内部网络接口的地址，用来集群内部通信
+# 服务器内部网络接口的地址, 用来集群内部通信
 listeners=PLAINTEXT://localhost:9092
 # 可以被外部客户端访问的地址
 # 云服务器需要开放9092端口

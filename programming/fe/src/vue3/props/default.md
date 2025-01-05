@@ -6,7 +6,7 @@
 let { dataList = [], otherProp = "" } = defineProps<Props>();
 ```
 
-在 3.4 及更低版本，使用 withDefaults
+在 3.4 及更低版本, 使用 withDefaults
 
 ```ts
 import { withDefaults } from "vue";

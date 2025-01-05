@@ -14,13 +14,13 @@ public ThreadPoolExecutor(int corePoolSize,
                           RejectedExecutionHandler handler);
 ```
 
-- 核心线程数(corePoolSize)：线程池中始终保持的线程数量，即使它们处于空闲状态, 即最小的线程数量
+- 核心线程数(corePoolSize)：线程池中始终保持的线程数量, 即使它们处于空闲状态, 即最小的线程数量
 - 最大线程数(maximumPoolSize)：线程池中允许的最大线程数量
 - 保持活动时间(keepAliveTime)：允许非核心线程(临时线程)空闲多久, 超过这个时间还是空闲就会被销毁
 - 时间单位(unit)：保持活动时间的时间单位
 - 工作队列(workQueue)：当没有空闲的核心线程时, 用于存放新来的待执行任务的阻塞队列
 - 线程工厂(threadFactory)：用于定制线程对象的创建(实现 ThreadFactory 接口, 并重写 newThread 方法)
-- 拒绝策略(handler)：当任务太多，无法被线程池及时处理时，采取的策略
+- 拒绝策略(handler)：当任务太多, 无法被线程池及时处理时, 采取的策略
 
 ```java
 import java.util.concurrent.LinkedBlockingQueue;
@@ -97,9 +97,9 @@ public class MyHandler implements RejectedExecutionHandler {
         BlockingQueue<Runnable> queue = executor.getQueue();
         try {
             // 尝试将被拒绝的任务重新放入队列
-            // 如果队列已满，则会等待100秒
-            // 如果100秒内队列有空闲，则将任务放入队列并返回true
-            // 如果100秒后队列仍然是满的，则返回false
+            // 如果队列已满, 则会等待100秒
+            // 如果100秒内队列有空闲, 则将任务放入队列并返回true
+            // 如果100秒后队列仍然是满的, 则返回false
             boolean success = queue.offer(r, 100, TimeUnit.SECONDS);
             if (!success) {
                 throw new RuntimeException("队列已满");

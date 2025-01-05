@@ -29,6 +29,6 @@ import { storeToRefs } from "pinia";
 const userStore = useUserStore();
 const { getName } = storeToRefs(userStore);
 
-// getName是computed属性，可以直接获取值
+// getName是computed属性, 可以直接获取值
 console.log(getName.value);
 ```

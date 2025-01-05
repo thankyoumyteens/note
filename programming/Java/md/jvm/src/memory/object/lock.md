@@ -201,7 +201,7 @@ Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
 
 ## Lock Record
 
-Lock Record 用于偏向锁优化和轻量级锁优化。它保存 mark word 的原始值，还包含识别锁对象所必需的元数据。
+Lock Record 用于偏向锁优化和轻量级锁优化。它保存 mark word 的原始值, 还包含识别锁对象所必需的元数据。
 
 jvm 中对应的代码:
 
@@ -219,4 +219,4 @@ class BasicLock {
 };
 ```
 
-当字节码解释器执行 monitorenter 字节码轻量地锁住一个对象时，就会在获取锁的线程的栈上显式或隐式分配一个 lock record。同一个线程重入同一个锁的话, 会创建多个 lock record(只有最早的一个 lock record 会记录 mark word 的原始值, 但它们的 `_obj` 都会指向这个对象)。
+当字节码解释器执行 monitorenter 字节码轻量地锁住一个对象时, 就会在获取锁的线程的栈上显式或隐式分配一个 lock record。同一个线程重入同一个锁的话, 会创建多个 lock record(只有最早的一个 lock record 会记录 mark word 的原始值, 但它们的 `_obj` 都会指向这个对象)。

@@ -67,7 +67,7 @@ void ClassFileParser::post_process_parsed_stream(const ClassFileStream* const st
 
   Handle loader(THREAD, _loader_data->class_loader());
 
-  // 通过klassVtable、klassltable 模块提供的算法，
+  // 通过klassVtable、klassltable 模块提供的算法, 
   // 根据已解析的父类、方法、接口等信息计算得到Java vtable 和itable 大小
   klassVtable::compute_vtable_size_and_num_mirandas(&_vtable_size,
                                                     &_num_miranda_methods,

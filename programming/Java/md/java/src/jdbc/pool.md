@@ -19,8 +19,8 @@ public class App {
         config.setUsername(username);
         config.setPassword(password);
         // 缓存PreparedStatement对象
-        // 设置为 true 时，数据库连接池会将常用的预编译语句缓存起来，
-        // 以便于下次执行相同的 SQL 语句时可以复用，从而减少预编译的时间开销，提高效率
+        // 设置为 true 时, 数据库连接池会将常用的预编译语句缓存起来, 
+        // 以便于下次执行相同的 SQL 语句时可以复用, 从而减少预编译的时间开销, 提高效率
         config.addDataSourceProperty("cachePrepStmts", "true");
         // 预编译语句缓存的最大数量为 250
         config.addDataSourceProperty("prepStmtCacheSize", "250");

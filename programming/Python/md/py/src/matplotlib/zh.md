@@ -30,9 +30,9 @@ plt.show()
 python -c "import matplotlib; print(matplotlib.matplotlib_fname())"
 ```
 
-### 2. 编辑 `matplotlibrc` 文件，添加或修改以下行：
+### 2. 编辑 `matplotlibrc` 文件, 添加或修改以下行：
 
-确保你的系统安装了这些字体。如果没有安装，可以从网上下载并安装合适的中文字体
+确保你的系统安装了这些字体。如果没有安装, 可以从网上下载并安装合适的中文字体
 
 ```
 font.family: sans-serif

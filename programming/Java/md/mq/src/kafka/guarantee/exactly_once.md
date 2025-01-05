@@ -38,13 +38,13 @@ public class ExactlyOnceProducer {
                 ProducerRecord<String, String> record = new ProducerRecord<>("your-topic-name", "key", "value");
                 RecordMetadata metadata = producer.send(record).get(); // 阻塞等待发送完成
 
-                // 如果需要发送更多消息，可以继续添加到当前事务中
+                // 如果需要发送更多消息, 可以继续添加到当前事务中
 
                 // 提交事务
                 producer.commitTransaction();
                 System.out.println("Transaction committed successfully.");
             } catch (ExecutionException | InterruptedException e) {
-                // 如果发生异常，回滚事务
+                // 如果发生异常, 回滚事务
                 producer.abortTransaction();
                 System.err.println("Transaction aborted due to exception: " + e.getMessage());
             }
@@ -77,7 +77,7 @@ public class ExactlyOnceConsumer {
         // 禁用自动提交偏移量
         props.put("enable.auto.commit", "false");
 
-        // 设置隔离级别为读已提交，以确保消费者只会看到成功提交的事务中的消息
+        // 设置隔离级别为读已提交, 以确保消费者只会看到成功提交的事务中的消息
         props.put("isolation.level", "read_committed");
 
         // 创建Kafka消费者实例
@@ -95,7 +95,7 @@ public class ExactlyOnceConsumer {
                     // 在这里添加你的业务逻辑以处理消息
                 }
 
-                // 批量处理完所有消息后，同步提交偏移量
+                // 批量处理完所有消息后, 同步提交偏移量
                 consumer.commitSync(); // 同步提交确保所有之前的消息都已经被处理
             }
         }

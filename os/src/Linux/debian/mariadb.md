@@ -18,7 +18,7 @@ sudo systemctl status mariadb
 ```sh
 sudo mysql_secure_installation
 
-# 因为之前没有设置密码，所以直接回车
+# 因为之前没有设置密码, 所以直接回车
 Enter current password for root (enter for none):
 # 不使用
 Switch to unix_socket authentication [Y/n] n

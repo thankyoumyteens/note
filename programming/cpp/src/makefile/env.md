@@ -18,7 +18,7 @@ brew install gcc
 
 ```sh
 # gnu make在linux下一般是叫make
-# 但是如果是在其他的unix系统下，因为有一个原生的make
+# 但是如果是在其他的unix系统下, 因为有一个原生的make
 # gnu make就改个名字叫gmake了
 gmake --version
 ```

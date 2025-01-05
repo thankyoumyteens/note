@@ -73,6 +73,6 @@ public class ApiGatewayDemo {
 }
 ```
 
-Spring Cloud Zuul 在整合了 Eureka 之后，具备默认的服务路由功能，Zuul 网关会自动发现 Eureka 中注册的服务, 比如 eureka-client-demo，这时候 Zuul 会创建对应的路由规则。
+Spring Cloud Zuul 在整合了 Eureka 之后, 具备默认的服务路由功能, Zuul 网关会自动发现 Eureka 中注册的服务, 比如 eureka-client-demo, 这时候 Zuul 会创建对应的路由规则。
 
-比如 Zuul 创建的转发到 eureka-client-demo 服务的路由规则为：`/eureka-client-demo/**`。比如访问 http://localhost:27440/eureka-client-demo/service/list，该请求将最终被路由到 eureka-client-demo 的 /service/list 接口上。
+比如 Zuul 创建的转发到 eureka-client-demo 服务的路由规则为：`/eureka-client-demo/**`。比如访问 http://localhost:27440/eureka-client-demo/service/list, 该请求将最终被路由到 eureka-client-demo 的 /service/list 接口上。

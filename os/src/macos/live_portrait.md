@@ -41,6 +41,6 @@ pip install https://gradio-pypi-previews.s3.amazonaws.com/c5d763c3305fc143ace9ca
 pip install "gradio-client @ git+https://github.com/gradio-app/gradio@c5d763c3305fc143ace9ca6f8bdc32f12cef74d1#subdirectory=client/python"
 npm install https://gradio-npm-previews.s3.amazonaws.com/c5d763c3305fc143ace9ca6f8bdc32f12cef74d1/gradio-client-1.5.1.tgz
 
-# 对于搭载Apple Silicon的macOS用户，不支持Intel，这可能比RTX 4090慢20倍
+# 对于搭载Apple Silicon的macOS用户, 不支持Intel, 这可能比RTX 4090慢20倍
 PYTORCH_ENABLE_MPS_FALLBACK=1 python app.py # 人类模型模式
 ```

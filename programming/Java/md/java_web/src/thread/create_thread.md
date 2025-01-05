@@ -55,7 +55,7 @@ public static void main(String[] args) {
     FutureTask<String> futureTask = new FutureTask<>(callable);
     new Thread(futureTask).start();
     try {
-        // get() 方法会等待线程执行完成，并获取返回值
+        // get() 方法会等待线程执行完成, 并获取返回值
         System.out.println(futureTask.get());
     } catch (Exception e) {
         e.printStackTrace();

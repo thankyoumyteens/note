@@ -42,7 +42,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-// 配置mapper扫描路径，指定mariadb01的SqlSessionFactory
+// 配置mapper扫描路径, 指定mariadb01的SqlSessionFactory
 @MapperScan(basePackages = "com.example.mapper.mariadb01", sqlSessionFactoryRef = "mariadb01SqlSessionFactory")
 public class Mariadb01Config {
 
@@ -104,7 +104,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-// 配置mapper扫描路径，指定sqlite02的SqlSessionFactory
+// 配置mapper扫描路径, 指定sqlite02的SqlSessionFactory
 @MapperScan(basePackages = "com.example.mapper.sqlite02", sqlSessionFactoryRef = "sqlite02SqlSessionFactory")
 public class Sqlite02Config {
 

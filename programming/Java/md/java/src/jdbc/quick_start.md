@@ -26,13 +26,13 @@ public class App {
         // 连接oracle的话要加上, 否则打包后会找不到驱动
         // Class.forName("oracle.jdbc.driver.OracleDriver");
 
-        // DriverManager会扫描classpath，找到所有的JDBC驱动，然后根据传入的URL挑选一个合适的驱动
+        // DriverManager会扫描classpath, 找到所有的JDBC驱动, 然后根据传入的URL挑选一个合适的驱动
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String query = "select * from student_info where student_name = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 // 设置参数
                 statement.setString(1, "tom");
-                // 执行查询语句，返回结果集
+                // 执行查询语句, 返回结果集
                 try (ResultSet resultSet = statement.executeQuery()) {
                     // 遍历结果集
                     while (resultSet.next()) {

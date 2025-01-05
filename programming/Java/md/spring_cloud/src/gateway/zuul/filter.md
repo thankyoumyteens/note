@@ -1,6 +1,6 @@
 # 过滤器
 
-定义一个简单的 Zuul 过滤器，它实现了在请求被路由之前检查 HttpServletRequest 中是否有 Authorization，若有就进行路由，若没有就拒绝访问，返回 401 Unauthorized 错误。
+定义一个简单的 Zuul 过滤器, 它实现了在请求被路由之前检查 HttpServletRequest 中是否有 Authorization, 若有就进行路由, 若没有就拒绝访问, 返回 401 Unauthorized 错误。
 
 1. 添加过滤器
 
@@ -67,4 +67,4 @@ public class FilterConfig {
 }
 ```
 
-3. 服务启动后, 访问 http://localhost:27440/service1/service/list，请求头不加 Authorization 的话, 会返回 Authorization is empty
+3. 服务启动后, 访问 http://localhost:27440/service1/service/list, 请求头不加 Authorization 的话, 会返回 Authorization is empty

@@ -1,6 +1,6 @@
 # 与主进程通信
 
-在 Electron 中，进程使用 ipcMain 和 ipcRenderer 模块，通过开发人员定义的“通道”传递消息来进行通信。双向 IPC 的一个常见应用是从渲染器进程代码调用主进程模块并等待结果。 这可以通过将 ipcRenderer.invoke 与 ipcMain.handle 搭配使用来完成。
+在 Electron 中, 进程使用 ipcMain 和 ipcRenderer 模块, 通过开发人员定义的“通道”传递消息来进行通信。双向 IPC 的一个常见应用是从渲染器进程代码调用主进程模块并等待结果。 这可以通过将 ipcRenderer.invoke 与 ipcMain.handle 搭配使用来完成。
 
 ### 1. 在预处理脚本中绑定事件并暴露出去
 

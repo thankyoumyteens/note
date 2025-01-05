@@ -14,7 +14,7 @@ const router = createRouter({
     },
     {
       path: "/",
-      // 当访问根路径时，重定向到 /home
+      // 当访问根路径时, 重定向到 /home
       redirect: "/home",
     },
   ],

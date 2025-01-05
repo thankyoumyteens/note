@@ -69,7 +69,7 @@ plt.show()
 <!--
 \begin{align}
 & 设二元函数 z = f(x, y) 在点 M_0(x_0, y_0) 的去心邻域内有定义, \\
-& \;\, A 为常数，若对任意的 \varepsilon > 0, 总存在 \delta > 0, \\
+& \;\, A 为常数, 若对任意的 \varepsilon > 0, 总存在 \delta > 0, \\
 & 当 0 < \sqrt{(x - x_0)^2 + (y - y_0)^2} < \delta 时, \\
 & 有 | f(x, y) - A | < \varepsilon 成立, \\
 & 则称函数 z = f(x, y) 当 (x, y) \to (x_0, y_0) 时以 A 为极限, \\
@@ -137,12 +137,12 @@ plt.show()
 \Delta z_y = f(x_0, y) - f(x_0, y_0) 为函数在点 M_0 处关于 y 的偏增量 \\
 \\
 & 若 \lim_{\Delta x \to 0} \frac{\Delta z_x}{\Delta x} 或者
-\lim_{ x \to x_0} \frac{f(x, y_0) - f(x_0, y_0)}{x - x_0} 存在，则称函数在点 M_0 处关于 x 可偏导, \\
+\lim_{ x \to x_0} \frac{f(x, y_0) - f(x_0, y_0)}{x - x_0} 存在, 则称函数在点 M_0 处关于 x 可偏导, \\
 & 称此极限为函数在点 M_0 处关于 x 的偏导数, 记为 f_x(x_0, y_0) 或者
 \frac{\partial z}{\partial x} \big|_{(x_0, y_0)} \\
 \\
 & 若 \lim_{\Delta y \to 0} \frac{\Delta z_y}{\Delta y} 或者
-\lim_{ x \to x_0} \frac{f(x_0, y) - f(x_0, y_0)}{y - y_0} 存在，则称函数在点 M_0 处关于 y 可偏导, \\
+\lim_{ x \to x_0} \frac{f(x_0, y) - f(x_0, y_0)}{y - y_0} 存在, 则称函数在点 M_0 处关于 y 可偏导, \\
 & 称此极限为函数在点 M_0 处关于 y 的偏导数, 记为 f_y(x_0, y_0) 或者
 \frac{\partial z}{\partial y} \big|_{(x_0, y_0)} \\
 \\
@@ -182,10 +182,10 @@ plt.show()
 & 使得 D \subset \left \{ (x, y) | x^2 + y^2 \le R^2 \right \}, \\
 & 则称 D 为有界闭区域 \\
 \\
-& 性质1. 若二元函数 f(x, y) 在有界闭区域 D 上连续，则 f(x, y) 在有界闭区域 D 上取到最小值 m 和最大值 M \\
-& 性质2. 若二元函数 f(x, y) 在有界闭区域 D 上连续，则 f(x, y) 在有界闭区域 D 上有界, \\
+& 性质1. 若二元函数 f(x, y) 在有界闭区域 D 上连续, 则 f(x, y) 在有界闭区域 D 上取到最小值 m 和最大值 M \\
+& 性质2. 若二元函数 f(x, y) 在有界闭区域 D 上连续, 则 f(x, y) 在有界闭区域 D 上有界, \\
 & \quad \quad \quad 即存在 M_0 > 0, 对一切的 (x, y) \in D, 使得 |f(x, y)| \le M_0 \\
-& 性质3. 介值定理: 若二元函数 f(x, y) 在有界闭区域 D 上连续，m 和 M 为 f(x, y) 在 D 上的最小值和最大值, \\
+& 性质3. 介值定理: 若二元函数 f(x, y) 在有界闭区域 D 上连续, m 和 M 为 f(x, y) 在 D 上的最小值和最大值, \\
 & \quad \quad \quad 对任意的 \delta \in [m, M], 一定存在 (\xi, \eta) \in D, 使得 f(\xi, \eta) = \delta \\
 \end{align}
 -->
@@ -196,7 +196,7 @@ plt.show()
 
 <!--
 \begin{align}
-& 设二元函数 z = f(x, y)的两个二阶混合偏导数连续，\\
+& 设二元函数 z = f(x, y)的两个二阶混合偏导数连续, \\
 & 则 \frac{\partial ^2z}{\partial x \partial y} = \frac{\partial ^2z}{\partial y \partial x} \\
 \end{align}
 -->

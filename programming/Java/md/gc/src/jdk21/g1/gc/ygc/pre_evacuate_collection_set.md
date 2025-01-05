@@ -1,6 +1,6 @@
 # 预备疏散回收集阶段
 
-预备疏散回收集阶段(Pre Evacuate Collection Set)执行一些垃圾回收的准备工作: 断开 mutator 线程与 TLAB 的连接，选择本次垃圾回收的回收集，以及其他一些小的准备工作。
+预备疏散回收集阶段(Pre Evacuate Collection Set)执行一些垃圾回收的准备工作: 断开 mutator 线程与 TLAB 的连接, 选择本次垃圾回收的回收集, 以及其他一些小的准备工作。
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1YoungCollector.cpp --- //
@@ -300,18 +300,18 @@ HeapRegionManager::par_iterate(HeapRegionClosure *blk, HeapRegionClaimer *hrclai
         // 要认领的分区索引
         const uint index = (start_index + count) % n_regions;
         assert(index < n_regions, "sanity");
-        // 如果分区不是active状态，则跳过
+        // 如果分区不是active状态, 则跳过
         if (!is_available(index)) {
             continue;
         }
         HeapRegion *r = _regions.get_by_index(index);
-        // 如果这个分区被其它worker线程认领了，则跳过
+        // 如果这个分区被其它worker线程认领了, 则跳过
         if (hrclaimer->is_region_claimed(index)) {
             continue;
         }
         // 尝试认领这个分区(CAS操作)
         if (!hrclaimer->claim_region(index)) {
-            // 如果认领失败，则跳过
+            // 如果认领失败, 则跳过
             continue;
         }
         // 认领成功
@@ -405,7 +405,7 @@ class G1PrepareEvacuationTask : public WorkerTask {
             }
             // 判断是否要提前回收(Eager Reclaim)这个大对象
             // is_typeArray()判断对象是不是原始类型的数组
-            // 对于原始类型的大数组，只要这些大数组不再被其他对象引用, G1在任何GC停顿(包括Young GC)都会尝试进行回收
+            // 对于原始类型的大数组, 只要这些大数组不再被其他对象引用, G1在任何GC停顿(包括Young GC)都会尝试进行回收
             return obj->is_typeArray() &&
                    _g1h->is_potential_eager_reclaim_candidate(region);
         }

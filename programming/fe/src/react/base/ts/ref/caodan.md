@@ -6,7 +6,7 @@ import { useRef, forwardRef } from "react";
 interface PropsType {}
 
 // 子组件
-// forwardRef泛型的第一个参数是ref的类型，第二个参数是组件的props类型
+// forwardRef泛型的第一个参数是ref的类型, 第二个参数是组件的props类型
 const ChildComponent = forwardRef<HTMLInputElement, PropsType>(
   (props, refFromParent) => {
     return (

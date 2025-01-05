@@ -13,7 +13,7 @@ mv apache-zookeeper-3.9.3-bin zk
 ```sh
 sudo mkdir /zk
 sudo chmod -R 777 /zk
-# 创建三个文件夹，代表三个服务器
+# 创建三个文件夹, 代表三个服务器
 mkdir -p /zk/server1 /zk/server2 /zk/server3
 # 数据目录
 mkdir -p /zk/data1 /zk/data2 /zk/data3

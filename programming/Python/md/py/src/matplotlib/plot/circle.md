@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.transforms import Affine2D
 
-# 创建圆形对象: 圆心在(1, 1)，半径为 1
+# 创建圆形对象: 圆心在(1, 1), 半径为 1
 # fill=True 使用颜色填充
 # facecolor 指定填充颜色
 # edgecolor 边框颜色

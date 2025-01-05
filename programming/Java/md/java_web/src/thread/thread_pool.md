@@ -12,13 +12,13 @@ public ThreadPoolExecutor(int corePoolSize,
                           RejectedExecutionHandler handler);
 ```
 
-- 核心线程数(corePoolSize)：线程池中始终保持的线程数量，即使它们处于空闲状态, 即最小的线程数量
+- 核心线程数(corePoolSize)：线程池中始终保持的线程数量, 即使它们处于空闲状态, 即最小的线程数量
 - 最大线程数(maximumPoolSize)：线程池中允许的最大线程数量
 - 保持活动时间(keepAliveTime)：允许非核心线程(临时线程)空闲多久, 超过这个时间还是空闲就会被销毁
 - 时间单位(unit)：保持活动时间的时间单位
 - 工作队列(workQueue)：当没有空闲的核心线程时, 用于存放新来的待执行任务的阻塞队列
 - 线程工厂(threadFactory)：用于定制线程对象的创建
-- 拒绝策略(handler)：当任务太多，无法被线程池及时处理时，采取的策略
+- 拒绝策略(handler)：当任务太多, 无法被线程池及时处理时, 采取的策略
 
 ## 线程池的执行原理
 
@@ -57,7 +57,7 @@ public ThreadPoolExecutor(int corePoolSize,
 
 ## 线程池的种类
 
-考虑到 ThreadPoolExecutor 的构造函数实在是有些复杂，所以 Java 并发包里提供了一个线程池的静态工厂类 Executors，利用 Executors 可以快速创建线程池:
+考虑到 ThreadPoolExecutor 的构造函数实在是有些复杂, 所以 Java 并发包里提供了一个线程池的静态工厂类 Executors, 利用 Executors 可以快速创建线程池:
 
 - Executors.newFixedThreadPool: 它是一种固定线程数量的线程池, 无法扩展。采用 LinkedBlockingQueue, 容量为 `Integer.MAX_VALUE`, 因此永远不可能拒绝任务。适合任务量已知, 且相对耗时的任务
 - Executors.newSingleThreadExecutor: 创建一个单线程的线程池, 适合需要线程顺序执行的任务, 不适合并发
@@ -68,8 +68,8 @@ public ThreadPoolExecutor(int corePoolSize,
 
 Executors 返回的线程池对象的弊端:
 
-1. FixedThreadPool 和 SingleThreadPool 允许的请求队列长度为 `Integer.MAX_VALUE`，可能会堆积大量的请求，从而导致 OOM
-2. CachedThreadPool 和 ScheduledThreadPool 允许的创建线程数量为 `Integer.MAX_VALUE`，可能会创建大量的线程，从而导致 OOM
+1. FixedThreadPool 和 SingleThreadPool 允许的请求队列长度为 `Integer.MAX_VALUE`, 可能会堆积大量的请求, 从而导致 OOM
+2. CachedThreadPool 和 ScheduledThreadPool 允许的创建线程数量为 `Integer.MAX_VALUE`, 可能会创建大量的线程, 从而导致 OOM
 
 ## 多线程的使用场景
 

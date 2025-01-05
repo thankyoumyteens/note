@@ -34,7 +34,7 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>2.2.9.RELEASE</version>
-            <!-- nacos的2.2.x系列，默认引入ribbon, 需要手动去掉 -->
+            <!-- nacos的2.2.x系列, 默认引入ribbon, 需要手动去掉 -->
             <!-- 2021.0.x开始去掉ribbon, 引入loadbalancer -->
             <exclusions>
                 <exclusion>

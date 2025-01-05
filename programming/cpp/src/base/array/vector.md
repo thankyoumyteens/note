@@ -1,6 +1,6 @@
 # std::vector
 
-如果希望数组的大小是动态的，在 vector 中添加新元素时，vector 会自动调整大小。
+如果希望数组的大小是动态的, 在 vector 中添加新元素时, vector 会自动调整大小。
 
 ```cpp
 #include <iostream>

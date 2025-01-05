@@ -10,7 +10,7 @@ ref 可以定义基本类型和对象类型的响应式数据。
   import { ref } from "vue";
 
   // 定义data
-  // ref()函数接收一个基本类型的参数，返回一个响应式对象
+  // ref()函数接收一个基本类型的参数, 返回一个响应式对象
   let msg = ref("Hello Vue 3");
 
   // 定义methods

@@ -1,6 +1,6 @@
 # 链接解析器
 
-在虚拟机中，通过链接解析器(LinkResolver)对方法进行解析和查找，链接解析器能够对不同类型的方法执行解析任务
+在虚拟机中, 通过链接解析器(LinkResolver)对方法进行解析和查找, 链接解析器能够对不同类型的方法执行解析任务
 
 ## 参数
 
@@ -13,7 +13,7 @@ class LinkInfo : public StackObj {
   // 方法签名
   Symbol*     _signature;
   // 待解析方法所在的类
-  // 在执行方法解析的时候，所在类应当是已解析的，故称为resolved_klass
+  // 在执行方法解析的时候, 所在类应当是已解析的, 故称为resolved_klass
   Klass*      _resolved_klass;  // class that the constant pool entry points to
   // 常量池所在的类
   Klass*      _current_klass;   // class that owns the constant pool
@@ -28,11 +28,11 @@ class LinkInfo : public StackObj {
 ## 解析类方法
 
 1. 首先检查 resolved_klass 类型是否正确。如果 resolved_klass 是接口类型, 则抛出 java.lang.IncompatibleClassChangeError
-2. 在 resolved_klass 以及它的超类中査找方法。若未找到，则转向步骤 3。instanceKlass 中封装了这个查找算法，instanceKlass 中的成员 `_methods` 表该类拥有的方法表，它是已排序的，这样在做方法查找时，就可以应用高效的二分查找算法。找到目标方法后把 `Method*` 包装成 methodHandle 句柄
-3. 在 resolved_klass 实现的所有接口中査找，若已找到，则进入步骤 5, 进行一些必要的检查。如果仍然没有找到，则进入步骤 4
+2. 在 resolved_klass 以及它的超类中査找方法。若未找到, 则转向步骤 3。instanceKlass 中封装了这个查找算法, instanceKlass 中的成员 `_methods` 表该类拥有的方法表, 它是已排序的, 这样在做方法查找时, 就可以应用高效的二分查找算法。找到目标方法后把 `Method*` 包装成 methodHandle 句柄
+3. 在 resolved_klass 实现的所有接口中査找, 若已找到, 则进入步骤 5, 进行一些必要的检查。如果仍然没有找到, 则进入步骤 4
 4. 抛出 java.lang.NoSuchMethodError
-5. 检查方法是否是具体的，若该方法所在类是非抽象的但该方法是抽象的，则抛出 java.lang.AbstractMethodError
-6. 接下来是访问权限检查，包括检查调用类是否具有对该方法的访问权限，以及通过调用 SystemDictionary::check_signature_loaders，检查当前类和已解析类的加载器以及该方法的签名等信息，以检验是否违反类加载器约束，若违反约束，则抛出 java.lang.LinkageError
+5. 检查方法是否是具体的, 若该方法所在类是非抽象的但该方法是抽象的, 则抛出 java.lang.AbstractMethodError
+6. 接下来是访问权限检查, 包括检查调用类是否具有对该方法的访问权限, 以及通过调用 SystemDictionary::check_signature_loaders, 检查当前类和已解析类的加载器以及该方法的签名等信息, 以检验是否违反类加载器约束, 若违反约束, 则抛出 java.lang.LinkageError
 
 ```cpp
 // --- src/hotspot/share/interpreter/linkResolver.cpp --- //
@@ -63,8 +63,8 @@ Method* LinkResolver::resolve_method(const LinkInfo& link_info,
   }
 
   // 3. lookup method in resolved klass and its super klasses
-  // 待解析的方法，是一个methodHandle类型引用
-  // 若解析成功，则赋予正确的方法句柄
+  // 待解析的方法, 是一个methodHandle类型引用
+  // 若解析成功, 则赋予正确的方法句柄
   methodHandle resolved_method(THREAD, lookup_method_in_klasses(link_info, true, false));
 
   // 4. lookup method in all the interfaces implemented by the resolved klass
@@ -116,12 +116,12 @@ Method* LinkResolver::resolve_method(const LinkInfo& link_info,
 
 ## 解析接口方法
 
-1. 首先判断该方法是否是接口方法，若不是，则抛出 java.lang.IncompatibleClassChangeError
-2. 接下来，通过 lookup_method_in_klasses 函数在方法表中査找实例方法
-3. 若没找到，则通过 lookup_method_in_interfaces 函数在所有超类接口中查找
-4. 函数 lookup_method_in_all_interfaces 首先在接口表 `_transitive_interfaces` 中找到所有父接口，然后将每个父接口转化成 instanceKlass 并调用 lookup_method 函数寻找，若找到则返回方法句柄
-5. 若仍然没有找到，则抛出 java.lang.NoSuchMethodError
-6. 与解析类方法类似，接下来是访问权限检查，包括检查调用类是否具有对该方法的访问权限，以及通过调用 SystemDictionary::check_signature_loaders，检查当前类和已解析类的加载器以及该方法的签名等信息，以检验是否违反类加载器约束。若违反约束，则抛出 java.lang.LinkageError
+1. 首先判断该方法是否是接口方法, 若不是, 则抛出 java.lang.IncompatibleClassChangeError
+2. 接下来, 通过 lookup_method_in_klasses 函数在方法表中査找实例方法
+3. 若没找到, 则通过 lookup_method_in_interfaces 函数在所有超类接口中查找
+4. 函数 lookup_method_in_all_interfaces 首先在接口表 `_transitive_interfaces` 中找到所有父接口, 然后将每个父接口转化成 instanceKlass 并调用 lookup_method 函数寻找, 若找到则返回方法句柄
+5. 若仍然没有找到, 则抛出 java.lang.NoSuchMethodError
+6. 与解析类方法类似, 接下来是访问权限检查, 包括检查调用类是否具有对该方法的访问权限, 以及通过调用 SystemDictionary::check_signature_loaders, 检查当前类和已解析类的加载器以及该方法的签名等信息, 以检验是否违反类加载器约束。若违反约束, 则抛出 java.lang.LinkageError
 
 ```cpp
 // --- src/hotspot/share/interpreter/linkResolver.cpp --- //

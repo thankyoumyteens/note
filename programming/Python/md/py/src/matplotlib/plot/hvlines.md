@@ -1,6 +1,6 @@
 # 数据点到坐标轴的注释线
 
-hlines 函数用于绘制水平直线，vlines 函数用于绘制垂直直线。
+hlines 函数用于绘制水平直线, vlines 函数用于绘制垂直直线。
 
 ```py
 import matplotlib.pyplot as plt

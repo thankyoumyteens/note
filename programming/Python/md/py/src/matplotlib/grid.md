@@ -6,10 +6,10 @@
 plt.grid(b=None, which='major', axis='both', **kwargs)
 ```
 
-- `b` 布尔值，控制是否显示网格线。默认为 None，即不改变当前状态
+- `b` 布尔值, 控制是否显示网格线。默认为 None, 即不改变当前状态
 - `which` 指定要影响的刻度标签('major'、'minor' 或 'both')
 - `axis` 指定哪个轴上显示网格线('both'、'x' 或 'y')
-- `kwargs` 其他参数，如颜色、线型等，这些参数会被传递给 Line2D 对象来定义网格线的属性
+- `kwargs` 其他参数, 如颜色、线型等, 这些参数会被传递给 Line2D 对象来定义网格线的属性
 
 ```py
 import matplotlib.pyplot as plt

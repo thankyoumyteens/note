@@ -1,6 +1,6 @@
 # 空接口
 
-Go 语言的空接口 `interface{}` 类型很像 C 语言中的 `void*`，该类型的变量可以容纳任何类型的值。
+Go 语言的空接口 `interface{}` 类型很像 C 语言中的 `void*`, 该类型的变量可以容纳任何类型的值。
 
 ```go
 package main

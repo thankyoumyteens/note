@@ -1,6 +1,6 @@
 # Logger
 
-用来设置某一个包或具体的某一个类的日志打印级别和 Appender, root 节点也是 logger 元素，是根 logger。
+用来设置某一个包或具体的某一个类的日志打印级别和 Appender, root 节点也是 logger 元素, 是根 logger。
 
 ```xml
 <configuration>

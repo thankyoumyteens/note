@@ -27,7 +27,7 @@ public static void main(String[] args) {
     });
     Thread t2 = new Thread(() -> {
         try {
-            // join 方法会阻塞当前线程，直到t1线程执行完毕
+            // join 方法会阻塞当前线程, 直到t1线程执行完毕
             t1.join();
         } catch (InterruptedException ignored) {
         }
@@ -35,7 +35,7 @@ public static void main(String[] args) {
     });
     Thread t3 = new Thread(() -> {
         try {
-            // join 方法会阻塞当前线程，直到t2线程执行完毕
+            // join 方法会阻塞当前线程, 直到t2线程执行完毕
             t2.join();
         } catch (InterruptedException ignored) {
         }

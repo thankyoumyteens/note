@@ -1,6 +1,6 @@
 # 通道
 
-通道让数据能够进入和离开 Goroutine，可方便 Goroutine 之间进行通信。​Go 语言使用通道在 Goroutine 之间收发消息，避免了使用共享内存。
+通道让数据能够进入和离开 Goroutine, 可方便 Goroutine 之间进行通信。​Go 语言使用通道在 Goroutine 之间收发消息, 避免了使用共享内存。
 
 创建通道:
 

@@ -1,6 +1,6 @@
 # 断言
 
-Predicate 来自于 java8 的接口。Predicate 接受一个输入参数，返回一个布尔值结果。在 Gateway 中，有一些的内置 Predicate Factory，在运行时，Gateway 会自动根据需要创建对应的 Pridicate 对象。
+Predicate 来自于 java8 的接口。Predicate 接受一个输入参数, 返回一个布尔值结果。在 Gateway 中, 有一些的内置 Predicate Factory, 在运行时, Gateway 会自动根据需要创建对应的 Pridicate 对象。
 
 ## Path
 
@@ -52,7 +52,7 @@ spring:
 
 ## Cookie
 
-cookie 存在指定名称，并且对应的值符合指定正则表达式，则匹配成功
+cookie 存在指定名称, 并且对应的值符合指定正则表达式, 则匹配成功
 
 ```yaml
 spring:
@@ -69,7 +69,7 @@ spring:
 
 ## Header
 
-请求头中存在指定名称，并且对应的值符合指定正则表达式，则匹配成功
+请求头中存在指定名称, 并且对应的值符合指定正则表达式, 则匹配成功
 
 ```yaml
 spring:

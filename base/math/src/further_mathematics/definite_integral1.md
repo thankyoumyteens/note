@@ -5,7 +5,7 @@
 <!--
 \begin{align}
 & 不定积分 \int f(x) \mathrm{d}x \ne \int f(t) \mathrm{d}t \ne \int f(u) \mathrm{d}u \\
-& 而定积分由积分的上下限和函数关系决定，与积分变量无关，\\
+& 而定积分由积分的上下限和函数关系决定, 与积分变量无关, \\
 & 即 \int_{a}^{b} f(x) \mathrm{d}x = \int_{a}^{b} f(t) \mathrm{d}t = \int_{a}^{b} f(u) \mathrm{d}u \\
 \\
 & 定积分 \int_{a}^{x} f(x) \mathrm{d}x 在表达式中的 x 和积分上限 x 不同, \\

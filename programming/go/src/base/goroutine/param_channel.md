@@ -1,6 +1,6 @@
 # 通道作为函数参数
 
-<- 位于关键字 chan 左边时，表示通道在函数内是只读的
+<- 位于关键字 chan 左边时, 表示通道在函数内是只读的
 
 ```go
 func wait(c <-chan string) {
@@ -9,7 +9,7 @@ func wait(c <-chan string) {
 }
 ```
 
-<- 位于关键字 chan 右边时，表示通道在函数内是只写的
+<- 位于关键字 chan 右边时, 表示通道在函数内是只写的
 
 ```go
 func wait(c chan<- string) {
@@ -18,7 +18,7 @@ func wait(c chan<- string) {
 }
 ```
 
-没有指定 <- 时，表示通道是可读写的
+没有指定 <- 时, 表示通道是可读写的
 
 ```go
 func wait(c chan string) {

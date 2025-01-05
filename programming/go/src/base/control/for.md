@@ -18,7 +18,7 @@ func main() {
 
 ## range 子句
 
-可使用包含 range 子句的 for 语句来遍历大多数数据结构，且无须知道数据结构的长度。
+可使用包含 range 子句的 for 语句来遍历大多数数据结构, 且无须知道数据结构的长度。
 
 ```go
 package main

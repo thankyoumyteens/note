@@ -10,8 +10,8 @@ try (PreparedStatement statement = connection.prepareStatement(query, Statement.
     statement.setString(3, "13512345678");
     // 执行更新
     int effectedRows = statement.executeUpdate();
-    // 如果一次插入多条记录，那么这个ResultSet对象就会有多行返回值
-    // 如果插入时有多列自增，那么ResultSet对象的每一行都会对应多个自增值
+    // 如果一次插入多条记录, 那么这个ResultSet对象就会有多行返回值
+    // 如果插入时有多列自增, 那么ResultSet对象的每一行都会对应多个自增值
     ResultSet generatedKeys = statement.getGeneratedKeys();
     // 获取自动生成的主键
     if (generatedKeys.next()) {

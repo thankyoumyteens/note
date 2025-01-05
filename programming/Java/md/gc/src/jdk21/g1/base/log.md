@@ -132,7 +132,7 @@ decorators 的可选值如下:
 - `-Xlog:gc,safepoint`: 在控制台打印 info 级别的 gc 和 safepoint 日志
 - `-Xlog:gc+ref=debug`: 在控制台打印 debug 级别的 gc 和 ref 日志
 - `-Xlog:gc=debug:file=gc.txt:none`: 在 gc.txt 文件中打印 debug 级别的 gc 日志, 不使用 Decorations
-- `-Xlog:gc=trace:file=gctrace.txt:uptimemillis,pid:filecount=5,filesize=1024`: 在 gctrace.txt 文件中打印 trace 级别的 gc 日志, Decorations 使用 uptimemillis 和 pid, 系统会维护最多 5 个日志文件，每个文件的大小上限是 1 MB。当最新的日志文件达到 1 MB 时，它会被关闭，并且一个新的空日志文件会被创建，同时最老的那个日志文件如果存在的话将被删除或归档，以保持总共有 5 个日志文件: gctrace.txt.0, gctrace.txt.1, gctrace.txt.2, gctrace.txt.3, gctrace.txt.4
+- `-Xlog:gc=trace:file=gctrace.txt:uptimemillis,pid:filecount=5,filesize=1024`: 在 gctrace.txt 文件中打印 trace 级别的 gc 日志, Decorations 使用 uptimemillis 和 pid, 系统会维护最多 5 个日志文件, 每个文件的大小上限是 1 MB。当最新的日志文件达到 1 MB 时, 它会被关闭, 并且一个新的空日志文件会被创建, 同时最老的那个日志文件如果存在的话将被删除或归档, 以保持总共有 5 个日志文件: gctrace.txt.0, gctrace.txt.1, gctrace.txt.2, gctrace.txt.3, gctrace.txt.4
 - `-Xlog:gc::uptime,tid`: 在控制台打印 info 级别的 gc 日志, Decorations 使用 uptime 和 tid
 - `-Xlog:gc*=info,safepoint*=off`: 在控制台打印 info 级别的和 gc 有关的日志, 不打印和 safepoint 有关的日志
 - `-Xlog:disable -Xlog:safepoint=trace:safepointtrace.txt`: 关闭日志(禁用所有的默认日志设置), 然后在 safepointtrace.txt 中打印 trace 级别的 safepoint 日志

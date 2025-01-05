@@ -16,7 +16,7 @@ plt.plot(x, y, marker='*')
 
 ## 数据点的大小
 
-markersize(或 ms) 用于指定数据点的大小，是一个浮点数。
+markersize(或 ms) 用于指定数据点的大小, 是一个浮点数。
 
 例如:
 

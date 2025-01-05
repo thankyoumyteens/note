@@ -10,7 +10,7 @@ plt.subplot(nrows, ncols, index, **kwargs)
 
 - `nrows` 子图网格的行数
 - `ncols` 子图网格的列数
-- `index` 当前子图的索引，从 1 开始计数
+- `index` 当前子图的索引, 从 1 开始计数
 
 ```py
 import matplotlib.pyplot as plt
@@ -32,7 +32,7 @@ plt.subplot(2, 1, 2)  # 选择第二个子图
 plt.plot(x, y2)
 plt.title('Cosine Wave')
 
-plt.tight_layout()  # 自动调整子图参数，使之填充整个图形区域
+plt.tight_layout()  # 自动调整子图参数, 使之填充整个图形区域
 plt.show()
 ```
 
@@ -42,7 +42,7 @@ plt.show()
 plt.subplot(nrows_ncols_index)
 ```
 
-其中 nrows_ncols_index 是一个三位整数，前两位表示行数和列数，第三位表示当前子图的索引。
+其中 nrows_ncols_index 是一个三位整数, 前两位表示行数和列数, 第三位表示当前子图的索引。
 
 ```py
 import matplotlib.pyplot as plt

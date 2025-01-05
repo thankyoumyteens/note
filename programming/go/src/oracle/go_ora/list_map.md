@@ -44,7 +44,7 @@ func main() {
 	}
 	columnLength := len(columns)
 
-	// 创建一个buffer，用于存储每一行的数据
+	// 创建一个buffer, 用于存储每一行的数据
 	buffer := make([]interface{}, columnLength)
 	for index, _ := range buffer {
 		var a interface{}

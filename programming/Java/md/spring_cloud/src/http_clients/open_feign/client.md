@@ -1,6 +1,6 @@
 # 替换默认的 httpclient
 
-Feign 在默认情况下使用的是 JDK 原生的 URLConnection 发送 HTTP 请求，没有连接池，但是对每个地址会保持一个长连接，即利用 HTTP 的 persistence connection。
+Feign 在默认情况下使用的是 JDK 原生的 URLConnection 发送 HTTP 请求, 没有连接池, 但是对每个地址会保持一个长连接, 即利用 HTTP 的 persistence connection。
 
 可以查看 `feign.Client#execute` 方法使用的是哪个实现类, 判断使用的是哪个 http 客户端。
 

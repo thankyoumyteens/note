@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/config")
-// 通过@RefreshScope注解，实现配置自动刷新
+// 通过@RefreshScope注解, 实现配置自动刷新
 @RefreshScope
 public class ConfigInfoController {
     @Autowired

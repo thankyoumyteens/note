@@ -1,6 +1,6 @@
 # Feign
 
-Feign 使服务之间调用更加简单, 只需要声明接口而不用编写实现类。Feign 是基于 Ribbon 实现的，所以它自带了客户端负载均衡功能，也可以通过 Ribbon 的 IRule 进行策略扩展。
+Feign 使服务之间调用更加简单, 只需要声明接口而不用编写实现类。Feign 是基于 Ribbon 实现的, 所以它自带了客户端负载均衡功能, 也可以通过 Ribbon 的 IRule 进行策略扩展。
 
 Feign 已经停止更新, 最新版本是 1.4.7.RELEASE。
 

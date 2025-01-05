@@ -81,4 +81,4 @@ public class GatewayDemo {
 
 4. 启动网关和一个服务提供方, 访问 http://localhost:8090/test/hello, 请求会被路由到 http://nacos-client-demo/test/hello
 
-注意: 新版本 spring-cloud-starter-gateway 移除了负载均衡依赖，所以需要手动添加 spring-cloud-loadbalancer。
+注意: 新版本 spring-cloud-starter-gateway 移除了负载均衡依赖, 所以需要手动添加 spring-cloud-loadbalancer。

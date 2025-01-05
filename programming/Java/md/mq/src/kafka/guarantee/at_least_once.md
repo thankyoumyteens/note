@@ -1,6 +1,6 @@
 # 至少一次
 
-可以确保即使消费者在处理消息的过程中发生故障，也不会丢失任何消息，虽然有可能会导致一些消息被重复处理。
+可以确保即使消费者在处理消息的过程中发生故障, 也不会丢失任何消息, 虽然有可能会导致一些消息被重复处理。
 
 ```java
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -47,7 +47,7 @@ public class AtLeastOnceConsumer {
                     }
                 }
 
-                // 批量处理完所有消息后，同步提交偏移量
+                // 批量处理完所有消息后, 同步提交偏移量
                 consumer.commitSync(); // 同步提交确保所有之前的消息都已经被处理
             }
         }

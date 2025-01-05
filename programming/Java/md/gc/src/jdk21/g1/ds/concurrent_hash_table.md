@@ -1,10 +1,10 @@
 # ConcurrentHashTable
 
-ConcurrentHashTable 是一个并发的哈希表，其读操作是无需等待的，插入操作采用 CAS 机制。每个桶(Bucket)的删除操作是互斥的。
+ConcurrentHashTable 是一个并发的哈希表, 其读操作是无需等待的, 插入操作采用 CAS 机制。每个桶(Bucket)的删除操作是互斥的。
 
-VALUE 是保存在每个节点(Node)内部的类型，CONFIG 包含了哈希方法和分配方法。
+VALUE 是保存在每个节点(Node)内部的类型, CONFIG 包含了哈希方法和分配方法。
 
-对于获取和插入操作，需要提供一个回调函数(CALLBACK_FUNC)和查找函数(LOOKUP_FUNC)。
+对于获取和插入操作, 需要提供一个回调函数(CALLBACK_FUNC)和查找函数(LOOKUP_FUNC)。
 
 ```cpp
 // --- src/hotspot/share/utilities/concurrentHashTable.hpp --- //
@@ -26,7 +26,7 @@ private:
     // 用来实现节点的并发访问
     class Bucket {
     private:
-        // _first指针的最低两位用来存储自旋锁的状态信息，分别是未加锁、加锁、重定向三种状态
+        // _first指针的最低两位用来存储自旋锁的状态信息, 分别是未加锁、加锁、重定向三种状态
         Node *volatile _first;
 
         static const uintptr_t STATE_LOCK_BIT = 0x1;

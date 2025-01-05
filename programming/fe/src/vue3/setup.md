@@ -12,7 +12,7 @@ Vue 3 的 setup 函数是一个新增的组件选项, 它在 Composition API 中
       // setup中不能用this
 
       // 定义data
-      // 注意: 此时msg是一个局部变量，不是响应式的
+      // 注意: 此时msg是一个局部变量, 不是响应式的
       // 修改msg不会触发视图更新
       let msg = "Hello World";
 
@@ -86,7 +86,7 @@ Vue 3 的 setup 函数是一个新增的组件选项, 它在 Composition API 中
   // import 导入的其它组件会自动注册, 不需要再写 components: {XxxXxx,}, 了
 
   // 定义data
-  // 注意: 此时msg是一个局部变量，不是响应式的
+  // 注意: 此时msg是一个局部变量, 不是响应式的
   // 修改msg不会触发视图更新
   let msg = "Hello World";
 

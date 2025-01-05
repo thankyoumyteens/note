@@ -11,4 +11,4 @@ zuul:
     eureka-client-demo: /service1/**
 ```
 
-2. 服务启动后, 访问 http://localhost:27440/service1/service/list，该请求将最终被路由到 eureka-client-demo 的 /service/list 接口上
+2. 服务启动后, 访问 http://localhost:27440/service1/service/list, 该请求将最终被路由到 eureka-client-demo 的 /service/list 接口上

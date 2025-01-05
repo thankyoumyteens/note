@@ -104,7 +104,7 @@
 
 <!--
 \begin{align}
-& 形如 \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = 0 的微分方程，称为一阶齐次线性微分方程 \\
+& 形如 \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = 0 的微分方程, 称为一阶齐次线性微分方程 \\
 \\
 & 解法: 将 \frac{\mathrm{d}y}{\mathrm{d}x} + P(x)y = 0 化为 \frac{\mathrm{d}y}{\mathrm{d}x} = - P(x)y, \\
 & 令显然 y = 0 为微分方程的一个解 \\

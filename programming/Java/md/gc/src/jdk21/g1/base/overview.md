@@ -10,7 +10,7 @@ G1 的分配策略: 开启 TLAB 时, JVM 会优先在 TLAB 中分配内存, 当�
 
 ## 记忆集
 
-G1 使用记忆集(RSet)记录对象在不同分区之间的引用关系，目的是为了加速垃圾回收的速度。比如一条赋值语句: `objA.field = objB;` G1 会在 objB 的 RSet 中记录 objA 的地址。
+G1 使用记忆集(RSet)记录对象在不同分区之间的引用关系, 目的是为了加速垃圾回收的速度。比如一条赋值语句: `objA.field = objB;` G1 会在 objB 的 RSet 中记录 objA 的地址。
 
 在 G1 中提供了 3 种回收算法: Yong GC, Mixed GC 和 Full GC。这三种算法都会回收新生代分区, 所以新生代分区中只要被根直接/间接引用的对象都会被扫描到, 但在 Mixed GC 中, 老年代只会有某些分区被加入到回收集中, 其余没被选中的老年代分区都被看作是根, 那么需要记录 RSet 的情况就只有两种:
 
@@ -21,9 +21,9 @@ G1 使用记忆集(RSet)记录对象在不同分区之间的引用关系，目�
 
 G1 提供了 3 种 RSet 的粒度:
 
-1. 稀疏 PRT(Per Region Table): 通过哈希表方式来存储每个 region 的引用关系, key 是 region index，value 是 card 数组
-2. 细粒度 PRT: 当稀疏 PRT 指定 region 的 card 数量超过阈值时，则在细粒度 PRT 中创建一个对应的 PerRegionTable 对象。每个 PRT 包含一个 Region 的起始地址和一个位图, 位图的每一位对应 Region 的 512 字节
-3. 粗粒度位图: 当细粒度 PRT size 超过阈值时，所有 region 形成一个位图。位图中的每一位对应一个 Region
+1. 稀疏 PRT(Per Region Table): 通过哈希表方式来存储每个 region 的引用关系, key 是 region index, value 是 card 数组
+2. 细粒度 PRT: 当稀疏 PRT 指定 region 的 card 数量超过阈值时, 则在细粒度 PRT 中创建一个对应的 PerRegionTable 对象。每个 PRT 包含一个 Region 的起始地址和一个位图, 位图的每一位对应 Region 的 512 字节
+3. 粗粒度位图: 当细粒度 PRT size 超过阈值时, 所有 region 形成一个位图。位图中的每一位对应一个 Region
 
 ## Refine 线程
 

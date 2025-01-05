@@ -1,6 +1,6 @@
 # 高可用
 
-把 config-server 注册到 eureka 成为服务，这样所有客户端就能以服务的方式进行访问。只需要启动多个指向同一 Git 仓库的 config-server 就能实现高可用了。
+把 config-server 注册到 eureka 成为服务, 这样所有客户端就能以服务的方式进行访问。只需要启动多个指向同一 Git 仓库的 config-server 就能实现高可用了。
 
 ## Config Server 修改
 

@@ -51,7 +51,7 @@
    #   [1 2 3]
    # ]
    # 元素的值是通过调用 func 函数计算得到的
-   # 比如，元素 array_from_function[0][0] 的值是 func(0, 0) = 0
+   # 比如, 元素 array_from_function[0][0] 的值是 func(0, 0) = 0
    array_from_function = np.fromfunction(function=func, shape=(2, 3), dtype=int)
    ```
 7. **空数组**：

@@ -1,6 +1,6 @@
 # useEffect
 
-useEffect 是 React Hook 函数。它让你可以在函数组件中执行副作用操作。在类组件中，这些操作通常放在生命周期方法中完成，比如 componentDidMount、componentDidUpdate 和 componentWillUnmount。而在函数组件中，你可以使用 useEffect 来实现类似的功能。
+useEffect 是 React Hook 函数。它让你可以在函数组件中执行副作用操作。在类组件中, 这些操作通常放在生命周期方法中完成, 比如 componentDidMount、componentDidUpdate 和 componentWillUnmount。而在函数组件中, 你可以使用 useEffect 来实现类似的功能。
 
 用法
 

@@ -13,7 +13,7 @@ s = 1 + np.sin(2 * np.pi * t)
 fig, ax = plt.subplots()
 ax.plot(t, s)
 
-# 设置标题与标签，包含LaTeX数学表达式
+# 设置标题与标签, 包含LaTeX数学表达式
 ax.set_title(r'$\alpha_i > \beta_i$', fontsize=20, color='blue')
 ax.set_xlabel(r'$\Delta_i(j)$', fontsize=20)
 ax.set_ylabel(r'some numbers')

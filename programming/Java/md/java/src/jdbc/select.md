@@ -6,7 +6,7 @@ String query = "select * from student_info where student_name = ?";
 try (PreparedStatement statement = connection.prepareStatement(query)) {
     // 设置参数
     statement.setString(1, "tom");
-    // 执行查询语句，返回结果集
+    // 执行查询语句, 返回结果集
     try (ResultSet resultSet = statement.executeQuery()) {
         // 遍历结果集
         while (resultSet.next()) {

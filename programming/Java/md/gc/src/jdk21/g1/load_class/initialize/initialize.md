@@ -3,8 +3,8 @@
 触发初始化的时机:
 
 - 遇到 new, getstatic, putstatic 或 invokestatic 这些需要引用类或接口的指令时
-- 初次调用 java.lang.invoke.MethodHandle 实例时，返回结果为 REF_getStatic, REF_putStatic 或 REF_invokeStatic 的方法句柄
-- 调用反射方法时，如 Class 类或 java.lang.reflect 包
+- 初次调用 java.lang.invoke.MethodHandle 实例时, 返回结果为 REF_getStatic, REF_putStatic 或 REF_invokeStatic 的方法句柄
+- 调用反射方法时, 如 Class 类或 java.lang.reflect 包
 - 初始化类的子类时
 - 类被设计用做 JVM 启动时的初始类
 
@@ -14,7 +14,7 @@
 void InstanceKlass::initialize_impl(TRAPS) {
   HandleMark hm(THREAD);
 
-  // 在初始化过程正式开始之前，必须保证该类型已经完成链接
+  // 在初始化过程正式开始之前, 必须保证该类型已经完成链接
   // Make sure klass is linked (verified) before initialization
   // A class could already be verified, since it has been reflected upon.
   link_class(CHECK);
@@ -34,7 +34,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
 
     // Step 2
     // 如果此时还有别的线程正在初始化这个instanceKlass(状态：being_initialized)
-    // 则进入等待，待当前线程被唤醒后再重复这一步骤
+    // 则进入等待, 待当前线程被唤醒后再重复这一步骤
     while (is_being_initialized() && !is_init_thread(jt)) {
       wait = true;
       jt->set_class_to_be_initialized(this);
@@ -42,7 +42,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
       jt->set_class_to_be_initialized(nullptr);
     }
 
-    // 如果当前线程正在对该类型初始化，则这一定是初始化的一个递归调用，
+    // 如果当前线程正在对该类型初始化, 则这一定是初始化的一个递归调用, 
     // 此时释放class对象上的锁并正常地结束
     // Step 3
     if (is_being_initialized() && is_init_thread(jt)) {
@@ -50,7 +50,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
       return;
     }
 
-    // 如果类型已被初始化，则释放class对象上的锁并正常地结束
+    // 如果类型已被初始化, 则释放class对象上的锁并正常地结束
     // Step 4
     if (is_initialized()) {
       DTRACE_CLASSINIT_PROBE_WAIT(concurrent, -1, wait);
@@ -63,7 +63,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
     if (is_in_error_state()) {
       throw_error = true;
     } else {
-      // 否则，设置instanceKlass状态为being_initialized，
+      // 否则, 设置instanceKlass状态为being_initialized, 
       // 并释放该instanceKlass对象上的锁
       // Step 6
       set_init_state(being_initialized);
@@ -88,7 +88,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
   }
 
   // Step 7
-  // 如果该instanceKlass是一个类(而非接口)，并且该类的父类尚未被初始化，
+  // 如果该instanceKlass是一个类(而非接口), 并且该类的父类尚未被初始化, 
   // 则对父类递归地执行初始化
   if (!is_interface()) {
     Klass* super_klass = super();
@@ -145,7 +145,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
 
   // Step 9
   if (!HAS_PENDING_EXCEPTION) {
-    // 如果初始化正常地结束，则将这个instanceKlass状态位置为fully_initialized
+    // 如果初始化正常地结束, 则将这个instanceKlass状态位置为fully_initialized
     // 通知所有正在等待的线程
     set_initialization_state_and_notify(fully_initialized, THREAD);
     debug_only(vtable().verify(tty, true);)
@@ -158,7 +158,7 @@ void InstanceKlass::initialize_impl(TRAPS) {
     // JVMTI internal flag reset is needed in order to report ExceptionInInitializerError
     JvmtiExport::clear_detected_exception(jt);
     {
-      // 如果初始化异常，则将这个instanceKlass状态位置为initialization_error
+      // 如果初始化异常, 则将这个instanceKlass状态位置为initialization_error
       // 通知所有正在等待的线程, 最后抛出异常
       EXCEPTION_MARK;
       add_initialization_error(THREAD, e);

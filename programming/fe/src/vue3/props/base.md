@@ -47,7 +47,7 @@ export interface DataItem {
   }
 
   // 通过defineProps接收props
-  // defineProps<Props>()返回一个对象，包含了所有props的值
+  // defineProps<Props>()返回一个对象, 包含了所有props的值
   let { dataList } = defineProps<Props>();
 
   // 不限制类型的简写方式

@@ -22,7 +22,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         Map<String, Object> result = new HashMap<>();
         ObjectMapper objectMapper = new ObjectMapper();
         ServerHttpResponse response = serverWebExchange.getResponse();
-        System.out.println("进入全局异常处理器，异常信息：" + throwable.getMessage());
+        System.out.println("进入全局异常处理器, 异常信息：" + throwable.getMessage());
 
         response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 

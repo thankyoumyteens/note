@@ -39,7 +39,7 @@ spring:
       transport:
         # 指定控制台的地址
         dashboard: localhost:8081
-      # sentinel是懒加载机制，只有访问过一次的资源才会被监控
-      # 取消控制台懒加载，项目启动即连接Sentinel
+      # sentinel是懒加载机制, 只有访问过一次的资源才会被监控
+      # 取消控制台懒加载, 项目启动即连接Sentinel
       eager: true
 ```
