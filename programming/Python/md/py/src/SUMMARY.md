@@ -137,8 +137,8 @@
   - [基本使用](./paddle_ocr/quick_start.md)
 
 - [PySide6](./pyside/PySide6.md)
-  - [安装Pyside6](./pyside/安装Pyside6.md)
-  - [创建主窗口](./pyside/创建主窗口.md)
+  - [安装](./pyside/install.md)
+  - [基本使用](./pyside/quick_start.md)
   - [布局](./pyside/布局.md)
   - [菜单](./pyside/菜单.md)
   - [建立信号与槽的连接](./pyside/建立信号与槽的连接.md)

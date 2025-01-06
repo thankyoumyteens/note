@@ -16,6 +16,7 @@
   - [消息存储结构](./kafka/struct.md)
   - [消费者组](./kafka/comsumer_group.md)
   - [零拷贝](./kafka/zero_copy.md)
+  - [保证消息的顺序](./kafka/s.md)
   - [消息传递保障](./kafka/guarantee/guarantee.md)
     - [最多一次](./kafka/guarantee/at_most_once.md)
     - [至少一次](./kafka/guarantee/at_least_once.md)

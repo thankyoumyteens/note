@@ -1,0 +1,46 @@
+# 基本使用
+
+### 1. 创建主窗口
+
+在 QtDesigner 中选择 `文件-新建`, 选择 MainWindow。然后将设计的图形界面保存为 `ui_untitled.ui`。
+
+可用的窗口类型:
+
+- MainWindow: 包括菜单栏、工具栏、状态栏和标题栏, 常用于应用程序的窗口
+- Dialog: 没有菜单栏、工具栏、标题栏, 常用于对话框的窗口
+- Widget: 不确定窗口的类型
+
+### 2. 把设计文件转换成 py 文件
+
+在 PyCharm 选中 `ui_untitled.ui` 文件, 点击鼠标右键唤出下拉菜单, 选择 `Pyside6 -> PyUIC`, 点击鼠标左键运行 PyUIC 将选中的 .ui 文件转换为 .py 文件, 会在相同路径下生成 `ui_untitled.py` 文件。
+
+### 3. 编写主程序
+
+```py
+import sys
+
+from PySide6.QtWidgets import QApplication, QMainWindow
+
+# 导入 ui_untitled.py 中的 Ui_MainWindow 界面类
+from ui_untitled import Ui_MainWindow
+
+
+# 继承 QMainWindow 类和 Ui_MainWindow 界面类
+class MyMainWindow(QMainWindow, Ui_MainWindow):
+    def __init__(self, parent=None):
+        # 初始化父类
+        super(MyMainWindow, self).__init__(parent)
+        # 继承 Ui_MainWindow 界面类
+        self.setupUi(self)
+
+
+if __name__ == '__main__':
+    # 在 QApplication 方法中使用, 创建应用程序对象
+    app = QApplication(sys.argv)
+    # 实例化 MyMainWindow 类, 创建主窗口
+    myWin = MyMainWindow()
+    # 在桌面显示 myWin
+    myWin.show()
+    # 结束进程, 退出程序
+    sys.exit(app.exec_())
+```
