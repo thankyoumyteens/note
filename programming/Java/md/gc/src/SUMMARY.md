@@ -11,6 +11,9 @@
   - [NUMA](./jdk21/g1/base/numa.md)
   - [JVM统一日志框架](./jdk21/g1/base/log.md)
 
+- [技巧](./jdk21/g1/impl/impl.md)
+  - [根据哈希值计算索引, 并保证索引在数组内](./jdk21/g1/impl/log2_size.md)
+
 - [内部数据结构](./jdk21/g1/ds/ds.md)
   - [GlobalCounter](./jdk21/g1/ds/global_counter.md)
   - [ConcurrentHashTable](./jdk21/g1/ds/concurrent_hash_table.md)

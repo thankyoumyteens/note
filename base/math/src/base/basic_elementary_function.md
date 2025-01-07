@@ -17,7 +17,13 @@
 
 ## 对数函数(ogarithmic function)
 
-<!-- y = \log_{a}{x}  (a \gt 0 且 a \ne 1) (0 \lt x \lt +\infty) -->
+<!--
+\begin{align}
+& y = \log_{a}{x}  (a \gt 0 且 a \ne 1) (0 \lt x \lt +\infty) \\
+\\
+& \log_{a}{b} 表示以a为底b的对数，即求a的多少次方等于b \\
+\end{align}
+-->
 
 ![](../img/bef3.jpg)
 

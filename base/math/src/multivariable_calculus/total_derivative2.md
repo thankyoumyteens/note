@@ -80,5 +80,8 @@ v = xy
 例题 3
 
 <!--
-
+\begin{align}
+& 设 z = f(x + y, xy), 其中 z = f(u, v) 二阶连续可偏导, 求 \frac{\partial ^2 z}{\partial x \partial y} \\
+\\
+\end{align}
 -->
