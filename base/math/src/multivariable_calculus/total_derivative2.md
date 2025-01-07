@@ -83,5 +83,15 @@ v = xy
 \begin{align}
 & 设 z = f(x + y, xy), 其中 z = f(u, v) 二阶连续可偏导, 求 \frac{\partial ^2 z}{\partial x \partial y} \\
 \\
+& {\color{Green} // z = f(u, v), u = x + y , v = xy} \\
+& {\color{Green} // \frac{\partial z}{\partial x} = \frac{\partial z}{\partial u} \cdot \frac{\partial u}{\partial x} +
+\frac{\partial z}{\partial v} \cdot \frac{\partial v}{\partial x}} \\
+& \frac{\partial z}{\partial x} = f_1 + y f_2 \\
+& \frac{\partial ^2 z}{\partial x \partial y} = \frac{\partial (f_1 + y f_2)}{\partial y} \\
+& \qquad \,\,\,\, = f_{11} + x f_{12} + f_2 + y(f_{21} + x f_{22}) \\
 \end{align}
 -->
+
+![](../img/td2_5.jpg)
+
+## 隐函数(组)求偏导
