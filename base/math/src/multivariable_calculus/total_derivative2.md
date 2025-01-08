@@ -95,3 +95,31 @@ v = xy
 ![](../img/td2_5.jpg)
 
 ## 隐函数(组)求偏导
+
+<!--
+\begin{align}
+& 1. 一个约束条件 F 确定了一个函数, 剩下的字母是自变量 \\
+& \;\;\;\, F(x, y) = 0 \quad \Rightarrow \quad y = \varphi (x) \\
+& 2. 一个约束条件 F 确定了一个函数, 剩下的字母是自变量 \\
+& \;\;\;\, F(x, y, z) = 0 \quad \Rightarrow \quad z = \varphi (x, y) \\
+& 2. 两个约束条件 F, G 确定了两个函数, 剩下的字母是自变量 \\
+& \;\;\;\, \begin{cases}
+F(x, y, z) = 0 \\
+G(x, y, z) = 0
+\end{cases} \quad \Rightarrow \quad \begin{cases}
+y = y(x) \\
+z = z(x)
+\end{cases} \\
+\end{align}
+-->
+
+![](../img/td2_6.jpg)
+
+例题 1
+
+<!--
+\begin{align}
+& 设由 \tan (x + y + z) = x^2 + y^2 + z 确定一个二元函数 z = z(x, y), 求 \frac{\partial z}{\partial x} \\
+\\
+\end{align}
+-->

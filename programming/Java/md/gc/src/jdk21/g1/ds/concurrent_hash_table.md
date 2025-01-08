@@ -63,17 +63,22 @@ typename ConcurrentHashTable<CONFIG, F>::Node *
 ConcurrentHashTable<CONFIG, F>::
 get_node(const Bucket *const bucket, LOOKUP_FUNC &lookup_f,
          bool *have_dead, size_t *loops) const {
+    // 找到节点需要的循环次数
     size_t loop_count = 0;
+    // 链表头节点
     Node *node = bucket->first();
     while (node != nullptr) {
         bool is_dead = false;
         ++loop_count;
+        // 判断是不是查找的目标
         if (lookup_f.equals(node->value(), &is_dead)) {
             break;
         }
         if (is_dead && !(*have_dead)) {
+            // 这个节点需要清理
             *have_dead = true;
         }
+        // 下一个节点
         node = node->next();
     }
     if (loops != nullptr) {
@@ -105,20 +110,25 @@ get_bucket(uintx hash) const {
     return bucket;
 }
 
-Bucket *ConcurrentHashTable::get_bucket_in(InternalTable *table, const uintx hash) const {
-    // 根据哈希值算出数组的索引
-    size_t bucket_index = bucket_idx_hash(table, hash);
-    return table->get_bucket(bucket_index);
-}
+template<typename CONFIG, MEMFLAGS F>
+class ConcurrentHashTable : public CHeapObj<F> {
+    Bucket *get_bucket_in(InternalTable *table, const uintx hash) const {
+        // 根据哈希值算出数组的索引
+        size_t bucket_index = bucket_idx_hash(table, hash);
+        return table->get_bucket(bucket_index);
+    }
 
-static size_t ConcurrentHashTable::bucket_idx_hash(InternalTable *table, const uintx hash) {
-    // _hash_mask 用来保证算出的索引不会落在数组外
-    return ((size_t) hash) & table->_hash_mask;
-}
+    static size_t bucket_idx_hash(InternalTable *table, const uintx hash) {
+        // _hash_mask 用来保证算出的索引不会落在数组外
+        return ((size_t) hash) & table->_hash_mask;
+    }
 
-Bucket *InternalTable::get_bucket(size_t idx) {
-    return &_buckets[idx];
-}
+    class InternalTable : public CHeapObj<F> {
+        Bucket *get_bucket(size_t idx) {
+            return &_buckets[idx];
+        }
+    };
+};
 ```
 
 ## RCU 读临界区
@@ -226,14 +236,16 @@ internal_get(Thread *thread, LOOKUP_FUNC &lookup_f, bool *grow_hint) {
 
 template<typename CONFIG, MEMFLAGS F>
 class ConcurrentHashTable : public CHeapObj<F> {
-    // Returns true if the item was inserted, duplicates are found with
-    // LOOKUP_FUNC then FOUND_FUNC is called.
+    // 新增成功返回true, 如果找到重复数据则调用FOUND_FUNC函数
     template<typename LOOKUP_FUNC, typename FOUND_FUNC>
     bool insert_get(Thread *thread, LOOKUP_FUNC &lookup_f, VALUE &value, FOUND_FUNC &foundf,
                     bool *grow_hint = nullptr, bool *clean_hint = nullptr) {
         return internal_insert_get(thread, lookup_f, value, foundf, grow_hint, clean_hint);
     }
 };
+
+// --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
+
 ```
 
 ## 删除元素
