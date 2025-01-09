@@ -1,13 +1,14 @@
 # Summary
 
 - [基础](./base/base.md)
-  - [Hello World](./base/quick_start.md)
-  - [输入输出](./base/cin_cout.md)
+  - [基本使用](./base/quick_start.md)
+  - [变量](./base/variable.md)
+  - [常量](./base/const.md)
+  - [输入数据](./base/cin.md)
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
   - [字面量](./base/literal/literal.md)
     - [字符串字面量](./base/literal/str.md)
-  - [变量](./base/variable.md)
   - [数据类型](./base/typea.md)
     - [基本数据类型](./base/type.md)
     - [类型转换](./base/type_convert.md)

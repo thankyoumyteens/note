@@ -12,11 +12,19 @@
   - [JVM统一日志框架](./jdk21/g1/base/log.md)
 
 - [技巧](./jdk21/g1/impl/impl.md)
-  - [根据哈希值计算索引, 并保证索引在数组内](./jdk21/g1/impl/log2_size.md)
+  - [RCU机制](./jdk21/g1/impl/rcu.md)
+  - [根据哈希值计算索引时保证索引在数组内](./jdk21/g1/impl/log2_size.md)
 
 - [内部数据结构](./jdk21/g1/ds/ds.md)
   - [GlobalCounter](./jdk21/g1/ds/global_counter.md)
-  - [ConcurrentHashTable](./jdk21/g1/ds/concurrent_hash_table.md)
+  - [ConcurrentHashTable](./jdk21/g1/ds/concurrent_hash_table/concurrent_hash_table.md)
+    - [RCU读临界区](./jdk21/g1/ds/concurrent_hash_table/scs.md)
+    - [Node操作](./jdk21/g1/ds/concurrent_hash_table/node.md)
+    - [Bucket操作](./jdk21/g1/ds/concurrent_hash_table/bucket.md)
+    - [获取元素](./jdk21/g1/ds/concurrent_hash_table/get.md)
+    - [新增元素](./jdk21/g1/ds/concurrent_hash_table/insert.md)
+    - [删除元素](./jdk21/g1/ds/concurrent_hash_table/remove.md)
+    - [扩容](./jdk21/g1/ds/concurrent_hash_table/grow.md)
 
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)
