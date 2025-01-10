@@ -134,5 +134,28 @@ z = z(x)
 例题 2
 
 <!--
+\begin{align}
+& \begin{cases}
+x - y + 2z = 1 \\
+x^2 + y^2 + 4z^2 = 4
+\end{cases}, 求 \frac{\mathrm{d} z}{\mathrm{d} x} \\
+\\
+& {\color{Green} // 两个约束条件, 所以函数有两个, 三个变量, 所以自变量有一个} \\
+& {\color{Green} // 所以是两个一元函数} \\
+& {\color{Green} // 把式子里的 y 和 z 看成是 x 的函数 y = y(x), z = z(x)} \\
+& 两边对x求导: \\
+& \; \begin{cases}
+1 - \frac{\mathrm{d} y}{\mathrm{d} x} + 2 \frac{\mathrm{d} z}{\mathrm{d} x} = 0 \\
+2x + 2y \frac{\mathrm{d} y}{\mathrm{d} x} + 8z \frac{\mathrm{d} z}{\mathrm{d} x} = 0
+\end{cases} \\
+& 最后解方程组, 解出 \frac{\mathrm{d} z}{\mathrm{d} x} \\
+\end{align}
+-->
+
+![](../img/td2_8.jpg)
+
+例题 3
+
+<!--
 
 -->
