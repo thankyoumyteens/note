@@ -50,5 +50,6 @@
   - [数字转字符串](./oracle/number2str.md)
 
 - [Redis](./redis/redis.md)
+  - [通用命令](./redis/cmd.md)
   - [分布式锁](./redis/lock/lock.md)
     - [RedisTemplate实现](./redis/lock/redis_template.md)

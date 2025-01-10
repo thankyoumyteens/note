@@ -121,5 +121,18 @@ z = z(x)
 \begin{align}
 & 设由 \tan (x + y + z) = x^2 + y^2 + z 确定一个二元函数 z = z(x, y), 求 \frac{\partial z}{\partial x} \\
 \\
+& {\color{Green} // 一个约束条件, 所以函数有一个, 三个变量, 所以自变量有两个} \\
+& {\color{Green} // 所以是一个二元函数} \\
+& {\color{Green} // 把式子里的 z 看成是 x 和 y 的函数 \varphi (x, y)} \\
+& 两边对x求偏导: \\
+& \; \sec ^2(x + y + z) \cdot (1 + \frac{\partial z}{\partial x}) = 2x + \frac{\partial z}{\partial x} \\
 \end{align}
+-->
+
+![](../img/td2_7.jpg)
+
+例题 2
+
+<!--
+
 -->
