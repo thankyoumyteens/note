@@ -51,5 +51,7 @@
 
 - [Redis](./redis/redis.md)
   - [通用命令](./redis/cmd.md)
+  - [数据类型](./redis/type/type.md)
+    - [字符串](./redis/type/str.md)
   - [分布式锁](./redis/lock/lock.md)
     - [RedisTemplate实现](./redis/lock/redis_template.md)

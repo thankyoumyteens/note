@@ -16,12 +16,13 @@ int main() {
 
 ## 统一初始化
 
+C++11 增加的功能。
+
 ```cpp
 #include <iostream>
 
 int main() {
-    // C++11增加
-    // 类型 变量名{初始值}
+    // 数据类型 变量名{初始值}
     int b{10};
 
     std::cout << "b = " << b << std::endl;

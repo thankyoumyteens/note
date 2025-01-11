@@ -4,7 +4,7 @@
   - [基本使用](./base/quick_start.md)
   - [变量](./base/variable.md)
   - [常量](./base/const.md)
-  - [输入数据](./base/cin.md)
+
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
   - [字面量](./base/literal/literal.md)
