@@ -78,7 +78,7 @@ internal_insert_get(Thread *thread, LOOKUP_FUNC &lookup_f, const VALUE &value,
     } else if (i == 0 && clean) {
         // 没有线程竞争时, 进行清理工作
 
-        // 根据哈希值获取bucket数组中的元素, 并把找到的bucket加锁, 避免这个bucket被修改
+        // 根据哈希值获取bucket数组中的元素, 并把找到的bucket加锁, 清理完成前避免这个bucket被修改
         Bucket *bucket = get_bucket_locked(thread, lookup_f.get_hash());
         // 清理bucket中无效的数据
         delete_in_bucket(thread, bucket, lookup_f);

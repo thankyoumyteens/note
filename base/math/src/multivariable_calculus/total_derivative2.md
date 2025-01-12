@@ -157,5 +157,13 @@ x^2 + y^2 + 4z^2 = 4
 例题 3
 
 <!--
+\begin{align}
+& 设由 \begin{cases}
+xu + yv = 1 \\
+xv - y^2u = e^{x + y}
+\end{cases}, 确定两个二元函数 u = u(x, y), v = v(x, y), \\
+& 求 \frac{\partial u}{\partial x}, \frac{\partial v}{\partial y} \\
+\\
 
+\end{align}
 -->
