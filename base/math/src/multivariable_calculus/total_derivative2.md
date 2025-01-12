@@ -164,6 +164,21 @@ xv - y^2u = e^{x + y}
 \end{cases}, 确定两个二元函数 u = u(x, y), v = v(x, y), \\
 & 求 \frac{\partial u}{\partial x}, \frac{\partial v}{\partial y} \\
 \\
-
+& {\color{Green} // 把式子里的 u 和 v 看成是 x, y 的函数 u = u(x, y), v = v(x, y)} \\
+& 两边对x求偏导: \\
+& \; \begin{cases}
+1 \cdot u + x \frac{\partial u}{\partial x} + 0 + y \frac{\partial v}{\partial x} = 0 \\
+1 \cdot v + x \frac{\partial v}{\partial x} - 0 - y^2 \frac{\partial u}{\partial x} = e^{x + y} \cdot 1
+\end{cases} \\
+& 最后解方程组, 解出 \frac{\partial u}{\partial x} \\
+\\
+& 两边对y求偏导: \\
+& \; \begin{cases}
+0 + x \frac{\partial u}{\partial y} + 1 \cdot v + y \frac{\partial v}{\partial y} = 0 \\
+0 + x \frac{\partial v}{\partial } - 2y \cdot u - y^2 \frac{\partial u}{\partial y} = e^{x + y} \cdot 1
+\end{cases} \\
+& 最后解方程组, 解出 \frac{\partial v}{\partial y} \\
 \end{align}
 -->
+
+![](../img/td2_9.jpg)
