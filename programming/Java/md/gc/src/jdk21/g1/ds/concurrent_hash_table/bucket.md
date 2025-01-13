@@ -165,8 +165,9 @@ delete_in_bucket(Thread *thread, Bucket *bucket, LOOKUP_FUNC &lookup_f) {
             ndel[dels++] = rem_n;
             // 下一个节点
             Node *next_node = rem_n->next();
-            // rem_n_prev也指向下一个节点
-            // release_assign_node_ptr的作用: rem_n_prev = 不带状态的next_node指针 + rem_n_prev的状态
+            // 更新链表指针
+            // 把 prev -> current -> next
+            // 变成 prev -> next
             bucket->release_assign_node_ptr(rem_n_prev, next_node);
             rem_n = next_node;
             if (dels == StackBufferSize) {
@@ -187,29 +188,5 @@ delete_in_bucket(Thread *thread, Bucket *bucket, LOOKUP_FUNC &lookup_f) {
             DEBUG_ONLY(ndel[node_it] = (Node *) POISON_PTR;)
         }
     }
-}
-
-template<typename CONFIG, MEMFLAGS F>
-inline void ConcurrentHashTable<CONFIG, F>::
-Bucket::release_assign_node_ptr(
-        typename ConcurrentHashTable<CONFIG, F>::Node *const volatile *dst,
-        typename ConcurrentHashTable<CONFIG, F>::Node *node) const {
-    assert(is_locked(), "Must be locked.");
-    Node **tmp = (Node **) dst;
-    // clear_set_state函数返回: 把node的旧状态清除, 并设置为dst的状态的指针
-    Atomic::release_store(tmp, clear_set_state(node, *dst));
-}
-
-// --- src/hotspot/share/utilities/concurrentHashTable.hpp --- //
-
-static Node *clear_set_state(Node *node, Node *state) {
-    // 返回的指针: 把node的旧状态清除, 并设置为state的状态
-    // 示例:
-    // node: 10111001
-    // state: 10101011
-    // clear_state(node): 10111000
-    // get_state(state): 00000011
-    // 最终: 10111000 ^ 00000011 = 10111011
-    return (Node *) (((uintptr_t) clear_state(node)) ^ get_state(state));
 }
 ```

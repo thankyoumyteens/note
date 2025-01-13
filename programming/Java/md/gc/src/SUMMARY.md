@@ -14,6 +14,7 @@
 - [技巧](./jdk21/g1/impl/impl.md)
   - [RCU机制](./jdk21/g1/impl/rcu.md)
   - [根据哈希值计算索引时保证索引在数组内](./jdk21/g1/impl/log2_size.md)
+  - [删除链表节点](./jdk21/g1/impl/linked_list_del.md)
 
 - [内部数据结构](./jdk21/g1/ds/ds.md)
   - [GlobalCounter](./jdk21/g1/ds/global_counter.md)

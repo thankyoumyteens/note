@@ -114,6 +114,11 @@
   - [双轴图](./matplotlib/twinx.md)
   - [使用数学表达式](./matplotlib/tex.md)
 
+- [Pillow](./pillow/pillow.md)
+  - [安装](./pillow/install.md)
+  - [获取图片属性](./pillow/attr.md)
+  - [转换图片格式](./pillow/convert.md)
+
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)
 
