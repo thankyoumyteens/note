@@ -116,8 +116,14 @@
 
 - [Pillow](./pillow/pillow.md)
   - [安装](./pillow/install.md)
+  - [打开图片](./pillow/open.md)
   - [获取图片属性](./pillow/attr.md)
+  - [新建图片](./pillow/new.md)
   - [转换图片格式](./pillow/convert.md)
+  - [复制和粘贴矩形区域](./pillow/paste.md)
+  - [变换](./pillow/transform.md)
+    - [缩放](./pillow/resize.md)
+    - [旋转](./pillow/rotate.md)
 
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)
