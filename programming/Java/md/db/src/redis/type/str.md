@@ -23,6 +23,15 @@ setnx name "zhangsan"
 # 只有key存在时, 才设置
 set name "zhangsan" xx
 
+# 设置新值为zhangsan, 并返回旧值
+getset name "zhangsan"
+
+# 把!!!追加到name的旧值上
+append name "!!!"
+
+# 获取key为name的值的长度
+strlen name
+
 # 获取key为name的value
 get key
 

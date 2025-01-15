@@ -26,6 +26,7 @@
     - [新增元素](./jdk21/g1/ds/concurrent_hash_table/insert.md)
     - [删除元素](./jdk21/g1/ds/concurrent_hash_table/remove.md)
     - [扩容](./jdk21/g1/ds/concurrent_hash_table/grow.md)
+    - [缩容](./jdk21/g1/ds/concurrent_hash_table/shrink.md)
 
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)
