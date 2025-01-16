@@ -26,6 +26,12 @@ internal_grow(Thread *thread, size_t log2_size) {
     assert(_resize_lock_owner != thread, "Re-size lock held");
     return true;
 }
+```
+
+## 分配一块新内存
+
+```cpp
+// --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
 
 template<typename CONFIG, MEMFLAGS F>
 inline bool ConcurrentHashTable<CONFIG, F>::
@@ -51,6 +57,12 @@ internal_grow_prolog(Thread *thread, size_t log2_size) {
 
     return true;
 }
+```
+
+## 把原来的数据复制到新内存
+
+```cpp
+// --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
 
 template<typename CONFIG, MEMFLAGS F>
 inline void ConcurrentHashTable<CONFIG, F>::
@@ -101,5 +113,141 @@ internal_grow_range(Thread *thread, size_t start, size_t stop) {
                         _table->get_bucket(even_index)->first_ptr(), (Node *) POISON_PTR);
         )
     }
+}
+
+template<typename CONFIG, MEMFLAGS F>
+inline bool ConcurrentHashTable<CONFIG, F>::
+unzip_bucket(Thread *thread, InternalTable *old_table,
+             InternalTable *new_table, size_t even_index, size_t odd_index) {
+    // 把旧table中even_index索引位置的链表的所有节点
+    // 分散到新table中even_index和odd_index索引的两个链表中
+    // 新table:
+    // 整理前:  [0, 1, 2, 3, 4, 5, 6, 7]
+    //          ⭣           ⭣
+    //          x            x
+    //          x            x
+    //          x            x
+    //          x            x
+    //
+    // 整理后:  [0, 1, 2, 3, 4, 5, 6, 7]
+    //          ⭣           ⭣
+    //          x            x
+    //          x            x
+
+    Node *aux = old_table->get_bucket(even_index)->first();
+    if (aux == nullptr) {
+        return false;
+    }
+    Node *delete_me = nullptr;
+    Node *const volatile *even = new_table->get_bucket(even_index)->first_ptr();
+    Node *const volatile *odd = new_table->get_bucket(odd_index)->first_ptr();
+    while (aux != nullptr) {
+        bool dead_hash = false;
+        // 获取hash
+        size_t aux_hash = CONFIG::get_hash(*aux->value(), &dead_hash);
+        Node *aux_next = aux->next();
+        if (dead_hash) { // 节点不再使用
+            delete_me = aux;
+            // 删除这个节点
+            new_table->get_bucket(odd_index)->release_assign_node_ptr(odd,
+                                                                      aux_next);
+            new_table->get_bucket(even_index)->release_assign_node_ptr(even,
+                                                                       aux_next);
+        } else {
+            // 计算索引
+            size_t aux_index = bucket_idx_hash(new_table, aux_hash);
+            if (aux_index == even_index) {
+                //             [0, 1, 2, 3, 4, 5, 6, 7]
+                //              ⭣          ⭣
+                //    even⭢    x           x    ⭠odd
+                //              x           x
+                //              x           x
+                //              x           x
+                //
+                //             [0, 1, 2, 3, 4, 5, 6, 7]
+                //              ⭣          ⭣
+                //              x           x    ⭠odd
+                //     even⭢   x           x
+                //              x           x
+                //              x
+
+                // release_assign_node_ptr函数改的是odd指向的指针的地址
+                // 相当于把odd和new_table->get_bucket(odd_index)->_first一起改了
+                new_table->get_bucket(odd_index)->release_assign_node_ptr(odd,
+                                                                          aux_next);
+                // even指针后移一个节点
+                even = aux->next_ptr();
+            } else if (aux_index == odd_index) {
+                //             [0, 1, 2, 3, 4, 5, 6, 7]
+                //              ⭣          ⭣
+                //    even⭢    x           x    ⭠odd
+                //              x           x
+                //              x           x
+                //              x           x
+                //
+                //             [0, 1, 2, 3, 4, 5, 6, 7]
+                //              ⭣          ⭣
+                //     even⭢   x           x
+                //              x           x    ⭠odd
+                //              x           x
+                //                          x
+
+                new_table->get_bucket(even_index)->release_assign_node_ptr(even,
+                                                                           aux_next);
+                odd = aux->next_ptr();
+            } else {
+                fatal("aux_index does not match even or odd indices");
+            }
+        }
+        aux = aux_next;
+
+        write_synchonize_on_visible_epoch(thread);
+        // 清理删除的节点的内存
+        if (delete_me != nullptr) {
+            Node::destroy_node(_context, delete_me);
+            delete_me = nullptr;
+        }
+    }
+    return true;
+}
+```
+
+## 发布新内存并清理旧内存
+
+```cpp
+// --- src/hotspot/share/utilities/concurrentHashTable.inline.hpp --- //
+
+template<typename CONFIG, MEMFLAGS F>
+inline void ConcurrentHashTable<CONFIG, F>::
+internal_grow_epilog(Thread *thread) {
+    assert(_resize_lock_owner == thread, "Should be locked");
+
+    // 用_table指向新内存
+    InternalTable *old_table = set_table_from_new();
+    unlock_resize_lock(thread);
+#ifdef ASSERT
+    for (size_t i = 0; i < old_table->_size; i++) {
+        assert(old_table->get_bucket(i++)->first() == POISON_PTR,
+               "No poison found");
+    }
+#endif
+    // 清理旧内存
+    delete old_table;
+}
+
+template<typename CONFIG, MEMFLAGS F>
+inline typename ConcurrentHashTable<CONFIG, F>::InternalTable *
+ConcurrentHashTable<CONFIG, F>::
+set_table_from_new() {
+    InternalTable *old_table = _table;
+    // 发布新内存, 以后的操作都在新内存上
+    // _table = _new_table;
+    Atomic::release_store(&_table, _new_table);
+    // 等待所有旧读线程完成
+    GlobalCounter::write_synchronize();
+    // 重置_new_table指针
+    _new_table = nullptr;
+    DEBUG_ONLY(_new_table = (InternalTable *) POISON_PTR;)
+    return old_table;
 }
 ```
