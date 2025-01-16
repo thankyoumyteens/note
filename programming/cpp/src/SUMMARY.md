@@ -3,6 +3,7 @@
 - [基础](./base/base.md)
   - [基本使用](./base/quick_start.md)
   - [变量](./base/variable.md)
+    - [静态局部变量](./base/static.md)
   - [常量](./base/const.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)

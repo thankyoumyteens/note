@@ -17,6 +17,16 @@
 \begin{align}
 & 给定二元函数 z = f(x, y), 其中定义域 D 为开区域, \\
 & 求函数 z = f(x, y) 在 D 上的极值即为无条件极值 \\
+\end{align}
+-->
+
+![](../img/td3_2.jpg)
+
+例题
+
+<!--
+\begin{align}
+& 求二元函数 z = f(x, y) = x^3 - 3x + y^2 +2y +2 的极值点和极值 \\
 \\
 \end{align}
 -->

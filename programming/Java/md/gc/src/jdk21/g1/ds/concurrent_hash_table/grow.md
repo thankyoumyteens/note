@@ -52,4 +52,54 @@ internal_grow_prolog(Thread *thread, size_t log2_size) {
     return true;
 }
 
+template<typename CONFIG, MEMFLAGS F>
+inline void ConcurrentHashTable<CONFIG, F>::
+internal_grow_range(Thread *thread, size_t start, size_t stop) {
+    assert(stop <= _table->_size, "Outside backing array");
+    assert(_new_table != nullptr, "Grow not proper setup before start");
+    // even_index的最高位都是0
+    // odd_index的最高位都是1
+    // 比如新table长度为8
+    // even_index:
+    //     0 (000)
+    //     1 (001)
+    //     2 (010)
+    //     3 (011)
+    // odd_index:
+    //     4 (100)
+    //     5 (101)
+    //     6 (110)
+    //     7 (111)
+    for (size_t even_index = start; even_index < stop; even_index++) {
+        Bucket *bucket = _table->get_bucket(even_index);
+
+        bucket->lock();
+
+        // 例子:
+        // _table->_size = 2, 扩容后 _new_table->_size = 4
+        // _new_table: [x, x, x, x]
+        // even_index = 0 时, odd_index = 2
+        size_t odd_index = even_index + _table->_size;
+        // 把旧table的值赋给新table
+        _new_table->get_buckets()[even_index] = *bucket;
+        _new_table->get_buckets()[odd_index] = *bucket;
+
+        // 把bucket的锁转移到新table上
+        // 旧table的bucket的状态改为redirect
+        bucket->redirect();
+
+        // 重新分配新table中的节点
+        if (!unzip_bucket(thread, _table, _new_table, even_index, odd_index)) {
+            DEBUG_ONLY(GlobalCounter::write_synchronize();)
+        }
+
+        _new_table->get_bucket(even_index)->unlock();
+        _new_table->get_bucket(odd_index)->unlock();
+
+        DEBUG_ONLY(
+                bucket->release_assign_node_ptr(
+                        _table->get_bucket(even_index)->first_ptr(), (Node *) POISON_PTR);
+        )
+    }
+}
 ```
