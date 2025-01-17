@@ -27,6 +27,7 @@
     - [删除元素](./jdk21/g1/ds/concurrent_hash_table/remove.md)
     - [扩容](./jdk21/g1/ds/concurrent_hash_table/grow.md)
     - [缩容](./jdk21/g1/ds/concurrent_hash_table/shrink.md)
+  - [G1CardSet](./jdk21/g1/ds/g1_card_set/g1_card_set.md)
 
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)

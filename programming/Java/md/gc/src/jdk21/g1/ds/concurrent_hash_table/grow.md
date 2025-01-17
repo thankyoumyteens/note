@@ -212,6 +212,14 @@ unzip_bucket(Thread *thread, InternalTable *old_table,
 }
 ```
 
+while 循环外:
+
+![](../../../../img/grow1.jpg)
+
+aux_index == even_index:
+
+![](../../../../img/grow2.jpg)
+
 ## 发布新内存并清理旧内存
 
 ```cpp

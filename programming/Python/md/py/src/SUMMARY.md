@@ -124,6 +124,8 @@
   - [变换](./pillow/transform.md)
     - [缩放](./pillow/resize.md)
     - [旋转](./pillow/rotate.md)
+    - [翻转](./pillow/flip.md)
+    - [颜色](./pillow/mode.md)
 
 - [pdf](./pdf/pdf.md)
   - [删除指定页](./pdf/delete_page.md)
