@@ -30,7 +30,7 @@ private:
 };
 ```
 
-ContainerPtr 用来表示给定覆盖区域的卡片集容器(card set container)类型, 它在最低有效位(LSBs)中对一种类型进行编码，以此来区分不同的容器类型及状态。
+ContainerPtr 用来表示 card set container 的类型(一个 container 对应一个分区, G1CardSet 包含许多 container), 它在最低有效位(LSBs)中对一种类型进行编码，以此来区分不同的容器类型及状态。
 
 - `0...00000` free(空闲状态): 这个容器是空的
 - `1...11111` full(已满状态): 对应区域内的卡片都已经被包含在这个容器之中了，是一种完全填满的状态

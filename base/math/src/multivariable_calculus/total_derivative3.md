@@ -13,6 +13,8 @@
 
 ## 无条件极值
 
+无条件极值一定是二元函数的。
+
 <!--
 \begin{align}
 & 给定二元函数 z = f(x, y), 其中定义域 D 为开区域, \\
@@ -63,3 +65,21 @@ C = 2
 -->
 
 ![](../img/td3_3.jpg)
+
+## 条件极值
+
+<!--
+\begin{align}
+& 求函数 z = f(x, y) 在等式条件 \varphi (x, y) = 0 下的极值即为条件极值 \\
+& 步骤: \\
+& 第一步, 令 F(x, y, \lambda) = f(x, y) + \lambda \varphi (x, y) \\
+& 第二步, 求三个偏导数, 令 \begin{cases}
+F_x = f_x(x, y) + \lambda \varphi _x(x, y) = 0 \\
+F_y = f_y(x, y) + \lambda \varphi _y(x, y) = 0 \\
+F_{\lambda} = \varphi (x, y) = 0
+\end{cases} \\
+& 解出 x, y 从而得到可能的极值点 \\
+\end{align}
+-->
+
+![](../img/td3_4.jpg)

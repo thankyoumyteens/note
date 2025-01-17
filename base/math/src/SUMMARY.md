@@ -44,3 +44,4 @@
     - [全微分](./multivariable_calculus/total_derivative.md)
     - [求偏导法则](./multivariable_calculus/total_derivative2.md)
     - [多元函数的极值](./multivariable_calculus/total_derivative3.md)
+  - [二重积分](./multivariable_calculus/double_integral.md)
