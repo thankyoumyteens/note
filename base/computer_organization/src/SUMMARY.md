@@ -43,3 +43,4 @@
   - [指令流水线](./cpu/line.md)
 
 - [总线](./bus/bus.md)
+  - [系统总线的结构](./bus/struct.md)  

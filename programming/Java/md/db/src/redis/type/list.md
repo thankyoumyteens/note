@@ -28,12 +28,26 @@ lrem students 3 "Tom"
 # 从右到左, 删除3个Tom
 lrem students -3 "Tom"
 
-# 相当于 students.subList(1, 3)
+# 相当于 students = students.subList(1, 3)
 ltrim students 1 2
 ```
 
 ## 查询
 
 ```sh
+# 获取从左到右索引范围是[1, 2]的所有元素
+lrange students 1 2
 
+# 获取索引是1的元素
+lindex students 1
+
+# 获取列表的长度
+llen students
+```
+
+## 修改
+
+```sh
+# 把索引是1的元素值改为Tom
+lset students 1 "Tom"
 ```
