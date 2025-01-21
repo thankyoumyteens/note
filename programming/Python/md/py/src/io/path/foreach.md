@@ -8,10 +8,8 @@ from pathlib import Path
 base_path = Path('/home')
 
 # 获取直接下级文件和文件夹
-for path_obj in base_path.iterdir():
-    # /home/demo
-    # /home/1.txt
-    print(str(path_obj))
+for path_obj in base_path.glob('*'):
+    print(path_obj)
 ```
 
 ## 获取所有下级文件和文件夹

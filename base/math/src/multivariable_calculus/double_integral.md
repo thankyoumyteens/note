@@ -16,3 +16,30 @@
 -->
 
 ![](../img/dbi_1.jpg)
+
+## 重积分的性质
+
+<!--
+\begin{align}
+& 1. \iint\limits_{D} \left [ k_1 f(x, y) + k_2 g(x, y) \right ] \mathrm{d}\sigma
+= k_1 \iint\limits_{D} f(x, y) \mathrm{d}\sigma + k_2 \iint\limits_{D} g(x, y) \mathrm{d}\sigma \\
+& 2. 设 D 由 D_1, D_2 构成, 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma
+= \iint\limits_{D_1} f(x, y) \mathrm{d}\sigma + \iint\limits_{D_2} f(x, y) \mathrm{d}\sigma \\
+& 3. 设平面有界闭区域 D 的面积为 A, 则 \iint\limits_{D} 1 \mathrm{d}\sigma = A \\
+& 4.1. 设平面有界闭区域 D 关于 y 轴对称, 其中右侧区域为 D_1 \\
+& \;\;\;\;\,\, 若 f(-x, y) = - f(x, y), 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma = 0 \\
+& \;\;\;\;\,\, 若 f(-x, y) = f(x, y), 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma
+= 2 \iint\limits_{D_1} f(x, y) \mathrm{d}\sigma \\
+& 4.2. 设平面有界闭区域 D 关于 x 轴对称, 其中右侧区域为 D_1 \\
+& \;\;\;\;\,\, 若 f(x, -y) = - f(x, y), 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma = 0 \\
+& \;\;\;\;\,\, 若 f(x, -y) = f(x, y), 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma
+= 2 \iint\limits_{D_1} f(x, y) \mathrm{d}\sigma \\
+& 4.3. 设平面有界闭区域 D 关于 y = x 对称, 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma
+= \iint\limits_{D} f(y, x) \mathrm{d}\sigma \\
+& 5. 中值定理: 设二元函数 f(x, y) 在平面有界闭区域 D 上连续, 且 D 的面积为 A, \\
+& \;\,\,\, 则存在 (\xi, \eta) \in D, 使得 \iint\limits_{D} f(x, y) \mathrm{d}\sigma
+= f(\xi, \eta) A \\
+\end{align}
+-->
+
+![](../img/dbi_2.jpg)
