@@ -62,5 +62,6 @@
     - [字符串](./redis/type/str.md)
     - [hash](./redis/type/hash.md)
     - [list](./redis/type/list.md)
+    - [set](./redis/type/set.md)
   - [分布式锁](./redis/lock/lock.md)
     - [RedisTemplate实现](./redis/lock/redis_template.md)
