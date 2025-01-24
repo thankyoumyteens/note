@@ -45,3 +45,4 @@
 - [总线](./bus/bus.md)
   - [系统总线的结构](./bus/struct.md)
   - [总线的性能指标](./bus/indicators.md)
+  - [总线仲裁](./bus/arbitration.md)

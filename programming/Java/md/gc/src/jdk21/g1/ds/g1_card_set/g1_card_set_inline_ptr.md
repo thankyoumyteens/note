@@ -24,3 +24,45 @@ G1CardSetInlinePtr 类是一个用来把一些卡片索引编码到 ContainerPtr
 ```
 
 ## G1CardSetInlinePtr
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSetContainers.hpp --- //
+
+class G1CardSetInlinePtr : public StackObj {
+    using ContainerPtr = G1CardSet::ContainerPtr;
+
+    // 容器的地址(指向容器指针的指针)
+    ContainerPtr volatile *_value_addr;
+    // 容器(指向容器的指针)
+    ContainerPtr _value;
+
+    // 卡片索引个数
+    static const uint SizeFieldLen = 3;
+    // 标识
+    static const uint SizeFieldPos = 2;
+    // 指针头部大小是5位
+    static const uint HeaderSize = G1CardSet::ContainerPtrHeaderSize + SizeFieldLen;
+
+    // 指针的大小(32位或64位)
+    static const uint BitsInValue = sizeof(ContainerPtr) * BitsPerByte;
+
+    // 卡片索引个数的掩码
+    // 0000000000000000000000000000000000000000000000000000000000011100
+    static const uintptr_t SizeFieldMask = (((uint) 1 << SizeFieldLen) - 1) << SizeFieldPos;
+
+    // 根据下标(从0开始)获取指定卡片索引在指针中的位置(从第几个比特开始)
+    // 比如要获取card_index1的位置, 则传入 idx = 1, bits_per_card = 14, 返回 1 * 14 + 5 = 19
+    static uint8_t card_pos_for(uint const idx, uint const bits_per_card) {
+        return (idx * bits_per_card + HeaderSize);
+    }
+
+    // 获取指定下标的卡片索引
+    // value: 内联指针卡片模式容器
+    static uint card_at(ContainerPtr value, uint const idx, uint const bits_per_card) {
+        uint8_t card_pos = card_pos_for(idx, bits_per_card);
+        // 根据卡片索引的位置, 把它的值取出来
+        uint result = ((uintptr_t) value >> card_pos) & (((uintptr_t) 1 << bits_per_card) - 1);
+        return result;
+    }
+};
+```

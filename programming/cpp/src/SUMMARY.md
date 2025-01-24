@@ -5,10 +5,11 @@
   - [变量](./base/variable.md)
     - [静态局部变量](./base/static.md)
   - [常量](./base/const.md)
+  - [字面量](./base/literal/literal.md)
+    - [原始字面量](./base/literal/r.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
-  - [字面量](./base/literal/literal.md)
     - [字符串字面量](./base/literal/str.md)
   - [数据类型](./base/typea.md)
     - [基本数据类型](./base/type.md)
