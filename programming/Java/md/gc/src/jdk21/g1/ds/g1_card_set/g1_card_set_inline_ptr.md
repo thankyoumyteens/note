@@ -50,7 +50,7 @@ class G1CardSetInlinePtr : public StackObj {
     // 0000000000000000000000000000000000000000000000000000000000011100
     static const uintptr_t SizeFieldMask = (((uint) 1 << SizeFieldLen) - 1) << SizeFieldPos;
 
-    // 根据下标(从0开始)获取指定卡片索引在指针中的位置(从第几个比特开始)
+    // 根据下标(从0开始)获取指定卡片索引在指针中的起始位置(从第几个比特开始)
     // 比如要获取card_index1的位置, 则传入 idx = 1, bits_per_card = 14, 返回 1 * 14 + 5 = 19
     static uint8_t card_pos_for(uint const idx, uint const bits_per_card) {
         return (idx * bits_per_card + HeaderSize);
@@ -64,5 +64,54 @@ class G1CardSetInlinePtr : public StackObj {
         uint result = ((uintptr_t) value >> card_pos) & (((uintptr_t) 1 << bits_per_card) - 1);
         return result;
     }
+
+public:
+    // 获取指针中卡片索引的个数
+    // 例如个数为7时, 返回 111:
+    // 第一步: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX111XX
+    // 第二步: 00000000000000000000000000000000000000000000000000000000000111XX
+    // 第三步: 0000000000000000000000000000000000000000000000000000000000000111
+    static uint num_cards_in(ContainerPtr value) {
+        return ((uintptr_t) value & SizeFieldMask) >> SizeFieldPos;
+    }
 };
+```
+
+## 查找
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSetContainers.inline.hpp --- //
+
+// 查找卡片索引是否在指针中, 如果存在则返回卡片索引在指针中的下标, 否则返回num_cards
+// card_idx: 要查找的卡片索引
+// bits_per_card: 每个卡片索引占用的比特数
+// start_at: 从哪个下标开始查找
+// num_cards: 查找几个卡片索引后停止查找
+inline uint G1CardSetInlinePtr::find(uint card_idx, uint bits_per_card, uint start_at, uint num_cards) {
+    assert(start_at < num_cards, "Precondition!");
+
+    // 卡片索引掩码
+    // 例如每个卡片索引的长度为14比特, 则card_mask的值如下:
+    // 0000000000000000000000000000000000000000000000000011111111111111
+    uintptr_t const card_mask = (1 << bits_per_card) - 1;
+    // 找到start_at下标的位置, 并把指针中低于它的比特移除
+    // 比如_value是:
+    // ...|card_index2|card_index1|card_index0|11100
+    // start_at是1, 处理后的value是:
+    // ...|card_index2|card_index1
+    uintptr_t value = ((uintptr_t) _value) >> card_pos_for(start_at, bits_per_card);
+
+    // 遍历指针, 查找card_idx是否在指针中
+    for (uint cur_idx = start_at; cur_idx < num_cards; cur_idx++) {
+        if ((value & card_mask) == card_idx) {
+            // 找到了, 返回下标
+            return cur_idx;
+        }
+        // 准备遍历下一项
+        // ...|card_index2|card_index1 --> ...|card_index2
+        value >>= bits_per_card;
+    }
+    // 没找到, 返回num_cards
+    return num_cards;
+}
 ```
