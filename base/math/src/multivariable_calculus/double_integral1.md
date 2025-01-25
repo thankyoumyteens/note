@@ -61,5 +61,47 @@ D = \left \{ (x, y) | y \le x \le 1, 0 \le y \le 1 \right \} \\
 例题 2
 
 <!--
+\begin{align}
+& 计算 I = \iint\limits_{D} x \mathrm{d}x \mathrm{d}y, 其中 D 由 x = y^2 与 y = x - 2 所围成 \\
+\\
+& {\color{Green} // 把 x = y^2 代入到 y = x - 2 得到 y = y^2 - 2} \\
+& {\color{Green} // 整理得到 y^2 - y - 2 = 0} \\
+& {\color{Green} // 因式分解 (y - 2)(y + 1) = 0} \\
+& {\color{Green} // 解出 y = 2 或 -1} \\
+& {\color{Green} // 分别代入随便一个方程得到 x = 4 或 1} \\
+& 求出 x = y^2 与 y = x - 2 的两个交点: A (1, -1), B (4, 2) \\
+\\
+& {\color{Green} // 由于 x \le 1 时, 一个 x 对应两个 y, 所以用 x = 1 把 D 分成两块} \\
+& {\color{Green} // 左边是 D_1, 右边是 D_2} \\
+& 方法1, 将区域 D 表示为 X 型区域: \\
+& \; D_1 = \left \{ (x, y) | 0 \le x \le 1, - \sqrt{x} \le y \le \sqrt{x} \right \} \\
+& \; D_2 = \left \{ (x, y) | 1 \le x \le 4, x - 2 \le y \le \sqrt{x} \right \} \\
+& 则 \iint\limits_{D} x \mathrm{d}x \mathrm{d}y =
+\int_{0}^{1} \mathrm{d}x \int_{- \sqrt{x}}^{\sqrt{x}} x \mathrm{d}y +
+\int_{1}^{4} \mathrm{d}x \int_{x - 2}^{\sqrt{x}} x \mathrm{d}y \\
+& = \int_{0}^{1} x \mathrm{d}x \int_{- \sqrt{x}}^{\sqrt{x}} 1 \mathrm{d}y +
+\int_{1}^{4} x \mathrm{d}x \int_{x - 2}^{\sqrt{x}} 1 \mathrm{d}y \\
+& = 2 \int_{0}^{1} x \sqrt{x} \mathrm{d}x + \int_{1}^{4} x(\sqrt{x} - x + 2) \mathrm{d}x \\
+& = \frac{36}{5} \\
+\\
+& 方法2, 将区域 D 表示为 Y 型区域: \\
+& \; D = \left \{ (x, y) | y^2 \le x \le y + 2, -1 \le y \le 2 \right \} \\
+& 则 \iint\limits_{D} x \mathrm{d}x \mathrm{d}y =
+\int_{-1}^{2} \mathrm{d}y \int_{y^2}^{y + 2} x \mathrm{d}x \\
+& = \frac{36}{5} \\
+\end{align}
+-->
 
+![](../img/dbi1_3.jpg)
+
+![](../img/dbi1_3_1.png)
+
+例题 3
+
+<!--
+\begin{align}
+& 计算 I = \int_{0}^{2} \mathrm{d}y \int_{y}^{2} e^{-x^2} \mathrm{d}x \\
+\\
+
+\end{align}
 -->
