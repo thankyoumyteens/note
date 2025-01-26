@@ -115,3 +115,52 @@ inline uint G1CardSetInlinePtr::find(uint card_idx, uint bits_per_card, uint sta
     return num_cards;
 }
 ```
+
+## 合并
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSetContainers.inline.hpp --- //
+
+// 向指针中添加卡片索引, 并返回新指针
+// orig_value: 指针
+// card_in_region: 卡片索引
+// idx: card_in_region要添加到哪个下标(值为当前卡片索引总数, 即追加到末尾)
+// bits_per_card: 每个卡片索引占多少比特
+inline G1CardSetInlinePtr::ContainerPtr
+G1CardSetInlinePtr::merge(ContainerPtr orig_value, uint card_in_region, uint idx, uint bits_per_card) {
+    assert((idx & (SizeFieldMask >> SizeFieldPos)) == idx, "Index %u too large to fit into size field", idx);
+    assert(card_in_region < ((uint) 1 << bits_per_card), "Card %u too large to fit into card value field",
+           card_in_region);
+
+    // 下标为idx的卡片索引在指针中的位置
+    // 传进来的idx是指针中卡片索引的个数, 所以idx就是新卡片索引要添加到的位置:
+    //        idx
+    //         ⭣
+    // ...unused|card_index2|card_index1|card_index0|01100
+    uint8_t card_pos = card_pos_for(idx, bits_per_card);
+    assert(card_pos + bits_per_card < BitsInValue, "Putting card at pos %u with %u bits would extend beyond pointer",
+           card_pos, bits_per_card);
+
+    // 下标为idx的卡片索引的掩码
+    // 例如每个卡片索引的长度为14比特, (1 << bits_per_card) - 1:
+    // 0000000000000000000000000000000000000000000000000011111111111111
+    // card_pos = 9时, mask:
+    // 0000000000000000000000000000000111111111111110000000000000000000
+    uintptr_t mask = ((((uintptr_t) 1 << bits_per_card) - 1) << card_pos);
+    // 新卡片索引要添加到的位置(在unused中)的比特需要全为0
+    assert(((uintptr_t) orig_value & mask) == 0,
+           "The bits in the new range should be empty; orig_value " PTR_FORMAT " mask " PTR_FORMAT, p2i(orig_value),
+           mask);
+
+    // (idx + 1) << SizeFieldPos: 计算添加card_in_region后, 指针中的卡片索引总数(idx时最后一个元素的下标, 它加一就是总数)
+    // card_in_region << card_pos: 把card_in_region放到它在指针中应该在的位置
+    // 例, 当前指针里有3个卡片索引, card_in_region是要添加的第4个
+    // (idx + 1) << SizeFieldPos: 000 00000000000000 00000000000000 00000000000000 00000000000000 100 XX
+    // card_in_region << card_pos: 000 XXXXXXXXXXXXXX 00000000000000 00000000000000 00000000000000 000 XX
+    uintptr_t value = ((uintptr_t) (idx + 1) << SizeFieldPos) | ((uintptr_t) card_in_region << card_pos);
+    // 把卡片索引总数和card_in_region写入指针
+    // res: 000 XXXXXXXXXXXXXX XXXXXXXXXXXXXX XXXXXXXXXXXXXX XXXXXXXXXXXXXX 100 XX
+    uintptr_t res = (((uintptr_t) orig_value & ~SizeFieldMask) | value);
+    return (ContainerPtr) res;
+}
+```

@@ -96,12 +96,36 @@ D = \left \{ (x, y) | y \le x \le 1, 0 \le y \le 1 \right \} \\
 
 ![](../img/dbi1_3_1.png)
 
+<!--
+\begin{align}
+& 被积函数积不出来的情况: \\
+& \; 1. x^{偶次方} e^{\pm x^2} \mathrm{d}x \\
+& \; 2. e^{\frac{K}{x}} \mathrm{d}x \\
+& \; 3. \cos \frac{K}{x} \mathrm{d}x \\
+& \; 4. \sin \frac{K}{x} \mathrm{d}x \\
+\end{align}
+-->
+
+![](../img/dbi1_4.jpg)
+
 例题 3
 
 <!--
 \begin{align}
 & 计算 I = \int_{0}^{2} \mathrm{d}y \int_{y}^{2} e^{-x^2} \mathrm{d}x \\
 \\
-
+& {\color{Green} // \int_{y}^{2} e^{-x^2} \mathrm{d}x 积不出来} \\
+& {\color{Green} // Y 型区域积不出来, 需要换成 X 型区域} \\
+& {\color{Green} // D 是 x = 2 和 x = y 所围成的} \\
+& {\color{Green} // 把 D 改成向 x 轴投影} \\
+& \; \int_{0}^{2} \mathrm{d}x \int_{0}^{x} e^{-x^2} \mathrm{d}y \\
+& = \int_{0}^{2} e^{-x^2} \mathrm{d}x \int_{0}^{x} 1 \mathrm{d}y \\
+& = \int_{0}^{2} x e^{-x^2} \mathrm{d}x \\
+& = - \frac{1}{2} e^{-x^2} \big|_{0}^{2} \\
+& = \frac{1}{2} (1 - e^{-4}) \\
 \end{align}
 -->
+
+![](../img/dbi1_5.jpg)
+
+## 极坐标法
