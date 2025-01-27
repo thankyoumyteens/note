@@ -129,3 +129,33 @@ D = \left \{ (x, y) | y \le x \le 1, 0 \le y \le 1 \right \} \\
 ![](../img/dbi1_5.jpg)
 
 ## 极坐标法
+
+<!--
+\begin{align}
+& 计算二重积分时, 若具有如下两个特征之一, 一般使用极坐标法: \\
+& \; 1. 积分区域 D 的边界曲线含 x^2 + y^2 \\
+& \; 2. 被积函数 f(x, y) 中含 x^2 + y^2 \\
+\\
+& 令 \begin{cases}
+x = r \cos \theta \\
+y = r \sin \theta
+\end{cases}, (\alpha \le \theta \le \beta, \varphi _1(\theta) \le r \le \varphi _2(\theta)) \\
+& 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma =
+\int_{\alpha}^{\beta} \mathrm{d}\theta \int_{\varphi _1(\theta)}^{\varphi _2(\theta)}
+f(r \cos \theta, r \sin \theta) r \mathrm{d}r \\
+\end{align}
+-->
+
+![](../img/dbi1_6.jpg)
+
+![](../img/dbi1_6_1.png)
+
+例题 1
+
+<!--
+\begin{align}
+& 计算 I = \iint\limits_{D} f(x, y) \mathrm{d}\sigma, 其中 D 为圆域 x^2 + y^2 \le 4 \\
+\\
+
+\end{align}
+-->

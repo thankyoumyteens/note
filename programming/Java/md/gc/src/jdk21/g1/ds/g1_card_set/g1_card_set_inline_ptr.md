@@ -164,3 +164,44 @@ G1CardSetInlinePtr::merge(ContainerPtr orig_value, uint card_in_region, uint idx
     return (ContainerPtr) res;
 }
 ```
+
+## 添加卡片索引
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSetContainers.inline.hpp --- //
+
+inline G1AddCardResult G1CardSetInlinePtr::add(uint card_idx, uint bits_per_card, uint max_cards_in_inline_ptr) {
+    assert(_value_addr != nullptr, "No value address available, cannot add to set.");
+
+    uint cur_idx = 0;
+    while (true) {
+        // 获取指针中卡片索引的个数
+        uint num_cards = num_cards_in(_value);
+        if (num_cards > 0) {
+            // 查找卡片索引是否在指针中
+            cur_idx = find(card_idx, bits_per_card, cur_idx, num_cards);
+        }
+        if (cur_idx < num_cards) {
+            // 卡片索引已经在指针中, 返回Found
+            return Found;
+        }
+        if (num_cards >= max_cards_in_inline_ptr) {
+            // 指针空间不足
+            return Overflow;
+        }
+        // 向指针中添加卡片索引, 并返回新指针
+        ContainerPtr new_value = merge(_value, card_idx, num_cards, bits_per_card);
+        // 把_value更新为新的指针
+        ContainerPtr old_value = Atomic::cmpxchg(_value_addr, _value, new_value, memory_order_relaxed);
+        if (_value == old_value) {
+            // 成功
+            return Added;
+        }
+        // 把_value重置为原来的指针, 等下一轮循环重试
+        _value = old_value;
+        if (G1CardSet::container_type(_value) != G1CardSet::ContainerInlinePtr) {
+            return Overflow;
+        }
+    }
+}
+```
