@@ -154,7 +154,45 @@ f(r \cos \theta, r \sin \theta) r \mathrm{d}r \\
 
 <!--
 \begin{align}
-& 计算 I = \iint\limits_{D} f(x, y) \mathrm{d}\sigma, 其中 D 为圆域 x^2 + y^2 \le 4 \\
+& 计算 I = \iint\limits_{D} (x^2 + 3xy) \mathrm{d}\sigma, 其中 D 为圆域 x^2 + y^2 \le 4 \\
+\\
+& I = \iint\limits_{D} (x^2 + 3xy) \mathrm{d}\sigma \\
+& \;\; = \iint\limits_{D} x^2 \mathrm{d}\sigma + \iint\limits_{D} 3xy \mathrm{d}\sigma \\
+& {\color{Green} // D 关于 x 轴对称, 根据奇偶性:} \\
+& {\color{Green} // 若 f(x, -y) = - f(x, y), 则 \iint\limits_{D} f(x, y) \mathrm{d}\sigma = 0} \\
+& \;\; = \iint\limits_{D} x^2 \mathrm{d}\sigma + 0 \\
+& \;\; = \iint\limits_{D} x^2 \mathrm{d}\sigma \\
+& {\color{Green} // D 也关于 y = x 对称, 根据奇偶性:} \\
+& {\color{Green} // \iint\limits_{D} f(x, y) \mathrm{d}\sigma
+= \iint\limits_{D} f(y, x) \mathrm{d}\sigma} \\
+& \;\; = \iint\limits_{D} y^2 \mathrm{d}\sigma \\
+& 2I = \iint\limits_{D} x^2 \mathrm{d}\sigma + \iint\limits_{D} y^2 \mathrm{d}\sigma \\
+& I = \frac{1}{2} \iint\limits_{D} (x^2 + y^2) \mathrm{d}\sigma \\
+& {\color{Green} // 满足使用极坐标法的两个特征} \\
+& 令 \begin{cases}
+x = r \cos \theta \\
+y = r \sin \theta
+\end{cases}, (0 \le \theta \le 2 \pi, 0 \le r \le 2) \\
+& I = \frac{1}{2} \int_{0}^{2 \pi} \mathrm{d}\theta \int_{0}^{2}
+[(r \cos \theta)^2 + (r \sin \theta)^2] r \mathrm{d}r \\
+& \;\; = \frac{1}{2} \int_{0}^{2 \pi} \mathrm{d}\theta \int_{0}^{2}
+(r^2 \cos \theta ^2 + r^2 \sin \theta ^2) r \mathrm{d}r \\
+& \;\; = \frac{1}{2} \int_{0}^{2 \pi} \mathrm{d}\theta \int_{0}^{2}
+r^2 (\cos \theta ^2 + \sin \theta ^2) r \mathrm{d}r \\
+& \;\; = \frac{1}{2} \int_{0}^{2 \pi} \mathrm{d}\theta \int_{0}^{2}
+r^3 \mathrm{d}r \\
+& \;\; = 2 \cdot 2 \pi \\
+& \;\; = 4 \pi \\
+\end{align}
+-->
+
+![](../img/dbi1_7.jpg)
+
+例题 2
+
+<!--
+\begin{align}
+& 计算 I = \iint\limits_{D} x^2 \mathrm{d}\sigma, D 由 y = \sqrt{2x - x^2} 和 x 轴围成 \\
 \\
 
 \end{align}
