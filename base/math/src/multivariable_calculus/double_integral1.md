@@ -194,6 +194,56 @@ r^3 \mathrm{d}r \\
 \begin{align}
 & 计算 I = \iint\limits_{D} x^2 \mathrm{d}\sigma, D 由 y = \sqrt{2x - x^2} 和 x 轴围成 \\
 \\
-
+& {\color{Green} // y = \sqrt{2x - x^2} \Rightarrow x^2 + y^2 = 2x} \\
+& {\color{Green} // 满足使用极坐标法的两个特征} \\
+& 令 \begin{cases}
+x = r \cos \theta \\
+y = r \sin \theta
+\end{cases}, \\
+& {\color{Green} // x^2 + y^2 = 2x, 代入得到 r^2 = 2r \cos \theta, 所以 r = 2 \cos \theta} \\
+& (0 \le \theta \le \frac{\pi}{2}, 0 \le r \le 2 \cos \theta) \\
+& I = \int_{0}^{\frac{\pi}{2}} \mathrm{d}\theta \int_{0}^{2 \cos \theta}
+(r \cos \theta)^2 r \mathrm{d}r \\
+& \;\; = \int_{0}^{\frac{\pi}{2}} \mathrm{d}\theta \int_{0}^{2 \cos \theta}
+r^3 \mathrm{d}r \\
+& \;\; = \int_{0}^{\frac{\pi}{2}} \cos ^2 \theta \mathrm{d}\theta \int_{0}^{2 \cos \theta}
+r^3 \mathrm{d}r \\
+& \;\; = \int_{0}^{\frac{\pi}{2}} \cos ^2 \theta \cdot \frac{16 \cos ^4 \theta}{4} \mathrm{d}\theta \\
+& \;\; = 4 \int_{0}^{\frac{\pi}{2}} \cos ^6 \theta \mathrm{d}\theta \\
+& {\color{Green} // 三角函数的定积分性质} \\
+& \;\; = 4 \times \frac{5}{6} \times \frac{3}{4} \times \frac{1}{2} \times \frac{\pi}{2} \\
 \end{align}
 -->
+
+![](../img/dbi1_8.jpg)
+
+<!--
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 10000)
+y = np.sqrt(2 * x - x * x)
+
+fig = plt.figure()
+
+# 添加一个坐标轴
+ax_main = fig.add_axes((0.1, 0.1, 0.8, 0.8))
+
+# 设置x轴的刻度
+ax_main.set_xticks([0, 1, 2, 3])
+
+# 设置y轴的刻度
+ax_main.set_yticks([0, 1, 2, 3])
+
+# 手动设置x轴范围
+ax_main.set_xlim(left=0, right=3)
+# 手动设置y轴范围
+ax_main.set_ylim(bottom=0, top=3)
+
+# 绘制图像
+ax_main.plot(x, y)
+
+plt.show()
+-->
+
+![](../img/dbi1_8_1.png)
