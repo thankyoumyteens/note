@@ -64,5 +64,6 @@
     - [list](./redis/type/list.md)
     - [set](./redis/type/set.md)
     - [zset](./redis/type/zset.md)
+  - [慢查询](./redis/process.md)
   - [分布式锁](./redis/lock/lock.md)
     - [RedisTemplate实现](./redis/lock/redis_template.md)
