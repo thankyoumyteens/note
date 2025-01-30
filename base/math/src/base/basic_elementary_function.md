@@ -15,6 +15,8 @@
 ![](../img/bef2.jpg)
 ![](../img/bef2_1.jpg)
 
+![](../img/ex.jpg)
+
 ## 对数函数(ogarithmic function)
 
 <!--
