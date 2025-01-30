@@ -165,7 +165,7 @@ G1CardSetInlinePtr::merge(ContainerPtr orig_value, uint card_in_region, uint idx
 }
 ```
 
-## 添加卡片索引
+## 添加
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CardSetContainers.inline.hpp --- //
