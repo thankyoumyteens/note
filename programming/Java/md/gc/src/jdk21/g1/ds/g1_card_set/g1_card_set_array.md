@@ -47,6 +47,38 @@ private:
 }:
 ```
 
+## 上锁
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSetContainers.inline.hpp --- //
+
+inline G1CardSetArray::G1CardSetArrayLocker::G1CardSetArrayLocker(EntryCountType volatile *num_entries_addr) :
+        _num_entries_addr(num_entries_addr) {
+    SpinYield s;
+    // 最高位锁标志设为0
+    EntryCountType num_entries = Atomic::load(_num_entries_addr) & EntryMask;
+    while (true) {
+        // 如果此时_num_entries最高位是0, 则表示没上锁
+        // 就把_num_entries最高位改成1, 上锁
+        // 返回的old_value是_num_entries最新的值
+        EntryCountType old_value = Atomic::cmpxchg(_num_entries_addr,
+                                                   num_entries,
+                                                   (EntryCountType)(num_entries | LockBitMask));
+        if (old_value == num_entries) {
+            // CAS上锁成功
+            // 记录当前数组长度
+            _local_num_entries = num_entries;
+            break;
+        }
+        // CAS上锁失败
+        // 恢复数据, 等待下一轮循环重试
+        num_entries = old_value & EntryMask;
+        // 自旋等待/让出处理器/休眠
+        s.wait();
+    }
+}
+```
+
 ## 添加
 
 ```cpp

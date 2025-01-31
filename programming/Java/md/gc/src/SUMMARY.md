@@ -33,6 +33,7 @@
     - [CardSet容器](./jdk21/g1/ds/g1_card_set/g1_card_set_container.md)
       - [内联指针卡片模式容器](./jdk21/g1/ds/g1_card_set/g1_card_set_inline_ptr.md)
       - [卡片数组模式容器](./jdk21/g1/ds/g1_card_set/g1_card_set_array.md)
+      - [位图模式容器](./jdk21/g1/ds/g1_card_set/g1_card_set_bit_map.md)
     - [添加卡片](./jdk21/g1/ds/g1_card_set/add_card.md)
 
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
