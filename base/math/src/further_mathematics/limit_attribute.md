@@ -28,9 +28,18 @@
 
 ![](../img/la1.jpg)
 
-## 有界性
+## 数列极限的有界性
 
 如果数列的极限存在, 那么这个数列一定是有界, 反之不对。
+
+<!--
+\begin{align}
+& 如果\lim_{n \to \infty} a_n = A, 则一定存在 M > 0, 使得 | a_n | \le M \\
+\\
+& 证明: \\
+&
+\end{align}
+-->
 
 ## 保号性
 
@@ -66,27 +75,16 @@
 
 ![](../img/la3.jpg)
 
-推论 1:
+推论:
 
 <!--
 \begin{align}
-& 若 f(x) \gt 0 且 \lim_{x \to a} f(x) = A \\
-& 则 A \ge 0 \\
+& 1. 若 f(x) \gt 0 且 \lim_{x \to a} f(x) = A, 则 A \ge 0 \\
+& 2. 若 f(x) \gt g(x) 且 \lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B, 则 A \ge B \\
 \end{align}
 -->
 
 ![](../img/la4.jpg)
-
-推论 2:
-
-<!--
-\begin{align}
-& 若 f(x) \gt g(x) 且 \lim_{x \to a} f(x) = A, \lim_{x \to a} g(x) = B \\
-& 则 A \ge B \\
-\end{align}
--->
-
-![](../img/la5.jpg)
 
 例题 1:
 
@@ -119,6 +117,22 @@
 -->
 
 ![](../img/la7.jpg)
+
+例题 3:
+
+<!--
+\begin{align}
+& 设 f(1) = 2, \lim_{x \to 1} \frac{f(x) - 2}{(x - 1)^2} = 3, 讨论 x = 1 为函数 f(x) 的什么点？ \\
+\\
+& 根据保号性, 存在 \delta \gt 0, 当 0 \lt |x - 1| \lt \delta 时, \frac{f(x) - 2}{(x - 1)^2} > 0, \\
+& 因为 (x - 1)^2 一定大于 0, \\
+& 所以 f(x) - 2 > 0 \Rightarrow f(x) > 2\\
+& 因为 f(1) = 2, 所以 f(x) > f(1) \\
+& 所以, x = 1 为函数 f(x) 的极小值点 \\
+\end{align}
+-->
+
+![](../img/la5.jpg)
 
 ## 四则运算性质
 

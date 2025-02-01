@@ -11,6 +11,7 @@
     - [指针运算](./base/pointer/calc.md)
     - [void指针](./base/pointer/void.md)
   - [内存模型](./base/m.md)
+  - [动态内存分配](./base/allocation.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)

@@ -18,6 +18,7 @@
   - [判断奇偶](./jdk21/g1/impl/even_odd.md)
 
 - [内部数据结构](./jdk21/g1/ds/ds.md)
+  - [位图](./jdk21/g1/ds/bit_map/bit_map.md)
   - [GlobalCounter](./jdk21/g1/ds/global_counter.md)
   - [ConcurrentHashTable](./jdk21/g1/ds/concurrent_hash_table/concurrent_hash_table.md)
     - [RCU读临界区](./jdk21/g1/ds/concurrent_hash_table/scs.md)
