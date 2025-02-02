@@ -34,12 +34,21 @@
 
 <!--
 \begin{align}
-& 如果\lim_{n \to \infty} a_n = A, 则一定存在 M > 0, 使得 | a_n | \le M \\
+& 如果 \lim_{n \to \infty} a_n = A, 则一定存在 M > 0, 使得 | a_n | \le M \\
 \\
 & 证明: \\
-&
+& 取 \varepsilon = 1 > 0, 所以存在 N > 0, 当 n > N 时 | a_n - A| < 1 \\
+& 因为不等式 ||a_n| - |A|| \le | a_n - A| 恒成立 \\
+& 所以当 n > N 时, ||a_n| - |A|| < 1 \\
+& 所以 |a_n| < 1 + |A| \\
+& 取 M = max \left \{ |a_1|, |a_2|, ... , |a_N|, 1 + |A| \right \} \\
+& 那么对任意的 n, |a_n| \le M \\
+\\
+& 反之不对, 比如 a_n = 2 + (-1)^n, 那么 |a_n| \le 3, 但极限不存在 \\
 \end{align}
 -->
+
+![](../img/la1_1.jpg)
 
 ## 保号性
 

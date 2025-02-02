@@ -11,6 +11,7 @@
   - [基本初等函数](./base/basic_elementary_function.md)
   - [初等函数](./base/elementary_function.md)
   - [方程](./base/equation.md)
+  - [组合数](./base/c.md)
 - [高数](./further_mathematics/fm.md)
   - [极限](./further_mathematics/limit.md)
     - [数列的极限](./further_mathematics/limit1.md)

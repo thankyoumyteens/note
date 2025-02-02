@@ -15,12 +15,19 @@ Slowlog 是 Redis 用来记录查询执行时间的日志系统。查询执行�
 
 配置参数:
 
-- `slowlog-log-slower-than` 决定要对执行时间大于多少微秒的操作进行记录
-- `slowlog-max-len` 它决定 slowlog 最多能保存多少条日志。slowlog 本身是一个 FIFO 队列，当队列大小超过 slowlog-max-len 时，最旧的一条日志将被删除，而最新的一条日志加入到 slowlog 末尾
+- `slowlog-log-slower-than` 决定要对执行时间大于多少微秒的操作进行记录。默认 10000
+- `slowlog-max-len` 它决定 slowlog 最多能保存多少条日志。slowlog 本身是一个 FIFO 队列，当队列大小超过 slowlog-max-len 时，最旧的一条日志将被删除，而最新的一条日志加入到 slowlog 末尾。默认 128
 
 可以通过 redis.conf 文件进行配置:
 
 ```conf
 slowlog-log-lower-than 1000
 slowlog-max-len 200
+```
+
+也可以使用命令动态配置:
+
+```sh
+config set slowlog-log-lower-than 1000
+config set slowlog-max-len 200
 ```
