@@ -9,9 +9,9 @@
 
 慢查询发生在第 3 阶段, 客户端超时不一定是慢查询(4 个过程都可能导致超时)。
 
-## slowlog
+## 配置 slowlog
 
-Slowlog 是 Redis 用来记录查询执行时间的日志系统。查询执行时间指的是不包括像客户端响应、发送回复等 IO 操作，而单单是执行一个查询命令所耗费的时间。
+Slowlog 是 Redis 用来记录查询执行时间的日志系统。查询执行时间指的是不包括像客户端响应、发送回复等 IO 操作，而单单是执行一个查询命令所耗费的时间。slowlog 是记录在内存中的。
 
 配置参数:
 
@@ -31,3 +31,10 @@ slowlog-max-len 200
 config set slowlog-log-lower-than 1000
 config set slowlog-max-len 200
 ```
+
+## 查询 slowlog
+
+- `slowlog get` 打印所有的 slowlog 日志
+- `slowlog get 数量` 打印指定数量的 slowlog 日志
+- `slowlog len` 查看日志数量
+- `slowlog reset` 清空日志
