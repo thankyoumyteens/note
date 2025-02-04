@@ -269,3 +269,15 @@ x^{2}, & x \ge 1
 -->
 
 ![](../img/lec10.jpg)
+
+## 3 个不等式
+
+<!--
+\begin{align}
+& 1、当 x \ge 0 时，\sin x \le x \\
+& 2、当 x > -1 时，\ln (1+x) \le x \\
+& 3、e^x \le 1+x \\
+\end{align}
+-->
+
+![](../img/lec11.jpg)
