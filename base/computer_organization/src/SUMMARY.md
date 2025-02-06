@@ -47,3 +47,7 @@
   - [总线的性能指标](./bus/indicators.md)
   - [总线仲裁](./bus/arbitration.md)
   - [总线定时](./bus/timing.md)
+
+- [I/O系统](./io/io.md)
+  - [外部设备](./io/dev.md)
+    - [硬磁盘存储器](./io/disk.md)
