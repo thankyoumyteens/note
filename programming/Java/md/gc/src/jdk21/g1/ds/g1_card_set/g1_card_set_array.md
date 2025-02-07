@@ -97,15 +97,11 @@ inline G1AddCardResult G1CardSetArray::add(uint card_idx) {
         }
     }
 
-    // Since we did not find the card, lock.
     // 上锁
     G1CardSetArrayLocker x(&_num_entries);
 
-    // Reload number of entries from the G1CardSetArrayLocker as it might have changed.
-    // It already read the actual value with the necessary synchronization.
     // 在等待锁期间, 数组长度可能已经改变, 需要重新读取一次
     num_entries = x.num_entries();
-    // Look if the cards added while waiting for the lock are the same as our card.
     // 如果在等待锁期间, 数组中已经添加了相同的卡片索引, 则不需要再添加了
     for (; idx < num_entries; idx++) {
         if (_data[idx] == card_idx) {
@@ -113,7 +109,6 @@ inline G1AddCardResult G1CardSetArray::add(uint card_idx) {
         }
     }
 
-    // Check if there is space left.
     // 检查数组是否还有空间
     if (num_entries == _size) {
         return Overflow;

@@ -5,6 +5,23 @@ G1CardSetHashTable 内部通过 ConcurrentHashTable 实现。
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CardSet.cpp --- //
 
+using CardSetHash = ConcurrentHashTable<G1CardSetHashTableConfig, mtGCCardSet>;
+
+class G1CardSetHashTable : public CHeapObj<mtGCCardSet> {
+    using ContainerPtr = G1CardSet::ContainerPtr;
+    using CHTScanTask = CardSetHash::ScanTask;
+
+    G1CardSetMemoryManager *_mm;
+    CardSetHash _table;
+    CHTScanTask _table_scanner;
+};
+```
+
+## G1CardSetHashTableValue
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSet.cpp --- //
+
 class G1CardSetHashTableValue {
 public:
     using ContainerPtr = G1CardSet::ContainerPtr;
@@ -15,6 +32,12 @@ public:
     // 容器指针
     ContainerPtr volatile _container;
 };
+```
+
+## G1CardSetHashTableConfig
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSet.cpp --- //
 
 class G1CardSetHashTableConfig : public StackObj {
 public:
@@ -25,16 +48,5 @@ public:
     static void *allocate_node(void *context, size_t size, Value const &value);
 
     static void free_node(void *context, void *memory, Value const &value);
-};
-
-using CardSetHash = ConcurrentHashTable<G1CardSetHashTableConfig, mtGCCardSet>;
-
-class G1CardSetHashTable : public CHeapObj<mtGCCardSet> {
-    using ContainerPtr = G1CardSet::ContainerPtr;
-    using CHTScanTask = CardSetHash::ScanTask;
-
-    G1CardSetMemoryManager *_mm;
-    CardSetHash _table;
-    CHTScanTask _table_scanner;
 };
 ```
