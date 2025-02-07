@@ -28,28 +28,6 @@
 
 ![](../img/la1.jpg)
 
-## 数列极限的有界性
-
-如果数列的极限存在, 那么这个数列一定是有界, 反之不对。
-
-<!--
-\begin{align}
-& 如果 \lim_{n \to \infty} a_n = A, 则一定存在 M > 0, 使得 | a_n | \le M \\
-\\
-& 证明: \\
-& 取 \varepsilon = 1 > 0, 所以存在 N > 0, 当 n > N 时 | a_n - A| < 1 \\
-& 因为不等式 ||a_n| - |A|| \le | a_n - A| 恒成立 \\
-& 所以当 n > N 时, ||a_n| - |A|| < 1 \\
-& 所以 |a_n| < 1 + |A| \\
-& 取 M = max \left \{ |a_1|, |a_2|, ... , |a_N|, 1 + |A| \right \} \\
-& 那么对任意的 n, |a_n| \le M \\
-\\
-& 反之不对, 比如 a_n = 2 + (-1)^n, 那么 |a_n| \le 3, 但极限不存在 \\
-\end{align}
--->
-
-![](../img/la1_1.jpg)
-
 ## 保号性
 
 如果一个函数在某一点的极限是正数或负数, 那么在这一点的一个小邻域内, 函数值的符号与极限的符号相同。
@@ -131,6 +109,24 @@
 
 <!--
 \begin{align}
+& 设 f'(1) = 0, 且 \lim_{x \to 1} \frac{f'(x)}{\sin \pi x} = 2, 讨论 x = 1 是什么点？ \\
+\\
+& 因为 \lim_{x \to 1} \frac{f'(x)}{\sin \pi x} = 2 > 0, \\
+& 所以根据保号性，存在 \delta > 0, \\
+& 当 0 < |x - 1| < \delta 时, \frac{f'(x)}{\sin \pi x} > 0, \\
+& 当 x \in (1 - \delta, 1) 时 \Rightarrow \pi x < \pi \Rightarrow \sin \pi x > 0 \Rightarrow f'(x) > 0, \\
+& 当 x \in (1, 1 + \delta) 时 \Rightarrow \pi x > \pi \Rightarrow \sin \pi x < 0 \Rightarrow f'(x) < 0, \\
+& 当一阶导数大于0时, 函数单调递增, 当一阶导数小于0时, 函数单调递减, \\
+& 所以, x = 1 为函数 f(x) 的极大值点 \\
+\end{align}
+-->
+
+![](../img/la7_1.jpg)
+
+例题 4:
+
+<!--
+\begin{align}
 & 设 f(1) = 2, \lim_{x \to 1} \frac{f(x) - 2}{(x - 1)^2} = 3, 讨论 x = 1 为函数 f(x) 的什么点？ \\
 \\
 & 根据保号性, 存在 \delta \gt 0, 当 0 \lt |x - 1| \lt \delta 时, \frac{f(x) - 2}{(x - 1)^2} > 0, \\
@@ -142,6 +138,28 @@
 -->
 
 ![](../img/la5.jpg)
+
+## 数列极限的有界性
+
+如果数列的极限存在, 那么这个数列一定是有界, 反之不对。
+
+<!--
+\begin{align}
+& 如果 \lim_{n \to \infty} a_n = A, 则一定存在 M > 0, 使得 | a_n | \le M \\
+\\
+& 证明: \\
+& 取 \varepsilon = 1 > 0, 所以存在 N > 0, 当 n > N 时 | a_n - A| < 1 \\
+& 因为不等式 ||a_n| - |A|| \le | a_n - A| 恒成立 \\
+& 所以当 n > N 时, ||a_n| - |A|| < 1 \\
+& 所以 |a_n| < 1 + |A| \\
+& 取 M = max \left \{ |a_1|, |a_2|, ... , |a_N|, 1 + |A| \right \} \\
+& 那么对任意的 n, |a_n| \le M \\
+\\
+& 反之不对, 比如 a_n = 2 + (-1)^n, 那么 |a_n| \le 3, 但极限不存在 \\
+\end{align}
+-->
+
+![](../img/la1_1.jpg)
 
 ## 四则运算性质
 

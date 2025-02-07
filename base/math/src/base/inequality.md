@@ -1,6 +1,6 @@
 # 常见的不等式
 
-三角不等式
+## 三角不等式
 
 <!--
 \begin{align}
@@ -10,7 +10,7 @@
 
 ![](../img/ie1.jpg)
 
-均值不等式
+## 均值不等式
 
 <!--
 \begin{align}
@@ -27,7 +27,19 @@
 
 ![](../img/ie2.jpg)
 
-解带绝对值的不等式
+## 常用的不等式
+
+<!--
+\begin{align}
+& (1) \; 当 0 \lt x \lt \frac{\pi}{2} 时: 0 \le \sin x \lt x \lt \tan x \\
+& (2) \; 当 x \gt -1 时: \ln (1 + x) \le x, 其中当且仅当 x = 0 时等号成立 \\
+& (3) \;\; e^{x} \ge 1 + x, 其中当且仅当 x = 0 时等号成立 \\
+\end{align}
+-->
+
+![](../img/ie4.jpg)
+
+## 解带绝对值的不等式
 
 <!--
 \begin{align}
@@ -51,15 +63,3 @@ x \gt a - b, & x \lt a
 -->
 
 ![](../img/ie3.jpg)
-
-常用的不等式
-
-<!--
-\begin{align}
-& (1) \; 当 0 \lt x \lt \frac{\pi}{2} 时: 0 \le \sin x \lt x \lt \tan x \\
-& (2) \; 当 x \gt -1 时: \ln (1 + x) \le x, 其中当且仅当 x = 0 时等号成立 \\
-& (3) \;\; e^{x} \ge 1 + x, 其中当且仅当 x = 0 时等号成立 \\
-\end{align}
--->
-
-![](../img/ie4.jpg)

@@ -48,7 +48,7 @@
 
 ![](../img/lec1.jpg)
 
-例题 1
+例题
 
 <!--
 \begin{align}
@@ -76,15 +76,14 @@
 
 ![](../img/lec1_1.jpg)
 
-例题 2
-
 <!--
 \begin{align}
 & 求极限 \lim_{n \to \infty} \left (
 \frac{1}{2n^{2} + 1} + \frac{2}{2n^{2} + 2} + ... + \frac{n}{2n^{2} + n}
 \right )  \\
 \\
-& 式中分子的次方数是齐的(都是1次方), 分母的次方数是不齐的(有2次方, 也有1次方) \\
+& 式中分子的次方数是齐的(都是1次方), \\
+& 分母的次方数是不齐的(有2次方, 也有1次方) \\
 & 使用夹逼定理 \\
 \\
 & 式子里找一个最小的是\frac{n}{2n^{2} + n}，式子里分子是从1加到n，\\
@@ -99,12 +98,12 @@
 & 即 \frac{1}{2} \times \frac{n(n + 1)}{2n^{2} + n} \le
 b_n \le \frac{1}{2} \times \frac{n(n + 1)}{2n^{2} + 1} \\
 & 因为 \lim_{n \to \infty} \frac{1}{2} \times \frac{n(n + 1)}{2n^{2} + n}
-= \frac{1}{2} \lim_{n \to \infty} \frac{\frac{n(n + 1)}{n^{2}}}{\frac{2n^{2} + n}{n^{2}}}
-= \frac{1}{2} \lim_{n \to \infty} \frac{1 + \frac{1}{n}}{2 + \frac{1}{n}}
+= \frac{1}{2} \lim_{n \to \infty} \frac{\frac{n(n + 1)}{n^{2}}}{\frac{2n^{2} + n}{n^{2}}} \\
+& \qquad = \frac{1}{2} \lim_{n \to \infty} \frac{1 + \frac{1}{n}}{2 + \frac{1}{n}}
 = \frac{1}{4} \\
 & 且 \lim_{n \to \infty} \frac{1}{2} \times \frac{n(n + 1)}{2n^{2} + 1}
-= \frac{1}{2} \lim_{n \to \infty} \frac{\frac{n(n + 1)}{n^{2}}}{\frac{2n^{2} + 1}{n^{2}}}
-= \frac{1}{2} \lim_{n \to \infty} \frac{1 + \frac{1}{n}}{2 + \frac{1}{n^{2}}}
+= \frac{1}{2} \lim_{n \to \infty} \frac{\frac{n(n + 1)}{n^{2}}}{\frac{2n^{2} + 1}{n^{2}}} \\
+& \qquad = \frac{1}{2} \lim_{n \to \infty} \frac{1 + \frac{1}{n}}{2 + \frac{1}{n^{2}}}
 = \frac{1}{4} \\
 & 所以 \lim_{n \to \infty} b_n = \frac{1}{4} \\
 \end{align}
@@ -112,15 +111,14 @@ b_n \le \frac{1}{2} \times \frac{n(n + 1)}{2n^{2} + 1} \\
 
 ![](../img/lec8.jpg)
 
-例题 3
-
 <!--
 \begin{align}
 & 求极限 \lim_{n \to \infty} \left (
 \frac{1}{\sqrt{n^{2} + 1}} + \frac{1}{\sqrt{n^{2} + 2}} + ... + \frac{1}{\sqrt{n^{2} + n}}
 \right )  \\
 \\
-& 式中分子的次方数是齐的(都是1次方), 分母的次方数是不齐的(都有根号, 且根号里有2次方, 也有1次方) \\
+& 式中分子的次方数是齐的(都是1次方), \\
+& 分母的次方数是不齐的(都有根号, 且根号里有2次方, 也有1次方) \\
 & 使用夹逼定理 \\
 \\
 & 式子里找一个最小的是\frac{1}{\sqrt{n^{2} + n}}，式子里是n项相加，\\
@@ -143,8 +141,6 @@ b_n \le \frac{1}{2} \times \frac{n(n + 1)}{2n^{2} + 1} \\
 
 ![](../img/lec1_3.jpg)
 
-例题 4
-
 <!--
 \begin{align}
 & 求极限 \lim_{n \to \infty} \sqrt[n]{2^{n} + 3^{n}} \\
@@ -160,8 +156,6 @@ b_n \le \frac{1}{2} \times \frac{n(n + 1)}{2n^{2} + 1} \\
 -->
 
 ![](../img/lec5.jpg)
-
-例题 5
 
 <!--
 \begin{align}
@@ -193,6 +187,19 @@ x^{2}, & x > 1
 -->
 
 ![](../img/lec1_2.jpg)
+
+<!--
+\begin{align}
+& 求极限 \lim_{n \to \infty} (2^n + 3^n + 5^n)^{\frac{1}{n}} \\
+\\
+& 因为 5^n < 2^n + 3^n + 5^n < 3 \times 5^n \\
+& 则 5 < (2^n + 3^n + 5^n)^{\frac{1}{n}} < 3^{\frac{1}{n}} \times 5 \\
+& 因为 \lim_{n \to \infty} 5 = 5，\lim_{n \to \infty} (3^{\frac{1}{n}} \times 5) = 5 \\
+& 所以 \lim_{n \to \infty} (2^n + 3^n + 5^n)^{\frac{1}{n}} = 5 \\
+\end{align}
+-->
+
+![](../img/lec8_1.jpg)
 
 ### 推论
 
