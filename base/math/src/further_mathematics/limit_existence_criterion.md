@@ -277,13 +277,14 @@ x^{2}, & x \ge 1
 
 ![](../img/lec10.jpg)
 
-## 3 个不等式
+## 重要的不等式
 
 <!--
 \begin{align}
 & 1、当 x \ge 0 时，\sin x \le x \\
 & 2、当 x > -1 时，\ln (1+x) \le x \\
 & 3、e^x \le 1+x \\
+& 4、当 0 < x < \frac{\pi}{2} 时，\sin x < x < \tan x \\
 \end{align}
 -->
 
