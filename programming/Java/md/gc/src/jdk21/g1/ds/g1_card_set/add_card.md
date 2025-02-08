@@ -1,4 +1,4 @@
-# 添加卡片
+# 添加卡片索引
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CardSet.cpp --- //
@@ -31,7 +31,7 @@ G1AddCardResult G1CardSet::add_card(uint card_region, uint card_in_region, bool 
     while (true) {
         // 获取容器, 并增加引用计数
         container = acquire_container(&table_entry->_container);
-        // 把卡片索引(card_in_region)添加到container中
+        // 把卡片索引(card_in_region)添加到容器中
         add_result = add_to_container(&table_entry->_container, container, card_region, card_in_region,
                                       increment_total);
 
