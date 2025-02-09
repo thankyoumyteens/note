@@ -48,3 +48,14 @@ void *memset(void *s, int c, size_t n);
 ```cpp
 void *memcpy(void *dest, const void *src, size_t n);
 ```
+
+## 作为参数传递
+
+一维数组用于函数的参数时，只能传数组的地址，并且必须把数组长度也传进去，除非数组中有最后一个元素的标志(比如字符串 `char *` 以 0 为结束标记)。
+
+有两种写法:
+
+```cpp
+void func(int *arr, int len);
+void func(int arr[], int len);
+```

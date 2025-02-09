@@ -133,9 +133,38 @@ f(x) = \frac{2^{\frac{1}{x}}}{1 + 2^{\frac{1}{x}}} \cdot \frac{x^2 + x - 2}{x^2 
 \\
 & f(x) 的间断点: x = 0，x = -1，x = 1 \\
 \\
-&
+& 对于 x = 0 \\
+& \; x \to 0 时函数的定义中包含 a^{\frac{?}{x - b}}，要分左右极限 \Rightarrow \\
+& \begin{cases}
+x \to 0^- 时，2^{\frac{1}{x}} \to 2^{-\infty} \to 0 \Rightarrow
+\frac{2^{\frac{1}{x}}}{1 + 2^{\frac{1}{x}}} \to \frac{0}{1} \to 0 \\
+x \to 0^+ 时，2^{\frac{1}{x}} \to 2^{+\infty} \to \infty \Rightarrow
+\frac{2^{\frac{1}{x}}}{1 + 2^{\frac{1}{x}}} \to \frac{\infty}{\infty} \to 1
+\end{cases} \\
+& \; x \to 0 \Rightarrow \frac{x^2 + x - 2}{x^2 - 1} \to 2 \\
+& \; \lim_{x \to 0^-} f(x) = 0 \\
+& \; \lim_{x \to 0^+} f(x) = 2 \\
+& 所以 x = 0 是跳跃间断点 \\
+\\
+& 对于 x = -1 \\
+& \; x \to -1 \Rightarrow 2^{\frac{1}{x}} \to \frac{1}{2} \Rightarrow
+\frac{2^{\frac{1}{x}}}{1 + 2^{\frac{1}{x}}} \to \frac{1}{3} \\
+& \; x \to -1 \Rightarrow \frac{x^2 + x - 2}{x^2 - 1} \to \frac{-2}{0} \to \infty \\
+& \; \lim_{x \to -1} f(x) = \infty \\
+& 所以 x = -1 是第二类间断点 \\
+\\
+& 对于 x = 1 \\
+& \; x \to 1 \Rightarrow 2^{\frac{1}{x}} \to 2 \Rightarrow
+\frac{2^{\frac{1}{x}}}{1 + 2^{\frac{1}{x}}} \to \frac{2}{3} \\
+& \; x \to 1 \Rightarrow \frac{x^2 + x - 2}{x^2 - 1}
+= \frac{(x + 2)(x - 1)}{(x + 1)(x - 1)}
+= \frac{x + 2}{x + 1} \to \frac{3}{2} \\
+& \; \lim_{x \to -1} f(x) = 1 \\
+& 所以 x = 1 是可去间断点 \\
 \end{align}
 -->
+
+![](../img/cad7_1.jpg)
 
 ## 闭区间上连续函数的性质
 
