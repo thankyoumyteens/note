@@ -13,8 +13,9 @@
   - [内存模型](./base/m.md)
   - [动态内存分配](./base/allocation.md)
   - [数组](./base/array/array.md)
-    - [动态创建数组](./base/array/new.md)
+    - [在堆中分配一维数组](./base/array/new.md)
     - [C风格字符串](./base/array/cstr.md)
+    - [在堆中分配多维数组](./base/array/new_m.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)

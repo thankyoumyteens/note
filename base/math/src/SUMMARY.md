@@ -22,6 +22,8 @@
     - [极限存在准则](./further_mathematics/limit_existence_criterion.md)
     - [两个重要极限](./further_mathematics/two_limit.md)
     - [连续与间断](./further_mathematics/continuous_and_discontinuous.md)
+    - [题型](./further_mathematics/limit/question_format/question_format.md)
+      - [n项和的极限](./further_mathematics/limit/question_format/f1.md)
   - [导数与微分](./further_mathematics/derivatives_and_differentials.md)
     - [求导工具](./further_mathematics/derivative.md)
     - [隐函数](./further_mathematics/implicit_function.md)
