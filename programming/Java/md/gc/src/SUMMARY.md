@@ -39,6 +39,7 @@
     - [添加卡片索引](./jdk21/g1/ds/g1_card_set/add_card.md)
       - [获取分区对应的容器](./jdk21/g1/ds/g1_card_set/get_or_add_container.md)
       - [把卡片索引添加到容器中](./jdk21/g1/ds/g1_card_set/add_to_container.md)
+      - [释放容器](./jdk21/g1/ds/g1_card_set/release_and_maybe_free_container.md)
     - [容器粗化](./jdk21/g1/ds/g1_card_set/coarsen_container.md)
       - [释放_buckets中的容器](./jdk21/g1/ds/g1_card_set/g1_release_cardsets.md)
 
