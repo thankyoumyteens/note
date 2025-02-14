@@ -67,5 +67,6 @@
   - [慢查询](./redis/process.md)
   - [Pipeline](./redis/pipeline.md)
   - [发布订阅模式](./redis/ps.md)
+  - [持久化](./redis/persistence.md)
   - [分布式锁](./redis/lock/lock.md)
     - [RedisTemplate实现](./redis/lock/redis_template.md)
