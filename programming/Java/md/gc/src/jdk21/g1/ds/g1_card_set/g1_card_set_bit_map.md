@@ -16,6 +16,7 @@ class G1CardSetBitMap : public G1CardSetContainer {
 ```cpp
 // --- src/hotspot/share/gc/g1/g1CardSetContainers.inline.hpp --- //
 
+// card_idx: 卡片索引经过计算映射到位图中的索引
 inline G1AddCardResult G1CardSetBitMap::add(uint card_idx, size_t threshold, size_t size_in_bits) {
     // BitMapView是BitMap的一个实现类, 操作基本和BitMap一样
     BitMapView bm(_bits, size_in_bits);
@@ -30,5 +31,11 @@ inline G1AddCardResult G1CardSetBitMap::add(uint card_idx, size_t threshold, siz
         return Added;
     }
     return Found;
+}
+
+// 把卡片索引映射到位图中的索引
+// 保证卡片索引在位图内
+uint howl_bitmap_offset(uint card_idx) const {
+    return card_idx & _bitmap_hash_mask;
 }
 ```

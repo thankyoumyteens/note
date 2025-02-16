@@ -72,6 +72,7 @@ void G1CardSet::transfer_cards(G1CardSetHashTableValue *table_entry, ContainerPt
     assert(source_container != FullCardSet, "Should not need to transfer from FullCardSet");
     if (container_type(source_container) != ContainerHowl) {
         // 把旧的source_container中的卡片索引重新添加到card set中
+        // 一个分区对应一个容器, 所以根据card_region可以找到card set中对应的容器
         G1TransferCard iter(this, card_region);
         iterate_cards_during_transfer(source_container, iter);
     } else {
