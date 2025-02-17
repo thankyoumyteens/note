@@ -82,3 +82,44 @@ void G1CardSet::transfer_cards(G1CardSetHashTableValue *table_entry, ContainerPt
     }
 }
 ```
+
+## howl 子容器转移
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CardSet.cpp --- //
+
+void G1CardSet::transfer_cards_in_howl(ContainerPtr parent_container,
+                                       ContainerPtr source_container,
+                                       uint card_region) {
+    assert(container_type(parent_container) == ContainerHowl, "must be");
+    assert(source_container != FullCardSet, "Should not need to transfer from full");
+    if (container_type(source_container) != ContainerBitMap) {
+        // 转移非ContainerBitMap容器的数据
+        // 一个分区对应一个容器, 所以根据card_region可以找到card set中对应的容器
+        G1TransferCard iter(this, card_region);
+        iterate_cards_during_transfer(source_container, iter);
+    } else {
+        // TODO
+        // 位图容器还能存储多少个卡片索引
+        uint diff =
+                _config->max_cards_in_howl_bitmap() - container_ptr<G1CardSetBitMap>(source_container)->num_bits_set();
+
+        // Need to correct for that the Full remembered set occupies more cards than the
+        // bitmap before.
+        // We add 1 card less because the values will be incremented
+        // in G1CardSet::add_card for the current addition or where already incremented in
+        // G1CardSet::add_to_howl after coarsening.
+        diff -= 1;
+
+        G1CardSetHowl *howling_array = container_ptr<G1CardSetHowl>(parent_container);
+        Atomic::add(&howling_array->_num_entries, diff, memory_order_relaxed);
+
+        G1CardSetHashTableValue *table_entry = get_container(card_region);
+        assert(table_entry != nullptr, "Table entry not found for transferred cards");
+
+        Atomic::add(&table_entry->_num_occupied, diff, memory_order_relaxed);
+
+        Atomic::add(&_num_occupied, diff, memory_order_relaxed);
+    }
+}
+```
