@@ -22,7 +22,6 @@
   export default {
     data() {
       return {
-        title: "Hello",
         // 轮播图列表
         pictures: [
           {

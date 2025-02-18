@@ -111,3 +111,48 @@ class InternalTableClaimer {
 ```
 
 ## 遍历区间
+
+```cpp
+// --- src/hotspot/share/utilities/concurrentHashTableTasks.inline.hpp --- //
+
+template<typename CONFIG, MEMFLAGS F>
+template<typename FUNC>
+inline bool ConcurrentHashTable<CONFIG, F>::
+do_scan_for_range(FUNC &scan_f, size_t start_idx, size_t stop_idx, InternalTable *table) {
+    assert(start_idx < stop_idx, "Must be");
+    assert(stop_idx <= table->_size, "Must be");
+
+    for (size_t bucket_it = start_idx; bucket_it < stop_idx; ++bucket_it) {
+        Bucket *bucket = table->get_bucket(bucket_it);
+        // If bucket have a redirect the items will be in the new table.
+        // We must visit them there since the new table will contain any
+        // concurrent inserts done after this bucket was resized.
+        // If the bucket don't have redirect flag all items is in this table.
+        if (!bucket->have_redirect()) {
+            // Node里value的类型是G1CardSetHashTableValue, 包含: _region_idx, _num_occupied, _container
+            if (!visit_nodes(bucket, scan_f)) {
+                return false;
+            }
+        } else {
+            assert(bucket->is_locked(), "Bucket must be locked.");
+        }
+    }
+    return true;
+}
+
+template<typename CONFIG, MEMFLAGS F>
+template<typename FUNC>
+inline bool ConcurrentHashTable<CONFIG, F>::
+visit_nodes(Bucket *bucket, FUNC &visitor_f) {
+    Node *current_node = bucket->first();
+    while (current_node != nullptr) {
+        Prefetch::read(current_node->next(), 0);
+        // Node里value的类型是G1CardSetHashTableValue, 包含: _region_idx, _num_occupied, _container
+        if (!visitor_f(current_node->value())) {
+            return false;
+        }
+        current_node = current_node->next();
+    }
+    return true;
+}
+```

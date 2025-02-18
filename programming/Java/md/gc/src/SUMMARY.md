@@ -44,6 +44,7 @@
       - [释放_buckets中的容器](./jdk21/g1/ds/g1_card_set/g1_release_cardsets.md)
     - [把旧容器的数据转移到新容器](./jdk21/g1/ds/g1_card_set/transfer_cards.md)
     - [遍历容器](./jdk21/g1/ds/g1_card_set/iterate_containers.md)
+  - [记忆集](./jdk21/g1/ds/rset/rset.md)
 
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)

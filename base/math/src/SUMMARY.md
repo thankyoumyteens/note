@@ -25,6 +25,8 @@
     - [题型](./further_mathematics/limit/question_format/question_format.md)
       - [n项和的极限](./further_mathematics/limit/question_format/f1.md)
       - [不定型](./further_mathematics/limit/question_format/f2.md)
+        - [零比零型](./further_mathematics/limit/question_format/f2_1.md)
+        - [一的无穷大次方型](./further_mathematics/limit/question_format/f2_2.md)
   - [导数与微分](./further_mathematics/derivatives_and_differentials.md)
     - [求导工具](./further_mathematics/derivative.md)
     - [隐函数](./further_mathematics/implicit_function.md)
