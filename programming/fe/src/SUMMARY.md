@@ -160,3 +160,7 @@
     - [默认插槽](./vue3/slot/default.md)
     - [具名插槽](./vue3/slot/name.md)
     - [作用域插槽](./vue3/slot/scope.md)
+
+- [uni-app](./uniapp/uniapp.md)
+  - [底部导航栏](./uniapp/bar.md)
+  - [轮播图](./uniapp/carousel.md)

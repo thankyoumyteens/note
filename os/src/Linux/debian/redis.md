@@ -35,3 +35,17 @@ export PATH=/software/redis-6.0.9/bin:$PATH
 # 使环境变量生效
 source /etc/profile
 ```
+
+### 5. 允许远程连接
+
+```sh
+# 配置文件在源码根目录
+cp redis.conf /software/redis.conf
+vim /software/redis.conf
+# 把 bind 127.0.0.1 改成 bind 0.0.0.0
+# 把 protected-mode yes 改成 protected-mode no
+# 把 daemonize no 改成 daemonize yes
+
+# 启动
+nohup redis-server /software/redis.conf &
+```
