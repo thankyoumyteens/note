@@ -45,6 +45,7 @@
     - [把旧容器的数据转移到新容器](./jdk21/g1/ds/g1_card_set/transfer_cards.md)
     - [遍历容器](./jdk21/g1/ds/g1_card_set/iterate_containers.md)
   - [记忆集](./jdk21/g1/ds/rset/rset.md)
+    - [合并到卡表](./jdk21/g1/ds/rset/iterate_for_merge.md)
 
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)

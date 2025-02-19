@@ -164,3 +164,6 @@
 - [uni-app](./uniapp/uniapp.md)
   - [底部导航栏](./uniapp/bar.md)
   - [轮播图](./uniapp/carousel.md)
+  - [网络请求](./uniapp/req/req.md)
+    - [封装请求](./uniapp/req/util.md)
+    - [拦截器](./uniapp/req/add_interceptor.md)

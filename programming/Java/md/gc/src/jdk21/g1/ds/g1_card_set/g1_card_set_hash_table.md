@@ -26,7 +26,9 @@ class G1CardSetHashTableValue {
 public:
     using ContainerPtr = G1CardSet::ContainerPtr;
 
-    // 容器对应的分区的索引
+    // card_region的索引
+    // 一个card_region中包含多个卡片索引
+    // 一个分区(heap region)由多个card_region覆盖
     const uint _region_idx;
     uint volatile _num_occupied;
     // 容器指针
