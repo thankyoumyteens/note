@@ -162,3 +162,6 @@
   - [自定义事件](./pyside/customize_event.md)
   - [弹出子窗口](./pyside/sub_window.md)
   - [打包exe](./pyside/打包exe.md)
+
+- [Flask](./flask/flask.md)
+  - [基本使用](./flask/quick_start.md)

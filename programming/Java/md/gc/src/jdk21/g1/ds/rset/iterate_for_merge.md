@@ -31,6 +31,9 @@ class G1HeapRegionRemSetMergeCardClosure : public G1CardSet::ContainerPtrClosure
                 // 那么值为3的卡片索引在整个分区中的实际值应该是: (2 << 2) + 3 = 11
                 (card_region_idx & _card_regions_per_region_mask) << _log_card_region_size
         );
+        // 遍历容器内的所有卡片索引
+        // 1. 先调用start_iterate
+        // 2. 再通过()运算符调用do_card或do_card_range
         _card_set->iterate_cards_or_ranges_in_container(container, cl);
     }
 };
