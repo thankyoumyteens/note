@@ -1,6 +1,6 @@
 # 泛型
 
-泛型函数:
+## 函数的泛型
 
 ```ts
 function print<T>(a: T): void {
@@ -10,7 +10,17 @@ function print<T>(a: T): void {
 print<number>(1); // 1
 ```
 
-泛型接口:
+## 箭头函数的泛型
+
+```ts
+const print1 = <T>(a: T) => {
+  console.log(a);
+};
+
+print1<number>(1); // 1
+```
+
+## 接口的泛型
 
 ```ts
 interface Demo<T> {
@@ -22,7 +32,7 @@ const demo: Demo<string> = {
 };
 ```
 
-泛型类:
+## 类的泛型
 
 ```ts
 class Demo<T> {

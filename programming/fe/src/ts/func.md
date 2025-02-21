@@ -1,4 +1,4 @@
-# 函数
+# 定义函数
 
 ```ts
 function add(a: number, b: number): number {

@@ -1,9 +1,15 @@
 # 自定义类型
 
 ```ts
-type MyString = string;
+type StudentInfo = {
+  name: string;
+  age: number;
+};
 
-let a: MyString = "Hello";
+let tom: StudentInfo = {
+  name: "Tom",
+  age: 10,
+};
 ```
 
 ## 联合类型
