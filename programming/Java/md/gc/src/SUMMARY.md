@@ -46,6 +46,7 @@
     - [遍历容器](./jdk21/g1/ds/g1_card_set/iterate_containers.md)
     - [遍历容器里的卡片索引](./jdk21/g1/ds/g1_card_set/iterate_cards_or_ranges_in_container.md)
       - [遍历内联指针容器](./jdk21/g1/ds/g1_card_set/iterate_g1_card_set_inline_ptr.md)
+      - [遍历数组容器](./jdk21/g1/ds/g1_card_set/iterate_g1_card_set_array.md)
   - [记忆集](./jdk21/g1/ds/rset/rset.md)
     - [合并到卡表](./jdk21/g1/ds/rset/iterate_for_merge.md)
 
