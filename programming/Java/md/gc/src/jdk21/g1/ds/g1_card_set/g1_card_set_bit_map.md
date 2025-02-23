@@ -32,10 +32,4 @@ inline G1AddCardResult G1CardSetBitMap::add(uint card_idx, size_t threshold, siz
     }
     return Found;
 }
-
-// 把卡片索引映射到位图中的索引
-// 保证卡片索引在位图内
-uint howl_bitmap_offset(uint card_idx) const {
-    return card_idx & _bitmap_hash_mask;
-}
 ```

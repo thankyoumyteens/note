@@ -21,19 +21,21 @@ inline void HeapRegionRemSet::iterate_for_merge(CardOrRangeVisitor &cl) {
 template<typename Closure, template<typename> class CardOrRanges>
 class G1HeapRegionRemSetMergeCardClosure : public G1CardSet::ContainerPtrClosure {
     void do_containerptr(uint card_region_idx, size_t num_occupied, G1CardSet::ContainerPtr container) override {
+        // cl是G1ContainerCardsOrRanges类型
         CardOrRanges<Closure> cl(
+                // cl在这里是G1MergeCardSetClosure
                 _cl,
                 // 算出card region属于哪个分区
                 card_region_idx >> _log_card_regions_per_region,
                 // card_region_idx & _card_regions_per_region_mask: 确保card region索引不越界
                 // 换算出这个card region中卡片索引的偏移量
                 // 比如card region索引为2, 每个card region有4个卡片索引(_log_card_region_size = 2)
-                // 那么值为3的卡片索引在整个分区中的实际值应该是: (2 << 2) + 3 = 11
+                // 那么值为3的卡片索引在整个分区中的实际值应该是: (2 * 2^2) + 3 = 11
                 (card_region_idx & _card_regions_per_region_mask) << _log_card_region_size
         );
-        // 遍历容器内的所有卡片索引
-        // 1. 先调用start_iterate
-        // 2. 再通过()运算符调用do_card或do_card_range
+        // 遍历容器内的所有卡片索引:
+        // 1. 先调用cl的start_iterate函数
+        // 2. 再通过cl的重载()运算符调用do_card或do_card_range函数
         _card_set->iterate_cards_or_ranges_in_container(container, cl);
     }
 };
@@ -68,5 +70,13 @@ public:
         // 处理一组卡片索引
         _cl.do_card_range(card_idx + _offset, length);
     }
+};
+```
+
+## G1MergeCardSetClosure
+
+```cpp
+class G1MergeCardSetClosure : public HeapRegionClosure {
+
 };
 ```
