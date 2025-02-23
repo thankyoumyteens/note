@@ -90,7 +90,7 @@ G1AddCardResult G1CardSet::add_to_howl(ContainerPtr parent_container,
     ContainerPtr to_transfer = nullptr;
     ContainerPtr container;
 
-    // 根据卡片索引计算出bucket数组的索引
+    // 保证卡片索引不超出bucket数组的长度
     uint bucket = _config->howl_bucket_index(card_in_region);
     // return &_buckets[index]
     ContainerPtr volatile *bucket_entry = howl->get_container_addr(bucket);

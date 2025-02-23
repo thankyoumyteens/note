@@ -18,6 +18,8 @@
     - [C风格字符串](./base/array/cstr.md)
     - [在堆中分配多维数组](./base/array/new_m.md)
   - [结构体](./base/struct/struct.md)
+  - [联合体](./base/struct/union.md)
+  - [引用](./base/ref/ref.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
