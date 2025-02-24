@@ -1,17 +1,14 @@
 # 封装请求
 
 ```ts
-export interface DataType<T> {
+interface DataType<T> {
   code: number;
   message: string;
   data: T;
 }
 
-export const get = <T>(
-  url: string,
-  params: Object | Array<string | Object>
-) => {
-  return new Promise<DataType<T>>((resolve, reject) => {
+export const get = <T>(url: string, params: any) => {
+  return new Promise<T>((resolve, reject) => {
     uni.request({
       url: url,
       method: "GET",
@@ -19,9 +16,8 @@ export const get = <T>(
       success: (res) => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           const r = res.data as DataType<T>;
-          console.log(r);
           if (r.code === 0) {
-            resolve(r);
+            resolve(r.data);
           } else {
             reject(r);
           }
@@ -41,5 +37,16 @@ export const get = <T>(
       },
     });
   });
+};
+```
+
+## 使用
+
+```ts
+import { get } from "../../utils/request";
+
+const getData = async () => {
+  const name = await get<string>("/getUserName", { uid: "123" });
+  console.log(name);
 };
 ```

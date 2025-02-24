@@ -25,7 +25,8 @@ uni.addInterceptor("request", {
   },
 });
 
-export function login(username: string, password: string) {
+// 测试拦截器
+export function test(username: string, password: string) {
   uni.request({
     url: "/user/login",
     method: "POST",
