@@ -23,7 +23,7 @@
     - [路径转换](./io/path/convert.md)
     - [拼接拆分路径](./io/path/js.md)
     - [遍历目录](./io/path/foreach.md)
-    - [复制移到删除](./io/path/modify.md)
+    - [复制移动删除](./io/path/modify.md)
     - [重命名](./io/path/rename.md)
   - [文件操作](./io/file.md)
 

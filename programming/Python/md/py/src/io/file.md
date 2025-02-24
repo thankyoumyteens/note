@@ -70,3 +70,33 @@ open(文件名, mode)
 - `write(string)`: 将 string 写入缓冲区
 - `write(string.encode('utf-8'))`: 将 string 写入缓冲区(指定编码)
 - `flush()`: 将缓冲区的内容写入文件
+
+## 写入字节
+
+```py
+import sys
+
+# Hello World!
+file_content = [
+    0x48,
+    0x65,
+    0x6C,
+    0x6C,
+    0x6F,
+    0x2C,
+    0x20,
+    0x57,
+    0x6F,
+    0x72,
+    0x6C,
+    0x64,
+    0x21,
+]
+
+with open('test', 'wb') as f:
+    for byte in file_content:
+        # int.to_bytes: 把一个整数转换为指定长度的字节序列
+        # sys.byteorder: 获取系统是大端还是小端
+        f.write(byte.to_bytes(1, byteorder=sys.byteorder))
+    f.flush()
+```
