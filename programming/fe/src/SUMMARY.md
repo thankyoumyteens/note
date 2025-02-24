@@ -163,6 +163,7 @@
     - [作用域插槽](./vue3/slot/scope.md)
 
 - [uni-app](./uniapp/uniapp.md)
+  - [组件生命周期钩子](./uniapp/comp_hooks.md)
   - [页面生命周期钩子](./uniapp/hooks.md)
   - [导航栏](./uniapp/bar/bar.md)
     - [底部导航栏](./uniapp/bar/footer.md)
