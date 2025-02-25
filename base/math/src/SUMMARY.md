@@ -28,6 +28,8 @@
         - [零比零型](./further_mathematics/limit/question_format/f2_1.md)
         - [一的无穷大次方型](./further_mathematics/limit/question_format/f2_2.md)
         - [无穷比无穷型](./further_mathematics/limit/question_format/f2_3.md)
+        - [无穷大乘零型](./further_mathematics/limit/question_format/f2_4.md)
+        - [无穷大减无穷大型](./further_mathematics/limit/question_format/f2_5.md)
   - [导数与微分](./further_mathematics/derivatives_and_differentials.md)
     - [求导工具](./further_mathematics/derivative.md)
     - [隐函数](./further_mathematics/implicit_function.md)

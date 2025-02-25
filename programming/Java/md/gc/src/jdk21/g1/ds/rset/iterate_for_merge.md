@@ -76,7 +76,45 @@ public:
 ## G1MergeCardSetClosure
 
 ```cpp
-class G1MergeCardSetClosure : public HeapRegionClosure {
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
 
+class G1MergeCardSetClosure : public HeapRegionClosure {
+    // 返回给定分区是否需要遍历
+    bool start_iterate(uint const tag, uint const region_idx) {
+        assert(tag < G1GCPhaseTimes::MergeRSCards, "invalid tag %u", tag);
+        if (remember_if_interesting(region_idx)) {
+            // region_idx: 分区索引
+            // _region_base_idx: 该分区在卡表上的起始索引
+            // HeapRegion::LogCardsPerRegion: 每个分区需要用几张卡片表示(2的HeapRegion::LogCardsPerRegion次方张)
+            _region_base_idx = (size_t) region_idx << HeapRegion::LogCardsPerRegion;
+            _stats.inc_card_set_merged(tag);
+            return true;
+        }
+        // 该分区无需遍历
+        return false;
+    }
+
+    // 返回给定分区是否包含需要扫描的卡片
+    bool remember_if_interesting(uint const region_idx) {
+        // 判断给定分区是否包含需要扫描的卡片
+        if (!_scan_state->contains_cards_to_process(region_idx)) {
+            // 不包含, 该分区无需遍历
+            return false;
+        }
+        // 标记该分区在疏散阶段需要扫描的是否有脏卡片
+        _scan_state->add_dirty_region(region_idx);
+        // 该分区需要遍历
+        return true;
+    }
+};
+
+class G1RemSetScanState : public CHeapObj<mtGC> {
+    bool contains_cards_to_process(uint const region_idx) const {
+        HeapRegion *hr = G1CollectedHeap::heap()->region_at_or_null(region_idx);
+        // 需要扫描的分区:
+        // - 不在回收集中
+        // - 老年代或大对象分区
+        return (hr != nullptr && !hr->in_collection_set() && hr->is_old_or_humongous());
+    }
 };
 ```
