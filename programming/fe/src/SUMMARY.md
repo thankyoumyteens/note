@@ -178,3 +178,4 @@
   - [常用功能](./uniapp/style/style.md)
     - [局部滚动](./uniapp/style/scroll_view.md)
     - [滚动触底](./uniapp/style/on_scroll_to_lower.md)
+    - [下拉刷新](./uniapp/style/on_refresh.md)
