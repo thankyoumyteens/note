@@ -11,6 +11,7 @@
   <!-- - [校验码](./number_system/verification.md) -->
   - [进制转换](./number_system/number_system1.md)
   - [定点数](./number_system/fixed_point_number/fixed_point_number.md)
+    - [原码](./number_system/fixed_point_number/original.md)
     - [补码](./number_system/fixed_point_number/complement.md)
       - [补码求负数](./number_system/fixed_point_number/complement1.md)
       - [补码的加减](./number_system/fixed_point_number/complement2.md)

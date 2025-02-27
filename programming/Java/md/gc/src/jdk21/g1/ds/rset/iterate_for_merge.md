@@ -73,7 +73,7 @@ public:
 };
 ```
 
-## G1MergeCardSetClosure
+## start_iterate
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
@@ -115,6 +115,36 @@ class G1RemSetScanState : public CHeapObj<mtGC> {
         // - 不在回收集中
         // - 老年代或大对象分区
         return (hr != nullptr && !hr->in_collection_set() && hr->is_old_or_humongous());
+    }
+};
+```
+
+## do_card
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+class G1MergeCardSetClosure : public HeapRegionClosure {
+    void do_card(uint const card_idx) {
+        // 根据卡片索引拿到卡表上的卡片
+        G1CardTable::CardValue *to_prefetch = _ct->byte_for_index(_region_base_idx + card_idx);
+        // 把to_prefetch添加到数组末尾, 并把添加前的最后一个元素赋值给to_process
+        G1CardTable::CardValue *to_process = _merge_card_set_cache.push(to_prefetch);
+
+        mark_card(to_process);
+    }
+};
+
+template<class T>
+class G1MergeHeapRootsPrefetchCache {
+    T *push(T *elem) {
+        // 遍历数组时，提前把后续元素放到L1缓存中, 提高性能
+        Prefetch::write(elem, 0);
+        T *result = _cache[_cur_cache_idx];
+        _cache[_cur_cache_idx++] = elem;
+        _cur_cache_idx &= (CacheSize - 1);
+
+        return result;
     }
 };
 ```
