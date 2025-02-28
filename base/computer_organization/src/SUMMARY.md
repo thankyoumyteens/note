@@ -12,6 +12,7 @@
   - [进制转换](./number_system/number_system1.md)
   - [定点数](./number_system/fixed_point_number/fixed_point_number.md)
     - [原码](./number_system/fixed_point_number/original.md)
+    - [反码](./number_system/fixed_point_number/oc.md)
     - [补码](./number_system/fixed_point_number/complement.md)
       - [补码求负数](./number_system/fixed_point_number/complement1.md)
       - [补码的加减](./number_system/fixed_point_number/complement2.md)
@@ -20,6 +21,7 @@
     - [乘法](./number_system/fixed_point_number/mul.md)
     - [除法](./number_system/fixed_point_number/div.md)
   - [浮点数](./number_system/floating_point_number/floating_point_number.md)
+    - [移码](./number_system/floating_point_number/y.md)
     - [IEEE754](./number_system/floating_point_number/ieee754.md)
 
 - [存储器](./memory/memory.md)
