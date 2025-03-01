@@ -133,6 +133,17 @@ class G1MergeCardSetClosure : public HeapRegionClosure {
 
         mark_card(to_process);
     }
+
+    void mark_card(G1CardTable::CardValue *value) {
+        // _ct: 卡表
+        // mark_clean_as_dirty: 把卡片标记成脏卡片
+        if (_ct->mark_clean_as_dirty(value)) {
+            // index_for_cardvalue: 获取卡片在卡表中的索引
+            // set_chunk_dirty: 一个分区被分成多个块(chunk), 把这个卡片所在的块标记为脏
+            _scan_state->set_chunk_dirty(_ct->index_for_cardvalue(value));
+        }
+        _stats.inc_remset_cards();
+    }
 };
 
 template<class T>
@@ -148,3 +159,5 @@ class G1MergeHeapRootsPrefetchCache {
     }
 };
 ```
+
+## do_card_range
