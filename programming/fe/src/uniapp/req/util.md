@@ -23,6 +23,41 @@ export const get = <T>(url: string, params: any) => {
           }
         } else {
           uni.showToast({
+            icon: "error",
+            title: "数据获取失败",
+          });
+        }
+      },
+      fail: (err) => {
+        uni.showModal({
+          title: "请求失败",
+          content: err.errMsg,
+          showCancel: false,
+          confirmText: "确定",
+        });
+      },
+    });
+  });
+};
+
+export const post = <T>(url: string, params: any) => {
+  return new Promise<T>((resolve, reject) => {
+    uni.request({
+      url: url,
+      method: "POST",
+      data: params,
+      success: (res) => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          const r = res.data as DataType<T>;
+          console.log(r.code === 0);
+          if (r.code === 0) {
+            resolve(r.data);
+          } else {
+            reject(r);
+          }
+        } else {
+          uni.showToast({
+            icon: "error",
             title: "数据获取失败",
           });
         }

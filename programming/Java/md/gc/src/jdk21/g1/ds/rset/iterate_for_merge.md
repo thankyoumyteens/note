@@ -161,3 +161,30 @@ class G1MergeHeapRootsPrefetchCache {
 ```
 
 ## do_card_range
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+class G1MergeCardSetClosure : public HeapRegionClosure {
+    void do_card_range(uint const start_card_idx, uint const length) {
+        // 把这些卡片标记为脏
+        _ct->mark_range_dirty(_region_base_idx + start_card_idx, length);
+        _stats.inc_remset_cards(length);
+        // 把这些卡片所在的块都标记为脏
+        _scan_state->set_chunk_range_dirty(_region_base_idx + start_card_idx, length);
+    }
+};
+
+class G1RemSetScanState : public CHeapObj<mtGC> {
+    void set_chunk_range_dirty(size_t const region_card_idx, size_t const card_length) {
+        size_t chunk_idx = region_card_idx >> _scan_chunks_shift;
+        size_t const end_chunk = (region_card_idx + card_length - 1) >> _scan_chunks_shift;
+        for (; chunk_idx <= end_chunk; chunk_idx++) {
+            _region_scan_chunks[chunk_idx] = true;
+        }
+    }
+};
+
+// --- src/hotspot/share/gc/g1/g1CardTable.inline.hpp --- //
+
+```

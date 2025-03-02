@@ -4,14 +4,8 @@
 
 ```xml
 <dependency>
-    <groupId>org.hibernate.validator</groupId>
-    <artifactId>hibernate-validator</artifactId>
-    <version>8.0.1.Final</version>
-</dependency>
-<dependency>
-    <groupId>org.glassfish.expressly</groupId>
-    <artifactId>expressly</artifactId>
-    <version>5.0.0</version>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
 ```
 
@@ -47,23 +41,21 @@ package org.example.validator;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // http状态码返回400
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> validateErrorHandler(MethodArgumentNotValidException e) {
+    @ResponseBody
+    public Result<Void> validateErrorHandler(MethodArgumentNotValidException e) {
         ObjectError error = e.getBindingResult().getAllErrors().getFirst();
-        return new HashMap<>(){{
-            put("error", error.getDefaultMessage());
-        }};
+        return Result.fail(ResultCode.PARAMS_INVALID, error.getDefaultMessage());
     }
 }
 ```
