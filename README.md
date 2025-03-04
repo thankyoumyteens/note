@@ -39,9 +39,12 @@ vim books.sh
 ```sh
 #!/bin/bash
 
+# 遇到错误终止运行
+set -e
+
 echo "***************start***************"
 
-workdir=$(cd $(dirname $0); cd ..; pwd)
+workdir=~
 nginx_path=/usr/share/nginx/html/
 
 # 更新代码
@@ -236,4 +239,10 @@ cd base/shici/
 mdbook build
 rm -rf ${nginx_path}/shici/
 cp -r book/ ${nginx_path}/shici/
+```
+
+### 4. 运行脚本
+
+```sh
+sh books.sh
 ```
