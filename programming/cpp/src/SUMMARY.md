@@ -20,6 +20,8 @@
   - [结构体](./base/struct/struct.md)
   - [联合体](./base/struct/union.md)
   - [引用](./base/ref/ref.md)
+  - [函数](./base/func/func.md)
+    - [参数默认值](./base/func/default.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)

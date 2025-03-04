@@ -68,7 +68,41 @@ class G1RemSetScanState : public CHeapObj<mtGC> {
 class G1MergeHeapRootsTask : public WorkerTask {
 public:
     virtual void work(uint worker_id) {
+        G1CollectedHeap *g1h = G1CollectedHeap::heap();
+        G1GCPhaseTimes *p = g1h->phase_times();
 
+        G1GCPhaseTimes::GCParPhases merge_remset_phase = _initial_evacuation ?
+                                                         G1GCPhaseTimes::MergeRS :
+                                                         G1GCPhaseTimes::OptMergeRS;
+
+        {
+            G1GCParPhaseTimesTracker x(p, merge_remset_phase, worker_id,
+                                       !_initial_evacuation /* allow_multiple_record */);
+
+            {
+                // 处理需要提前回收的部分大对象分区
+                // _fast_reclaim_handled 控制只能由一个worker线程处理大对象分区
+                if (_initial_evacuation &&
+                    g1h->has_humongous_reclaim_candidates() &&
+                    !_fast_reclaim_handled &&
+                    !Atomic::cmpxchg(&_fast_reclaim_handled, false, true)) {
+
+                    G1GCParPhaseTimesTracker subphase_x(p, G1GCPhaseTimes::MergeER, worker_id);
+
+                    // 把候选的大对象分区的记忆集合并到卡表中
+                    G1FlushHumongousCandidateRemSets cl(_scan_state);
+                    // 内部会调用cl的do_heap_region_index函数
+                    g1h->heap_region_iterate(&cl);
+                    G1MergeCardSetStats stats = cl.stats();
+
+                    for (uint i = 0; i < G1GCPhaseTimes::MergeRSContainersSentinel; i++) {
+                        p->record_or_add_thread_work_item(merge_remset_phase, worker_id, stats.merged(i), i);
+                    }
+                }
+            }
+TODO
     }
 };
 ```
+
+## 把候选的大对象分区的记忆集合并到卡表中

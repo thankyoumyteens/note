@@ -187,4 +187,40 @@ class G1RemSetScanState : public CHeapObj<mtGC> {
 
 // --- src/hotspot/share/gc/g1/g1CardTable.inline.hpp --- //
 
+inline void G1CardTable::mark_range_dirty(size_t start_card_index, size_t num_cards) {
+    assert(is_aligned(start_card_index, sizeof(size_t)), "Start card index must be aligned.");
+    assert(is_aligned(num_cards, sizeof(size_t)), "Number of cards to change must be evenly divisible.");
+
+    // 为了提高效率按块遍历, 如果这个块内的卡片都是脏卡片则直接跳过这个块
+    // 如果这个块内都是干净的卡片则可以一次性把整个块标记为脏
+    // 只有当这个块内的卡片既有脏卡片又有干净的卡片时, 才需要逐个处理块内的每个卡片
+    // 在这里, 一个块的大小是size_t
+    size_t const num_chunks = num_cards / sizeof(size_t);
+
+    // 取出起始的块
+    size_t *cur_word = (size_t *) &_byte_map[start_card_index];
+    // 遍历到哪个块
+    size_t *const end_word_map = cur_word + num_chunks;
+    while (cur_word < end_word_map) {
+        size_t value = *cur_word;
+        if (value == WordAllClean) { // WordAllClean: size_t位二进制全是0
+            *cur_word = WordAllDirty; // WordAllDirty: size_t位二进制全是1
+        } else if (value == WordAllDirty) {
+            // do nothing.
+        } else {
+            // 块内既有脏卡片也有干净的卡片
+            // 逐个处理块内的每个卡片
+            CardValue *cur = (CardValue *) cur_word;
+            for (size_t i = 0; i < sizeof(size_t); i++) {
+                CardValue value = *cur;
+                // 把干净的卡片标为脏
+                if (value == clean_card_val()) {
+                    *cur = dirty_card_val();
+                }
+                cur++;
+            }
+        }
+        cur_word++;
+    }
+}
 ```
