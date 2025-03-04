@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>walter</title>
+    <style>
+      html {
+        background-color: rgb(22, 25, 35);
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      li {
+        font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+        border-bottom: 1px solid #7e7b7b;
+      }
+
+      li:last-child {
+        border: none;
+      }
+
+      li a {
+        text-decoration: none;
+        color: #ccc;
+        display: block;
+        text-align: center;
+        font-size: 30px;
+        margin: 10px 0;
+        transition: font-size 0.3s ease, background-color 0.3s ease;
+      }
+
+      li a:hover {
+        color: #1f90bb;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      let list = [
+        { name: "数学", path: "math/" },
+        // { name: "english", path: "english/" },
+        { name: "组成原理", path: "computer_organization/" },
+        { name: "操作系统", path: "operating_system/" },
+        { name: "算法", path: "algorithm/" },
+        { name: "汇编", path: "asm/" },
+        { name: "C++", path: "cpp/" },
+        { name: "Java虚拟机入门", path: "jvm/" },
+        { name: "Java虚拟机规范", path: "jvm_spec/" },
+        { name: "G1源码", path: "gc/" },
+        { name: "Java", path: "java/" },
+        { name: "Spring", path: "spring/" },
+        { name: "SpringBoot", path: "spring_boot/" },
+        { name: "SpringCloud", path: "spring_cloud/" },
+        { name: "消息队列", path: "mq/" },
+        { name: "数据库", path: "db/" },
+        { name: "Python", path: "py/" },
+        // { name: "Go", path: "go/" },
+        { name: "前端", path: "fe/" },
+        { name: "bugs", path: "bugs/" },
+        // { name: "flutter", path: "flutter/" },
+        { name: "使用操作系统", path: "os/" },
+        { name: "使用软件", path: "software/" },
+        { name: "shell", path: "shell/" },
+        { name: "Linux编程", path: "linux_c/" },
+        { name: "面试", path: "java_web/" },
+        { name: "诗词", path: "shici/" },
+      ];
+      let el = "<ul>";
+      for (let i = 0; i < list.length; i++) {
+        el += `<li><a href="${list[i].path}">${list[i].name}</a></li>`;
+      }
+      el += "</ul>";
+      document.querySelector("#app").innerHTML = el;
+    </script>
+  </body>
+</html>
