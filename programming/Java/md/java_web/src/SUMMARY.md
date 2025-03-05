@@ -8,6 +8,9 @@
   - [MyBatis](./q1/q1/s5.md)
   - [SpringBoot](./q1/q1/s6.md)
   - [MySQL](./q1/q1/s7.md)
+  - [SpringCloud](./q1/q1/s8.md)
+  - [消息队列](./q1/q1/s9.md)
+  - [Redis](./q1/q1/s10.md)
 
 - [Redis](./redis/redis.md)
   - [缓存](./redis/cache/cache.md)
