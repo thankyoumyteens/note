@@ -1,10 +1,5 @@
 # Summary
 
-- [Servlet](./servlet/servlet.md)
-  - [搭建servlet项目](./servlet/quick_start.md)
-  - [添加Filter](./servlet/add_filter.md)
-  - [使用包装类修改请求和响应数据](./servlet/wrapper.md)
-
 - [Spring](./spring/spring.md)
 
 - [MyBatis](./mybatis/MyBatis.md)
