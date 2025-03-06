@@ -23,6 +23,7 @@
   - [浮点数](./number_system/floating_point_number/floating_point_number.md)
     - [移码](./number_system/floating_point_number/y.md)
     - [IEEE754](./number_system/floating_point_number/ieee754.md)
+    - [浮点数加减](./number_system/floating_point_number/calc.md)
 
 - [存储器](./memory/memory.md)
   - [存储芯片](./memory/chip.md)

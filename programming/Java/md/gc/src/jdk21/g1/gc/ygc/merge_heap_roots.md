@@ -106,3 +106,39 @@ TODO
 ```
 
 ## 把候选的大对象分区的记忆集合并到卡表中
+
+## 遍历回收集中的分区
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
+
+void G1CollectedHeap::collection_set_iterate_increment_from(HeapRegionClosure *cl,
+                                                            HeapRegionClaimer *hr_claimer,
+                                                            uint worker_id) {
+    _collection_set.iterate_incremental_part_from(cl, hr_claimer, worker_id);
+}
+
+// --- src/hotspot/share/gc/g1/g1CollectionSet.cpp --- //
+
+void G1CollectionSet::iterate_incremental_part_from(HeapRegionClosure *cl,
+                                                    HeapRegionClaimer *hr_claimer,
+                                                    uint worker_id) const {
+    iterate_part_from(cl, hr_claimer, _inc_part_start, increment_length(), worker_id);
+}
+
+void G1CollectionSet::iterate_part_from(HeapRegionClosure *cl,
+                                        HeapRegionClaimer *hr_claimer,
+                                        size_t offset,
+                                        size_t length,
+                                        uint worker_id) const {
+    _g1h->par_iterate_regions_array(cl,
+                                    hr_claimer,
+                                    // 回收集就是分区索引的数组
+                                    &_collection_set_regions[offset],
+                                    length,
+                                    worker_id);
+}
+
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
+
+```
