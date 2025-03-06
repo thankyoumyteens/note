@@ -91,7 +91,7 @@ public:
 
                     // 把候选的大对象分区的记忆集合并到卡表中
                     G1FlushHumongousCandidateRemSets cl(_scan_state);
-                    // 内部会调用cl的do_heap_region_index函数
+                    // 遍历堆中的分区, 内部会调用cl的do_heap_region_index函数
                     g1h->heap_region_iterate(&cl);
                     G1MergeCardSetStats stats = cl.stats();
 
@@ -105,7 +105,84 @@ TODO
 };
 ```
 
+## 遍历堆中的分区
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
+
+void G1CollectedHeap::heap_region_iterate(HeapRegionIndexClosure *cl) const {
+    _hrm.iterate(cl);
+}
+
+// --- src/hotspot/share/gc/g1/heapRegionManager.cpp --- //
+
+void HeapRegionManager::iterate(HeapRegionIndexClosure *blk) const {
+    uint len = reserved_length();
+
+    for (uint i = 0; i < len; i++) {
+        if (!is_available(i)) {
+            continue;
+        }
+        bool res = blk->do_heap_region_index(i);
+        if (res) {
+            blk->set_incomplete();
+            return;
+        }
+    }
+}
+```
+
 ## 把候选的大对象分区的记忆集合并到卡表中
+
+```cpp
+class G1FlushHumongousCandidateRemSets : public HeapRegionIndexClosure {
+    bool do_heap_region_index(uint region_index) override {
+        G1CollectedHeap *g1h = G1CollectedHeap::heap();
+
+        // 确保这个分区是当前回收集的候选分区
+        if (!g1h->region_attr(region_index).is_humongous_candidate()) {
+            return false;
+        }
+
+        // 获取当前分区
+        HeapRegion *r = g1h->region_at(region_index);
+        if (r->rem_set()->is_empty()) {
+            return false;
+        }
+
+        guarantee(r->rem_set()->occupancy_less_or_equal_than(G1EagerReclaimRemSetThreshold),
+                    "Found a not-small remembered set here. This is inconsistent with previous assumptions.");
+
+        // 把候选的大对象分区的记忆集合并到卡表中
+        _cl.merge_card_set_for_region(r);
+
+        r->rem_set()->clear_locked(true /* only_cardset */);
+        r->rem_set()->set_state_complete();
+#ifdef ASSERT
+        G1HeapRegionAttr region_attr = g1h->region_attr(region_index);
+        assert(region_attr.remset_is_tracked(), "must be");
+#endif
+        assert(r->rem_set()->is_empty(), "At this point any humongous candidate remembered set must be empty.");
+
+        return false;
+    }
+};
+
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+class G1MergeCardSetClosure : public HeapRegionClosure {
+    void merge_card_set_for_region(HeapRegion *r) {
+        assert(r->in_collection_set() || r->is_starts_humongous(), "must be");
+
+        HeapRegionRemSet *rem_set = r->rem_set();
+        if (!rem_set->is_empty()) {
+            // 遍历记忆集, 合并到卡表
+            // 就是把记忆集中记录的卡片在卡表中标记为脏
+            rem_set->iterate_for_merge(*this);
+        }
+    }
+};
+```
 
 ## 遍历回收集中的分区
 
@@ -141,4 +218,41 @@ void G1CollectionSet::iterate_part_from(HeapRegionClosure *cl,
 
 // --- src/hotspot/share/gc/g1/g1CollectedHeap.cpp --- //
 
+void G1CollectedHeap::par_iterate_regions_array(HeapRegionClosure *cl,
+                                                HeapRegionClaimer *hr_claimer,
+                                                const uint regions[],
+                                                size_t length,
+                                                uint worker_id) const {
+    assert_at_safepoint();
+    // length是要处理的回收集数组的长度
+    if (length == 0) {
+        return;
+    }
+    uint total_workers = workers()->active_workers();
+
+    // 每个worker线程都会从不同的位置开始处理, 但最终每个worker线程最终都会尝试处理数组内所有的分区
+    // 比如: worker_id = 2, length = 10, total_workers = 5
+    // worker_id = 2的线程会从回收集数组中索引为2的分区(第3个分区)开始处理,
+    // 处理完第3个分区后, 继续处理后续的分区（如果hr_claimer不为空, 则会判断某个分区是否正在被其它worker线程处理, 如果是则跳过该分区)
+    // 到达数组末尾后, 再从数组开头继续处理, 直到走过一圈再回到start_pos为止
+    size_t start_pos = (worker_id * length) / total_workers;
+    size_t cur_pos = start_pos;
+
+    do {
+        uint region_idx = regions[cur_pos];
+        // 在合并堆根阶段, hr_claimer传入的是nullptr
+        if (hr_claimer == nullptr || hr_claimer->claim_region(region_idx)) {
+            HeapRegion *r = region_at(region_idx);
+            bool result = cl->do_heap_region(r);
+            guarantee(!result, "Must not cancel iteration");
+        }
+
+        cur_pos++;
+        if (cur_pos == length) {
+            cur_pos = 0;
+        }
+    } while (cur_pos != start_pos);
+}
 ```
+
+## G1MergeCardSetClosure
