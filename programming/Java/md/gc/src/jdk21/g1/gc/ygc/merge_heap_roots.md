@@ -100,6 +100,23 @@ public:
                     }
                 }
             }
+
+            {
+                // 处理回收集内的分区
+                G1MergeCardSetClosure merge(_scan_state);
+                G1ClearBitmapClosure clear(g1h);
+                // 先执行merge, 如果merge执行成功, 再执行clear
+                G1CombinedClosure combined(&merge, &clear);
+
+                // 遍历回收集中的分区, 对每个分区都执行一次cl中的do_heap_region函数
+                g1h->collection_set_iterate_increment_from(&combined, nullptr, worker_id);
+                G1MergeCardSetStats stats = merge.stats();
+
+                for (uint i = 0; i < G1GCPhaseTimes::MergeRSContainersSentinel; i++) {
+                    p->record_or_add_thread_work_item(merge_remset_phase, worker_id, stats.merged(i), i);
+                }
+            }
+        }
 TODO
     }
 };
@@ -271,11 +288,36 @@ class G1CombinedClosure : public HeapRegionClosure {
 };
 ```
 
-##
+## 把回收集内分区的记忆集合并到卡表
 
 ```cpp
 // --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
 
 class G1MergeCardSetClosure : public HeapRegionClosure {
+    virtual bool do_heap_region(HeapRegion *r) {
+        assert(r->in_collection_set(), "must be");
+
+        // 添加到_all_dirty_regions集合中
+        _scan_state->add_all_dirty_region(r->hrm_index());
+        // 把r分区的记忆集合并到卡表
+        // 就是把记忆集中记录的卡片在卡表中标记为脏
+        merge_card_set_for_region(r);
+
+        return false;
+    }
+};
+
+class G1ClearBitmapClosure : public HeapRegionClosure {
+    bool do_heap_region(HeapRegion *hr) {
+        assert(_g1h->is_in_cset(hr), "Should only be used iterating the collection set");
+
+        if (should_clear_region(hr)) {
+            _g1h->clear_bitmap_for_region(hr);
+            hr->reset_top_at_mark_start();
+        } else {
+            assert_bitmap_clear(hr, _g1h->concurrent_mark()->mark_bitmap());
+        }
+        return false;
+    }
 };
 ```

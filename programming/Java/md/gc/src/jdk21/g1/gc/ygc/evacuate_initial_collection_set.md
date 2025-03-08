@@ -12,6 +12,7 @@ void G1YoungCollector::evacuate_initial_collection_set(G1ParScanThreadStateSet *
 
     {
         Ticks start = Ticks::now();
+        // 合并堆根阶段
         rem_set()->merge_heap_roots(true /* initial_evacuation */);
         p->record_merge_heap_roots_time((Ticks::now() - start).seconds() * 1000.0);
     }
