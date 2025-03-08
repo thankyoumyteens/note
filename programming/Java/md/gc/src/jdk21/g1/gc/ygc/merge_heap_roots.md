@@ -255,4 +255,27 @@ void G1CollectedHeap::par_iterate_regions_array(HeapRegionClosure *cl,
 }
 ```
 
-## G1MergeCardSetClosure
+## G1CombinedClosure
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+class G1CombinedClosure : public HeapRegionClosure {
+    HeapRegionClosure *_closure1;
+    HeapRegionClosure *_closure2;
+
+    bool do_heap_region(HeapRegion *hr) {
+        return _closure1->do_heap_region(hr) ||
+                _closure2->do_heap_region(hr);
+    }
+};
+```
+
+##
+
+```cpp
+// --- src/hotspot/share/gc/g1/g1RemSet.cpp --- //
+
+class G1MergeCardSetClosure : public HeapRegionClosure {
+};
+```
