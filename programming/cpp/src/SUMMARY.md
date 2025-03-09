@@ -22,6 +22,8 @@
   - [引用](./base/ref/ref.md)
   - [函数](./base/func/func.md)
     - [参数默认值](./base/func/default.md)
+    - [函数重载](./base/func/overloading.md)
+    - [内连函数](./base/func/inline.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
