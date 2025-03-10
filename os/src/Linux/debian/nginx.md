@@ -27,7 +27,7 @@ sudo apt install nginx
 
 ```sh
 # 启动
-nginx
+/usr/sbin/nginx -c /etc/nginx/nginx.conf
 # 停止
 nginx -s stop
 ```

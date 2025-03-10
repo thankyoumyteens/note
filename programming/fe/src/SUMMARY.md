@@ -166,6 +166,8 @@
 - [uni-app](./uniapp/uniapp.md)
   - [组件生命周期钩子](./uniapp/comp_hooks.md)
   - [页面生命周期钩子](./uniapp/hooks.md)
+  - [部署](./uniapp/build/build.md)
+    - [nginx](./uniapp/build/nginx.md)
   - [导航栏](./uniapp/bar/bar.md)
     - [底部导航栏](./uniapp/bar/footer.md)
     - [自定义顶部导航栏](./uniapp/bar/header.md)
@@ -179,3 +181,4 @@
     - [局部滚动](./uniapp/style/scroll_view.md)
     - [滚动触底](./uniapp/style/on_scroll_to_lower.md)
     - [下拉刷新](./uniapp/style/on_refresh.md)
+  - [Pinia](./uniapp/pinia/pinia.md)
