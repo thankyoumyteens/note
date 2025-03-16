@@ -1,6 +1,8 @@
 # 指针队列
 
 ```cpp
+// --- src/hotspot/share/gc/shared/ptrQueue.hpp --- //
+
 class PtrQueue {
 
     // 最后一个入队的元素的下标

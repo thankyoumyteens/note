@@ -238,3 +238,21 @@ x \to 0^+ 时，2^{\frac{1}{x}} \to 2^{+\infty} \to \infty \Rightarrow
 -->
 
 ![](../img/cad11.jpg)
+
+<!--
+\begin{align}
+& \; f(x) \in C[a,b]，p>0，q>0 \\
+& 证明 存在 \xi \in [a,b]，使得pf(a)+qf(b)=(p+q)f(\xi) \\
+\\
+& 因为f(x) \in C[a,b] \\
+& 所以存在上下界 m，M \\
+& 则 (p+q)m\le pf(a)+qf(b)\le (p+q)M \\
+& 推出 m\le \frac{pf(a)+qf(b)}{p+q} \le M \\
+& 则 \frac{pf(a)+qf(b)}{p+q} 是介值 \\
+& 存在 \xi \in [a,b] \\
+& 使得 f(\xi)=\frac{pf(a)+qf(b)}{p+q} \\
+& 则 pf(a)+qf(b)=(p+q)f(\xi) \\
+\end{align}
+-->
+
+![](../img/cad12.jpg)
