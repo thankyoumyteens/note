@@ -170,6 +170,20 @@ x \to 0^+ 时，2^{\frac{1}{x}} \to 2^{+\infty} \to \infty \Rightarrow
 \begin{align}
 & 找出 f(x)=\frac{\ln|x|}{x^2-1}e^{\frac{1}{x-2}} 的间断点 \\
 \\
+& 间断点：x=-1、0、1、2 \\
+\\
+& \lim_{x \to -1}f(x)=\lim_{x \to -1}\frac{\ln(-x)}{x^2-1}e^{\frac{1}{x-2}} \\
+& {\color{Green} // x^2-1在分母，极限没法求，把它拆开} \\
+& {\color{Green} // 因为\frac{1}{x-1}和e^{\frac{1}{x-2}}的极限能直接求出来} \\
+& {\color{Green} // 所以把它们放到一起} \\
+& =\lim_{x \to -1}\frac{e^{\frac{1}{x-2}}}{x-1} \times \frac{\ln(-x)}{x+1} \\
+& =-\frac{1}{2}e^{-\frac{1}{3}} \lim_{x \to -1} \frac{\ln(-x)}{x+1} \\
+& =-\frac{1}{2}e^{-\frac{1}{3}} \lim_{x \to -1} \frac{\ln[1-(x+1)]}{x+1} \\
+& {\color{Green} // 等价无穷小替换} \\
+& =-\frac{1}{2}e^{-\frac{1}{3}} \lim_{x \to -1} \frac{-(x+1)}{x+1} \\
+& =\frac{1}{2}e^{-\frac{1}{3}} \\
+& x=-1是可去间断点 \\
+\\
 
 \end{align}
 -->
