@@ -51,6 +51,8 @@
 
 ![](../img/bef3_1.jpg)
 
+![](../img/ln-graph.png)
+
 ## 三角函数(trigonometric function)
 
 <!--

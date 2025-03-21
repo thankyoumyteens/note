@@ -184,9 +184,27 @@ x \to 0^+ 时，2^{\frac{1}{x}} \to 2^{+\infty} \to \infty \Rightarrow
 & =\frac{1}{2}e^{-\frac{1}{3}} \\
 & x=-1是可去间断点 \\
 \\
-
+& \lim_{x \to 0}f(x)=\lim_{x \to 0}\frac{\ln|x|}{x^2-1}e^{\frac{1}{x-2}} \\
+& {\color{Green} // \lim_{x \to 0}\ln|x|=-\infty} \\
+& = +\infty \\
+& x=0是第二类间断点 \\
+\\
+& \lim_{x \to 1}f(x)=\lim_{x \to 1}\frac{\ln x}{x^2-1}e^{\frac{1}{x-2}} \\
+& =\lim_{x \to 1}\frac{e^{\frac{1}{x-2}}}{x+1} \times \frac{\ln x}{x-1} \\
+& =\frac{1}{2}e^{-1} \lim_{x \to 1} \frac{\ln[1+(x-1)]}{x-1} \\
+& =\frac{1}{2}e^{-1} \lim_{x \to 1} \frac{x-1}{x-1} \\
+& =\frac{1}{2}e^{-1} \\
+& x=1是可去间断点 \\
+\\
+& \lim_{x \to 2^-}f(x)=\lim_{x \to 2^-}\frac{\ln|x|}{x^2-1}e^{\frac{1}{x-2}} \\
+& =0 \\
+& \lim_{x \to 2^+}f(x)=\lim_{x \to 2^+}\frac{\ln|x|}{x^2-1}e^{\frac{1}{x-2}} \\
+& =+\infty \\
+& x=2是第二类间断点 \\
 \end{align}
 -->
+
+![](../img/cad7_2.jpg)
 
 ## 闭区间上连续函数的性质
 
