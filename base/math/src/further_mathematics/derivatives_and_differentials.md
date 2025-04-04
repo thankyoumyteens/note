@@ -29,7 +29,7 @@
 
 ![](../img/dad2.jpg)
 
-例题 1
+例题
 
 <!--
 \begin{align}
@@ -48,8 +48,6 @@
 -->
 
 ![](../img/dad3.jpg)
-
-例题 2
 
 <!--
 \begin{align}
@@ -80,6 +78,16 @@
 -->
 
 ![](../img/dad4.jpg)
+
+<!--
+\begin{align}
+& f(x)=x(x-1)(x+2)\cdots(x-99)(x+100)，求f'(0) \\
+\\
+& 方法一 \\
+& f'(x)=(x-1)\cdots(x+100)+x(x+2)\cdots(x+100)+\cdots+x(x-99) \\
+&  
+\end{align}
+-->
 
 ## 微分
 
