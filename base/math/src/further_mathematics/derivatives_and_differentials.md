@@ -84,8 +84,11 @@
 & f(x)=x(x-1)(x+2)\cdots(x-99)(x+100)，求f'(0) \\
 \\
 & 方法一 \\
-& f'(x)=(x-1)\cdots(x+100)+x(x+2)\cdots(x+100)+\cdots+x(x-99) \\
-&  
+& f'(x)=(x-1)\cdots(x+100)+x(x+2)\cdots(x+100)+\cdots+x(x-1)\cdots(x-99) \\
+& f'(0) = (x-1)\cdots(x+100) = 100! \\
+\\
+& 方法二 \\
+& 
 \end{align}
 -->
 

@@ -2,6 +2,7 @@
 
 - [MacOS](./macos/macos.md)
   - [安装软件](./macos/i.md)
+    - [Xcode](./macos/xcode.md)
     - [Homebrew](./macos/brew.md)
     - [安装软件](./macos/inst.md)
     - [git](./macos/git.md)

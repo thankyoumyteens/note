@@ -1,11 +1,5 @@
 # Homebrew
 
-## 安装 Command Line Tools (CLT) for Xcode
-
-```sh
-xcode-select --install
-```
-
 ## 安装 Homebrew
 
 ```sh

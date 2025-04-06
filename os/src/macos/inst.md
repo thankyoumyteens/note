@@ -45,6 +45,10 @@ brew install ffmpeg
 brew install wget
 # ip命令
 brew install iproute2mac
+# 将PlantUML脚本转换成图片
+brew install graphviz
+# PlantUML
+brew install plantuml
 ```
 
 - [Anaconda](https://www.anaconda.com/download/success)
