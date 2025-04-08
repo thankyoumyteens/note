@@ -85,12 +85,17 @@
 \\
 & 方法一 \\
 & f'(x)=(x-1)\cdots(x+100)+x(x+2)\cdots(x+100)+\cdots+x(x-1)\cdots(x-99) \\
-& f'(0) = (x-1)\cdots(x+100) = 100! \\
+& f'(0)=(0-1)\cdots(0+100) = 100! \\
 \\
 & 方法二 \\
-& 
+& f'(0)=\lim_{x \to 0}\frac{f(x)-f(0)}{x-0} \\
+& = \lim_{x \to 0}\frac{x(x-1)(x+2)\cdots(x-99)(x+100)}{x} \\
+& = \lim_{x \to 0}(x-1)(x+2)\cdots(x-99)(x+100) \\
+& = 100! \\
 \end{align}
 -->
+
+![](../img/dad7.jpg)
 
 ## 微分
 
