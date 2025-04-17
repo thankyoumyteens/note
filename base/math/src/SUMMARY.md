@@ -35,6 +35,7 @@
       - [证明数列极限存在](./further_mathematics/limit/question_format/f3.md)
   - [导数与微分](./further_mathematics/derivatives_and_differentials.md)
     - [求导工具](./further_mathematics/derivative.md)
+      - [求导类型](./further_mathematics/derivative1.md)
     - [隐函数](./further_mathematics/implicit_function.md)
     - [参数方程](./further_mathematics/parametric_equation.md)
     - [中值定理](./further_mathematics/mean_value_theorem.md)
