@@ -10,6 +10,10 @@
 \\
 & y=(1+x)^{\sin x}，求y' \\
 & {\color{Green} // 见到 u^v，就把它写成 e^{v \ln u}} \\
-& y'=
+& y=e^{\sin x \ln(1+x)} \\
+& y'=e^{\sin x \ln(1+x)}\left [ \cos x \ln(1+x) + \frac{\sin x}{1+x} \right ]  \\
+& =(1+x)^{\sin x}\left [ \cos x \ln(1+x) + \frac{\sin x}{1+x} \right ]  \\
 \end{align}
 -->
+
+![](../img/d1_1.jpg)
