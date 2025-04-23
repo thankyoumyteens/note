@@ -24,6 +24,9 @@
     - [参数默认值](./base/func/default.md)
     - [函数重载](./base/func/overloading.md)
     - [内连函数](./base/func/inline.md)
+  - [泛型](./base/template/template.md)
+    - [函数模版](./base/template/t.md)
+    - [传递指针类型](./base/template/tp.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
