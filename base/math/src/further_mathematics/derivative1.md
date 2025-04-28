@@ -25,12 +25,25 @@
 & 把y看成x的函数正常求导 \\
 & \ln\sqrt{x^2+y^2}=\arctan\frac{y}{x}确定y是x的函数，求\frac{\mathrm{d}y}{\mathrm{d}x} \\
 & {\color{Green} // 等号两边同时求导} \\
-& \frac{1}{\sqrt{x^2+y^2}}\times\frac{1}{2\sqrt{x^2+y^2}}\left ( 2x+2y\frac{\mathrm{d}y}{\mathrm{d}x} \right ) 
+& \frac{1}{\sqrt{x^2+y^2}}\times\frac{1}{2\sqrt{x^2+y^2}}\left ( 2x+2y\frac{\mathrm{d}y}{\mathrm{d}x} \right )
 = \frac{1}{1+\left ( \frac{y}{x} \right ) ^2}\times\frac{x\frac{\mathrm{d}y}{\mathrm{d}x}+y}{x^2} \\
 & \frac{x+y\frac{\mathrm{d}y}{\mathrm{d}x}}{x^2+y^2}=\frac{x\frac{\mathrm{d}y}{\mathrm{d}x}-y}{x^2+y^2} \\
 & x+y\frac{\mathrm{d}y}{\mathrm{d}x}=x\frac{\mathrm{d}y}{\mathrm{d}x}-y \\
 & \frac{\mathrm{d}y}{\mathrm{d}x}=\frac{x+y}{x-y} \\
 \\
-& 
+& e^{xy}=x^2+y，求y'(0)和y''(0) \\
+& x=0代入，得到y=1 \\
+& {\color{Green} // 等号两边同时求导} \\
+& x^{xy}(y+xy')=2x+y' \\
+& 把x=0，y=1代入：得到y'(0)=1 \\
+& {\color{Green} // 继续求导} \\
+& x^{xy}(y+xy')^2+x^{xy}(2y'+xy'')=2+y'' \\
+& 把x=0，y=1，y'=1代入：得到y''(0)=1 \\
 \end{align}
+-->
+
+![](../img/d1_2.jpg)
+
+<!--
+
 -->
