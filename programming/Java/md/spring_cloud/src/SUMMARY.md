@@ -32,6 +32,7 @@
   - [OpenFeign](./http_clients/open_feign/open_feign.md)
     - [设置超时时间](./http_clients/open_feign/timeout.md)
     - [打印日志](./http_clients/open_feign/log.md)
+    - [重写FeignClient输出日志](./http_clients/open_feign/feign_log.md)
     - [替换默认的httpclient](./http_clients/open_feign/client.md)
     - [开启GZIP](./http_clients/open_feign/gzip.md)
 

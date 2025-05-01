@@ -1,10 +1,11 @@
-# 重写FeignClient输出日志
+# 重写 FeignClient 输出日志
 
-FeignClient默认输出的日志, 是多条INFO日志, 在并发时, 很有可能会互相干扰, 而且格式也无法调整。
+FeignClient 默认输出的日志, 是多条 INFO 日志, 在并发时, 很有可能会互相干扰, 而且格式也无法调整。
 
-Feign默认情况下, 是使用 feign.Client.Default 发起http请求, 可以重写Client, 并注入Bean来替换掉 feign.Client.Default, 从而实现日志记录
+Feign 默认情况下, 是使用 feign.Client.Default 发起 http 请求, 可以重写 Client, 并注入 Bean 来替换掉 feign.Client.Default, 从而实现日志记录
 
-编写FeignConfiguration
+编写 FeignConfiguration
+
 ```java
 public class FeignConfiguration {
 
@@ -16,7 +17,8 @@ public class FeignConfiguration {
 }
 ```
 
-重写Client
+重写 Client
+
 ```java
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;

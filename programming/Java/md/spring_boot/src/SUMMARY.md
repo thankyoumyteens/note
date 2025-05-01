@@ -14,7 +14,6 @@
   - [跨域](./base/cors.md)
   - [多环境配置](./base/profiles.md)
   - [logback配置](./base/logback.md)
-  - [重写FeignClient输出日志](./base/feign_log.md)
   - [HibernateValidator](./base/validator.md)
   - [使用包装类修改请求和响应数据](./base/wrapper.md)
 
