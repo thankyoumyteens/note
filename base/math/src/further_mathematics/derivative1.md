@@ -45,5 +45,15 @@
 ![](../img/d1_2.jpg)
 
 <!--
-
+\begin{align}
+& \mathbf{三、参数方程求导}  \\
+\\
+& \begin{cases}
+x=\varphi (t) \\
+y=\psi (t)
+\end{cases}，其中\varphi (t)、\psi (t)二阶可导，且\varphi '(t)\ne0 \\
+& 则\frac{\mathrm{d} y}{\mathrm{d} x}=\frac{\psi '(t)}{\varphi '(t)} \\
+\\
+& 
+\end{align}
 -->
