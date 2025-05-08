@@ -52,8 +52,15 @@
 x=\varphi (t) \\
 y=\psi (t)
 \end{cases}，其中\varphi (t)、\psi (t)二阶可导，且\varphi '(t)\ne0 \\
-& 则\frac{\mathrm{d} y}{\mathrm{d} x}=\frac{\psi '(t)}{\varphi '(t)} \\
+& 则\frac{\mathrm{d}y}{\mathrm{d}x}=\frac{\psi '(t)}{\varphi '(t)} \\
 \\
+& \begin{cases}
+x=\arctan t \\
+y=\ln(1+t^2)
+\end{cases}，求\frac{\mathrm{d}y}{\mathrm{d}x}和\frac{\mathrm{d}^2y}{\mathrm{d}x^2} \\
+& \frac{\mathrm{d}y}{\mathrm{d}x}
+=\frac{\frac{\mathrm{d}y}{\mathrm{d}t}}{\frac{\mathrm{d}x}{\mathrm{d}t}}
+=\frac{\frac{2t}{1+t^2} }{\frac{1}{1+t^2}}=2t \\
 & 
 \end{align}
 -->

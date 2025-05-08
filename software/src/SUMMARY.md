@@ -53,3 +53,6 @@
 
 - [GIMP](./gimp/gimp.md)
   - [透明图片设置白色背景](./gimp/set_bg.md)
+
+- [Chrome](./chrome/chrome.md)
+  - [字体锯齿](./chrome/font_bug.md)
