@@ -23,7 +23,7 @@
   - [函数](./base/func/func.md)
     - [参数默认值](./base/func/default.md)
     - [函数重载](./base/func/overloading.md)
-    - [内连函数](./base/func/inline.md)
+    - [内联函数](./base/func/inline.md)
   - [泛型](./base/template/template.md)
     - [函数模版](./base/template/t.md)
     - [传递指针类型](./base/template/tp.md)
