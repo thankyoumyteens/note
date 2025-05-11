@@ -1,4 +1,4 @@
-# G1CardSet
+# 卡片索引集合
 
 卡片索引集合(G1CardSet)内部通过 G1CardSetHashTable 实现, G1 通过这些卡片索引来构建和维护记忆集。
 

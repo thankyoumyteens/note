@@ -1,4 +1,4 @@
-# GlobalCounter
+# 全局计数器
 
 GlobalCounter(全局计数器)用来实现 RCU 机制。
 

@@ -1,4 +1,4 @@
-# ConcurrentHashTable
+# 并发哈希表
 
 ConcurrentHashTable 是一个并发的哈希表(数组+链表实现), 其读操作是无需等待的, 插入操作采用 CAS 机制。每个桶(Bucket)的删除操作是互斥的。
 

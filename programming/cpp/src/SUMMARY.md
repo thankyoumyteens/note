@@ -24,6 +24,8 @@
     - [参数默认值](./base/func/default.md)
     - [函数重载](./base/func/overloading.md)
     - [内联函数](./base/func/inline.md)
+  - [类](./base/class/class.md)
+    - [拷贝构造函数](./base/class/copy.md)
   - [泛型](./base/template/template.md)
     - [函数模版](./base/template/t.md)
     - [传递指针类型](./base/template/tp.md)
@@ -81,9 +83,6 @@
   - [memcopy](./allocation/memcopy.md)
   - [memset](./allocation/memset.md)
   - [数组](./allocation/array.md)
-
-- [类](./base/class/class.md)
-  - [友元](./base/class/friend.md)
 
 - [对象](./base/obj/obj.md)
   - [对象赋值](./base/obj/obj_v.md)

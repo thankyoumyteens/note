@@ -19,8 +19,8 @@
 
 - [内部数据结构](./jdk21/g1/ds/ds.md)
   - [位图](./jdk21/g1/ds/bit_map/bit_map.md)
-  - [GlobalCounter](./jdk21/g1/ds/global_counter.md)
-  - [ConcurrentHashTable](./jdk21/g1/ds/concurrent_hash_table/concurrent_hash_table.md)
+  - [全局计数器](./jdk21/g1/ds/global_counter.md)
+  - [并发哈希表](./jdk21/g1/ds/concurrent_hash_table/concurrent_hash_table.md)
     - [RCU读临界区](./jdk21/g1/ds/concurrent_hash_table/scs.md)
     - [Node操作](./jdk21/g1/ds/concurrent_hash_table/node.md)
     - [Bucket操作](./jdk21/g1/ds/concurrent_hash_table/bucket.md)
@@ -29,7 +29,7 @@
     - [删除元素](./jdk21/g1/ds/concurrent_hash_table/remove.md)
     - [扩容](./jdk21/g1/ds/concurrent_hash_table/grow.md)
     - [缩容](./jdk21/g1/ds/concurrent_hash_table/shrink.md)
-  - [G1CardSet](./jdk21/g1/ds/g1_card_set/g1_card_set.md)
+  - [卡片索引集合](./jdk21/g1/ds/g1_card_set/g1_card_set.md)
     - [G1CardSetHashTable](./jdk21/g1/ds/g1_card_set/g1_card_set_hash_table.md)
     - [CardSet容器](./jdk21/g1/ds/g1_card_set/g1_card_set_container.md)
       - [内联指针卡片模式容器](./jdk21/g1/ds/g1_card_set/g1_card_set_inline_ptr.md)
@@ -52,6 +52,7 @@
   - [记忆集](./jdk21/g1/ds/rset/rset.md)
     - [合并到卡表](./jdk21/g1/ds/rset/iterate_for_merge.md)
   - [指针队列](./jdk21/g1/ds/ptr_queue.md)
+  - [无锁空闲链表](./jdk21/g1/ds/free_list/free_list.md)
   
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)
