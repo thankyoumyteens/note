@@ -21,6 +21,7 @@
       - ACC: 累加器(accumulator)
       - ALU: 算术逻辑单元(Arithmetic logic unit)
       - X: 操作数寄存器
+      - PSW: 标志寄存器, 存放ALU运算得到的标志信息, 比如结果是否溢出、有无进位等
     - 控制器
       - CU: 控制单元(Control Unit): 分析指令并发出各种控制信号来协调各部件完成指令所描述的操作
       - IR: 指令寄存器(Instruction register): 存放当前要执行的指令, 其内容来自 MDR

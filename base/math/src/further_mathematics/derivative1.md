@@ -69,6 +69,21 @@ y=\ln(1+t^2)
 =\frac{\frac{\mathrm{d}(2t)}{\mathrm{d}t}}{\frac{\mathrm{d}x}{\mathrm{d}t}}
 =\frac{2}{\frac{1}{1+t^2}}=2+2t^2 \\
 \\
-& 
+& \begin{cases}
+x=t-\sin t \\
+y=1-\cos t
+\end{cases}，求\frac{\mathrm{d}y}{\mathrm{d}x}和\frac{\mathrm{d}^2y}{\mathrm{d}x^2} \\
+& \frac{\mathrm{d}y}{\mathrm{d}x}
+=\frac{\frac{\mathrm{d}y}{\mathrm{d}t}}{\frac{\mathrm{d}x}{\mathrm{d}t}}
+=\frac{\sin t}{1-\cos t} \\
+& \frac{\mathrm{d}^2y}{\mathrm{d}x^2}
+=\frac{\mathrm{d}\left ( \frac{\mathrm{d}y}{\mathrm{d}x} \right )}{\mathrm{d}x}
+=\frac{\mathrm{d}\left ( \frac{\sin t}{1-\cos t} \right )}{\mathrm{d}x}
+=\frac{\frac{\mathrm{d}\left ( \frac{\sin t}{1-\cos t} \right )}{\mathrm{d}t}}{\frac{\mathrm{d}x}{\mathrm{d}t}} \\
+\\
+& \begin{cases}
+x=2t^2+1 \\
+e^{yt}=y+3t
+\end{cases}，求\frac{\mathrm{d}y}{\mathrm{d}x}\big|_{x=1} \\
 \end{align}
 -->

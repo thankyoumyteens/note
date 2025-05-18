@@ -53,6 +53,7 @@
     - [合并到卡表](./jdk21/g1/ds/rset/iterate_for_merge.md)
   - [指针队列](./jdk21/g1/ds/ptr_queue.md)
   - [无锁空闲链表](./jdk21/g1/ds/free_list/free_list.md)
+    - [无锁栈](./jdk21/g1/ds/free_list/lock_free_stack.md)
   
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)
