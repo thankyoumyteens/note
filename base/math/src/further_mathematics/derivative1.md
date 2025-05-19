@@ -82,8 +82,30 @@ y=1-\cos t
 =\frac{\frac{\mathrm{d}\left ( \frac{\sin t}{1-\cos t} \right )}{\mathrm{d}t}}{\frac{\mathrm{d}x}{\mathrm{d}t}} \\
 \\
 & \begin{cases}
-x=2t^2+1 \\
+x=2t^2+t+1 \\
 e^{yt}=y+3t
 \end{cases}，求\frac{\mathrm{d}y}{\mathrm{d}x}\big|_{x=1} \\
+& x=1时，t=0，y=1 \\
+& \frac{\mathrm{d}y}{\mathrm{d}x}
+=\frac{\frac{\mathrm{d}y}{\mathrm{d}t}}{\frac{\mathrm{d}x}{\mathrm{d}t}} \\
+& \frac{\mathrm{d}x}{\mathrm{d}t}=4t+1，在t=0时值为1 \\
+& \frac{\mathrm{d}y}{\mathrm{d}t} 使用隐函数求导： \\
+& e^{yt}\left ( t\frac{\mathrm{d}y}{\mathrm{d}t}+y \right )=\frac{\mathrm{d}y}{\mathrm{d}t}+3 \\
+& t=0，y=1代入：e^0(1+0)=\frac{\mathrm{d}y}{\mathrm{d}t}+3 \\
+& \frac{\mathrm{d}y}{\mathrm{d}t}=-2 \\
+& \frac{\mathrm{d}y}{\mathrm{d}x}\big|_{x=1}=\frac{-2}{1}=-2 \\
+\end{align}
+-->
+
+![](../img/d1_3.jpg)
+
+<!--
+\begin{align}
+& \mathbf{三、分段函数求导}  \\
+\\
+& \begin{cases}
+x= \\
+y=
+\end{cases}
 \end{align}
 -->
