@@ -103,9 +103,15 @@ e^{yt}=y+3t
 \begin{align}
 & \mathbf{四、分段函数求导}  \\
 \\
-& \begin{cases}
-x= \\
-y=
-\end{cases}
+& f(x)=\begin{cases}
+e^{ax}，& x<0 \\
+\ln(1+2x)+b，& x\ge0
+\end{cases}，f'(0)存在，求a，b \\
+& \lim_{x \to 0^-}f(x)=\lim_{x \to 0^-}e^{ax}=1 \\
+& \lim_{x \to 0^+}f(x)=\lim_{x \to 0^+}\ln(1+2x)+b=b \\
+& f(0)=\lim_{x \to 0^+}f(x)=b \\
+& 因为 f'(0)存在，则\lim_{x \to 0^-}f(x)=\lim_{x \to 0^+}f(x)=f(0) \\
+& 所以b=1 \\
+&
 \end{align}
 -->
