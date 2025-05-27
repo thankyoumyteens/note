@@ -53,6 +53,7 @@
 
 - [Ubuntu](./Linux/Ubuntu/ubuntu.md)
   - [软件源配置](./Linux/Ubuntu/sources.md)
+  - [使用mac键位](./Linux/Ubuntu/mac_keyboard.md)
   - [中文输入法](./Linux/Ubuntu/input.md)
   - [开启ssh服务](./Linux/Ubuntu/ssh.md)
   - [修改DNS](./Linux/Ubuntu/dns.md)
