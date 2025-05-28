@@ -128,6 +128,7 @@
     - [颜色](./pillow/mode.md)
 
 - [pdf](./pdf/pdf.md)
+  - [word转pdf](./pdf/word2pdf.md)
   - [删除指定页](./pdf/delete_page.md)
 
 - [selenium](./selenium/selenium.md)

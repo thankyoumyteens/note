@@ -11,7 +11,7 @@ python -m venv test
 ## 激活虚拟环境
 
 ```sh
-# linux
+# linux/mac
 source test/bin/activate
 # windows
 test\Scripts\activate.bat
