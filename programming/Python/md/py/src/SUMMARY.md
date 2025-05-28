@@ -28,8 +28,9 @@
   - [文件操作](./io/file.md)
 
 - [subprocess](./subprocess/subprocess.md)
-  - [Popen](./subprocess/Popen.md)
-  - [run](./subprocess/run.md)
+  - [基本用法](./subprocess/base.md)
+  - [控制输入输出流](./subprocess/io.md)
+  - [异步执行](./subprocess/async.md)
 
 - [正则表达式](./regex/regex.md)
   - [查找](./regex/find.md)
