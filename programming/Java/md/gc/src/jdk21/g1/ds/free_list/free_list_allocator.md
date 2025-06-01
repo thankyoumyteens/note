@@ -85,22 +85,6 @@ try_transfer_pending():
    3. 后续 release() 操作写入 _pending_lists[1]
 ```
 
-空闲链表中的一个空闲节点
-
-```cpp
-struct FreeNode {
-    FreeNode *volatile _next;
-
-    FreeNode() : _next(nullptr) {}
-
-    FreeNode *next() { return Atomic::load(&_next); }
-
-    FreeNode *volatile *next_addr() { return &_next; }
-
-    void set_next(FreeNode *next) { Atomic::store(&_next, next); }
-};
-```
-
 表示一组批量操作的节点集合，用于从 PendingList 到 FreeList 的转移
 
 ```cpp

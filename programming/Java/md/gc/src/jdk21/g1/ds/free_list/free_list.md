@@ -19,3 +19,19 @@
 | 分配新内存并构造 Node          |                   | 批量转移到 Free List    |
 +-----------------------------+                   +------------------------+
 ```
+
+空闲链表中的一个空闲节点
+
+```cpp
+struct FreeNode {
+    FreeNode *volatile _next;
+
+    FreeNode() : _next(nullptr) {}
+
+    FreeNode *next() { return Atomic::load(&_next); }
+
+    FreeNode *volatile *next_addr() { return &_next; }
+
+    void set_next(FreeNode *next) { Atomic::store(&_next, next); }
+};
+```

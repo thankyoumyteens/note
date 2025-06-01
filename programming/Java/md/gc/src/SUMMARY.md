@@ -56,6 +56,7 @@
     - [无锁栈](./jdk21/g1/ds/free_list/lock_free_stack.md)
     - [FreeListConfig](./jdk21/g1/ds/free_list/free_list_config.md)
     - [FreeListAllocator](./jdk21/g1/ds/free_list/free_list_allocator.md)
+  - [BufferNode](./jdk21/g1/ds/buffer_node/buffer_node.md)
   
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)
