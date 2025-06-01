@@ -112,6 +112,14 @@ e^{ax}，& x<0 \\
 & f(0)=\lim_{x \to 0^+}f(x)=b \\
 & 因为 f'(0)存在，则\lim_{x \to 0^-}f(x)=\lim_{x \to 0^+}f(x)=f(0) \\
 & 所以b=1 \\
-&
+& x\ne0时要分左右导数，\\
+& f'_-(0)=\lim_{x \to 0^-}\frac{f(x)-f(0)}{x}=\lim_{x \to 0^-}\frac{e^{ax}-1}{x}
+=\lim_{x \to 0^-}\frac{ax}{x}=a \\
+& f'_+(0)=\lim_{x \to 0^+}\frac{f(x)-f(0)}{x}=\lim_{x \to 0^+}\frac{\ln(1+2x)+1-1}{x}
+=\lim_{x \to 0^+}\frac{2x}{x}=2 \\
+& 因为f'_-(0)=f'_+(0) \\
+& 所以a=2 \\
+\\
+& 
 \end{align}
 -->
