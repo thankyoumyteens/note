@@ -58,7 +58,13 @@
   - [使用代理](./requests/proxy.md)
 
 - [Excel](./excel/excel.md)
-  - [excel读写](./excel/excel_op.md)
+  - [安装](./excel/inst.md)
+  - [打开Excel](./excel/open/open.md)
+  - [Excel读](./excel/read/read.md)
+    - [读取sheet](./excel/read/sheet.md)
+    - [读取单元格](./excel/read/cell.md)
+    - [获取合并单元格的值](./excel/read/merged_cell.md)
+  - [Excel写](./excel/write/write.md)
   - [列号的字母数字转换](./excel/convert.md)
 
 - [XML](./xml/xml.md)
