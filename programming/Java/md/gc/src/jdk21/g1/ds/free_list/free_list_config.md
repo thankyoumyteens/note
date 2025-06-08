@@ -2,7 +2,7 @@
 
 ```cpp
 class FreeListConfig {
-    // 当空闲链表中的空闲节点数量超过此阈值时，触发批量操作（如批量释放到全局内存池或批量申请新内存）
+    // 当空闲列表中的空闲节点数量超过此阈值时，触发批量操作（如批量释放到全局内存池或批量申请新内存）
     const size_t _transfer_threshold;
 protected:
     ~FreeListConfig() = default;
