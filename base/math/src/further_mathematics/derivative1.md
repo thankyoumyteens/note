@@ -103,6 +103,7 @@ e^{yt}=y+3t
 \begin{align}
 & \mathbf{四、分段函数求导}  \\
 \\
+& 例题1 \\
 & f(x)=\begin{cases}
 e^{ax}，& x<0 \\
 \ln(1+2x)+b，& x\ge0
@@ -120,6 +121,23 @@ e^{ax}，& x<0 \\
 & 因为f'_-(0)=f'_+(0) \\
 & 所以a=2 \\
 \\
-& 
+& 例题2 \\
+& f(x)=\begin{cases}
+1，& x=0 \\
+\frac{\sin x}{x}，& x\ne0
+\end{cases}，求f'(x) \\
+& x\ne0时，f'(x)=\frac{x\cos x-\sin x}{x^2} \\
+& x=0时，f'(0)=\lim_{x \to 0}\frac{f(x)-f(0)}{x}=\lim_{x \to 0}\frac{\frac{\sin x}{x}-1}{x}
+=\lim_{x \to 0}\frac{\sin x-x}{x^2}=0 \\
+& f'(x)=\begin{cases}
+0，& x=0 \\
+\frac{x\cos x-\sin x}{x^2}，& x\ne0
+\end{cases} \\
+\\
+& 例题3 \\
+& f(x)=\begin{cases}
+\ln(1+2x)，& x<0 \\
+ax^2+bx+c，& x\ge0
+\end{cases}，且f''(0)存在，求a，b，c \\
 \end{align}
 -->
