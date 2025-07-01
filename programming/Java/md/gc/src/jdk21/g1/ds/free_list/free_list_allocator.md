@@ -166,3 +166,60 @@ void FreeListAllocator::release(void* free_node) {
   try_transfer_pending();
 }
 ```
+
+## 批量转移
+
+```
+┌───────────────────────┐       ┌───────────────────────┐
+│      Pending List     │       │      Free List        │
+│      (Index 0)        │       │ (LockFreeStack)       │
+├───────────┬───────────┤       ├───────────────────────┤
+│ Node A → Node B → null│       │ Node C → Node D → null│
+└───────────┴───────────┘       └───────────────────────┘
+         │                               │
+         └─────── try_transfer_pending ──┘
+                     │ 1.获取锁
+                     │ 2.切换活跃列表(0→1)
+                     │ 3.全局同步
+                     │ 4.批量转移
+                     ▼
+┌───────────────────────┐       ┌───────────────────────────┐
+│      Pending List     │       │        Free List          │
+│      (Index 0)        │       │ (LockFreeStack)           │
+├───────────────────────┤       ├───────────┬───────────────┤
+│         empty         │       │ Node A → B → C → D → null │
+└───────────────────────┘       └───────────┴───────────────┘
+```
+
+```cpp
+// --- src/hotspot/share/gc/shared/freeListAllocator.cpp --- //
+
+bool FreeListAllocator::try_transfer_pending() {
+    if (Atomic::load(&_transfer_lock) ||
+        Atomic::cmpxchg(&_transfer_lock, false, true)) {
+        return false;
+    }
+    // 切换活跃待处理列表（双缓冲切换）
+    // 当前待处理的列表索引（0或1）
+    uint index = Atomic::load(&_active_pending_list);
+    // 切换后的新活跃列表索引
+    uint new_active = (index + 1) % ARRAY_SIZE(_pending_lists);
+    // 确保切换操作对其他线程可见
+    Atomic::release_store(&_active_pending_list, new_active);
+
+    GlobalCounter::write_synchronize();
+
+    // 将不活跃的待处理列表中的节点转移到空闲列表中
+    NodeList transfer_list = _pending_lists[index].take_all();
+    size_t count = transfer_list._entry_count;
+    if (count > 0) {
+        Atomic::add(&_free_count, count);
+        // 使用LockFreeStack的prepend方法，将transfer_list中的所有节点插入到_free_list的头部, 无锁操作, 减少同步开销
+        _free_list.prepend(*transfer_list._head, *transfer_list._tail);
+        log_trace(gc, freelist)
+        ("Transferred %s pending to free: %zu", name(), count);
+    }
+    Atomic::release_store(&_transfer_lock, false);
+    return true;
+}
+```

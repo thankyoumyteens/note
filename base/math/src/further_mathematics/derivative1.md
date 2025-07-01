@@ -139,5 +139,35 @@ e^{ax}，& x<0 \\
 \ln(1+2x)，& x<0 \\
 ax^2+bx+c，& x\ge0
 \end{cases}，且f''(0)存在，求a，b，c \\
+& 因为f''(0)存在，所以f'(0)存在 \\
+& 因为f'(0)存在，所以f(x)在x=0处连续 \\
+& 所以\lim_{x \to 0^-}f(x)=\lim_{x \to 0^+}f(x)=f(0) \\
+& \lim_{x \to 0^-}\ln(1+2x)=0 \\
+& \lim_{x \to 0^+}ax^2+bx+c=0，所以c=0 \\
+& f'(x)=\begin{cases}
+\frac{2}{1+2x} ，& x<0 \\
+2ax+b，& x\ge0
+\end{cases} \\
+& 因为f''(0)存在，所以f'(x)在x=0处连续 \\
+& 所以\lim_{x \to 0^-}f'(x)=\lim_{x \to 0^+}f'(x)=f'(0) \\
+& \lim_{x \to 0^-}\frac{2}{1+2x}=2 \\
+& \lim_{x \to 0^+}(2ax+b)=2，所以b=2 \\
+& 所以f'(x)=\begin{cases}
+\frac{2}{1+2x} ，& x<0 \\
+2ax+2，& x\ge0
+\end{cases} \\
+& 因为f''(0)存在，所以f''_-(0)=f''_+(0) \\
+& f''_-(0)=\lim_{x \to 0^-}\frac{f'(x)-f'(0)}{x} \\
+& =\lim_{x \to 0^-}\frac{\frac{2}{1+2x}-2}{x} \\
+& =\lim_{x \to 0^-}\frac{\frac{2-2(1+2x)}{1+2x}}{x} \\
+& =\lim_{x \to 0^-}\frac{2\frac{-2x}{1+2x}}{x} \\
+& =\lim_{x \to 0^-}2\frac{-2}{1+2x} \\
+& =-4 \\
+& f''_+(0)=\lim_{x \to 0^+}\frac{f'(x)-f'(0)}{x} \\
+& =\lim_{x \to 0^+}\frac{2ax+2-2}{x} \\
+& =2a \\
+& 所以a=-2 \\
 \end{align}
 -->
+
+![](../img/d1_4.jpg)
