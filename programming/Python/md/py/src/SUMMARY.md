@@ -31,6 +31,7 @@
   - [基本用法](./subprocess/base.md)
   - [控制输入输出流](./subprocess/io.md)
   - [异步执行](./subprocess/async.md)
+  - [Windows系统以管理员身份执行命令](./subprocess/win_admin.md)
 
 - [正则表达式](./regex/regex.md)
   - [查找](./regex/find.md)
