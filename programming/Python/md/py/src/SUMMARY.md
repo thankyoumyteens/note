@@ -8,7 +8,7 @@
   - [安装anaconda](./anaconda/quick_start.md)
   - [虚拟环境](./anaconda/venv.md)
 
-- [python](./base/base.md)
+- [基础](./base/base.md)
   - [虚拟环境](./base/venv.md)
   - [import绝对路径](./base/import_abs.md)
   - [字符串操作](./base/str.md)
@@ -55,8 +55,15 @@
   - [上传文件](./requests/upload.md)
   - [设置请求头](./requests/req_header.md)
   - [获取响应头](./requests/resp_header.md)
-  - [Cookie](./requests/cookie.md)
+  - [设置cookie](./requests/cookie.md)
   - [使用代理](./requests/proxy.md)
+
+- [数据库操作](./db/db.md)
+  - [pymysql](./db/pymysql/pymysql.md)
+    - [安装](./db/pymysql/install.md)
+    - [连接数据库](./db/pymysql/connect.md)
+    - [查询](./db/pymysql/select.md)
+    - [增删改](./db/pymysql/update.md)
 
 - [Excel](./excel/excel.md)
   - [安装](./excel/inst.md)
@@ -75,6 +82,14 @@
   - [使用下标访问子节点](./xml/index.md)
   - [遍历子节点](./xml/foreach.md)
   - [查找子节点](./xml/find.md)
+
+- [pdf](./pdf/pdf.md)
+  - [word转pdf](./pdf/word2pdf.md)
+  - [删除指定页](./pdf/delete_page.md)
+
+- [markdown](./markdown/markdown.md)
+  - [安装](./markdown/install.md)
+  - [基本使用](./markdown/simple.md)
 
 - [pyautogui](./pyautogui/pyautogui.md)
   - [安装](./pyautogui/install.md)
@@ -134,14 +149,6 @@
     - [旋转](./pillow/rotate.md)
     - [翻转](./pillow/flip.md)
     - [颜色](./pillow/mode.md)
-
-- [pdf](./pdf/pdf.md)
-  - [word转pdf](./pdf/word2pdf.md)
-  - [删除指定页](./pdf/delete_page.md)
-
-- [markdown](./markdown/markdown.md)
-  - [安装](./markdown/install.md)
-  - [基本使用](./markdown/simple.md)
 
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)

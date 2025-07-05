@@ -171,3 +171,13 @@ ax^2+bx+c，& x\ge0
 -->
 
 ![](../img/d1_4.jpg)
+
+<!--
+\begin{align}
+& \mathbf{五、高阶导数}  \\
+\\
+& 例题1 \\
+& y=f(x)=e^x\sin x，求f^{(n)}(x) \\
+& 
+\end{align}
+-->
