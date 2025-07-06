@@ -178,6 +178,22 @@ ax^2+bx+c，& x\ge0
 \\
 & 例题1 \\
 & y=f(x)=e^x\sin x，求f^{(n)}(x) \\
-& 
+& f'(x)=e^x\sin x+e^x\cos x \\
+& =e^x(\sin x+\cos x) \\
+& {\color{Green} // 提取出\sqrt{2}} \\
+& =\sqrt{2}e^x(\frac{1}{\sqrt{2}}\sin x+\frac{1}{\sqrt{2}}\cos x) \\
+& {\color{Green} // \cos\frac{\pi}{4}=\sin\frac{\pi}{4}=\frac{\sqrt{2}}{2}=\frac{1}{\sqrt{2}}} \\
+& =\sqrt{2}e^x(\cos\frac{\pi}{4}\sin x+\sin\frac{\pi}{4}\cos x) \\
+& {\color{Green} // 根据正弦和角公式：\sin(A+B)=\sin A\cos B+\cos A\sin B} \\
+& =\sqrt{2}e^x\sin \left ( x+\frac{\pi}{4} \right ) \\
+& f''(x)=\sqrt{2}\left [ e^x\sin \left ( x+\frac{\pi}{4} \right ) +
+e^x\cos \left ( x+\frac{\pi}{4} \right ) \right ] \\
+& {\color{Green} // 提取出\sqrt{2}} \\
+& =(\sqrt{2})^2\left [ e^x\sin\left ( x+\frac{\pi}{4}+\frac{\pi}{4} \right ) \right ] \\
+& =(\sqrt{2})^2e^x\sin\left ( x+\frac{2\pi}{4} \right ) \\
+& 根据归纳法：f^{(n)}(x)=(\sqrt{2})^ne^x\sin\left ( x+\frac{n\pi}{4} \right ) \\
+\\
+& 例题2 \\
+
 \end{align}
 -->
