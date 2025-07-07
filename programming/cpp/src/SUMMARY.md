@@ -30,6 +30,7 @@
     - [函数模版](./base/template/t.md)
     - [传递指针类型](./base/template/tp.md)
     - [自动推导返回值](./base/template/decltype.md)
+    - [实现遍历列表](./base/template/for_each.md)
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
