@@ -193,3 +193,6 @@
 
 - [Flask](./flask/flask.md)
   - [基本使用](./flask/quick_start.md)
+
+- [加密解密](./enc/enc.md)
+  - [SHA256](./enc/sha256.md)

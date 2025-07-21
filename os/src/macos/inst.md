@@ -62,7 +62,9 @@ brew install plantuml
 - [GIMP](https://www.gimp.org/downloads/) 修图
 - [gradle](https://mirrors.cloud.tencent.com/gradle/)
 - [HandBrake](https://github.com/HandBrake/HandBrake/releases) 视频格式转换
+- [LiveRecorder](https://github.com/auqhjjqdo/LiveRecorder) 无人值守直播录制脚本
 - [localsend](https://github.com/localsend/localsend)
+- [录播姬](https://rec.danmuji.org/install/desktop/) 录B站直播
 - [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
 - [Jetbrains GoLand](https://www.jetbrains.com/go/download/other.html)
 - [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/other.html)
