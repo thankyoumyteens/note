@@ -17,13 +17,13 @@ def is_admin():
 
 def run_as_admin(cmd):
     if is_admin():
-        subprocess.run(cmd, shell=True, check=True)
+        subprocess.run(cmd)
     else:
         # 请求管理员权限
         ctypes.windll.shell32.ShellExecuteW(None, 'runas', sys.executable, ' '.join(sys.argv), None, 1)
         sys.exit()
 
 if __name__ == '__main__':
-    cmd = 'echo Hello, Admin!'
+    cmd = ['echo', 'Hello, Admin!']
     run_as_admin(cmd)
 ```
