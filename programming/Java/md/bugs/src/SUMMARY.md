@@ -1,19 +1,21 @@
-- [excel](./excel/excel.md)
-    - [poi报错RecordFormatException](./excel/poi读大文件.md)
-    - [easyexcel报错NoClassDefFoundError](./excel/easyexcel报错NoClassDefFoundError.md)
+- [java](./java/java.md)
+    - [找不到或无法加载主类](./java/main_class_not_found.md)
 
-- [word](./word/word.md)
-    - [Java使用poi-tl动态渲染word模板时图像变红](./word/Java使用poi-tl动态渲染word模板时图像变红.md)
-
-- [nacos](./nacos/nacos.md)
-    - [windows中java -jar启动时, 报错java.nio.charset.MalformedInputException: Input length = 1](./nacos/java.nio.charset.MalformedInputException.md)
+- [SpringCloud](./springcloud/springcloud.md)
+    - [SpringBoot](./springcloud/springboot/springboot.md)
+        - [AbstractMethodError](./springcloud/springboot/AbstractMethodError.md)
+        - [使用systemPath缺少本地jar包](./springcloud/springboot/使用systemPath缺少本地jar包.md)
+        - [Process finished with exit code 1](./springcloud/springboot/process_finished_with_exit_code_1.md)
+    - [mybatis](./springcloud/mybatis/mybatis.md)
+        - [无效的列类型: 1111](./springcloud/mybatis/无效的列类型1111.md)
+        - [For input string](./springcloud/mybatis/java.lang.NumberFormatException.md)
+    - [Hibernate Validator](./springcloud/validator/validator.md)
+        - [@Valid嵌套对象不效验](./springcloud/validator/Valid嵌套对象不效验.md)
+    - [nacos](./springcloud/nacos/nacos.md)
+        - [Input length = 1](./springcloud/nacos/java.nio.charset.MalformedInputException.md)
 
 - [Kafka](./kafka/kafka.md)
-    - [使用Kafka之后程序不打印异常](./kafka/使用Kafka之后程序不打印异常.md)
-
-- [mybatis](./mybatis/mybatis.md)
-    - [java.sql.SQLException: 无效的列类型: 1111](./mybatis/无效的列类型1111.md)
-    - [Error querying database. Cause: java.lang.NumberFormatException: For input string](./mybatis/java.lang.NumberFormatException.md)
+    - [使用Kafka之后日志不打印异常](./kafka/使用Kafka之后程序不打印异常.md)
 
 - [数据库](./db/db.md)
     - [oracle](./db/oracle/oracle.md)
@@ -24,23 +26,19 @@
         - [oracle排序后, 切换页大小数据乱序](./db/oracle/oracle_sort_bug.md)
         - [小数点前0不显示](./db/oracle/oracle_number_bug.md)
 
-- [SpringBoot](./springboot/springboot.md)
-    - [java.lang.AbstractMethodError](./springboot/AbstractMethodError.md)
-    - [使用systemPath缺少本地jar包](./springboot/使用systemPath缺少本地jar包.md)
-    - [Process finished with exit code 1](./springboot/process_finished_with_exit_code_1.md)
-
 - [Vue.js](./vue/vue.md)
     - [z-index无效](./vue/z-index无效.md)
     - [页面不更新](./vue/页面不更新.md)
-
-- [Hibernate Validator](./validator/validator.md)
-    - [@Valid嵌套对象不效验](./validator/Valid嵌套对象不效验.md)
-
-- [java](./java/java.md)
-    - [找不到或无法加载主类](./java/main_class_not_found.md)
 
 - [JSON](./json/json.md)
     - [illegal identifier : \pos 1, line 1, column 2](./json/escape.md)
 
 - [正则表达式](./re/re.md)
     - [Illegal repetition](./re/illegal_repetition.md)
+
+- [excel](./excel/excel.md)
+    - [poi报错RecordFormatException](./excel/poi读大文件.md)
+    - [easyexcel报错NoClassDefFoundError](./excel/easyexcel报错NoClassDefFoundError.md)
+
+- [word](./word/word.md)
+    - [Java使用poi-tl动态渲染word模板时图像变红](./word/Java使用poi-tl动态渲染word模板时图像变红.md)

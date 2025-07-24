@@ -1,16 +1,18 @@
-# Error querying database. Cause: java.lang.NumberFormatException: For input string
+# For input string
 
 ```xml
 <if test="param.xxx!= '2'">
 ```
 
+Error querying database. Cause: java.lang.NumberFormatException: For input string
+
 ## 原因
 
-mybatis会把单引号转成char, String和char比较, 会报错。
+mybatis 会把单引号转成 char, String 和 char 比较, 会报错。
 
 ## 解决
 
-使用toString()。
+使用 toString()。
 
 ```xml
 <if test="param.xxx!= '2'.toString()">

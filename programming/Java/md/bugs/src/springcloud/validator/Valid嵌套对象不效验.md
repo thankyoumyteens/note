@@ -1,7 +1,5 @@
 # @Valid 嵌套对象不效验
 
-## 问题
-
 ```java
 @Data
 public class UserParam {

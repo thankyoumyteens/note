@@ -1,4 +1,4 @@
-# 使用 Kafka 之后程序不打印异常
+# 使用 Kafka 之后日志不打印异常
 
 在 Spring 项目中使用 Kafka 时, 在 kafka 的消费者中调用的 service 如果抛出异常, 不会输出到日志中。
 
