@@ -12,7 +12,6 @@
   - [JVM统一日志框架](./jdk21/g1/base/log.md)
 
 - [技巧](./jdk21/g1/impl/impl.md)
-  - [RCU机制](./jdk21/g1/impl/rcu.md)
   - [根据哈希值计算索引时保证索引在数组内](./jdk21/g1/impl/log2_size.md)
   - [删除链表节点](./jdk21/g1/impl/linked_list_del.md)
   - [判断奇偶](./jdk21/g1/impl/even_odd.md)
@@ -21,6 +20,7 @@
   - [位图](./jdk21/g1/ds/bit_map/bit_map.md)
   - [全局计数器](./jdk21/g1/ds/global_counter.md)
   - [并发哈希表](./jdk21/g1/ds/concurrent_hash_table/concurrent_hash_table.md)
+    - [RCU机制](./jdk21/g1/ds/concurrent_hash_table/rcu.md)
     - [RCU读临界区](./jdk21/g1/ds/concurrent_hash_table/scs.md)
     - [Node操作](./jdk21/g1/ds/concurrent_hash_table/node.md)
     - [Bucket操作](./jdk21/g1/ds/concurrent_hash_table/bucket.md)
