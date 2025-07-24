@@ -1,4 +1,4 @@
-# JNI 基本类型数组操作
+# JNI 操作基本类型的数组
 
 ```cpp
 // ArrayType: jintArray, jbyteArray, jshortArray, jlongArray, jfloatArray, jdoubleArray, jcharArray, jbooleanArray

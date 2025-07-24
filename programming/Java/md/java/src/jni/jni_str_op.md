@@ -1,4 +1,4 @@
-# JNI 字符串操作
+# JNI 操作字符串
 
 如果使用 c++方式调用, 则第一个参数 `JNIEnv *env` 不需要传, 比如: `const char *inCStr = env->GetStringUTFChars(inJNIStr, NULL);`。
 
@@ -57,4 +57,4 @@ void ReleaseStringCritical(JNIEnv *env, jstring string, const jchar *cstring);
 
 GetStringChar 和 GetStringCritical 的区别在于: GetStringCritical 返回原始字符串的可能性更高, 一般情况下, GetStringChar 返回的是一份拷贝。GetStringCritical 返回的是原始字符串。
 
-注意:  在 GetStringCritical 和 ReleaseStringCritical 函数之间不能再调用其他任何 JNI 函数, 也不能有任何阻塞当前线程的操作。
+注意: 在 GetStringCritical 和 ReleaseStringCritical 函数之间不能再调用其他任何 JNI 函数, 也不能有任何阻塞当前线程的操作。
