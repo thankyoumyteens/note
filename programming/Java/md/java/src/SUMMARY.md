@@ -92,14 +92,15 @@
   - [JNI数据类型](./jni/jni_types.md)
   - [访问基本数据类型](./jni/jni_primitives.md)
   - [访问字符串](./jni/jni_str.md)
-    - [JNI操作字符串](./jni/jni_str_op.md)
   - [访问基本类型数组](./jni/jni_primitive_array.md)
-    - [JNI操作基本类型的数组](./jni/jni_pa_op.md)
   - [访问对象的字段](./jni/jni_object_fields.md)
-    - [JNI操作对象的字段](./jni/jni_fields_op.md)
   - [访问类变量](./jni/jni_static_vars.md)
   - [访问对象的方法](./jni/jni_obj_method.md)
   - [访问类的静态方法](./jni/jni_static_method.md)
+  - [JNI API](./jni/api.md)
+    - [JNI操作字符串](./jni/jni_str_op.md)
+    - [JNI操作基本类型的数组](./jni/jni_pa_op.md)
+    - [JNI操作对象的字段](./jni/jni_fields_op.md)
 
 - [编译期注解处理器](./bytecode/AbstractProcessor.md)
 

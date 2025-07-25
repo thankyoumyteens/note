@@ -1,60 +1,80 @@
 # JNI 操作字符串
 
-如果使用 c++方式调用, 则第一个参数 `JNIEnv *env` 不需要传, 比如: `const char *inCStr = env->GetStringUTFChars(inJNIStr, NULL);`。
-
-UTF-8 编码的字符串(1~3 字节)
+## 将 Java 字符串转换为以 `\0` 结尾的 UTF-8 编码的 C 字符串
 
 ```cpp
-// java字符串转char数组
-// isCopy 由JVM设置
-const char * GetStringUTFChars(JNIEnv *env, jstring string, jboolean *isCopy);
-
-// 释放对字符串string的引用, 让它可以被GC
-void ReleaseStringUTFChars(JNIEnv *env, jstring string, const char *utf);
-
-// char数组转java字符串
-jstring NewStringUTF(JNIEnv *env, const char *bytes);
-
-// 获取字符串的长度
-jsize GetStringUTFLength(JNIEnv *env, jstring string);
-
-// 截取字符串保存到buf中
-void GetStringUTFRegion(JNIEnv *env, jstring str, jsize start, jsize length, char *buf);
+const char* GetStringUTFChars(jstring str, jboolean *isCopy);
 ```
 
-Unicode 编码的字符串(4 字节)
+isCopy: 指向一个 jboolean 变量的指针。如果为 JNI_TRUE，表示返回的 C 字符串是原始 Java 字符串的副本；如果为 JNI_FALSE，表示返回的是指向内部数据的直接指针。isCopy 参数的值由 JVM 设置。
+
+## 释放通过 GetStringUTFChars 获取的 UTF-8 编码的 C 字符串
+
+这个函数必须与 GetStringUTFChars 配对使用，以确保资源正确释放和内存安全。
 
 ```cpp
-// java字符串转char数组
-const jchar * GetStringChars(JNIEnv *env, jstring string, jboolean *isCopy);
-
-// 释放对字符串string的引用
-void ReleaseStringChars(JNIEnv *env, jstring string, const jchar *chars);
-
-// char数组转java字符串
-jstring NewString(JNIEnv *env, const jchar *unicodeChars, jsize length);
-
-// 获取字符串的长度
-jsize GetStringLength(JNIEnv *env, jstring string);
-
-// 截取字符串保存到buf中
-void GetStringRegion(JNIEnv *env, jstring str, jsize start, jsize length, jchar *buf);
-
-// java字符串转char数组(进入临界区)
-// 在调用ReleaseStringCritical之前, 不能有任何阻塞当前线程的操作
-jchar * GetStringCritical(JNIEnv *env, jstring string, jboolean *isCopy);
-
-// 退出临界区
-void ReleaseStringCritical(JNIEnv *env, jstring string, const jchar *cstring);
+void ReleaseStringUTFChars(jstring str, const char* chars);
 ```
 
-## GetStringChars/GetStringRegion/GetStringCritical
+如果 JVM 在调用 GetStringUTFChars 时复制了原始 Java 字符串（由 isCopy 参数指示），则 ReleaseStringUTFChars 会确保这些临时内存被正确回收。如果返回的是直接指针，则该函数会通知 JVM 本地代码不再需要访问该指针。
 
-这三个函数的作用都一样, 都是将 Java 的 String 对像, 转换为 char 数组。JVM 在返回 char 数组时有两个选择:
+## 根据 UTF-8 编码的 C 字符串创建一个新的 Java 字符串对象
 
-1. 将 java String 所对应的原始 jchar 拷贝一份返回, 并将 isCopy 赋值为 true。函数返回的指针指向一份拷贝的数据, 即使修改也不会对原始字符串造成影响
-2. 将 Java String 所对应的原始 jchar 直接返回, 并将 isCopy 赋值为 false。函数返回的指针指向原始数据, 修改会直接改动原始字符串
+```cpp
+jstring NewStringUTF(const char *utf);
+```
 
-GetStringChar 和 GetStringCritical 的区别在于: GetStringCritical 返回原始字符串的可能性更高, 一般情况下, GetStringChar 返回的是一份拷贝。GetStringCritical 返回的是原始字符串。
+## 获取 java 字符串转换为 UTF-8 编码后的字节长度
 
-注意: 在 GetStringCritical 和 ReleaseStringCritical 函数之间不能再调用其他任何 JNI 函数, 也不能有任何阻塞当前线程的操作。
+这个函数返回的长度不包括字符串结尾的 `\0`。
+
+```cpp
+jsize GetStringUTFLength(jstring str);
+```
+
+## 将 Java 字符串的指定区域转换为 UTF-8 编码，并复制到预先分配的 C 字符数组中
+
+这个函数允许你选择性地提取 Java 字符串的一部分内容，而不是整个字符串。
+
+```cpp
+void GetStringUTFRegion(jstring str, jsize start, jsize len, char *buf);
+```
+
+- str: Java 字符串对象的引用，要提取内容的目标字符串
+- start: 起始索引（从 0 开始），指定从 Java 字符串的哪个位置开始提取
+- len: 要提取的字符数量
+- buf: 指向预先分配的 C 字符数组的指针，用于存储转换后的 UTF-8 字符串
+
+## UTF-16 版本
+
+```cpp
+const jchar *GetStringChars(jstring str, jboolean *isCopy);
+void ReleaseStringChars(jstring str, const jchar *chars);
+jstring NewString(const jchar *unicode, jsize len);
+jsize GetStringLength(jstring str);
+void GetStringRegion(jstring str, jsize start, jsize len, jchar *buf);
+```
+
+## 获取 Java 字符串的 UTF-16 编码表示的直接指针
+
+允许 c++ 代码直接访问 java 字符串内容而无需进行复制。
+
+与 GetStringChars 相比，GetStringCritical 提供了一种更高效但更受限制的方式来访问字符串内容，适用于需要最小化 JVM 阻塞时间的高性能场景。
+
+```cpp
+const jchar * GetStringCritical(jstring string, jboolean *isCopy);
+```
+
+## 用于释放通过 GetStringCritical 获取的 UTF-16 编码字符串指针
+
+这个函数必须与 GetStringCritical 配对使用，以确保 JVM 能够恢复对字符串内存的正常管理。
+
+```cpp
+void ReleaseStringCritical(jstring string, const jchar *cstring);
+```
+
+## 临界区(Critical)的限制
+
+在临界区内（即调用 GetPrimitiveArrayCritical 之后、ReleasePrimitiveArrayCritical 之前），c++ 代码不能调用可能导致线程阻塞或触发垃圾回收的 JNI 函数，也不能执行可能阻塞 JVM 的操作。
+
+临界区应该尽可能短，以减少 JVM 被阻塞的时间。
