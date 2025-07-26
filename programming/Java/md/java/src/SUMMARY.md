@@ -101,6 +101,7 @@
     - [JNI操作字符串](./jni/jni_str_op.md)
     - [JNI操作基本类型的数组](./jni/jni_pa_op.md)
     - [JNI操作对象的字段](./jni/jni_fields_op.md)
+    - [JNI操作方法](./jni/jni_method_op.md)
 
 - [编译期注解处理器](./bytecode/AbstractProcessor.md)
 

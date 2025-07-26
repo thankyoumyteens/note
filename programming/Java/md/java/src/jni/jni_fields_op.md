@@ -8,29 +8,35 @@
 4. 使用 FieldID 调用 SetObjectField 等方法修改字段值
 
 ```cpp
-jclass GetObjectClass(JNIEnv *env, jobject obj);
+jclass GetObjectClass(jobject obj);
 // name: 字段名, sig: 字段描述符
-jfieldID GetFieldID(JNIEnv *env, jclass clazz, const char *name, const char *sig);
+jfieldID GetFieldID(jclass clazz, const char *name, const char *sig);
+```
 
-// 字段取值
-jobject GetObjectField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jboolean GetBooleanField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jbyte GetByteField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jchar GetCharField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jshort GetShortField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jint GetIntField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jlong GetLongField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jfloat GetFloatField(JNIEnv *env, jobject obj, jfieldID fieldID);
-jdouble GetDoubleField(JNIEnv *env, jobject obj, jfieldID fieldID);
+## 字段取值
 
-// 字段赋值
-void SetObjectField(JNIEnv *env, jobject obj, jfieldID fieldID, jobject val);
-void SetBooleanField(JNIEnv *env, jobject obj, jfieldID fieldID, jboolean val);
-void SetByteField(JNIEnv *env, jobject obj, jfieldID fieldID, jbyte val);
-void SetCharField(JNIEnv *env, jobject obj, jfieldID fieldID, jchar val);
-void SetShortField(JNIEnv *env, jobject obj, jfieldID fieldID, jshort val);
-void SetIntField(JNIEnv *env, jobject obj, jfieldID fieldID, jint val);
-void SetLongField(JNIEnv *env, jobject obj, jfieldID fieldID, jlong val);
-void SetFloatField(JNIEnv *env, jobject obj, jfieldID fieldID, jfloat val);
-void SetDoubleField(JNIEnv *env, jobject obj, jfieldID fieldID, jdouble val);
+```cpp
+jobject GetObjectField(jobject obj, jfieldID fieldID);
+jboolean GetBooleanField(jobject obj, jfieldID fieldID);
+jbyte GetByteField(jobject obj, jfieldID fieldID);
+jchar GetCharField(jobject obj, jfieldID fieldID);
+jshort GetShortField(jobject obj, jfieldID fieldID);
+jint GetIntField(jobject obj, jfieldID fieldID);
+jlong GetLongField(jobject obj, jfieldID fieldID);
+jfloat GetFloatField(jobject obj, jfieldID fieldID);
+jdouble GetDoubleField(jobject obj, jfieldID fieldID);
+```
+
+## 字段赋值
+
+```cpp
+void SetObjectField(jobject obj, jfieldID fieldID, jobject val);
+void SetBooleanField(jobject obj, jfieldID fieldID, jboolean val);
+void SetByteField(jobject obj, jfieldID fieldID, jbyte val);
+void SetCharField(jobject obj, jfieldID fieldID, jchar val);
+void SetShortField(jobject obj, jfieldID fieldID, jshort val);
+void SetIntField(jobject obj, jfieldID fieldID, jint val);
+void SetLongField(jobject obj, jfieldID fieldID, jlong val);
+void SetFloatField(jobject obj, jfieldID fieldID, jfloat val);
+void SetDoubleField(jobject obj, jfieldID fieldID, jdouble val);
 ```
