@@ -58,6 +58,8 @@
     - [FreeListAllocator](./jdk21/g1/ds/free_list/free_list_allocator.md)
   - [BufferNode](./jdk21/g1/ds/buffer_node/buffer_node.md)
     - [分配器](./jdk21/g1/ds/buffer_node/allocator.md)
+  - [worker线程](./jdk21/g1/ds/worker/worker.md)
+    - [WorkerTaskDispatcher](./jdk21/g1/ds/worker/worker_task_dispatcher.md)
   
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)

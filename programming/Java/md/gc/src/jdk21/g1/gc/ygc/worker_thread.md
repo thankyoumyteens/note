@@ -1,22 +1,5 @@
 # worker 线程
 
-```cpp
-// --- src/hotspot/share/gc/shared/workerThread.cpp --- //
-
-// worker线程的入口
-void WorkerThread::run() {
-    // 设置worker线程的优先级为高
-    os::set_priority(this, NearMaxPriority);
-
-    // 不断执行worker线程的任务
-    while (true) {
-        // WorkerTaskDispatcher *const _dispatcher;
-        // 所有worker线程共享同一个_dispatcher对象
-        _dispatcher->worker_run_task();
-    }
-}
-```
-
 ## WorkerTaskDispatcher
 
 ```cpp
@@ -55,7 +38,7 @@ public:
 
     // signal 函数(V操作)用于释放一个资源
     // 当一个进程调用 signal 函数时, 它会将信号量的值加 1
-    // 如果有其他进程因为调用 wait 函数而处于等待状态(即信号量的值为 0 时等待), 
+    // 如果有其他进程因为调用 wait 函数而处于等待状态(即信号量的值为 0 时等待),
     // 那么这些等待的进程中的一个会被唤醒, 允许它继续执行, 以获取刚刚释放的资源
     void signal(uint count = 1) { _impl.signal(count); }
 
@@ -69,8 +52,8 @@ public:
     // trywait 函数是一种非阻塞的尝试获取资源的操作
     // 它和 wait 函数类似, 也会检查信号量的值
     // 如果信号量的值大于 0, 那么它会将信号量的值减 1, 并且函数返回成功, 表示获取资源成功
-    // 但是, 与 wait 函数不同的是, 如果信号量的值等于 0, trywait 函数不会阻塞进程, 
-    // 而是直接返回一个表示资源不可用的状态(通常是返回一个错误码或者特定的值), 
+    // 但是, 与 wait 函数不同的是, 如果信号量的值等于 0, trywait 函数不会阻塞进程,
+    // 而是直接返回一个表示资源不可用的状态(通常是返回一个错误码或者特定的值),
     // 这样进程可以继续执行其他任务, 而不是进入等待状态
     bool trywait() { return _impl.trywait(); }
 
