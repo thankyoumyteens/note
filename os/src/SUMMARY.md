@@ -13,6 +13,7 @@
     - [redis](./macos/redis.md)
     - [IDE设置](./macos/ide_settings.md)
     - [UTM安装Win11Arm](./macos/win11_arm.md)
+    - [mysql](./macos/mysql.md)
   - [使用](./macos/u.md)
     - [查看ip地址](./macos/ls_color.md)
     - [ls结果显示颜色](./macos/ls_color.md)
