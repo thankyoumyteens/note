@@ -75,6 +75,11 @@
     - [判断一个数是奇数还是偶数](./base/bitwise_operations/odd.md)
   - [函数模版](./base/template.md)
   - [字符串操作](./base/str.md)
+  - [日期操作](./base/date/date.md)
+    - [日期格式化](./base/date/format.md)
+    - [获取当前日期和时间](./base/date/current.md)
+    - [初始化日期和时间](./base/date/init.md)
+    - [修改日期和时间](./base/date/modify.md)
 
 - [动态内存分配](./allocation/allocation.md)
   - [malloc](./allocation/malloc.md)
