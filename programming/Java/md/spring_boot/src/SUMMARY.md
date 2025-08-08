@@ -16,6 +16,7 @@
   - [logback配置](./base/logback.md)
   - [HibernateValidator](./base/validator.md)
   - [使用包装类修改请求和响应数据](./base/wrapper.md)
+  - [获取客户端ip](./base/real_ip.md)
 
 - [SpringBoot集成](./integration/integration.md)
   - [连接数据库](./integration/datasource.md)
