@@ -81,6 +81,8 @@
     - [初始化日期和时间](./base/date/init.md)
     - [修改日期和时间](./base/date/modify.md)
     - [字符串转日期和时间](./base/date/parse.md)
+    - [日期加减](./base/date/plus.md)
+    - [时间加减](./base/date/time_plus.md)
 
 - [动态内存分配](./allocation/allocation.md)
   - [malloc](./allocation/malloc.md)
