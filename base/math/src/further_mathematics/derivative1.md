@@ -194,6 +194,26 @@ e^x\cos \left ( x+\frac{\pi}{4} \right ) \right ] \\
 & 根据归纳法：f^{(n)}(x)=(\sqrt{2})^ne^x\sin\left ( x+\frac{n\pi}{4} \right ) \\
 \\
 & 例题2 \\
-
+& f(x)=\frac{1}{2x+1}，求f^{(n)}(x) \\
+& f(x)=(2x+1)^{-1} \\
+& f'(x)=(-1)(2x+1)^{-2}\cdot 2 \\
+& f''(x)=(-1)(-2)(2x+1)^{-3}\cdot 2^2 \\
+& 所以 f^{(n)}(0)=(-1)(-2)\cdots(-n)(2x+1)^{-(n+1)}\cdot 2^n \\
+& =\frac{(-1)^n n!2^n}{(2x+1)^{n+1}} \\
+& {\color{Blue} 结论:}  \\
+& \left ( \frac{1}{ax+b} \right )^n=\frac{(-1)^n n!a^n}{(ax+b)^{n+1}} \\
+& 例题3 \\
+& f(x)=\ln(2x^2+x-1)，求f^{(n)}(x) \\
+& f(x)=\ln(2x^2+x-1) \\
+& =\ln[(x+1)(2x-1)] \\
+& =\ln(x+1)+\ln(2x-1) \\
+& f'(x)=\frac{1}{x+1}+2\frac{1}{2x-1} \\
+& {\color{Green} // 这里的n-1是n-1阶导数，不是n-1次方} \\
+& {\color{Green} // f^{(n)}是f'再经过n-1阶导数得到，所以是n-1} \\
+& f^{(n)}(x)=\left ( \frac{1}{x+1} \right )^{(n-1)}+\left ( 2\frac{1}{2x-1} \right )^{(n-1)} \\
+& {\color{Green} // 代入例题2得到的公式} \\
+& f^{(n)}(x)=\frac{(-1)^{n-1} (n-1)!}{(x+1)^n}+\frac{(-1)^{n-1} (n-1)!2^{n-1}}{(2x-1)^n} \\
 \end{align}
 -->
+
+![](../img/d1_5.jpg)
