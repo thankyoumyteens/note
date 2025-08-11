@@ -35,6 +35,7 @@
     - [重写FeignClient输出日志](./http_clients/open_feign/feign_log.md)
     - [替换默认的httpclient](./http_clients/open_feign/client.md)
     - [开启GZIP](./http_clients/open_feign/gzip.md)
+    - [获取服务的真实ip地址](./http_clients/open_feign/real_ip.md)
 
 - [配置中心](./config/config.md)
   - [Spring Cloud Config](./config/spring_config/spring_config.md)
