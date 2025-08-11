@@ -31,9 +31,9 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-## 传入类
+## 传入仿函数
 
-自定义回调函数可以传入类, 以实现更多功能。
+自定义回调函数可以传入仿函数, 以实现更多功能。
 
 ```cpp
 #include <iostream>

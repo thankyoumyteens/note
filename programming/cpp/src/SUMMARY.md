@@ -24,6 +24,7 @@
     - [参数默认值](./base/func/default.md)
     - [函数重载](./base/func/overloading.md)
     - [内联函数](./base/func/inline.md)
+    - [仿函数](./base/func/functor.md)
   - [类](./base/class/class.md)
     - [拷贝构造函数](./base/class/copy.md)
   - [泛型](./base/template/template.md)
@@ -31,6 +32,24 @@
     - [传递指针类型](./base/template/tp.md)
     - [自动推导返回值](./base/template/decltype.md)
     - [实现遍历列表](./base/template/for_each.md)
+  - [日期操作](./base/date/date.md)
+    - [日期格式化](./base/date/format.md)
+    - [获取当前日期和时间](./base/date/current.md)
+    - [初始化日期和时间](./base/date/init.md)
+    - [修改日期和时间](./base/date/modify.md)
+    - [字符串转日期和时间](./base/date/parse.md)
+    - [日期加减](./base/date/plus.md)
+    - [时间加减](./base/date/time_plus.md)
+  - [线程操作](./base/thread/thread.md)
+    - [创建简单线程](./base/thread/simple.md)
+    - [创建带参数的线程](./base/thread/args.md)
+
+
+
+
+
+
+
 
   - [预处理器](./base/preprocessor/preprocessor.md)
   - [命名空间](./base/ns/ns.md)
@@ -75,14 +94,6 @@
     - [判断一个数是奇数还是偶数](./base/bitwise_operations/odd.md)
   - [函数模版](./base/template.md)
   - [字符串操作](./base/str.md)
-  - [日期操作](./base/date/date.md)
-    - [日期格式化](./base/date/format.md)
-    - [获取当前日期和时间](./base/date/current.md)
-    - [初始化日期和时间](./base/date/init.md)
-    - [修改日期和时间](./base/date/modify.md)
-    - [字符串转日期和时间](./base/date/parse.md)
-    - [日期加减](./base/date/plus.md)
-    - [时间加减](./base/date/time_plus.md)
 
 - [动态内存分配](./allocation/allocation.md)
   - [malloc](./allocation/malloc.md)
