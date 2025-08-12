@@ -13,6 +13,8 @@
         - [@Valid嵌套对象不效验](./springcloud/validator/Valid嵌套对象不效验.md)
     - [nacos](./springcloud/nacos/nacos.md)
         - [Input length = 1](./springcloud/nacos/java.nio.charset.MalformedInputException.md)
+    - [feign](./springcloud/feign/feign.md)
+        - [Consider defining a bean of type](./springcloud/feign/feign1.md)
 
 - [Kafka](./kafka/kafka.md)
     - [使用Kafka之后日志不打印异常](./kafka/使用Kafka之后程序不打印异常.md)

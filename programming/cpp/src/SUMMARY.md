@@ -43,6 +43,8 @@
   - [线程操作](./base/thread/thread.md)
     - [创建简单线程](./base/thread/simple.md)
     - [创建带参数的线程](./base/thread/args.md)
+    - [join函数](./base/thread/join.md)
+    - [detach函数](./base/thread/detach.md)
 
 
 
