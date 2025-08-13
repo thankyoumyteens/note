@@ -45,6 +45,7 @@
     - [创建带参数的线程](./base/thread/args.md)
     - [join函数](./base/thread/join.md)
     - [detach函数](./base/thread/detach.md)
+    - [this_thread](./base/thread/this_thread.md)
 
 
 
