@@ -11,7 +11,7 @@
   - [NUMA](./jdk21/g1/base/numa.md)
   - [JVM统一日志框架](./jdk21/g1/base/log.md)
 
-- [技巧](./jdk21/g1/impl/impl.md)
+- [经验](./jdk21/g1/impl/impl.md)
   - [根据哈希值计算索引时保证索引在数组内](./jdk21/g1/impl/log2_size.md)
   - [删除链表节点](./jdk21/g1/impl/linked_list_del.md)
   - [判断奇偶](./jdk21/g1/impl/even_odd.md)

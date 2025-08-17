@@ -158,6 +158,9 @@
     - [翻转](./pillow/flip.md)
     - [颜色](./pillow/mode.md)
 
+- [OpenCV](./cv2/cv2.md)
+  - [安装](./cv2/install.md)
+
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)
   - [浏览器基本操作](./selenium/browser_base/browser_base.md)
