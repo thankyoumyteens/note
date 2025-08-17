@@ -59,7 +59,10 @@
   - [BufferNode](./jdk21/g1/ds/buffer_node/buffer_node.md)
     - [分配器](./jdk21/g1/ds/buffer_node/allocator.md)
   - [worker线程](./jdk21/g1/ds/worker/worker.md)
+    - [worker线程的入口](./jdk21/g1/ds/worker/run.md)
     - [WorkerTaskDispatcher](./jdk21/g1/ds/worker/worker_task_dispatcher.md)
+      - [分发任务](./jdk21/g1/ds/worker/coordinator_distribute_task.md)
+      - [执行任务](./jdk21/g1/ds/worker/worker_run_task.md)
   
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)
