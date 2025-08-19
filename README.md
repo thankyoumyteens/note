@@ -24,7 +24,7 @@ mdbook -V
 
 ```sh
 cd ~
-git clone https://gitee.com/thankyoumyteens/note.git
+git clone https://codeberg.org/walter2743/note.git
 ```
 
 ### 3. 创建部署脚本
