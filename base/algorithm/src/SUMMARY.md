@@ -7,7 +7,8 @@
 
 - [基础排序](./basic_sort/basic_sort.md)
   - [选择排序](./basic_sort/selection_sort.md)
-    - [优化选择排序](./basic_sort/selection_sort2.md)
+  - [优化选择排序](./basic_sort/selection_sort2.md)
+  - [实现选择排序](./basic_sort/selection_sort_impl.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
