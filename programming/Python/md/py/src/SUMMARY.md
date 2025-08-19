@@ -160,6 +160,9 @@
 
 - [OpenCV](./cv2/cv2.md)
   - [安装](./cv2/install.md)
+  - [读取图片](./cv2/imread.md)
+  - [图片通道数](./cv2/channels.md)
+  - [彩色图片转为灰度图](./cv2/gray.md)
 
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)
