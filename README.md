@@ -24,7 +24,7 @@ mdbook -V
 
 ```sh
 cd ~
-git clone https://codeberg.org/walter2743/note.git
+git clone https://walter2743-admin@bitbucket.org/walter2743/note.git
 ```
 
 ### 3. 创建部署脚本
