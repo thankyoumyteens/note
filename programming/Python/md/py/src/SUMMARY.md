@@ -16,6 +16,7 @@
   - [日期格式化](./base/date_format.md)
   - [随机数](./base/random.md)
   - [简写](./base/simplify.md)
+  - [序列解压与重组操作](./base/zip.md)
 
 - [文件](./io/io.md)
   - [路径操作](./io/path/path.md)
@@ -164,6 +165,8 @@
   - [图片通道数](./cv2/channels.md)
   - [彩色图片转为灰度图](./cv2/gray.md)
   - [裁剪图片](./cv2/crop.md)
+  - [处理图片的噪点](./cv2/blur.md)
+  - [模板匹配](./cv2/match.md)
 
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)
