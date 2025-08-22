@@ -4,4 +4,6 @@
 
 循环体: 每次循环都要把找到的最小值 `data[minIndex]` 放到 `data[i]` 的位置, 以维持循环不变量。
 
+时间复杂度: O(n<sup>2</sup>)
+
 ![](../img/selection_sort2.jpg)

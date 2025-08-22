@@ -4,4 +4,6 @@
 
 循环体: 每次循环都要把 `data[i]` 放到合适的位置, 以维持循环不变量。
 
+时间复杂度: O(n<sup>2</sup>)
+
 ![](../img/insertion_sort.jpg)

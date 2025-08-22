@@ -161,7 +161,8 @@
 
 - [OpenCV](./cv2/cv2.md)
   - [安装](./cv2/install.md)
-  - [读取图片](./cv2/imread.md)
+  - [基本操作](./cv2/imread.md)
+  - [图像的表示方法](./cv2/image/image.md)
   - [图片通道数](./cv2/channels.md)
   - [彩色图片转为灰度图](./cv2/gray.md)
   - [裁剪图片](./cv2/crop.md)

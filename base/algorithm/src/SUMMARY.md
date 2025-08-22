@@ -11,6 +11,8 @@
     - [实现选择排序](./basic_sort/selection_sort_impl.md)
   - [插入排序](./basic_sort/insertion_sort.md)
     - [实现插入排序](./basic_sort/insertion_sort_impl.md)
+    - [优化插入排序](./basic_sort/insertion_sort_impl2.md)
+    - [插入排序的重要特性](./basic_sort/insertion_sort_feature.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
