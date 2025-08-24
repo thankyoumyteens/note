@@ -170,6 +170,7 @@
   - [像素处理](./cv2/pixel/pixel.md)
     - [灰度图像](./cv2/pixel/grayscale_image.md)
     - [彩色图像](./cv2/pixel/color_image.md)
+    - [使用numpy处理像素](./cv2/pixel/np.md)
   - [图片通道数](./cv2/channels.md)
   - [彩色图片转为灰度图](./cv2/gray.md)
   - [裁剪图片](./cv2/crop.md)
