@@ -1,6 +1,6 @@
 # 使用 numpy 处理像素
 
-numpy.array 提供了 item() 和 itemset() 函数来访问和修改像素值。这两个函数都是经过优化的，能够更大幅度地提高处理效率。在访问及修改像素点的值时，利用 numpy.array 提供的函数比直接使用索引要快得多。
+也可以用 numpy.array 提供的 item() 和 itemset() 函数来访问和修改像素值。在访问及修改像素点的值时，利用 numpy.array 提供的函数比直接使用索引要快得多。
 
 ```py
 import cv2
