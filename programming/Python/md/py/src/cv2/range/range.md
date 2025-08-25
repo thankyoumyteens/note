@@ -5,9 +5,7 @@
 ```py
 import cv2
 import numpy as np
-from networkx.algorithms.isomorphism.matchhelpers import tmpdoc
 
-# 生成一个600×600大小的图像
 img = np.random.randint(0, 256, size=(600, 600, 3), dtype=np.uint8)
 
 # 把第100行到第199行, 与第100列到第199列的交叉区域设置为白色(255, 255, 255)

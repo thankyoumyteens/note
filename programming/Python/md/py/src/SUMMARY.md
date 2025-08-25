@@ -172,6 +172,9 @@
     - [彩色图像](./cv2/pixel/color_image.md)
     - [使用numpy处理像素](./cv2/pixel/np.md)
   - [区域操作](./cv2/range/range.md)
+  - [通道操作](./cv2/channel/channel.md)
+    - [拆分通道](./cv2/channel/split.md)
+    - [合并通道](./cv2/channel/merge.md)
 
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)
