@@ -15,5 +15,9 @@
     - [插入排序的重要特性](./basic_sort/insertion_sort_feature.md)
   - [冒泡排序](./basic_sort/bubble_sort.md)
 
+- [基础数据结构](./basic_ds/basic_ds.md)
+  - [栈](./basic_ds/stack.md)
+    - [括号匹配](./basic_ds/valid_parentheses.md)
+
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
