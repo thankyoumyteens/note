@@ -175,6 +175,8 @@
   - [通道操作](./cv2/channel/channel.md)
     - [拆分通道](./cv2/channel/split.md)
     - [合并通道](./cv2/channel/merge.md)
+  - [图像运算](./cv2/calc/calc.md)
+    - [加法](./cv2/calc/add.md)
 
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)

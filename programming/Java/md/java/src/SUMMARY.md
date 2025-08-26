@@ -33,12 +33,14 @@
     - [获取字段的参数化类型](./java/field_parameterized_type.md)
     - [获取方法的参数化类型](./java/method_parameterized_type.md)
 
+- [JAR文件](./jar/jar.md)
+  - [MANIFEST.MF文件](./jar/mf.md)
+
 - [Java模块化系统](./module/jpms.md)
-  - [使用模块](./module/module_demo.md)
-  - [模块传递](./module/module_transitive.md)
-  - [限制导出](./module/module_exports_to.md)
+  - [使用模块](./module/quick_start.md)
   - [模块路径](./module/module_path.md)
-  - [服务](./module/module_service.md)
+  - [多模块应用程序](./module/multi_modules/multi_modules.md)
+  - [模块](./module/modules/modules.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
@@ -91,9 +93,6 @@
 - [动态代理](./proxy/proxy.md)
   - [JDK动态代理](./proxy/jdk_proxy.md)
   - [CGLIB动态代理](./proxy/cglib_proxy.md)
-
-- [JAR文件](./jar/jar.md)
-  - [MANIFEST.MF文件](./jar/mf.md)
 
 - [feature](./java/feature/feature.md)
   - [JDK8](./java/feature/jdk8/jdk8.md)

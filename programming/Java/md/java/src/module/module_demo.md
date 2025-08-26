@@ -28,7 +28,7 @@ module org.demo.jpms.ma {
 
 ## 创建模块化项目
 
-1. 父 pom:
+### 1. 父 pom
 
 ```xml
 <project
@@ -64,7 +64,7 @@ module org.demo.jpms.ma {
 </project>
 ```
 
-2. 模块 mb 的 pom:
+### 2. 模块 mb 的 pom
 
 ```xml
 <project
@@ -91,7 +91,7 @@ module org.demo.jpms.ma {
 </project>
 ```
 
-3. 模块 ma 的 pom:
+### 3. 模块 ma 的 pom
 
 ```xml
 <project
