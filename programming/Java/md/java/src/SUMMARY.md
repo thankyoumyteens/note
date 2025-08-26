@@ -40,6 +40,9 @@
   - [使用模块](./module/quick_start.md)
   - [模块路径](./module/module_path.md)
   - [多模块应用程序](./module/multi_modules/multi_modules.md)
+    - [提供方法的模块](./module/multi_modules/core.md)
+    - [使用方法的模块](./module/multi_modules/gui.md)
+    - [编译多模块](./module/multi_modules/compile.md)
   - [模块](./module/modules/modules.md)
 
 - [线程](./java/thread/thread.md)
