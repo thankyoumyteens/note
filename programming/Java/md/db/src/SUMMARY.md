@@ -35,6 +35,8 @@
     - [Using temporary](./mysql/index/using_tmp.md)
    - [索引失效的情况](./mysql/index/indexes_unused.md)
   - [日期操作](./mysql/date.md)
+    - [生成指定时间范围内的每一天日期](./mysql/date/list.md)
+    - [生成12个月月份](./mysql/date/mlist.md)
   - [存储过程](./mysql/func.md)
 
 - [Oracle](./oracle/oracle.md)
