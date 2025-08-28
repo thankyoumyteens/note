@@ -17,6 +17,7 @@
   - [随机数](./base/random.md)
   - [简写](./base/simplify.md)
   - [序列解压与重组操作](./base/zip.md)
+  - [判断当前操作系统](./base/os.md)
 
 - [文件](./io/io.md)
   - [路径操作](./io/path/path.md)

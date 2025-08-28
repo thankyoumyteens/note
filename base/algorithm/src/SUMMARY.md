@@ -18,6 +18,9 @@
 - [基础数据结构](./basic_ds/basic_ds.md)
   - [栈](./basic_ds/stack.md)
     - [括号匹配](./basic_ds/valid_parentheses.md)
+  - [队列](./basic_ds/queue/queue.md)
+    - [用队列实现栈](./basic_ds/queue/queue_stack.md)
+    - [用栈实现队列](./basic_ds/queue/stack_queue.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
