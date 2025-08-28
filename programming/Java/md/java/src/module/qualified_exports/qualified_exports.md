@@ -4,8 +4,8 @@
 
 示例:
 
-- 提供服务的模块: data.masking
-- 使用服务的模块: user.gui
+- 提供功能的模块: data.masking
+- 使用功能的模块: user.gui
 
 目录结构如下:
 

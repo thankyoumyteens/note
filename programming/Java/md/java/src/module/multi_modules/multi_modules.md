@@ -2,8 +2,8 @@
 
 示例:
 
-- 提供服务的模块: calc.core
-- 使用服务的模块: calc.gui
+- 提供功能的模块: calc.core
+- 使用功能的模块: calc.gui
 
 目录结构如下:
 
