@@ -21,6 +21,8 @@
   - [队列](./basic_ds/queue/queue.md)
     - [用队列实现栈](./basic_ds/queue/queue_stack.md)
     - [用栈实现队列](./basic_ds/queue/stack_queue.md)
+  - [链表](./basic_ds/linked_list/linked_list.md)
+    - [链表的基本操作](./basic_ds/linked_list/linked_list_op.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)

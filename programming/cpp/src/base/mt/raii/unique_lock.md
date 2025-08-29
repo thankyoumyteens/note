@@ -20,7 +20,7 @@ void basic_usage() {
     // 操作共享资源
     shared_data = 42;
 
-    // 提前手动解锁（释放锁让其他线程使用）
+    // 提前手动解锁, 如果不提前解锁就会在析构函数中释放锁
     lock.unlock();
     std::cout << "线程 " << std::this_thread::get_id() << " 提前解锁" << std::endl;
 

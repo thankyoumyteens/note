@@ -179,6 +179,7 @@
   - [图像运算](./cv2/calc/calc.md)
     - [加法](./cv2/calc/add.md)
     - [加权和](./cv2/calc/add_weight.md)
+    - [位运算](./cv2/calc/bit.md)
 
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)
