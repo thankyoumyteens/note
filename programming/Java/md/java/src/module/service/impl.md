@@ -13,7 +13,7 @@ public class Computer implements Transfer {
     @Override
     public boolean downloadData(String name) {
         System.out.println("from computer");
-        System.out.println(name + "downloading...");
+        System.out.println(name + " downloading...");
         return true;
     }
 }

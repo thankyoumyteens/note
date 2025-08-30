@@ -56,6 +56,7 @@
       - [lock_guard](./base/mt/raii/lock_guard.md)
       - [unique_lock](./base/mt/raii/unique_lock.md)
     - [条件变量](./base/mt/condition_variable/condition_variable.md)
+    - [原子类型](./base/mt/atomic/atomic.md)
 
 
 
