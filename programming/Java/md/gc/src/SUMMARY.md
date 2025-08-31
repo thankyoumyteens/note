@@ -63,6 +63,9 @@
     - [WorkerTaskDispatcher](./jdk21/g1/ds/worker/worker_task_dispatcher.md)
       - [分发任务](./jdk21/g1/ds/worker/coordinator_distribute_task.md)
       - [执行任务](./jdk21/g1/ds/worker/worker_run_task.md)
+    - [WorkerTask](./jdk21/g1/ds/worker/worker_task.md)
+    - [worker线程集](./jdk21/g1/ds/worker/worker_threads.md)
+      - [run_task](./jdk21/g1/ds/worker/run_task.md)
   
 - [Oop-Klass对象模型](./jdk21/g1/base/oop_klass.md)
   - [oop](./jdk21/g1/base/oop.md)

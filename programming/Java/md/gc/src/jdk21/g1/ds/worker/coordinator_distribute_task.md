@@ -12,8 +12,8 @@ void WorkerTaskDispatcher::coordinator_distribute_task(WorkerTask *task, uint nu
     // 唤醒num_workers个worker线程来执行任务
     _start_semaphore.signal(num_workers);
 
-    // 阻塞当前线程(执行coordinator_distribute_task函数的线程), 等待所有worker线程执行完毕
-    // worker_run_task函数在执行完任务后会调用signal释放该信号量
+    // 阻塞当前线程(执行该函数的线程), 等待所有worker线程执行完毕
+    // worker_run_task函数在执行完任务后会调用signal释放_end_semaphore信号量
     _end_semaphore.wait();
 
     // 确保所有工作线程都已完成
