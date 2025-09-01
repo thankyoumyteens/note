@@ -1,6 +1,6 @@
 # 用队列实现栈
 
-[Leetcode: 225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/description/)
+[225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/description/)
 
 请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（push、top、pop 和 empty）。
 

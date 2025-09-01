@@ -181,6 +181,8 @@
     - [加权和](./cv2/calc/add_weight.md)
     - [位运算](./cv2/calc/bit.md)
     - [位平面分解](./cv2/calc/bit_plane_decomposition.md)
+    - [图像加密和解密](./cv2/calc/sec.md)
+    - [数字水印](./cv2/calc/digital_watermarking.md)
 
 - [selenium](./selenium/selenium.md)
   - [基本使用](./selenium/quick_start.md)

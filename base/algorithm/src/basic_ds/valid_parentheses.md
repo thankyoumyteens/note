@@ -1,6 +1,6 @@
 # 括号匹配
 
-[Leetcode: 20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/)
+[20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/description/)
 
 给定一个只包括 `(`，`)`，`{`，`}`，`[`，`]` 的字符串 s ，判断字符串是否有效。
 

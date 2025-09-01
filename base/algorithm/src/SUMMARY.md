@@ -23,6 +23,7 @@
     - [用栈实现队列](./basic_ds/queue/stack_queue.md)
   - [链表](./basic_ds/linked_list/linked_list.md)
     - [链表的基本操作](./basic_ds/linked_list/linked_list_op.md)
+    - [移除链表元素](./basic_ds/linked_list/remove_linked_list_elements.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)

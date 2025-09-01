@@ -110,8 +110,8 @@ def bit_plane_decomposition(gray_img):
         # 使用按位与操作提取当前位
         bit_plane = cv2.bitwise_and(gray_img, mask)
 
-        # 将非零值转换为1，便于观察
-        bit_plane[bit_plane != 0] = 1
+        # 将非零值转换为255，实现二值化
+        bit_plane[bit_plane != 0] = 255
 
         bit_planes.append(bit_plane)
 
