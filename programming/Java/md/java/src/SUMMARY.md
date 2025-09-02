@@ -56,6 +56,8 @@
     - [编译多模块](./module/service/compile.md)
     - [链接多模块](./module/service/link.md)
     - [提供服务的方式](./module/service/provider.md)
+  - [传递依赖](./module/transitive/transitive.md)
+    - [聚合器模块](./module/transitive/aggregator_modules.md)
   - [模块](./module/modules/modules.md)
 
 - [线程](./java/thread/thread.md)
