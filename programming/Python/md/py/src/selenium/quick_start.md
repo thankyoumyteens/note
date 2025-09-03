@@ -3,8 +3,7 @@
 ### 1. 安装
 
 ```sh
-# 版本 4.27.1
-pip install selenium
+pip install selenium==4.27.1
 ```
 
 ### 2. 下载浏览器驱动

@@ -33,7 +33,6 @@
   - [基本用法](./subprocess/base.md)
   - [控制输入输出流](./subprocess/io.md)
   - [异步执行](./subprocess/async.md)
-  - [Windows系统以管理员身份执行命令](./subprocess/win_admin.md)
 
 - [正则表达式](./regex/regex.md)
   - [查找](./regex/find.md)
@@ -50,7 +49,7 @@
     - [压缩](./zip/tar/compression.md)
     - [解压](./zip/tar/decompression.md)
 
-- [Requests](./requests/requests.md)
+- [HTTP操作](./requests/requests.md)
   - [安装](./requests/install.md)
   - [GET请求](./requests/get.md)
   - [POST请求](./requests/post.md)
@@ -107,6 +106,7 @@
   - [鼠标操作](./pyautogui/mouse.md)
   - [键盘操作](./pyautogui/kb.md)
   - [截图](./pyautogui/screenshot.md)
+  - [多显示器截图](./pyautogui/screenshot2.md)
   - [弹框](./pyautogui/box.md)
 
 - [numpy](./numpy/numpy.md)
@@ -222,3 +222,7 @@
 
 - [加密解密](./enc/enc.md)
   - [SHA256](./enc/sha256.md)
+
+- [windows](./win/win.md)
+  - [Windows系统以管理员身份执行命令](./win/win_admin.md)
+  - [获取输入法中英文状态](./win/ime.md)
