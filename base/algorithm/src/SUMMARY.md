@@ -24,6 +24,7 @@
   - [链表](./basic_ds/linked_list/linked_list.md)
     - [链表的基本操作](./basic_ds/linked_list/linked_list_op.md)
     - [移除链表元素](./basic_ds/linked_list/remove_linked_list_elements.md)
+    - [反转链表](./basic_ds/linked_list/reverse_linked_list.md)
   - [递归](./basic_ds/recursion/recursion.md)
     - [移除链表元素(递归)](./basic_ds/recursion/remove_linked_list_elements.md)
 
