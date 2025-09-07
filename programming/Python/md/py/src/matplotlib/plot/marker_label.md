@@ -2,21 +2,27 @@
 
 ```py
 import matplotlib.pyplot as plt
-import numpy as np
 
-x = np.linspace(1, 10, 10)
-y = x * 2
+plt.rcParams["font.family"] = ["SimHei", "WenQuanYi Micro Hei", "Heiti TC"]
+plt.rcParams['axes.unicode_minus'] = False
 
-fig = plt.figure()
+plt.figure()
 
-ax_main = fig.add_axes((0.1, 0.1, 0.8, 0.8))
-ax_main.set_xlim(left=0, right=10)
-ax_main.set_ylim(bottom=0, top=20)
+# 绘制数据点, 坐标: (0, 2)
+plt.plot(0, 2, mfc='green', markersize=5.0, marker='o')
 
-# 绘制点(3, 6)的标签
-# 3.2是向右偏移一点, 以免挡住数据点
-ax_main.text(3.2, 6, r'$P_1$', fontsize=12, color='red')
+# 需要限制坐标轴的范围
+plt.xlim(-1, 1)
+plt.ylim(0, 3)
 
-ax_main.plot(x, y, ms=5, ls='None', marker='o')
+# 添加数据点名称标签
+# 0 + 0.05 和 2 + 0.1 控制标签相对于数据点的偏移量，避免重叠
+plt.text(0 + 0.05, 2 + 0.1, '数据点', fontsize=10, color='#333333')
+
+plt.tight_layout()
 plt.show()
 ```
+
+效果:
+
+![](../../img/plot_dotlabel.png)
