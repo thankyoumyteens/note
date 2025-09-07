@@ -31,3 +31,40 @@
 - -5000 <= Node.val <= 5000
 
 进阶：链表可以选用迭代或递归方式完成反转。你能否用两种方法解决这道题？
+
+![](../../img/reverse_linked_list.jpg)
+
+```java
+public class ReverseLinkedList {
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            // 反转当前节点
+            cur.next = pre;
+            // 指针右移
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    /**
+     * 测试方法
+     */
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
+        ListNode newHead = reverseLinkedList.reverseList(head);
+        while (newHead != null) {
+            System.out.println(newHead.val);
+            newHead = newHead.next;
+        }
+    }
+}
+```
