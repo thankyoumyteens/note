@@ -1,4 +1,22 @@
-# 设置数据点样式
+# 绘制数据点
+
+```py
+import matplotlib.pyplot as plt
+
+plt.figure()
+
+# 绘制数据点, 坐标: (0, 2)
+plt.plot(0, 2, mfc='green', markersize=5.0, marker='o')
+
+plt.tight_layout()
+plt.show()
+```
+
+效果:
+
+![](../../img/plot_dot.png)
+
+## 数据点样式
 
 marker 参数用于设置数据点的形状, 常用的值:
 
@@ -24,7 +42,7 @@ markersize(或 ms) 用于指定数据点的大小, 是一个浮点数。
 plt.plot(x, y, markersize=10.0, marker='o')
 ```
 
-## 数据点颜色
+## 数据点的颜色
 
 数据点的颜色默认和线条的颜色一致。
 

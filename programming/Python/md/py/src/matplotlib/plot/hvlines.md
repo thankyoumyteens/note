@@ -1,25 +1,28 @@
 # 数据点到坐标轴的注释线
 
-hlines 函数用于绘制水平直线, vlines 函数用于绘制垂直直线。
-
 ```py
 import matplotlib.pyplot as plt
-import numpy as np
 
-x = np.linspace(1, 10, 10)
-y = x * 2
+plt.figure()
 
-fig = plt.figure()
+# 绘制数据点, 坐标: (0, 2)
+plt.plot(0, 2, mfc='green', markersize=5.0, marker='o')
 
-ax_main = fig.add_axes((0.1, 0.1, 0.8, 0.8))
-ax_main.set_xlim(left=0, right=10)
-ax_main.set_ylim(bottom=0, top=20)
+# 需要限制坐标轴的范围
+plt.xlim(-1, 1)
+plt.ylim(0, 3)
 
-# 绘制点(3, 6)到x轴的注释线
-ax_main.vlines(x=3, ymin=0, ymax=6, color='b', linestyles='dotted')
-# 绘制点(3, 6)到y轴的注释线
-ax_main.hlines(y=6, xmin=0, xmax=3, color='b', linestyles='dotted')
+# 绘制一条从 (-1, 2) 到 (0, 2) 的水平虚线，颜色为深灰色，线宽 1，透明度 0.7
+plt.plot([-1, 0], [2, 2], color='#666666', linestyle='--', linewidth=1, alpha=0.7)
+# 绘制一条从 (0, 0) 到 (0, 2) 的垂直虚线，颜色为深灰色，线宽 1，透明度 0.7
+plt.plot([0, 0], [0, 2], color='#666666', linestyle='--', linewidth=1, alpha=0.7)
 
-ax_main.plot(x, y, ms=5, ls='None', marker='o')
+plt.tight_layout()
 plt.show()
 ```
+
+plt.plot 的前两个参数是 `[x1, x2]` 和 `[y1, y2]`。表示画一条由 `(x1, y1)` 和 `(x2, y2)` 这两点确定的一条直线。
+
+效果:
+
+![](../../img/plot_dotline.png)

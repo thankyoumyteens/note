@@ -1,4 +1,4 @@
-# 设置线条样式
+# 线条样式
 
 linestyle(或 ls) 用于设置线条样式, 常用的值:
 
@@ -14,7 +14,7 @@ linestyle(或 ls) 用于设置线条样式, 常用的值:
 plt.plot(x, y, linestyle='dashdot')
 ```
 
-## 设置线条宽度
+## 线条宽度
 
 linewidth(或 lw) 用于指定线条的宽度, 是一个浮点数。
 
@@ -22,7 +22,7 @@ linewidth(或 lw) 用于指定线条的宽度, 是一个浮点数。
 plt.plot(x, y, linewidth=10.0)
 ```
 
-## 设置线条颜色
+## 线条颜色
 
 color 用于指定线条的颜色, 常用的值:
 

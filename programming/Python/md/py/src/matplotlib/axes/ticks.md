@@ -31,3 +31,16 @@ plt.show()
 效果:
 
 ![](../../img/axes_ticks.png)
+
+## 自定义刻度的名称
+
+```py
+# x轴刻度2名为a, 刻度5名为b
+plt.xticks([2, 5], ['a', 'b'])
+# y轴刻度1名为A, 刻度6名为B
+plt.yticks([1, 6], ['A', 'B'])
+```
+
+效果:
+
+![](../../img/axes_ticks2.png)
