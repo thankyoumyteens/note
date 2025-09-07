@@ -27,6 +27,7 @@
     - [仿函数](./base/func/functor.md)
   - [类](./base/class/class.md)
     - [拷贝构造函数](./base/class/copy.md)
+  - [可调用对象](./base/callable_object/callable_object.md)
   - [泛型](./base/template/template.md)
     - [函数模版](./base/template/t.md)
     - [传递指针类型](./base/template/tp.md)

@@ -20,7 +20,7 @@ plt.ylim(y_min, y_max)
 plt.axhline(y=0, color='k', linewidth=1.5)  # x轴（水平线，y=0）
 plt.axvline(x=0, color='k', linewidth=1.5)  # y轴（垂直线，x=0）
 
-# 隐藏顶部和右侧的边框（让坐标轴更整洁）
+# 获取当前坐标轴对象
 ax = plt.gca()
 ax.spines['top'].set_visible(False)  # 隐藏顶部边框
 ax.spines['right'].set_visible(False)  # 隐藏右侧边框
