@@ -61,6 +61,8 @@
   - [可选的依赖](./module/alternative/alternative.md)
     - [编译时依赖](./module/alternative/static.md)
     - [使用服务实现可选的依赖](./module/alternative/service.md)
+  - [资源](./module/res/res.md)
+    - [加载本模块的资源](./module/res/self.md)
   - [模块](./module/modules/modules.md)
 
 - [线程](./java/thread/thread.md)
