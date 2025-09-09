@@ -228,3 +228,4 @@
       - [数字水印](./cv2/calc/digital_watermarking.md)
     - [几何变换](./cv2/geometric_transformations/geometric_transformations.md)
       - [缩放](./cv2/geometric_transformations/resize.md)
+      - [翻转](./cv2/geometric_transformations/flip.md)
