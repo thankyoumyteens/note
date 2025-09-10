@@ -140,7 +140,7 @@
     - [绘制数据点](./matplotlib/plot/marker.md)
     - [绘制数据点的标签](./matplotlib/plot/marker_label.md)
     - [数据点到坐标轴的注释线](./matplotlib/plot/hvlines.md)
-    - [画圆](./matplotlib/plot/circle.md)
+  - [画圆](./matplotlib/plot/circle.md)
   - [创建子图](./matplotlib/subplot.md)
   - [网格线](./matplotlib/grid.md)
   - [双轴图](./matplotlib/twinx.md)

@@ -29,5 +29,8 @@
     - [移除链表元素(递归)](./basic_ds/recursion/remove_linked_list_elements.md)
     - [反转链表(递归)](./basic_ds/recursion/reverse_linked_list.md)
 
+- [进阶排序](./advance_sort/advance_sort.md)
+  - [归并排序](./advance_sort/merge_sort.md)
+
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
