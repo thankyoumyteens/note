@@ -31,6 +31,7 @@
 
 - [进阶排序](./advance_sort/advance_sort.md)
   - [归并排序](./advance_sort/merge_sort.md)
+    - [实现归并排序](./advance_sort/merge_sort_impl.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
