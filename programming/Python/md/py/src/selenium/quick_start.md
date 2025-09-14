@@ -20,6 +20,8 @@ pip install selenium==4.27.1
 ### 3. 使用
 
 ```python
+from time import sleep
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -39,6 +41,8 @@ driver = webdriver.Chrome(options=opt, service=ser)
 
 # 打开网页
 driver.get('https://www.example.com')
+
+sleep(10)
 
 # 关闭浏览器
 driver.quit()

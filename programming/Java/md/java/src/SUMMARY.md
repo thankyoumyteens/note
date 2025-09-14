@@ -63,6 +63,7 @@
     - [使用服务实现可选的依赖](./module/alternative/service.md)
   - [资源](./module/res/res.md)
     - [加载本模块的资源](./module/res/self.md)
+    - [跨模块加载资源](./module/res/others.md)
   - [模块](./module/modules/modules.md)
 
 - [线程](./java/thread/thread.md)

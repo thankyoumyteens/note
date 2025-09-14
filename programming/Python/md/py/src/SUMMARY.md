@@ -155,6 +155,7 @@
     - [刷新当前页面](./selenium/browser_base/refresh.md)
     - [设置代理](./selenium/proxy.md)0
     - [窗口截图](./selenium/screenshot.md)
+    - [复用浏览器配置](./selenium/browser_base/profile.md)
   - [页面操作](./selenium/page/page.md)
     - [定位HTML标签](./selenium/page/find_element.md)
     - [定位子标签](./selenium/page/sub_tag.md)

@@ -5,10 +5,18 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+# 定位单个标签
 # 每0.5秒尝试一次定位, 等待时间超过100秒则报错
 # 定位到标签后返回该标签
-e = WebDriverWait(driver, 100, 0.5).until(
-    EC.presence_of_element_located((By.ID, 'btn1'))
+target_element = WebDriverWait(driver, 100, 0.5).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, '#btn1'))
+)
+
+# 定位多个标签
+# 每0.5秒尝试一次定位, 等待时间超过100秒则报错
+# 定位到标签后返回该标签
+element_list = WebDriverWait(driver, 100, 0.5).until(
+    EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.btn1'))
 )
 
 print(e)
