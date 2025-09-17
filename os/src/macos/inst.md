@@ -7,6 +7,61 @@ QuickRec-Screen Recording
 bob
 ```
 
+## git
+
+git 在安装 Command Line Tools (CLT) for Xcode 时自带:
+
+```sh
+git config --global user.name "zhaosz"
+git config --global user.email "iloveyesterday@outlook.com"
+ssh-keygen -t rsa -C "iloveyesterday@outlook.com"
+# 设置为区分大小写
+git config --global core.ignorecase false
+```
+
+## jdk
+
+下载:
+
+- [Liberica](https://bell-sw.com/pages/downloads/)
+- [Adoptium](https://mirrors.tuna.tsinghua.edu.cn/Adoptium)
+- [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
+- [Microsoft](https://learn.microsoft.com/zh-cn/java/openjdk/download)
+
+配置:
+
+```sh
+# 打开配置文件
+vim ~/.zshrc
+
+# 在最后一行添加
+export JAVA_HOME=/Users/walter/walter/jdk/jdk-21.0.2.jdk
+export PATH=$JAVA_HOME/bin:$PATH
+
+# 使环境变量生效
+source ~/.zshrc
+
+# 验证
+java -version
+```
+
+### 报错: 无法打开"java", 因为无法验证开发者:
+
+1.  左上角 apple -> 系统设置 -> 隐私与安全性 -> 安全性
+2.  已阻止使用"java", 因为来自身分不明的开发者
+3.  仍要打开
+
+## python
+
+```sh
+brew install python3
+brew install python-tk
+
+pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+pip3 config set global.trusted-host pypi.tuna.tsinghua.edu.cn
+pip3 config set global.timeout 120
+```
+
 ## 安装 jd-gui
 
 1. 下载并解压: [jd-gui-osx-1.6.6.tar](https://github.com/java-decompiler/jd-gui/releases/download/v1.6.6/jd-gui-osx-1.6.6.tar)
@@ -26,7 +81,7 @@ else
 fi
 ```
 
-## 安装其它软件
+## 使用 Homebrew 安装的软件
 
 ```sh
 # chrome
@@ -51,6 +106,8 @@ brew install graphviz
 brew install plantuml
 ```
 
+## 其它软件
+
 - [Anaconda](https://www.anaconda.com/download/success)
 - [Android Studio](https://developer.android.google.cn/studio?hl=zh-cn)
 - [AnotherRedisDesktopManager](https://gitee.com/qishibo/AnotherRedisDesktopManager/releases)
@@ -64,7 +121,7 @@ brew install plantuml
 - [HandBrake](https://github.com/HandBrake/HandBrake/releases) 视频格式转换
 - [LiveRecorder](https://github.com/auqhjjqdo/LiveRecorder) 无人值守直播录制脚本
 - [localsend](https://github.com/localsend/localsend)
-- [录播姬](https://rec.danmuji.org/install/desktop/) 录B站直播
+- [录播姬](https://rec.danmuji.org/install/desktop/) 录 B 站直播
 - [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
 - [Jetbrains GoLand](https://www.jetbrains.com/go/download/other.html)
 - [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/other.html)

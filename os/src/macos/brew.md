@@ -41,13 +41,15 @@ export PATH=/opt/homebrew/bin:$PATH
 source ~/.zshrc
 ```
 
-## 安装软件
+## 用法
+
+### 安装软件
 
 ```sh
 brew install 软件名
 ```
 
-## 更新软件
+### 更新软件
 
 ```sh
 brew update
@@ -55,7 +57,7 @@ brew upgrade
 brew upgrade 软件名
 ```
 
-## 卸载软件
+### 卸载软件
 
 ```sh
 brew uninstall 软件名
