@@ -18,6 +18,7 @@
     - [tar](./macos/tar.md)
     - [zip](./macos/zip.md)
     - [7z](./macos/7zz.md)
+    - [ssh](./macos/ssh.md)
     - [svn](./macos/svn.md)
   - [使用](./macos/u.md)
     - [ls结果显示颜色](./macos/ls_color.md)

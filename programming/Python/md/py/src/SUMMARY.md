@@ -191,6 +191,14 @@
   - [Windows系统以管理员身份执行命令](./win/win_admin.md)
   - [获取输入法中英文状态](./win/ime.md)
 
+- [Paramiko](./paramiko/paramiko.md)
+  - [安装](./paramiko/install.md)
+  - [密码登录](./paramiko/pwd.md)
+  - [密钥登录](./paramiko/key.md)
+  - [文件传输](./paramiko/file.md)
+  - [交互式Shell](./paramiko/shell.md)
+  - [创建SSH隧道](./paramiko/ssh_tunnel.md)
+
 - [图像操作](./image.md)
   - [Pillow](./pillow/pillow.md)
     - [安装](./pillow/install.md)
@@ -230,3 +238,4 @@
     - [几何变换](./cv2/geometric_transformations/geometric_transformations.md)
       - [缩放](./cv2/geometric_transformations/resize.md)
       - [翻转](./cv2/geometric_transformations/flip.md)
+      - [仿射](./cv2/geometric_transformations/affine.md)
