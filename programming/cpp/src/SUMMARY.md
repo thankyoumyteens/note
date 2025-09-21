@@ -3,6 +3,7 @@
 - [基础](./base/base.md)
   - [基本使用](./base/quick_start.md)
   - [g++基本使用](./base/gcc.md)
+  - [gdb调试](./base/gdb.md)
   - [变量](./base/variable.md)
     - [静态局部变量](./base/static.md)
   - [常量](./base/const.md)
