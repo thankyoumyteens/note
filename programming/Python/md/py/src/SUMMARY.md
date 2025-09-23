@@ -18,6 +18,8 @@
   - [简写](./base/simplify.md)
   - [序列解压与重组操作](./base/zip.md)
   - [判断当前操作系统](./base/os.md)
+  - [Type Hint](./base/type_hint.md)
+  - [泛型](./base/generics.md)
 
 - [文件](./io/io.md)
   - [路径操作](./io/path/path.md)
@@ -240,3 +242,5 @@
       - [翻转](./cv2/geometric_transformations/flip.md)
       - [仿射](./cv2/geometric_transformations/affine.md)
       - [透视](./cv2/geometric_transformations/perspective.md)
+    - [阈值处理](./cv2/thresholding/thresholding.md)
+      - [固定阈值处理](./cv2/thresholding/threshold.md)
