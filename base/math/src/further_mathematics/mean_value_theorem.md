@@ -207,7 +207,7 @@ plt.show()
 
 ![](../img/mvt6.jpg)
 
-例题 1
+例题
 
 <!--
 \begin{align}
@@ -223,8 +223,6 @@ plt.show()
 
 ![](../img/mvt7.jpg)
 
-例题 2
-
 <!--
 \begin{align}
 & 设 f(x) 可导, 且 \lim_{x \to \infty} f'(x) = e, 求 \lim_{x \to \infty} [f(x + 2) - f(x - 1)] \\
@@ -237,8 +235,6 @@ plt.show()
 -->
 
 ![](../img/mvt8.jpg)
-
-例题 3
 
 <!--
 \begin{align}
@@ -259,8 +255,6 @@ plt.show()
 -->
 
 ![](../img/mvt9.jpg)
-
-例题 4
 
 <!--
 \begin{align}

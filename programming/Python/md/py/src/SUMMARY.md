@@ -14,12 +14,16 @@
   - [字符串操作](./base/str.md)
   - [字符串格式化](./base/str_format.md)
   - [日期格式化](./base/date_format.md)
+  - [bytes操作](./base/bytes.md)
   - [随机数](./base/random.md)
   - [简写](./base/simplify.md)
   - [序列解压与重组操作](./base/zip.md)
   - [判断当前操作系统](./base/os.md)
   - [Type Hint](./base/type_hint.md)
   - [泛型](./base/generics.md)
+
+- [线程](./thread/thread.md)
+  - [基本使用](./thread/basic.md)
 
 - [文件](./io/io.md)
   - [路径操作](./io/path/path.md)

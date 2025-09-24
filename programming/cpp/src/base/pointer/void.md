@@ -1,6 +1,6 @@
 # void 指针
 
-函数的形参用 `void *`, 表示接受任意数据类型的指针:
+函数的形参用 `void *`, 表示接受任意数据类型的指针, 比如:
 
 ```cpp
 void *memccpy(void *__dst, const void *__src, int __c, size_t __n);
