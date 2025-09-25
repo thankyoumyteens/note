@@ -159,7 +159,7 @@
     - [不支持安全连接问题](./selenium/ssl.md)
     - [浏览器窗口大小](./selenium/browser_base/window.md)
     - [刷新当前页面](./selenium/browser_base/refresh.md)
-    - [设置代理](./selenium/proxy.md)0
+    - [设置代理](./selenium/proxy.md)
     - [窗口截图](./selenium/screenshot.md)
     - [复用浏览器配置](./selenium/browser_base/profile.md)
   - [页面操作](./selenium/page/page.md)
