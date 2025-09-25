@@ -168,10 +168,14 @@
     - [等待标签出现](./selenium/page/wait.md)
     - [标签操作](./selenium/page/tag_op.md)
     - [控制滚动条](./selenium/page/scroll.md)
-  - [模拟登录](./selenium/模拟登录.md)
+    - [文件上传](./selenium/page/upload.md)
+  - [键盘和鼠标操作](./selenium/km/km.md)
+    - [模拟鼠标悬停](./selenium/km/hover.md)
+    - [模拟键盘输入](./selenium/km/send_keys.md)
+    - [模拟复杂交互](./selenium/km/ac.md)
 
-- [PaddleOCR](./paddle_ocr/paddle_ocr.md)
-  - [基本使用](./paddle_ocr/quick_start.md)
+- [OCR](./ocr/ocr.md)
+  - [基本使用](./ocr/quick_start.md)
 
 - [PySide6](./pyside/PySide6.md)
   - [安装](./pyside/install.md)

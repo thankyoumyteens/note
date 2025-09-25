@@ -289,14 +289,22 @@ plt.show()
 & \; 3. g'(x) \ne 0, \quad a < x < b \\
 & 则存在 \xi \in (a, b), \\
 & 使得 \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)} \\
+\\
+& 当 g(x) = x 时, 柯西中值定理即为拉格朗日中值定理, \\
+& 即拉格朗日中值定理是柯西中值定理的特例 \\
+\\
+& 证明拉格朗日时的辅助函数：\\
+& \varphi (x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a) \\
+& 那么证明柯西时需要的辅助函数就是把x还原回g(x)：\\
+& \varphi (x)=f(x)-f(a)-\frac{f(b)-f(a)}{g(b)-g(a)}\left [ g(x)-g(a) \right ]  \\
+& 证明：\\
+&
 \end{align}
 -->
 
 ![](../img/mvt11.jpg)
 
-当 g(x) = x 时, 柯西中值定理即为拉格朗日中值定理, 即拉格朗日中值定理是柯西中值定理的特例。
-
-例题 1
+例题
 
 <!--
 \begin{align}
@@ -325,8 +333,6 @@ plt.show()
 -->
 
 ![](../img/mvt12.jpg)
-
-例题 2
 
 <!--
 \begin{align}
@@ -357,8 +363,6 @@ plt.show()
 -->
 
 ![](../img/mvt13.jpg)
-
-例题 3
 
 <!--
 \begin{align}
