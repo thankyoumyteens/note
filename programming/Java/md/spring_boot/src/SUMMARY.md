@@ -13,6 +13,7 @@
   - [全局异常处理](./base/exception_handler.md)
   - [跨域](./base/cors.md)
   - [多环境配置](./base/profiles.md)
+  - [加载配置文件](./base/configuration_properties.md)
   - [logback配置](./base/logback.md)
   - [HibernateValidator](./base/validator.md)
   - [使用包装类修改请求和响应数据](./base/wrapper.md)
