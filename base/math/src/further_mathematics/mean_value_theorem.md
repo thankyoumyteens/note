@@ -27,7 +27,7 @@
 
 ![](../img/mvt2.jpg)
 
-例题
+### 例题
 
 <!--
 \begin{align}
@@ -207,7 +207,7 @@ plt.show()
 
 ![](../img/mvt6.jpg)
 
-例题
+### 例题
 
 <!--
 \begin{align}
@@ -288,9 +288,9 @@ plt.show()
 & \; 2. f(x), g(x) 在 (a, b) 内可导 \\
 & \; 3. g'(x) \ne 0, \quad a < x < b \\
 & 则存在 \xi \in (a, b), \\
-& 使得 \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)} \\
+& 使得 \frac{f(b) - f(a)}{g(b) - g(a)}=\frac{f'(\xi)}{g'(\xi)} \\
 \\
-& 当 g(x) = x 时, 柯西中值定理即为拉格朗日中值定理, \\
+& 当 g(x)=x 时, 柯西中值定理即为拉格朗日中值定理, \\
 & 即拉格朗日中值定理是柯西中值定理的特例 \\
 \\
 & 证明拉格朗日时的辅助函数：\\
@@ -298,13 +298,22 @@ plt.show()
 & 那么证明柯西时需要的辅助函数就是把x还原回g(x)：\\
 & \varphi (x)=f(x)-f(a)-\frac{f(b)-f(a)}{g(b)-g(a)}\left [ g(x)-g(a) \right ]  \\
 & 证明：\\
-&
+& {\color{Green} // 加、减、乘不会改变连续性和可导性} \\
+& \varphi (x) 在 [a, b] 上连续、在 (a, b) 内可导 \\
+& \varphi (a)=f(a)-f(a)-\frac{f(b)-f(a)}{g(b)-g(a)}\left [ g(a)-g(a) \right ]=0 \\
+& \varphi (b)=f(b)-f(a)-\frac{f(b)-f(a)}{g(b)-g(a)}\left [ g(b)-g(a) \right ]\\
+& =f(b)-f(a)-\left [ f(b)-f(a) \right ]=0 \\
+& 满足罗尔定理 \\
+& 所以存在 \xi \in (a, b)，使\varphi '(\xi)=0 \\
+& 而\varphi '(x)=f'(x)-\frac{f(b)-f(a)}{g(b)-g(a)}g'(x) \\
+& 所以 \varphi '(\xi)=f'(\xi)-\frac{f(b)-f(a)}{g(b)-g(a)}g'(\xi) = 0 \\
+& \frac{f'(\xi)}{g'(\xi)}=\frac{f(b)-f(a)}{g(b)-g(a)} \\
 \end{align}
 -->
 
 ![](../img/mvt11.jpg)
 
-例题
+### 例题
 
 <!--
 \begin{align}
@@ -372,9 +381,9 @@ plt.show()
 & \;\, {\color{Green} // 有中值 \xi, 有 a 和 b, 而且 \xi 和 a, b 可以分开} \\
 & \;\, {\color{Green} // 如果可以变形成 \frac{f(b) - f(a)}{b - a}, 则使用拉格朗日定理} \\
 & \;\, {\color{Green} // 如果可以变形成 \frac{f(b) - f(a)}{g(b) - g(a)}, 则使用柯西定理} \\
-& \;\, f(b) - f(a) = \xi f'(\xi) \ln \frac{b}{a} \Rightarrow
-\frac{f(b) - f(a)}{\ln \frac{b}{a}} = \xi f'(\xi) \\
-& \;\, \frac{f(b) - f(a)}{\ln b - \ln a} = \xi f'(\xi) \\
+& \;\, f(b) - f(a) = \xi f'(\xi) \ln \frac{b}{a} \\
+& \Rightarrow \frac{f(b) - f(a)}{\ln \frac{b}{a}} = \xi f'(\xi) \\
+& \Rightarrow \frac{f(b) - f(a)}{\ln b - \ln a} = \xi f'(\xi) \\
 & \;\, {\color{Green} // 使用柯西定理} \\
 & 令 g(x) = \ln x, g'(x) = \frac{1}{x} \ne 0 \\
 & 所以存在 \xi \in (a, b), 使 \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(\xi)}{g'(\xi)}
@@ -389,6 +398,9 @@ plt.show()
 
 <!--
 \begin{align}
+& 背景：\\
+&
+\\
 & 设 f(x) 在 x = x_{0} 邻域里有 n+1 阶导数, \\
 & 则 f(x) = P_{n}(x) + R_{n}(x) \\
 & 其中 P_{n}(x) 是 n 次多项式, R_{n}(x) 称为余项 \\
@@ -409,7 +421,7 @@ o((x - x_{0})^{n}), & 佩亚诺型余项
 
 ![](../img/mvt15.jpg)
 
-常用的麦克劳林公式
+### 常用的麦克劳林公式
 
 <!--
 \begin{align}
@@ -425,7 +437,7 @@ o((x - x_{0})^{n}), & 佩亚诺型余项
 
 ![](../img/mvt16.jpg)
 
-例题 1
+### 例题
 
 <!--
 \begin{align}
@@ -444,8 +456,6 @@ o((x - x_{0})^{n}), & 佩亚诺型余项
 -->
 
 ![](../img/mvt17.jpg)
-
-例题 2
 
 <!--
 \begin{align}
@@ -473,8 +483,6 @@ o((x - x_{0})^{n}), & 佩亚诺型余项
 -->
 
 ![](../img/mvt18.jpg)
-
-例题 3
 
 <!--
 \begin{align}
