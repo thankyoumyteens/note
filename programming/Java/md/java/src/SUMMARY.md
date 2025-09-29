@@ -68,6 +68,9 @@
     - [开放反射权限](./module/reflection/open.md)
   - [模块](./module/modules/modules.md)
     - [获取模块信息](./module/modules/get_info.md)
+  - [层](./module/layer/layer.md)
+    - [引导层](./module/layer/boot.md)
+    - [创建新层](./module/layer/create.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
