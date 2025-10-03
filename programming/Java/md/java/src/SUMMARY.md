@@ -71,6 +71,7 @@
   - [层](./module/layer/layer.md)
     - [引导层](./module/layer/boot.md)
     - [创建新层](./module/layer/create.md)
+    - [实现插件](./module/layer/plugin.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
