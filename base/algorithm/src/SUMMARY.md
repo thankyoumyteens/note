@@ -35,6 +35,7 @@
     - [归并排序的时间复杂度](./advance_sort/merge_sort2.md)
     - [优化归并排序](./advance_sort/merge_sort3.md)
     - [自底向上的归并排序](./advance_sort/merge_sort4.md)
+    - [数组中逆序对的总数](./advance_sort/nxd.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
