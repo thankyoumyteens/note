@@ -474,19 +474,39 @@ P_{n}(x) = f(x_{0}) + \frac{f'(x_{0})}{1!} (x - x_{0}) +
 \begin{align}
 & 求极限 \lim_{x \to 0} \frac{\ln(1 + x) - e^{x} + 1}{x^{2}} \\
 \\
-& \;\, {\color{Green} // 式子的最大次方是2次方, 所以麦克劳林公式也写到2次方} \\
+& \;\, {\color{Green} // 式子的最大次方是2次方} \\
+& \;\, {\color{Green} // 所以麦克劳林公式也写到2次方} \\
 & \;\, \ln(1 + x) = x - \frac{x^{2}}{2} + o(x^{2}) \\
 & \;\, e^{x} = 1 + x + \frac{x^{2}}{2} + o(x^{2}) \\
 & \;\, {\color{Green} // 带入到分子} \\
 & \;\, \ln(1 + x) - e^{x} + 1 = -x^{2} + o(x^{2}) \\
 & \;\, {\color{Green} // 由于是求极限, 所以可以去掉高阶无穷小} \\
 & \;\, -x^{2} + o(x^{2}) 等价于 -x^{2} \\
-& 所以 \lim_{x \to 0} \frac{\ln(1 + x) - e^{x} + 1}{x^{2}}
-= \lim_{x \to 0} \frac{-x^{2}}{x^{2}} = -1 \\
+& 所以 \lim_{x \to 0} \frac{\ln(1 + x) - e^{x} + 1}{x^{2}} \\
+& = \lim_{x \to 0} \frac{-x^{2}}{x^{2}} \\
+& = -1 \\
 \end{align}
 -->
 
 ![](../img/mvt17.jpg)
+
+<!--
+\begin{align}
+& 求极限 \lim_{x\to0}\frac{e^{-\frac{x^2}{2}}-1+\frac{x^2}{2}}{x^3\arcsin x} \\
+\\
+& {\color{Green} // 分母是乘法，可以直接用等价无穷小替换} \\
+& =\lim_{x\to0}\frac{e^{-\frac{x^2}{2}}-1+\frac{x^2}{2}}{x^4} \\
+& {\color{Green} // 分母最高是4阶，分子最高是2阶，精确度不够} \\
+& {\color{Green} // 使用麦克劳林公式展开：e^{x} = 1+x+\frac{x^2}{2!}+o(x^n)} \\
+& e^{-\frac{x^2}{2}}=1-\frac{x^2}{2}+\frac{\left ( -\frac{x^2}{2} \right ) ^2}{2!}+o(x^n) \\
+& =1-\frac{x^2}{2}+\frac{1}{8}x^4+o(x^4) \\
+& e^{-\frac{x^2}{2}}-1+\frac{x^2}{2}=\frac{1}{8}x^4+o(x^4) \sim \frac{1}{8}x^4 \\
+& 所以 \lim_{x\to0}\frac{e^{-\frac{x^2}{2}}-1+\frac{x^2}{2}}{x^4}
+=\lim_{x\to0}\frac{\frac{1}{8}x^4}{x^4}=\frac{1}{8} \\
+\end{align}
+-->
+
+![](../img/mvt17_1.jpg)
 
 <!--
 \begin{align}
@@ -532,3 +552,25 @@ P_{n}(x) = f(x_{0}) + \frac{f'(x_{0})}{1!} (x - x_{0}) +
 -->
 
 ![](../img/mvt19.jpg)
+
+## 使用场景
+
+<!--
+\begin{align}
+& 1、遇到题目中有：f(b)-f(a)或者f(a)\ne f(b) \\
+& 解法：使用拉格朗日中值定理 \\
+& 2、见到题目中有类似 \xi f'(\xi) + 2f(\xi)（只有中值 \xi 且导数差一阶） \\
+& 解法： \\
+& \quad 1、 把 \xi 换成 x 得到：x f'(x) + 2f(x) \\
+& \quad 2、 构造成分子比分母多一阶导数的形式：\frac{f'(x)}{f(x)} + ... = 0 \\
+& \quad 3、 导数还原：[\ln f(x)]' + (...)' = 0 \\
+& \quad 4、 取\ln 的内部作为 \varphi (x)得到：\varphi (x) = ... \\
+& 3、有中值 \xi, 有边界 a 和 b, 且 \xi 和 a, b 可以分开 \\
+& 解法： \\
+& \quad 1、 把 \xi 和 a, b 分开 \\
+& \quad 2、 如果 a，b 这一侧可以变形成 \frac{f(b) - f(a)}{b - a}, 则使用拉格朗日中值定理 \\
+& \quad 3、 如果 a，b 这一侧可以变形成 \frac{f(b) - f(a)}{g(b) - g(a)}, 则使用柯西中值定理 \\
+\end{align}
+-->
+
+![](../img/lhsr1.jpg)
