@@ -15,7 +15,7 @@
 
 ## 生产者
 
-配置文件
+### 1. 配置文件
 
 ```yaml
 spring:
@@ -64,7 +64,7 @@ spring:
         # max.in.flight.requests.per.connection: 1
 ```
 
-代码
+### 2. 代码
 
 ```java
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +98,7 @@ public class KafkaProducer {
 
 ## 消费者
 
-配置文件
+### 1. 配置文件
 
 ```yaml
 spring:
@@ -144,7 +144,7 @@ spring:
       default-topic: "COLA"
 ```
 
-代码
+### 2. 代码
 
 ```java
 import org.apache.kafka.clients.consumer.ConsumerRecord;

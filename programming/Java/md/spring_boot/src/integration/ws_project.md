@@ -1,6 +1,6 @@
 # 使用 WebSocket
 
-1. 添加依赖
+### 1. 添加依赖
 
 ```xml
 <dependency>
@@ -9,7 +9,7 @@
 </dependency>
 ```
 
-2. 配置类
+### 2. 配置类
 
 ```java
 import org.springframework.context.annotation.Bean;
@@ -29,7 +29,7 @@ public class WebSocketConfiguration {
 }
 ```
 
-3. 服务器
+### 3. 服务器
 
 ```java
 import com.alibaba.fastjson.JSON;

@@ -2,7 +2,7 @@
 
 ## mariadb
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -12,7 +12,7 @@
 </dependency>
 ```
 
-2. 配置
+### 2. 配置
 
 ```yaml
 spring:
@@ -25,7 +25,7 @@ spring:
 
 ## mysql
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -35,7 +35,7 @@ spring:
 </dependency>
 ```
 
-2. 配置
+### 2. 配置
 
 ```yaml
 spring:
@@ -48,7 +48,7 @@ spring:
 
 ## oracle
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -58,7 +58,7 @@ spring:
 </dependency>
 ```
 
-2. 配置
+### 2. 配置
 
 ```yaml
 spring:
@@ -71,7 +71,7 @@ spring:
 
 ## sqlite
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -81,7 +81,7 @@ spring:
 </dependency>
 ```
 
-2. 配置
+### 2. 配置
 
 ```yaml
 spring:

@@ -1,6 +1,6 @@
 # 集成 MybatisPlus
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -19,7 +19,7 @@
 </dependency>
 ```
 
-2. 配置数据源
+### 2. 配置数据源
 
 ```yaml
 spring:
@@ -30,8 +30,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
-3. resource 下新建 mapper 文件夹
-4. 配置 mybatis plus
+### 3. resource 下新建 mapper 文件夹
+
+### 4. 配置 mybatis plus
 
 ```yaml
 mybatis-plus:
@@ -40,7 +41,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
-5. 配置包扫描
+### 5. 配置包扫描
 
 ```java
 import org.mybatis.spring.annotation.MapperScan;
@@ -52,7 +53,7 @@ public class MybatisPlusConfig {
 }
 ```
 
-6. 添加实体类
+### 6. 添加实体类
 
 ```java
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -70,7 +71,7 @@ public class Words {
 }
 ```
 
-7. 添加 mapper 接口
+### 7. 添加 mapper 接口
 
 ```java
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -79,7 +80,7 @@ public interface DemoMapper extends BaseMapper<Words> {
 }
 ```
 
-8. 测试
+### 8. 测试
 
 ```java
 @Component

@@ -24,6 +24,7 @@
   - [集成Mybatis](./integration/mybatis.md)
   - [集成MybatisPlus](./integration/mybatis_plus.md)
   - [集成JPA](./integration/jpa.md)
+  - [集成Redis](./integration/redis_template.md)
   - [集成HibernateValidator](./integration/validator_with_sb.md)
   - [集成Kafka](./integration/kafka.md)
   - [集成WebSocket](./integration/ws_project.md)
@@ -34,6 +35,9 @@
 - [Mybatis Plus](./mybatis_plus/mybatis_plus.md)
   - [分页](./mybatis_plus/page.md)
   - [多数据源](./mybatis_plus/dynamic_datasource.md)
+
+- [RedisTemplate](./redis_template/redis_template.md)
+  - [多数据源](./redis_template/dynamic_datasource.md)
 
 - [Spring Data JPA](./jpa/jpa.md)
   - [常规用法](./jpa/base.md)

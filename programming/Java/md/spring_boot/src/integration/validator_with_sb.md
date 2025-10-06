@@ -1,6 +1,6 @@
 # SpringBoot 集成
 
-1. 添加依赖:
+### 1. 添加依赖
 
 ```xml
 <dependency>
@@ -9,7 +9,7 @@
 </dependency>
 ```
 
-2. 配置类:
+### 2. 配置类
 
 ```java
 import jakarta.validation.Validation;
@@ -33,7 +33,7 @@ public class ValidatorConfig {
 }
 ```
 
-3. 全局异常处理:
+### 3. 全局异常处理
 
 ```java
 package org.example.validator;
@@ -60,7 +60,7 @@ public class GlobalExceptionHandler {
 }
 ```
 
-4. controller:
+### 4. controller
 
 ```java
 import jakarta.validation.Valid;

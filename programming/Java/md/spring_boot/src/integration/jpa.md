@@ -1,6 +1,6 @@
 # 集成 JPA
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -18,7 +18,7 @@
 </dependency>
 ```
 
-2. 配置
+### 2. 配置
 
 ```yaml
 spring:
@@ -33,7 +33,7 @@ spring:
     show-sql: true
 ```
 
-3. 创建实体
+### 3. 创建实体
 
 ```java
 package com.example;
@@ -58,5 +58,6 @@ public class Person {
 }
 ```
 
-4. 启动项目
-5. 如果 mysql 中没有 person 表, jpa 会自动创建 person 表
+### 4. 启动项目
+
+### 5. 如果 mysql 中没有 person 表, jpa 会自动创建 person 表

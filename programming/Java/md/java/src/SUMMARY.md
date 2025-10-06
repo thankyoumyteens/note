@@ -32,6 +32,7 @@
   - [泛型](./java/parameterized_type.md)
     - [获取字段的参数化类型](./java/field_parameterized_type.md)
     - [获取方法的参数化类型](./java/method_parameterized_type.md)
+    - [通过TypeReference获取泛型信息](./java/type_reference.md)
 
 - [JAR文件](./jar/jar.md)
   - [MANIFEST.MF文件](./jar/mf.md)

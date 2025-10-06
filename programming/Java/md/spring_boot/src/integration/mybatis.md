@@ -1,6 +1,6 @@
 # 集成 Mybatis
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -15,7 +15,7 @@
 </dependency>
 ```
 
-2. 配置数据源
+### 2. 配置数据源
 
 ```yaml
 spring:
@@ -26,8 +26,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
-3. resource 下新建 mapper 文件夹
-4. 配置 mybatis
+### 3. resource 下新建 mapper 文件夹
+
+### 4. 配置 mybatis
 
 ```yaml
 mybatis:
@@ -37,7 +38,7 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
-5. 配置包扫描
+### 5. 配置包扫描
 
 ```java
 package com.example;
@@ -51,7 +52,7 @@ public class MybatisConfig {
 }
 ```
 
-6. 添加 mapper 接口
+### 6. 添加 mapper 接口
 
 ```java
 package com.example.mapper;
@@ -64,7 +65,7 @@ public interface DemoMapper {
 }
 ```
 
-7. 添加 sql
+### 7. 添加 sql
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -78,7 +79,7 @@ public interface DemoMapper {
 </mapper>
 ```
 
-8. 测试
+### 8. 测试
 
 ```java
 package com.example;
