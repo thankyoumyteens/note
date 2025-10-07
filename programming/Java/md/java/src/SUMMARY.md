@@ -26,6 +26,7 @@
   - [字符串操作](./java/str/str.md)
     - [数字格式化](./java/str/number_format.md)
     - [字符串和16进制互转](./java/str/hex.md)
+    - [区分UTF-8字符串中的ASCII与非ASCII字符](./java/str/urf8.md)
   - [BigDecimal](./java/BigDecimal.md)
   - [集合](./java/collection.md)
     - [List去重](./java/list_distinct.md)
