@@ -42,6 +42,8 @@
       - [中值定理](./further_mathematics/mean_value_theorem.md)
     - [洛必达法则](./further_mathematics/l_hospital_s_rule.md)
     - [导数的应用](./further_mathematics/derivatives2.md)
+      - [函数的单调性](./further_mathematics/derivatives2_1.md)
+      - [函数的极值](./further_mathematics/derivatives2_2.md)
     - [弧微分](./further_mathematics/arc_differential.md)
   - [不定积分](./further_mathematics/indefinite_integral.md)
     - [换元积分法](./further_mathematics/indefinite_integral2.md)

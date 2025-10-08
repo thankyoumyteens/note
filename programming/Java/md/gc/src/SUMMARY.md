@@ -3,6 +3,8 @@
 - [todo](./jdk21/g1/todo.md)
 
 - [基础知识](./jdk21/g1/base/base.md)
+  - [ubuntu22调试OpenJDK21](./jdk21/g1/ubuntu22_jdk21.md)
+  - [MacOS调试OpenJDK21](./jdk21/g1/mac_jdk21.md)
   - [总览](./jdk21/g1/base/overview.md)
   - [Garbage-First垃圾回收器](./jdk21/g1/base/guide.md)
   - [Garbage-First垃圾回收器调优](./jdk21/g1/base/tuning.md)
@@ -244,8 +246,3 @@
 
 
 - [MMU](./jdk21/g1/region/mmu.md)
-
-## 附录
-
-  - [ubuntu22调试OpenJDK21](./jdk21/g1/ubuntu22_jdk21.md)
-  - [MacOS调试OpenJDK21](./jdk21/g1/mac_jdk21.md)
