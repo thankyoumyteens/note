@@ -252,3 +252,4 @@
       - [透视](./cv2/geometric_transformations/perspective.md)
     - [阈值处理](./cv2/thresholding/thresholding.md)
       - [固定阈值处理](./cv2/thresholding/threshold.md)
+      - [Otsu阈值处理](./cv2/thresholding/otsu.md)
