@@ -2,7 +2,75 @@
 
 ## 函数的凹凸性
 
-<!-- 
+<!--
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams['font.sans-serif'] = ['Hiragino Sans GB']
+plt.rcParams['axes.unicode_minus'] = False
+
+
+def get_line_function(x1, y1, x2, y2):
+    # 计算斜率k和截距b
+    k = (y2 - y1) / (x2 - x1)
+    b = y1 - k * x1
+
+    # 定义直线函数
+    line_func = lambda x: k * x + b
+    return line_func
+
+
+def f(x):
+    return x ** 2
+
+
+# 曲线
+x_start = 0
+x_end = 5
+x = np.linspace(x_start, x_end, 2000)  # x范围覆盖两个极值点，2000个点确保曲线平滑
+y = f(x)
+
+# 创建画布
+plt.figure(figsize=(8, 6))
+
+# 绘制函数曲线
+plt.plot(x, y, color='#2E86AB', linewidth=2.5)
+plt.text(x_end - 0.5, f(x_end - 0.7), '$L: y=f(x)$', fontsize=10, color='#333333')
+
+# 坐标轴范围
+plt.xlim(x_start - 1, x_end + 1)
+plt.ylim(f(x_start) - 2, f(x_end) + 1)
+
+# 添加注释线
+x1 = x_start + 1
+x2 = x_start + 4
+plt.plot([x1, x1], [f(x1), -3], color='#666666', linestyle='--', linewidth=1, alpha=0.7)
+plt.plot([x2, x2], [f(x2), -3], color='#666666', linestyle='--', linewidth=1, alpha=0.7)
+
+# 连线
+line_f = get_line_function(x1, f(x1), x2, f(x2))
+x = np.linspace(x1, x2, 2000)
+plt.plot(x, line_f(x), color='#666666', linestyle='--', linewidth=1, alpha=0.7)
+
+xm = (x1 + x2) / 2
+plt.plot([xm, xm], [line_f(xm), -3], color='#666666', linestyle='--', linewidth=1, alpha=0.7)
+
+# 设置刻度
+plt.xticks([x1, xm, x2], ['$x_1$', r'$\frac{x_1+x_2}{2}$', '$x_2$'])
+plt.yticks([], [])
+# 获取当前坐标轴对象
+ax = plt.gca()
+ax.spines['top'].set_visible(False)  # 隐藏顶部边框
+ax.spines['right'].set_visible(False)  # 隐藏右侧边框
+
+# 调整布局并显示
+plt.tight_layout()
+plt.show()
+-->
+
+![](../img/d2_12_img.png)
+
+<!--
 TODO 画图 \frac{f(x_1) + f(x_2)}{2}是梯形的中位线
 -->
 <!--

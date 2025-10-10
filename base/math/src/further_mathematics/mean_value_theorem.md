@@ -93,40 +93,6 @@
 ## 拉格朗日中值定理
 
 <!--
-\begin{align}
-& 设函数 f(x) 满足: \\
-& \; 1. f(x) 在 [a, b] 上连续 \\
-& \; 2. f(x) 在 (a, b) 内可导 \\
-& 则存在 \xi \in (a, b), \\
-& 使得 f'(\xi) = \frac{f(b) - f(a)}{b - a} \\
-\\
-& {\Large 几何意义}\\
-& 存在 \xi \in (a, b), \\
-& 函数f(x)在点(\xi,f(x))处的切线 \\
-& 和(a,f(a))、(b,f(b))两点的连线平行 \\
-\\
-& {\Large 证明} \\
-& 辅助函数: \\
-& 1、L：y=f(x) \\
-& 2、L_{AB}：y-f(a)=\frac{f(b)-f(a)}{b-a}(x-a) \\
-& 即 L_{AB}：y=f(a)+\frac{f(b)-f(a)}{b-a}(x-a) \\
-& 证明：\\
-& 令 \varphi (x)=曲线-直线=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a) \\
-& {\color{Green} // 加、减、乘不会改变连续性和可导性} \\
-& \varphi (x) 在 [a, b] 上连续、在 (a, b) 内可导 \\
-& {\color{Green} // a、b是曲线和直线的交点，所以它们的函数值相等} \\
-& \varphi (a)=\varphi (b)=0 \\
-& 满足罗尔定理 \\
-& 所以存在 \xi \in (a, b)，使\varphi '(\xi)=0 \\
-& 而\varphi '(x)=f'(x)-\frac{f(b)-f(a)}{b-a} \\
-& 所以 \varphi '(\xi) =f'(\xi)-\frac{f(b)-f(a)}{b-a} \\
-& f'(\xi)=\frac{f(b)-f(a)}{b-a} \\
-\end{align}
--->
-
-![](../img/mvt5.jpg)
-
-<!--
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -195,6 +161,40 @@ plt.show()
 -->
 
 ![](../img/mvt5_1.png)
+
+<!--
+\begin{align}
+& 设函数 f(x) 满足: \\
+& \; 1. f(x) 在 [a, b] 上连续 \\
+& \; 2. f(x) 在 (a, b) 内可导 \\
+& 则存在 \xi \in (a, b), \\
+& 使得 f'(\xi) = \frac{f(b) - f(a)}{b - a} \\
+\\
+& {\Large 几何意义}\\
+& 存在 \xi \in (a, b), \\
+& 函数f(x)在点(\xi,f(x))处的切线 \\
+& 和(a,f(a))、(b,f(b))两点的连线平行 \\
+\\
+& {\Large 证明} \\
+& 辅助函数: \\
+& 1、L：y=f(x) \\
+& 2、L_{AB}：y-f(a)=\frac{f(b)-f(a)}{b-a}(x-a) \\
+& 即 L_{AB}：y=f(a)+\frac{f(b)-f(a)}{b-a}(x-a) \\
+& 证明：\\
+& 令 \varphi (x)=曲线-直线=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a) \\
+& {\color{Green} // 加、减、乘不会改变连续性和可导性} \\
+& \varphi (x) 在 [a, b] 上连续、在 (a, b) 内可导 \\
+& {\color{Green} // a、b是曲线和直线的交点，所以它们的函数值相等} \\
+& \varphi (a)=\varphi (b)=0 \\
+& 满足罗尔定理 \\
+& 所以存在 \xi \in (a, b)，使\varphi '(\xi)=0 \\
+& 而\varphi '(x)=f'(x)-\frac{f(b)-f(a)}{b-a} \\
+& 所以 \varphi '(\xi) =f'(\xi)-\frac{f(b)-f(a)}{b-a} \\
+& f'(\xi)=\frac{f(b)-f(a)}{b-a} \\
+\end{align}
+-->
+
+![](../img/mvt5.jpg)
 
 <!--
 \begin{align}

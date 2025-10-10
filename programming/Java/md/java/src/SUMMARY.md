@@ -74,6 +74,8 @@
     - [引导层](./module/layer/boot.md)
     - [创建新层](./module/layer/create.md)
     - [实现插件](./module/layer/plugin.md)
+  - [迁移到模块系统](./module/hybrid/hybrid.md)
+    - [使用传统的类路径](./module/hybrid/demo.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
