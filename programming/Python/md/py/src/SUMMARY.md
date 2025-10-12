@@ -200,6 +200,7 @@
 - [windows](./win/win.md)
   - [Windows系统以管理员身份执行命令](./win/win_admin.md)
   - [获取输入法中英文状态](./win/ime.md)
+  - [获取Windows桌面的缩放比例](./win/scale.md)
 
 - [Paramiko](./paramiko/paramiko.md)
   - [安装](./paramiko/install.md)
@@ -253,3 +254,5 @@
     - [阈值处理](./cv2/thresholding/thresholding.md)
       - [固定阈值处理](./cv2/thresholding/threshold.md)
       - [Otsu阈值处理](./cv2/thresholding/otsu.md)
+      - [自适应阈值处理](./cv2/thresholding/adaptive_thresholding.md)
+    - [图像平滑处理](./cv2/smoothing/smoothing.md)

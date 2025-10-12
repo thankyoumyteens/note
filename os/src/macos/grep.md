@@ -38,3 +38,10 @@ grep "pattern" file1.txt file2.txt
   - 示例 `grep -B 3 "success" log.txt`
 - `-C 行数`：显示匹配行及其前后几行的内容, `-C` 可省略
   - 示例`grep -C 2 "warning" log.txt` 或 `grep 2 "warning" log.txt`
+
+## 匹配到指定数量的行后就停止搜索
+
+```sh
+# 只输出前 3 行匹配结果
+grep -m 3 "error" app.log
+```
