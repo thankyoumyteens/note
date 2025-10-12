@@ -76,6 +76,7 @@
     - [实现插件](./module/layer/plugin.md)
   - [迁移到模块系统](./module/hybrid/hybrid.md)
     - [使用传统的类路径](./module/hybrid/demo.md)
+    - [自动模块](./module/hybrid/automatic_module.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
@@ -104,6 +105,7 @@
   - [线程的状态](./java/thread/state.md)
   - [线程池](./java/thread/pool/pool.md)
     - [Executor](./java/thread/pool/executor.md)
+    - [CallerRunsPolicy策略的坑](./java/thread/pool/caller_runs_policy.md)
 
 - [IO](./java/io/io.md)
   - [虚拟内存](./java/io/virtual_memory.md)
