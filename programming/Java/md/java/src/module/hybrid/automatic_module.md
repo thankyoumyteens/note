@@ -63,3 +63,15 @@ Exception in thread "main" java.lang.reflect.InaccessibleObjectException: Unable
 ```
 
 Jackson Databind 使用反射来查看类的字段以便进行序列化。因此，Jackson Databind 需要访问 Person 类；否则，就无法使用反射来查看它的字段。为此，包含该类的包必须通被导出或开放(导出包可以反射公共元素，而开放包则允许进行深度反射)。
+
+### 6. 开放反射权限
+
+```java
+module demo {
+    requires jackson.databind;
+
+    opens com.example;
+}
+```
+
+### 7. 重新编译+运行
