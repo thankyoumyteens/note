@@ -37,3 +37,5 @@ cv2.imshow("Mean Blur (7x7)", blur_7x7)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
+
+![](../../img/mean_filtering.jpg)

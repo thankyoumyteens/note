@@ -37,3 +37,5 @@ cv2.imshow("Median Blur (5x5)", median_5x5)  # 噪声完全去除，轻微模糊
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
+
+![](../../img/median_filtering.jpg)

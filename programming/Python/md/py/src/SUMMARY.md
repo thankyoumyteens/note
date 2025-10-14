@@ -263,3 +263,6 @@
       - [双边滤波](./cv2/smoothing/bilateral_filtering.md)
       - [2D卷积](./cv2/smoothing/2d_convolution.md)
     - [形态学操作](./cv2/mo/morphological_operations.md)
+      - [基本形态学操作](./cv2/mo/erosion.md)
+      - [组合形态学操作](./cv2/mo/opening.md)
+    - [图像梯度](./cv2/gradient/gradient.md)

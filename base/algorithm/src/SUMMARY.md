@@ -37,6 +37,7 @@
     - [自底向上的归并排序](./advance_sort/merge_sort4.md)
     - [数组中逆序对的总数](./advance_sort/nxd.md)
   - [快速排序](./advance_sort/quick_sort.md)
+    - [实现快速排序](./advance_sort/quick_sort_impl.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)

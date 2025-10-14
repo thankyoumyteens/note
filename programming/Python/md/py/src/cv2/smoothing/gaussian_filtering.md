@@ -41,3 +41,5 @@ cv2.imshow("Gaussian Blur (5x5, sigma=10)", gauss_5x5_s10)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
+
+![](../../img/gaussian_filtering2.jpg)
