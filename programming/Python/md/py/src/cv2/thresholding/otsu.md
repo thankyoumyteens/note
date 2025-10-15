@@ -16,6 +16,7 @@ ret_otsu, otsu_thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRE
 # 输出算法找到的最优阈值
 print(f"Otsu自动计算的最优阈值：{ret_otsu}")
 
+cv2.imshow('Original', img)
 cv2.imshow(f"Otsu Threshold ({ret_otsu})", otsu_thresh)
 
 cv2.waitKey(0)

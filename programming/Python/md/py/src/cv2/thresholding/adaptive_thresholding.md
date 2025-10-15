@@ -52,9 +52,12 @@ gaussian_thresh = cv2.adaptiveThreshold(
     C=2
 )
 
+cv2.imshow('Original', img)
 cv2.imshow("Adaptive Mean (block=11)", mean_thresh)
 cv2.imshow("Adaptive Gaussian (block=11)", gaussian_thresh)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
+
+![](../../img/adaptive_thresholding.jpg)

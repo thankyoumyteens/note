@@ -29,7 +29,7 @@ import numpy as np
 img = cv2.imread("test_gray.jpg")
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-# 2. 设定阈值参数（阈值thresh=127，最大值maxval=255）
+# 设定阈值参数（阈值thresh=127，最大值maxval=255）
 thresh = 127
 maxval = 255
 
@@ -45,12 +45,15 @@ ret4, dst4 = cv2.threshold(gray, thresh, maxval, cv2.THRESH_TOZERO)
 ret5, dst5 = cv2.threshold(gray, thresh, maxval, cv2.THRESH_TOZERO_INV)
 
 # 显示所有结果
-cv2.imshow('THRESH_BINARY', img)
-cv2.imshow('THRESH_BINARY_INV', img)
-cv2.imshow('THRESH_TRUNC', img)
-cv2.imshow('THRESH_TOZERO', img)
-cv2.imshow('THRESH_TOZERO_INV', img)
+cv2.imshow('Original', img)
+cv2.imshow('THRESH_BINARY', dst1)
+cv2.imshow('THRESH_BINARY_INV', dst2)
+cv2.imshow('THRESH_TRUNC', dst3)
+cv2.imshow('THRESH_TOZERO', dst4)
+cv2.imshow('THRESH_TOZERO_INV', dst5)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
+
+![](../../img/threshold.jpg)
