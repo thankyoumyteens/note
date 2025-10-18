@@ -11,4 +11,11 @@ void WorkerThreads::run_task(WorkerTask *task, uint num_workers) {
     // 执行任务
     run_task(task);
 }
+
+void WorkerThreads::run_task(WorkerTask *task) {
+    set_indirectly_suspendible_threads();
+    // 分发任务
+    _dispatcher.coordinator_distribute_task(task, _active_workers);
+    clear_indirectly_suspendible_threads();
+}
 ```
