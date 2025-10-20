@@ -74,6 +74,7 @@
   - [redis](./db/redis/redis.md)
     - [安装](./db/redis/install.md)
     - [连接redis](./db/redis/connect.md)
+    - [通用操作](./db/redis/basic.md)
     - [字符串操作](./db/redis/str.md)
     - [自增操作](./db/redis/incr.md)
     - [列表操作](./db/redis/list.md)

@@ -80,6 +80,13 @@
   - [迁移到模块系统](./module/hybrid/hybrid.md)
     - [使用传统的类路径](./module/hybrid/demo.md)
     - [自动模块](./module/hybrid/automatic_module.md)
+  - [搭配maven使用](./module/maven/maven.md)
+    - [创建项目](./module/maven/tree.md)
+    - [父pom](./module/maven/pom.md)
+    - [calculator模块](./module/maven/calculator.md)
+    - [calculator-impl模块](./module/maven/calculator_impl.md)
+    - [ui模块](./module/maven/ui.md)
+    - [打包和运行](./module/maven/pack.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
