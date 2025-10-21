@@ -87,6 +87,7 @@
     - [calculator-impl模块](./module/maven/calculator_impl.md)
     - [ui模块](./module/maven/ui.md)
     - [打包和运行](./module/maven/pack.md)
+    - [使用jlink构建镜像](./module/maven/jlink.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)
