@@ -16,13 +16,6 @@ cp ui/target/ui-1.0-SNAPSHOT.jar modules/
 
 ### 2. 执行 jlink 命令生成运行时镜像
 
-`jlink` 的核心参数：
-
-- `--module-path`：指定模块路径, 需要包含项目模块 JAR 和 JDK 自带的模块(`$JAVA_HOME/jmods` 是 JDK 的模块目录)
-- `--add-modules`：指定要包含的模块, 一般是主模块，`jlink` 会自动添加主模块依赖的模块。注意: 如果使用了服务, 服务提供模块也需要手动指定
-- `--output`：指定输出目录（自定义运行时的安装路径）
-- `--launcher`：可选，创建一个启动脚本, 格式: `启动脚本名=模块/主类`
-
 ```bash
 # 执行时需要删掉后面的注释
 jlink \
@@ -34,16 +27,6 @@ jlink \
   --strip-debug \                            # 移除调试信息（减小体积）
   --no-man-pages \                           # 不包含手册页
   --no-header-files                          # 不包含头文件
-```
-
-生成的 `calculator-runtime` 目录包含精简的 JRE 结构：
-
-```sh
-calculator-runtime/
-├── bin/           # 包含启动脚本（如 calculator、java）
-├── conf/          # 配置文件
-├── lib/           # 运行时库（仅包含必要模块）
-└── legal/         # 许可信息
 ```
 
 ### 3. 运行程序
