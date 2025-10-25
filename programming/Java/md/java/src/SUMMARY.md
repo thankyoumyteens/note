@@ -89,6 +89,8 @@
     - [打包和运行](./module/maven/pack.md)
     - [使用jlink构建镜像](./module/maven/jlink.md)
   - [jlink](./module/jlink/jlink.md)
+    - [插件](./module/jlink/plugin.md)
+    - [交叉编译](./module/jlink/cc.md)
 
 - [线程](./java/thread/thread.md)
   - [start方法](./java/thread/start.md)

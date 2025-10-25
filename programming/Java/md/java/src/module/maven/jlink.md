@@ -32,7 +32,10 @@ jlink \
 ### 3. 运行程序
 
 ```sh
+# 可以通过启动脚本运行程序
 ./calculator-runtime/bin/calculator
+# 也可以通过生成的java命令运行程序
+./calculator-runtime/bin/java -m calculator.ui/com.example.App
 ```
 
 ## 通过 maven 自动执行 jlink
