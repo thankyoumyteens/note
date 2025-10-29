@@ -1,36 +1,22 @@
 # lambda 表达式
 
-lambda 表达式可以替换只有单个抽象方法的接口。
+Lambda 表达式 是一种简洁的匿名函数，用于简化函数式接口的实现。它极大地简化了匿名内部类的写法，尤其适合与 Stream、Optional 等 API 配合，大幅提升集合处理、异步编程等场景的开发效率。
 
-原始的匿名内部类:
+## 示例: Comparator 接口
+
+传统写法：
 
 ```java
-new Thread(new Runnable() {
+Collections.sort(list, new Comparator<String>() {
     @Override
-    public void run() {
-        System.out.println("new thread");
+    public int compare(String s1, String s2) {
+        return s1.compareTo(s2);
     }
-}).start();
+});
 ```
 
-使用 lambda 表达式替代:
+Lambda 简化后：
 
 ```java
-new Thread(() -> System.out.println("new thread")).start();
-```
-
-## 方法引用
-
-方法引用是 lambda 表达式的一种快捷写法。如果 lambda 表达式中的内容就是简单的调用一个已存在的方法, 那么可以使用方法引用替代。
-
-使用 lambda 表达式:
-
-```java
-List<String> collect = strList.stream().map((str) -> str.toUpperCase()).collect(Collectors.toList());
-```
-
-替换成方法引用:
-
-```java
-List<String> collect = strList.stream().map(String::toUpperCase).collect(Collectors.toList());
+Collections.sort(list, (s1, s2) -> s1.compareTo(s2));
 ```
