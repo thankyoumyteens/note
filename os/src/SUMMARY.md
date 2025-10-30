@@ -17,6 +17,7 @@
       - [使用自定义分隔符](./macos/awk1.md)
       - [awk的执行过程](./macos/awk2.md)
       - [模式和动作](./macos/awk3.md)
+      - [使用正则表达式](./macos/regex.md)
     - [端口占用](./macos/port.md)
     - [压缩解压](./macos/compress.md)
       - [tar](./macos/tar.md)
