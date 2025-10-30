@@ -107,6 +107,13 @@ mdbook build
 rm -rf ${nginx_path}/java/
 cp -r book/ ${nginx_path}/java/
 
+# java新特性
+cd "${workdir}/note"
+cd programming/Java/md/feature/
+mdbook build
+rm -rf ${nginx_path}/feature/
+cp -r book/ ${nginx_path}/feature/
+
 # 面试
 cd "${workdir}/note"
 cd programming/Java/md/java_web/
