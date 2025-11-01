@@ -25,7 +25,8 @@ git config --global core.ignorecase false
 下载:
 
 - [Liberica](https://bell-sw.com/pages/downloads/)
-- [Adoptium](https://mirrors.tuna.tsinghua.edu.cn/Adoptium)
+- [Adoptium](https://adoptium.net/temurin/releases)
+- [Adoptium(清华源)](https://mirrors.tuna.tsinghua.edu.cn/Adoptium)
 - [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
 - [Microsoft](https://learn.microsoft.com/zh-cn/java/openjdk/download)
 
@@ -36,7 +37,7 @@ git config --global core.ignorecase false
 vim ~/.zshrc
 
 # 在最后一行添加
-export JAVA_HOME=/Users/walter/walter/jdk/jdk-21.0.2.jdk
+export JAVA_HOME=/Users/walter/walter/jdk/jdk-25.0.1+8/Contents/Home
 export PATH=$JAVA_HOME/bin:$PATH
 
 # 使环境变量生效
@@ -61,6 +62,9 @@ brew install python-tk
 pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 pip3 config set global.trusted-host pypi.tuna.tsinghua.edu.cn
 pip3 config set global.timeout 120
+
+# 移除国内镜像源
+pip3 config unset global.index-url
 ```
 
 ## 安装 jd-gui

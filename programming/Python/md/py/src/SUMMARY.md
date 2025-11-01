@@ -193,6 +193,7 @@
   - [打包exe](./pyside/打包exe.md)
 
 - [Flask](./flask/flask.md)
+  - [安装](./flask/install.md)
   - [基本使用](./flask/quick_start.md)
 
 - [加密解密](./enc/enc.md)

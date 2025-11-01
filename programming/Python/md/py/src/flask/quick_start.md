@@ -1,32 +1,19 @@
 # 基本使用
 
-### 1. 安装
-
-```sh
-pip install Flask
-pip install flask-cors
-```
-
-### 2. 使用
-
 ```py
-from flask import Flask, jsonify
-from flask_cors import CORS
+from flask import Flask
 
+# 初始化 Flask 应用，__name__ 表示当前模块名
 app = Flask(__name__)
-# 跨域
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-@app.route('/userInfo', methods=['GET'])
-def userInfo():
-    return jsonify({
-        'code': 0,
-        'message': '操作成功',
-        'data': 'Hello, World!'
-    })
+# 定义路由：访问根路径 '/' 时触发该函数
+@app.route('/')
+def hello_world():
+    return 'Hello, Flask!'
 
 
+# 启动服务器（仅在直接运行该脚本时执行）
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True)  # debug=True 开启调试模式，代码修改后自动重启
 ```

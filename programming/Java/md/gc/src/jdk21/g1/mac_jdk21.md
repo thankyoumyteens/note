@@ -11,8 +11,6 @@ git checkout -b jdk-21-ga jdk-21-ga
 
 ## 安装 Xcode
 
-**注意: 千万不要从 App Store 安装 Xcode**
-
 1. [https://developer.apple.com/download/all/](https://developer.apple.com/download/all/)
 2. 登录苹果账号
 3. 下载 [Xcode 16.2.xip](https://download.developer.apple.com/Developer_Tools/Xcode_16.2/Xcode_16.2.xip)
@@ -55,7 +53,7 @@ brew install freetype
 进入 openjdk 源码根目录
 
 ```sh
-bash ./configure --with-xcode-path="/Users/walter/walter/software/Xcode.app" --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.13.2/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.13.2/include --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
+bash ./configure --with-xcode-path="/Users/walter/walter/software/Xcode.app" --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.14.1_1/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.14.1_1/include --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
 make
 make compile-commands
 ```
@@ -168,7 +166,7 @@ br set -n main -o true -G true -C "pro hand -p true -s false SIGILL"
 
 ```sh
 make clean
-bash ./configure --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.13.2/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.13.2/include --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
+bash ./configure --with-boot-jdk="/Users/walter/walter/jdk/jdk-21.0.2.jdk" --with-target-bits=64 --with-freetype-lib=/opt/homebrew/Cellar/freetype/2.14.1_1/lib --with-freetype-include=/opt/homebrew/Cellar/freetype/2.14.1_1/include --with-jvm-variants=server --disable-warnings-as-errors --with-debug-level=slowdebug
 make
 make compile-commands
 ```
