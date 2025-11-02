@@ -21,6 +21,12 @@
     - [Optional增强](./feature/jdk9/optional.md)
     - [进程API](./feature/jdk9/process.md)
     - [响应式流](./feature/jdk9/flow.md)
+    - [变量句柄](./feature/jdk9/variable_handles.md)
+    - [方法句柄](./feature/jdk9/method_handles.md)
+  - [Java10](./feature/jdk10/jdk10.md)
+    - [局部变量类型推断](./feature/jdk10/var.md)
+    - [垃圾回收器接口](./feature/jdk10/gci.md)
+    - [G1并行FullGC](./feature/jdk10/g1.md)
   - [Java17](./feature/jdk17/jdk17.md)
     - [Switch表达式](./feature/jdk17/switch_expressions.md)
 
