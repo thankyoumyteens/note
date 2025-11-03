@@ -5,8 +5,11 @@
   - [pip管理包](./base/pip_pkg.md)
 
 - [anaconda](./anaconda/anaconda.md)
-  - [安装anaconda](./anaconda/quick_start.md)
+  - [安装miniconda](./anaconda/miniconda.md)
+  - [配置国内源](./anaconda/quick_start.md)
+  - [关闭启动终端自动进入base环境](./anaconda/post.md)
   - [虚拟环境](./anaconda/venv.md)
+  - [更新conda](./anaconda/update.md)
 
 - [基础](./base/base.md)
   - [虚拟环境](./base/venv.md)
@@ -195,6 +198,14 @@
 - [Flask](./flask/flask.md)
   - [安装](./flask/install.md)
   - [基本使用](./flask/quick_start.md)
+  - [路由](./flask/route/route.md)
+    - [路由的基本定义](./flask/route/basic.md)
+    - [URL嵌入参数](./flask/route/url_param.md)
+  - [HTTP请求](./flask/http/http.md)
+    - [HTTP方法限制](./flask/http/methods.md)
+    - [GET请求](./flask/http/get.md)
+    - [POST请求](./flask/http/post.md)
+    - [获取请求头](./flask/http/headers.md)
 
 - [加密解密](./enc/enc.md)
   - [SHA256](./enc/sha256.md)

@@ -37,6 +37,10 @@
   - [多数据源](./mybatis_plus/dynamic_datasource.md)
 
 - [RedisTemplate](./redis_template/redis_template.md)
+  - [配置redis连接](./redis_template/conn/conn.md)
+    - [单机模式](./redis_template/conn/standalone.md)
+    - [哨兵模式](./redis_template/conn/sentinel.md)
+    - [集群模式](./redis_template/conn/cluster.md)
   - [多数据源](./redis_template/dynamic_datasource.md)
 
 - [Spring Data JPA](./jpa/jpa.md)

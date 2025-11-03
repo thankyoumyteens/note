@@ -1,10 +1,4 @@
-# 安装 anaconda
-
-## 下载
-
-[anaconda](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/)
-
-## 配置国内源
+# 配置国内源
 
 ```sh
 vim ~/.condarc
@@ -35,22 +29,4 @@ custom_channels:
 
 ```sh
 conda clean -i
-```
-
-## 关闭启动终端自动进入 base
-
-```sh
-conda config --set auto_activate_base false
-```
-
-## 进入 base 环境
-
-```sh
-conda activate base
-```
-
-## 退出 base 环境
-
-```sh
-deactivate
 ```

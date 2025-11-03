@@ -27,6 +27,8 @@
     - [局部变量类型推断](./feature/jdk10/var.md)
     - [垃圾回收器接口](./feature/jdk10/gci.md)
     - [G1并行FullGC](./feature/jdk10/g1.md)
+    - [集合增强](./feature/jdk10/collection.md)
+    - [Optional增强](./feature/jdk10/optional.md)
   - [Java17](./feature/jdk17/jdk17.md)
     - [Switch表达式](./feature/jdk17/switch_expressions.md)
 

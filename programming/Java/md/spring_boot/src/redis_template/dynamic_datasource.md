@@ -59,20 +59,16 @@ public class RedisConfiguration {
      * @param port Redis 端口号
      * @return Redis 连接工厂
      */
-    public LettuceConnectionFactory redisConnectionFactory(String host, int port) {
+    public JedisConnectionFactory redisConnectionFactory(String host, int port) {
         // 配置 Redis 单机服务器信息
-        RedisStandaloneConfiguration standaloneConfig = new RedisStandaloneConfiguration();
-        standaloneConfig.setHostName(host); // Redis 主机地址
-        standaloneConfig.setPort(port); // 端口
-
-        // 配置 Lettuce 客户端参数（非池化）
-        LettuceClientConfiguration clientConfig = LettuceClientConfiguration.builder()
-                .commandTimeout(Duration.ofSeconds(5))  // 命令执行超时时间
-                .shutdownTimeout(Duration.ofSeconds(2)) // 客户端关闭超时时间
-                .build();
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+        config.setHostName("localhost");
+        config.setPort(6380);
+        config.setPassword(RedisPassword.of("123456"));
+        config.setDatabase(0);
 
         // 创建连接工厂
-        LettuceConnectionFactory factory = new LettuceConnectionFactory(standaloneConfig, clientConfig);
+        JedisConnectionFactory factory = new JedisConnectionFactory(config);
         // 关键：手动触发初始化(Spring 自动配置会自动调用，这里是手动创建, 所以需显式调用)
         factory.afterPropertiesSet();
         return factory;
