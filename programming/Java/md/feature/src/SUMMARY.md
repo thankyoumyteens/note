@@ -29,6 +29,10 @@
     - [G1并行FullGC](./feature/jdk10/g1.md)
     - [集合增强](./feature/jdk10/collection.md)
     - [Optional增强](./feature/jdk10/optional.md)
+    - [应用程序类数据共享](./feature/jdk10/cds.md)
+    - [基于Java的JIT编译器](./feature/jdk10/jit.md)
+  - [Java11](./feature/jdk11/jdk11.md)
+    - [HTTP Client](./feature/jdk11/httpc.md)
   - [Java17](./feature/jdk17/jdk17.md)
     - [Switch表达式](./feature/jdk17/switch_expressions.md)
 
