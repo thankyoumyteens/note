@@ -33,6 +33,8 @@
     - [基于Java的JIT编译器](./feature/jdk10/jit.md)
   - [Java11](./feature/jdk11/jdk11.md)
     - [HTTP Client](./feature/jdk11/httpc.md)
+    - [String增强](./feature/jdk11/str.md)
+    - [Optional增强](./feature/jdk11/optional.md)
   - [Java17](./feature/jdk17/jdk17.md)
     - [Switch表达式](./feature/jdk17/switch_expressions.md)
 
