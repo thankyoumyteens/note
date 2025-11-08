@@ -286,3 +286,4 @@
     - [图像金字塔](./cv2/pyramid/pyramid.md)
     - [图像轮廓](./cv2/contours/contours.md)
     - [模板匹配](./cv2/template_matching/template_matching.md)
+      - [多目标匹配](./cv2/template_matching/multi.md)
