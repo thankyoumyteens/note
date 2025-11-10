@@ -35,6 +35,11 @@
     - [HTTP Client](./feature/jdk11/httpc.md)
     - [String增强](./feature/jdk11/str.md)
     - [Optional增强](./feature/jdk11/optional.md)
+    - [ZGC](./feature/jdk11/z.md)
+    - [直接启动单文件Java源代码程序](./feature/jdk11/sfscp.md)
+  - [Java12](./feature/jdk12/jdk12.md)
+    - [String增强](./feature/jdk12/str.md)
+    - [Files类增强](./feature/jdk12/files.md)
   - [Java17](./feature/jdk17/jdk17.md)
     - [Switch表达式](./feature/jdk17/switch_expressions.md)
 
