@@ -40,6 +40,9 @@
   - [Java12](./feature/jdk12/jdk12.md)
     - [String增强](./feature/jdk12/str.md)
     - [Files类增强](./feature/jdk12/files.md)
+    - [数字格式化工具类](./feature/jdk12/nf.md)
+    - [ShenandoahGC](./feature/jdk12/shenandoah_gc.md)
+    - [G1收集器优化](./feature/jdk12/g1.md)
   - [Java17](./feature/jdk17/jdk17.md)
     - [Switch表达式](./feature/jdk17/switch_expressions.md)
 

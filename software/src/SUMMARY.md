@@ -30,6 +30,9 @@
     - [修改远程仓库地址](./use_git/remote/change_url.md)
     - [删除远程仓库](./use_git/remote/del.md)
 
+- [nginx](./nginx/nginx.md)
+  - [避免访问静态文件时直接下载](./nginx/apple_app_site_association.md)
+
 - [postman](./postman/postman.md)
   - [禁止更新](./postman/禁止更新.md)
 
