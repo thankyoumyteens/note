@@ -169,6 +169,7 @@
   - [页面操作](./selenium/page/page.md)
     - [定位HTML标签](./selenium/page/find_element.md)
     - [定位子标签](./selenium/page/sub_tag.md)
+    - [定位直接子标签](./selenium/page/sub_direct_tag.md)
     - [等待标签出现](./selenium/page/wait.md)
     - [标签操作](./selenium/page/tag_op.md)
     - [控制滚动条](./selenium/page/scroll.md)

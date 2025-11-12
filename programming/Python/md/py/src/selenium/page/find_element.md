@@ -13,7 +13,11 @@ e = driver.find_element(By.TAG, 'div')
 e = driver.find_element(By.XPATH, 'xPath')
 # css定位
 e = driver.find_element(By.CSS_SELECTOR, '#btnId')
+```
 
+## 定位多个标签
+
+```py
 # 根据class定位多个标签
 e_list = driver.find_elements(By.CLASS_NAME, 'btnClass')
 ```
