@@ -19,6 +19,9 @@ public class QuickSort {
         int pivot = left;
         int i = pivot + 1;
         int j = pivot;
+        // 循环不变量:
+        // arr[pivot+1...j] < 基准值
+        // arr[j+1...i-1] > 基准值
         while (i <= right) {
             if (data[i] > data[pivot]) {
                 // 如果arr[i] > arr[pivot], 直接i++就可以了

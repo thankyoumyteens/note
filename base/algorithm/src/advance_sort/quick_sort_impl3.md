@@ -20,6 +20,9 @@ private static void partition2(int[] data, int left, int right) {
     pivot = left;
     int i = pivot + 1;
     int j = right;
+    // 循环不变量:
+    // arr[pivot+1...i-1] <= 基准值
+    // arr[j+1...right] >= 基准值
     while (true) {
         // 如果arr[i] < arr[pivot], 直接i++就可以了
         while (i <= j && data[i] < data[pivot]) {
