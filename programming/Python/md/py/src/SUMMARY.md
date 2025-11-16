@@ -103,7 +103,10 @@
   - [查找子节点](./xml/find.md)
 
 - [pdf](./pdf/pdf.md)
+  - [安装](./pdf/install.md)
   - [word转pdf](./pdf/word2pdf.md)
+  - [旋转页面](./pdf/rotate.md)
+  - [拆分指定页](./pdf/split.md)
   - [删除指定页](./pdf/delete_page.md)
 
 - [markdown](./markdown/markdown.md)

@@ -1,8 +1,6 @@
 # 删除指定页
 
 ```py
-# pip install pypdf
-
 from pypdf import PdfReader, PdfWriter
 
 # 读取原始的pdf文件
