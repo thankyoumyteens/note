@@ -41,6 +41,7 @@
     - [随机选择基准值](./advance_sort/quick_sort_impl2.md)
     - [双路快速排序](./advance_sort/quick_sort_impl3.md)
     - [三路快速排序](./advance_sort/quick_sort_impl4.md)
+    - [颜色分类](./advance_sort/sort_colors.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
