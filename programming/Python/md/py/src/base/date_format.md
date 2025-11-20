@@ -4,8 +4,10 @@
 from datetime import datetime
 
 dt = datetime.now()
+
 # 2015-03-08 23:30:42
 print(dt.strftime('%Y-%m-%d %H:%M:%S'))
+
 # 15-03-08 11:30:42 PM
 print(dt.strftime('%y-%m-%d %I:%M:%S %p'))
 

@@ -8,7 +8,7 @@
   - [安装miniconda](./anaconda/miniconda.md)
   - [配置国内源](./anaconda/quick_start.md)
   - [关闭启动终端自动进入base环境](./anaconda/post.md)
-  - [虚拟环境](./anaconda/venv.md)
+  - [虚拟环境操作](./anaconda/venv.md)
   - [更新conda](./anaconda/update.md)
 
 - [基础](./base/base.md)
