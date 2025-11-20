@@ -291,3 +291,8 @@
     - [图像轮廓](./cv2/contours/contours.md)
     - [模板匹配](./cv2/template_matching/template_matching.md)
       - [多目标匹配](./cv2/template_matching/multi.md)
+    - [视频处理](./cv2/video/video.md)
+      - [摄像头视频捕获](./cv2/video/video_capture.md)
+      - [保存摄像头视频到本地](./cv2/video/save_video_capture.md)
+      - [视频文件播放](./cv2/video/video_file.md)
+      - [insightface人脸识别](./cv2/video/insightface.md)

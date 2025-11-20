@@ -43,6 +43,9 @@
     - [数字格式化工具类](./feature/jdk12/nf.md)
     - [ShenandoahGC](./feature/jdk12/shenandoah_gc.md)
     - [G1收集器优化](./feature/jdk12/g1.md)
+  - [Java13](./feature/jdk13/jdk13.md)
+    - [增强ZGC](./feature/jdk13/zgc.md)
+    - [SocketAPI重构](./feature/jdk13/socket_api.md)
   - [Java17](./feature/jdk17/jdk17.md)
     - [Switch表达式](./feature/jdk17/switch_expressions.md)
 
