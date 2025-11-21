@@ -23,6 +23,8 @@
     - [极限存在准则](./further_mathematics/limit_existence_criterion.md)
     - [两个重要极限](./further_mathematics/two_limit.md)
     - [连续与间断](./further_mathematics/continuous_and_discontinuous.md)
+    - [闭区间上连续函数的性质](./further_mathematics/continuous_and_discontinuous2.md)
+      - [介值定理](./further_mathematics/continuous_and_discontinuous3.md)
     - [题型](./further_mathematics/limit/question_format/question_format.md)
       - [抓大放小](./further_mathematics/limit/question_format/f0.md)
       - [n项和的极限](./further_mathematics/limit/question_format/f1.md)

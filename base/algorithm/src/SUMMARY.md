@@ -44,5 +44,7 @@
     - [颜色分类](./advance_sort/sort_colors.md)
     - [Select K问题](./advance_sort/select_k.md)
 
+- [二分查找法](./binary_search/binary_search.md)
+
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
