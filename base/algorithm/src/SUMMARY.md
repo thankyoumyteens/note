@@ -45,6 +45,7 @@
     - [Select K问题](./advance_sort/select_k.md)
 
 - [二分查找法](./binary_search/binary_search.md)
+  - [递归实现二分查找法](./binary_search/binary_search_recursively.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)
