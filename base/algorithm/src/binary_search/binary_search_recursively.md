@@ -1,9 +1,6 @@
 # 递归实现二分查找法
 
 ```java
-import java.util.Arrays;
-import java.util.Random;
-
 public class BinarySearch {
 
     private static int doSearch(int[] data, int left, int right, int target) {

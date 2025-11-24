@@ -46,6 +46,7 @@
 
 - [二分查找法](./binary_search/binary_search.md)
   - [递归实现二分查找法](./binary_search/binary_search_recursively.md)
+  - [非递归实现二分查找法](./binary_search/binary_search_loop.md)
 
 - [LeetCode](./leet_code/leet_code.md)
   - [Two Sum](./leet_code/two_sum.md)

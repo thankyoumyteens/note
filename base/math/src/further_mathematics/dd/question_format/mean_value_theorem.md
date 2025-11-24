@@ -56,6 +56,10 @@
 & 使 f'(\xi_1) = f'(\xi_2) = 0 \\
 & 再次使用罗尔定理，存在 \xi \in (\xi_1, \xi_2) \subset (0, 5) \\
 & 使f''(\xi)=0 \\
+\\
+& {\color{BLue} 例题：f(x)二阶可导，\lim_{x\to0}\frac{f(x)-1}{x}=1，f(1)=2，} \\
+& {\color{BLue} 证明：存在\xi\in(0, 1)，使f''(\xi)=0} \\
+&
 \end{align}
 -->
 
