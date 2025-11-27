@@ -186,6 +186,7 @@
     - [InitLauncher函数](./jdk21/g1/launcher/jli_launch/init_launcher.md)
     - [补充知识](./jdk21/g1/launcher/jli_launch/extra/extra.md)
       - [启动画面](./jdk21/g1/launcher/jli_launch/extra/splash_screen.md)
+      - [java.awt](./jdk21/g1/launcher/jli_launch/extra/awt.md)
   - [JavaMain](./jdk21/g1/launcher/java_main.md)
   - [InitializeJVM](./jdk21/g1/launcher/initialize_jvm.md)
   - [create_vm](./jdk21/g1/launcher/create_vm.md)
