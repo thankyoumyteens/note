@@ -184,6 +184,8 @@
       - [--source参数](./jdk21/g1/launcher/main_function/extra/source_param.md)
   - [JLI_Launch函数](./jdk21/g1/launcher/jli_launch/jli_launch.md)
     - [InitLauncher函数](./jdk21/g1/launcher/jli_launch/init_launcher.md)
+    - [SelectVersion函数](./jdk21/g1/launcher/jli_launch/select_version.md)
+      - [解析MANIFEST.MF文件](./jdk21/g1/launcher/jli_launch/jli_parse_manifest.md)
     - [补充知识](./jdk21/g1/launcher/jli_launch/extra/extra.md)
       - [启动画面](./jdk21/g1/launcher/jli_launch/extra/splash_screen.md)
       - [java.awt](./jdk21/g1/launcher/jli_launch/extra/awt.md)

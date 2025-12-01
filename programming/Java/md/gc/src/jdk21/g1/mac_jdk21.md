@@ -139,7 +139,7 @@ public class Test {
 ```
 
 10. Clion -> 右上角 Edit Configurations...
-    1. Program Arguments: 输入 `-Xmx128M -XX:+UseG1GC -Xlog:gc*=debug Test`
+    1. Program Arguments: 输入 `-Xmx8M -XX:+UseG1GC -Xlog:gc*=debug Test`
     2. Working directory: 输入 class 文件所在的目录
 11. 启动 debug
 

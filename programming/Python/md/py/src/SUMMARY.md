@@ -211,6 +211,13 @@
     - [POST请求](./flask/http/post.md)
     - [获取请求头](./flask/http/headers.md)
 
+- [音视频处理](./media/media.md)
+  - [MP3音频处理](./media/audio/audio.md)
+    - [安装](./media/audio/install.md)
+    - [设置ID3标签](./media/audio/id3.md)
+    - [设置封面图](./media/audio/cover.md)
+    - [提取封面图](./media/audio/extract_cover.md)
+
 - [加密解密](./enc/enc.md)
   - [SHA256](./enc/sha256.md)
 
