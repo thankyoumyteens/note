@@ -1,8 +1,8 @@
 # zip 文件的中央目录
 
-所有文件组成的 entry 存储完毕后会生成 central directory file header ，每个 entry 都会对应一个 central directory file header。
+所有文件组成的 entry 存储完毕后会生成 中央目录文件头(Central Directory File Header), 每个 entry 都会对应一个 Central Directory File Header。
 
-所有的 central directory file header 结束后会添加一个 End Of Central Directory Record(EOCD), 每个 ZIP 文件只有一个 EOCD。
+所有的 Central Directory File Header 结束后会添加一个 中央目录结束记录(End Of Central Directory Record, EOCD), 每个 ZIP 文件只有一个 EOCD。
 
 ```
 [Entry1]
@@ -16,9 +16,9 @@
 [End Of Central Directory Record]
 ```
 
-## central directory file header
+## Central Directory File Header
 
-每个 entry 都有一个 central directory file header，central directory file header 中的大部分信息都和 local file header（或者 data descriptor）中的信息是重复的，然后就是 entry 的定位信息，主要就是为了根据中央目录快速定位 entry，而不用读取完整的整个文件去查找某个文件，相当于索引。
+每个 entry 都有一个 Central Directory File Header，Central Directory File Header 中的大部分信息都和 local file header（或者 data descriptor）中的信息是重复的，然后就是 entry 的定位信息，主要就是为了根据中央目录快速定位 entry，而不用读取完整的整个文件去查找某个文件，相当于索引。
 
 | 偏移量(offset) | 长度(字节) | 描述                                                                                                                                                     |
 | -------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |

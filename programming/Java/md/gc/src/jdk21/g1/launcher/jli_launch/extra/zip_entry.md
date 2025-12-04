@@ -4,24 +4,24 @@
 
 每个 entry 由以下 3 部分组成：
 
-1. local file header（每个文件对应一个）
-2. data（文件实际数据，可能压缩，也可能未压缩）
-3. data descriptor（可选）
+1. 普通本地文件头(Local File Header): 每个文件对应一个
+2. 实际的数据(Data): 文件实际数据，可能压缩，也可能未压缩
+3. 数据描述符(Data Descriptor): 可选
 
 ```
 [Local File Header 1][Data 1]
-[Local File Header 2][Data 2][Data Descriptor2]
+[Local File Header 2][Data 2][Data Descriptor 2]
 [Local File Header 3][Data 3]
 ...
 ```
 
-## local file header
+## Local File Header
 
 | 偏移量(offset) | 长度(字节) | 描述                                                                                                                       |
 | -------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
-| 0              | 4          | local file header 签名，固定值：0x04034b50                                                                                 |
+| 0              | 4          | Local File Header 签名，固定值：0x04034b50                                                                                 |
 | 4              | 2          | 提取本文件需要的最低版本号                                                                                                 |
-| 6              | 2          | 标志位，如果第三个 bit 被设置了（0x08），表示写入的时候不知道数据大小和 CRC-32，则该 entry 包含 data descriptor 部分       |
+| 6              | 2          | 标志位，如果第三个 bit 被设置了（0x08），表示写入的时候不知道数据大小和 CRC-32，则该 entry 包含 Data Descriptor 部分       |
 | 8              | 2          | 压缩方法，0 表示本 entry 没有压缩，只是归档到 ZIP 中了，0x08 表示使用了 DEFLATE 算法压缩                                   |
 | 10             | 2          | 文件最后修改时间                                                                                                           |
 | 12             | 2          | 文件最后修改日期                                                                                                           |
@@ -33,9 +33,9 @@
 | 30             | n          | 文件名                                                                                                                     |
 | 30 + n         | m          | 扩展字段                                                                                                                   |
 
-## data descriptor
+## Data Descriptor
 
-如果 entry 的 local file header 的标志位第三个 bit 被设置了（0x08），表示写入的时候不知道数据大小和 CRC-32，则该 entry 需要包含 data descriptor。
+如果 entry 的 Local File Header 的标志位第三个 bit 被设置了（0x08），表示写入的时候不知道数据大小和 CRC-32，则该 entry 需要包含 Data Descriptor。
 
 | 偏移量(offset) | 长度(字节) | 描述                        |
 | -------------- | ---------- | --------------------------- |
