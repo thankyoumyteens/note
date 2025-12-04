@@ -1,8 +1,8 @@
-# zip 文件中的 entry
+# ZIP 文件中的 Entry
 
-多个文件在 ZIP 包中是分别存储的，每个文件都会生成一个 entry。比如 `a.zip` 里有 `foo.txt`、`bar/`、`bar/baz.png`，这三个都是 entry。
+多个文件在 ZIP 包中是分别存储的，每个文件都会生成一个 Entry。比如 `a.zip` 里有 `foo.txt`、`bar/`、`bar/baz.png`，这三个都是 Entry。
 
-每个 entry 由以下 3 部分组成：
+每个 Entry 由以下 3 部分组成：
 
 1. 普通本地文件头(Local File Header): 每个文件对应一个
 2. 实际的数据(Data): 文件实际数据，可能压缩，也可能未压缩
