@@ -118,21 +118,22 @@ brew install plantuml
 - [AnotherRedisDesktopManager](https://gitee.com/qishibo/AnotherRedisDesktopManager/releases)
 - [calibre](https://github.com/kovidgoyal/calibre/releases)
 - [dbeaver](https://github.com/dbeaver/dbeaver/releases)
-- [downkyicore](https://github.com/yaobiao131/downkyicore/releases)
+- [downkyicore](https://github.com/yaobiao131/downkyicore/releases) 下载 B 站视频
 - [drawio](https://github.com/jgraph/drawio-desktop/releases)
 - [flutter](https://mirrors.tuna.tsinghua.edu.cn/flutter/flutter_infra/releases/stable/macos/)
 - [GIMP](https://www.gimp.org/downloads/) 修图
 - [gradle](https://mirrors.cloud.tencent.com/gradle/)
 - [HandBrake](https://github.com/HandBrake/HandBrake/releases) 视频格式转换
-- [LiveRecorder](https://github.com/auqhjjqdo/LiveRecorder) 无人值守直播录制脚本
-- [localsend](https://github.com/localsend/localsend)
-- [录播姬](https://rec.danmuji.org/install/desktop/) 录 B 站直播
+- [iina](https://github.com/iina/iina/releases) 本地视频播放器
 - [Jetbrains CLion](https://www.jetbrains.com/clion/download/other.html)
 - [Jetbrains GoLand](https://www.jetbrains.com/go/download/other.html)
 - [Jetbrains IntelliJ IDEA](https://www.jetbrains.com/idea/download/other.html)
 - [Jetbrains PyCharm](https://www.jetbrains.com/pycharm/download/other.html)
 - [Jetbrains WebStorm](https://www.jetbrains.com/webstorm/download/other.html)
 - [kdenlive](https://kdenlive.org/zh/download-zh/) 剪视频
+- [LiveRecorder](https://github.com/auqhjjqdo/LiveRecorder) 无人值守直播录制脚本
+- [localsend](https://github.com/localsend/localsend)
+- [录播姬](https://rec.danmuji.org/install/desktop/) 录 B 站直播
 - [mactex](https://www.tug.org/mactex/mactex-download.html) latex
 - [maven](https://repo.huaweicloud.com/apache/maven/maven-3/)
 - [Motrix](https://github.com/agalwood/Motrix/releases)
