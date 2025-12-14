@@ -109,9 +109,7 @@
   - [控制某个方法并发访问线程的数量](./thread/semaphore.md)
   - [ThreadLocal](./thread/thread_local.md)
 
-- [JVM](./jvm/jvm.md)
-  - [引用](./jvm/ref.md)
-  - [调优参数](./jvm/params.md)
-  - [调优工具](./jvm/tools.md)
-  - [内存泄漏排查](./jvm/dump.md)
-  - [CPU占用过高排查](./jvm/cpu.md)
+- [JVM 与性能优化](./jvm/jvm.md)
+  - [你实际遇到过的GC问题有哪些？具体是怎么定位和解决的？](./jvm/gc_problem.md)
+    - [本地模拟](./jvm/gc_problem_demo.md)
+  - [监控平台如何监控GC日志](./jvm/gc_monitor.md)
