@@ -109,6 +109,12 @@
   - [控制某个方法并发访问线程的数量](./thread/semaphore.md)
   - [ThreadLocal](./thread/thread_local.md)
 
+- [接口设计](./int_design/int_design.md)
+  - [APP首页增加查询余额功能](./int_design/home_page_query.md)
+
+- [语言与基础](./basic/basic.md)
+  - [说一个你在实际项目中用到多线程/并发控制的场景，怎么设计的？](./basic/concurrency.md)
+
 - [JVM 与性能优化](./jvm/jvm.md)
   - [你实际遇到过的GC问题有哪些？具体是怎么定位和解决的？](./jvm/gc_problem.md)
     - [本地模拟](./jvm/gc_problem_demo.md)
