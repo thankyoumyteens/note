@@ -187,6 +187,7 @@
     - [SelectVersion函数](./jdk21/g1/launcher/jli_launch/select_version.md)
       - [解析MANIFEST.MF文件](./jdk21/g1/launcher/jli_launch/jli_parse_manifest.md)
         - [在jar包中定位到MANIFEST.MF文件](./jdk21/g1/launcher/jli_launch/find_file.md)
+        - [读取MANIFEST.MF文件的内容](./jdk21/g1/launcher/jli_launch/read_file.md)
     - [补充知识](./jdk21/g1/launcher/jli_launch/extra/extra.md)
       - [启动画面](./jdk21/g1/launcher/jli_launch/extra/splash_screen.md)
       - [java.awt](./jdk21/g1/launcher/jli_launch/extra/awt.md)
