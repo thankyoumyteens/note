@@ -115,6 +115,7 @@
 - [语言与基础](./basic/basic.md)
   - [说一个你在实际项目中用到多线程/并发控制的场景，怎么设计的？](./basic/concurrency.md)
   - [你说有 ASM 字节码增强的实践，具体是做什么？为什么不用 Spring AOP？](./basic/asm.md)
+    - [本地模拟](./basic/asm_demo.md)
 
 - [JVM 与性能优化](./jvm/jvm.md)
   - [你实际遇到过的GC问题有哪些？具体是怎么定位和解决的？](./jvm/gc_problem.md)
