@@ -189,6 +189,8 @@
         - [在jar包中定位到MANIFEST.MF文件](./jdk21/g1/launcher/jli_launch/find_file.md)
         - [读取MANIFEST.MF文件的内容](./jdk21/g1/launcher/jli_launch/read_file.md)
         - [解析出键值对](./jdk21/g1/launcher/jli_launch/parse_nv_pairs.md)
+      - [构建一个可以启动JVM的运行环境](./jdk21/g1/launcher/jli_launch/create_execution_environment.md)
+        - [记录当前可执行文件的名字](./jdk21/g1/launcher/jli_launch/set_execname.md)
     - [补充知识](./jdk21/g1/launcher/jli_launch/extra/extra.md)
       - [启动画面](./jdk21/g1/launcher/jli_launch/extra/splash_screen.md)
       - [java.awt](./jdk21/g1/launcher/jli_launch/extra/awt.md)

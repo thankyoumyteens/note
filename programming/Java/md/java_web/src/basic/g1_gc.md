@@ -262,3 +262,73 @@ JVM 不会实时、逐写地更新完整 RSet，而是：
 这样既保证了 RSet 最终是一致的，又不会把写屏障的开销搞得太大。
 
 ### 如果应用写入非常频繁，RSet 的维护会带来什么开销？你在排查过哪些因为卡表 / RSet 导致的 GC 问题吗？
+
+#### 写入频繁对 RSet 的开销：原理 + 落地表现
+
+在 G1 里，写入频繁会放大 写屏障 + 卡表更新 + RSet 维护 的成本，主要体现在三个方面：
+
+1. 应用线程本身的写屏障开销变大。写操作本来只是“改个指针”，在 G1 下会变成“改指针 + 通知 GC 系统一大堆元数据”，写多了这块开销会很明显。
+   - 每次写引用字段，都会触发写屏障：
+     - 标记对应 Card 为“脏卡”（dirty card）；
+     - 把这个卡的地址放到一个队列里，后续要更新到 RSet 中。
+   - 写操作越多：
+     - 写屏障执行次数越多；
+     - 应用线程在这些额外指令上花的 CPU 越多。
+2. 并发维护 RSet 的后台线程（Refinement Threads）压力增大
+   - 脏卡会进入日志队列（dirty card queue），由专门的 Refinement Threads 来处理：
+     - 把这些脏卡解析出来；
+     - 更新到相应 Region 的 RSet。
+   - 写入非常频繁时：
+     - 卡队列很快积压；
+     - JVM 会增加 Refinement 线程数、提高优先级；
+     - 这部分线程会和应用线程、GC 线程抢 CPU。
+   - 如果队列积压太狠，还有可能：
+     - 把一部分处理放到 Mutator 线程（应用线程）上做，造成应用线程“顺带干苦力”。
+3. RSet 自身膨胀 -> 内存和扫描成本上升
+   - 单个 Region 的 RSet 条目会越来越多：
+     - 消耗更多堆内存；
+     - Mixed GC / Young GC 时，扫描 RSet 的时间增加；
+   - 极端情况下：
+     - RSet 很大 -> 每次 GC 的扫描工作量大 -> STW 时间拉长；
+     - 甚至会触发 G1 的一些保护机制，退化成 Full GC。
+
+所以高写入场景下，G1 的问题不一定是“分配太多对象”，而是：
+
+- 引用更新太多
+- 写屏障 + 卡表日志 + RSet 维护的开销被放大
+- 导致 CPU 占用升高、GC 阶段时间变长，甚至触发更多 GC。
+
+#### 典型能观察到的现象 / 指标
+
+从现象上看，如果是卡表 / RSet 带来的问题，我一般会关注几个信号：
+
+- GC 日志里 RSet 相关时间明显偏高
+  - 比如 G1 日志中的：
+    - Update RS
+    - Scan RS
+    - Refine Cards
+  - 这些阶段时间如果特别突出，就很可疑。
+- Young GC / Mixed GC 本身不算多，但每次停顿含量高
+  - 堆还没撑满、晋升压力也不是特别大；
+  - 但每次 GC STW 时间里，Scan RS 占比很高；
+  - 这时往往是 RSet 太大或者卡表处理过重。
+- CPU 使用率高，但大部分在 GC 辅助工作
+  - 某些线程叫 G1 Refine#N、GC Thread 之类的占比较高；
+  - 应用业务线程“感觉没干多少事”，但整个机器 CPU 很热。
+- GC 日志和 -Xlog:gc+ergo（或类似）中能看到 G1 在调节 Refinement 线程
+  - 会看到类似于：
+    - 提示增加 / 减少 refinement 线程；
+    - 卡队列压力信息（不同 JDK 版本格式略有差异）。
+
+### 如果你要减少 Mixed GC 的单次停顿时间，你会优先考虑哪些参数？
+
+如果要压缩 G1 Mixed GC 的单次停顿时间，我会：
+
+1. 用 MaxGCPauseMillis 来定整体停顿预算，让 G1 对每次 GC 的“工作量”有个软上限；
+2. 用 G1MixedGCLiveThresholdPercent 和 G1OldCSetRegionThresholdPercent 来减轻一次 Mixed GC 中老年代的工作量；
+   - G1MixedGCLiveThresholdPercent: 老年代 Region 存活对象比例低于这个阈值，才有资格被 Mixed GC 回收
+   - G1OldCSetRegionThresholdPercent: 控制“本次 GC 的 Collection Set 里，老年代 Region 的数量上限，占整个堆 Region 数量的百分比”。
+3. 通过 G1MixedGCCountTarget 来让 G1 更分散地清理老年代，用多次较短的 Mixed GC 代替少量很重的 Mixed GC；
+   - G1MixedGCCountTarget 控制“清理完一轮老年代，G1 计划用几次 Mixed GC 来完成”。
+   - 这个参数本身不直接控制单次停顿时长，但会影响 G1 在每一次 Mixed GC 里分配多少“老年代工作量”；
+4. 辅助看一下年轻代相关参数，避免年轻代太大把每次 GC 停顿“先占满了一半”。
