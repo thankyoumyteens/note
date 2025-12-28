@@ -217,6 +217,7 @@
     - [设置ID3标签](./media/audio/id3.md)
     - [设置封面图](./media/audio/cover.md)
     - [提取封面图](./media/audio/extract_cover.md)
+    - [flac转mp3](./media/audio/flac2mp3.md)
 
 - [加密解密](./enc/enc.md)
   - [SHA256](./enc/sha256.md)
