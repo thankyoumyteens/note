@@ -25,7 +25,6 @@
         - [ORA-00904: "ID": 标识符无效](./db/oracle/标识符无效.md)
         - [ORA-01795: 列表中的最大表达式数为 1000](./db/oracle/in语句不能超过1000.md)
         - [oracle排序后, 分页数据重复](./db/oracle/oracle_sort_bug.md)
-        - [oracle排序后, 切换页大小数据乱序](./db/oracle/oracle_sort_bug.md)
         - [小数点前0不显示](./db/oracle/oracle_number_bug.md)
 
 - [Vue.js](./vue/vue.md)
