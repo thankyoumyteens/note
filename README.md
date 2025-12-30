@@ -3,8 +3,8 @@
 ```sh
 mkdir -p /build/mdbook
 cd /build/mdbook
-wget https://github.com/rust-lang/mdBook/releases/download/v0.4.45/mdbook-v0.4.45-x86_64-unknown-linux-gnu.tar.gz
-tar -zxvf mdbook-v0.4.45-x86_64-unknown-linux-gnu.tar.gz
+wget https://github.com/rust-lang/mdBook/releases/download/v0.5.2/mdbook-v0.5.2-x86_64-unknown-linux-gnu.tar.gz
+tar -zxvf mdbook-v0.5.2-x86_64-unknown-linux-gnu.tar.gz
 
 # 打开配置文件
 sudo vim /etc/profile

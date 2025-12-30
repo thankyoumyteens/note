@@ -165,7 +165,6 @@
 
 - [字节码文件](./jdk21/g1/class_file/class_file.md)
   - [解析字节码文件](./jdk21/g1/class_file/parse_class_file.md)
-  - [运行时常量池](./jdk21/g1/class_file/parse_class_file.md)
 
 - [Handle](./jdk21/g1/base/handle.md)
 
