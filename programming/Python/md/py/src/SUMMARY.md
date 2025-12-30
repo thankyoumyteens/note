@@ -1,6 +1,6 @@
 # Summary
 
-- [pip](./base/base.md)
+- [pip](./base/pip.md)
   - [pip设置国内源](./base/pip_url.md)
   - [pip管理包](./base/pip_pkg.md)
 
