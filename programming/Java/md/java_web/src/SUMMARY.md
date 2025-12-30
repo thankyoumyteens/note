@@ -116,9 +116,12 @@
   - [说一个你在实际项目中用到多线程/并发控制的场景，怎么设计的？](./basic/concurrency.md)
   - [你说有 ASM 字节码增强的实践，具体是做什么？为什么不用 Spring AOP？](./basic/asm.md)
     - [本地模拟](./basic/asm_demo.md)
-  - [你说理解G1的Young GC/Mixed GC，大概能说一下两者的区别和触发时机吗？](./basic/g1_gc.md)
+
+- [框架与微服务](./framework/framework.md)
 
 - [JVM 与性能优化](./jvm/jvm.md)
   - [你实际遇到过的GC问题有哪些？具体是怎么定位和解决的？](./jvm/gc_problem.md)
     - [本地模拟](./jvm/gc_problem_demo.md)
+  - [你说理解G1的Young GC/Mixed GC，大概能说一下两者的区别和触发时机吗？](./jvm/g1_gc.md)
+    - [模拟一轮完整的G1周期](./jvm/g1_gc_demo.md)
   - [监控平台如何监控GC日志](./jvm/gc_monitor.md)
