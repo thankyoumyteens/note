@@ -191,6 +191,7 @@
       - [构建一个可以启动JVM的运行环境](./jdk21/g1/launcher/jli_launch/create_execution_environment.md)
         - [记录当前可执行文件的名字](./jdk21/g1/launcher/jli_launch/set_execname.md)
         - [找到要使用的JRE](./jdk21/g1/launcher/jli_launch/get_jre_path.md)
+        - [解析jvm.cfg](./jdk21/g1/launcher/jli_launch/read_known_v_ms.md)
     - [补充知识](./jdk21/g1/launcher/jli_launch/extra/extra.md)
       - [启动画面](./jdk21/g1/launcher/jli_launch/extra/splash_screen.md)
       - [java.awt](./jdk21/g1/launcher/jli_launch/extra/awt.md)
