@@ -33,6 +33,7 @@
   - [多数据源](./mybatis/dynamic_datasource.md)
 
 - [Mybatis Plus](./mybatis_plus/mybatis_plus.md)
+  - [打印SQL](./mybatis_plus/print_sql.md)
   - [分页](./mybatis_plus/page.md)
   - [多数据源](./mybatis_plus/dynamic_datasource.md)
 
