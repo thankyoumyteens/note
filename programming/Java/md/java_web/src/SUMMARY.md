@@ -118,6 +118,10 @@
     - [本地模拟](./basic/asm_demo.md)
 
 - [框架与微服务](./framework/framework.md)
+  - [你参与的微服务项目是怎么拆服务的？有没有遇到过拆得过细或过粗的问题？](./framework/ms_split.md)
+  - [在微服务里，你是怎么做配置管理和服务治理的？](./framework/ms_rc.md)
+
+- [数据库与持久化](./db/db.md)
 
 - [JVM 与性能优化](./jvm/jvm.md)
   - [你实际遇到过的GC问题有哪些？具体是怎么定位和解决的？](./jvm/gc_problem.md)
