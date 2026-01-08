@@ -36,6 +36,7 @@
       - [决定用哪个JVM类型](./jdk21/g1/launcher/jli_launch/check_jvm_type.md)
       - [找到真正的JVM动态库](./jdk21/g1/launcher/jli_launch/get_jvm_path.md)
       - [启动Cocoa事件循环](./jdk21/g1/launcher/jli_launch/mac_osx_startup.md)
+    - [加载JVM动态库](./jdk21/g1/launcher/jli_launch/load_java_vm.md)
     - [补充知识](./jdk21/g1/launcher/jli_launch/extra/extra.md)
       - [启动画面](./jdk21/g1/launcher/jli_launch/extra/splash_screen.md)
       - [java.awt](./jdk21/g1/launcher/jli_launch/extra/awt.md)
