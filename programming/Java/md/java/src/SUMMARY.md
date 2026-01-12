@@ -146,6 +146,8 @@
       - [ClassVisitor](./bytecode/asm/concept/class_visitor.md)
       - [MethodVisitor](./bytecode/asm/concept/method_visitor.md)
       - [FieldVisitor和AnnotationVisitor](./bytecode/asm/concept/other_visitor.md)
+    - [asm-commons](./bytecode/asm/asm_commons.md)
+      - [asm-commons里的工具类](./bytecode/asm/asm_commons_utils.md)
     - [读取class内容](./bytecode/asm/read_class.md)
     - [生成class](./bytecode/asm/create_class.md)
     - [读取并修改class](./bytecode/asm/edit_class.md)
