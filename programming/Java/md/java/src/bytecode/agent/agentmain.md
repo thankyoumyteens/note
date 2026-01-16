@@ -1,68 +1,36 @@
 # 修改已经加载的类
 
-## 添加依赖
+有时候应用已经在跑了，你想“热插”一个 Agent 进去，这就用：
 
-```xml
-<dependencies>
-   <dependency>
-       <groupId>org.ow2.asm</groupId>
-       <artifactId>asm</artifactId>
-       <version>9.6</version>
-   </dependency>
-</dependencies>
-```
+- Attach API（com.sun.tools.attach）
+- 目标 JVM 进程会加载你的 agent JAR，并调用 agentmain 函数
 
-## 实现 ClassFileTransformer 接口
+### 1. 实现 ClassFileTransformer 接口
 
 ```java
 public class MyTransformer implements ClassFileTransformer {
+
     @Override
-    public byte[] transform(
-            Module module,
-            ClassLoader loader,
-            String className,
-            Class<?> classBeingRedefined,
-            ProtectionDomain protectionDomain,
-            byte[] classFileBuffer
-    ) throws IllegalClassFormatException {
-        if (className.equals("org/example/Bird")) {
-            // 使用ASM修改App类的内容
+    public byte[] transform(Module module, ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classFileBuffer) throws IllegalClassFormatException {
+        // 例如: 只修改MyApp类
+        if (className.equals("org/example/MyApp")) {
+            // 使用ASM修改App类
             ClassReader classReader = new ClassReader(classFileBuffer);
             ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-            // 修改main方法的方法体
-            classReader.accept(
-                    new ClassVisitor(Opcodes.ASM9, classWriter) {
-                        @Override
-                        public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                            MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
-                            if (name.equals("fly")) {
-                                return new MethodVisitor(Opcodes.ASM9, mv) {
-                                    @Override
-                                    public void visitLdcInsn(Object value) {
-                                        // 替换打印的内容
-                                        if (value instanceof String) {
-                                            value = "bird is flying...";
-                                        }
-                                        super.visitLdcInsn(value);
-                                    }
-                                };
-                            }
-                            // 其他方法不做修改, 直接返回原始的MethodVisitor
-                            return mv;
-                        }
-                    },
-                    ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES
-            );
-            // 返回修改的class
+            ClassVisitor cv = new MyClassVisitor(Opcodes.ASM9, classWriter);
+            classReader.accept(cv, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+            // 返回修改后的字节码
+            // JVM 会加载修改后的字节码
             return classWriter.toByteArray();
         }
-        // 返回null表示不修改class内容
+        // 返回 null 表示不修改字节码
+        // JVM 会加载原始的字节码
         return null;
     }
 }
 ```
 
-## 定义 Agent 的入口类
+### 2. 定义 Agent 的入口类
 
 ```java
 public class MyAgent {

@@ -1,73 +1,33 @@
 # 在类加载的时候修改类
 
-## 添加依赖
-
-```xml
-<dependencies>
-   <dependency>
-       <groupId>org.ow2.asm</groupId>
-       <artifactId>asm</artifactId>
-       <version>9.6</version>
-   </dependency>
-</dependencies>
-```
-
-## 实现 ClassFileTransformer 接口
+### 1. 实现 ClassFileTransformer 接口
 
 ```java
 public class MyTransformer implements ClassFileTransformer {
 
     @Override
-    public byte[] transform(
-            Module module,
-            ClassLoader loader,
-            String className,
-            Class<?> classBeingRedefined,
-            ProtectionDomain protectionDomain,
-            byte[] classFileBuffer
-    ) throws IllegalClassFormatException {
-        if (className.equals("org/example/App")) {
-            // 使用ASM修改App类的内容
+    public byte[] transform(Module module, ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classFileBuffer) throws IllegalClassFormatException {
+        // 例如: 只修改MyApp类
+        if (className.equals("org/example/MyApp")) {
+            // 使用ASM修改App类
             ClassReader classReader = new ClassReader(classFileBuffer);
             ClassWriter classWriter = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-            // 修改main方法的方法体
-            classReader.accept(
-                    new ClassVisitor(Opcodes.ASM9, classWriter) {
-                        @Override
-                        public MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
-                            MethodVisitor mv = super.visitMethod(access, name, descriptor, signature, exceptions);
-                            if (name.equals("main")) {
-                                return new MethodVisitor(Opcodes.ASM9, mv) {
-                                    @Override
-                                    public void visitCode() {
-                                        // 在main方法的方法体前面插入一行代码
-                                        mv.visitFieldInsn(Opcodes.GETSTATIC, "java/lang/System", "out",
-                                                "Ljava/io/PrintStream;");
-                                        mv.visitLdcInsn("do something before main method!");
-                                        mv.visitMethodInsn(Opcodes.INVOKEVIRTUAL,
-                                                "java/io/PrintStream", "println",
-                                                "(Ljava/lang/String;)V", false);
-                                    }
-                                };
-                            }
-                            // 其他方法不做修改
-                            return mv;
-                        }
-                    },
-                    ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES
-            );
-            // 返回修改的class
+            ClassVisitor cv = new MyClassVisitor(Opcodes.ASM9, classWriter);
+            classReader.accept(cv, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+            // 返回修改后的字节码
+            // JVM 会加载修改后的字节码
             return classWriter.toByteArray();
         }
-        // 返回null表示不修改class内容
+        // 返回 null 表示不修改字节码
+        // JVM 会加载原始的字节码
         return null;
     }
 }
 ```
 
-## 定义 Agent 的入口类
+### 2. 定义 Agent 的入口类
 
-premain 方法是 java agent 的入口, 它总会在 main 函数之前执行
+JVM 启动时会自动调用 premain 函数
 
 ```java
 public class MyAgent {
@@ -78,7 +38,7 @@ public class MyAgent {
 }
 ```
 
-## 配置打包
+### 3. 打包时指定入口
 
 ```xml
 <build>
@@ -94,6 +54,7 @@ public class MyAgent {
                         <addClasspath>true</addClasspath>
                     </manifest>
                     <manifestEntries>
+                        <!-- MANIFEST.MF 里要指定 agent 的入口类 -->
                         <Premain-Class>org.example.MyAgent</Premain-Class>
                         <Can-Redefine-Classes>true</Can-Redefine-Classes>
                         <Can-Retransform-Classes>true</Can-Retransform-Classes>
@@ -101,7 +62,7 @@ public class MyAgent {
                 </archive>
             </configuration>
         </plugin>
-        <!-- 将依赖的jar包打入项目-->
+        <!-- 将依赖的 jar 包打入-->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-shade-plugin</artifactId>
@@ -116,6 +77,7 @@ public class MyAgent {
                     <configuration>
                         <artifactSet>
                             <includes>
+                                <!-- 打入依赖的 asm 包 -->
                                 <include>org.ow2.asm:asm</include>
                             </includes>
                         </artifactSet>
@@ -130,25 +92,15 @@ public class MyAgent {
 
 执行 mvn package
 
-## 测试类
+### 4. 使用 agent
 
-```java
-public class App {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
-}
+启动时通过 JVM 参数指定 agent:
+
+```sh
+java -javaagent:/path/to/your-agent.jar -jar app.jar
 ```
 
-## 使用 agent
-
-启动时设置 JVM 参数:
-
-```
--javaagent:/刚才打的jar包路径/my-agent-1.0-SNAPSHOT.jar
-```
-
-## 输出
+### 5. 输出
 
 ```
 do something before main method!
