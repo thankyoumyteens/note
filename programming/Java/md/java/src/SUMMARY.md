@@ -176,7 +176,7 @@
 - [Maven](./maven/maven.md)
   - [设置国内源](./maven/mirror.md)
   - [设置项目jdk版本](./maven/jdk_version.md)
-  - [指定主类](./maven/main_class.md)
+  - [maven-shade-plugin](./maven/main_class.md)
   - [导入本地jar包](./maven/local_jar.md)
   - [设置私服](./maven/repositories.md)
   - [Maven内置变量](./maven/maven_vars.md)

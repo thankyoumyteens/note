@@ -37,8 +37,8 @@ public class MyAgent {
     public static void agentmain(String args, Instrumentation inst) {
         inst.addTransformer(new MyTransformer(), true);
         try {
-            // 重新加载新的Bird类
-            inst.retransformClasses(Class.forName("org.example.Bird"));
+            // 重新加载新的MyApp类
+            inst.retransformClasses(Class.forName("org.example.MyApp"));
         } catch (UnmodifiableClassException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +46,7 @@ public class MyAgent {
 }
 ```
 
-## 配置打包
+### 3. 配置打包
 
 ```xml
 <build>
@@ -98,7 +98,7 @@ public class MyAgent {
 
 执行 mvn package
 
-## 测试类
+### 4. 测试类
 
 ```java
 // 要被修改的类
@@ -120,7 +120,7 @@ public class App {
 }
 ```
 
-## 使用 agent
+### 5. 使用 agent
 
 编写一个类, 用于注入 agent:
 
@@ -145,18 +145,7 @@ public class AttachDemo {
 }
 ```
 
-## AttachDemo 类输出
-
-```
-92083 : com.intellij.idea.Main
-...
-93133 : org.example.App
-93135 : org.example.AttachDemo
-687 : com.intellij.idea.Main
-...
-```
-
-## App 类输出
+### 6. App 类输出
 
 ```
 bird want to fly...
