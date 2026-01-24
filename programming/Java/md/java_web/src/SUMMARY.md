@@ -1,5 +1,5 @@
 # Summary
-
+<!-- 
 - [面试题](./q1/q1.md)
   - [基础](./q1/q1/s1.md)
   - [JVM](./q1/q1/s2.md)
@@ -107,10 +107,13 @@
   - [ConcurrentHashMap](./thread/concurrent_hash_map.md)
   - [线程池](./thread/thread_pool.md)
   - [控制某个方法并发访问线程的数量](./thread/semaphore.md)
-  - [ThreadLocal](./thread/thread_local.md)
+  - [ThreadLocal](./thread/thread_local.md) -->
 
 - [接口设计](./int_design/int_design.md)
   - [APP首页增加查询余额功能](./int_design/home_page_query.md)
+
+- [疑难杂症](./bugs/bugs.md)
+  - [Java Agent导致的protobuf版本不兼容报错](./bugs/protobuf.md)
 
 - [语言与基础](./basic/basic.md)
   - [说一个你在实际项目中用到多线程/并发控制的场景，怎么设计的？](./basic/concurrency.md)
