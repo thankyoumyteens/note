@@ -212,6 +212,7 @@
     - [获取请求头](./flask/http/headers.md)
 
 - [音视频处理](./media/media.md)
+  - [从视频中提取音频](./media/extract_audio.md)
   - [人声和伴奏分离](./media/demucs.md)
   - [MP3音频处理](./media/audio/audio.md)
     - [安装](./media/audio/install.md)

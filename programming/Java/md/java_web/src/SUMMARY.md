@@ -126,6 +126,9 @@
 
 - [数据库与持久化](./db/db.md)
 
+- [缓存与消息中间件](./middleware/middleware.md)
+  - [你是怎么在项目中应对缓存击穿/穿透/雪崩这些问题的？](./middleware/cache_attack.md)
+
 - [JVM 与性能优化](./jvm/jvm.md)
   - [你实际遇到过的GC问题有哪些？具体是怎么定位和解决的？](./jvm/gc_problem.md)
     - [本地模拟](./jvm/gc_problem_demo.md)
