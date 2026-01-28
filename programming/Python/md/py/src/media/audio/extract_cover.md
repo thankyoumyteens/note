@@ -4,6 +4,7 @@
 from mutagen.id3 import ID3
 import os
 
+
 def extract_cover(mp3_path, out_path=None):
     audio = ID3(mp3_path)
 
