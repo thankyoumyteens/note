@@ -130,6 +130,12 @@
   - [你是怎么在项目中应对缓存击穿/穿透/雪崩这些问题的？](./middleware/cache_attack.md)
   - [说一个你用MQ做异步解耦/削峰的具体场景](./middleware/mq_ussage.md)
 
+- [分布式任务调度](./job/job.md)
+  - [你在项目中是怎么设计定时任务和失败补偿机制的？](./job/design.md)
+
+- [安全与权限](./auth/auth.md)
+  - [你是怎么实现基于JWT+Redis的登录态管理的？](./auth/jwt.md)
+
 - [JVM 与性能优化](./jvm/jvm.md)
   - [你实际遇到过的GC问题有哪些？具体是怎么定位和解决的？](./jvm/gc_problem.md)
     - [本地模拟](./jvm/gc_problem_demo.md)
