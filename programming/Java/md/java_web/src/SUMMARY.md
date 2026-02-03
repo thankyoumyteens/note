@@ -114,6 +114,7 @@
 
 - [疑难杂症](./bugs/bugs.md)
   - [Java Agent导致的protobuf版本不兼容报错](./bugs/protobuf.md)
+  - [ASM动态生成的类使用EasyExcel导出报错NoClassDefFoundError](./bugs/asm_easy_excel.md)
 
 - [语言与基础](./basic/basic.md)
   - [说一个你在实际项目中用到多线程/并发控制的场景，怎么设计的？](./basic/concurrency.md)

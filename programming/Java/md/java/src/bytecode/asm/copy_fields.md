@@ -1,36 +1,45 @@
 # 复制一个类的字段
 
+### 1. 自定义 ClassLoader
+
 ```java
-public class AsmUtil implements Opcodes {
+public class MyDynamicClassLoader extends ClassLoader {
+
+    // 用当前线程的 context classloader
+    public MyDynamicClassLoader() {
+        super(Thread.currentThread().getContextClassLoader());
+    }
+
+    public MyDynamicClassLoader(ClassLoader parent) {
+        super(parent);
+    }
 
     /**
-     * 类加载器
+     * 把一段字节码定义成 Class 对象
      */
-    public static class AsmUtilClassLoader extends ClassLoader {
-
-        /**
-         * 根据字节数组加载类
-         *
-         * @param fullClassName 类的全限定名
-         * @param b             类的字节数组
-         * @return class
-         */
-        public Class<?> load(String fullClassName, byte[] b) {
-            return defineClass(fullClassName, b, 0, b.length);
-        }
+    public Class<?> defineClass(String className, byte[] bytes) {
+        // 注意：这里直接调用 ClassLoader 自带的 protected defineClass 方法
+        return super.defineClass(className, bytes, 0, bytes.length);
     }
+}
+```
+
+### 2. 复制所有字段
+
+```java
+public class AsmUtil implements Opcodes {
 
     /**
      * 复制类的字段, 并生成一个新的类
      *
      * @param originalEntityName 要复制的类
-     * @return 新的类
+     * @return 新类的字节码
      */
-    public static Class<?> copyFields(String originalEntityName) throws Exception {
-        // 新类内部名
+    public static byte[] copyFields(String originalEntityName) throws Exception {
+        // 新类的内部名
         String internalName = originalEntityName.replaceAll("\\.", "/");
-        internalName = internalName.substring(0, internalName.length() - 2) + "Copy";
-        // 新类全名
+        internalName = internalName + "Copy";
+        // 新类的类全名
         String targetName = internalName.replaceAll("/", ".");
 
         // 获取原始类的所有字段
@@ -38,7 +47,7 @@ public class AsmUtil implements Opcodes {
         Field[] declaredFields = originalClass.getDeclaredFields();
         List<Field> fieldList = new ArrayList<>(Arrays.asList(declaredFields));
 
-        // 创建类
+        // 创建新类
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
         writer.visit(V1_8, ACC_PUBLIC + ACC_SUPER,
                 internalName, null, "java/lang/Object",
@@ -54,7 +63,7 @@ public class AsmUtil implements Opcodes {
         writer.visitEnd();
 
         byte[] byteArray = writer.toByteArray();
-        return new AsmUtilClassLoader().load(targetName, byteArray);
+        return byteArray;
     }
 
     /**
@@ -122,6 +131,7 @@ public class AsmUtil implements Opcodes {
             annotationVisitor.visitEnd();
         }
         fieldVisitor.visitEnd();
+
         // getter
         MethodVisitor getter = writer.visitMethod(ACC_PUBLIC, "get" + pascalName,
                 "()" + fieldDesc, null, null);
@@ -145,11 +155,31 @@ public class AsmUtil implements Opcodes {
 }
 ```
 
-使用
+### 3. 结合EasyExcel使用
 
 ```java
 public static void main(String[] args) throws Exception {
-    Class<?> klass = AsmUtil.copyFields("org.example.OriginEntity");
-    System.out.println(klass);
+    // ASM 生成的字节码
+    byte[] bytes = AsmUtil.copyFields("com.example.ExcelModel");
+
+    // 1. 创建自定义 ClassLoader（以当前线程的 context classloader 为父）
+    MyDynamicClassLoader loader =
+        new MyDynamicClassLoader(Thread.currentThread().getContextClassLoader());
+
+    // 2. 加载类
+    Class<?> modelClass = loader.defineClass(className, bytes);
+
+    // 3. 很关键：把这个新的 loader 设成当前线程的 ContextClassLoader
+    ClassLoader old = Thread.currentThread().getContextClassLoader();
+    Thread.currentThread().setContextClassLoader(loader);
+    try {
+        // 4. 在这个上下文中调用 EasyExcel
+        EasyExcel.write(outputStream, modelClass)
+                .sheet("sheet1")
+                .doWrite(dataList);  // dataList 里的对象类型要和 modelClass 对应
+    } finally {
+        // 5. 恢复原来的 ClassLoader，避免污染其他地方
+        Thread.currentThread().setContextClassLoader(old);
+    }
 }
 ```
