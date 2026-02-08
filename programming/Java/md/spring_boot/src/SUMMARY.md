@@ -15,6 +15,7 @@
   - [多环境配置](./base/profiles.md)
   - [加载配置文件](./base/configuration_properties.md)
   - [logback配置](./base/logback.md)
+    - [在日志中增加traceId用于链路追踪](./base/trace_id.md)
   - [HibernateValidator](./base/validator.md)
   - [使用包装类修改请求和响应数据](./base/wrapper.md)
   - [获取客户端ip](./base/real_ip.md)

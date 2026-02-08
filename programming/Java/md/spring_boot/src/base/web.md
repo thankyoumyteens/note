@@ -1,6 +1,6 @@
 # Web 项目
 
-1. 依赖
+### 1. 依赖
 
 ```xml
 <dependency>
@@ -9,7 +9,7 @@
 </dependency>
 ```
 
-2. 创建 controller
+### 2. 创建 controller
 
 ```java
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,3 +25,7 @@ public class DemoController {
     }
 }
 ```
+
+### 3. 访问
+
+[http://localhost:8080/demo/hello](http://localhost:8080/demo/hello)
