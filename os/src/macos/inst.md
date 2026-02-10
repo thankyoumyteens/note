@@ -1,4 +1,4 @@
-# 安装软件
+# 安装常用软件
 
 ## app store
 
@@ -18,53 +18,6 @@ git config --global user.email "iloveyesterday@outlook.com"
 ssh-keygen -t rsa -C "iloveyesterday@outlook.com"
 # 设置为区分大小写
 git config --global core.ignorecase false
-```
-
-## jdk
-
-下载:
-
-- [Liberica](https://bell-sw.com/pages/downloads/)
-- [Adoptium](https://adoptium.net/temurin/releases)
-- [Adoptium(清华源)](https://mirrors.tuna.tsinghua.edu.cn/Adoptium)
-- [Zulu](https://www.azul.com/downloads/?package=jdk#zulu)
-- [Microsoft](https://learn.microsoft.com/zh-cn/java/openjdk/download)
-
-配置:
-
-```sh
-# 打开配置文件
-vim ~/.zshrc
-
-# 在最后一行添加
-export JAVA_HOME=/Users/walter/walter/jdk/jdk-25.0.1+8/Contents/Home
-export PATH=$JAVA_HOME/bin:$PATH
-
-# 使环境变量生效
-source ~/.zshrc
-
-# 验证
-java -version
-```
-
-### 报错: 无法打开"java", 因为无法验证开发者:
-
-1.  左上角 apple -> 系统设置 -> 隐私与安全性 -> 安全性
-2.  已阻止使用"java", 因为来自身分不明的开发者
-3.  仍要打开
-
-## python
-
-```sh
-brew install python3
-brew install python-tk
-
-pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-pip3 config set global.trusted-host pypi.tuna.tsinghua.edu.cn
-pip3 config set global.timeout 120
-
-# 移除国内镜像源
-pip3 config unset global.index-url
 ```
 
 ## 安装 jd-gui

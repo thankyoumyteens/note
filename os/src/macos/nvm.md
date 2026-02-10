@@ -1,12 +1,12 @@
 # nvm
 
-1. 安装:
+### 1. 安装:
 
 ```sh
 brew install nvm
 ```
 
-2. 配置环境变量
+### 2. 配置环境变量
 
 ```sh
 # 打开配置文件
@@ -21,7 +21,7 @@ export NVM_DIR="$HOME/.nvm"
 source ~/.zshrc
 ```
 
-3. 验证
+### 3. 验证
 
 ```sh
 nvm help
@@ -33,7 +33,7 @@ nvm help
 nvm install 16.15.1
 ```
 
-切换 node 版本:
+## 切换 node 版本
 
 ```sh
 # nvm use 只能在当前控制台临时修改版本
@@ -42,7 +42,7 @@ nvm use 16.15.1
 nvm alias default 16.15.1
 ```
 
-配置国内源:
+## npm 配置国内源
 
 ```sh
 npm config set registry https://registry.npmmirror.com

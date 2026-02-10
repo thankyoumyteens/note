@@ -19,3 +19,25 @@ brew help
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 ```
+
+## 用法
+
+### 安装软件
+
+```sh
+brew install 软件名
+```
+
+### 更新软件
+
+```sh
+brew update
+brew upgrade
+brew upgrade 软件名
+```
+
+### 卸载软件
+
+```sh
+brew uninstall 软件名
+```
