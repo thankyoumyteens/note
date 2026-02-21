@@ -1,4 +1,4 @@
-# python
+# Python
 
 ```sh
 brew install python3
