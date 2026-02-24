@@ -143,3 +143,6 @@
   - [你说理解G1的Young GC/Mixed GC，大概能说一下两者的区别和触发时机吗？](./jvm/g1_gc.md)
     - [模拟一轮完整的G1周期](./jvm/g1_gc_demo.md)
   - [监控平台如何监控GC日志](./jvm/gc_monitor.md)
+
+- [Vibe Coding](./vibe_coding/vibe_coding.md)
+  - [入门](./vibe_coding/first_step.md)
