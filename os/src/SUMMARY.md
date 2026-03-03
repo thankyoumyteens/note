@@ -14,6 +14,7 @@
       - [ElastiSearch](./macos/es.md)
       - [IDE设置](./macos/ide_settings.md)
       - [Redis](./macos/redis.md)
+        - [Redis Cluster](./macos/redis_cluster.md)
       - [MySQL](./macos/mysql.md)
       - [MongoDB](./macos/mongo.md)
       - [Cursor](./macos/cursor.md)

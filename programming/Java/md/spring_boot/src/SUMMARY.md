@@ -26,6 +26,7 @@
   - [集成MybatisPlus](./integration/mybatis_plus.md)
   - [集成JPA](./integration/jpa.md)
   - [集成Redis](./integration/redis_template.md)
+    - [集成RedisCluster](./integration/redis_template_cluster.md)
   - [集成HibernateValidator](./integration/validator_with_sb.md)
   - [集成Kafka](./integration/kafka.md)
   - [集成WebSocket](./integration/ws_project.md)

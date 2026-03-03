@@ -17,12 +17,6 @@ tar -zxvf elasticsearch-9.3.0-darwin-aarch64.tar.gz
 ### 4. 运行
 
 ```sh
-vim bin/elasticsearch
-
-JAVA="/Users/walter/walter/jdk/jdk-17.0.10.jdk/bin/java"
-```
-
-```sh
 cd ./elasticsearch-9.3.0
 bin/elasticsearch
 ```
