@@ -100,6 +100,13 @@ mdbook build
 rm -rf ${nginx_path}/gc/
 cp -r book/ ${nginx_path}/gc/
 
+# AI应用开发
+cd "${workdir}/note"
+cd programming/ai_engineering/
+mdbook build
+rm -rf ${nginx_path}/ai_engineering/
+cp -r book/ ${nginx_path}/ai_engineering/
+
 # java
 cd "${workdir}/note"
 cd programming/Java/md/java/
