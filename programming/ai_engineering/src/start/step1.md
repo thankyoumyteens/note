@@ -15,7 +15,7 @@
 ### 2. 安装依赖
 
 ```sh
-pip install fastapi uvicorn pydantic langchain langchain_community langchain-openai langchain-huggingface faiss-cpu python-dotenv
+pip install fastapi uvicorn pydantic langchain langchain-community langchain-openai langchain-huggingface faiss-cpu python-dotenv
 # 注意：如果终端使用了代理的话需要安装下面的依赖：
 pip install socksio
 ```
@@ -128,7 +128,7 @@ if __name__ == "__main__":
 ### 4. 运行
 
 1. 启动项目
-2. FastAPI 默认集成了 Swagger UI，打开浏览器访问：http://127.0.0.1:8000/docs
+2. FastAPI 默认集成了 Swagger UI，打开浏览器访问：[http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 3. 在页面中找到 POST /api/chat 接口，点击 Try it out，输入 JSON 格式的数据进行测试
 
 ### 5. 测试案例 1
