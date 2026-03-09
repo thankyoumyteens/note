@@ -11,4 +11,5 @@
   - [FastAPI + Pydantic](./phase1/fast_api_and_pydantic/fast_api_and_pydantic.md)
     - [写一个最简单的 FastAPI + Pydantic 应用](./phase1/fast_api_and_pydantic/fast_api.md)
     - [使用 Pydantic 进行更复杂的数据校验](./phase1/fast_api_and_pydantic/pydantic_field.md)
+    - [路径参数与查询参数](./phase1/fast_api_and_pydantic/query_params.md)
     - [把拦截器和路由抽离到单独的文件中](./phase1/fast_api_and_pydantic/add_exception_handler.md)
