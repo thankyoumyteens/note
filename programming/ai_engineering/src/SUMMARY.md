@@ -13,3 +13,5 @@
     - [使用 Pydantic 进行更复杂的数据校验](./phase1/fast_api_and_pydantic/pydantic_field.md)
     - [路径参数与查询参数](./phase1/fast_api_and_pydantic/query_params.md)
     - [把拦截器和路由抽离到单独的文件中](./phase1/fast_api_and_pydantic/add_exception_handler.md)
+    - [依赖注入](./phase1/fast_api_and_pydantic/di.md)
+    - [结合 SQLAlchemy 或 SQLModel 进行真实的数据库增删改查](./phase1/fast_api_and_pydantic/sql.md)

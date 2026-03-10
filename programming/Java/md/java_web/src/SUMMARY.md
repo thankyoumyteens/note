@@ -1,5 +1,5 @@
 # Summary
-<!-- 
+
 - [面试题](./q1/q1.md)
   - [基础](./q1/q1/s1.md)
   - [JVM](./q1/q1/s2.md)
@@ -107,7 +107,9 @@
   - [ConcurrentHashMap](./thread/concurrent_hash_map.md)
   - [线程池](./thread/thread_pool.md)
   - [控制某个方法并发访问线程的数量](./thread/semaphore.md)
-  - [ThreadLocal](./thread/thread_local.md) -->
+  - [ThreadLocal](./thread/thread_local.md)
+
+---
 
 - [接口设计](./int_design/int_design.md)
   - [APP首页增加查询余额功能](./int_design/home_page_query.md)
@@ -146,3 +148,5 @@
 
 - [Vibe Coding](./vibe_coding/vibe_coding.md)
   - [入门](./vibe_coding/first_step.md)
+  - [项目示例](./vibe_coding/demo/demo.md)
+    - [在线翻译器](./vibe_coding/demo/translator.md)
