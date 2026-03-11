@@ -52,3 +52,17 @@ sudo /usr/local/mysql/support-files/mysql.server start
 ```
 
 注意: 首次安装完成后会默认启动, 此时通过终端停止 mysql 会报错 ` ERROR! MySQL server PID file could not be found!`。只要在系统设置里点击按钮停止 mysql 后, 再通过终端启动就好了。
+
+## 查看端口号
+
+```sh
+show global variables like 'port';
+```
+
+## 修改端口号
+
+把mysql端口号由3307改为3306:
+
+1. 修改配置文件：/Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+2. 将 `–port=3307`
+3. 改为 `–port=3306`
