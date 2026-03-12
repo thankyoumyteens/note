@@ -15,3 +15,8 @@
     - [把拦截器和路由抽离到单独的文件中](./phase1/fast_api_and_pydantic/add_exception_handler.md)
     - [依赖注入](./phase1/fast_api_and_pydantic/di.md)
     - [结合 SQLAlchemy 或 SQLModel 进行真实的数据库增删改查](./phase1/fast_api_and_pydantic/sql.md)
+
+- [SQLModel](./sql_model/sql_model.md)
+  - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
+  - [按指定条件查询](./sql_model/where.md)
+  - [手写sql](./sql_model/sql.md)

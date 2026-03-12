@@ -111,8 +111,9 @@
 
 ---
 
-- [接口设计](./int_design/int_design.md)
+- [功能设计](./int_design/int_design.md)
   - [APP首页增加查询余额功能](./int_design/home_page_query.md)
+  - [生成 100 年不重复的12位流水号](./int_design/serial_no.md)
 
 - [疑难杂症](./bugs/bugs.md)
   - [Java Agent导致的protobuf版本不兼容报错](./bugs/protobuf.md)
