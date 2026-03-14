@@ -36,6 +36,12 @@ export PATH=/Users/walter/walter/software/redis:$PATH
 source ~/.zshrc
 ```
 
+### 5. 运行
+
+```sh
+redis-server
+```
+
 ## 报错: call to undeclared function 'fstat64';
 
 修改 src/config.h 文件
