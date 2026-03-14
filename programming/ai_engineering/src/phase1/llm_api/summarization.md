@@ -30,7 +30,7 @@ from fastapi import FastAPI, BackgroundTasks  # 【新增】引入后台任务
 
 app = FastAPI()
 
-client = OpenAI(
+client = AsyncOpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
     base_url="https://ark.cn-beijing.volces.com/api/v3"
 )
