@@ -37,6 +37,8 @@
     - [FastAPI + LangChain 流式接口](./phase1/lang_chain/stream.md)
   - [第五步：攻克上下文管理](./phase1/context/context.md)
     - [构建带有记忆的终端对话机器人](./phase1/context/chat_robot.md)
+    - [强制截断](./phase1/context/buffer_window.md)
+    - [滚动总结](./phase1/context/summary_memory.md)
 
 - [SQLModel](./sql_model/sql_model.md)
   - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
