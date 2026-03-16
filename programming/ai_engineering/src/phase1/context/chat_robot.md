@@ -1,6 +1,6 @@
 # 构建带有记忆的终端对话机器人
 
-在最新版的 LangChain 中，我们通常使用 RunnableWithMessageHistory 来优雅地包裹我们在第四步学到的 LCEL Chain。它能拦截你的输入，自动从存储（比如 Redis 或数据库）中抓取历史记录拼接到 Prompt 里，再把大模型的新回答写回存储中。
+我们通常使用 RunnableWithMessageHistory 来优雅地包裹 LCEL Chain。它能拦截你的输入，自动从存储（比如 Redis 或数据库）中抓取历史记录拼接到 Prompt 里，再把大模型的新回答写回存储中。
 
 ### 1. 安装依赖
 
