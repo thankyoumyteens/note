@@ -48,6 +48,10 @@
   - [拆解 RAG 基础架构与 MVP 搭建](./phase2/basic_rag/basic_rag.md)
     - [核心概念](./phase2/basic_rag/concept.md)
     - [用 LangChain 搭建朴素 RAG](./phase2/basic_rag/langchain_rag.md)
+    - [使用 RecursiveCharacterTextSplitter 切分文本](./phase2/basic_rag/recursive_character_text_splitter.md)
+  - [数据接入与清洗](./phase2/etl/etl.md)
+    - [解析 PDF](./phase2/etl/parse_pdf.md)
+    - [针对 Markdown 的智能切分方法](./phase2/etl/markdown_header_text_splitter.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
 
 - [SQLModel](./sql_model/sql_model.md)

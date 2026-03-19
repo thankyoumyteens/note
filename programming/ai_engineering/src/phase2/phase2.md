@@ -19,7 +19,7 @@
 - 实现最基础的固定长度分块（CharacterTextSplitter），存入向量库。
 - 完成用户的提问检索，并将其拼接到 Prompt 中交给 LLM 生成回答。
 
-### 第二步：数据接入与清洗 ETL
+### 第二步：数据接入与清洗
 
 RAG 系统的上限由数据质量决定。“Garbage In, Garbage Out”在这里体现得淋漓尽致。
 
