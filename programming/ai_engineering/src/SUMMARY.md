@@ -51,7 +51,12 @@
     - [使用 RecursiveCharacterTextSplitter 切分文本](./phase2/basic_rag/recursive_character_text_splitter.md)
   - [数据接入与清洗](./phase2/etl/etl.md)
     - [解析 PDF](./phase2/etl/parse_pdf.md)
+    - [解析 Word](./phase2/etl/parse_word.md)
     - [针对 Markdown 的智能切分方法](./phase2/etl/markdown_header_text_splitter.md)
+  - [进阶分块策略](./phase2/advanced_chunking/advanced_chunking.md)
+    - [父子文档拆分](./phase2/advanced_chunking/parent_child_document.md)
+    - [语义分块](./phase2/advanced_chunking/semantic_chunking.md)
+  - [向量数据库落地](./phase2/db/db.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
 
 - [SQLModel](./sql_model/sql_model.md)
