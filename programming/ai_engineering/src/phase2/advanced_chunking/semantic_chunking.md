@@ -35,10 +35,14 @@ pip install langchain-experimental
 
 ```py
 import os
+
+# 使用 Hugging Face 国内镜像源
+# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
+# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_huggingface import HuggingFaceEmbeddings
-
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
 # 1. 准备一段【话题突变】的测试文本
 # 前面在讲公司愿景，中间突然变成打车报销，最后变成电脑密码配置。

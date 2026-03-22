@@ -15,6 +15,12 @@ pip install langchain-huggingface sentence-transformers
 ```py
 import os
 
+# 【避坑指南】如果你在国内网络环境，直接连 HuggingFace 下载模型可能会超时报错。
+# 使用 Hugging Face 国内镜像源
+# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
+# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_openai import ChatOpenAI
@@ -46,10 +52,6 @@ print(f"-> 文件被切分成了 {len(chunks)} 个块。")
 # ==========================================
 # 第三步 & 第四步：嵌入 (Embed) 与 存储 (Store)
 # ==========================================
-
-# 【避坑指南】如果你在国内网络环境，直接连 HuggingFace 下载模型可能会超时报错。
-# 加上这行环境变量，可以让它通过国内的镜像站下载模型权重。
-# os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
 print("3 & 4. 正在加载本地 Embedding 模型并存入 Chroma 向量库 (首次运行会自动下载，约 100MB，请耐心等待)...")
 # 使用 BAAI 的中文轻量级模型

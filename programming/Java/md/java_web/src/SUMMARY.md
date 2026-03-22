@@ -147,6 +147,10 @@
     - [模拟一轮完整的G1周期](./jvm/g1_gc_demo.md)
   - [监控平台如何监控GC日志](./jvm/gc_monitor.md)
 
+- [高并发](./high_concurrency/high_concurrency.md)
+  - [多线程模型和事件循环模型](./high_concurrency/models.md)
+  - [Java21 以下的版本实现事件循环模型](./high_concurrency/java_event_loop.md)
+
 - [Vibe Coding](./vibe_coding/vibe_coding.md)
   - [入门](./vibe_coding/first_step.md)
   - [项目示例](./vibe_coding/demo/demo.md)

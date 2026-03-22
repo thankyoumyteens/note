@@ -116,3 +116,11 @@ docker context use colima
 ```
 
 运行后，终端应该会提示：colima is the current context
+
+### failed to connect to the docker API at unix:///Users/walter/.colima/default/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/walter/.colima/default/docker.sock: connect: no such file or directory
+
+没启动 Colima，启动一下就好了：
+
+```sh
+colima start
+```

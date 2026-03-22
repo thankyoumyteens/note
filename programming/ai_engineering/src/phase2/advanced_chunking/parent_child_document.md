@@ -34,15 +34,17 @@ pip install langchain langchain-chroma langchain-huggingface
 ```py
 import os
 
+# 使用 Hugging Face 国内镜像源
+# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
+# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+
 from langchain_classic.retrievers import ParentDocumentRetriever
 from langchain_core.documents import Document
 from langchain_core.stores import InMemoryStore
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
-
-# 配置环境变量以加速模型下载
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
 # 1. 准备一份测试文档（模拟一个比较长、结构化的段落）
 docs = [

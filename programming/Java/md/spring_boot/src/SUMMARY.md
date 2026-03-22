@@ -66,3 +66,8 @@
       - [最基础的 Nginx 运行](./docker/use/nginx/base.md)
       - [目录挂载](./docker/use/nginx/volume.md)
       - [使用 Docker Compose](./docker/use/nginx/enterprise.md)
+    - [搭建 Redis](./docker/use/redis/redis.md)
+      - [最基础的 Redis 运行](./docker/use/redis/base.md)
+      - [开启持久化与设置密码](./docker/use/redis/volume.md)
+      - [使用 Docker Compose](./docker/use/redis/enterprise.md)
+    - [搭建 Elasticsearch](./docker/use/elasticsearch/elasticsearch.md)

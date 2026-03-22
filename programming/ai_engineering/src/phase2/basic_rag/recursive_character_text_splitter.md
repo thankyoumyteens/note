@@ -17,6 +17,11 @@
 ```py
 import os
 
+# 使用 Hugging Face 国内镜像源
+# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
+# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
+os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter
 from langchain_openai import ChatOpenAI
@@ -50,7 +55,6 @@ print(f"-> 文件被更合理地切分成了 {len(chunks)} 个块。")
 # 第三步 & 第四步：嵌入 (Embed) 与 存储 (Store)
 # ==========================================
 
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 print("3 & 4. 正在加载本地 Embedding 模型并存入 Chroma 向量库 (首次运行会自动下载，约 100MB，请耐心等待)...")
 embeddings_model = HuggingFaceEmbeddings(
     model_name="BAAI/bge-small-zh-v1.5",
