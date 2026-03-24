@@ -58,7 +58,10 @@
     - [语义分块](./phase2/advanced_chunking/semantic_chunking.md)
   - [向量数据库落地](./phase2/db/db.md)
     - [Qdrant 向量数据库](./phase2/db/qdrant.md)
+    - [标量过滤](./phase2/db/scalar_filtering.md)
     - [Milvus 向量数据库](./phase2/db/milvus.md)
+  - [高级检索技术与重排](./phase2/search/search.md)
+    - [在向量数据库中开启混合检索](./phase2/search/hybrid_search.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
 
 - [SQLModel](./sql_model/sql_model.md)
