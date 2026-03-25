@@ -1,12 +1,14 @@
 # Summary
 
 - [Java转AI应用开发](./chapter_1.md)
-- [简单体验](./start/start.md)
+- [获取硅基流动的 API 密钥](./get_api_key.md)
+- [搭建开发环境](./env.md)
+<!-- - [简单体验](./start/start.md)
   - [开始搭建一个最基础的RAG接口](./start/step1.md)
   - [打通真实的文档数据流（ETL 与分块）](./start/step2.md)
   - [让AI记住上下文](./start/step3.md)
   - [流式输出](./start/step4.md)
-  - [基本概念介绍](./start/step5.md)
+  - [基本概念介绍](./start/step5.md) -->
 - [阶段一：从 Java 思维切换到 AI 原生开发](./phase1/phase1.md)
   - [Python 基础补齐](./phase1/python/python.md)
     - [列表推导式](./phase1/python/list_comprehension.md)
@@ -61,7 +63,6 @@
     - [标量过滤](./phase2/db/scalar_filtering.md)
     - [Milvus 向量数据库](./phase2/db/milvus.md)
   - [高级检索技术与重排](./phase2/search/search.md)
-    - [在向量数据库中开启混合检索](./phase2/search/hybrid_search.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
 
 - [SQLModel](./sql_model/sql_model.md)
