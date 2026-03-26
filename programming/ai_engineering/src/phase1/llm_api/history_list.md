@@ -5,12 +5,17 @@
 为了让它有记忆，我们必须在代码里维护一个“对话列表”，每次用户提问时，把新的问题塞进列表，每次 AI 回答完，把 AI 的完整回答也塞进列表，然后再把整个列表打包发给服务器。
 
 ```py
+import os
+
+import env_setup
 from openai import OpenAI
+
+SILICON_FLOW_API_KEY = os.environ.get("API_KEY")
 
 # 初始化客户端
 client = OpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
-    base_url="https://ark.cn-beijing.volces.com/api/v3"
+    api_key=SILICON_FLOW_API_KEY,
+    base_url="https://api.siliconflow.cn/v1"
 )
 
 
@@ -48,7 +53,7 @@ def start_chat():
         try:
             # 4. 发送包含完整历史记录的请求
             response = client.chat.completions.create(
-                model="ep-11111111111111-aaaaa",
+                model="Pro/moonshotai/Kimi-K2.5",
                 messages=messages,
                 temperature=0.8,
                 stream=True

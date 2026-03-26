@@ -4,6 +4,8 @@
 import json
 import os
 
+import env_setup
+
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
@@ -11,18 +13,9 @@ from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
-# ================= 豆包 (Volcengine) 配置区 =================
-DOUBAO_API_KEY = os.environ.get("OPENAI_API_KEY")
-DOUBAO_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
-LLM_ENDPOINT_ID = os.environ.get("ENDPOINT_ID")  # 对话模型接入点id
-# =========================================================
-
 app = FastAPI(title="AI Financial Assistant (Streaming)")
 
 
-# ==========================================
-# 定义 DTO
-# ==========================================
 class ChatRequest(BaseModel):
     session_id: str = Field(..., description="会话唯一标识")
     message: str = Field(..., description="用户当前的问题")
@@ -31,11 +24,11 @@ class ChatRequest(BaseModel):
 # ==========================================
 # 初始化 AI 管道组件
 # ==========================================
-# 注意：流式输出不需要在 ChatOpenAI 里做特殊配置，底层默认支持
+# 注意：流式输出不需要在 ChatOpenAI 里做特殊配置
 model = ChatOpenAI(
-    api_key=DOUBAO_API_KEY,
-    base_url=DOUBAO_BASE_URL,
-    model=LLM_ENDPOINT_ID,
+    api_key=os.environ.get("API_KEY"),
+    base_url="https://api.siliconflow.cn/v1",
+    model="Pro/moonshotai/Kimi-K2.5",
     temperature=0.7,
 )
 
@@ -62,7 +55,9 @@ async def chat_stream(request: ChatRequest):
         # 它会返回一个异步迭代器，随着大模型的推理，一块一块地输出 (chunk)
         async for chunk in chain.astream(
                 {"question": request.message},
-                config={"configurable": {"session_id": request.session_id}}
+                config={
+                    "configurable": {"session_id": request.session_id}
+                }
         ):
             # chunk.content 就是这一次吐出来的几个字符
             if chunk.content:

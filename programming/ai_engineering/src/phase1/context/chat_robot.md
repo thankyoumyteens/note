@@ -8,40 +8,30 @@
 pip install langchain langchain-openai redis langchain-community
 ```
 
-### 2. redis_memory.py
+### 2. 代码
 
 ```py
 import os
+
+import env_setup
 
 from langchain_community.chat_message_histories import RedisChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-# 强行清理可能存在的代理环境变量，确保直连国内 API
-for key in ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY', 'all_proxy', 'ALL_PROXY']:
-    os.environ.pop(key, None)
-
-# ================= 豆包 (Volcengine) 配置区 =================
-DOUBAO_API_KEY = os.environ.get("OPENAI_API_KEY")
-DOUBAO_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
-LLM_ENDPOINT_ID = os.environ.get("ENDPOINT_ID")  # 对话模型接入点id
-# =========================================================
-
-REDIS_URL = "redis://localhost:6379/0"
-
 # 1. 初始化模型
 llm = ChatOpenAI(
-    api_key=DOUBAO_API_KEY,
-    base_url=DOUBAO_BASE_URL,
-    model=LLM_ENDPOINT_ID,
+    api_key=os.environ.get("API_KEY"),
+    base_url="https://api.siliconflow.cn/v1",
+    model="Pro/moonshotai/Kimi-K2.5",
     temperature=0,
 )
 
 # 2. 构建 Prompt 模板
-# 注意这里的 MessagesPlaceholder，它就像一个占位符“管道”，专门用来动态灌入历史消息
 prompt = ChatPromptTemplate.from_messages([
     ("system", "你是一位资深的金融数据工程师，擅长处理美股市场的数据清洗与架构设计。请用专业、干练的口吻回答。"),
+    # 注意这里的 MessagesPlaceholder，它就像一个占位符“管道”，专门用来动态灌入历史消息
     MessagesPlaceholder(variable_name="chat_history"),
     ("human", "{question}"),
 ])
@@ -54,7 +44,7 @@ chain = prompt | llm
 def get_redis_history(session_id: str) -> RedisChatMessageHistory:
     return RedisChatMessageHistory(
         session_id=session_id,
-        url=REDIS_URL,
+        url="redis://localhost:6379/0",  # Redis 连接地址
         key_prefix="chat_memory:"  # 规范的 Redis Key 前缀，方便管理
     )
 

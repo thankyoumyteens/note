@@ -7,39 +7,38 @@
 1. 系统预设分离：绝对不能把 System Prompt 存进 Redis，否则后面清理冗余记忆时会把它误删，导致 AI “人设崩塌”。
 2. 滑动窗口限流 (Sliding Window)：大模型按 Token 收费且有上下文长度上限。如果不加限制，聊上两百回合，单次请求的费用会极其高昂，甚至直接报错。我们必须利用 Redis 的 LTRIM 指令，只保留最近的 N 轮对话。
 
-### 1. 安装 Python 的 Redis 客户端
+### 1. 安装依赖
+
+安装 Python 的 Redis 客户端
 
 ```sh
 pip install redis
 ```
 
-### 2. 修改 main.py
+### 2. 代码
 
 ```py
 import os
+
+import env_setup
+
 import json
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from openai import AsyncOpenAI
 import redis.asyncio as redis  # 【关键1】引入异步 Redis 客户端
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# 初始化 OpenAI 和 Redis 客户端
 client = AsyncOpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
-    base_url="https://ark.cn-beijing.volces.com/api/v3"
+    api_key=os.environ.get("API_KEY"),
+    base_url="https://api.siliconflow.cn/v1"
 )
 
+# 初始化 Redis 客户端
 # 生产环境建议将配置写进环境变量，decode_responses=True 会自动将字节解码为字符串
-redis_client = redis.Redis(
-    host='localhost',
-    port=6379,
-    db=0,
-    decode_responses=True
-)
+redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
 
 
 class ChatRequest(BaseModel):
@@ -77,7 +76,7 @@ async def generate_chat_stream(session_id: str, user_message: str):
     try:
         # 3. 发起大模型流式请求
         response = await client.chat.completions.create(
-            model="ep-11111111111111-aaaaa",
+            model="Pro/moonshotai/Kimi-K2.5",
             messages=request_messages,
             temperature=0.8,
             stream=True
@@ -105,7 +104,7 @@ async def generate_chat_stream(session_id: str, user_message: str):
             # 【核心护城河】：滑动窗口裁剪。只保留列表最右边（最新）的 MAX_HISTORY_LENGTH 条记录
             pipe.ltrim(redis_key, -MAX_HISTORY_LENGTH, -1)
 
-            # 刷新过期时间，避免死数据堆积
+            # 刷新过期时间
             pipe.expire(redis_key, SESSION_TTL)
 
             # 把打包在 Pipeline 里的 RPUSH、LTRIM 和 EXPIRE 指令一次性发给 Redis

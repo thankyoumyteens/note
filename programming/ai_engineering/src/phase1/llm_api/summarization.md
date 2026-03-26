@@ -17,30 +17,40 @@
 System Prompt + [后台摘要] + [最近的 6 条聊天记录] + [当前新问题]。
 ```
 
+### 1. 代码
+
 修改 main.py。这次引入了 BackgroundTasks 来做异步的摘要压缩：
 
 ```py
+import asyncio
+import os
+
+import env_setup
+
 import json
+from fastapi import FastAPI, BackgroundTasks
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from openai import AsyncOpenAI
 import redis.asyncio as redis
-import asyncio  # 【新增】引入 Python 内置的异步库
-from fastapi import FastAPI, BackgroundTasks  # 【新增】引入后台任务
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-client = AsyncOpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
-    base_url="https://ark.cn-beijing.volces.com/api/v3"
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 开发环境下允许所有来源
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-redis_client = redis.Redis(
-    host='localhost',
-    port=6379,
-    db=0,
-    decode_responses=True
+client = AsyncOpenAI(
+    api_key=os.environ.get("API_KEY"),
+    base_url="https://api.siliconflow.cn/v1"
 )
+
+redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
 
 
 class ChatRequest(BaseModel):
@@ -60,13 +70,13 @@ SESSION_TTL = 3600
 
 
 # ==========================================
-# 【核心逻辑】：后台异步执行的摘要压缩任务
+# 【核心逻辑】：在后台异步执行的摘要压缩任务
 # ==========================================
 async def compress_memory_task(session_id: str):
     history_key = f"chat_history:{session_id}"
     summary_key = f"chat_summary:{session_id}"
 
-    # 1. 拿到当前的旧摘要和过长的历史记录
+    # 1. 拿到当前的旧摘要和过长的对话历史记录
     old_summary = await redis_client.get(summary_key) or "无"
     raw_history = await redis_client.lrange(history_key, 0, -1)
 
@@ -88,7 +98,7 @@ async def compress_memory_task(session_id: str):
         # 这里不需要流式输出，直接一次性等待结果即可
         response = await client.chat.completions.create(
             # 摘要任务用更便宜的模型即可，降低成本
-            model="ep-11111111111111-bbbbb",
+            model="deepseek-ai/DeepSeek-V3",
             messages=[{"role": "user", "content": summarize_prompt}],
             temperature=0.3  # 摘要需要严谨，降低随机性
             # 不开启流式输出，直接等待结果全部返回
@@ -97,9 +107,9 @@ async def compress_memory_task(session_id: str):
         new_summary = response.choices[0].message.content
 
         # 3. 将新摘要存入 Redis，并清空刚刚被总结过的那部分历史记录
-        # 我们留下最新的 2 条（1 个回合），保持对话的连贯性
         async with redis_client.pipeline(transaction=True) as pipe:
             pipe.setex(summary_key, SESSION_TTL, new_summary)
+            # 我们留下最新的 2 条（1 个回合），保持对话的连贯性
             pipe.ltrim(history_key, -2, -1)
             await pipe.execute()
 
@@ -110,7 +120,7 @@ async def compress_memory_task(session_id: str):
 
 
 # ==========================================
-# 主流式接口
+# 处理对话
 # ==========================================
 async def generate_chat_stream(session_id: str, user_message: str, background_tasks: BackgroundTasks):
     history_key = f"chat_history:{session_id}"
@@ -126,7 +136,6 @@ async def generate_chat_stream(session_id: str, user_message: str, background_ta
 
     # 2. 组装终极 Context
     request_messages = [SYSTEM_PROMPT]
-
     if current_summary:
         # 如果有摘要，把它变成一条 System 指令塞进去，大模型会把它当成“已知事实”
         request_messages.append({"role": "system", "content": f"【用户历史背景摘要】：{current_summary}"})
@@ -138,7 +147,7 @@ async def generate_chat_stream(session_id: str, user_message: str, background_ta
     try:
         response = await client.chat.completions.create(
             # 这里使用更强的模型
-            model="ep-11111111111111-aaaaa",
+            model="Pro/moonshotai/Kimi-K2.5",
             messages=request_messages,
             temperature=0.8,
             stream=True
@@ -155,9 +164,9 @@ async def generate_chat_stream(session_id: str, user_message: str, background_ta
 
         # 保存对话记录
         async with redis_client.pipeline(transaction=True) as pipe:
-            pipe.rpush(history_key, json.dumps(new_user_msg))  # type: ignore
-            pipe.rpush(history_key, json.dumps(new_ai_msg))  # type: ignore
-            pipe.expire(history_key, SESSION_TTL)  # type: ignore
+            pipe.rpush(history_key, json.dumps(new_user_msg))
+            pipe.rpush(history_key, json.dumps(new_ai_msg))
+            pipe.expire(history_key, SESSION_TTL)
             await pipe.execute()
 
         # 3. 【核心触发机制】：如果对话太长了，触发后台压缩任务

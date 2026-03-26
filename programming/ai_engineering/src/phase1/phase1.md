@@ -2,20 +2,6 @@
 
 从 Java 后端思维切换到 AI 原生开发（Python 生态）是一个非常经典且充满价值的转型。Java 开发者通常习惯了严谨的面向对象、设计模式和繁重的企业级框架（如 Spring 生态），而在 AI 开发的初期（阶段一），最大的挑战往往是适应 Python 的“脚本化”思维以及大模型的“非确定性”输出。
 
-为了帮你丝滑过渡，我将“阶段一”拆解为具体的学习路线，并为你整理了 **Java 到 Python AI 生态的思维映射表**，希望能降低你的学习成本。
-
-### 核心思维映射（Java vs Python AI 生态）
-
-| 核心概念与场景     | Java 后端开发体系                    | Python AI 开发体系              |
-| ------------------ | ------------------------------------ | ------------------------------- |
-| **依赖与包管理**   | Maven / Gradle                       | pip / requirements.txt / Poetry |
-| **环境隔离**       | 多 JDK 版本 / 容器化                 | venv / Conda                    |
-| **数据传输与校验** | POJO + Jackson + Hibernate Validator | Pydantic (极度重要)             |
-| **Web API 框架**   | Spring Boot                          | FastAPI                         |
-| **业务逻辑编排**   | Spring Framework (IoC/AOP)           | LangChain (LCEL)                |
-
----
-
 ### 第一步：Python 基础补齐
 
 不要试图去学完一整本 Python 教程，Java 开发者只需抓住几个核心差异即可快速上手。
@@ -29,14 +15,14 @@
 使用 FastAPI 创建标准的 Web 服务，供前端或内部系统调用。
 
 - **FastAPI 基础**：学习这个现代、快速的异步 Web 框架。掌握如何定义 GET/POST 路由。
-- **Pydantic 深度学习**：这是 AI 开发的数据基石。学习如何定义继承自 `BaseModel` 的数据类，掌握数据自动转换和校验逻辑（这就是你未来的实体类/DTO）。
-- **整合 Pydantic**：使用 FastAPI 时，直接将你第一步学过的 Pydantic 模型作为请求（Request Body）和响应（Response Model）的类型注解，框架会自动生成 Swagger 文档并完成参数校验。
+- **Pydantic 学习**：这是 AI 开发的数据基石。学习如何定义继承自 `BaseModel` 的数据类，掌握数据自动转换和校验逻辑（这就是你未来的实体类/DTO）。
+- **整合 Pydantic**：使用 FastAPI 时，直接将 Pydantic 模型作为请求（Request Body）和响应（Response Model）的类型注解，框架会自动生成 Swagger 文档并完成参数校验。
 
 #### 第三步：大模型 API 原生调用与 Prompt 技巧
 
 暂不使用任何复杂的框架，直接通过 HTTP 或官方 SDK 与大模型交互，理解底层逻辑。
 
-- **基础对话流**：注册 OpenAI 或 DeepSeek 获取 API Key。使用官方 Python SDK 发起 `ChatCompletion` 请求。
+- **基础对话流**：使用 OpenAI 官方 Python SDK 发起 `ChatCompletion` 请求。
 - **上下文管理 (Context)**：大模型本身是无状态的（类似 HTTP 协议）。学习如何通过在代码中维护一个 `messages` 列表（包含 System, User, Assistant 角色）来手动实现多轮对话记忆。
 - **参数调优**：编写测试脚本，调整并观察 `Temperature`（温度，控制发散度）、`Top-P`、`Max Tokens` 对模型输出的具体影响。
 - **Prompt 工程**：练习 Few-Shot（少样本提示，给模型 1-2 个例子规范 JSON 输出）和 CoT（思维链，在 Prompt 中加入“请一步步思考”，提高复杂逻辑的准确率）。

@@ -4,18 +4,22 @@
 
 滚动总结（Summary Memory）完美地平衡了“保留长期记忆”与“控制 Token 消耗”。
 
-架构设计思路
+## 架构设计思路
 
 1. 触发机制：每次写 Redis 时检查长度，当 `len(List) >= 20` 时，非阻塞地抛出一个异步任务，主线程立刻向用户返回当前的 AI 回答。
 2. 异步总结：后台任务捞出这 20 条消息，用一个专门的“总结 Prompt”请求大模型，要求生成 200 字摘要。
 3. 状态替换：将这 20 条长文本从 Redis 中删除，替换为一条 SystemMessage（内容为：“这是之前的对话摘要：...”）。
 
+## 代码
+
 ```py
 import os
+
+import env_setup
+
 import json
 import asyncio
 from typing import List
-
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
@@ -26,23 +30,15 @@ from langchain_core.messages import SystemMessage, BaseMessage, message_to_dict,
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
-# ================= 1. 环境与配置 =================
-for key in ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY', 'all_proxy', 'ALL_PROXY']:
-    os.environ.pop(key, None)
-
-DOUBAO_API_KEY = os.environ.get("OPENAI_API_KEY")
-DOUBAO_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
-LLM_ENDPOINT_ID = os.environ.get("ENDPOINT_ID")
-
-if not DOUBAO_API_KEY or not LLM_ENDPOINT_ID:
-    raise ValueError("🚨 环境变量缺失，请配置 OPENAI_API_KEY 和 ENDPOINT_ID")
-
 # 初始化 Redis 客户端
-# decode_responses=True 会自动将 Redis 的 bytes 解码为 str，省去手动 decode 的麻烦
-redis_client = redis.Redis.from_url("redis://localhost:6379/0", decode_responses=True)
+redis_client = redis.Redis.from_url(
+    "redis://localhost:6379/0",
+    # decode_responses=True 会自动将 Redis 的 bytes 解码为 str，省去手动 decode 的麻烦
+    decode_responses=True
+)
 
 
-# ================= 2. Pydantic 交互模型 =================
+# ================= Pydantic 交互模型 =================
 class ChatRequest(BaseModel):
     session_id: str = Field(..., description="用户会话ID")
     query: str = Field(..., min_length=1, max_length=1000, description="提问内容")
@@ -54,11 +50,11 @@ class ChatResponse(BaseModel):
     is_summarizing: bool = Field(default=False, description="当前后台是否正在压缩记忆")
 
 
-# ================= 3. AI 逻辑与异步总结存储引擎 =================
+# ================= AI 逻辑与异步总结存储引擎 =================
 llm = ChatOpenAI(
-    api_key=DOUBAO_API_KEY,
-    base_url=DOUBAO_BASE_URL,
-    model=LLM_ENDPOINT_ID,
+    api_key=os.environ.get("API_KEY"),
+    base_url="https://api.siliconflow.cn/v1",
+    model="Pro/moonshotai/Kimi-K2.5",
     temperature=0,
 )
 
@@ -78,9 +74,8 @@ SUMMARY_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
-class SummarySingleRedisHistory(BaseChatMessageHistory):
-    """Redis 版的滚动总结功能实现"""
-
+# Redis 版的滚动总结功能实现
+class SummaryRedisHistory(BaseChatMessageHistory):
     def __init__(self, session_id: str, threshold: int = 10, ttl: int = 604800):
         self.session_id = session_id
         self.key_prefix = "ai_agent:chat_summary:"
@@ -120,7 +115,6 @@ class SummarySingleRedisHistory(BaseChatMessageHistory):
         # 1. 批量存入新消息
         for message in messages:
             redis_client.lpush(self.key, json.dumps(message_to_dict(message)))
-
         if self.ttl:
             redis_client.expire(self.key, self.ttl)
 
@@ -134,26 +128,33 @@ class SummarySingleRedisHistory(BaseChatMessageHistory):
 
     async def _async_summarize(self):
         try:
-            print(f"\n[后台任务] 检测到对话超过 {self.threshold} 条，触发记忆总结 (Session: {self.session_id})...")
+            # 1. 拍下当前的快照长度
+            snapshot_len = redis_client.llen(self.key)
+            print(f"\n[后台任务] 触发记忆总结 (当前快照长度: {snapshot_len}, Session: {self.session_id})...")
+
+            # 获取当前所有消息进行总结
             current_messages = self.messages
             history_text = "\n".join([f"{m.type}: {m.content}" for m in current_messages])
 
             summary_chain = SUMMARY_PROMPT | llm
-            # ainvoke 异步调用大模型，释放 CPU
+            # ainvoke 异步调用大模型，释放 CPU。这期间用户可能又发了 2 条新消息
             summary_response = await summary_chain.ainvoke({"chat_history": history_text})
             summary_text = summary_response.content
 
             print(f"[后台任务] 摘要生成完成: {summary_text[:50]}...")
-
             new_memory = SystemMessage(content=f"之前的对话摘要：{summary_text}")
 
-            # 原子化替换：先删后插
+            # 2. 优雅的并发更新：精准裁剪老消息，保留期间产生的新消息
             pipeline = redis_client.pipeline()
-            pipeline.delete(self.key)
-            pipeline.lpush(self.key, json.dumps(message_to_dict(new_memory)))
+            # 从右侧（最老的消息）弹出 snapshot_len 次
+            for _ in range(snapshot_len):
+                pipeline.rpop(self.key)
+
+            # 将新的摘要从右侧（作为最老的基础记忆）推入
+            pipeline.rpush(self.key, json.dumps(message_to_dict(new_memory)))
             pipeline.execute()
 
-            print(f"[后台任务] Redis 状态已更新。记忆已压缩为 1 条摘要。")
+            print(f"[后台任务] Redis 状态已更新。已安全替换 {snapshot_len} 条老记忆，期间的新消息不受影响。")
         except Exception as e:
             print(f"[后台任务] 总结失败: {e}")
         finally:
@@ -170,7 +171,7 @@ history_store = {}
 def get_summary_redis_history(session_id: str) -> BaseChatMessageHistory:
     if session_id not in history_store:
         # 这里将阈值设为 4 条（即 2 轮对话），方便你快速测试出总结效果
-        history_store[session_id] = SummarySingleRedisHistory(session_id=session_id, threshold=4)
+        history_store[session_id] = SummaryRedisHistory(session_id=session_id, threshold=4)
     return history_store[session_id]
 
 

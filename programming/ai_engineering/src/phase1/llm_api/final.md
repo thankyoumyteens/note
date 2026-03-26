@@ -12,6 +12,9 @@
 
 ```py
 import os
+
+import env_setup
+
 import json
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
@@ -21,7 +24,6 @@ import redis.asyncio as redis
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-# 允许跨域请求
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # 开发环境下允许所有来源
@@ -30,8 +32,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 client = AsyncOpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
-    base_url="https://ark.cn-beijing.volces.com/api/v3"
+    api_key=os.environ.get("API_KEY"),
+    base_url="https://api.siliconflow.cn/v1"
 )
 redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
 
@@ -81,6 +83,7 @@ TOOLS = [{
 # 2. 核心流式 Agent 逻辑
 # ==========================================
 async def generate_chat_stream(session_id: str, user_message: str):
+    # 从缓存加载对话上下文
     history_key = f"chat_history:{session_id}"
     raw_history = await redis_client.lrange(history_key, 0, -1)
     history_messages = [json.loads(msg) for msg in raw_history]
@@ -91,7 +94,7 @@ async def generate_chat_stream(session_id: str, user_message: str):
     try:
         # 【第一轮请求】：开启流式，带上工具箱
         response = await client.chat.completions.create(
-            model="ep-11111111111111-aaaaa",
+            model="Pro/moonshotai/Kimi-K2.5",
             messages=request_messages,
             tools=TOOLS,
             stream=True
@@ -127,7 +130,11 @@ async def generate_chat_stream(session_id: str, user_message: str):
         # 【拦截判定】：流式结束后，检查刚才有没有积攒工具调用？
         if tool_calls_accumulator:
             # 1. 给前端发一个友好的提示（这步极其提升用户体验！）
-            yield f"data: {json.dumps({'content': '<br><i style=\"color:gray;\">[系统日志：正在切入交易内网查询底层数据...]</i><br>'}, ensure_ascii=False)}\n\n"
+            loading_message = json.dumps(
+                {'content': '<br><i style=\"color:gray;\">[系统日志：正在切入交易内网查询底层数据...]</i><br>'},
+                ensure_ascii=False
+            )
+            yield f"data: {loading_message}\n\n"
 
             # 2. 把大模型想要调用的工具列表，存入上下文
             tool_calls_list = list(tool_calls_accumulator.values())
@@ -155,7 +162,7 @@ async def generate_chat_stream(session_id: str, user_message: str):
 
             # 4. 【第二轮请求】：带着查到的真实数据，再次唤醒大模型，让它润色
             second_response = await client.chat.completions.create(
-                model="ep-11111111111111-aaaaa",
+                model="Pro/moonshotai/Kimi-K2.5",
                 messages=request_messages,
                 stream=True  # 第二次也要流式输出
             )
@@ -166,7 +173,7 @@ async def generate_chat_stream(session_id: str, user_message: str):
                     full_reply += content
                     yield f"data: {json.dumps({'content': content}, ensure_ascii=False)}\n\n"
 
-        # 最终：把用户的问题，和大模型最终的一大串回复，存入 Redis
+        # 最终：把用户的问题，和大模型最终的一大串回复，存入 Redis（调用工具的对话记录不用存）
         new_ai_msg = {"role": "assistant", "content": full_reply}
         async with redis_client.pipeline(transaction=True) as pipe:
             pipe.rpush(history_key, json.dumps(new_user_msg))

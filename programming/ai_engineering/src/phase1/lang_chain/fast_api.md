@@ -1,4 +1,4 @@
-# 整合到 FastAPI
+# LangChain 搭配 FastAPI
 
 ### 1. 安装依赖
 
@@ -6,10 +6,12 @@
 pip install fastapi uvicorn langchain langchain-openai pydantic
 ```
 
-### 2. main.py
+### 2. 代码
 
 ```py
 import os
+
+import env_setup
 
 import uvicorn
 from fastapi import FastAPI, HTTPException
@@ -17,12 +19,6 @@ from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
-
-# ================= 豆包 (Volcengine) 配置区 =================
-DOUBAO_API_KEY = os.environ.get("OPENAI_API_KEY")
-DOUBAO_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
-LLM_ENDPOINT_ID = os.environ.get("ENDPOINT_ID")  # 对话模型接入点id
-# =========================================================
 
 app = FastAPI(
     title="AI Financial News Extractor",
@@ -38,7 +34,7 @@ app = FastAPI(
 # 客户端请求的 JSON 结构 (FastAPI 会自动执行基础校验)
 class NewsRequest(BaseModel):
     # ...放在 Field 的第一个参数位置（也就是 default 参数的位置）时，
-    # 它的明确含义是：这个字段是必填项（Required），没有默认值
+    # 它的明确含义是：这个字段是必填项（Required），且没有默认值
     content: str = Field(..., min_length=15, description="新闻文本内容，太短的内容没有提取价值")
 
 
@@ -62,9 +58,9 @@ prompt = ChatPromptTemplate.from_messages([
 ])
 
 model = ChatOpenAI(
-    api_key=DOUBAO_API_KEY,
-    base_url=DOUBAO_BASE_URL,
-    model=LLM_ENDPOINT_ID,
+    api_key=os.environ.get("API_KEY"),
+    base_url="https://api.siliconflow.cn/v1",
+    model="Pro/moonshotai/Kimi-K2.5",
     temperature=0,
 )
 
@@ -104,4 +100,10 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
 ```
 
-async 和 await 的威力：当你调用 OpenAI(或其它大模型) 的 API 时，网络延迟可能长达 1-2 秒。在传统的同步阻塞模型中，这会卡死当前线程。Python 原生的 async/await 类似于 Java 的虚拟线程（Virtual Threads）或 WebFlux。当你的代码 `await chain.ainvoke(...)` 时，FastAPI 会把当前线程让出来去处理其他用户的 HTTP 请求，等 OpenAI 返回结果了再切回来继续执行。这对高并发的 AI 应用至关重要。
+## async 和 await 的威力
+
+当你调用 OpenAI(或其它大模型) 的 API 时，网络延迟可能长达 1-2 秒。在传统的同步阻塞模型中，这会卡死当前线程。
+
+Python 原生的 async/await 类似于 Java 的虚拟线程（Virtual Threads）或 WebFlux。
+
+当你的代码 `await chain.ainvoke(...)` 时，FastAPI 会把当前线程让出来去处理其他用户的 HTTP 请求，等 OpenAI 返回结果了再切回来继续执行。这对高并发的 AI 应用至关重要。
