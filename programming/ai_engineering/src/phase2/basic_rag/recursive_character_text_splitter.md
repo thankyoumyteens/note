@@ -12,21 +12,19 @@
 
 结论：它能最大限度地保证一句话、一段话的语义完整性。
 
-## 代码替换
+## 代码
 
 ```py
 import os
 
-# 使用 Hugging Face 国内镜像源
-# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
-# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+import env_setup
 
 from langchain_community.document_loaders import TextLoader
-from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter
-from langchain_openai import ChatOpenAI
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
+
+SILICON_FLOW_API_KEY = os.environ.get("API_KEY")
 
 print("1. 正在加载文档...")
 loader = TextLoader("knowledge.txt", encoding="utf-8")
@@ -47,18 +45,19 @@ chunks = text_splitter.split_documents(docs)
 print(f"-> 文件被更合理地切分成了 {len(chunks)} 个块。")
 
 # （可选）打印出前两个块看看效果，你会发现语句比之前完整多了
-# print(chunks[0].page_content)
-# print("---")
-# print(chunks[1].page_content)
+print(chunks[0].page_content)
+print("---")
+print(chunks[1].page_content)
 
 # ==========================================
 # 第三步 & 第四步：嵌入 (Embed) 与 存储 (Store)
 # ==========================================
 
-print("3 & 4. 正在加载本地 Embedding 模型并存入 Chroma 向量库 (首次运行会自动下载，约 100MB，请耐心等待)...")
-embeddings_model = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-small-zh-v1.5",
-    model_kwargs={'device': 'cpu'}
+print("3 & 4. 正在加载 Embedding 模型并存入 Chroma 向量库...")
+embeddings_model = OpenAIEmbeddings(
+    openai_api_key=SILICON_FLOW_API_KEY,
+    openai_api_base="https://api.siliconflow.cn/v1",
+    model="Qwen/Qwen3-Embedding-8B"
 )
 
 vector_db = Chroma.from_documents(documents=chunks, embedding=embeddings_model)
@@ -69,15 +68,12 @@ retriever = vector_db.as_retriever(search_kwargs={"k": 2})
 user_question = "我是一个刚入职 1 年的新员工，我今年有几天年假？如果我连续生病休息了 3 天，需要准备什么材料？"
 retrieved_docs = retriever.invoke(user_question)
 
-DOUBAO_API_KEY = os.environ.get("OPENAI_API_KEY")
-DOUBAO_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
-LLM_ENDPOINT_ID = os.environ.get("ENDPOINT_ID")
 print("6. 拼接 Prompt 并调用 LLM 生成回答...")
 llm = ChatOpenAI(
-    api_key=DOUBAO_API_KEY,
-    base_url=DOUBAO_BASE_URL,
-    model=LLM_ENDPOINT_ID,
-    temperature=0
+    api_key=SILICON_FLOW_API_KEY,
+    base_url="https://api.siliconflow.cn/v1",
+    model="Pro/moonshotai/Kimi-K2.5",
+    temperature=0,
 )
 
 context = "\n---\n".join([doc.page_content for doc in retrieved_docs])

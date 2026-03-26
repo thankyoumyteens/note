@@ -6,26 +6,23 @@
 
 ```sh
 pip install langchain langchain-openai langchain-chroma chromadb tiktoken
-# 使用本地开源的 Embedding 模型
-pip install langchain-huggingface sentence-transformers
 ```
 
-### 2. 代码实现（请仔细看注释里的 1~6 步对应关系）
+### 2. 代码
+
+请仔细看注释里的 1~6 步对应关系
 
 ```py
 import os
 
-# 【避坑指南】如果你在国内网络环境，直接连 HuggingFace 下载模型可能会超时报错。
-# 使用 Hugging Face 国内镜像源
-# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
-# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+import env_setup
 
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
+
+SILICON_FLOW_API_KEY = os.environ.get("API_KEY")
 
 # 假设你本地有一个 knowledge.txt 文件
 # ==========================================
@@ -53,12 +50,11 @@ print(f"-> 文件被切分成了 {len(chunks)} 个块。")
 # 第三步 & 第四步：嵌入 (Embed) 与 存储 (Store)
 # ==========================================
 
-print("3 & 4. 正在加载本地 Embedding 模型并存入 Chroma 向量库 (首次运行会自动下载，约 100MB，请耐心等待)...")
-# 使用 BAAI 的中文轻量级模型
-embeddings_model = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-small-zh-v1.5",
-    # 如果你的电脑有 Nvidia 显卡，可以把 "cpu" 改成 "cuda" 加速，Mac M系列芯片可以改成 "mps"
-    model_kwargs={'device': 'cpu'}
+print("3 & 4. 正在加载 Embedding 模型并存入 Chroma 向量库...")
+embeddings_model = OpenAIEmbeddings(
+    openai_api_key=SILICON_FLOW_API_KEY,
+    openai_api_base="https://api.siliconflow.cn/v1",
+    model="Qwen/Qwen3-Embedding-8B"
 )
 
 # Chroma 会在内存中创建一个向量库，并自动调用 embeddings_model 把 chunks 变成向量存进去
@@ -77,15 +73,12 @@ retrieved_docs = retriever.invoke(user_question)
 # ==========================================
 # 第六步：生成 (Generate)
 # ==========================================
-DOUBAO_API_KEY = os.environ.get("OPENAI_API_KEY")
-DOUBAO_BASE_URL = "https://ark.cn-beijing.volces.com/api/v3"
-LLM_ENDPOINT_ID = os.environ.get("ENDPOINT_ID")
 print("6. 拼接 Prompt 并调用 LLM 生成回答...")
 llm = ChatOpenAI(
-    api_key=DOUBAO_API_KEY,
-    base_url=DOUBAO_BASE_URL,
-    model=LLM_ENDPOINT_ID,
-    temperature=0
+    api_key=SILICON_FLOW_API_KEY,
+    base_url="https://api.siliconflow.cn/v1",
+    model="Pro/moonshotai/Kimi-K2.5",
+    temperature=0,
 )
 
 # 把检索到的两个文本块的内容拼在一起作为上下文
@@ -107,6 +100,8 @@ response = llm.invoke(prompt)
 print("\n🤖 AI 回答:")
 print(response.content)
 ```
+
+### 3. knowledge.txt 文件
 
 请将以下内容复制，并保存为与你 Python 脚本同级目录下的 knowledge.txt 文件：
 
@@ -133,10 +128,7 @@ print(response.content)
 3. VPN使用：非办公区访问公司内网的 Gitlab 或 Jira 系统，必须使用公司统一配发的 GlobalProtect VPN 客户端，并配合手机动态令牌（MFA）登录。
 ```
 
-- CharacterTextSplitter 比较“死板”：在实际工程中，我们更常用 RecursiveCharacterTextSplitter，它会优先按段落切，再按句子切，尽量保证一句话的完整性。
-- 向量库持久化：上面的 Chroma 是存在内存里的，程序一停就没了。如果你想把它存到本地硬盘当真正的“数据库”用，只需要在初始化时加一个参数 `persist_directory="./chroma_db"`。
-
-### 3. 测试指南：如何验证你的 RAG 系统？
+### 4. 测试指南：如何验证你的 RAG 系统？
 
 把代码里的 user_question 依次替换成以下几个问题，看看大模型是否能给出准确的回答：
 
