@@ -1,20 +1,18 @@
 # 针对 Markdown 的智能切分方法
 
-之前我们用的 RecursiveCharacterTextSplitter 是“物理切分”：它不管你内容讲的是什么，只要字数到了，就强行找个标点符号切断。
-这会导致一个致命问题——上下文丢失。
+之前我们用的 RecursiveCharacterTextSplitter 是“物理切分”：它不管你内容讲的是什么，只要字数到了，就强行找个标点符号切断。这会导致一个致命问题：上下文丢失。
 
 假设你的文档有一段内容：
 
-```
+```markdown
 ### 3. 餐补与交通费
+
 公司每月随工资发放 800 元餐饮补贴。
 ```
 
 如果切分时，“标题”和“正文”刚好被切到了两个不同的 Chunk（块）里，大模型拿到“公司每月随工资发放 800 元餐饮补贴”这句话时，它根本不知道这是哪个部门的规定，也不知道这属于“餐补”范畴。
 
-MarkdownHeaderTextSplitter 的魔法在于：提取元数据（Metadata）。
-
-它会把当前段落隶属的所有父级标题，自动作为字典塞进这个 Chunk 的 Metadata 里。大模型不仅能看到正文，还能看到它的“血统”。
+MarkdownHeaderTextSplitter 的魔法在于：提取元数据（Metadata）。它会把当前段落隶属的所有父级标题，自动作为字典塞进这个 Chunk 的 Metadata 里。大模型不仅能看到正文，还能看到它的“血统”。
 
 ## 体验智能切分与 Metadata
 
@@ -83,14 +81,63 @@ for i, chunk in enumerate(md_header_splits):
 代码写出来是这样的：
 
 ```py
+from langchain_text_splitters import MarkdownHeaderTextSplitter
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-# ... (前面保留 Markdown 切分的 md_header_splits 代码)
+markdown_document = """
+# 星辰科技有限公司2026版内部员工手册
+
+## 第二章：考勤与办公制度
+### 1. 工作时间
+公司实行弹性工作制。标准工作时间为工作日 10:00 - 19:00。
+### 2. 迟到与早退
+每月允许有 3 次、每次不超过 30 分钟的免责迟到。
+
+## 第三章：假期与福利
+### 1. 年假
+试用期（3个月）通过后，即可获得每年 12 天的带薪年假。
+"""
+
+headers_to_split_on = [
+    ("#", "文档大标题"),
+    ("##", "章"),
+    ("###", "节"),
+]
+
+markdown_splitter = MarkdownHeaderTextSplitter(
+    headers_to_split_on=headers_to_split_on,
+    strip_headers=False  # 是否在正文中保留标题符号，推荐保留（False）
+)
+
+# 执行 Markdown 切分
+md_header_splits = markdown_splitter.split_text(markdown_document)
 
 # 引入我们熟悉的递归切分器限制长度
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=200, chunk_overlap=20
+    # 为了看到效果，这里把 chunk_size 设置小一些
+    chunk_size=20, chunk_overlap=20
 )
 
 final_splits = text_splitter.split_documents(md_header_splits)
+
+print(f"✅ 成功切分为 {len(final_splits)} 个独立块。\n")
+
+for i, chunk in enumerate(final_splits):
+    print(f"--- Chunk {i + 1} ---")
+    print(f"📄 正文内容: {chunk.page_content.strip()}")
+    print(f"🏷️ 元数据 (Metadata): {chunk.metadata}")
+    print()
+```
+
+输出如下：
+
+```
+...
+--- Chunk 13 ---
+📄 正文内容: 试用期（3个月）通过后，即可获得每年
+🏷️ 元数据 (Metadata): {'文档大标题': '星辰科技有限公司2026版内部员工手册', '章': '第三章：假期与福利', '节': '1. 年假'}
+
+--- Chunk 14 ---
+📄 正文内容: 12 天的带薪年假。
+🏷️ 元数据 (Metadata): {'文档大标题': '星辰科技有限公司2026版内部员工手册', '章': '第三章：假期与福利', '节': '1. 年假'}
 ```

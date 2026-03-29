@@ -36,35 +36,25 @@ pip install langchain-experimental
 ```py
 import os
 
-# 使用 Hugging Face 国内镜像源
-# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
-# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+import env_setup
 
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import OpenAIEmbeddings
 
 # 1. 准备一段【话题突变】的测试文本
 # 前面在讲公司愿景，中间突然变成打车报销，最后变成电脑密码配置。
 # 注意：里面没有任何换行符和段落标识，完全是一坨纯文本！
 text = """星辰科技成立于2020年，我们的核心使命是用AI技术让生活更简单。公司始终坚持客户第一的价值观，不断迭代我们的核心产品。关于员工的日常报销，若因项目加班超过晚上21:30，可通过企业滴滴直接打车回家，费用由公司全额支付。另外，每月随工资发放800元餐饮补贴。新员工入职后，办公电脑需连接Starry_Corp_5G网络，该网络必须使用个人LDAP账号进行认证，严禁将密码泄露给外来访客。"""
 
-print("1. 加载本地 Embedding 模型 (充当语义雷达)...")
-embeddings = HuggingFaceEmbeddings(
-    model_name="BAAI/bge-small-zh-v1.5",
-    model_kwargs={'device': 'cpu'}
+print("1. 加载 Embedding 模型 (充当语义雷达)...")
+embeddings = OpenAIEmbeddings(
+    openai_api_key=os.environ.get("API_KEY"),
+    openai_api_base="https://api.siliconflow.cn/v1",
+    model="Qwen/Qwen3-Embedding-8B"
 )
 
 print("2. 初始化语义分块器...")
-# breakpoint_threshold_type="percentile" 表示：
-# 找出所有相邻句子距离中最陡峭的那几个点（比如前 15% 陡峭的差异点），作为切分依据。
-# semantic_chunker = SemanticChunker(
-#     embeddings,
-#     breakpoint_threshold_type="percentile",
-#     breakpoint_threshold_amount=50  # 阈值可以调，越高切得越少（块越大），越低切得越碎
-# )
-# 在实际工程中，面对长短不一的文本，percentile（百分位）不太稳定。
-# 我们更推荐使用 standard_deviation（标准差）。意思是：“只要这句话偏离了全文明明主题 X 个标准差，就切开它”。
+# standard_deviation（标准差）的意思是：“只要这句话偏离了全文主题 X 个标准差，就切开它”。
 semantic_chunker = SemanticChunker(
     embeddings,
     breakpoint_threshold_type="standard_deviation",
@@ -75,7 +65,7 @@ semantic_chunker = SemanticChunker(
     sentence_split_regex=r"(?<=[。？！.?!])"
 )
 
-print("3. 开始进行语义切分（这会比普通切分慢，因为底层在疯狂计算向量）...")
+print("3. 开始进行语义切分...")
 docs = semantic_chunker.create_documents([text])
 
 print(f"\n✅ 成功切分为 {len(docs)} 个语义块：\n")

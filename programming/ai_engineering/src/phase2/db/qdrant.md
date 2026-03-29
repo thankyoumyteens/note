@@ -6,7 +6,9 @@ Qdrant 是用 Rust 编写的，极其轻量、性能极高，而且单机跑 Doc
 
 ```sh
 # 拉取并运行 Qdrant 镜像，暴露 6333 (HTTP API) 和 6334 (gRPC) 端口
-docker run -p 6333:6333 -p 6334:6334 \
+docker run \
+    --name my-qdrant \
+    -p 6333:6333 -p 6334:6334 \
     -v ~/tmp/qdrant_storage:/qdrant/storage:z \
     qdrant/qdrant
 ```
@@ -22,7 +24,7 @@ docker run -p 6333:6333 -p 6334:6334 \
 ### 1. 安装 Qdrant 的 Python 客户端
 
 ```sh
-pip install qdrant-client langchain-huggingface
+pip install qdrant-client
 ```
 
 ### 2. 代码
@@ -30,28 +32,28 @@ pip install qdrant-client langchain-huggingface
 ```py
 import os
 
-# 使用 Hugging Face 国内镜像源
-# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
-# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+import env_setup
 
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
-from langchain_huggingface import HuggingFaceEmbeddings
 import uuid
-
-for key in ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY', 'all_proxy', 'ALL_PROXY']:
-    os.environ.pop(key, None)
+from langchain_openai import OpenAIEmbeddings
 
 # 1. 连接数据库
 print("🔌 正在连接 Qdrant 数据库...")
 client = QdrantClient(url="http://localhost:6333")
 
-# 我们先定义我们要用的 Embedding 模型（这里继续用免费高效的本地 BGE 模型）
-embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-small-zh-v1.5", model_kwargs={'device': 'cpu'})
+# 输出的向量维度
+VECTOR_DIMENSION = 4096
 
-# BGE-small 输出的向量长度固定是 512 维（如果是 OpenAI 的 text-embedding-3-small 则是 1536 维）
-VECTOR_DIMENSION = 512
+# 我们先定义我们要用的 Embedding 模型
+embeddings = OpenAIEmbeddings(
+    openai_api_key=os.environ.get("API_KEY"),
+    openai_api_base="https://api.siliconflow.cn/v1",
+    model="Qwen/Qwen3-Embedding-8B",
+    # 指定输出的向量维度
+    dimensions=VECTOR_DIMENSION
+)
 
 # 2. 建表 (Create Collection)
 # 相当于 SQL: CREATE TABLE company_rules (...)
@@ -114,3 +116,7 @@ for hit in search_result.points:
     # score 是余弦相似度得分，越接近 1 越相似
     print(f"-> [相似度: {hit.score:.4f}] 文本: {hit.payload['text']} (分类: {hit.payload['category']})")
 ```
+
+## 向量的维度（Dimensions）
+
+在生产环境中，一个 1024 维或更高级别的向量，虽然精度高，但存入 Qdrant/Chroma 后会极其消耗内存，且在几百万条数据并发进行余弦相似度计算时，会显著拖慢检索速度（Latency）。

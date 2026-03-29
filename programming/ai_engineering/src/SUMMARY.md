@@ -59,6 +59,7 @@
     - [语义分块](./phase2/advanced_chunking/semantic_chunking.md)
   - [向量数据库落地](./phase2/db/db.md)
     - [Qdrant 向量数据库](./phase2/db/qdrant.md)
+    - [使用 Qdrant 的父子文档拆分](./phase2/db/qdrant_parent_child_document.md)
     - [标量过滤](./phase2/db/scalar_filtering.md)
     - [Milvus 向量数据库](./phase2/db/milvus.md)
   - [高级检索技术与重排](./phase2/search/search.md)
