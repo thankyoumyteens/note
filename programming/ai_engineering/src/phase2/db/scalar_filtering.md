@@ -20,31 +20,37 @@ SELECT * FROM 知识库 WHERE department = 'IT部' ORDER BY 向量相似度(问�
 ```py
 import os
 
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
+from langchain_openai import OpenAIEmbeddings
+
+import env_setup
 
 from qdrant_client import QdrantClient, models
-from langchain_huggingface import HuggingFaceEmbeddings
 import uuid
-
-for key in ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY', 'all_proxy', 'ALL_PROXY']:
-    os.environ.pop(key, None)
 
 print("🔌 连接本地 Docker 里的 Qdrant 数据库...")
 client = QdrantClient(url="http://localhost:6333")
 
 # 2. 建表
+VECTOR_DIMENSION = 4096
 COLLECTION_NAME = "review_scalar_filter"
 if not client.collection_exists(COLLECTION_NAME):
     client.create_collection(
         collection_name=COLLECTION_NAME,
         vectors_config=models.VectorParams(
-            size=512,
+            size=VECTOR_DIMENSION,
             distance=models.Distance.COSINE  # 使用余弦相似度计算距离
         )
     )
 
-# 3. 准备数据 (注意这里的 Metadata 标签！)
-embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-small-zh-v1.5", model_kwargs={'device': 'cpu'})
+embeddings = OpenAIEmbeddings(
+    openai_api_key=os.environ.get("API_KEY"),
+    openai_api_base="https://api.siliconflow.cn/v1",
+    model="Qwen/Qwen3-Embedding-8B",
+    # 指定输出的向量维度
+    dimensions=VECTOR_DIMENSION
+)
+
+# 3. 准备数据 (注意这里的 Metadata 标签：text 和 department！)
 docs = [
     {"text": "公司每月随工资发放800元餐饮补贴。", "department": "HR部"},
     {"text": "办公电脑需连接Starry_Corp_5G网络。", "department": "IT部"},

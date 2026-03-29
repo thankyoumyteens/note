@@ -61,8 +61,10 @@
     - [Qdrant 向量数据库](./phase2/db/qdrant.md)
     - [使用 Qdrant 的父子文档拆分](./phase2/db/qdrant_parent_child_document.md)
     - [标量过滤](./phase2/db/scalar_filtering.md)
+    - [标量过滤 + 父子文档拆分](./phase2/db/scalar_filtering_pc.md)
     - [Milvus 向量数据库](./phase2/db/milvus.md)
   - [高级检索技术与重排](./phase2/search/search.md)
+  - [Context 注入与安全防护](./phase2/protect/protect.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
 
 - [SQLModel](./sql_model/sql_model.md)
