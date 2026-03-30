@@ -20,7 +20,7 @@ docker-compose ps
 ### 1. 安装 Milvus 依赖包
 
 ```sh
-pip install pymilvus sentence-transformers langchain-huggingface
+pip install pymilvus sentence-transformers
 ```
 
 ### 2. 用 Milvus 重写 CRUD
@@ -29,18 +29,12 @@ pip install pymilvus sentence-transformers langchain-huggingface
 
 ```py
 import os
+
+import env_setup
+
 import time
-
-# 使用 Hugging Face 国内镜像源
-# os.environ 的配置，必须放在你 import HuggingFace 相关库的前面！
-# 一旦先 import 了底层库，它就会读取系统默认的环境变量，你再改就晚了。
-os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
-
-from langchain_huggingface import HuggingFaceEmbeddings
 from pymilvus import MilvusClient
-
-for key in ['http_proxy', 'https_proxy', 'HTTP_PROXY', 'HTTPS_PROXY', 'all_proxy', 'ALL_PROXY']:
-    os.environ.pop(key, None)
+from langchain_openai import OpenAIEmbeddings
 
 # 1. 初始化 Milvus Lite 客户端
 print("🔌 正在连接 Docker 版 Milvus 服务器 (端口 19530)...")
@@ -54,17 +48,23 @@ if client.has_collection(collection_name=COLLECTION_NAME):
     client.drop_collection(collection_name=COLLECTION_NAME)
 
 print(f"📦 创建 Milvus 集合: {COLLECTION_NAME}")
+VECTOR_DIMENSION = 512
 # Milvus 相比 Qdrant 更加严格，但新版的高级 API 帮我们简化了 Schema 的创建
 client.create_collection(
     collection_name=COLLECTION_NAME,
-    dimension=512,  # BGE-small 的维度
+    dimension=VECTOR_DIMENSION,  # 维度
     metric_type="COSINE",  # 余弦相似度
     id_type="int",  # 主键类型
     auto_id=True  # 类似 MySQL 的 AUTO_INCREMENT
 )
 
 # 3. 准备数据并向量化
-embeddings = HuggingFaceEmbeddings(model_name="BAAI/bge-small-zh-v1.5", model_kwargs={'device': 'cpu'})
+embeddings = OpenAIEmbeddings(
+    openai_api_key=os.environ.get("API_KEY"),
+    openai_api_base="https://api.siliconflow.cn/v1",
+    model="Qwen/Qwen3-Embedding-8B",
+    dimensions=VECTOR_DIMENSION
+)
 
 docs = [
     {"text": "公司每月随工资发放800元餐饮补贴。", "category": "福利"},

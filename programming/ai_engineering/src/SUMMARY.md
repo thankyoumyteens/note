@@ -64,6 +64,8 @@
     - [标量过滤 + 父子文档拆分](./phase2/db/scalar_filtering_pc.md)
     - [Milvus 向量数据库](./phase2/db/milvus.md)
   - [高级检索技术与重排](./phase2/search/search.md)
+    - [LangChain 终极检索流水线](./phase2/search/rerank.md)
+    - [实现企业知识库 AI 助手](./phase2/search/chat_robot.md)
   - [Context 注入与安全防护](./phase2/protect/protect.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
 
