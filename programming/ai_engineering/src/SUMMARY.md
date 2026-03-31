@@ -67,7 +67,11 @@
     - [LangChain 终极检索流水线](./phase2/search/rerank.md)
     - [实现企业知识库 AI 助手](./phase2/search/chat_robot.md)
   - [Context 注入与安全防护](./phase2/protect/protect.md)
+    - [核心防线一：Prompt 模板的“沙盒隔离”](./phase2/protect/context_isolation.md)
+    - [核心防线二：防止 Prompt 注入攻击](./phase2/protect/prompt_injection.md)
+    - [生产级安全 Prompt 模板](./phase2/protect/prompt_temp.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
+  - [掌握 Function Calling 与单体 Agent 原理](./phase3/function_calling/function_calling.md)
 
 - [SQLModel](./sql_model/sql_model.md)
   - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
