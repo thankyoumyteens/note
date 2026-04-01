@@ -3,6 +3,11 @@
 - [pip](./base/pip.md)
   - [pip设置国内源](./base/pip_url.md)
   - [pip管理包](./base/pip_pkg.md)
+  - [Poetry依赖管理](./base/poetry/poetry.md)
+    - [安装Poetry](./base/poetry/install.md)
+    - [初始化项目](./base/poetry/init.md)
+    - [管理依赖包](./base/poetry/depend.md)
+    - [Poetry 与 Miniconda 结合使用](./base/poetry/conda.md)
 
 - [anaconda](./anaconda/anaconda.md)
   - [安装miniconda](./anaconda/miniconda.md)
