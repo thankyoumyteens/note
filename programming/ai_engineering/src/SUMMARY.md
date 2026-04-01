@@ -72,6 +72,12 @@
     - [生产级安全 Prompt 模板](./phase2/protect/prompt_temp.md)
 - [阶段三：Agent 架构与工程化落地](./phase3/phase3.md)
   - [掌握 Function Calling 与单体 Agent 原理](./phase3/function_calling/function_calling.md)
+    - [一个简单的“查天气”工具](./phase3/function_calling/weather.md)
+    - [给大模型加上联网功能](./phase3/function_calling/web_search.md)
+    - [把 RAG 封装成 Tool](./phase3/function_calling/rag.md)
+    - [RunnableWithMessageHistory 光荣退役](./phase3/function_calling/history.md)
+  - [复杂任务编排与多 Agent 协同](./phase3/lang_graph/lang_graph.md)
+    - [LangGraph 版的 Hello World](./phase3/lang_graph/start.md)
 
 - [SQLModel](./sql_model/sql_model.md)
   - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
