@@ -77,7 +77,8 @@
     - [把 RAG 封装成 Tool](./phase3/function_calling/rag.md)
     - [RunnableWithMessageHistory 光荣退役](./phase3/function_calling/history.md)
   - [复杂任务编排与多 Agent 协同](./phase3/lang_graph/lang_graph.md)
-    - [LangGraph 版的 Hello World](./phase3/lang_graph/start.md)
+    - [用 LangGraph 重构“查天气”工具](./phase3/lang_graph/start.md)
+    - [理解 LangGraph](./phase3/lang_graph/explain.md)
 
 - [SQLModel](./sql_model/sql_model.md)
   - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
