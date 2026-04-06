@@ -77,3 +77,4 @@
       - [使用 Docker Compose](./docker/use/mysql/enterprise.md)
       - [搭建 MySQL 主从复制](./docker/use/mysql/ms.md)
     - [搭建 Elasticsearch](./docker/use/elasticsearch/elasticsearch.md)
+      - [极其关键的准备工作（必做）](./docker/use/elasticsearch/linux.md)

@@ -18,6 +18,22 @@ vi /etc/apt/sources.list
 apt-get update
 ```
 
+## 连接 ssh
+
+```sh
+# 启动 ssh
+systemctl start ssh.service
+# 设置开机启动
+systemctl enable ssh.service
+# 查看本机 ip 地址
+ip address
+```
+
+连接 ssh:
+
+- 端口 -> 22
+- 用户 -> 非 root 用户
+
 ## 安装 sudo
 
 ```sh
@@ -28,7 +44,7 @@ apt-get -y install vim
 
 vim /etc/sudoers
 # 在%sudo ALL=(ALL:ALL) ALL 这一行底下加入:
-# 用户名 ALL=(ALL) ALL
+# 你的用户名 ALL=(ALL) ALL
 # 保存退出vim
 
 # 退出root
@@ -37,18 +53,3 @@ exit
 sudo apt-get update
 sudo apt-get upgrade
 ```
-
-## 连接 ssh
-
-启动 ssh:
-
-```sh
-sdo systemctl start ssh.service
-# 查看ip地址
-ip address
-```
-
-连接 ssh:
-
-- 端口 -> 22
-- 用户 -> 非 root 用户
