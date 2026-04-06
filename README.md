@@ -107,6 +107,13 @@ mdbook build
 rm -rf ${nginx_path}/ai_engineering/
 cp -r book/ ${nginx_path}/ai_engineering/
 
+# AI视频生成
+cd "${workdir}/note"
+cd programming/ai_video/
+mdbook build
+rm -rf ${nginx_path}/ai_video/
+cp -r book/ ${nginx_path}/ai_video/
+
 # java
 cd "${workdir}/note"
 cd programming/Java/md/java/
