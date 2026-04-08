@@ -24,7 +24,7 @@ mdbook -V
 
 ```sh
 cd ~
-git clone https://walter2743-admin@bitbucket.org/walter2743/note.git
+git clone https://github.com/thankyoumyteens/note.git
 ```
 
 ### 3. 创建部署脚本
@@ -113,6 +113,13 @@ cd programming/ai_video/
 mdbook build
 rm -rf ${nginx_path}/ai_video/
 cp -r book/ ${nginx_path}/ai_video/
+
+# AI编程
+cd "${workdir}/note"
+cd programming/ai_coding/
+mdbook build
+rm -rf ${nginx_path}/ai_coding/
+cp -r book/ ${nginx_path}/ai_coding/
 
 # java
 cd "${workdir}/note"
