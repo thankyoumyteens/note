@@ -7,3 +7,4 @@
   - [核心概念](./phase1/concept.md)
 - [阶段二：掌握“绝对控制权”](./phase2/phase2.md)
   - [为你的链路注入“特征中间件” (LoRA)](./phase2/lora.md)
+  - [ControlNet](./phase2/control_net.md)

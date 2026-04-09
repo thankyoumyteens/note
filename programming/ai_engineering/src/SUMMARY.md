@@ -90,6 +90,7 @@
     - [引入“自愈 (Self-Healing)”机制](./phase3/lang_graph/sh.md)
   - [MCP 协议与企业级架构融合](./phase3/mcp/mcp.md)
     - [写一个简单的 MCP Server](./phase3/mcp/mcp_server.md)
+    - [LangGraph 接入 MCP Server](./phase3/mcp/lang_graph_mcp_server.md)
 
 - [SQLModel](./sql_model/sql_model.md)
   - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
