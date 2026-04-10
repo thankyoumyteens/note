@@ -44,9 +44,9 @@ wget -c -O diffusers_xl_depth_full.safetensors "https://huggingface.co/lllyasvie
 
 默认的 ComfyUI 无法直接“看懂”你骑摩托车的照片，我们需要安装一个视觉解析器，把照片变成纯粹的骨骼数据。
 
-1. 在 ComfyUI 界面点击右上角的 Manager 按钮（如果没有弹出菜单，可能需要刷新一下页面）。
-2. 点击 Custom Nodes Manager。
-3. 在搜索框输入：comfyui_controlnet_aux
+1. 在 ComfyUI 界面点击右上角的 Manager 按钮（如果没有弹出菜单，可能需要刷新一下页面）
+2. 点击 Custom Nodes Manager
+3. 在搜索框输入： comfyui_controlnet_aux
 4. 找到列表中的 comfyui_controlnet_aux 插件（作者是 Fannovel16），点击 Install。
 5. 安装完成后，点击界面提示的 Restart 重启 ComfyUI 服务。
 

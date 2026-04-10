@@ -153,5 +153,3 @@
 
 - [Vibe Coding](./vibe_coding/vibe_coding.md)
   - [入门](./vibe_coding/first_step.md)
-  - [在线翻译器](./vibe_coding/translator/translator.md)
-    - [1. 创建项目](./vibe_coding/translator/step1.md)
