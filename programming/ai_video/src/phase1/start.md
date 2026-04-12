@@ -1,98 +1,97 @@
-# 生成第一张图片
+# 生成图片
 
-### 1. 进入 JupyterLab 终端
+## 1. 进入 JupyterLab 终端
 
 1. RunPod 开机
 2. 点击面板上的 `Port 8888 -> JupyterLab` 快捷入口。这会打开一个类似完整操作系统的网页界面。
 3. 在 JupyterLab 界面中，点击左上角的蓝色加号按钮，新建一个 Terminal。
 
-### 2. 下载模型
+## 2. 下载模型
 
 ```sh
-# 大模型（Checkpoint）必须严格存放在特定的文件夹下 ComfyUI 才能识别
+# 1. 拉取 NoobAI-XL 底模
 cd /workspace/runpod-slim/ComfyUI/models/checkpoints/
-# 下载 NoobAI XL 旗舰底模 (约 6.4GB)
 wget -c -O NoobAI-XL.safetensors "https://huggingface.co/Laxhar/noobai-XL-1.1/resolve/main/NoobAI-XL-v1.1.safetensors"
+
+# 2. 拉取卡提希娅 LoRA
+cd /workspace/runpod-slim/ComfyUI/models/loras/
+wget -c -O Cartethyia_V5_XL.safetensors "https://civitai.com/api/download/models/2525827"
+cd /workspace/runpod-slim/ComfyUI/models/controlnet/
 ```
 
-### 3. 打开 ComfyUI 图形化操作界面
+## 3. 打开 ComfyUI 图形化操作界面
 
 下载完成后，回到 RunPod 页面点击 `Port 8188 -> ComfyUI`。
 
 左下角设置图标 -> comfy -> 区域设置 -> 语言 -> 换成 English。
 
-### 4. 添加模块
+## 4. 构建 DAG 拓扑
 
-在空白区域双击左键（或者点击右键 -> Add Node），按照以下逻辑添加四个核心模块：
+在空白区域双击左键即可打开搜索框，输入关键字搜索对应的模块。
 
-1. loaders：
-   - Load Checkpoint：选择我们刚下的 NoobAI-XL.safetensors。
-2. conditioning：
-   - CLIP Text Encode (Prompt)：你需要添加两个，一个用于正面描述，一个用于负面描述。
-3. latent：
-   - Empty Latent Image：这是你的“数字画布”，设置为 832 x 1216。
-   - VAE Decode：将潜空间数据转回图片。
-4. sampling
-   - KSampler：这是 AI 的“大脑”，负责进行去噪运算。
-5. image：
-   - Save Image：预览你的成果。
+1. `Load Checkpoint`: 选择 NoobAI-XL.safetensors
+2. `Load LoRA (Model and CLIP)`: 选择 Cartethyia_V5_XL.safetensors
+   - 连线: 将 `Load Checkpoint` 的 MODEL 和 CLIP 连入此节点
+3. 两个 `CLIP Text Encode (Prompt)`
+   - 一个用做正向, 另一个用做反向
+   - 连线: 两个节点的输入端都连接 LoRA 输出的 CLIP
+4. `Empty Latent Image`
+   - 参数: 宽度 832，高度 1216，batch_size 设为 1（极其重要，我们现在只画单张图）
+5. `KSampler`:
+   - 连线:
+     - 接收 `Load LoRA (Model and CLIP)` 的 MODEL
+     - 正向的 `Load LoRA (Model and CLIP)` CONDITIONING 连到 positive
+     - 反向的 `Load LoRA (Model and CLIP)` CONDITIONING 连到 negative
+     - `Empty Latent Image` 的 LATENT 连到 latent_iamge
+   - 参数:
+     - seed 设为 randomize (我们要抽卡了)
+     - steps: 30
+     - CFG: 5.0
+     - sampler_name: euler
+     - scheduler: normal
+6. `VAEDecode`:
+   - 连线: 接收 `KSampler` 的 LATENT 和 `Load Checkpoint` 原始输出的 VAE
+7. `Save Image`: 接收 `VAEDecode` 的 IMAGE 输出
 
-### 5. 连线
+## 5. 注入业务参数
 
-在 ComfyUI 中，不同颜色的端口代表不同的数据类型。你现在需要把这些“孤岛”节点按照数据流向串联起来。
+把下面的提示词直接复制进你的 CLIP Text Encode 节点中。记住，这张图是未来视频的“材质包”，所以她必须安静地站着，没有任何复杂的动作。
 
-请按照以下逻辑进行物理连线（鼠标左键按住端口拖动到目标端口）：
+### 正向提示词 (Positive)
 
-1. Model 骨干网 (紫色线):
-   - Load Checkpoint (MODEL) → KSampler (model)
-2. CLIP 语义网 (黄色线):
-   - Load Checkpoint (CLIP) → 两个 CLIP Text Encode 的 (clip) 输入端。
-3. Conditioning 条件控制 (桔色线):
-   - CLIP Text Encode (你用作正面词的) (CONDITIONING) → KSampler (positive)
-   - CLIP Text Encode (你用作负面词的) (CONDITIONING) → KSampler (negative)
-4. Latent 潜空间传输 (粉色线):
-   - Empty Latent Image (LATENT) → KSampler (latent_image)
-   - KSampler (LATENT) → VAE Decode (samples)
-5. VAE & Pixel 输出 (红色线/蓝色线):
-   - Load Checkpoint (VAE) → VAE Decode (vae)
-   - VAE Decode (IMAGE) → Save Image (image)
+```
+masterpiece, best quality, very awa, highres, cartethyia, 1girl, solo, blonde hair, long hair down to the waist, blue eyes, highly detailed face, (forehead tattoo:1.3), teardrop earrings, alternate costume, (white knit sweater, scarf, plaid skirt, white beret:1.2), standing, facing viewer, looking at viewer, night street background, cinematic lighting, soft lighting
+```
 
-### 6. 参数注入
+为什么这么写：
 
-1. 填入提示词 (Prompts)
-   - 正向 (Positive): masterpiece, best quality, cartethyia, circlet, earrings, blue eyes, grey pupils, 1girl, solo, blonde hair, sweet smile, (white knit sweater, scarf, plaid skirt, white beret:1.3), night street, cinematic lighting, highres
-   - 负面 (Negative): lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, worst quality, low quality
-2. 配置 KSampler (The Brain)
-   - seed: 不用管
-   - control_after_generate: randomize。
-   - steps: 30。
-   - cfg: 5.0 (NoobAI 专用低 CFG)。
-   - sampler_name: euler。
-   - scheduler: normal。
-   - denoise: 1.00。
+- very awa：这是作者强烈推荐的 NoobAI-XL 专属最高质量词，能极大提升画面的细腻度。
+- (forehead tattoo:1.3)：直接调用了说明书里明确列出的声痕触发词，同时赋予 1.3 的高权重，确保底模绝对不敢把它“优化”掉。
+- alternate costume：按照作者说明，当让卡提希娅穿非官方衣服（白毛衣）时，必须加上这个词，告诉模型放弃默认的盔甲和长裙。
 
-### 6. 生成图片
+### 反向提示词 (Negative)
 
-一切就绪后，点击右侧控制面板顶部的 Run。
+```
+lowres, low quality, video artifacts, jpeg artifacts, chromatic aberration, film grain, absurdly detailed composition, sketch, red pupils, pink pupils, bad anatomy, bad hands, error, missing fingers, extra digit, worst quality, mutated, deformed, blurry, action, movement, dynamic pose
+```
 
-- 看状态：你会看到节点周围出现绿色边框在跳动，这代表数据流正在该节点进行计算。
-- 看显存：5090 加载 NoobAI-XL 大约需要 2-3 秒，一旦加载完毕，采样过程会快得让你产生“幻觉”。
-- 查看结果：最终，图片会出现在 Save Image 节点的预览框里。
+为什么这么写：
 
-![](../img/start.jpg)
+- 官方黑名单全量接入：把作者列出的 chromatic aberration (色差)、film grain (胶片颗粒) 和 video artifacts 全部加进去了，这能让画面变得极其干净，非常适合作为后续视频的材质包。
+- absurdly detailed composition：这个词非常精妙，它能压制画师过度炫技带来的“杂乱无章感”，保证画面的主体（卡提希娅）足够清晰。
+- red pupils, pink pupils：防止瞳孔颜色在渲染时发生变异。
 
-## 模块说明
+## 6. 最后的重要参数对齐
 
-这其实就是一个标准的有向无环图 (DAG) 任务流，数据从左向右流动：
+调整 `Load LoRA (Model and CLIP)` 的参数:
 
-- Load Checkpoint（Checkpoint 加载器）：这是整个流的起点，负责把几 GB 的权重文件加载进你 5090 的显存里。
-- CLIP Text Encode（CLIP 文本编码）：有两个框，一个框填正向提示词（你想要的画面，比如 1girl, beautiful, cinematic lighting），另一个框填反向提示词（你不想要的，比如 ugly, bad anatomy）。
-- KSampler（K采样器）：这是算力消耗的核心节点，它负责根据你的文本，一步步去噪生成图像。
-- Save Image（保存图像）： 渲染出的最终结果。
+- strength_model (主模型权重): 保持 0.85。
+- strength_clip (文本编码器权重): 按照作者“可能炼炸了”的警告，必须把它降到 0.5 到 0.6 之间！
 
-你可以顺着这两个 CLIP 文本编码节点右侧黄色的 条件 (CONDITIONING) 输出点，沿着连线往右看，一直看到 K采样器 (KSampler) 节点：
+## 7. 运行
 
-- 上面的节点：它的线连到了 K采样器的 正向条件 (positive) 接口。所以它就是正向提示词。
-- 下面的节点： 它的线连到了 K采样器的 负面条件 (negative) 接口。所以它就是反向提示词。
+点击右上角的 `Run`。开始疯狂抽卡，直到抽出那张没有任何结构崩坏、材质光影完美、让你一眼惊艳的“真理源”底图。
 
-这就是 ComfyUI 作为节点式工作流最核心的逻辑——完全靠连线（数据的流向）来决定。
+当你抽到这张完美的定妆照时，我们就以此为基石，正式进军 2026 年的原生视频大模型环节。
+
+![](../img/start.png)
