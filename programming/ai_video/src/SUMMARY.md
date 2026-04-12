@@ -6,5 +6,6 @@
   - [生成图片](./phase1/start.md)
   - [核心概念](./phase1/concept.md)
   - [Cartethyia_V5_XL说明](./phase1/cartethyia_v5_xl.md)
+  - [局部重绘](./phase1/inpainting.md)
 - [阶段二：动态特征捕获](./phase2/phase2.md)
 - [阶段三：原生 DiT 视频生成](./phase3/phase3.md)

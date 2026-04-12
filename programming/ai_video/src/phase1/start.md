@@ -90,7 +90,7 @@ lowres, low quality, video artifacts, jpeg artifacts, chromatic aberration, film
 
 ## 7. 运行
 
-点击右上角的 `Run`。开始疯狂抽卡，直到抽出那张没有任何结构崩坏、材质光影完美、让你一眼惊艳的“真理源”底图。
+点击右上角的 `Run`。开始疯狂抽卡，直到抽出那张没有任何结构崩坏、材质光影完美、让你一眼惊艳的“真理源”底图（Base_Texture_Map）。
 
 当你抽到这张完美的定妆照时，我们就以此为基石，正式进军 2026 年的原生视频大模型环节。
 
