@@ -1,7 +1,9 @@
 # Summary
 
 - [大模型服务提供商](./provider/provider.md)
+  - [EdenAI](./provider/eden_ai.md)
   - [OpenRouter](./provider/open_router.md)
+  - [ShuttleAI](./provider/shuttle_ai.md)
 - [安装 AI Coding 工具](./software/software.md)
   - [安装 Gemini CLI](./software/gemini_cli.md)
   - [安装 Claude Code](./software/claude_code.md)
