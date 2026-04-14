@@ -27,6 +27,12 @@ source ~/.zshrc
 nvm help
 ```
 
+## 列出可安装的node版本
+
+```sh
+nvm ls-remote
+```
+
 ## 安装 node.js
 
 ```sh
