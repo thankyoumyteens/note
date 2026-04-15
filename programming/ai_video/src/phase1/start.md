@@ -16,7 +16,6 @@ wget -c -O NoobAI-XL.safetensors "https://huggingface.co/Laxhar/noobai-XL-1.1/re
 # 2. 拉取卡提希娅 LoRA
 cd /workspace/runpod-slim/ComfyUI/models/loras/
 wget -c -O Cartethyia_V5_XL.safetensors "https://civitai.com/api/download/models/2525827"
-cd /workspace/runpod-slim/ComfyUI/models/controlnet/
 ```
 
 ## 3. 打开 ComfyUI 图形化操作界面

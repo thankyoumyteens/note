@@ -56,3 +56,6 @@
     - [最多一次](./kafka/guarantee/at_most_once.md)
     - [至少一次](./kafka/guarantee/at_least_once.md)
     - [精确一次](./kafka/guarantee/exactly_once.md)
+
+- [Gradle](./gradle/gradle.md)
+  - [项目搭建(JDK25)](./gradle/create_project.md)
