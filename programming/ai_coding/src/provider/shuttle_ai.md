@@ -2,7 +2,13 @@
 
 [https://shuttleai.com](https://shuttleai.com)
 
-常用模型:
+## 对话模型的完整 API 端点
+
+```
+https://api.shuttleai.com/v1/chat/completions
+```
+
+## 常用模型
 
 - openai/gpt-5.4
 - anthropic/claude-opus-4-6

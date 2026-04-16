@@ -2,9 +2,13 @@
 
 [https://app.edenai.run](https://app.edenai.run)
 
-聊天的完整 API 端点: "https://api.edenai.run/v3/llm/chat/completions"
+## 对话模型的完整 API 端点
 
-常用模型:
+```
+https://api.edenai.run/v3/llm/chat/completions
+```
+
+## 常用模型
 
 - openai/gpt-5.4
 - google/gemini-2.5-flash

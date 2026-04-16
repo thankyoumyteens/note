@@ -2,7 +2,13 @@
 
 [https://openrouter.ai](https://openrouter.ai)
 
-常用模型:
+## 对话模型的完整 API 端点
+
+```
+https://openrouter.ai/api/v1/chat/completions
+```
+
+## 常用模型
 
 - openai/gpt-5.4
 - google/gemini-2.5-flash

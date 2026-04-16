@@ -16,17 +16,21 @@ pip install langchain-mcp-adapters
 import asyncio
 import json
 import os
-from typing import Literal
-
+from typing import Literal, TypedDict, Annotated
+from langgraph.graph.message import add_messages
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langgraph.constants import START
 from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
-from lang_graph.supervisor_human import State
+
 
 import env_setup
+
+
+class State(TypedDict):
+    messages: Annotated[list, add_messages]
 
 
 async def main():

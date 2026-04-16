@@ -59,3 +59,4 @@
 
 - [Gradle](./gradle/gradle.md)
   - [项目搭建(JDK25)](./gradle/create_project.md)
+  - [Web项目](./gradle/web.md)

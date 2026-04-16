@@ -4,14 +4,20 @@
   - [EdenAI](./provider/eden_ai.md)
   - [OpenRouter](./provider/open_router.md)
   - [ShuttleAI](./provider/shuttle_ai.md)
+
 - [安装 AI Coding 工具](./software/software.md)
   - [安装 Gemini CLI](./software/gemini_cli.md)
   - [安装 Claude Code](./software/claude_code.md)
   - [安装 OpenCode](./software/open_code.md)
   - [安装 Goose](./software/goose.md)
-  - [安装 Aider](./software/aider.md)
+
+- [SKILL](./skills/skills.md)
+  - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
+  - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
+
 - [Spec Workflow](./spec_workflow/spec_workflow.md)
   - [安装 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp.md)
+    - [Gemini CLI 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_gemini.md)
     - [Claude Code 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_cc.md)
     - [Goose 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_goose.md)
 
