@@ -205,6 +205,7 @@
   - [文件传输](./paramiko/file.md)
   - [交互式Shell](./paramiko/shell.md)
   - [创建SSH隧道](./paramiko/ssh_tunnel.md)
+  - [macOS 环境下自动提权与特权端口绑定](./paramiko/ssh_tunnel_macos.md)
 
 - [图像操作](./image.md)
   - [Pillow](./pillow/pillow.md)
