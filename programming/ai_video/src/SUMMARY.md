@@ -1,9 +1,8 @@
 # Summary
 
 - [学习路线](./chapter_1.md)
-- [云环境搭建](./env_cloud.md)
-- [Windows11+RTX5090Laptop环境搭建](./win5090laptop.md)
 - [阶段一：基建与构建“唯一真理源”](./phase1/phase1.md)
+  - [Windows11+RTX5090Laptop环境搭建](./phase1/win5090laptop.md)
   - [生成图片](./phase1/start.md)
   - [核心概念](./phase1/concept.md)
   - [Cartethyia_V5_XL说明](./phase1/cartethyia_v5_xl.md)

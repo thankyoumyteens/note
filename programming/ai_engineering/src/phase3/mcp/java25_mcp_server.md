@@ -22,6 +22,8 @@ dependencies {
 
 ### 2. 配置文件
 
+STREAMABLE 是 Spring 专门为解决 Tomcat 挂起问题开发的增强版协议。它允许服务器以非阻塞的方式持续推送数据流，同时保持对传统 SSE 客户端（比如 Python 的 mcp 库）的透明兼容。
+
 ```yaml
 server:
   port: 8080
@@ -30,8 +32,8 @@ spring:
   ai:
     mcp:
       server:
-        # Tomcat 的 SSE 模式又 BUG
-        # 废弃传统的 SSE 模式，使用专为 WebMVC 打造的全新 STREAMABLE 协议引擎
+        # Tomcat 的 SSE 模式存在 BUG
+        # 废弃传统的 SSE 模式，使用专为 WebMVC 打造的全新 STREAMABLE 协议
         protocol: STREAMABLE
 ```
 
