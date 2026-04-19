@@ -117,7 +117,7 @@ if __name__ == "__main__":
 
 为了确保 AI 客户端后台启动该 Python 进程时不会报错，我们必须使用刚刚创建的虚拟环境中的解释器绝对路径。
 
-假设你的 macOS 用户名是 `walter`，那么 Python 解释器的绝对路径就是：
+假设你的 macOS 用户名是 `walter`，那么 Python 解释器的绝对路径就是(注意路径里不能出现 `.`)：
 `/Users/walter/ai_agent_skills/sqlite_memory/venv/bin/python`
 
 #### 方案 A：针对官方版 Claude Code
