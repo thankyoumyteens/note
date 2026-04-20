@@ -69,9 +69,7 @@ git clone https://github.com/ltdrdata/ComfyUI-Manager.git
 cd ..
 ```
 
-### 四、 针对 RTX 5090 Laptop 的运行优化
-
-RTX 5090 拥有极强的算力和充裕的显存。在本地启动时，可以通过添加启动参数来最大化发挥它的性能。
+### 四、 创建快速启动脚本
 
 在 `ComfyUI` 根目录下，创建一个名为 `run.bat` 的批处理文件，填入以下内容：
 
