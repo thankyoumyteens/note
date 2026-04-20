@@ -8,5 +8,6 @@
   - [Cartethyia_V5_XL说明](./phase1/cartethyia_v5_xl.md)
   - [局部重绘](./phase1/inpainting.md)
   - [小脸崩坏定律](./phase1/small_face_collapse.md)
-- [阶段二：动态特征捕获](./phase2/phase2.md)
-- [阶段三：原生 DiT 视频生成](./phase3/phase3.md)
+- [阶段二：本地原生 DiT 算力基建](./phase2/phase2.md)
+  - [Wan 2.2 14B](./phase2/wan.md)
+- [阶段三：原生 I2V 视频渲染与调度](./phase3/phase3.md)

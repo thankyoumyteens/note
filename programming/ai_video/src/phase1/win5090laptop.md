@@ -71,9 +71,10 @@ cd ..
 
 ### 四、 创建快速启动脚本
 
-在 `ComfyUI` 根目录下，创建一个名为 `run.bat` 的批处理文件，填入以下内容：
+创建一个名为 `run.bat` 的批处理文件，填入以下内容：
 
 ```bat
+cd 换成你的ComfyUI根目录
 call conda activate ai_demo
 python main.py
 pause

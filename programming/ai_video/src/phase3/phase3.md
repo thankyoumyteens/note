@@ -1,41 +1,90 @@
-# 阶段三：原生 DiT 视频生成
+# 阶段三：原生 I2V 视频渲染与调度
 
-### 1. 安装插件
+把 ComfyUI 生成的图片改名成 cartethyia_front.png。在同级目录下创建一个名为 `run_video.py` 的文件，填入以下内容：
 
-1. 呼出包管理器 (ComfyUI Manager)
-   - 在 ComfyUI 网页界面的右侧控制面板，点击 Manager 按钮。（如果你选的 RunPod 镜像自带了 Manager 的话）。
-   - 点击 Install Custom Nodes (安装自定义节点)。
-2. 搜索并安装核心组件
-   - ComfyUI-MimicMotionWrapper, 作者是 Kijai
+```py
+import torch
+import gc
+from diffusers import DiffusionPipeline
+from transformers import UMT5EncoderModel
+from diffusers.utils import export_to_video
+from PIL import Image
+import os
 
-### 2. 节点部署
+model_path = r"C:\Users\ILove\software\ai_video\Wan\Wan-14B-I2V-720P"
 
-请在 ComfyUI 的画布上（建议新建一个干净的 Group 或者工作区）严格按照以下架构进行连线：
+print("🧹 阶段 0: 清扫环境，准备迎接 192GB 混合内存挑战...")
+gc.collect()
+torch.cuda.empty_cache()
 
-1. 注入核心输入源 (Input Ingestion)
-   - **底图输入**：添加 `Load Image` 节点，导入你刚才通过 FaceDetailer 修复完毕的、包含完美脸部和完整双腿的卡提希娅全身图。
-   - **骨架输入**：添加 `Load Video (Upload) 🎥🅥🅗🅢` 节点，导入你之前提取好的纯黑底色、彩色线条的火柴人视频。
-2. 配置“尺寸归一化拦截器” (Resolution Normalization): 为了彻底防止我们之前踩过的张量对齐崩溃（27 vs 28 报错），必须在数据进入大模型前进行强制拦截。
-   - 添加**两个** `Upscale Image` 节点。
-   - 将两个节点的参数统一焊死为：`width`: **576**, `height`: **1024**, `crop`: **center**, `upscale_method`: **bilinear**。
-   - **连线**：将底图的 `IMAGE` 和骨架视频的 `IMAGE`，分别连入这两个节点的输入端。
-3. 加载 DiT 视频计算图 (Context Object)
-   - 添加 `(Down)Load MimicMotionModel` 节点。
-   - 保持默认参数，它会自动把几十 GB 的权重读入内存，并输出一条紫色的 `mimic_pipeline`（胖上下文对象）。
-4. 点燃时序采样大熔炉 (The Core Sampler)
-   - 添加 `MimicMotion Sampler` 节点。
-   - **物理连线**：
-     - `mimic_pipeline` ← 接入第三步的输出。
-     - `ref_image` ← 接入**底图**对应的那个 `Upscale Image` 输出。
-     - `pose_images` ← 接入**骨架**对应的那个 `Upscale Image` 输出。
-   - _(这个节点会接管你的算力，在潜空间内进行疯狂的降噪推演，输出 `samples`)_。
-5. 反序列化与 MP4 压制 (Decode & Encode)
-   - 添加 `MimicMotion Decode` 节点。
-     - `samples` ← 接入 Sampler 的输出。
-     - `mimic_pipeline` ← 接入最前面的加载器。
-     - _(这一步打破次元壁，将潜空间张量翻译回可见的 `IMAGE` 像素矩阵)_。
-   - 添加 `Video Combine 🎥🅥🅗🅢` 节点。
-     - 接入 Decode 出来的 `IMAGE` 流。
-     - 设置帧率（与你的原版动作视频保持一致，通常为 24 或 30），格式选择 `video/h264-mp4`。
+# ==========================================
+# 1. 稳健加载：全部使用原生 bfloat16 (不量化)
+# ==========================================
+print("⏳ 阶段 1/2: 加载 Text Encoder...")
+text_encoder = UMT5EncoderModel.from_pretrained(
+    model_path,
+    subfolder="text_encoder",
+    torch_dtype=torch.bfloat16
+)
 
-整套架构搭建完毕后，检查一遍有没有漏连的线缆，然后果断点击界面上的 **Run** 按钮。
+print("⚙️ 阶段 2/2: 加载核心 DiT 管道 (原生精度)...")
+pipe = DiffusionPipeline.from_pretrained(
+    model_path,
+    text_encoder=text_encoder,
+    torch_dtype=torch.bfloat16,
+    use_safetensors=True
+)
+
+# ==========================================
+# 3. 核心绝招：开启【层级序列卸载】
+# ==========================================
+# 这个函数比之前的 model_cpu_offload 更彻底。
+# 它会让 140 亿参数以“流”的形式经过你的 5090。
+# 这样即便显存只有 4GB 都能跑通，更别提你的 24GB 了！
+pipe.enable_sequential_cpu_offload()
+pipe.vae.enable_tiling()
+
+# ==========================================
+# 4. 注入指令与点火
+# ==========================================
+image_path = "cartethyia_front.png" # 可以改成你自己的图片文件名
+input_image = Image.open(image_path).convert("RGB")
+
+# 【正向算子】：精准描述穿搭，加入迎面走来和风吹拂的物理动态
+prompt = "A beautiful anime girl, Cartethyia, facing the viewer, walking slowly towards the camera on a sunlit paved street. She is wearing a white beret, a black scarf, a white cable-knit sweater, and a blue plaid skirt. Wind is gently blowing her long blonde hair and scarf. Perfectly smooth motion, natural fabric physics, realistic sunlight and shadows, masterpiece video."
+
+# 【反向黑名单】：除了视频防闪烁，特别加强了防衣服扭曲和面部崩坏
+negative_prompt = "mutated, deformed, bad anatomy, jittering, flickering, boiling background, morphing clothes, distorted face, duplicate, extra limbs, unnatural movement"
+
+print("🚀 启动 DiT 时序渲染！这次不搞任何骚操作，用物理内存硬刚！")
+# 恢复 33 帧，享受 5090 的全精度推演
+video_frames = pipe(
+    image=input_image,
+    prompt=prompt,
+    negative_prompt=negative_prompt,
+    num_inference_steps=40,
+    guidance_scale=7.0,
+    num_frames=33,
+    # 生成竖屏视频(Wan 2.2 的 3D-VAE 极其严格，要求画面的长宽必须是 16 的倍数)
+    height=1216,
+    width=832,
+    generator=torch.Generator("cuda").manual_seed(1024)
+).frames[0]
+
+output_path = "cartethyia_walking_wan_14B_ultra_stable.mp4"
+export_to_video(video_frames, output_path, fps=16)
+print(f"🎉 史诗级胜利！视频已通过‘时间换空间’策略成功保存至: {output_path}")
+```
+
+## 创建快速启动脚本
+
+创建一个名为 `run_video.bat` 的批处理文件，填入以下内容：
+
+```bat
+cd 换成 run_video.py 所在的目录
+conda activate wan_video
+python run_video.py
+pause
+```
+
+双击 `run_video.bat` 即可启动。

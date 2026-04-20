@@ -1,4 +1,4 @@
-# Langfuse搭建
+# LangfuseV2搭建
 
 Langfuse 是一个专为大语言模型（LLM）应用打造的开源可观测性（Observability）和评估平台。 在传统的 Java 后端时代，你排查问题看的是 Log、查的是数据库、用的是 SkyWalking。但在 AI 时代，大模型的输入和输出全是大段的自然语言，且充满不确定性。
 如果把你的 AI Agent 比作一架超音速客机，Langfuse 就是这架飞机的“黑匣子”+“塔台雷达”。
