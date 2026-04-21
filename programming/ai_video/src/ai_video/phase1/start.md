@@ -98,4 +98,4 @@ lowres, low quality, video artifacts, jpeg artifacts, chromatic aberration, film
 
 点击右侧面板的 **Run**。
 
-![](../img/start.png)
+![](../../img/start.png)

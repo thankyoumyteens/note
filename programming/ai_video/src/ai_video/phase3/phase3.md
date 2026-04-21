@@ -1,4 +1,4 @@
-# 阶段三：原生 I2V 视频渲染与调度
+# 阶段三：使用代码生成视频
 
 把 ComfyUI 生成的图片改名成 cartethyia_front.png。在同级目录下创建一个名为 `run_video.py` 的文件，填入以下内容：
 
