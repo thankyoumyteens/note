@@ -64,7 +64,8 @@ video_frames = pipe(
     negative_prompt=negative_prompt,
     num_inference_steps=40,
     guidance_scale=7.0,
-    num_frames=33,
+    # 将帧数推向模型上限 81 帧
+    num_frames=81,
     # 生成竖屏视频(Wan 2.2 的 3D-VAE 极其严格，要求画面的长宽必须是 16 的倍数)
     height=1216,
     width=832,

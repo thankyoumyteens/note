@@ -89,8 +89,10 @@
     - [把 Java 8 项目改造成 MCP Server](./phase3/mcp/java8_mcp_server.md)
     - [把 Java 25 项目改造成 MCP Server](./phase3/mcp/java25_mcp_server.md)
   - [LLMOps 工程化落地与质量保障](./phase3/llm_ops/llm_ops.md)
-    - [Langfuse搭建](./phase3/llm_ops/langfuse_server.md)
-    - [给 Python 客户端加上探针](./phase3/llm_ops/tracing.md)
+    - [Langfuse](./phase3/llm_ops/langfuse.md)
+    - [LangfuseV2搭建](./phase3/llm_ops/langfuse_server.md)
+    - [LangfuseV3搭建](./phase3/llm_ops/langfuse_server_v3.md)
+    - [给 Python 客户端加上探针(V3)](./phase3/llm_ops/tracing.md)
 
 - [SQLModel](./sql_model/sql_model.md)
   - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)

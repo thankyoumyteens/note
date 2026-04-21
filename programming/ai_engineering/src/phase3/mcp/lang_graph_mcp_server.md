@@ -59,7 +59,7 @@ async def main():
     llm = ChatOpenAI(
         api_key=os.environ.get("API_KEY"),
         base_url="https://api.siliconflow.cn/v1",
-        model="Qwen/Qwen2.5-7B-Instruct"
+        model="Qwen/Qwen3.6-35B-A3B"
     )
     llm_with_tools = llm.bind_tools(mcp_tools)
 

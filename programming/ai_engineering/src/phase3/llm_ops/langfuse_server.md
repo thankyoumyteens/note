@@ -1,25 +1,5 @@
 # LangfuseV2搭建
 
-Langfuse 是一个专为大语言模型（LLM）应用打造的开源可观测性（Observability）和评估平台。 在传统的 Java 后端时代，你排查问题看的是 Log、查的是数据库、用的是 SkyWalking。但在 AI 时代，大模型的输入和输出全是大段的自然语言，且充满不确定性。
-如果把你的 AI Agent 比作一架超音速客机，Langfuse 就是这架飞机的“黑匣子”+“塔台雷达”。
-
-1. 核心底座：极其变态的全链路追踪 (Tracing)。当你的 Python 脚本接收到用户的提问：“查一下订单 ORD-002”，Langfuse 会帮你记录下这极其复杂的生命周期：
-   - Trace（整体追踪）：记录这通对话总共花了 3 秒，花了 0.05 美元。
-   - Generation（大模型生成）：记录 Python 到底把这个订单号包装成了什么样的 Prompt 发给了 OpenAI/Claude，大模型又返回了怎样一坨带着 Tool Call 的 JSON。
-   - Span（普通逻辑耗时）：记录大模型决定调用工具后，你的 Python 请求 Java MCP 接口花了多少毫秒，Java 吐回来的业务数据长什么样。
-   - 价值：一旦 AI 答错了，你打开后台，一层层点开，一眼就能定案到底是提示词写得烂，还是 Java 接口背了锅。
-2. 拔高利器：提示词版本管理 (Prompt Management)。在初级阶段，大家都是把 Prompt 写死在 Python 代码的字符串里（Hardcode）。
-   - Langfuse 允许你在它的 Web 后台像写代码一样管理 Prompt。
-   - 你可以在后台修改 Prompt，打上 v2、v3 的标签，然后在 Python 代码里直接通过 SDK 动态拉取最新的 Prompt。
-   - 价值：提示词的优化（调参）彻底与代码部署解耦。产品经理甚至可以直接在后台修改 Prompt 优化 AI 语气，而不需要你重新发版！
-3. 终极闭环：量化评估与指标大盘 (Evaluation & Metrics)
-   - 领导问你：“咱们接入大模型后，回答准确率是多少？每天大概烧多少钱？”
-   - Langfuse 会自动帮你汇总 Token 开销大盘、首字延迟（TTFT）。
-   - 它还支持给每一条回答打分（比如用户点了👍或👎，或者你通过自动化脚本判断它有没有出现“幻觉”）。
-   - 价值：让 AI 系统的优化从“我觉得还行”变成“准确率从 85% 提升到了 92%，Token 成本下降了 15%”。
-
-Langfuse 官方极其厚道地提供了完整的 Docker 镜像。我们不需要去搞复杂的 Kubernetes，在本地或者开发机上，一个干净的 `docker-compose.yml` 就能把这台“行车记录仪”的指挥中心拔地而起。
-
 ### 1. 编写基建编排文件 (Docker Compose)
 
 在你的电脑上新建一个目录（比如 `langfuse-local`），在里面新建一个 `docker-compose.yml` 文件。直接贴入这套极简但绝对够用的标准架构：
