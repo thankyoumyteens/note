@@ -8,6 +8,7 @@
 
 - [Docker](./docker/docker.md)
   - [MacOS 安装 Docker](./docker/macos.md)
+  - [Windows 安装 Docker](./docker/win.md)
   - [核心概念](./docker/concept.md)
   - [常用基础命令](./docker/command.md)
   - [简单体验](./docker/demo.md)

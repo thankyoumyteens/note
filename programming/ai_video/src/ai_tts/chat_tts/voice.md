@@ -21,7 +21,7 @@ chat.load(compile=False)
 
 # 抽卡配置
 num_draws = 5
-test_text = "你好! 我是新生成的音色。[laugh] 听听看我的声音你还满意吗?"
+test_text = "你好，我是新生成的音色。[laugh] 听听看我的声音你还满意吗。"
 
 # 创建一个专门放音色的文件夹
 output_dir = "my_voice_bank"
@@ -78,7 +78,7 @@ print("正在加载专属音色...")
 my_spk = torch.load("my_voice_bank/my_favorite_voice.pt")
 
 # 2. 准备你想生成的文本
-text = "太棒了，这下我以后所有的视频和 AI 助手，都可以用这个专属的声音来播报了！"
+text = "太棒了，这下我以后所有的视频和 AI 助手，都可以用这个专属的声音来播报了。"
 
 # 3. 推理（把加载的音色传进去）
 print("正在使用专属音色生成音频...")

@@ -48,7 +48,7 @@ chat.load(compile=False)
 
 # 2. 准备文本
 texts = [
-    "你好啊! [laugh] 很高兴今天能和你聊天。",
+    "你好啊，[laugh] 很高兴今天能和你聊天。",
     "不过... [uv_break] 我们得先处理一下后端的逻辑。"
 ]
 

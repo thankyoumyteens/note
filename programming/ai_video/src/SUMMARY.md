@@ -1,7 +1,7 @@
 # Summary
 
 - [AI 视频生成](./ai_video/ai_video.md)
-  - [AI 视频生成学习路线](./ai_video/chapter_1.md)
+  - [本地 AI 视频生成学习路线](./ai_video/chapter_1.md)
   - [阶段一：生成静态参考图](./ai_video/phase1/phase1.md)
     - [Windows11 + RTX5090Laptop 环境搭建](./ai_video/phase1/win5090laptop.md)
     - [生成图片](./ai_video/phase1/start.md)
@@ -12,8 +12,15 @@
   - [阶段二：配置本地运行环境](./ai_video/phase2/phase2.md)
     - [Wan 2.2 14B](./ai_video/phase2/wan.md)
   - [阶段三：使用代码生成视频](./ai_video/phase3/phase3.md)
+    - [拟音与环境混流](./ai_video/phase3/foley_and_muxing.md)
+  - [阶段四：音频驱动与口型同步](./ai_video/phase4/phase4.md)
+  - [在线 AI 视频生成学习路线](./ai_video/paid/overview.md)
 
 - [AI 文字转语音](./ai_tts/ai_tts.md)
   - [ChatTTS](./ai_tts/chat_tts/chat_tts.md)
     - [搭建ChatTTS环境](./ai_tts/chat_tts/install.md)
     - [音色“抽卡”与持久化](./ai_tts/chat_tts/voice.md)
+    - [语气控制](./ai_tts/chat_tts/emotion_control.md)
+  - [CosyVoice 3.0](./ai_tts/cosy_voice_3/cosy_voice_3.md)
+    - [搭建 CosyVoice 3.0 环境](./ai_tts/cosy_voice_3/install.md)
+      - [克隆声音](./ai_tts/cosy_voice_3/clone.md)
