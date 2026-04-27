@@ -21,6 +21,8 @@
     - [搭建ChatTTS环境](./ai_tts/chat_tts/install.md)
     - [音色“抽卡”与持久化](./ai_tts/chat_tts/voice.md)
     - [语气控制](./ai_tts/chat_tts/emotion_control.md)
+  - [Fish Speech](./ai_tts/fish_speech/fish_speech.md)
+    - [搭建 Fish Speech 环境](./ai_tts/fish_speech/install.md)
   - [CosyVoice 3.0](./ai_tts/cosy_voice_3/cosy_voice_3.md)
     - [搭建 CosyVoice 3.0 环境](./ai_tts/cosy_voice_3/install.md)
       - [克隆声音](./ai_tts/cosy_voice_3/clone.md)
