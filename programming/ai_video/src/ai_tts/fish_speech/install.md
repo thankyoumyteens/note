@@ -1,10 +1,16 @@
 # 搭建 Fish Speech 环境
 
-本文档记录了使用 Docker Compose 快速部署 Fish Speech (含 `s2-pro` 模型) 的完整流程，包括源码获取、模型下载以及多种运行模式的启动命令。
+## 🖥️ 一、 系统要求与环境准备
 
-## 📁 一、 准备工作：环境与模型
+- **操作系统**：Linux 或 Windows 的 WSL2（官方明确提示：编译加速不支持 Windows 原生环境）。
+- **硬件要求**：建议至少 24GB 显存的 GPU（用于推理 s2-pro 等大模型）。
+- **前置依赖**：
+  - 已安装 Docker 和 Docker Compose。
+  - **关键**：已安装 `NVIDIA Docker runtime`（在 WSL2 下使用 Docker Desktop 会自带该支持，无需额外折腾）。
 
-在启动容器之前，需要先将项目代码克隆到本地，并下载对应的大模型权重文件。
+## 📁 二、 获取代码与模型权重
+
+容器启动前，必须将代码和模型准备好，因为 Docker 会默认读取本地映射的目录。
 
 **1. 克隆官方代码仓库**
 
@@ -13,62 +19,79 @@ git clone https://github.com/fishaudio/fish-speech.git
 cd fish-speech
 ```
 
-**2. 下载模型权重**
-提前通过 Hugging Face 官方工具将 `s2-pro` 模型下载到指定的 `checkpoints` 目录，供 Docker 容器挂载使用。
+**2. 下载核心模型权重**
+提前通过 Hugging Face 官方工具将 `s2-pro` 模型下载到指定的 `checkpoints` 目录。
 
 ```bash
-# 安装 Hugging Face 命令行工具
+# 安装下载工具
 pip install huggingface_hub
 
-# 下载 s2-pro 模型到本地 checkpoints/s2-pro 文件夹
+# 强制下载到本地的 checkpoints/s2-pro 目录
 huggingface-cli download fishaudio/s2-pro --local-dir checkpoints/s2-pro
 ```
 
----
+## 📂 三、 目录挂载规范 (必读)
 
-## 🚀 二、 启动核心服务 (已验证成功 ✅)
+为了让 Docker 容器能读取到你的文件，项目默认设定了两个核心的“数据通道”（卷挂载）。你在使用时，请将文件放入对应文件夹：
 
-此部分为主要操作步骤，使用默认的 GPU (CUDA) 环境启动可视化交互界面。
+- `./checkpoints` ➡️ 映射到容器的 `/app/checkpoints`（**存放下载好的大模型，如 s2-pro**）。
+- `./references` ➡️ 映射到容器的 `/app/references`（**存放你准备好的参考音频，比如守岸人的 wav 文件**，方便在 WebUI 中直接调用）。
 
-**启动 WebUI 可视化界面**
+## 🚀 四、 启动服务 (基础模式)
+
+确保你在 `fish-speech` 目录下，根据你的需求选择以下命令：
+
+**1. 启动 WebUI (可视化界面)** —— _日常克隆语音推荐_
 
 ```bash
 docker compose --profile webui up
 ```
 
-_说明：启动成功后，即可在浏览器中访问 WebUI 进行语音克隆与生成操作。_
+_启动后浏览器访问：`http://localhost:7860`_
 
----
-
-## 🛠️ 三、 进阶启动模式 (备选)
-
-以下命令适用于特定场景（如需要追求极致推理速度、需要提供接口服务或在无显卡环境运行），可根据后续需求进行尝试：
-
-### 1. 开启编译优化加速 (Compile 模式)
-
-在启动命令前加入 `COMPILE=1` 环境变量，PyTorch 会在底层对算子进行编译融合，以获得更快的推理速度（首次启动加载时间会稍长）。
-
-- **加速启动 WebUI:**
-  ```bash
-  COMPILE=1 docker compose --profile webui up
-  ```
-- **加速启动 API 服务:**
-  ```bash
-  COMPILE=1 docker compose --profile server up
-  ```
-
-### 2. 独立 API 服务模式
-
-如果你不需要浏览器可视化界面，而是想通过代码调用（如集成到其他应用中），可单独启动 API Server：
+**2. 启动 API Server (接口服务)** —— _代码调用/二次开发推荐_
 
 ```bash
 docker compose --profile server up
 ```
 
-### 3. 纯 CPU 运行模式
+_启动后 API 访问：`http://localhost:8080`_
 
-在没有 NVIDIA 显卡或 CUDA 环境的机器上，可以强制使用 CPU 作为计算后端启动服务：
+**3. 仅 CPU 运行模式** —— _无显卡环境备用_
 
 ```bash
 BACKEND=cpu docker compose --profile webui up
 ```
+
+## ⚡ 五、 进阶：性能全开模式 (Compile)
+
+官方文档指出，启用 `torch.compile` 可以使 **推理速度提升约 10 倍**！（这也是为什么我们必须用 Linux/WSL2 的原因，Windows 无法使用此特性）。
+
+**启用 10x 加速启动 WebUI：**
+
+```bash
+COMPILE=1 docker compose --profile webui up
+```
+
+**启用 10x 加速启动 API Server：**
+
+```bash
+COMPILE=1 docker compose --profile server up
+```
+
+_(注：开启 `COMPILE=1` 后，首次生成语音时由于底层需要实时编译 CUDA 算子，等待时间会比较长，但从第二次开始速度将极其恐怖。)_
+
+## ⚙️ 六、 自定义端口与环境变量设置
+
+如果你不想每次都在命令行里敲环境变量，或者 `7860` 端口被占用了，你可以在项目根目录创建一个 `.env` 文件，一次性写死你的配置：
+
+```ini
+# .env 文件示例
+BACKEND=cuda              # 强制使用显卡 (或 cpu)
+COMPILE=1                 # 默认开启 10 倍速度优化
+GRADIO_PORT=7860          # 更改 WebUI 的访问端口
+API_PORT=8080             # 更改 API 服务的访问端口
+GRADIO_SERVER_NAME=0.0.0.0 # 允许局域网其他设备访问
+```
+
+配置好 `.env` 文件后，直接运行 `docker compose --profile webui up` 即可自动读取。
