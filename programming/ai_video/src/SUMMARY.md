@@ -23,6 +23,7 @@
     - [语气控制](./ai_tts/chat_tts/emotion_control.md)
   - [Fish Speech](./ai_tts/fish_speech/fish_speech.md)
     - [搭建 Fish Speech 环境](./ai_tts/fish_speech/install.md)
+      - [克隆声音](./ai_tts/fish_speech/clone.md)
   - [CosyVoice 3.0](./ai_tts/cosy_voice_3/cosy_voice_3.md)
     - [搭建 CosyVoice 3.0 环境](./ai_tts/cosy_voice_3/install.md)
       - [克隆声音](./ai_tts/cosy_voice_3/clone.md)
