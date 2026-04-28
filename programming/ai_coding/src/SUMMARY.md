@@ -7,6 +7,7 @@
 
 - [安装 AI Coding 工具](./software/software.md)
   - [安装 Gemini CLI](./software/gemini_cli.md)
+  - [安装 Codex CLI](./software/codex_cli.md)
   - [安装 Claude Code](./software/claude_code.md)
   - [安装 OpenCode](./software/open_code.md)
   - [安装 Goose](./software/goose.md)
@@ -18,6 +19,7 @@
 - [Spec Workflow](./spec_workflow/spec_workflow.md)
   - [安装 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp.md)
     - [Gemini CLI 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_gemini.md)
+    - [Codex CLI 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_codex.md)
     - [Claude Code 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_cc.md)
     - [Goose 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_goose.md)
 

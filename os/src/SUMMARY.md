@@ -87,6 +87,7 @@
 
 - [Windows 11](./Windows/win11/win11.md)
   - [安装 WSL2](./Windows/win11/wsl2/wsl2.md)
+  - [RTX5090Laptop玩游戏频繁崩溃](./Windows/win11/nvdia5090bug.md)
   - [安装时跳过"让我们为你连接到网络"](./Windows/win11/让我们为你连接到网络.md)
   - [端口号占用](./Windows/win11/端口号占用.md)
   - [win11 右键菜单改回 win10](./Windows/win11/win11右键菜单改回win10.md)

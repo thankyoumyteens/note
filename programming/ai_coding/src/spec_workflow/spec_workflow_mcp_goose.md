@@ -15,7 +15,7 @@ goose configure
 1. 用方向键选择 `● Add Extension`。
 2. 类型选择 `Command-line`。
 3. Name: `spec-workflow`
-4. Command: `/换成你的绝对路径/npx -y spec-workflow-mcp@latest .`。
+4. Command: `/换成你的绝对路径/npx -y @pimzino/spec-workflow-mcp@latest .`。
 
 ### 3. 重新启动 Goose
 

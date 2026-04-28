@@ -19,7 +19,7 @@ Gemini CLI 支持两级配置，你可以根据自己的需求选择：
   "mcpServers": {
     "spec-workflow": {
       "command": "npx",
-      "args": ["-y", "spec-workflow-mcp@latest", "."],
+      "args": ["-y", "@pimzino/spec-workflow-mcp@latest", "."],
       "env": {}
     }
   }

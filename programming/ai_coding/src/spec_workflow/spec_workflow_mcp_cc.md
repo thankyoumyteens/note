@@ -37,7 +37,7 @@
   "mcpServers": {
     "spec-workflow": {
       "command": "npx",
-      "args": ["-y", "spec-workflow-mcp"]
+      "args": ["-y", "@pimzino/spec-workflow-mcp@latest", "."]
     }
   }
 }
@@ -46,6 +46,6 @@
 核心区别：
 
 - `"command": "npx"` 表示真正执行的命令是 npx。
-- `args: ["-y", "spec-workflow-mcp"]` 是告诉 npx 去执行这个包（`-y` 是自动回答 "yes" 以跳过安装确认提示）。
+- `args: ["-y", "@pimzino/spec-workflow-mcp@latest"]` 是告诉 npx 去执行这个包（`-y` 是自动回答 "yes" 以跳过安装确认提示）。
 
 优势：不需要提前全局安装。如果你从来没有用 npm 安装过这个包，npx 会在后台自动拉取最新的包并缓存在本地运行。它非常适合用来快速尝鲜，或者在换了一台新电脑时，不用关心环境有没有装好，直接就能跑起来。
