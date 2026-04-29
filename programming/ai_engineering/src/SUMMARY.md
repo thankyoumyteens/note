@@ -96,6 +96,17 @@
     - [提示词缓存](./phase3/llm_ops/prompt_caching.md)
     - [语义缓存](./phase3/llm_ops/semantic_cache.md)
 
+- [Java转AI应用开发(2026)](./v2026/route.md)
+  - [阶段 1：模型 API 工程化](./v2026/phase1/phase1.md)
+    - [第 1 课：先建立 AI Gateway 的工程模型](./v2026/phase1/lesson1/lesson1.md)
+      - [你需要先掌握的 5 个核心概念](./v2026/phase1/lesson1/concept.md)
+      - [第 1 阶段我们要做什么？](./v2026/phase1/lesson1/overview.md)
+      - [环境和项目骨架](./v2026/phase1/lesson1/project.md)
+      - [第一个接口设计](./v2026/phase1/lesson1/interface.md)
+      - [先用 Mock LLM 跑通流程](./v2026/phase1/lesson1/mock_llm.md)
+      - [这一课你要真正理解的点](./v2026/phase1/lesson1/conclusion.md)
+
+
 - [SQLModel](./sql_model/sql_model.md)
   - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
   - [按指定条件查询](./sql_model/where.md)
