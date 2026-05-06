@@ -261,12 +261,11 @@ mdbook build
 rm -rf ${nginx_path}/asm/
 cp -r book/ ${nginx_path}/asm/
 
-# 诗词
 cd "${workdir}/note"
-cd base/shici/
+cd base/english/
 mdbook build
-rm -rf ${nginx_path}/shici/
-cp -r book/ ${nginx_path}/shici/
+rm -rf ${nginx_path}/english/
+cp -r book/ ${nginx_path}/english/
 ```
 
 ### 4. 运行脚本

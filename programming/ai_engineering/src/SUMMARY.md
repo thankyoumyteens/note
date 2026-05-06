@@ -106,6 +106,7 @@
       - [先用 Mock LLM 跑通流程](./v2026/phase1/lesson1/mock_llm.md)
       - [这一课你要真正理解的点](./v2026/phase1/lesson1/conclusion.md)
     - [第 2 课：接入真实模型 API](./v2026/phase1/lesson2/lesson2.md)
+      - [核心概念](./v2026/phase1/lesson2/concept.md)
       - [先加依赖](./v2026/phase1/lesson2/dependencies.md)
       - [配置 application.yml](./v2026/phase1/lesson2/application.md)
       - [设置环境变量](./v2026/phase1/lesson2/env.md)
@@ -135,6 +136,12 @@
       - [新增 Controller 接口](./v2026/phase1/lesson4/controller.md)
       - [测试接口](./v2026/phase1/lesson4/test.md)
       - [为什么这一步很重要？](./v2026/phase1/lesson4/conclusion.md)
+    - [第 5 课：结构化输出稳定性增强](./v2026/phase1/lesson5/lesson5.md)
+      - [新增异常类](./v2026/phase1/lesson5/ex.md)
+      - [改造 TaskExtractionService](./v2026/phase1/lesson5/task_extraction_service.md)
+      - [增强全局异常处理](./v2026/phase1/lesson5/ex_handler.md)
+      - [测试](./v2026/phase1/lesson5/test.md)
+      - [本课核心理解](./v2026/phase1/lesson5/conclusion.md)
 
 
 - [SQLModel](./sql_model/sql_model.md)

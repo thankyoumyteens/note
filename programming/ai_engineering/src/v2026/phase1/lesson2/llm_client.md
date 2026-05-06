@@ -94,3 +94,18 @@ ChatCompletionResponse.Choice firstChoice = response.choices().getFirst();
 ```java
 ChatCompletionResponse.Choice firstChoice = response.choices().get(0);
 ```
+
+---
+
+当模型 API 返回 4xx 或 5xx 时，WebClient 会抛出：
+
+```java
+WebClientResponseException
+```
+
+例如：
+
+- 401 Unauthorized：API Key 错误
+- 404 Not Found：base-url 或路径错误
+- 429 Too Many Requests：限流
+- 500：供应商内部错误

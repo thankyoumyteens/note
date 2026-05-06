@@ -28,6 +28,14 @@ public record ChatCompletionRequest(
 
 ## ChatCompletionResponse
 
+核心字段：
+
+| 字段              | 含义                                                                              |
+| ----------------- | --------------------------------------------------------------------------------- |
+| `choices`         | 模型候选回复列表，多数场景只取第一个。后续如果使用多候选生成，才会处理多个 choice |
+| `message.content` | 真正的模型回答                                                                    |
+| `usage`           | token 使用情况                                                                    |
+
 ```java
 package com.example.aigateway.client.openai.dto;
 
