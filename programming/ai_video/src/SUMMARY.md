@@ -14,7 +14,8 @@
   - [阶段三：使用代码生成视频](./ai_video/phase3/phase3.md)
     - [拟音与环境混流](./ai_video/phase3/foley_and_muxing.md)
   - [阶段四：音频驱动与口型同步](./ai_video/phase4/phase4.md)
-  - [在线 AI 视频生成学习路线](./ai_video/paid/overview.md)
+
+- [在线 AI 视频生成学习路线](./ai_video/paid/overview.md)
 
 - [AI 文字转语音](./ai_tts/ai_tts.md)
   - [ChatTTS](./ai_tts/chat_tts/chat_tts.md)
