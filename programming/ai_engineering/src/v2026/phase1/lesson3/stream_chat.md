@@ -127,10 +127,15 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
             return Flux.empty();
         }
 
+        // SSE 原始事件通常带有前缀 data:
+        // Jackson 不能直接解析这个字符串，因为它不是纯 JSON。所以需要先去掉
         if (chunk.startsWith("data:")) {
             chunk = chunk.substring("data:".length()).strip();
         }
 
+        // OpenAI-compatible 流式响应通常最后会返回
+        // data: [DONE]
+        // 表示流结束。它不是 JSON，不能交给 Jackson 解析。
         if (chunk.isBlank() || chunk.equals("[DONE]")) {
             return Flux.empty();
         }
@@ -156,6 +161,33 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
     }
 }
 ```
+
+## `bodyToFlux(String.class)` 的含义
+
+第 2 课普通响应使用：
+
+```java
+.bodyToMono(ChatCompletionResponse.class)
+```
+
+意思是读取一个完整响应。
+
+第 3 课流式响应使用：
+
+```java
+.bodyToFlux(String.class)
+```
+
+意思是读取多个字符串片段。
+
+对比：
+
+```text
+Mono<T>：一个结果
+Flux<T>：多个结果
+```
+
+这里每个 `String` 可能是一段 SSE 数据。
 
 ## 一个重要说明：bodyToFlux(String.class) 的兼容问题
 

@@ -1,12 +1,43 @@
 # 增加流式响应 DTO
 
-OpenAI-compatible 的流式返回不是完整 JSON，而是一行一行的：
+普通模型响应是完整 JSON，例如：
+
+```json
+{
+  "choices": [
+    {
+      "message": {
+        "content": "RAG 是一种..."
+      }
+    }
+  ]
+}
+```
+
+流式响应是一段段 chunk，例如：
 
 ```text
 data: {"choices":[{"delta":{"content":"RAG"}}]}
+
 data: {"choices":[{"delta":{"content":" 是"}}]}
+
 data: {"choices":[{"delta":{"content":"一种"}}]}
+
 data: [DONE]
+```
+
+每个 chunk 只包含新增内容。
+
+所以不能再读取：
+
+```text
+message.content
+```
+
+而是要读取：
+
+```text
+delta.content
 ```
 
 所以我们需要一个流式响应 DTO。

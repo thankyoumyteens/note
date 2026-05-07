@@ -1,5 +1,13 @@
 # 增加流式请求 DTO
 
+OpenAI-compatible Chat Completions 要启用 streaming，通常需要在请求中增加：
+
+```json
+{
+  "stream": true
+}
+```
+
 你现在已经有普通请求 DTO：
 
 ```java

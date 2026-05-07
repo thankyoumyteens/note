@@ -4,15 +4,15 @@
 
 像这些词：
 
-* **he / him / his / her / and / to / of**
+- **he / him / his / her / and / to / of**
 
 在句子里**几乎都会变形**：
 
-* **he → /i/**
-* **him → /ɪm/**
-* **his → /ɪz/**
-* **and → /ən/**
-* **to → /tə/**
+- **he → /i/**
+- **him → /ɪm/**
+- **his → /ɪz/**
+- **and → /ən/**
+- **to → /tə/**
 
 👉 结论：
 **你听不懂，80%是因为这些词“变形了”**
@@ -23,9 +23,9 @@
 
 只要前面是辅音，后面是元音，就会连起来：
 
-* pick **it** → /ˈpɪkɪt/
-* find **out** → /faɪnˈdaʊt/
-* and **he** → /ən i/
+- pick **it** → /ˈpɪkɪt/
+- find **out** → /faɪnˈdaʊt/
+- and **he** → /ən i/
 
 👉 结论：
 **英语是“流动的”，不是一个词一个词断开的**
@@ -34,14 +34,12 @@
 
 ## 3️⃣ t / d 会变（最关键）
 
-这是你刚刚一直问的核心👇
-
 ### 情况 A：变成“轻 d”（flap /ɾ/）
 
 条件：**元音 + t/d + 元音**
 
-* better → /ˈbɛɾər/
-* city → /ˈsɪɾi/
+- better → /ˈbɛɾər/
+- city → /ˈsɪɾi/
 
 👉 听起来像 **d**
 
@@ -51,9 +49,9 @@
 
 条件：**n + t + 非重读音**
 
-* enter → /ˈɛnər/
-* center → /ˈsɛnər/
-* internet → /ˈɪnɚˌnɛt/（中间 t 几乎没了）
+- enter → /ˈɛnər/
+- center → /ˈsɛnər/
+- internet → /ˈɪnɚˌnɛt/（中间 t 几乎没了）
 
 👉 本质是：**t 被吞掉（glottal stop）**
 
@@ -61,8 +59,8 @@
 
 ### 情况 C：必须发音
 
-* intent → /ɪnˈtɛnt/
-* attack → /əˈtæk/
+- intent → /ɪnˈtɛnt/
+- attack → /əˈtæk/
 
 👉 只要是**重读或语义关键位置 → t 保留**
 
@@ -72,14 +70,14 @@
 
 只要不是强调：
 
-* he → /i/
-* him → /ɪm/
-* his → /ɪz/
+- he → /i/
+- him → /ɪm/
+- his → /ɪz/
 
 👉 例子：
 
-* **after his → /ˈæftərɪz/**
-* **and he → /ən i/**
+- **after his → /ˈæftərɪz/**
+- **and he → /ən i/**
 
 ---
 
@@ -112,21 +110,16 @@
 
 ---
 
-# 🗣️ 举个整句（你就会通了）
+# 🗣️ 举个整句
 
 **Then he said it in his life**
 
 真实发音 ≈
 **/ðen i sɛɾɪɾɪnɪz laɪf/**
 
-你之前问的所有点都在里面：
+之前的所有点都在里面：
 
-* he → i
-* said it → sɛɾɪɾ
-* in his → ɪnɪz
-* t → d / 消失
-
----
-
-如果你愿意，我可以帮你做一件更有用的事：
-👉 给你一套**“美剧听力解码训练（7天版）”**，把这些规则变成肌肉记忆，而不是靠记。
+- he → i
+- said it → sɛɾɪɾ
+- in his → ɪnɪz
+- t → d / 消失

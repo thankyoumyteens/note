@@ -33,3 +33,13 @@ Flux<String> streamChat(String message);
 ```
 
 `Flux<String>` 表示：后端会不断发出一段一段文本。
+
+扩展后调用链变成：
+
+```text
+AiChatController
+  -> AiChatService
+  -> LlmClient.streamChat
+  -> OpenAiCompatibleLlmClient.streamChat
+  -> LLM Provider streaming API
+```

@@ -51,8 +51,4 @@ public class AiChatController {
 @PostMapping(value = "/chat/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 ```
 
-它告诉 Spring：
-
-```text
-这个接口返回 SSE 流，而不是普通 JSON。
-```
+它告诉 Spring：这个接口返回 SSE 流，而不是普通 JSON。如果没有这个声明，客户端可能不会按 SSE 流来处理响应。
