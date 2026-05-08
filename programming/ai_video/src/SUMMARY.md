@@ -16,6 +16,10 @@
   - [阶段四：音频驱动与口型同步](./ai_video/phase4/phase4.md)
 
 - [在线 AI 视频生成学习路线](./ai_video/paid/overview.md)
+  - [第 1 课：建立卡提希娅参考图包](./ai_video/paid/lesson1/lesson1.md)
+    - [操作步骤](./ai_video/paid/lesson1/tasks.md)
+    - [第 1 课收尾：卡提希娅角色控制清单 v1](./ai_video/paid/lesson1/control_pack_v1.md)
+  - [第 2 课：生成卡提希娅角色标准图](./ai_video/paid/lesson2/lesson2.md)
 
 - [AI 文字转语音](./ai_tts/ai_tts.md)
   - [ChatTTS](./ai_tts/chat_tts/chat_tts.md)
