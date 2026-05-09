@@ -31,6 +31,10 @@
     - [如果 AI 生成得太复杂，怎么纠正](./work_with_ai/lesson1/guide.md)
     - [如果 AI 创建项目失败，怎么让它修](./work_with_ai/lesson1/bug_fix.md)
   - [第 2 课：建立项目规则文件 AGENTS.md / CLAUDE.md](./work_with_ai/lesson2/lesson2.md)
+    - [本课推荐 Prompt](./work_with_ai/lesson2/prompt.md)
+    - [重点观察 AI 有没有犯这些错误](./work_with_ai/lesson2/guide.md)
+  - [第 3 课：初始化 Git 与基线提交](./work_with_ai/lesson3/lesson3.md)
+    - [你要让 Codex 做什么](./work_with_ai/lesson3/prompt.md)
 
 - [SOP](./sop/sop.md)
   - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./sop/ios_bug.md)

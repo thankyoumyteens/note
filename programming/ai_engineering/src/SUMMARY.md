@@ -151,6 +151,16 @@
       - [新增 Controller](./v2026/phase2/lesson6/order_assistant_controller.md)
       - [测试](./v2026/phase2/lesson6/test.md)
   - [阶段 3：AI Gateway 生产化](./v2026/phase3/phase3.md)
+      - [第 7 课：调用日志与成本统计](./v2026/phase3/lesson7/lesson7.md)
+      - [核心概念](./v2026/phase3/lesson7/concept.md)
+      - [新增调用类型枚举](./v2026/phase3/lesson7/enum.md)
+      - [新增调用日志 DTO](./v2026/phase3/lesson7/dto.md)
+      - [新增日志 Service](./v2026/phase3/lesson7/llm_call_log_service.md)
+      - [新增查询 Controller](./v2026/phase3/lesson7/llm_call_log_controller.md)
+      - [修改 LlmClient](./v2026/phase3/lesson7/llm_client.md)
+      - [修改 OpenAiCompatibleLlmClient](./v2026/phase3/lesson7/open_ai_compatible_llm_client.md)
+      - [给业务调用补充 callType](./v2026/phase3/lesson7/call_type.md)
+      - [测试](./v2026/phase3/lesson7/test.md)
 
 
 - [SQLModel](./sql_model/sql_model.md)
