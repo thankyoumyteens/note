@@ -21,9 +21,9 @@
     - [第 1 课收尾：卡提希娅角色控制清单 v1](./ai_video/paid/lesson1/control_pack_v1.md)
   - [第 2 课：生成卡提希娅角色标准图](./ai_video/paid/lesson2/lesson2.md)
     - [核心概念](./ai_video/paid/lesson2/concept.md)
-    - [niji 简介](./ai_video/paid/lesson2/niji.md)
-    - [统一操作步骤](./ai_video/paid/lesson2/guide.md)
-    - [六张标准图的 niji prompt](./ai_video/paid/lesson2/niji_prompt.md)
+    <!-- - [niji 简介](./ai_video/paid/lesson2/niji.md) -->
+    - [生成正面半身标准图](./ai_video/paid/lesson2/guide.md)
+    <!-- - [其余五张图的 GPT Image 2 提示词](./ai_video/paid/lesson2/niji_prompt.md) -->
 
 - [AI 文字转语音](./ai_tts/ai_tts.md)
   - [ChatTTS](./ai_tts/chat_tts/chat_tts.md)

@@ -35,6 +35,10 @@
     - [重点观察 AI 有没有犯这些错误](./work_with_ai/lesson2/guide.md)
   - [第 3 课：初始化 Git 与基线提交](./work_with_ai/lesson3/lesson3.md)
     - [你要让 Codex 做什么](./work_with_ai/lesson3/prompt.md)
+    - [Codex 完成后你自己执行的命令](./work_with_ai/lesson3/cmd.md)
+  - [第 4 课：从模糊需求到清晰任务](./work_with_ai/lesson4/lesson4.md)
+    - [本课的标准任务结构](./work_with_ai/lesson4/structure.md)
+    - [推荐发给 Codex 的 Prompt](./work_with_ai/lesson4/prompt.md)
 
 - [SOP](./sop/sop.md)
   - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./sop/ios_bug.md)

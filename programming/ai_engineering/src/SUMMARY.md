@@ -151,7 +151,7 @@
       - [新增 Controller](./v2026/phase2/lesson6/order_assistant_controller.md)
       - [测试](./v2026/phase2/lesson6/test.md)
   - [阶段 3：AI Gateway 生产化](./v2026/phase3/phase3.md)
-      - [第 7 课：调用日志与成本统计](./v2026/phase3/lesson7/lesson7.md)
+    - [第 7 课：调用日志与成本统计](./v2026/phase3/lesson7/lesson7.md)
       - [核心概念](./v2026/phase3/lesson7/concept.md)
       - [新增调用类型枚举](./v2026/phase3/lesson7/enum.md)
       - [新增调用日志 DTO](./v2026/phase3/lesson7/dto.md)
@@ -161,6 +161,13 @@
       - [修改 OpenAiCompatibleLlmClient](./v2026/phase3/lesson7/open_ai_compatible_llm_client.md)
       - [给业务调用补充 callType](./v2026/phase3/lesson7/call_type.md)
       - [测试](./v2026/phase3/lesson7/test.md)
+    - [第 8 课：重试、限流、Fallback](./v2026/phase3/lesson8/lesson8.md)
+      - [新增 LlmRateLimitException](./v2026/phase3/lesson8/llm_rate_limit_exception.md)
+      - [新增 LlmFallbackException](./v2026/phase3/lesson8/llm_fallback_exception.md)
+      - [新增限流组件](./v2026/phase3/lesson8/llm_rate_limiter.md)
+      - [修改 GlobalExceptionHandler](./v2026/phase3/lesson8/global_exception_handler.md)
+      - [修改 OpenAiCompatibleLlmClient](./v2026/phase3/lesson8/open_ai_compatible_llm_client.md)
+      - [测试](./v2026/phase3/lesson8/test.md)
 
 
 - [SQLModel](./sql_model/sql_model.md)

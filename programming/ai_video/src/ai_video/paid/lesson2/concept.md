@@ -41,3 +41,48 @@
 干净背景
 稳定构图
 ```
+
+## PMX / MMD 模型是什么
+
+PMX 是 MikuMikuDance 常用的角色模型格式，通常包含：
+
+```text
+角色网格
+骨骼
+材质
+贴图
+表情 Morph
+物理骨骼
+裙摆 / 头发 / 飘带物理
+```
+
+我们要做的不是改模型，而是把它导入 Blender 或 MMD，用它渲染出标准图。
+
+---
+
+## Blender 是什么
+
+Blender 是 3D 软件，用来：
+
+```text
+导入模型
+摆姿势
+设置相机
+设置灯光
+渲染图片
+输出标准图
+```
+
+---
+
+## mmd_tools 是什么
+
+mmd_tools 是 Blender 插件，用来导入 MMD 模型。它支持导入 `.pmd`、`.pmx` 模型，也支持导入 `.vmd` 动作和 `.vpd` 姿势。([GitHub][2])
+
+对我们来说，mmd_tools 的作用就是：
+
+```text
+让 Blender 能打开卡提希娅 PMX 模型
+```
+
+Blender 官方扩展库里也有 MMD Tools 插件，说明它用于把 MMD 模型导入 Blender。

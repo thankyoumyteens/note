@@ -1,228 +1,122 @@
-# 六张标准图的 niji prompt
-
-下面的 prompt 都是 niji 适配版。
-
-你使用时，把参考图链接放在最前面。
-
----
-
-## 图 1：正面半身标准图
-
-用途：
-
-```text
-定脸、定气质、定头冠、定耳饰、定上半身服装。
-```
-
-推荐参考图：
-
-```text
-正面图 + 官方全身图
-```
-
-prompt：
-
-```text
-[正面参考图链接] [官方全身参考图链接] Cartethyia from Wuthering Waves, faithful character reference, anime game 3D model inspired key visual, young woman with long pale blonde hair, center-parted bangs, soft side hair strands, calm reserved expression, slightly narrow face, delicate blue crystalline eyes, elf-like pointed ears, black vertical forehead mark, thin irregular blue-purple crystalline branch crown close to the forehead, not large antlers, blue teardrop earrings, white black and blue ornate ceremonial outfit, black high collar, white front panels with black inner bodice, blue thin straps, gold ring ornaments, translucent blue gradient fin-like ribbons, elegant sacred and mysterious atmosphere, front view, upper body portrait, centered composition, clean simple dark background, high quality anime game character reference sheet, detailed outfit design --niji 7 --ar 2:3 --s 50 --iw 2 --no text, logo, watermark, school uniform, casual outfit, boots, staff, gun, bow, scythe, antlers, golden crown
-```
-
-验收标准：
-
-```text
-1. 正脸稳定
-2. 蓝眼清楚
-3. 额头黑色竖纹存在
-4. 水晶枝冠存在
-5. 尖耳和蓝色耳饰存在
-6. 黑色高领存在
-7. 不像随机浅金发二次元少女
-```
-
----
+# 其余五张图的 GPT Image 2 提示词
 
 ## 图 2：全身标准图
 
-用途：
-
 ```text
-定完整服装、身体比例、蓝色飘带、鞋子、整体轮廓。
-```
+请基于卡提希娅参考图，生成一张“全身角色标准图”。
 
-推荐参考图：
+目标：
+用于后续 AI 视频生产的角色标准图，重点是完整服装、身体比例、飘带、鞋子和整体轮廓。
 
-```text
-官方全身图 + 游戏内模型图
-```
+风格：
+3D anime game character render，高质量二次元开放世界手游官方角色展示图质感。
+不要平面插画，不要写实真人。
 
-prompt：
+构图：
+全身站姿，正面或轻微 3/4 角度，角色完整入画，背景干净简单。
 
-```text
-[官方全身参考图链接] [游戏内模型参考图链接] Cartethyia from Wuthering Waves, elegant anime game character, young woman with long pale blonde hair, blue crystalline eyes, elf-like pointed ears, black vertical forehead mark, blue crystalline branch crown, blue teardrop earrings, white black and blue ornate outfit, black high collar, translucent blue gradient ribbon sleeves, flowing blue gradient ribbons, gold ornaments, white strappy high-heel sandals, delicate ceremonial fantasy outfit, calm gentle expression, sacred and mysterious atmosphere, full body standing pose, front view, clean simple background, clear silhouette, high quality anime game character reference sheet, detailed outfit design --niji 7 --ar 2:3 --s 100 --iw 1.5 --no text, logo, watermark, school uniform, casual outfit, boots, staff, gun, bow, scythe
-```
+必须保留：
+浅金色长发、蓝色晶体眼睛、尖耳、额头黑色竖向印记、蓝紫色水晶枝状头冠、蓝色水滴耳饰、白黑蓝服装、黑色高领、金色装饰件、蓝色透明渐变飘带 / 鱼鳍状披帛、白色细带高跟凉鞋。
 
-验收标准：
-
-```text
-1. 全身完整
-2. 头冠和耳饰没有丢
-3. 白黑蓝服装结构正确
-4. 蓝色渐变飘带明显
-5. 鞋子是细带高跟凉鞋，不是靴子
-6. 不是普通白裙
-```
-
-如果生成成靴子，下一轮把 `--no boots` 放前一点，或者在正向 prompt 里强化：
-
-```text
-white strappy high-heel sandals, visible delicate ankle straps
+要求：
+服装不要简化成普通白裙。
+鞋子不要变成靴子。
+头冠不要变成巨大鹿角或金色皇冠。
+保持角色比例优雅、轻盈、圣洁。
+不要文字、Logo、水印。
 ```
 
 ---
 
 ## 图 3：侧脸近景标准图
 
-用途：
-
 ```text
-定侧脸轮廓、尖耳、耳饰、头冠侧面结构。
-```
+请基于卡提希娅参考图，生成一张“侧脸近景角色标准图”。
 
-推荐参考图：
+目标：
+用于确定卡提希娅的侧脸轮廓、尖耳、耳饰和头冠侧面结构。
 
-```text
-侧脸图 + 正面脸图
-```
+风格：
+3D anime game character render，接近官方游戏角色近景截图，有立体面部结构、柔和皮肤阴影和水晶材质感。
 
-prompt：
+构图：
+侧脸近景，90 度或接近 90 度侧面，胸口以上，背景干净简单。
 
-```text
-[侧脸参考图链接] [正面脸部参考图链接] Cartethyia from Wuthering Waves, elegant anime game character, young woman with long pale blonde hair, blue crystalline eyes, elf-like pointed ears, black vertical forehead mark, blue crystalline branch crown, blue teardrop earrings, white black and blue ornate outfit, black high collar, gold ornaments, calm and distant expression, sacred and mysterious atmosphere, side profile close-up, 90 degree profile view, clean simple background, soft blue lighting, detailed face, detailed pointed ear, detailed blue teardrop earrings, high quality anime game character reference sheet --niji 7 --ar 2:3 --s 100 --iw 1.5 --no text, logo, watermark, school uniform, casual outfit, boots, staff, gun, bow, scythe
-```
+必须保留：
+浅金色长发、侧脸长发束、蓝色晶体眼睛、明显尖耳、蓝色水滴耳饰、蓝紫色水晶枝状头冠、额头黑色竖向印记局部可见、黑色高领和白黑蓝服装局部。
 
-验收标准：
-
-```text
-1. 侧脸清楚
-2. 尖耳明显
-3. 蓝色水滴耳饰明显
-4. 头冠不是普通王冠
-5. 脸不要变成熟
-6. 气质冷静
+表情：
+冷静、克制、轻微疏离感。
+不要可爱卖萌，不要成熟御姐化。
+不要文字、Logo、水印。
 ```
 
 ---
 
 ## 图 4：背影标准图
 
-用途：
-
 ```text
-定背面长发、编发、背部轮廓、飘带位置。
-```
+请基于卡提希娅参考图，生成一张“背影角色标准图”。
 
-推荐参考图：
+目标：
+用于确定背面长发、编发结构、背部服装轮廓、蓝色飘带位置。
 
-```text
-背面图 + 官方全身图
-```
+风格：
+3D anime game character render，高质量二次元游戏角色展示图质感。
 
-prompt：
+构图：
+全身背影，角色站立，背景干净简单。
 
-```text
-[背面参考图链接] [官方全身参考图链接] Cartethyia from Wuthering Waves, elegant anime game character, young woman with very long pale blonde hair, braided back hair, blue crystalline branch crown, elf-like pointed ears, white black and blue ornate outfit, translucent blue gradient ribbon sleeves, flowing blue ribbons, gold ornaments, delicate ceremonial fantasy outfit, sacred and mysterious atmosphere, back view, full body from behind, standing calmly, clean simple background, clear silhouette, detailed long hair, detailed braided hair, high quality anime game character reference sheet --niji 7 --ar 2:3 --s 100 --iw 1.5 --no text, logo, watermark, school uniform, casual outfit, boots, staff, gun, bow, scythe
-```
+必须保留：
+非常长的浅金色头发，从背后自然垂下；背面有编发结构；蓝紫色水晶枝状头冠从背面可见；尖耳轮廓可见；白黑蓝服装背面结构；蓝色透明渐变飘带 / 鱼鳍状披帛；金色装饰件。
 
-验收标准：
-
-```text
-1. 长发从背后垂下
-2. 有背后编发结构
-3. 蓝色飘带位置清楚
-4. 头冠可见
-5. 服装背面完整
-6. 不要变成披风角色
-```
-
-如果背影图总是丢头冠，下一轮加：
-
-```text
-blue crystalline branch crown visible from behind
+要求：
+不要变成普通披风角色。
+不要让蓝色飘带消失。
+不要让头发变短。
+不要文字、Logo、水印。
 ```
 
 ---
 
 ## 图 5：眼部 / 表情特写
 
-用途：
+眼部特写这一项，我建议不要用“AI 重绘生成图”作为标准图。
+
+更稳的方案是：
 
 ```text
-定眼睛、额头印记、表情、头冠局部。
+直接把官方 / 游戏内脸部截图作为眼部标准图，而不是必须生成一张新的。
 ```
 
-推荐参考图：
+原因很简单：**模型能抓住符号特征，但抓不住具体脸部结构。**
 
-```text
-脸部特写 + 正面图
-```
-
-prompt：
-
-```text
-[脸部特写参考图链接] [正面参考图链接] Cartethyia from Wuthering Waves, elegant anime game character, close-up of her face and eyes, blue crystalline eyes, black vertical forehead mark, pale blonde hair framing her face, blue crystalline branch crown partially visible, elf-like pointed ears slightly visible, blue teardrop earrings, calm gentle expression, sacred and mysterious atmosphere, soft lighting, detailed eyes, emotional subtle smile, high quality anime game cinematic close-up --niji 7 --ar 2:3 --s 100 --iw 1.5 --no text, logo, watermark, school uniform, casual outfit, staff, gun, bow, scythe
-```
-
-验收标准：
-
-```text
-1. 蓝色晶体眼清楚
-2. 额头黑色竖纹清楚
-3. 表情温柔克制
-4. 头冠局部存在
-5. 不要变成普通大眼萌妹
-```
-
-眼部特写可以稍微放宽服装要求，因为主要验证脸。
+眼部标准图的目标是控制角色脸部一致性，不是创造新图。如果生成图不像，最好的标准图就是原始参考图。
 
 ---
 
 ## 图 6：持剑中景标准图
 
-用途：
-
 ```text
-定武器、上半身战斗状态、能量意象。
-```
+请基于卡提希娅参考图，生成一张“持剑中景角色标准图”。
 
-推荐参考图：
+目标：
+用于确定她在持剑状态下的上半身、武器、能量意象和服装稳定性。
 
-```text
-官方角色展示图 + 官方全身图
-```
+风格：
+3D anime game character render，接近高质量游戏角色展示图和角色 PV 截图。
 
-prompt：
+构图：
+中景，角色上半身到大腿附近，手持蓝色能量剑，背景干净简单，不要复杂战斗场景。
 
-```text
-[官方角色展示参考图链接] [官方全身参考图链接] Cartethyia from Wuthering Waves, elegant anime game character, young woman with long pale blonde hair, blue crystalline eyes, elf-like pointed ears, black vertical forehead mark, blue crystalline branch crown, blue teardrop earrings, white black and blue ornate outfit, black high collar, translucent blue gradient ribbon sleeves, gold ornaments, calm determined expression, holding a glowing blue sword, elegant sword, blue energy blade, water-like energy around the blade, crystalline blue light, sacred and mysterious atmosphere, medium shot, clean simple background, high quality anime game character reference sheet, detailed character design --niji 7 --ar 2:3 --s 100 --iw 1.5 --no text, logo, watermark, school uniform, casual outfit, boots, staff, gun, bow, scythe, red fire
-```
+必须保留：
+浅金色长发、蓝色晶体眼睛、尖耳、额头黑色竖向印记、蓝紫色水晶枝状头冠、蓝色水滴耳饰、白黑蓝服装、黑色高领、蓝色透明渐变飘带、金色装饰件。
 
-验收标准：
+武器：
+必须是剑，优雅的蓝色能量剑，有水流、晶体、潮汐感能量。
+不要法杖、枪、弓、镰刀、火焰武器。
 
-```text
-1. 武器是剑
-2. 剑是蓝色能量感
-3. 不是法杖、枪、弓、镰刀
-4. 脸仍然像卡提希娅
-5. 服装和头冠没有因为持剑而跑偏
-```
-
-如果总是生成法杖，下一轮加强正向：
-
-```text
-holding an elegant sword, visible blade, sword hilt, blue energy blade
-```
-
-同时保留：
-
-```text
---no staff
+表情：
+冷静、坚定、神秘、圣洁。
+不要文字、Logo、水印。
 ```
