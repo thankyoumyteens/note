@@ -176,6 +176,7 @@
 - [Maven](./maven/maven.md)
   - [设置国内源](./maven/mirror.md)
   - [设置项目jdk版本](./maven/jdk_version.md)
+  - [强制重新下载依赖](./maven/reload_force.md)
   - [maven-shade-plugin](./maven/main_class.md)
   - [导入本地jar包](./maven/local_jar.md)
   - [设置私服](./maven/repositories.md)

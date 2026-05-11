@@ -168,6 +168,15 @@
       - [修改 GlobalExceptionHandler](./v2026/phase3/lesson8/global_exception_handler.md)
       - [修改 OpenAiCompatibleLlmClient](./v2026/phase3/lesson8/open_ai_compatible_llm_client.md)
       - [测试](./v2026/phase3/lesson8/test.md)
+    - [第 9 课：Spring AI 重构](./v2026/phase3/lesson9/lesson9.md)
+      - [核心概念](./v2026/phase3/lesson9/concept.md)
+      - [升级 Spring Boot 版本并引入 Spring AI](./v2026/phase3/lesson9/sbv.md)
+      - [配置 Spring AI](./v2026/phase3/lesson9/sai_config.md)
+      - [修改 OpenAiCompatibleLlmClient](./v2026/phase3/lesson9/open_ai_compatible_llm_client.md)
+      - [新增 SpringAiLlmClient](./v2026/phase3/lesson9/spring_ai_llm_client.md)
+      - [测试](./v2026/phase3/lesson9/test.md)
+  - [阶段 4：Python AI 工具补齐](./v2026/phase4/phase4.md)
+    - [第 10 课：Python AI 工具补齐](./v2026/phase4/lesson10/lesson10.md)
 
 
 - [SQLModel](./sql_model/sql_model.md)

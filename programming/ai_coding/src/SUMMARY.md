@@ -39,6 +39,8 @@
   - [第 4 课：从模糊需求到清晰任务](./work_with_ai/lesson4/lesson4.md)
     - [本课的标准任务结构](./work_with_ai/lesson4/structure.md)
     - [推荐发给 Codex 的 Prompt](./work_with_ai/lesson4/prompt.md)
+  - [第 5 课：输出格式控制](./work_with_ai/lesson5/lesson5.md)
+    - [本课推荐 Prompt](./work_with_ai/lesson5/prompt.md)
 
 - [SOP](./sop/sop.md)
   - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./sop/ios_bug.md)
