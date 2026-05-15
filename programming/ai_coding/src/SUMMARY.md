@@ -57,6 +57,8 @@
     - [合格的 design.md 应该包含什么](./work_with_ai/lesson8/design.md)
     - [合格的 tasks.md 应该能指导第 9 课](./work_with_ai/lesson8/tasks.md)
     - [合格的 test.md 应该覆盖什么](./work_with_ai/lesson8/test.md)
+  - [第 9 课：Spec 驱动实现文档查询功能](./work_with_ai/lesson9/lesson9.md)
+    - [第一步：让 Codex 先读取 spec，不改代码](./work_with_ai/lesson9/read_spec.md)
 
 - [SOP](./sop/sop.md)
   - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./sop/ios_bug.md)
