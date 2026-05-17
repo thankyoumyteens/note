@@ -59,3 +59,34 @@ Python scripts / workers
   -> prompt 实验
   -> 数据清洗
 ```
+
+## Python 调模型 API 和 Java 调模型 API 的区别
+
+本质一样，都是 HTTP API 调用。
+
+Java 里你用了：
+
+```text
+WebClient
+DTO
+LlmClient
+OpenAiCompatibleLlmClient
+```
+
+Python 里先用简单脚本：
+
+```text
+httpx
+dict / Pydantic
+OpenAI-compatible API
+```
+
+不要一上来引入 LangChain、LangGraph、LlamaIndex。
+
+本课先掌握底层：
+
+```text
+Python -> HTTP -> OpenAI-compatible API -> JSON response -> Pydantic validation
+```
+
+这和你 Java 课程的底层逻辑一致。

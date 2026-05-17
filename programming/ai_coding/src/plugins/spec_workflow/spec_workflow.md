@@ -1,4 +1,4 @@
-# Spec Workflow
+# spec-workflow-mcp
 
 Spec-workflow（规范工作流）是一种专门为 AI 代码生成和 Autonomous Agents（自主智能体）设计的“规范驱动开发”（Spec-Driven Development, SDD）方法论及生态系统。
 

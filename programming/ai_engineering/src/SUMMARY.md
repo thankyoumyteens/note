@@ -100,7 +100,6 @@
   - [阶段 1：模型 API 工程化](./v2026/phase1/phase1.md)
     - [第 1 课：先建立 AI Gateway 的工程模型](./v2026/phase1/lesson1/lesson1.md)
       - [你需要先掌握的 5 个核心概念](./v2026/phase1/lesson1/concept.md)
-      - [第 1 阶段我们要做什么？](./v2026/phase1/lesson1/overview.md)
       - [环境和项目骨架](./v2026/phase1/lesson1/project.md)
       - [第一个接口设计](./v2026/phase1/lesson1/interface.md)
       - [先用 Mock LLM 跑通流程](./v2026/phase1/lesson1/mock_llm.md)
@@ -177,6 +176,10 @@
       - [测试](./v2026/phase3/lesson9/test.md)
   - [阶段 4：Python AI 工具补齐](./v2026/phase4/phase4.md)
     - [第 10 课：Python AI 工具补齐](./v2026/phase4/lesson10/lesson10.md)
+      - [初始化 uv 项目](./v2026/phase4/lesson10/uv.md)
+      - [创建 .env](./v2026/phase4/lesson10/env.md)
+      - [Python 调模型 API](./v2026/phase4/lesson10/api.md)
+      - [Pydantic 结构化输出](./v2026/phase4/lesson10/pydantic.md)
 
 
 - [SQLModel](./sql_model/sql_model.md)

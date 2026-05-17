@@ -163,6 +163,9 @@
     - [模拟键盘输入](./selenium/km/send_keys.md)
     - [模拟复杂交互](./selenium/km/ac.md)
 
+- [Playwright](./playwright/playwright.md)
+  - [安装 Playwright Python](./playwright/install.md)
+
 - [OCR](./ocr/ocr.md)
   - [基本使用](./ocr/quick_start.md)
 

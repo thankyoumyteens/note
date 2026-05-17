@@ -12,17 +12,6 @@
   - [安装 OpenCode](./software/open_code.md)
   - [安装 Goose](./software/goose.md)
 
-- [SKILL](./skills/skills.md)
-  - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
-  - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
-
-- [Spec Workflow](./spec_workflow/spec_workflow.md)
-  - [安装 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp.md)
-    - [Gemini CLI 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_gemini.md)
-    - [Codex CLI 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_codex.md)
-    - [Claude Code 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_cc.md)
-    - [Goose 配置 spec-workflow-mcp](./spec_workflow/spec_workflow_mcp_goose.md)
-
 - [指挥 AI 工作](./work_with_ai/work_with_ai.md)
   - [第 1 课：从空目录创建最小 Java 项目](./work_with_ai/lesson1/lesson1.md)
     - [本课任务结构](./work_with_ai/lesson1/structure.md)
@@ -59,6 +48,22 @@
     - [合格的 test.md 应该覆盖什么](./work_with_ai/lesson8/test.md)
   - [第 9 课：Spec 驱动实现文档查询功能](./work_with_ai/lesson9/lesson9.md)
     - [第一步：让 Codex 先读取 spec，不改代码](./work_with_ai/lesson9/read_spec.md)
+    - [第二步：按 tasks.md 小步实现](./work_with_ai/lesson9/tasks.md)
+    - [第三步：运行测试](./work_with_ai/lesson9/test.md)
+    - [第四步：更新 spec 状态](./work_with_ai/lesson9/update_spec.md)
+    - [第五步：最终 diff 审查](./work_with_ai/lesson9/diff.md)
+
+- [SKILL](./skills/skills.md)
+  - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
+  - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
+
+- [常用插件](./plugins/plugins.md)
+- [spec-workflow-mcp](./plugins/spec_workflow/spec_workflow.md)
+  - [安装 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp.md)
+    - [Gemini CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_gemini.md)
+    - [Codex CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_codex.md)
+    - [Claude Code 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_cc.md)
+    - [Goose 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_goose.md)
 
 - [SOP](./sop/sop.md)
   - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./sop/ios_bug.md)
