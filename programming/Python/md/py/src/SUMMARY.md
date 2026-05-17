@@ -165,6 +165,8 @@
 
 - [Playwright](./playwright/playwright.md)
   - [安装 Playwright Python](./playwright/install.md)
+  - [打开网页](./playwright/open_page.md)
+  - [定位元素](./playwright/locate/locate.md)
 
 - [OCR](./ocr/ocr.md)
   - [基本使用](./ocr/quick_start.md)
