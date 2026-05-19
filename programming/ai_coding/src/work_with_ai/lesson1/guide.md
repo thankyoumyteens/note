@@ -1,28 +1,27 @@
-# 如果 AI 生成得太复杂，怎么纠正
+# 如果 AI 过度设计，怎么纠正
 
-你可以继续发这个纠偏 prompt：
+如果它加入了数据库、Security、Docker、Spring AI 等内容，发这个纠正 Prompt：
 
 ```text
-当前实现过度复杂，请回退到第 1 课要求的最小可运行项目。
+当前实现过度设计。目前只允许创建最小可运行 Spring Boot 项目骨架。
 
 请移除或不要加入以下内容：
 1. 数据库相关依赖和配置
 2. Spring Security
 3. Docker / docker-compose
-4. 前端目录
-5. 真实 AI API 接入
-6. 复杂分层和无关业务模块
+4. 前端
+5. 真实 AI API
+6. Spring AI
+7. 用户系统
+8. 复杂业务模块
+9. 不必要依赖
 
-保留：
+请保留：
 1. pom.xml
-2. 主启动类
+2. Spring Boot 主启动类
 3. GET /api/health
 4. 基础测试
 5. README.md
 
-目标是让 mvn test 通过，并保持文件数量尽量少。
+目标是让 mvn test 通过，并保持项目结构尽量简单。
 ```
-
-这就是 AI 工作指挥里的一个重要习惯：
-
-> **发现 AI 过度发挥时，不要顺着它改，要把范围拉回课程目标。**

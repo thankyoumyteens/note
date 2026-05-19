@@ -1,34 +1,6 @@
-# 本课你要特别观察 AI 的行为
+# 你要检查 AI 的输出
 
-当你把上面的 prompt 发给 Codex 或 Claude Code 后，不是只看它有没有生成代码。
-
-你要检查 5 件事。
-
-## 检查 1：有没有过度设计
-
-不应该出现：
-
-```text
-Spring Security
-JWT
-UserController
-数据库配置
-Dockerfile
-docker-compose.yml
-Redis
-PostgreSQL
-前端目录
-复杂异常体系
-复杂领域模型
-```
-
-如果出现，说明限制没有被遵守。
-
----
-
-## 检查 2：项目结构是否足够简单
-
-理想结构大概是这样：
+完成后检查项目结构，理想结果大概是：
 
 ```text
 ai-doc-summary/
@@ -44,57 +16,63 @@ ai-doc-summary/
       java/
         com/example/aidocsummary/
           AiDocSummaryApplicationTests.java
-          HealthControllerTest.java
 ```
 
-可以略有不同，但第一版不应该太复杂。
+也可能没有单独的 `HealthController.java`，而是放在主类旁边。只要结构清晰、能跑、不过度设计即可。
 
----
+## 检查依赖是否过度
 
-## 检查 3：pom.xml 是否干净
-
-第一版依赖一般只需要：
+第 1 课合理依赖通常只有：
 
 ```text
 spring-boot-starter-web
 spring-boot-starter-test
 ```
 
-可以有：
-
-```text
-spring-boot-maven-plugin
-```
-
-不应该一开始就有：
+不应该出现：
 
 ```text
 spring-boot-starter-data-jpa
 spring-boot-starter-security
+spring-ai
 postgresql
 mysql
 redis
-lombok
-openapi
 jjwt
+openapi
+docker
+lombok
 ```
 
-尤其是 `lombok`，第 1 课不需要。
+`lombok` 也不建议第 1 课加入，因为现在没有复杂模型。
 
----
+## 运行验收命令
 
-## 检查 4：健康检查接口是否简单
+项目生成后，运行：
 
-可以是：
-
-```java
-@GetMapping("/api/health")
-public String health() {
-    return "OK";
-}
+```bash
+mvn test
 ```
 
-或者返回 JSON：
+通过后启动项目：
+
+```bash
+mvn spring-boot:run
+```
+
+再开一个终端访问：
+
+```bash
+curl http://localhost:8080/api/health
+```
+
+预期返回类似：
+
+```text
+OK
+```
+
+或者：
 
 ```json
 {
@@ -102,28 +80,4 @@ public String health() {
 }
 ```
 
-两者都可以。第 1 课不需要复杂健康指标。
-
----
-
-## 检查 5：测试是否真的能跑
-
-你要自己运行：
-
-```bash
-mvn test
-```
-
-如果通过，再启动：
-
-```bash
-mvn spring-boot:run
-```
-
-然后访问：
-
-```bash
-curl http://localhost:8080/api/health
-```
-
-如果返回 `OK` 或类似健康状态，第 1 课的项目骨架就成功了。
+两种都可以。
