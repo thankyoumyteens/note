@@ -57,9 +57,7 @@
 - [SKILL](./skills/skills.md)
   - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
   - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
-  - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
   - [常用 SKILL](./skills/examples/examples.md)
-    - [系统分析设计文档编写 Skill](./skills/examples/system_analysis_design_writer.md)
 
 - [常用插件](./plugins/plugins.md)
 - [spec-workflow-mcp](./plugins/spec_workflow/spec_workflow.md)
