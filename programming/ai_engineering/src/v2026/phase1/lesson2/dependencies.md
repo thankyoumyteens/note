@@ -27,7 +27,7 @@
 </dependencies>
 ```
 
-如果你已经有 `spring-boot-starter-web`，只需要额外加 `spring-boot-starter-webflux`。
+如果你只有 `spring-boot-starter-web`，需要补上 `webflux`，因为 `WebClient` 在 WebFlux 里。
 
 ## macOS 网络环境下可能出现 DNS 解析不符合系统配置的问题
 

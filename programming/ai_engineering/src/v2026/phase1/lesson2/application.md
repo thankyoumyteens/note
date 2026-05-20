@@ -23,6 +23,8 @@ model：模型名称
 timeout-seconds：请求超时时间
 ```
 
+---
+
 如果你用的是其他兼容 OpenAI 格式的平台，比如 DeepSeek、Qwen、Moonshot 等，只要改：
 
 ```yaml
@@ -31,4 +33,26 @@ api-key: 你的 API Key
 model: 你的模型名
 ```
 
-注意：不同供应商的 `/v1/chat/completions` 兼容程度可能不同。
+注意：
+
+```text
+base-url 不要重复写 /v1。
+```
+
+本课代码中会写：
+
+```text
+/v1/chat/completions
+```
+
+所以如果 `base-url` 写成：
+
+```text
+https://xxx.com/v1
+```
+
+最终可能变成：
+
+```text
+https://xxx.com/v1/v1/chat/completions
+```

@@ -23,12 +23,29 @@ package com.example.aigateway.client.openai.dto;
 
 import java.util.List;
 
+/**
+ * OpenAI-compatible Chat Completions 请求 DTO。
+ *
+ * 本 DTO 同时用于普通非流式调用和流式调用。
+ *
+ * stream:
+ * - false：模型完整生成后一次性返回
+ * - true：模型边生成边返回 streaming chunks
+ */
 public record ChatCompletionRequest(
         String model,
         List<Message> messages,
         Double temperature,
         Boolean stream
 ) {
+    /**
+     * Chat Completions 的消息结构。
+     *
+     * role 常见取值：
+     * - system：系统级约束
+     * - user：用户输入
+     * - assistant：模型历史回答
+     */
     public record Message(
             String role,
             String content

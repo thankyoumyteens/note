@@ -1,22 +1,12 @@
 # 实现 streamChat
 
-打开你的：
+文件：
 
 ```text
-client.openai/OpenAiCompatibleLlmClient.java
+src/main/java/com/example/aigateway/client/openai/OpenAiCompatibleLlmClient.java
 ```
 
-增加几个 import：
-
-```java
-import com.example.aigateway.client.openai.dto.ChatCompletionChunk;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import reactor.core.publisher.Flux;
-```
-
-然后给类增加一个 `ObjectMapper` 字段。
-
-完整版本如下：
+完整示例：
 
 ```java
 package com.example.aigateway.client.openai;
@@ -28,11 +18,22 @@ import com.example.aigateway.client.openai.dto.ChatCompletionResponse;
 import com.example.aigateway.config.LlmProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
 
+/**
+ * OpenAI-compatible 模型客户端。
+ *
+ * 当前职责：
+ * - 普通非流式聊天
+ * - 流式聊天
+ *
+ * 注意：
+ * 业务层只依赖 LlmClient，不直接依赖这个类。
+ */
 @Component
 public class OpenAiCompatibleLlmClient implements LlmClient {
 
@@ -50,6 +51,9 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * 普通聊天：等待模型完整生成后，一次性返回。
+     */
     @Override
     public String chat(String message) {
         ChatCompletionRequest request = buildRequest(message, false);
@@ -62,13 +66,16 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
                     .bodyToMono(ChatCompletionResponse.class)
                     .block();
 
-            if (response == null || response.choices() == null || response.choices().isEmpty()) {
+            if (response == null
+                    || response.choices() == null
+                    || response.choices().isEmpty()) {
                 throw new IllegalStateException("LLM response is empty");
             }
 
             ChatCompletionResponse.Choice firstChoice = response.choices().get(0);
 
-            if (firstChoice.message() == null || firstChoice.message().content() == null) {
+            if (firstChoice.message() == null
+                    || firstChoice.message().content() == null) {
                 throw new IllegalStateException("LLM response message is empty");
             }
 
@@ -76,8 +83,8 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
 
         } catch (WebClientResponseException e) {
             throw new RuntimeException(
-                    "LLM API error. status=" + e.getStatusCode() +
-                            ", body=" + e.getResponseBodyAsString(),
+                    "LLM API error. status=" + e.getStatusCode()
+                            + ", body=" + e.getResponseBodyAsString(),
                     e
             );
         } catch (Exception e) {
@@ -85,12 +92,18 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
         }
     }
 
+    /**
+     * 流式聊天：模型边生成边返回。
+     *
+     * 返回 Flux<String>，每个 String 是模型新增的一小段文本。
+     */
     @Override
     public Flux<String> streamChat(String message) {
         ChatCompletionRequest request = buildRequest(message, true);
 
         return llmWebClient.post()
                 .uri("/v1/chat/completions")
+                .accept(MediaType.TEXT_EVENT_STREAM)
                 .bodyValue(request)
                 .retrieve()
                 .bodyToFlux(String.class)
@@ -98,6 +111,12 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
                 .onErrorResume(e -> Flux.just("[ERROR] " + e.getMessage()));
     }
 
+    /**
+     * 构建 Chat Completions 请求。
+     *
+     * stream = false：普通调用
+     * stream = true：流式调用
+     */
     private ChatCompletionRequest buildRequest(String message, boolean stream) {
         return new ChatCompletionRequest(
                 properties.getModel(),
@@ -116,38 +135,47 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
         );
     }
 
+    /**
+     * 解析模型返回的 SSE chunk。
+     *
+     * 供应商可能返回：
+     * data: {"choices":[{"delta":{"content":"RAG"}}]}
+     *
+     * 也可能 WebClient 已经帮你拆掉 data: 前缀，只剩：
+     * {"choices":[{"delta":{"content":"RAG"}}]}
+     */
     private Flux<String> parseSseChunk(String rawChunk) {
-        if (rawChunk == null || rawChunk.isBlank()) {
-            return Flux.empty();
-        }
-
-        String chunk = rawChunk.strip();
-
-        if (chunk.equals("[DONE]") || chunk.equals("data: [DONE]")) {
-            return Flux.empty();
-        }
-
-        // SSE 原始事件通常带有前缀 data:
-        // Jackson 不能直接解析这个字符串，因为它不是纯 JSON。所以需要先去掉
-        if (chunk.startsWith("data:")) {
-            chunk = chunk.substring("data:".length()).strip();
-        }
-
-        // OpenAI-compatible 流式响应通常最后会返回
-        // data: [DONE]
-        // 表示流结束。它不是 JSON，不能交给 Jackson 解析。
-        if (chunk.isBlank() || chunk.equals("[DONE]")) {
-            return Flux.empty();
-        }
-
         try {
-            ChatCompletionChunk parsed = objectMapper.readValue(chunk, ChatCompletionChunk.class);
-
-            if (parsed.choices() == null || parsed.choices().isEmpty()) {
+            if (rawChunk == null || rawChunk.isBlank()) {
                 return Flux.empty();
             }
 
-            ChatCompletionChunk.Choice choice = parsed.choices().get(0);
+            String text = rawChunk.strip();
+
+            // OpenAI-compatible 流式响应最后通常会返回 [DONE]
+            if ("[DONE]".equals(text) || "data: [DONE]".equals(text)) {
+                return Flux.empty();
+            }
+
+            // 如果还有 data: 前缀，就手动去掉
+            if (text.startsWith("data:")) {
+                text = text.substring("data:".length()).strip();
+            }
+
+            if (text.isBlank() || "[DONE]".equals(text)) {
+                return Flux.empty();
+            }
+
+            ChatCompletionChunk chunk = objectMapper.readValue(
+                    text,
+                    ChatCompletionChunk.class
+            );
+
+            if (chunk.choices() == null || chunk.choices().isEmpty()) {
+                return Flux.empty();
+            }
+
+            ChatCompletionChunk.Choice choice = chunk.choices().get(0);
 
             if (choice.delta() == null || choice.delta().content() == null) {
                 return Flux.empty();
@@ -156,6 +184,8 @@ public class OpenAiCompatibleLlmClient implements LlmClient {
             return Flux.just(choice.delta().content());
 
         } catch (Exception e) {
+            // 某些供应商可能会返回非标准 chunk。
+            // 当前学习阶段先忽略解析失败的 chunk，避免整个流中断。
             return Flux.empty();
         }
     }

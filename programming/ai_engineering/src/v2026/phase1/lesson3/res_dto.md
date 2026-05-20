@@ -55,6 +55,12 @@ package com.example.aigateway.client.openai.dto;
 
 import java.util.List;
 
+/**
+ * OpenAI-compatible streaming chunk DTO。
+ *
+ * 普通响应使用 ChatCompletionResponse，其中内容在 message.content。
+ * 流式响应使用 ChatCompletionChunk，其中新增内容在 delta.content。
+ */
 public record ChatCompletionChunk(
         List<Choice> choices
 ) {
@@ -64,6 +70,13 @@ public record ChatCompletionChunk(
     ) {
     }
 
+    /**
+     * delta 表示本次 chunk 新增的内容。
+     *
+     * 常见字段：
+     * - role：有些供应商会在第一个 chunk 返回 assistant role
+     * - content：本次新增文本片段
+     */
     public record Delta(
             String role,
             String content

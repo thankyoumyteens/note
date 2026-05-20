@@ -1,16 +1,12 @@
 # 修改 Controller
 
-现在你的 `AiChatController` 应该有普通接口：
+文件：
 
-```java
-@PostMapping("/chat")
-public ChatResponse chat(@RequestBody ChatRequest request) {
-    String answer = aiChatService.chat(request.message());
-    return new ChatResponse(answer);
-}
+```text
+src/main/java/com/example/aigateway/controller/AiChatController.java
 ```
 
-新增一个流式接口：
+改成：
 
 ```java
 package com.example.aigateway.controller;
@@ -22,6 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
+/**
+ * AI 聊天接口。
+ */
 @RestController
 @RequestMapping("/api/ai")
 public class AiChatController {
@@ -32,12 +31,26 @@ public class AiChatController {
         this.aiChatService = aiChatService;
     }
 
+    /**
+     * 普通聊天接口。
+     *
+     * 返回 JSON：
+     * {
+     *   "answer": "完整回答"
+     * }
+     */
     @PostMapping("/chat")
     public ChatResponse chat(@RequestBody ChatRequest request) {
         String answer = aiChatService.chat(request.message());
         return new ChatResponse(answer);
     }
 
+    /**
+     * 流式聊天接口。
+     *
+     * produces = text/event-stream 表示返回 SSE。
+     * 客户端会持续收到 data: xxx 形式的事件。
+     */
     @PostMapping(value = "/chat/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> streamChat(@RequestBody ChatRequest request) {
         return aiChatService.streamChat(request.message());

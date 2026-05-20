@@ -1,6 +1,20 @@
 # 第 1 课：先建立 AI Gateway 的工程模型
 
-今天先不急着写复杂代码。先明确你要构建的系统边界。
+本课目标是建立 AI Gateway 的最小 Spring Boot 项目骨架，先跑通：
+
+```text
+Controller -> Service -> LlmClient -> MockLlmClient
+```
+
+一句话概括：
+
+> 本课不接真实模型，只用 Mock 实现跑通第一个 AI Gateway 接口，并建立后续所有模型调用的分层基础。
+
+最终实现接口：
+
+```http
+POST /api/ai/chat
+```
 
 ## 什么是 AI Gateway？
 

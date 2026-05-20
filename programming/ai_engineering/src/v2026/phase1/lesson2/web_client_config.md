@@ -51,43 +51,20 @@ public class WebClientConfig {
 2. 设置连接超时和响应超时
 ```
 
-## 为什么用 WebClient？
+## 为什么使用 WebClient
 
-`WebClient` 是 Spring 提供的 HTTP 客户端，适合调用外部 API。
+`WebClient` 是 Spring 生态常用 HTTP 客户端，适合调用外部模型 API。
 
-本课使用它完成：
-
-- 设置 base URL
-- 设置 Authorization header
-- 设置 Content-Type
-- 发送 POST 请求
-- 发送 JSON body
-- 解析 JSON response
-- 配置连接超时
-- 配置响应超时
-
-典型调用结构：
-
-```java
-ChatCompletionResponse response = llmWebClient.post()
-        .uri("/v1/chat/completions")
-        .bodyValue(request)
-        .retrieve()
-        .bodyToMono(ChatCompletionResponse.class)
-        .block();
-```
-
-这段代码的含义：
+本课用它完成：
 
 ```text
+设置 base URL
+设置 Authorization header
+设置 Content-Type
 发送 POST 请求
--> 请求路径 /v1/chat/completions
--> 请求体是 request
--> 取回响应
--> 反序列化为 ChatCompletionResponse
--> 阻塞等待结果
+发送 JSON body
+解析 JSON response
+配置 timeout
 ```
 
-当前使用 `.block()` 是为了简化同步接口。
-
-后续流式输出会使用 `Flux`。
+Spring Framework 是 Java 企业应用常用基础框架，提供完整的编程和配置模型；本课程使用 Spring Boot + WebClient，是为了保持 Java 后端主线。

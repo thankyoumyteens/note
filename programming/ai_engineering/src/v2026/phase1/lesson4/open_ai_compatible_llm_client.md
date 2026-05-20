@@ -1,19 +1,38 @@
 # 修改 OpenAiCompatibleLlmClient
 
-把 `chat()` 里的通用调用抽出来。
+在 `OpenAiCompatibleLlmClient` 中新增 `complete` 方法。
 
-## 1. 增加 complete 方法
+文件：
 
-在 `OpenAiCompatibleLlmClient` 中新增：
+```text
+src/main/java/com/example/aigateway/client/openai/OpenAiCompatibleLlmClient.java
+```
+
+在类中加入：
 
 ```java
+/**
+ * 通用模型调用方法。
+ *
+ * 与 chat(message) 的区别：
+ * - chat 使用固定 system prompt
+ * - complete 允许调用方传入不同 system prompt
+ *
+ * 结构化输出、JSON 修复、工具调用决策等场景都应该用 complete。
+ */
 @Override
 public String complete(String systemPrompt, String userPrompt) {
     ChatCompletionRequest request = new ChatCompletionRequest(
             properties.getModel(),
             List.of(
-                    new ChatCompletionRequest.Message("system", systemPrompt),
-                    new ChatCompletionRequest.Message("user", userPrompt)
+                    new ChatCompletionRequest.Message(
+                            "system",
+                            systemPrompt
+                    ),
+                    new ChatCompletionRequest.Message(
+                            "user",
+                            userPrompt
+                    )
             ),
             0.1,
             false
@@ -27,13 +46,16 @@ public String complete(String systemPrompt, String userPrompt) {
                 .bodyToMono(ChatCompletionResponse.class)
                 .block();
 
-        if (response == null || response.choices() == null || response.choices().isEmpty()) {
+        if (response == null
+                || response.choices() == null
+                || response.choices().isEmpty()) {
             throw new IllegalStateException("LLM response is empty");
         }
 
         ChatCompletionResponse.Choice firstChoice = response.choices().get(0);
 
-        if (firstChoice.message() == null || firstChoice.message().content() == null) {
+        if (firstChoice.message() == null
+                || firstChoice.message().content() == null) {
             throw new IllegalStateException("LLM response message is empty");
         }
 
@@ -41,8 +63,8 @@ public String complete(String systemPrompt, String userPrompt) {
 
     } catch (WebClientResponseException e) {
         throw new RuntimeException(
-                "LLM API error. status=" + e.getStatusCode() +
-                        ", body=" + e.getResponseBodyAsString(),
+                "LLM API error. status=" + e.getStatusCode()
+                        + ", body=" + e.getResponseBodyAsString(),
                 e
         );
     } catch (Exception e) {
@@ -51,13 +73,12 @@ public String complete(String systemPrompt, String userPrompt) {
 }
 ```
 
----
-
-## 2. 简化 chat 方法
-
-把原来的 `chat()` 改成调用 `complete()`：
+然后建议把 `chat` 方法改成复用 `complete`：
 
 ```java
+/**
+ * 普通聊天：使用默认 system prompt。
+ */
 @Override
 public String chat(String message) {
     return complete(
@@ -67,4 +88,4 @@ public String chat(String message) {
 }
 ```
 
-这样代码复用更好。
+这样可以减少重复代码。

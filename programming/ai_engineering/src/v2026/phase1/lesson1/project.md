@@ -37,8 +37,6 @@ com.example.aigateway
   │     └── AiChatService.java
   ├── client
   │     └── LlmClient.java
-  ├── client.openai
-  │     └── OpenAiLlmClient.java
   ├── dto
   │     ├── ChatRequest.java
   │     └── ChatResponse.java
