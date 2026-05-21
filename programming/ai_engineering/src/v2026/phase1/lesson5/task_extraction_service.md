@@ -1,17 +1,12 @@
 # 改造 TaskExtractionService
 
-把你的 `TaskExtractionService` 改成下面这个版本。
-
-重点新增：
+文件：
 
 ```text
-1. 最多尝试 2 次
-2. 第一次正常抽取
-3. 失败后调用 repairJson
-4. 对结果做字段校验
-5. 对 priority 做容错
-6. 把原始输出和修复输出打印出来
+src/main/java/com/example/aigateway/service/TaskExtractionService.java
 ```
+
+用下面版本替换你当前的 `TaskExtractionService`：
 
 ````java
 package com.example.aigateway.service;
@@ -23,119 +18,170 @@ import com.example.aigateway.exception.AiStructuredOutputException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+/**
+ * 任务信息抽取服务。
+ *
+ * 第 5 课增强点：
+ * 1. 从模型输出中提取 { ... }
+ * 2. 统一 parseAndValidate
+ * 3. JSON 解析失败后自动 repair 一次
+ * 4. 修复后再次解析
+ * 5. 仍失败则抛出 AiStructuredOutputException
+ */
 @Service
 public class TaskExtractionService {
 
     private final LlmClient llmClient;
     private final ObjectMapper objectMapper;
 
-    public TaskExtractionService(LlmClient llmClient, ObjectMapper objectMapper) {
+    public TaskExtractionService(
+            LlmClient llmClient,
+            ObjectMapper objectMapper
+    ) {
         this.llmClient = llmClient;
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * 从自然语言文本中抽取任务信息。
+     */
     public TaskExtractionResult extract(String text) {
         if (text == null || text.isBlank()) {
             throw new IllegalArgumentException("text cannot be empty");
         }
 
-        String raw = llmClient.complete(buildExtractionSystemPrompt(), text);
-        System.out.println("LLM raw extraction output: " + raw);
+        String rawOutput = llmClient.complete(
+                buildExtractionSystemPrompt(),
+                text
+        );
+
+        System.out.println("LLM raw extraction output: " + rawOutput);
 
         try {
-            return parseAndValidate(raw);
+            return parseAndValidate(rawOutput);
         } catch (Exception firstError) {
             System.err.println("First parse failed: " + firstError.getMessage());
 
-            String repaired = repairJson(raw, firstError.getMessage());
-            System.out.println("LLM repaired extraction output: " + repaired);
+            String repairedOutput = repairJson(rawOutput, firstError.getMessage());
+
+            System.out.println("LLM repaired extraction output: " + repairedOutput);
 
             try {
-                return parseAndValidate(repaired);
+                return parseAndValidate(repairedOutput);
             } catch (Exception secondError) {
                 throw new AiStructuredOutputException(
                         "Failed to parse structured task extraction output after repair",
-                        raw,
+                        rawOutput,
                         secondError
                 );
             }
         }
     }
 
+    /**
+     * 解析并校验模型输出。
+     *
+     * 这个方法会被调用两次：
+     * 1. 第一次解析原始模型输出
+     * 2. 第二次解析修复后的模型输出
+     */
     private TaskExtractionResult parseAndValidate(String raw) throws Exception {
         String json = cleanupJson(raw);
-        TaskExtractionResult result = objectMapper.readValue(json, TaskExtractionResult.class);
+
+        TaskExtractionResult result = objectMapper.readValue(
+                json,
+                TaskExtractionResult.class
+        );
+
         return normalizeAndValidate(result);
     }
 
+    /**
+     * 构造任务抽取 system prompt。
+     */
+    private String buildExtractionSystemPrompt() {
+        return """
+                你是一个任务信息抽取器。
+                
+                你的任务是从用户输入中抽取待办任务信息。
+                
+                你只能输出 JSON，不能输出 Markdown，不能输出解释，不能使用 ```json 代码块。
+                
+                JSON 字段要求：
+                {
+                  "taskName": "待办事项名称，字符串，不能为空",
+                  "dueTimeText": "原文中的时间表达，如果没有则为 null",
+                  "priority": "LOW | MEDIUM | HIGH | UNKNOWN",
+                  "assignee": "负责人。如果用户没有指定，则为 me"
+                }
+                
+                字段规则：
+                - taskName 应该是简短动作短语，不要包含“用户想”“提醒我”等多余描述
+                - dueTimeText 保留用户原文中的时间表达，不要自行换算成日期
+                - priority 只能是 LOW、MEDIUM、HIGH、UNKNOWN
+                - 如果用户说“高优先级”“紧急”“很急”，priority = HIGH
+                - 如果用户说“不急”“有空再做”，priority = LOW
+                - 如果无法判断优先级，priority = UNKNOWN
+                - 如果没有指定负责人，assignee = "me"
+                """;
+    }
+
+    /**
+     * JSON 修复。
+     *
+     * 注意：
+     * 这里不是重新抽取任务，而是让模型把错误输出修复成合法 JSON。
+     */
     private String repairJson(String rawOutput, String errorMessage) {
         String systemPrompt = """
                 你是一个 JSON 修复器。
-
-                你的任务是把输入内容修复成合法 JSON。
-
-                目标 JSON Schema：
+                
+                你的任务是把错误的模型输出修复为合法 JSON。
+                
+                你只能输出 JSON，不能输出 Markdown，不能输出解释，不能使用 ```json 代码块。
+                
+                目标 JSON 格式：
                 {
-                  "taskName": "string",
-                  "dueTimeText": "string or null",
+                  "taskName": "待办事项名称，字符串，不能为空",
+                  "dueTimeText": "原文中的时间表达，如果没有则为 null",
                   "priority": "LOW | MEDIUM | HIGH | UNKNOWN",
-                  "assignee": "string"
+                  "assignee": "负责人。如果用户没有指定，则为 me"
                 }
-
+                
                 修复规则：
-                - 只能输出合法 JSON
-                - 不要输出 Markdown
-                - 不要输出解释
-                - 不要使用 ```json 代码块
-                - 不要添加额外字段
-                - 不要省略字段
-                - 如果 dueTimeText 不存在，使用 null
-                - 如果 assignee 不存在，使用 "me"
-                - 如果 priority 不是 LOW、MEDIUM、HIGH、UNKNOWN 之一，请修复为最接近的枚举值
+                - 不要添加目标格式以外的字段
+                - 不要省略目标格式中的字段
+                - priority 必须是 LOW、MEDIUM、HIGH、UNKNOWN 之一
+                - 如果 priority 是中文，例如“高”“紧急”，请映射为 HIGH
+                - 如果 priority 是“不急”，请映射为 LOW
+                - 如果无法判断 priority，请使用 UNKNOWN
+                - 如果 assignee 缺失或为空，请使用 "me"
+                - 如果 dueTimeText 缺失或为空，请使用 null
                 """;
 
         String userPrompt = """
                 原始模型输出：
                 %s
-
+                
                 解析错误：
                 %s
-
+                
                 请修复为合法 JSON。
                 """.formatted(rawOutput, errorMessage);
 
         return llmClient.complete(systemPrompt, userPrompt);
     }
 
-    private String buildExtractionSystemPrompt() {
-        return """
-                你是一个任务信息抽取器。
-
-                你的任务是从用户输入中抽取待办事项信息。
-
-                你只能输出 JSON，不能输出 Markdown，不能输出解释，不能使用 ```json 代码块。
-
-                JSON 字段要求：
-                {
-                  "taskName": "待办事项名称，字符串",
-                  "dueTimeText": "原文中的时间表达，如果没有则为 null",
-                  "priority": "LOW | MEDIUM | HIGH | UNKNOWN",
-                  "assignee": "负责人。如果用户没有指定，则为 me"
-                }
-
-                优先级判断规则：
-                - 出现“紧急”、“尽快”、“马上”、“高优先级”、“优先级高”，priority = HIGH
-                - 出现“一般”、“普通”，priority = MEDIUM
-                - 出现“不急”、“有空”、“低优先级”，priority = LOW
-                - 无法判断，priority = UNKNOWN
-
-                注意：
-                - 必须输出合法 JSON
-                - 不要额外添加字段
-                - 不要省略字段
-                """;
-    }
-
+    /**
+     * 清理模型输出中的 JSON。
+     *
+     * 第 5 课增强点：
+     * - 去掉 Markdown 代码块
+     * - 从文本中截取第一个 { 到最后一个 }
+     *
+     * 这样可以处理：
+     * “以下是结果：{...}”
+     */
     private String cleanupJson(String raw) {
         if (raw == null) {
             throw new IllegalStateException("LLM output is null");
@@ -165,20 +211,26 @@ public class TaskExtractionService {
         return text;
     }
 
+    /**
+     * 规范化并校验结构化输出结果。
+     */
     private TaskExtractionResult normalizeAndValidate(TaskExtractionResult result) {
         if (result == null) {
-            throw new IllegalStateException("result is null");
+            throw new IllegalStateException("Task extraction result is null");
         }
 
-        String taskName = blankToNull(result.taskName());
-        String dueTimeText = blankToNull(result.dueTimeText());
-        TaskPriority priority = result.priority() == null ? TaskPriority.UNKNOWN : result.priority();
-        String assignee = blankToNull(result.assignee());
+        String taskName = normalizeRequiredString(
+                result.taskName(),
+                "taskName cannot be empty"
+        );
 
-        if (taskName == null) {
-            throw new IllegalStateException("taskName is required");
-        }
+        String dueTimeText = normalizeNullableString(result.dueTimeText());
 
+        TaskPriority priority = result.priority() == null
+                ? TaskPriority.UNKNOWN
+                : result.priority();
+
+        String assignee = normalizeNullableString(result.assignee());
         if (assignee == null) {
             assignee = "me";
         }
@@ -191,8 +243,34 @@ public class TaskExtractionService {
         );
     }
 
-    private String blankToNull(String value) {
-        return value == null || value.isBlank() ? null : value.strip();
+    /**
+     * 规范化必填字符串。
+     */
+    private String normalizeRequiredString(String value, String errorMessage) {
+        String normalized = normalizeNullableString(value);
+
+        if (normalized == null) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        return normalized;
+    }
+
+    /**
+     * 规范化可空字符串。
+     *
+     * null -> null
+     * "" -> null
+     * "  abc  " -> "abc"
+     */
+    private String normalizeNullableString(String value) {
+        if (value == null) {
+            return null;
+        }
+
+        String normalized = value.strip();
+
+        return normalized.isEmpty() ? null : normalized;
     }
 }
 ````

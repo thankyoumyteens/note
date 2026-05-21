@@ -71,3 +71,19 @@ curl -X POST http://localhost:8080/api/ai/extract-task \
   "assignee": "me"
 }
 ```
+
+## 人工测试错误处理
+
+如果想测试 `AI_STRUCTURED_OUTPUT_ERROR`，可以临时把 `repairJson` 的 system prompt 改坏，让它无法修复，然后调用接口。
+
+预期响应类似：
+
+```json
+{
+  "code": "AI_STRUCTURED_OUTPUT_ERROR",
+  "message": "Failed to parse structured task extraction output after repair",
+  "timestamp": "..."
+}
+```
+
+测试完成后恢复代码。
