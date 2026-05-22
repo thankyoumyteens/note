@@ -145,6 +145,13 @@
   - [阶段 2：评估与生产化](./v2026/phase2/phase2.md)
     - [第 7 课：Evals 优先：结构化输出与工具调用评估](./v2026/phase2/lesson7/lesson7.md)
       - [核心概念](./v2026/phase2/lesson7/concept.md)
+      - [创建目录](./v2026/phase2/lesson7/dirs.md)
+      - [创建评估集](./v2026/phase2/lesson7/datasets.md)
+      - [安装 Python 依赖](./v2026/phase2/lesson7/dependences.md)
+      - [创建结构化输出评估脚本](./v2026/phase2/lesson7/eval_task_extraction.md)
+      - [创建订单助手评估脚本](./v2026/phase2/lesson7/eval_order_assistant.md)
+      - [测试方式](./v2026/phase2/lesson7/test.md)
+    - [第 8 课：AI Gateway 生产化](./v2026/phase2/lesson8/lesson8.md)
   - [阶段 3：AI Gateway 生产化](./v2026/phase3/phase3.md)
   - [阶段 4：Python AI 工具补齐](./v2026/phase4/phase4.md)
 
