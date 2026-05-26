@@ -1,8 +1,7 @@
 # Summary
-
+<!-- 
 - [Java转AI应用开发](./chapter_1.md)
 - [搭建开发环境](./env.md)
-
 - [阶段一：从 Java 思维切换到 AI 原生开发](./phase1/phase1.md)
   - [Python 基础补齐](./phase1/python/python.md)
     - [列表推导式](./phase1/python/list_comprehension.md)
@@ -94,7 +93,8 @@
     - [LangfuseV3搭建](./phase3/llm_ops/langfuse_server_v3.md)
     - [给 Python 客户端加上探针(V3)](./phase3/llm_ops/tracing.md)
     - [提示词缓存](./phase3/llm_ops/prompt_caching.md)
-    - [语义缓存](./phase3/llm_ops/semantic_cache.md)
+    - [语义缓存](./phase3/llm_ops/semantic_cache.md) 
+-->
 
 - [Java转AI应用开发(2026)](./v2026/route.md)
   - [阶段 1：AI Gateway 基础能力](./v2026/phase1/phase1.md)
@@ -183,13 +183,28 @@
       - [新增 RateLimitStatus](./v2026/phase2/lesson8_5/rate_limit_status.md)
       - [新增 RateLimitStatusController](./v2026/phase2/lesson8_5/rate_limit_status_controller.md)
       - [测试方式](./v2026/phase2/lesson8_5/test.md)
+    - [第 8.6 课：生产级日志、Tracing 与可观测性](./v2026/phase2/lesson8_6/lesson8_6.md)
+      - [添加 JPA 和数据库依赖](./v2026/phase2/lesson8_6/jpa_depends.md)
+      - [配置 H2 和 JPA](./v2026/phase2/lesson8_6/config_jpa.md)
+      - [新增 TraceContext](./v2026/phase2/lesson8_6/trace_context.md)
+      - [新增 RequestIdFilter](./v2026/phase2/lesson8_6/request_id_filter.md)
+      - [新增 LlmCallLogEntity](./v2026/phase2/lesson8_6/llm_call_log_entity.md)
+      - [新增 ToolCallLogEntity](./v2026/phase2/lesson8_6/tool_call_log_entity.md)
+      - [新增 Repository](./v2026/phase2/lesson8_6/repository.md)
+      - [修改 LlmCallLogService](./v2026/phase2/lesson8_6/llm_call_log_service.md)
+      - [新增 LlmCallStats](./v2026/phase2/lesson8_6/llm_call_stats.md)
+      - [修改 ToolCallLogService](./v2026/phase2/lesson8_6/tool_call_log_service.md)
+      - [修改 LlmCallLogController](./v2026/phase2/lesson8_6/llm_call_log_controller.md)
+      - [修改 ToolCallLogController](./v2026/phase2/lesson8_6/tool_call_log_controller.md)
+      - [测试方式](./v2026/phase2/lesson8_6/test.md)
+    - [第 9 课：Spring AI 框架适配与生态入口](./v2026/phase2/lesson9/lesson9.md)
   - [阶段 3：AI Gateway 生产化](./v2026/phase3/phase3.md)
   - [阶段 4：Python AI 工具补齐](./v2026/phase4/phase4.md)
 
-
-- [SQLModel](./sql_model/sql_model.md)
-  - [Python 数据类型与数据库数据类型的对应关系](./sql_model/data_type.md)
-  - [按指定条件查询](./sql_model/where.md)
-  - [手写sql](./sql_model/sql.md)
-  - [数据库连接池](./sql_model/pool.md)
-  - [异步数据库查询](./sql_model/async.md)
+- [LeetCode / 算法面试](./leet_code/leet_code.md)
+  - [第 1 课：HashMap / 数组基础题型识别](./leet_code/lesson1/lesson1.md)
+    - [HashMap / HashSet 的核心用途](./leet_code/lesson1/hash_map.md)
+    - [1. Two Sum](./leet_code/lesson1/two_sum/two_sum.md)
+      - [题型识别信号](./leet_code/lesson1/two_sum/type.md)
+      - [暴力思路](./leet_code/lesson1/two_sum/solution1.md)
+      - [HashMap 优化思路](./leet_code/lesson1/two_sum/solution2.md)
