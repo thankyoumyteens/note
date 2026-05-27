@@ -2,12 +2,16 @@
 
 ```sh
 npm install -g @anthropic-ai/claude-code
+# 升级
+npm update -g @anthropic-ai/claude-code
 ```
 
 ## 安装 Claude Code Router
 
 ```sh
 npm install -g @musistudio/claude-code-router
+# 升级
+npm update -g @musistudio/claude-code-router
 ```
 
 **创建 CCR 配置：**
