@@ -240,3 +240,5 @@
       - [普通写法](./leet_code/lesson1/group_anagrams/solution2.md)
       - [熟练后写法](./leet_code/lesson1/group_anagrams/solution3.md)
     - [本课三个核心模板对比](./leet_code/lesson1/group_anagrams/template.md)
+  - [第 2 课：数组 / 字符串基础扩展](./leet_code/lesson2/lesson2.md)
+    - [217. Contains Duplicate](./leet_code/lesson2/contains_duplicate/contains_duplicate.md)
