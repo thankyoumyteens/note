@@ -1,49 +1,75 @@
-# 第一步 Prompt：只实现模型和 DTO
-
-先发这个给 Codex：
+# 本课推荐 Prompt
 
 ```text
 目标：
-开始第 7 课：小步实现文档保存功能。现在只执行第 1 小步：新增文档模型和 DTO。
+按照你已经输出并确认过的实现计划，小步实现文档保存功能 `POST /api/documents`。
 
 背景：
-第 6 课已经完成文档保存功能的实现计划。当前要实现 POST /api/documents，但必须小步进行。
-本次只允许新增最小数据结构，不允许实现 Controller，不允许写业务逻辑，不允许写测试。
+当前项目是 `ai-doc-summary`。第 6 课已经完成 Plan-Then-Act 的 Plan 阶段，你已经给出了文档保存功能的实现计划。
 
-本次允许新增：
-1. src/main/java/com/example/aidocsummary/document/Document.java
-2. src/main/java/com/example/aidocsummary/document/DocumentRequest.java
-3. src/main/java/com/example/aidocsummary/document/DocumentResponse.java
+现在进入第 7 课：小步实现。
 
-设计要求：
-1. Document 包含 id、title、content。
-2. DocumentRequest 包含 title、content。
-3. DocumentResponse 只包含 documentId。
-4. 使用普通 Java 类或 record 均可，但保持项目风格一致。
-5. 不新增依赖。
+核心要求：
+不要一次性完成整个功能。
+不要一次性执行所有计划项。
+你每次只能执行当前计划中的“下一个未完成任务”。
+完成该任务后必须停止，等待我确认后才能继续下一个任务。
 
-限制：
-1. 不要修改 pom.xml。
-2. 不要修改 README.md。
-3. 不要修改 AGENTS.md / CLAUDE.md。
-4. 不要实现 DocumentController。
-5. 不要实现 InMemoryDocumentStore。
-6. 不要新增测试。
-7. 不要接入数据库、AI API、Spring Security。
-8. 不要让 DocumentResponse 返回 title 或 content。
+功能约束：
 
-完成后请输出：
-1. 新增了哪些文件
-2. 每个文件的用途
-3. 是否修改了无关文件
-4. 下一步建议
+1. 只实现 `POST /api/documents`。
+2. 请求 JSON 包含 `title` 和 `content`。
+3. `title` 和 `content` 不能为空，也不能是纯空格。
+4. 成功状态码为 `201 Created`。
+5. 成功响应只返回 `documentId`。
+6. 参数错误返回 `400 Bad Request`。
+7. 当前只使用内存存储。
+8. 不接数据库。
+9. 不使用 JPA。
+10. 不新增依赖。
+11. 不接真实 AI API。
+12. 不加入 Spring AI。
+13. 不加入 Spring Security。
+14. 不加入用户系统。
+15. 不实现文件上传。
+16. 不实现文档查询接口。
+17. 不实现摘要生成接口。
+
+执行规则：
+
+1. 先读取当前项目状态和你已有的计划。
+2. 找出计划中的下一个未完成任务。
+3. 只执行这个任务。
+4. 不要提前执行后续任务。
+5. 不要为了方便一次性创建所有文件。
+6. 当前任务完成后，立即停止。
+7. 等待我确认后，才能继续下一个任务。
+
+每一步完成后输出：
+
+1. 本次执行的是计划中的哪一个任务。
+2. 本次修改了哪些文件。
+3. 本次为什么只需要这些修改。
+4. 是否修改了 `pom.xml`。
+5. 是否新增了依赖。
+6. 是否引入了数据库 / JPA / Spring AI / 真实 AI API / Security / 用户系统 / 文件上传。
+7. `git diff --stat` 摘要。
+8. 下一步建议，但不要执行下一步。
+
+禁止事项：
+
+1. 不要修改 `pom.xml`。
+2. 不要修改 `README.md`。
+3. 不要修改 `AGENTS.md`。
+4. 不要修改 `CLAUDE.md`。
+5. 不要修改 `WORKFLOW.md`。
+6. 不要修改 `COURSE.md`。
+7. 不要新增依赖。
+8. 不要执行 `git add`。
+9. 不要执行 `git commit`。
+10. 不要运行 `mvn spring-boot:run`。
+11. 不要让任何 Java 进程长期占用 `8080`。
+
+现在只执行计划中的下一个未完成任务。
+完成后停止。
 ```
-
-完成后你检查：
-
-```bash
-git diff --stat
-git diff
-```
-
-理想情况下只新增 3 个文件。
