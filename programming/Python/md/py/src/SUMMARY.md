@@ -9,6 +9,15 @@
     - [管理依赖包](./base/poetry/depend.md)
     - [Poetry 与 Miniconda 结合使用](./base/poetry/conda.md)
 
+- [uv](./uv/uv.md)
+  - [安装 uv](./uv/install.md)
+  - [使用 uv 安装 python](./uv/install_python.md)
+  - [使用 uv 管理项目](./uv/project/project.md)
+    - [初始化项目](./uv/project/init.md)
+    - [管理依赖](./uv/project/depends.md)
+    - [运行项目](./uv/project/run.md)
+    - [部署项目](./uv/project/deploy.md)
+
 - [anaconda](./anaconda/anaconda.md)
   - [安装miniconda](./anaconda/miniconda.md)
   - [配置国内源](./anaconda/quick_start.md)

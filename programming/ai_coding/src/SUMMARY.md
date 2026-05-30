@@ -49,6 +49,8 @@
     - [不符合预期怎么纠正](./work_with_ai/lesson6/guide.md)
   - [第 7 课：小步实现文档保存功能](./work_with_ai/lesson7/lesson7.md)
     - [本课推荐 Prompt](./work_with_ai/lesson7/step1.md)
+  - [第 7A 课：Plan-Then-Act 工具化](./work_with_ai/lesson7a/lesson7a.md)
+    - [本课推荐 Prompt](./work_with_ai/lesson7a/prompt.md)
   - [第 8 课：轻量 Spec 结构](./work_with_ai/lesson8/lesson8.md)
     - [推荐发给 Codex 的 Prompt](./work_with_ai/lesson8/prompt.md)
     - [合格的 requirements.md 应该长什么样](./work_with_ai/lesson8/requirements.md)
