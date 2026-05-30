@@ -16,6 +16,7 @@
         - [Redis Cluster](./macos/redis_cluster.md)
       - [MySQL](./macos/mysql.md)
       - [MongoDB](./macos/mongo.md)
+      - [VS Code](./macos/vs_code.md)
       - [Cursor](./macos/cursor.md)
     - [UTM安装Win11Arm](./macos/win11_arm.md)
   - [常用命令](./macos/cmd.md)

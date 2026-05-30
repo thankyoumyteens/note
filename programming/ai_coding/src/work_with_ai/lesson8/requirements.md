@@ -1,48 +1,93 @@
-# 合格的 requirements.md 应该长什么样
+# 你要检查 Spec 是否合格
 
-它不需要很长，大概这样即可：
+## `requirements.md` 要检查
+
+必须有：
+
+```text
+做什么
+不做什么
+验收标准
+```
+
+尤其要有 Non-goals：
+
+```text
+不接数据库
+不做搜索
+不做分页
+不做权限
+不做摘要
+```
+
+---
+
+## `design.md` 要检查
+
+成功响应这次应该返回完整文档：
+
+```json
+{
+  "documentId": "1",
+  "title": "Spring Boot 学习笔记",
+  "content": "这是一篇关于 Spring Boot 最小项目的文档正文。"
+}
+```
+
+注意：这和 `POST /api/documents` 不一样。
+
+`POST` 成功只返回：
+
+```json
+{
+  "documentId": "1"
+}
+```
+
+`GET` 查询成功可以返回：
+
+```json
+{
+  "documentId": "1",
+  "title": "...",
+  "content": "..."
+}
+```
+
+---
+
+## `tasks.md` 要检查
+
+不要让它写成一个大任务：
 
 ```markdown
-# Requirements
+- [ ] 实现文档查询功能
+```
 
-## Goal
+这太粗。
 
-Add a document query endpoint:
+应该类似：
 
-`GET /api/documents/{id}`
+```markdown
+- [ ] 检查现有文档保存功能和内存存储结构
+- [ ] 为 InMemoryDocumentStore 增加按 id 查询能力
+- [ ] 新增查询响应 DTO
+- [ ] 在 DocumentController 中新增 GET /api/documents/{id}
+- [ ] 处理 documentId 不存在时的 404 响应
+- [ ] 新增 MockMvc 测试覆盖查询成功
+- [ ] 新增 MockMvc 测试覆盖文档不存在
+- [ ] 运行 mvn test 并检查 git diff
+```
 
-The endpoint returns a previously saved document by `documentId`.
+---
 
-## User Story
+## `test.md` 要检查
 
-As a user, after creating a document, I want to retrieve it by `documentId` so that I can view the stored title and content.
+至少包含：
 
-## Scope
-
-- Add `GET /api/documents/{id}`.
-- Return `200 OK` when the document exists.
-- Return `404 Not Found` when the document does not exist.
-- Continue using in-memory storage.
-- Reuse the document data saved by `POST /api/documents`.
-
-## Non-goals
-
-- No database.
-- No AI summary generation.
-- No external AI API.
-- No authentication or authorization.
-- No Spring Security.
-- No list endpoint.
-- No pagination.
-- No file upload.
-- No dependency changes.
-- Do not change `POST /api/documents` response format.
-
-## Acceptance Criteria
-
-- `GET /api/documents/{id}` returns `documentId`, `title`, and `content` for an existing document.
-- Missing document returns `404 Not Found`.
-- Error response is simple and predictable.
-- Existing `POST /api/documents` tests continue to pass.
-- Existing health check tests continue to pass.
+```text
+查询已存在文档成功
+查询不存在 documentId 返回 404
+健康检查接口不受影响
+已有 POST /api/documents 测试不受影响
 ```
