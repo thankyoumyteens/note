@@ -2,7 +2,7 @@
 
 ```text
 目标：
-进入第 9B 课：用 spec-workflow-mcp 复做一个小功能。
+进入第 9B 课：用 spec-workflow-mcp 做一个小功能。
 
 本课目标：
 使用 spec-workflow MCP 管理并实现一个小功能：

@@ -2,9 +2,38 @@
 
 同样地，为了方便日后管理和一键部署，我们将上述复杂的命令转化为 docker-compose.yml 文件。
 
-### 1. 创建 docker-compose.yml 文件
+### 1. 准备目录结构
 
-在你喜欢的目录下创建该文件，并确保同级目录下有 conf/redis.conf 和 data 文件夹。
+在宿主机创建用来存放配置和数据的目录（以 ~/tmp/mydata/redis 为例）：
+
+```sh
+mkdir -p ~/tmp/mydata/redis/conf
+mkdir -p ~/tmp/mydata/redis/data
+```
+
+### 2. 准备配置文件 (redis.conf)
+
+Redis 容器默认是不带 redis.conf 文件的。我们需要自己创建一个。
+
+在 ~/tmp/mydata/redis/conf 目录下创建一个名为 redis.conf 的文件：
+
+```sh
+touch ~/tmp/mydata/redis/conf/redis.conf
+```
+
+然后编辑这个文件（使用 vim 或其他编辑器），写入以下两行最核心的配置：
+
+```sh
+# 设置 Redis 连接密码 (把 yourpassword 换成你想要的密码)
+requirepass yourpassword
+
+# 开启 AOF 持久化，确保数据不会因为重启而丢失
+appendonly yes
+```
+
+### 3. 创建 docker-compose.yml 文件
+
+在 conf 和 data 文件夹的同级目录下创建该文件。
 
 ```sh
 version: '3.8'
@@ -25,7 +54,7 @@ services:
       - TZ=Asia/Shanghai
 ```
 
-### 2. 一键启动
+### 4. 一键启动
 
 在这个文件所在的目录下，运行：
 
@@ -33,7 +62,7 @@ services:
 docker-compose up -d
 ```
 
-### 3. 验证持久化和密码是否生效
+### 5. 验证持久化和密码是否生效
 
 ```sh
 # 进入容器并连接 redis-cli
@@ -49,7 +78,7 @@ auth yourpassword
 ping
 ```
 
-### 4. 停止并删除容器
+### 6. 停止并删除容器
 
 想要停止并删除容器，只需运行：
 
