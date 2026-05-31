@@ -69,6 +69,7 @@
   - [第 9B 课：用 spec-workflow-mcp 做一个小功能](./work_with_ai/lesson9b/lesson9b.md)
     - [本课开始前检查](./work_with_ai/lesson9b/check.md)
     - [本课推荐 Prompt](./work_with_ai/lesson9b/prompt.md)
+  - [第 10 课：先写测试，不写实现](./work_with_ai/lesson10/lesson10.md)
 
 - [SKILL](./skills/skills.md)
   - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
