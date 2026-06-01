@@ -235,6 +235,12 @@
       - [测试方式](./v2026/phase3/lesson11/test.md)
     - [第 12 课：Spring AI RAG 适配课](./v2026/phase3/lesson12/lesson12.md)
       - [添加 Spring AI PgVector 依赖](./v2026/phase3/lesson12/depends.md)
+      - [配置 Spring AI VectorStore](./v2026/phase3/lesson12/conf.md)
+      - [明确 EmbeddingModel 边界](./v2026/phase3/lesson12/embedding_model.md)
+      - [新增 Spring AI RAG DTO](./v2026/phase3/lesson12/dto.md)
+      - [新增 SpringAiRagService](./v2026/phase3/lesson12/spring_ai_rag_service.md)
+      - [新增 Controller](./v2026/phase3/lesson12/controller.md)
+      - [测试方式](./v2026/phase3/lesson12/test.md)
   - [阶段 4：Python AI 工具补齐](./v2026/phase4/phase4.md)
 
 - [LeetCode / 算法面试](./leet_code/leet_code.md)
