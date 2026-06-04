@@ -264,6 +264,7 @@
       - [修改 RagDocumentController](./v2026/phase3/lesson14/rag_document_controller.md)
       - [修改 RagQueryService](./v2026/phase3/lesson14/rag_query_service.md)
       - [测试方式](./v2026/phase3/lesson14/test.md)
+    - [第 15 课：Context Engineering](./v2026/phase3/lesson15/lesson15.md)
   - [阶段 4：Python AI 工具补齐](./v2026/phase4/phase4.md)
 
 - [LeetCode / 算法面试](./leet_code/leet_code.md)

@@ -5,13 +5,10 @@
 在项目目录运行：
 
 ```bash
-npx -y @pimzino/spec-workflow-mcp@latest . --dashboard
-```
-
-或者如果官方版本要求 project path 在最后，就按它的 README 调整为：
-
-```bash
-npx -y @pimzino/spec-workflow-mcp@latest /path/to/ai-doc-summary --dashboard
+# 默认监听 5000 端口
+# 但是 macOS 系统的 Control Center，也在监听 *:5000
+# 所以改用 5001
+npx -y @pimzino/spec-workflow-mcp@latest . --dashboard --port 5001
 ```
 
 如果启动成功，通常会提示 Dashboard 地址。你只在本机浏览器打开即可。
