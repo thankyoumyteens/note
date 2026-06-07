@@ -88,6 +88,8 @@
     - [创建组合 Skill](./work_with_ai/lesson11c/prompt1.md)
     - [使用组合 Skill 实战小功能](./work_with_ai/lesson11c/prompt.md)
     - [因不可抗力中断后让 AI 继续执行任务](./work_with_ai/lesson11c/prompt2.md)
+  - [第 12 课：Hooks 自动化：测试、格式化、提醒](./work_with_ai/lesson12/lesson12.md)
+    - [本课推荐 Prompt](./work_with_ai/lesson12/prompt.md)
 
 - [SKILL](./skills/skills.md)
   - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
