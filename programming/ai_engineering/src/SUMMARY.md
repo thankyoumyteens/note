@@ -304,6 +304,7 @@
       - [新增 Tool Eval 数据集](./v2026/phase4/lesson17/tool_eval_ds.md)
       - [新增 Tool Eval 脚本](./v2026/phase4/lesson17/tool_eval_py.md)
       - [测试方式](./v2026/phase4/lesson17/test.md)
+    - [第 18 课：MCP 企业集成](./v2026/phase4/lesson18/lesson18.md)
 
 - [LeetCode / 算法面试](./leet_code/leet_code.md)
   - [第 1 课：HashMap / 数组基础题型识别](./leet_code/lesson1/lesson1.md)
