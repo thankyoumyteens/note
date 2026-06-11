@@ -12,8 +12,8 @@
   - [安装 OpenCode](./software/open_code.md)
   - [安装 Goose](./software/goose.md)
 
-- [指挥 AI 工作](./work_with_ai/work_with_ai.md)
-  - [第 1 课：把“我要一个 Java 项目”变成清晰任务](./work_with_ai/lesson1/lesson1.md)
+- [AI 辅助开发](./work_with_ai/work_with_ai.md)
+  - [把“我要一个 Java 项目”变成清晰任务](./work_with_ai/lesson1/lesson1.md)
     - [本课任务结构](./work_with_ai/lesson1/structure.md)
     - [推荐 Prompt](./work_with_ai/lesson1/prompt.md)
     - [你要检查 AI 的输出](./work_with_ai/lesson1/tips.md)
