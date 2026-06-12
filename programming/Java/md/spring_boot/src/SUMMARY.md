@@ -7,7 +7,7 @@
 
 - [基础](./base/springboot.md)
   - [项目搭建(JDK8)](./base/create_project.md)
-  - [项目搭建(JDK21)](./base/create_project_21.md)
+  - [项目搭建(JDK25)](./base/create_project_21.md)
   - [命令行项目](./base/cli.md)
   - [Web项目](./base/web.md)
   - [全局异常处理](./base/exception_handler.md)
