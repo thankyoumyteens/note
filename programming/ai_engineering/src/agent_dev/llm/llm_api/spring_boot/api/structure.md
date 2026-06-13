@@ -15,7 +15,7 @@ WebClient.post()
                            │
                            ▼
                     ┌──────────────┐
-                    │  LlmService  │
+                    │   Service    │
                     └──────┬───────┘
                            │
                            ▼

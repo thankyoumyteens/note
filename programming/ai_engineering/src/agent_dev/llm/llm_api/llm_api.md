@@ -5,4 +5,4 @@
 - 请求参数：model、messages、temperature、max_tokens
 - 返回结果解析
 - API Key 配置与安全管理
-- Chat Completion / Responses 调用模式
+- Chat Completion 调用模式
