@@ -80,6 +80,9 @@
       - [POST SSE Controller](./agent_dev/llm/sse/spring_ai/controller.md)
       - [测试](./agent_dev/llm/sse/spring_ai/test.md)
       - [修改返回的格式](./agent_dev/llm/sse/spring_ai/custom.md)
+    - [Python](./agent_dev/llm/sse/py/py.md)
+      - [安装依赖](./agent_dev/llm/sse/py/uv.md)
+      - [.env](./agent_dev/llm/sse/py/env.md)
 
 <!-- 
 - [Java转AI应用开发(2026)](./v2026/route.md)
