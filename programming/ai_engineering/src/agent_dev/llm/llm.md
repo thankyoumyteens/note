@@ -3,10 +3,12 @@
 需要掌握：
 
 - LLM 基本原理与能力边界
-- GPT、Claude、Llama 等主流模型差异
-- 模型 API 调用与集成
-- Streaming / SSE 流式输出
-- Token、上下文窗口、成本、延迟控制
-- 多轮对话设计
-- 结构化输出
-- 模型结果稳定性与可控性
+- OpenAI、DeepSeek、Claude 的 API 调用方式
+- 多 provider 路由设计
+- API Key 管理与环境变量配置
+- 请求参数：model、messages、temperature、max_tokens、stream
+- system / user / assistant 消息结构
+- 统一请求结构与统一响应结构
+- 错误处理：400、401、403、429、5xx
+- 超时、重试、fallback、provider 降级
+- Token usage 记录与成本估算

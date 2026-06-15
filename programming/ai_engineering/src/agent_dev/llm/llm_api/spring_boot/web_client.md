@@ -242,49 +242,6 @@ Mono<ClaudeMessageResponse>
 
 意思是：如果 60 秒内没有结果，就中断这个 reactive pipeline，抛出 timeout 异常。
 
-## 错误处理：为什么你应该加 `onStatus`
-
-默认情况下，`retrieve()` 遇到 4xx / 5xx 会抛异常。问题是：如果不手动读取错误响应体，你看不到第三方返回的具体错误。
-
-解决的方法：
-
-```java
-.retrieve()
-.onStatus(
-        HttpStatusCode::isError,
-        clientResponse -> clientResponse.bodyToMono(String.class)
-                .map(body -> new RuntimeException(
-                        "LLM API error, status="
-                                + clientResponse.statusCode()
-                                + ", body="
-                                + body
-                ))
-)
-.bodyToMono(ClaudeMessageResponse.class)
-```
-
-`onStatus` 的作用是：
-
-```text
-当 HTTP status 是 4xx / 5xx 时，HttpStatusCode::isError 返回 true，
-读取错误 body，
-转换成你自己的异常。
-```
-
-这对调模型 API 非常重要，因为 OpenAI / Qwen / Claude 的错误信息通常都在 JSON body 里。
-
-如果想捕获更详细的 HTTP 错误码，可以写多个 onStatus：
-
-```java
-.retrieve()
-.onStatus(status -> status.value() == 400, clientResponse -> ...)
-.onStatus(status -> status.value() == 401 || status.value() == 403, clientResponse -> ...)
-.onStatus(HttpStatusCode::is5xxServerError, clientResponse -> ...)
-.bodyToMono(ClaudeMessageResponse.class)
-```
-
----
-
 ## `retrieve()` vs `exchangeToMono()`
 
 大部分简单场景用：
