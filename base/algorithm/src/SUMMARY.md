@@ -1,7 +1,7 @@
 # Summary
 
 - [LeetCode / 算法面试](./leet_code/leet_code.md)
-  - [第 1 课：HashMap / 数组基础题型识别](./leet_code/lesson1/lesson1.md)
+  - [HashMap / 数组基础题型识别](./leet_code/lesson1/lesson1.md)
     - [HashMap / HashSet 的核心用途](./leet_code/lesson1/hash_map.md)
     - [1. Two Sum](./leet_code/lesson1/two_sum/two_sum.md)
       - [题型识别信号](./leet_code/lesson1/two_sum/type.md)
@@ -18,7 +18,7 @@
       - [普通写法](./leet_code/lesson1/group_anagrams/solution2.md)
       - [熟练后写法](./leet_code/lesson1/group_anagrams/solution3.md)
     - [本课三个核心模板对比](./leet_code/lesson1/group_anagrams/template.md)
-  - [第 2 课：数组 / 字符串基础扩展](./leet_code/lesson2/lesson2.md)
+  - [数组 / 字符串基础扩展](./leet_code/lesson2/lesson2.md)
     - [217. Contains Duplicate](./leet_code/lesson2/contains_duplicate/contains_duplicate.md)
       - [题型识别信号](./leet_code/lesson2/contains_duplicate/type.md)
       - [解题思路](./leet_code/lesson2/contains_duplicate/solution1.md)
@@ -28,6 +28,12 @@
     - [14. Longest Common Prefix](./leet_code/lesson2/longest_common_prefix/longest_common_prefix.md)
       - [题型识别信号](./leet_code/lesson2/longest_common_prefix/type.md)
       - [解题思路](./leet_code/lesson2/longest_common_prefix/solution1.md)
+  - [HashMap 高频变形](./leet_code/lesson3/lesson3.md)
+    - [383. Ransom Note](./leet_code/lesson3/ransom_note/ransom_note.md)
+      - [题型识别信号](./leet_code/lesson3/ransom_note/type.md)
+      - [解题思路](./leet_code/lesson3/ransom_note/solution1.md)
+    - [205. Isomorphic Strings](./leet_code/lesson3/isomorphic_strings/isomorphic_strings.md)
+
 <!-- 
 - [线性查找](./linear_search/linear_search.md)
   - [实现线性查找](./linear_search/impl.md)
