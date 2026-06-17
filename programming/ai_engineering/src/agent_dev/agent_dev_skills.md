@@ -28,7 +28,6 @@
 - 统一请求结构与统一响应结构
 - 错误处理：400、401、403、429、5xx
 - 超时、重试、fallback、provider 降级
-- Token usage 记录与成本估算
 
 ---
 
@@ -38,7 +37,7 @@
 
 - Streaming 与 SSE 的基本概念
 - OpenAI-compatible streaming 事件解析
-- Claude Messages streaming 事件解析
+- Anthropic Messages streaming 事件解析
 - 使用 Java 和 Python 实现 SSE
 - 前端 fetch + ReadableStream 接收 POST SSE
 - 后端统一封装前端事件协议
@@ -79,21 +78,6 @@
 
 ---
 
-## Context Engineering
-
-需要掌握：
-
-- Token 预算、上下文窗口、成本与延迟控制
-- 上下文来源、优先级与组织结构
-- 长上下文压缩、摘要与截断
-- 对话状态、短期记忆与长期记忆
-- 用户画像与个性化上下文
-- RAG、工具结果与历史对话的组合策略
-- 上下文选择、排序、裁剪与可信度标注
-- 上下文冲突处理、污染防护与可靠回答边界
-
----
-
 ## RAG 知识库系统
 
 需要掌握：
@@ -111,6 +95,21 @@
 - 上下文拼接策略
 - RAG 结果评估
 - 知识库更新、权限、版本管理
+
+---
+
+## Context Engineering
+
+需要掌握：
+
+- Token 预算、上下文窗口、成本与延迟控制
+- 上下文来源、优先级与组织结构
+- 长上下文压缩、摘要与截断
+- 对话状态、短期记忆与长期记忆
+- 用户画像与个性化上下文
+- RAG、工具结果与历史对话的组合策略
+- 上下文选择、排序、裁剪与可信度标注
+- 上下文冲突处理、污染防护与可靠回答边界
 
 ---
 
@@ -164,7 +163,7 @@
 - 失败案例分析
 - Agent 执行链路 Trace
 - Prompt log、tool trace、conversation replay
-- 成本、延迟、稳定性指标
+- Token usage 记录与成本、延迟、稳定性指标
 
 ---
 

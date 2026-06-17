@@ -27,7 +27,9 @@ return webClient.post()
                 HttpStatusCode::is5xxServerError,
                 response -> toException(response, "Provider server error")
         )
-        .bodyToMono(ResponseDto.class);
+        .bodyToMono(ResponseDto.class)
+        .timeout(Duration.ofSeconds(60))
+        .block();
 ```
 
 错误转换方法：
