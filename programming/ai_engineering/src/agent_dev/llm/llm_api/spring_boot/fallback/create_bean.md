@@ -1,4 +1,4 @@
-# 创建 ProviderClient 对象
+# 创建 Bean
 
 ```java
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
