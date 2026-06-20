@@ -33,9 +33,9 @@ Content-Type: application/json
 }
 ```
 
-OpenAI 官方 Java SDK 现在把 **Responses API** 作为主要接口，同时也说明 Chat Completions API 是之前的标准，并继续支持；如果要统一接 OpenAI / Qwen / DeepSeek，先用 Chat Completions 风格最容易。
+OpenAI 官方现在把 **Responses API** 作为主要接口，同时也说明 Chat Completions API 是之前的标准，并继续支持；如果要统一接 OpenAI / Qwen / DeepSeek，先用 Chat Completions 风格最容易。
 
-## 2. Claude 原生 Messages API
+## 2. Anthropic Messages API
 
 Claude 原生 API 不是 Chat Completions 格式，而是 Messages API。Anthropic 官方 Java SDK 通过 `ANTHROPIC_API_KEY` 环境变量访问 Claude API，并提供 Messages API 客户端。
 

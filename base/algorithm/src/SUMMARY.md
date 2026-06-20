@@ -33,6 +33,11 @@
       - [题型识别信号](./leet_code/lesson3/ransom_note/type.md)
       - [解题思路](./leet_code/lesson3/ransom_note/solution1.md)
     - [205. Isomorphic Strings](./leet_code/lesson3/isomorphic_strings/isomorphic_strings.md)
+      - [题型识别信号](./leet_code/lesson3/isomorphic_strings/type.md)
+      - [解题思路](./leet_code/lesson3/isomorphic_strings/solution1.md)
+    - [290. Word Pattern](./leet_code/lesson3/word_pattern/word_pattern.md)
+      - [题型识别信号](./leet_code/lesson3/word_pattern/type.md)
+      - [解题思路](./leet_code/lesson3/word_pattern/solution1.md)
 
 <!-- 
 - [线性查找](./linear_search/linear_search.md)

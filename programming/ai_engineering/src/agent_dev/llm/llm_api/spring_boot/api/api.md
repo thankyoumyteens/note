@@ -1,4 +1,4 @@
-# 如何调用模型 API
+# 调用 OpenAI-compatible API
 
 用 Spring 官方的 `WebClient` 处理 HTTP 调用。
 

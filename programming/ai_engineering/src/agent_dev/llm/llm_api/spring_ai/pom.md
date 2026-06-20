@@ -31,7 +31,7 @@ Spring AI 推荐通过 BOM 管理版本。
 </dependencyManagement>
 ```
 
-普通 Web 项目：
+## 接入 OpenAI
 
 ```xml
 <dependencies>
@@ -49,22 +49,12 @@ Spring AI 推荐通过 BOM 管理版本。
 </dependencies>
 ```
 
-如果要接 Claude，再加：
+## 接入 Claude
 
 ```xml
 <!-- Spring AI 的 Anthropic / Claude 模型接入 starter。 -->
 <dependency>
     <groupId>org.springframework.ai</groupId>
     <artifactId>spring-ai-starter-model-anthropic</artifactId>
-</dependency>
-```
-
-如果要接 DeepSeek 原生 starter，再加：
-
-```xml
-<!-- Spring AI 的 DeepSeek 模型接入 starter。 -->
-<dependency>
-    <groupId>org.springframework.ai</groupId>
-    <artifactId>spring-ai-starter-model-deepseek</artifactId>
 </dependency>
 ```
