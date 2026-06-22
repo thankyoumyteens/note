@@ -20,8 +20,16 @@ return webClient.post()
                 response -> toException(response, "Forbidden: no permission to access this model or resource")
         )
         .onStatus(
+                status -> status.value() == 404,
+                response -> toException(response, "Not found: model, path, or resource does not exist")
+        )
+        .onStatus(
                 status -> status.value() == 429,
                 response -> toException(response, "Rate limited: quota or request limit exceeded")
+        )
+        .onStatus(
+                status -> status.value() == 529,
+                response -> toException(response, "Provider overloaded")
         )
         .onStatus(
                 HttpStatusCode::is5xxServerError,
