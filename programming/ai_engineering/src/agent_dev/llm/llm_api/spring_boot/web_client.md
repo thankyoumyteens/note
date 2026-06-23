@@ -54,6 +54,8 @@ WebClient webClient = WebClient.builder()
 
 ### 方式二：注入 `WebClient.Builder`
 
+Spring Boot 的 WebClientAutoConfiguration 会自动配置一个 WebClient.Builder 类型的 bean。在需要使用 WebClient 的时候在程序中注入一个 WebClient.Builder 对象，通过对它进行自定义来生成对应的 WebClient 对象，从而作为客户端进行Web请求。
+
 Spring Boot 项目里更推荐这样：
 
 ```java
@@ -314,3 +316,13 @@ x-api-key: xxx
 anthropic-version: 2023-06-01
 Content-Type: application/json
 ```
+
+## WebClientCustomizer
+
+Spring Boot 提供了 org.springframework.boot.web.reactive.function.client.WebClientCustomizer 接口定义，它允许我们通过实现该接口对 WebClient 进行一些通用的自定义，然后将该接口的实现类定义为 Spring bean。
+
+Spring Boot 在创建 WebClient 实例时会在 bean 容器中寻找 WebClientCustomizer 类型的 bean，并一一调用它们的 customize() 方法以便对 WebClient 进行一些自定义。
+
+## CodecCustomizer
+
+如果需要定义自己的编解码工具，则可以实现 org.springframework.boot.web.codec.CodecCustomizer 接口，把它定义为 Spring bean，通过其 customize() 方法可以获取到 org.springframework.http.codec.CodecConfigurer 对象，从而可以注册新的编解码工具，或对现有的编解码工具进行替换等。
