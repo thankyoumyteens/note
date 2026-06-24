@@ -1,8 +1,10 @@
-# 异常模型
+# 自定义异常
 
-单个 provider 失败时：
+## 单个 provider 失败时的异常
 
 ```java
+package com.example.llm.exceptions;
+
 public class LlmProviderException extends RuntimeException {
 
     private final String provider;
@@ -45,9 +47,11 @@ public class LlmProviderException extends RuntimeException {
 }
 ```
 
-全部 provider 都失败时：
+## 全部 provider 都失败时的异常
 
 ```java
+package com.example.llm.exceptions;
+
 import java.util.List;
 
 public class AllProvidersFailedException extends RuntimeException {

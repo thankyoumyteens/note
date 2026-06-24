@@ -1,6 +1,8 @@
 # WebClient 工厂：处理连接超时 + 响应超时
 
 ```java
+package com.example.llm.provider;
+
 import io.netty.channel.ChannelOption;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;

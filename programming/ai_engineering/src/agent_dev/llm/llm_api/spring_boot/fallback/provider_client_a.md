@@ -3,6 +3,8 @@
 ## AnthropicChatRequest
 
 ```java
+package com.example.llm.dto.anthropic;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,19 +16,16 @@ import java.util.List;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record AnthropicChatRequest(
-        String model,
+        String model, // 要调用的 Claude 模型名称。
 
         @JsonProperty("max_tokens")
-        Integer maxTokens,
-
-        Double temperature,
+        Integer maxTokens, // 限制模型最多生成的 token 数，只限制输出长度。
+        Double temperature, // 控制模型输出随机性，值越低越稳定，值越高越发散。
 
         @JsonProperty("top_p")
-        Double topP,
-
-        String system,
-
-        List<Message> messages
+        Double topP, // nucleus sampling 参数，用于控制候选 token 的采样范围。
+        String system, // 系统指令，用于设置模型行为和回答边界。
+        List<Message> messages // 对话消息列表，只包含 user / assistant 消息。
 ) {
 
     /**
@@ -34,8 +33,8 @@ public record AnthropicChatRequest(
      * role 只能是 user 或 assistant。
      */
     public record Message(
-            String role,
-            String content
+            String role, // 消息角色，只能是 user 或 assistant。
+            String content // 消息文本内容。
     ) {
     }
 }
@@ -44,6 +43,8 @@ public record AnthropicChatRequest(
 ## AnthropicChatResponse
 
 ```java
+package com.example.llm.dto.anthropic;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -53,19 +54,19 @@ import java.util.List;
  * content 是数组，文本结果通常在 type=text 的 content block 里。
  */
 public record AnthropicChatResponse(
-        String id,
-        String type,
-        String role,
-        String model,
-        List<ContentBlock> content,
+        String id, // 响应 ID。
+        String type, // 响应类型，通常是 message。
+        String role, // 返回消息角色，通常是 assistant。
+        String model, // 实际使用的 Claude 模型名称。
+        List<ContentBlock> content, // 输出内容块列表，可能包含 text / thinking / tool_use 等类型。
 
         @JsonProperty("stop_reason")
-        String stopReason,
+        String stopReason, // 模型停止生成的原因，例如 end_turn、max_tokens、stop_sequence。
 
         @JsonProperty("stop_sequence")
-        String stopSequence,
+        String stopSequence, // 命中的自定义停止序列，没有命中时通常为空。
 
-        Usage usage
+        Usage usage // 本次调用的 token 用量信息。
 ) {
 
     /**
@@ -90,8 +91,8 @@ public record AnthropicChatResponse(
      * 普通文本回答通常是 type=text。
      */
     public record ContentBlock(
-            String type,
-            String text
+            String type, // 内容块类型，普通文本通常是 text。
+            String text // 文本内容，仅 type=text 时通常有值。
     ) {
     }
 
@@ -100,10 +101,10 @@ public record AnthropicChatResponse(
      */
     public record Usage(
             @JsonProperty("input_tokens")
-            Integer inputTokens,
+            Integer inputTokens, // 输入 token 数。
 
             @JsonProperty("output_tokens")
-            Integer outputTokens
+            Integer outputTokens // 输出 token 数。
     ) {
     }
 }
@@ -112,6 +113,16 @@ public record AnthropicChatResponse(
 ## AnthropicProviderClient
 
 ```java
+package com.example.llm.provider;
+
+import com.example.llm.exceptions.LlmProviderException;
+import com.example.llm.dto.LlmProvider;
+import com.example.llm.dto.TokenUsage;
+import com.example.llm.dto.UnifiedChatMessage;
+import com.example.llm.dto.UnifiedChatRequest;
+import com.example.llm.dto.UnifiedChatResponse;
+import com.example.llm.dto.anthropic.AnthropicChatRequest;
+import com.example.llm.dto.anthropic.AnthropicChatResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
@@ -134,12 +145,25 @@ import java.util.concurrent.TimeoutException;
  */
 public class AnthropicProviderClient implements LlmProviderClient {
 
+    // provider 标识，例如 anthropic。
     private final String provider;
+
+    // Anthropic API Key。
     private final String apiKey;
+
+    // 当前 provider 默认使用的 Claude 模型名称。
     private final String model;
+
+    // Anthropic API 版本，例如 2023-06-01。
     private final String anthropicVersion;
+
+    // 整个请求的外层超时时间，防止 Mono 长时间不结束。
     private final int requestTimeoutSeconds;
+
+    // 最大重试次数，只对临时错误生效。
     private final int maxRetries;
+
+    // 当前 provider 专用的 WebClient。
     private final WebClient webClient;
 
     public AnthropicProviderClient(
@@ -159,6 +183,8 @@ public class AnthropicProviderClient implements LlmProviderClient {
         this.anthropicVersion = anthropicVersion;
         this.requestTimeoutSeconds = requestTimeoutSeconds;
         this.maxRetries = maxRetries;
+
+        // 通过工厂创建 WebClient，统一处理连接超时和响应超时。
         this.webClient = WebClientFactory.create(
                 baseUrl,
                 connectTimeoutMillis,
@@ -173,32 +199,49 @@ public class AnthropicProviderClient implements LlmProviderClient {
 
     @Override
     public Mono<UnifiedChatResponse> chat(UnifiedChatRequest request) {
+        // 将业务层统一请求转换成 Anthropic Messages API 请求体。
         AnthropicChatRequest providerRequest = toAnthropicRequest(request);
 
         return webClient.post()
+                // Anthropic Messages API 路径。
                 .uri("/messages")
+                // Anthropic 使用 x-api-key 作为认证请求头。
                 .header("x-api-key", apiKey)
+                // Anthropic 要求显式传入 API version。
                 .header("anthropic-version", anthropicVersion)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .bodyValue(providerRequest)
                 .retrieve()
+                // 将 HTTP 4xx / 5xx 转成统一的 LlmProviderException。
                 .onStatus(
                         HttpStatusCode::isError,
                         response -> toException(response, "Provider server error")
                 )
+                // 将 provider 原始响应反序列化为 AnthropicChatResponse。
                 .bodyToMono(AnthropicChatResponse.class)
+                // 整个 Mono 调用级超时，作为外层兜底。
                 .timeout(Duration.ofSeconds(requestTimeoutSeconds))
+                // 只重试临时错误，例如超时、网络错误、429、5xx。
                 .retryWhen(
                         Retry.backoff(maxRetries, Duration.ofMillis(500))
+                                // 指数退避的最大等待时间，避免重试间隔无限变长。
                                 .maxBackoff(Duration.ofSeconds(3))
+                                // 增加随机抖动，降低并发请求同时重试的概率。
                                 .jitter(0.2)
+                                // 只重试临时性错误，不重试参数错误、认证错误、权限错误。
                                 .filter(this::isRetryable)
+                                // 重试耗尽后抛出最后一次异常，交给上层降级链或全局异常处理。
                                 .onRetryExhaustedThrow((spec, signal) -> signal.failure())
                 )
+                // 将 provider 原始响应转换成业务层统一响应。
                 .map(this::toUnifiedResponse);
     }
 
+    /**
+     * 将统一聊天请求转换成 Anthropic Messages API 请求。
+     */
     private AnthropicChatRequest toAnthropicRequest(UnifiedChatRequest request) {
+        // Anthropic 的 messages 只放 user / assistant，不放 system。
         List<AnthropicChatRequest.Message> messages = request.messages()
                 .stream()
                 .map(this::toAnthropicMessage)
@@ -214,6 +257,9 @@ public class AnthropicProviderClient implements LlmProviderClient {
         );
     }
 
+    /**
+     * 将业务层统一消息转换成 Anthropic message。
+     */
     private AnthropicChatRequest.Message toAnthropicMessage(UnifiedChatMessage message) {
         String role = switch (message.role()) {
             case USER -> "user";
@@ -226,6 +272,9 @@ public class AnthropicProviderClient implements LlmProviderClient {
         );
     }
 
+    /**
+     * 将 Anthropic 原始响应转换成业务层统一响应。
+     */
     private UnifiedChatResponse toUnifiedResponse(AnthropicChatResponse response) {
         if (response == null) {
             throw new IllegalStateException("Anthropic response must not be null");
@@ -241,6 +290,9 @@ public class AnthropicProviderClient implements LlmProviderClient {
         );
     }
 
+    /**
+     * 将 Anthropic usage 转换成统一 token usage。
+     */
     private TokenUsage toTokenUsage(AnthropicChatResponse.Usage usage) {
         if (usage == null) {
             return TokenUsage.empty();
@@ -252,6 +304,10 @@ public class AnthropicProviderClient implements LlmProviderClient {
         );
     }
 
+    /**
+     * 提取 Anthropic 响应里的基础元数据。
+     * 元数据主要用于日志、排查和观测，不参与主业务逻辑。
+     */
     private Map<String, Object> toMetadata(AnthropicChatResponse response) {
         Map<String, Object> metadata = new LinkedHashMap<>();
 
@@ -263,12 +319,19 @@ public class AnthropicProviderClient implements LlmProviderClient {
         return metadata;
     }
 
+    /**
+     * 只写入非空元数据，避免 metadata 里出现大量 null。
+     */
     private void putIfNotNull(Map<String, Object> metadata, String key, Object value) {
         if (value != null) {
             metadata.put(key, value);
         }
     }
 
+    /**
+     * 将 WebClient 的错误响应转换成统一异常。
+     * response body 保留下来，方便日志排查 provider 返回的具体错误。
+     */
     private Mono<? extends Throwable> toException(ClientResponse response, String message) {
         return response.bodyToMono(String.class)
                 .defaultIfEmpty("")
@@ -280,7 +343,12 @@ public class AnthropicProviderClient implements LlmProviderClient {
                 ));
     }
 
+    /**
+     * 判断异常是否允许重试。
+     * 只重试临时性错误，不重试 400 / 401 / 403 这类确定性错误。
+     */
     private boolean isRetryable(Throwable throwable) {
+        // Reactor 可能会包装异常，这里先拆出原始异常。
         Throwable ex = Exceptions.unwrap(throwable);
 
         if (ex instanceof TimeoutException) {

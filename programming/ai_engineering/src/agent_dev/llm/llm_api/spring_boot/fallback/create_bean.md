@@ -1,6 +1,13 @@
 # 创建 Bean
 
 ```java
+package com.example.llm.config;
+
+import com.example.llm.provider.AnthropicProviderClient;
+import com.example.llm.provider.LlmProviderClient;
+import com.example.llm.provider.OpenAiCompatibleProviderClient;
+import com.example.llm.provider.ProviderFallbackRouter;
+import com.example.llm.provider.OpenAiResponsesProviderClient;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +29,7 @@ public class LlmProviderConfig {
     public LlmProviderClient openaiProviderClient(LlmProperties properties) {
         LlmProperties.ProviderProperties provider = properties.requiredProvider("openai");
 
-        return new OpenAiCompatibleProviderClient(
+        return new OpenAiResponsesProviderClient(
                 "openai",
                 provider.baseUrl(),
                 provider.apiKey(),
