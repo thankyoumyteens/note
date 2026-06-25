@@ -91,6 +91,13 @@
   - [第 12 课：Hooks 自动化：测试、格式化、提醒](./work_with_ai/lesson12/lesson12.md)
     - [本课推荐 Prompt](./work_with_ai/lesson12/prompt.md)
 
+- [主 Agent / Sub Agent 分工工作流](./sub_agent/sub_agent.md)
+  - [项目准备](./sub_agent/demo_project.md)
+  - [阶段 0：项目级上下文校准](./sub_agent/stage0/stage0.md)
+    - [只读项目，不允许改文件](./sub_agent/stage0/step1.md)
+    - [生成阶段 0 文档](./sub_agent/stage0/step2.md)
+    - [验收文档](./sub_agent/stage0/step3.md)
+
 - [SKILL](./skills/skills.md)
   - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
   - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)

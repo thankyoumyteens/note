@@ -1,25 +1,25 @@
-# 设置项目 jdk 版本
+# 设置项目的 JDK 版本
 
-方法 1:配置 settings.xml
+## 方法 1:配置 settings.xml
 
 ```xml
 <profiles>
   <profile>
-  <id>jdk-1.8</id>
+  <id>jdk-25</id>
   <activation>
     <activeByDefault>true</activeByDefault>
-    <jdk>1.8</jdk>
+    <jdk>25</jdk>
   </activation>
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
+    <maven.compiler.compilerVersion>25</maven.compiler.compilerVersion>
   </properties>
   </profile>
 </profiles>
 ```
 
-方法 2:配置 pom.xml 文件
+## 方法 2:配置 pom.xml 文件
 
 ```xml
 <build>
@@ -29,8 +29,8 @@
       <artifactId>maven-compiler-plugin</artifactId>
       <version>3.12.1</version>
       <configuration>
-        <source>1.8</source>
-        <target>1.8</target>
+        <source>25</source>
+        <target>25</target>
       </configuration>
     </plugin>
   </plugins>

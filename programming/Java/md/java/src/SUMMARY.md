@@ -173,16 +173,6 @@
       - [在类加载的时候修改类](./bytecode/agent/premain.md)
       - [修改已经加载的类](./bytecode/agent/agentmain.md)
 
-- [Maven](./maven/maven.md)
-  - [设置国内源](./maven/mirror.md)
-  - [设置项目jdk版本](./maven/jdk_version.md)
-  - [强制重新下载依赖](./maven/reload_force.md)
-  - [maven-shade-plugin](./maven/main_class.md)
-  - [导入本地jar包](./maven/local_jar.md)
-  - [设置私服](./maven/repositories.md)
-  - [Maven内置变量](./maven/maven_vars.md)
-  - [多模块下扫描不到子模块mybatis.xml](./maven/maven_scan_mapper.md)
-
 - [Gradle](./gradle/gradle.md)
   - [安装](./gradle/install.md)
   - [Gradle项目结构](./gradle/gradle_project.md)

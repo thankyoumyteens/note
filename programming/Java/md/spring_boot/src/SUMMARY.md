@@ -1,5 +1,16 @@
 # Summary
 
+- [Maven](./maven/maven.md)
+  - [设置第三方仓库](./maven/mirror.md)
+  - [设置项目的 JDK 版本](./maven/jdk_version.md)
+  - [强制重新下载依赖](./maven/reload_force.md)
+  - [maven-shade-plugin](./maven/main_class.md)
+  - [导入本地jar包](./maven/local_jar.md)
+  - [设置私服](./maven/repositories.md)
+  - [Maven内置变量](./maven/maven_vars.md)
+  - [多模块下扫描不到子模块的 mybatis.xml](./maven/maven_scan_mapper.md)
+  - [mvnw](./maven/mvnw.md)
+
 - [Servlet](./servlet/servlet.md)
   - [搭建servlet项目](./servlet/quick_start.md)
   - [添加Filter](./servlet/add_filter.md)
