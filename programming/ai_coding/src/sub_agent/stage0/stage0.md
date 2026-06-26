@@ -1,12 +1,13 @@
 # 阶段 0：项目级上下文校准
 
-阶段 0 不要一次性让 AI “分析并生成所有文档”。正确流程分成 **3 轮**：
-
-- 第 1 轮：只读项目，不改文件
-- 第 2 轮：生成阶段 0 文档草稿
-- 第 3 轮：验收文档是否可信、是否脑补、是否越界
-
-你的目标不是让 AI 写漂亮文档，而是让 AI 基于项目事实生成后续开发可用的上下文边界。
+1. 第 1 轮：AI 直接分析项目并创建 6 个文件:
+   - .spec-workflow/steering/product.md
+   - .spec-workflow/steering/tech.md
+   - .spec-workflow/steering/structure.md
+   - AGENTS.md
+   - docs/lessons/README.md
+   - docs/decisions/README.md
+2. 第 2 轮：你看文件后，指出要改哪里，AI 只改指定文件
 
 ## 先建立一个分支
 
