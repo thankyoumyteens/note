@@ -1,6 +1,6 @@
 # Maven 依赖
 
-由于需要完全手动创建 OpenAiApi / OpenAiChatModel / AnthropicChatModel。就不再用 starter了，改用底层模块，这样可以减少自动配置的干扰。
+由于需要完全手动创建 OpenAiApi / OpenAiChatModel / AnthropicChatModel。就不再用 starter 了，改用底层模块，这样可以减少自动配置的干扰。
 
 把：
 

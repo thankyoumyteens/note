@@ -1,14 +1,10 @@
-# 异常类
+# 自定义异常
 
-单个 provider 失败时：
+## 单个 provider 失败时的异常
 
 ```java
-package com.example.llm.client;
+package com.example.llm.exceptions;
 
-/**
- * 单个 provider 调用失败时抛出的统一异常。
- * statusCode = -1 表示 timeout、网络异常、未知连接异常等没有 HTTP status 的错误。
- */
 public class LlmProviderException extends RuntimeException {
 
     private final String provider;
@@ -25,7 +21,16 @@ public class LlmProviderException extends RuntimeException {
         super(message, cause);
         this.provider = provider;
         this.statusCode = statusCode;
-        this.responseBody = responseBody == null ? "" : responseBody;
+        this.responseBody = responseBody;
+    }
+
+    public LlmProviderException(
+            String provider,
+            int statusCode,
+            String message,
+            String responseBody
+    ) {
+        this(provider, statusCode, message, responseBody, null);
     }
 
     public String provider() {
@@ -42,23 +47,20 @@ public class LlmProviderException extends RuntimeException {
 }
 ```
 
-全部 provider 都失败时：
+## 全部 provider 都失败时的异常
 
 ```java
-package com.example.llm.client;
+package com.example.llm.exceptions;
 
 import java.util.List;
 
-/**
- * 所有 provider 都失败时抛出。
- */
 public class AllProvidersFailedException extends RuntimeException {
 
     private final List<LlmProviderException> failures;
 
     public AllProvidersFailedException(List<LlmProviderException> failures) {
         super("All LLM providers failed");
-        this.failures = List.copyOf(failures);
+        this.failures = failures;
     }
 
     public List<LlmProviderException> failures() {
