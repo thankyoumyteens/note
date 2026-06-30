@@ -93,6 +93,8 @@
         - [AnthropicProviderClient](./agent_dev/llm/sse/impl/spring_boot/fallback/provider_client_a.md)
         - [provider 配置](./agent_dev/llm/sse/impl/spring_boot/fallback/provider_config.md)
         - [显式 Provider 降级链](./agent_dev/llm/sse/impl/spring_boot/fallback/router.md)
+        - [创建 Bean](./agent_dev/llm/sse/impl/spring_boot/fallback/create_bean.md)
+        - [Controller 使用方式](./agent_dev/llm/sse/impl/spring_boot/fallback/controller.md)
     - [Spring AI](./agent_dev/llm/sse/impl/spring_ai/spring_ai.md)
       - [Maven 依赖](./agent_dev/llm/sse/impl/spring_ai/pom.md)
       - [application.yml](./agent_dev/llm/sse/impl/spring_ai/yml.md)
