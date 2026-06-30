@@ -25,7 +25,8 @@ public record AnthropicChatRequest(
         @JsonProperty("top_p")
         Double topP, // nucleus sampling 参数，用于控制候选 token 的采样范围。
         String system, // 系统指令，用于设置模型行为和回答边界。
-        List<Message> messages // 对话消息列表，只包含 user / assistant 消息。
+        List<Message> messages, // 对话消息列表，只包含 user / assistant 消息。
+        Boolean stream // 是否启用流式输出。
 ) {
 
     /**
@@ -253,7 +254,8 @@ public class AnthropicProviderClient implements LlmProviderClient {
                 request.options().temperature(),
                 request.options().topP(),
                 request.system(),
-                messages
+                messages,
+                false
         );
     }
 

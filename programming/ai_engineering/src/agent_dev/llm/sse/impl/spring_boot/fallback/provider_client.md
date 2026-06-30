@@ -39,9 +39,11 @@ public record OpenAiChatRequest(
 ```java
 package com.example.llm.dto.openai;
 
+import com.example.llm.dto.TokenUsage;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * OpenAI-compatible Chat Completions Stream API 的单个 SSE chunk 响应体。
@@ -60,21 +62,93 @@ public record OpenAiChatStreamResponse(
 ) {
 
     /**
+     * 获取第一个候选结果。
+     */
+    public Choice firstChoice() {
+        if (choices == null || choices.isEmpty()) {
+            return null;
+        }
+
+        return choices.getFirst();
+    }
+
+    /**
      * 获取第一个候选结果的增量文本。
      * 如果当前 chunk 没有 content，则返回空字符串。
      */
     public String firstDeltaText() {
-        if (choices == null || choices.isEmpty()) {
-            return "";
-        }
+        Choice choice = firstChoice();
 
-        Choice choice = choices.getFirst();
-
-        if (choice.delta() == null || choice.delta().content() == null) {
+        if (choice == null || choice.delta() == null || choice.delta().content() == null) {
             return "";
         }
 
         return choice.delta().content();
+    }
+
+    /**
+     * 获取第一个候选结果的停止原因。
+     */
+    public String firstFinishReason() {
+        Choice choice = firstChoice();
+
+        if (choice == null || choice.finishReason() == null) {
+            return "";
+        }
+
+        return choice.finishReason();
+    }
+
+    /**
+     * 获取第一个候选结果的 delta role。
+     */
+    public String firstDeltaRole() {
+        Choice choice = firstChoice();
+
+        if (choice == null || choice.delta() == null || choice.delta().role() == null) {
+            return "";
+        }
+
+        return choice.delta().role();
+    }
+
+    /**
+     * 将 provider usage 转成统一 TokenUsage。
+     */
+    public TokenUsage toTokenUsage() {
+        if (usage == null) {
+            return TokenUsage.empty();
+        }
+
+        if (usage.promptTokens() == null && usage.completionTokens() == null) {
+            return TokenUsage.empty();
+        }
+
+        return TokenUsage.of(usage.promptTokens(), usage.completionTokens());
+    }
+
+    /**
+     * 将 provider 元数据整理成统一 metadata。
+     */
+    public Map<String, Object> toMetadata() {
+        Choice choice = firstChoice();
+
+        return Map.of(
+                "id", id == null ? "" : id,
+                "object", object == null ? "" : object,
+                "created", created == null ? "" : created,
+                "systemFingerprint", systemFingerprint == null ? "" : systemFingerprint,
+                "choiceIndex", choice == null || choice.index() == null ? "" : choice.index(),
+                "deltaRole", firstDeltaRole(),
+                "finishReason", firstFinishReason()
+        );
+    }
+
+    /**
+     * 判断当前 chunk 是否包含结束信息。
+     */
+    public boolean hasFinishSignal() {
+        return !firstFinishReason().isBlank() || usage != null;
     }
 
     /**
@@ -357,7 +431,8 @@ public class OpenAiCompatibleStreamProviderClient implements LlmStreamProviderCl
             return Mono.empty();
         }
 
-        // 收到 [DONE] 后，输出统一 DONE 事件。
+        // 收到 [DONE] 后，输出兜底 DONE 事件。
+        // 真正的 finish_reason / usage 通常已经在前一个 JSON chunk 中处理过。
         if ("[DONE]".equals(data)) {
             return Mono.just(UnifiedChatStreamEvent.done(
                     llmProvider,
@@ -370,22 +445,39 @@ public class OpenAiCompatibleStreamProviderClient implements LlmStreamProviderCl
             // 解析 OpenAI-compatible stream chunk。
             OpenAiChatStreamResponse response = objectMapper.readValue(data, OpenAiChatStreamResponse.class);
 
+            // 优先使用 provider 实际返回的 model，避免配置 model 和真实命中 model 不一致。
+            String actualModel = response.model() == null || response.model().isBlank()
+                    ? model
+                    : response.model();
+
             // 提取当前 chunk 的增量文本。
             String text = response.firstDeltaText();
 
-            // 没有文本的 chunk 不输出，例如 role chunk 或 finish chunk。
-            if (text == null || text.isEmpty()) {
-                return Mono.empty();
+            // 有文本内容时，输出 MESSAGE 事件，同时保留 chunk 元数据。
+            if (text != null && !text.isEmpty()) {
+                contentStarted.set(true);
+
+                return Mono.just(UnifiedChatStreamEvent.message(
+                        llmProvider,
+                        actualModel,
+                        text,
+                        response.toMetadata()
+                ));
             }
 
-            // 一旦输出过文本，就不再允许当前 provider retry。
-            contentStarted.set(true);
+            // 没有文本，但带 finish_reason 或 usage 时，输出 DONE 事件。
+            // 这样不会丢弃 stop reason、usage、id、created、system_fingerprint 等信息。
+            if (response.hasFinishSignal()) {
+                return Mono.just(UnifiedChatStreamEvent.done(
+                        llmProvider,
+                        actualModel,
+                        response.toTokenUsage(),
+                        response.toMetadata()
+                ));
+            }
 
-            return Mono.just(UnifiedChatStreamEvent.message(
-                    llmProvider,
-                    model,
-                    text
-            ));
+            // 例如只有 role=assistant 的开头 chunk，没有文本，也没有结束信息，可以忽略。
+            return Mono.empty();
 
         } catch (Exception ex) {
             // JSON 解析失败时，包装成统一 provider 异常。

@@ -241,5 +241,41 @@ public record UnifiedChatStreamEvent(
                 Map.of()
         );
     }
+
+    public static UnifiedChatStreamEvent message(
+            LlmProvider provider,
+            String model,
+            String content,
+            Map<String, Object> metadata
+    ) {
+        return new UnifiedChatStreamEvent(
+                StreamEventType.MESSAGE,
+                provider,
+                model,
+                content,
+                "",
+                "",
+                TokenUsage.empty(),
+                metadata
+        );
+    }
+
+    public static UnifiedChatStreamEvent done(
+            LlmProvider provider,
+            String model,
+            TokenUsage usage,
+            Map<String, Object> metadata
+    ) {
+        return new UnifiedChatStreamEvent(
+                StreamEventType.DONE,
+                provider,
+                model,
+                "",
+                "",
+                "",
+                usage,
+                metadata
+        );
+    }
 }
 ```
