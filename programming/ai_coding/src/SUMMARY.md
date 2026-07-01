@@ -99,6 +99,7 @@
   - [阶段 1：需求探索与反复讨论](./sub_agent/stage1/stage1.md)
     - [要实现的需求](./sub_agent/stage1/new_function.md)
     - [讨论需求](./sub_agent/stage1/discuss.md)
+  - [阶段 2：需求定稿](./sub_agent/stage2/stage2.md)
 
 - [SKILL](./skills/skills.md)
   - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
