@@ -29,4 +29,28 @@ startup_timeout_sec = 20
 
 ## 支持多项目
 
-目前只能去修改 "/path/to/ai-doc-summary"。
+不要在全局配置文件(`~/.codex/config.toml`)中配置。而是在每个项目的根目录下创建 codex 配置文件:
+
+```sh
+mkdir .codex
+vim .codex/config.toml
+```
+
+添加下面内容:
+
+```toml
+[mcp_servers.spec-workflow]
+command = "npx"
+args = [
+  "-y",
+  "@pimzino/spec-workflow-mcp@latest",
+  "/path/to/ai-doc-summary"
+]
+startup_timeout_sec = 20
+
+[mcp_servers.spec-workflow.tools.approvals]
+approval_mode = "approve"
+
+[mcp_servers.spec-workflow.tools.log-implementation]
+approval_mode = "approve"
+```

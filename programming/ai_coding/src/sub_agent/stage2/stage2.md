@@ -9,7 +9,7 @@
 
 核心要求：
 
-1. 创建或更新 `.spec-workflow/specs/` 下的文件时，优先使用 MCP 暴露的创建/更新工具；如果当前会话没有暴露该工具，则按 spec_workflow_guide 创建/更新。
+1. 创建或更新 `.spec-workflow/specs/` 下的文件时，优先使用 MCP 暴露的创建/更新工具；如果当前会话没有暴露该工具，则按 `spec_workflow_guide` 创建/更新。
 2. 必须使用 `spec-workflow-mcp --dashboard` 完成 requirements 的审批流程。
 3. `spec-workflow-mcp --dashboard` 不只是查看状态用，而是用于让用户审查、确认、批准 requirements。
 4. 如果当前会话没有暴露可用的 MCP 工具，无法配合 dashboard 完成审批流程，先停止并说明原因。
@@ -28,17 +28,17 @@
 
 `requirements.md` 必须包含：
 
-* Feature name
-* Goal
-* User scenarios
-* Functional requirements
-* Non-goals
-* Input / output
-* Error cases
-* Compatibility requirements
-* Acceptance criteria
-* Out of scope
-* Open questions
+* 功能名称
+* 需求目标
+* 用户场景
+* 功能性需求
+* 非目标
+* 输入 / 输出
+* 错误场景
+* 兼容性要求
+* 验收标准
+* 范围外事项
+* 未确认问题
 
 内容要求：
 
@@ -55,7 +55,7 @@
 
 审批要求：
 
-1. requirements 写入后，告知用户启动 dashboard 的命令
+1. requirements 写入后，告知用户启动 dashboard 的命令。
 2. 通过 dashboard 等待用户审查 requirements。
 3. 如果用户要求修改，只修改 requirements，并继续通过 dashboard 走审批流程。
 4. 在 requirements 获得用户批准前，不得进入 design 阶段。
