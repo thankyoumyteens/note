@@ -27,6 +27,7 @@ package com.example.demo;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 @Component
 public class DemoConsole implements CommandLineRunner {
@@ -46,13 +47,17 @@ public class DemoConsole implements CommandLineRunner {
                 .defaultSystem("你是一个严谨、清晰的 Java 后端和 AI Agent 开发助手。")
                 .build();
 
-        String content = chatClient.prompt()
+        // stream() 启用流式调用，content() 返回 Flux<String>。
+        Flux<String> contentFlux = chatClient.prompt()
                 .user("用一句话解释什么是 RAG。")
-                .call()
+                .stream()
                 .content();
 
-        // 输出大模型的回答
-        System.out.println(content);
+        // CommandLineRunner 中需要阻塞等待流结束，否则程序可能提前退出。
+        contentFlux
+                .doOnNext(System.out::print)
+                .doOnComplete(() -> System.out.println("\n--- stream finished ---"))
+                .blockLast();
     }
 }
 ```

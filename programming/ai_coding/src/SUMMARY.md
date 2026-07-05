@@ -12,6 +12,32 @@
   - [安装 OpenCode](./software/open_code.md)
   - [安装 Goose](./software/goose.md)
 
+- [SKILL](./skills/skills.md)
+  - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
+  - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
+  - [常用 SKILL](./skills/examples/examples.md)
+
+- [常用工具](./plugins/plugins.md)
+  - [spec-workflow-mcp](./plugins/spec_workflow/spec_workflow.md)
+    - [安装 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp.md)
+      - [Codex CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_codex.md)
+      - [Claude Code 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_cc.md)
+      <!-- - [Goose 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_goose.md) -->
+      <!-- - [Gemini CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_gemini.md) -->
+      - [启动 Dashboard](./plugins/spec_workflow/dashboard.md)
+
+- [主 Agent / Sub Agent 分工工作流](./sub_agent/sub_agent.md)
+  - [项目准备](./sub_agent/demo_project.md)
+  - [阶段 0：项目级上下文校准](./sub_agent/stage0/stage0.md)
+    - [创建文档](./sub_agent/stage0/step1.md)
+    - [验收文档](./sub_agent/stage0/step2.md)
+  - [阶段 1：需求探索与反复讨论](./sub_agent/stage1/stage1.md)
+    - [要实现的需求](./sub_agent/stage1/new_function.md)
+    - [讨论需求](./sub_agent/stage1/discuss.md)
+  - [阶段 2：需求定稿](./sub_agent/stage2/stage2.md)
+  - [阶段 3：设计评审](./sub_agent/stage3/stage3.md)
+  - [阶段 4：任务拆分](./sub_agent/stage4/stage4.md)
+
 - [AI 辅助开发](./work_with_ai/work_with_ai.md)
   - [把“我要一个 Java 项目”变成清晰任务](./work_with_ai/lesson1/lesson1.md)
     - [本课任务结构](./work_with_ai/lesson1/structure.md)
@@ -90,30 +116,6 @@
     - [因不可抗力中断后让 AI 继续执行任务](./work_with_ai/lesson11c/prompt2.md)
   - [第 12 课：Hooks 自动化：测试、格式化、提醒](./work_with_ai/lesson12/lesson12.md)
     - [本课推荐 Prompt](./work_with_ai/lesson12/prompt.md)
-
-- [主 Agent / Sub Agent 分工工作流](./sub_agent/sub_agent.md)
-  - [项目准备](./sub_agent/demo_project.md)
-  - [阶段 0：项目级上下文校准](./sub_agent/stage0/stage0.md)
-    - [创建文档](./sub_agent/stage0/step1.md)
-    - [验收文档](./sub_agent/stage0/step2.md)
-  - [阶段 1：需求探索与反复讨论](./sub_agent/stage1/stage1.md)
-    - [要实现的需求](./sub_agent/stage1/new_function.md)
-    - [讨论需求](./sub_agent/stage1/discuss.md)
-  - [阶段 2：需求定稿](./sub_agent/stage2/stage2.md)
-  - [阶段 3：设计评审](./sub_agent/stage3/stage3.md)
-
-- [SKILL](./skills/skills.md)
-  - [基于 SKILL.md 的 Agent Skills](./skills/md_skill.md)
-  - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
-  - [常用 SKILL](./skills/examples/examples.md)
-
-- [常用插件](./plugins/plugins.md)
-- [spec-workflow-mcp](./plugins/spec_workflow/spec_workflow.md)
-  - [安装 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp.md)
-    - [Gemini CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_gemini.md)
-    - [Codex CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_codex.md)
-    - [Claude Code 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_cc.md)
-    - [Goose 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_goose.md)
 
 - [SOP](./sop/sop.md)
   - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./sop/ios_bug.md)
