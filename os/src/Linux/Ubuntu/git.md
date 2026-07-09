@@ -49,7 +49,6 @@ git --version
 # 初始化git
 
 ```sh
-git config --global user.name "zhaosz"
-git config --global user.email "iloveyesterday@outlook.com"
-ssh-keygen -t rsa -C "iloveyesterday@outlook.com"
+git config --global user.name ""
+git config --global user.email ""
 ```

@@ -10,6 +10,6 @@ git -v
 ### 2. 初始化 git
 
 ```sh
-git config --global user.name "zhaosz"
-git config --global user.email "iloveyesterday@outlook.com"
+git config --global user.name ""
+git config --global user.email ""
 ```

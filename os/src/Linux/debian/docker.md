@@ -3,7 +3,7 @@
 ### 1. 卸载旧版本（可选）
 
 ```sh
-apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
 注：如果提示未找到这些包，说明你的系统很干净，直接进入下一步即可。
@@ -13,38 +13,38 @@ apt-get remove docker docker-engine docker.io containerd runc
 更新包索引并安装必要的依赖工具，确保 apt 可以通过 HTTPS 安全地下载：
 
 ```sh
-apt-get update
-apt-get install ca-certificates curl gnupg
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg -y
 ```
 
 添加 Docker 官方的 GPG 密钥：
 
 ```sh
-install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-chmod a+r /etc/apt/keyrings/docker.gpg
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 ```
 
 将 Docker 官方源添加到系统的源列表中：
 
 ```sh
-echo \
+sudo echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 ### 3. 安装 Docker Engine
 
 ```sh
-apt-get update
-apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
 ### 4. 验证安装
 
 ```sh
-docker run hello-world
+sudo docker run hello-world
 ```
 
 如果终端打印出带有 "Hello from Docker!" 的欢迎信息，就说明安装大功告成了！

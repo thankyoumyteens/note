@@ -4,12 +4,12 @@
 
 ### 1. 在宿主机创建所需目录
 
-假设我们在 `~/tmp/mydata/nginx` 目录下统一管理：
+假设我们在 `~/mydata/nginx` 目录下统一管理：
 
 ```sh
-mkdir -p ~/tmp/mydata/nginx/html
-mkdir -p ~/tmp/mydata/nginx/logs
-mkdir -p ~/tmp/mydata/nginx/conf
+mkdir -p ~/mydata/nginx/html
+mkdir -p ~/mydata/nginx/logs
+mkdir -p ~/mydata/nginx/conf
 ```
 
 ### 2. 获取默认的 Nginx 配置文件
@@ -21,9 +21,9 @@ Nginx 容器启动时需要默认配置。我们可以先启动一个临时的 N
 docker run --name nginx-test -d nginx
 
 # 将容器内的 nginx.conf 拷贝到宿主机的 conf 目录
-docker cp nginx-test:/etc/nginx/nginx.conf ~/tmp/mydata/nginx/conf/nginx.conf
+docker cp nginx-test:/etc/nginx/nginx.conf ~/mydata/nginx/conf/nginx.conf
 # 将默认的配置文件夹也拷贝出来 (包含 default.conf 等)
-docker cp nginx-test:/etc/nginx/conf.d ~/tmp/mydata/nginx/conf/conf.d
+docker cp nginx-test:/etc/nginx/conf.d ~/mydata/nginx/conf/conf.d
 
 # 删除临时容器
 docker stop nginx-test
@@ -35,12 +35,12 @@ docker rm nginx-test
 在刚才创建的 html 目录下写一个自定义的首页，用来验证挂载是否成功。
 
 ```sh
-echo '<h1>Hello, Docker Nginx! Volume Mapping works!</h1>' > ~/tmp/mydata/nginx/html/index.html
+echo '<h1>Hello, Docker Nginx! Volume Mapping works!</h1>' > ~/mydata/nginx/html/index.html
 ```
 
 ### 4. 创建 docker-compose.yml 文件
 
-在你喜欢的目录下（例如 `~/tmp/mydata/nginx`）创建一个名为 `docker-compose.yml` 的文件，填入以下内容：
+在你喜欢的目录下（例如 `~/mydata/nginx`）创建一个名为 `docker-compose.yml` 的文件，填入以下内容：
 
 ```yaml
 version: "3.8"
