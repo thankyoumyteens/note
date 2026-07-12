@@ -5,15 +5,20 @@ main.py
 ```py
 from __future__ import annotations
 
+from fastapi import FastAPI, HTTPException
+
+from llm_api_demo.exceptions import AllProvidersFailedException, LlmProviderException
+from llm_api_demo.fallback_router import ProviderFallbackRouter
 from llm_api_demo.provider_clients import (
     AnthropicProviderClient,
     DeepSeekProviderClient,
     LlmProviderClient,
     OpenAiResponsesProviderClient,
 )
-from llm_api_demo.fallback_router import ProviderFallbackRouter
-from llm_api_demo.schemas import UnifiedChatMessage, UnifiedChatRequest
+from llm_api_demo.schemas import UnifiedChatRequest, UnifiedChatResponse
 from llm_api_demo.settings import settings
+
+app = FastAPI(title="LLM Fallback Demo")
 
 
 def build_clients() -> list[LlmProviderClient]:
@@ -27,30 +32,45 @@ def build_clients() -> list[LlmProviderClient]:
     return [client_map[name] for name in settings.provider_order]
 
 
-def main() -> None:
-    """演示一次带降级链的 LLM 调用。"""
-    router = ProviderFallbackRouter(build_clients())
-
-    request = UnifiedChatRequest(
-        system="You are a helpful assistant.",
-        messages=[
-            UnifiedChatMessage.user("用一句话解释什么是 LLM fallback。"),
-        ],
-    )
-
-    response = router.chat(request)
-
-    print(f"provider: {response.provider}")
-    print(f"model: {response.model}")
-    print(response.content)
+router = ProviderFallbackRouter(build_clients())
 
 
-if __name__ == "__main__":
-    main()
+@app.post("/api/ai/chat")
+def chat(request: UnifiedChatRequest) -> UnifiedChatResponse:
+    """带重试和降级的聊天接口。"""
+    try:
+        return router.chat(request)
+    except LlmProviderException as exc:
+        # 非临时错误或单个 provider 已经明确失败时，返回网关错误给前端。
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except AllProvidersFailedException as exc:
+        # 所有 provider 都失败，说明降级链已经耗尽。
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 ```
 
 ## 运行
 
 ```sh
-uv run python -m llm_api_demo.main
+uv run uvicorn llm_api_demo.main:app --reload --port 8000
+```
+
+## 测试
+
+```sh
+curl -X POST http://127.0.0.1:8000/api/ai/chat \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "system": "You are a helpful assistant.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "用一句话解释什么是 LLM fallback。"
+      }
+    ],
+    "options": {
+      "temperature": 0.2,
+      "max_tokens": 1000
+    },
+    "metadata": {}
+  }'
 ```

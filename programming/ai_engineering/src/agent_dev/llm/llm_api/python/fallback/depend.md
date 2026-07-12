@@ -1,5 +1,5 @@
 # 安装依赖
 
 ```sh
-uv add openai anthropic pydantic-settings tenacity
+uv add fastapi uvicorn openai anthropic pydantic-settings tenacity
 ```
