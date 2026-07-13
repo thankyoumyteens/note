@@ -1,133 +1,35 @@
 # Python 实现客户端断流
 
-Python 同步生成器被关闭时会收到 `GeneratorExit`。
+FastAPI 返回 `AsyncIterator` 时，客户端关闭页面、刷新页面或主动 abort，当前异步响应任务会被取消，`event_generator()` 会收到 `asyncio.CancelledError`。
 
-为了可靠释放上游连接，需要分别处理三件事：
-
-1. sse_main.py: 用 GeneratorExit 识别客户端断开，结束生成器。
-2. stream_fallback_router.py: 关闭当前 provider_stream，把关闭动作向下传播。
-3. stream_provider_clients.py: 在 finally 中关闭 OpenAI或 Anthropic SDK stream，真正释放 HTTP 连接。
-
-修改 stream_provider_clients.py：
-
-```py
-# 这里以 OpenAiCompatibleStreamProviderClient._stream_once() 为例，
-# AnthropicStreamProviderClient.stream() 也要使用相同方式关闭 SDK stream。
-# 在原方法中增加 stream = None 和 finally
-def _stream_once(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent]:
-    """执行一次 OpenAI-compatible streaming 请求。"""
-    stream = None  # 当前 OpenAI-compatible SDK stream。
-
-    try:
-        messages = [{"role": "system", "content": request.system}]
-
-        for message in request.messages:
-            messages.append({"role": message.role.value, "content": message.content})
-
-        stream = self.client.chat.completions.create(
-            model=self._model,
-            messages=messages,
-            temperature=request.options.temperature,
-            max_tokens=request.options.max_tokens,
-            top_p=request.options.top_p,
-            stream=True,
-        )
-
-        for chunk in stream:
-            if not chunk.choices:
-                continue
-
-            content = chunk.choices[0].delta.content
-
-            if content:
-                yield UnifiedChatStreamEvent(
-                    type=StreamEventType.MESSAGE,
-                    provider=self._provider,
-                    model=chunk.model or self._model,
-                    content=content,
-                )
-
-    except (APITimeoutError, APIConnectionError) as exc:
-        raise LlmProviderException(self.provider, -1, f"{self.provider} timeout or connection error") from exc
-    except APIError as exc:
-        raise LlmProviderException(
-            self.provider,
-            getattr(exc, "status_code", -1) or -1,
-            str(exc),
-            str(getattr(exc, "response", "")),
-        ) from exc
-    finally:
-        if stream is not None:
-            # Router 关闭当前 Provider 生成器时，继续关闭上游 HTTP stream。
-            stream.close()
-```
-
-修改 stream_fallback_router.py：
-
-```py
-# 把 client.stream(request) 保存为当前 Provider 生成器，并在 finally 中关闭
-def stream(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent]:
-    """只有当前 provider 尚未输出 message chunk 时，才允许 fallback。"""
-    failures: list[LlmProviderException] = []
-
-    for client in self.clients:
-        content_started = False
-        provider_stream = client.stream(request)  # 当前 provider 流式生成器。
-
-        try:
-            for event in provider_stream:
-                if event.type == StreamEventType.MESSAGE:
-                    content_started = True
-
-                yield event
-
-            yield UnifiedChatStreamEvent(type=StreamEventType.DONE)
-            return
-
-        except Exception as exc:
-            provider_exception = self._to_provider_exception(client.provider, exc)
-            failures.append(provider_exception)
-
-            if content_started:
-                yield UnifiedChatStreamEvent(
-                    type=StreamEventType.ERROR,
-                    error_code="STREAM_INTERRUPTED",
-                    error_message=provider_exception.message,
-                )
-                yield UnifiedChatStreamEvent(type=StreamEventType.DONE)
-                return
-
-            if not self._should_fallback(provider_exception):
-                yield UnifiedChatStreamEvent(
-                    type=StreamEventType.ERROR,
-                    error_code="PROVIDER_FAILED",
-                    error_message=provider_exception.message,
-                )
-                yield UnifiedChatStreamEvent(type=StreamEventType.DONE)
-                return
-        finally:
-            # event_generator 被关闭时，把关闭动作继续传给 ProviderClient。
-            provider_stream.close()
-
-    raise AllProvidersFailedException(failures)
-```
-
-最后修改 sse_main.py：
+修改 `sse_main.py` 中的 `stream_chat()`：
 
 ```py
 @app.post("/api/llm/chat/stream")
-def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
+async def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
+    """异步流式聊天接口。"""
 
-    def event_generator() -> Iterator[str]:
+    async def event_generator() -> AsyncIterator[str]:
         completed_normally = False  # stream 是否正常结束。
 
         try:
-            for event in router.stream(request):
+            async for event in router.stream(request):
                 if event.type == StreamEventType.DONE:
                     # 收到 DONE 表示业务流已经正常收尾。
                     completed_normally = True
 
                 yield sse_event(event)
+
+        except asyncio.CancelledError:
+            if not completed_normally:
+                print(
+                    "客户端断开了, requestId="
+                    + str(request.metadata.get("requestId"))
+                )
+                # 这里记录 cancelled 状态，不要按系统异常告警。
+
+            # 继续抛出取消信号，让 Router 和 ProviderClient 关闭上游 stream。
+            raise
 
         except AllProvidersFailedException:
             yield sse_event(
@@ -140,18 +42,6 @@ def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
             completed_normally = True
             yield sse_event(UnifiedChatStreamEvent(type=StreamEventType.DONE))
 
-        # 处理客户端断流
-        except GeneratorExit:
-            if not completed_normally:
-                print(
-                    "客户端断开了, requestId="
-                    + str(request.metadata.get("requestId"))
-                )
-                # 这里记录 cancelled 状态，不要按系统异常告警。
-
-            # 重新抛出刚捕获的 GeneratorExit，让 Router 和 ProviderClient 执行关闭逻辑。
-            raise
-
     return StreamingResponse(
         event_generator(),
         media_type="text/event-stream",
@@ -163,9 +53,24 @@ def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
     )
 ```
 
-这里的 `GeneratorExit` 对应 Reactor 中的 `SignalType.CANCEL`，生成器中的 `finally` 对应 `doFinally`。
+这里的 `asyncio.CancelledError` 对应 Reactor 中的 `SignalType.CANCEL`。
+
+`CancelledError` 不继承 `Exception`，所以不会被 Router 中处理 Provider 失败的 `except Exception` 捕获，也不会触发 retry 或 fallback。`raise` 会继续传播取消信号；传播过程中，Router 的 `aclosing` 和 ProviderClient 的 `async with stream` 会依次关闭异步生成器和 SDK HTTP stream。
+
+```text
+客户端断开
+    → event_generator 收到 CancelledError
+    → Router 的 AsyncIterator 被取消
+    → ProviderClient 的 AsyncIterator 被取消
+    → async with 关闭 SDK stream
+    → 上游 HTTP 连接释放
+```
+
+客户端取消不是 Provider 调用失败，不要发送 `error` 事件，也不要按系统异常告警。
 
 ## 测试
+
+发起一个耗时较长的请求，并让 curl 在三秒后主动断开：
 
 ```sh
 curl -N \
@@ -183,11 +88,25 @@ curl -N \
     ],
     "options": {
       "temperature": 0.2,
-      "maxTokens": 4000,
-      "topP": null
+      "max_tokens": 4000,
+      "top_p": null
     },
     "metadata": {
       "requestId": "cutoff-test-001"
     }
   }'
 ```
+
+正常情况下，curl 会先收到部分 SSE 内容，然后输出类似信息：
+
+```text
+curl: (28) Operation timed out after 3000 milliseconds
+```
+
+服务端应该输出：
+
+```text
+客户端断开了, requestId=cutoff-test-001
+```
+
+curl 的退出码 28 是本次测试的预期结果，表示测试客户端主动结束请求，不是服务端异常。
