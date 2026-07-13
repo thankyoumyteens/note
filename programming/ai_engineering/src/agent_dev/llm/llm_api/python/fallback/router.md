@@ -16,13 +16,13 @@ class ProviderFallbackRouter:
     def __init__(self, clients: list[LlmProviderClient]) -> None:
         self.clients = clients  # 按优先级排序的 provider client 列表。
 
-    def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
-        """依次尝试 provider，成功则返回，临时性失败则降级。"""
+    async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
+        """异步依次尝试 provider，成功则返回，临时性失败则降级。"""
         failures: list[LlmProviderException] = []
 
         for client in self.clients:
             try:
-                return client.chat(request)
+                return await client.chat(request)
             except Exception as exc:
                 provider_exception = self._to_provider_exception(client.provider, exc)
                 failures.append(provider_exception)

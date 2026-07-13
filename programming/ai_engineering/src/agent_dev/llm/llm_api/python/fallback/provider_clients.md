@@ -7,8 +7,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from anthropic import Anthropic, APIError as AnthropicAPIError
-from openai import APIConnectionError, APIError, APITimeoutError, OpenAI
+from anthropic import AsyncAnthropic, APIError as AnthropicAPIError
+from openai import APIConnectionError, APIError, APITimeoutError, AsyncOpenAI
 from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
 
 from llm_api_demo.exceptions import LlmProviderException
@@ -37,8 +37,8 @@ class LlmProviderClient(ABC):
         """返回 provider 名称，用于记录失败链路和构造统一异常。"""
 
     @abstractmethod
-    def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
-        """发起统一聊天请求，并返回统一响应对象。"""
+    async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
+        """异步发起统一聊天请求，并返回统一响应对象。"""
 
 
 def should_retry_exception(exc: BaseException) -> bool:
@@ -69,7 +69,7 @@ class OpenAiResponsesProviderClient(LlmProviderClient):
     def __init__(self) -> None:
         # OpenAI SDK 会读取这里传入的 api_key、base_url 和 timeout。
         # timeout 对应 Spring Boot WebClient 里的 request timeout。
-        self.client = OpenAI(
+        self.client = AsyncOpenAI(
             api_key=settings.openai_api_key,
             base_url=settings.openai_base_url,
             timeout=settings.request_timeout_seconds,
@@ -90,14 +90,14 @@ class OpenAiResponsesProviderClient(LlmProviderClient):
         # 最后一次仍失败时，直接抛出原异常交给 fallback router 判断是否切 provider。
         reraise=True,
     )
-    def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
+    async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
         try:
             # Responses API 的 input 可以直接接收字符串。
             # 这里把多轮 user / assistant 消息压成文本，保持示例聚焦 fallback 主线。
             # 如果需要完整多轮结构，可以把 input 改成 Responses API 支持的 message 数组。
             user_text = "\n".join(message.content for message in request.messages)
 
-            response = self.client.responses.create(
+            response = await self.client.responses.create(
                 model=settings.openai_model,
                 instructions=request.system,
                 input=user_text,
@@ -138,7 +138,7 @@ class DeepSeekProviderClient(LlmProviderClient):
 
     def __init__(self) -> None:
         # 通过 base_url 切到 DeepSeek 服务端，其余调用方式仍沿用 OpenAI SDK。
-        self.client = OpenAI(
+        self.client = AsyncOpenAI(
             api_key=settings.deepseek_api_key,
             base_url=settings.deepseek_base_url,
             timeout=settings.request_timeout_seconds,
@@ -156,7 +156,7 @@ class DeepSeekProviderClient(LlmProviderClient):
         wait=wait_exponential(multiplier=0.5, min=0.5, max=4),
         reraise=True,
     )
-    def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
+    async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
         try:
             # Chat Completions 把 system 放在 messages 的第一条。
             messages = [{"role": "system", "content": request.system}]
@@ -165,7 +165,7 @@ class DeepSeekProviderClient(LlmProviderClient):
             for message in request.messages:
                 messages.append({"role": message.role.value, "content": message.content})
 
-            response = self.client.chat.completions.create(
+            response = await self.client.chat.completions.create(
                 model=settings.deepseek_model,
                 messages=messages,
                 temperature=request.options.temperature,
@@ -212,7 +212,7 @@ class AnthropicProviderClient(LlmProviderClient):
 
     def __init__(self) -> None:
         # Anthropic SDK 只需要 api_key 和 timeout；base_url 保持 SDK 默认即可。
-        self.client = Anthropic(
+        self.client = AsyncAnthropic(
             api_key=settings.anthropic_api_key,
             timeout=settings.request_timeout_seconds,
         )
@@ -229,7 +229,7 @@ class AnthropicProviderClient(LlmProviderClient):
         wait=wait_exponential(multiplier=0.5, min=0.5, max=4),
         reraise=True,
     )
-    def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
+    async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
         try:
             # Anthropic Messages API 不允许把 system 混在 messages 里，
             # 所以这里过滤出 user / assistant 后，system 通过独立参数传入。
@@ -239,7 +239,7 @@ class AnthropicProviderClient(LlmProviderClient):
                 if message.role in {ChatRole.USER, ChatRole.ASSISTANT}
             ]
 
-            response = self.client.messages.create(
+            response = await self.client.messages.create(
                 model=settings.anthropic_model,
                 system=request.system,
                 messages=messages,

@@ -36,10 +36,10 @@ router = ProviderFallbackRouter(build_clients())
 
 
 @app.post("/api/ai/chat")
-def chat(request: UnifiedChatRequest) -> UnifiedChatResponse:
-    """带重试和降级的聊天接口。"""
+async def chat(request: UnifiedChatRequest) -> UnifiedChatResponse:
+    """带重试和降级的异步聊天接口。"""
     try:
-        return router.chat(request)
+        return await router.chat(request)
     except LlmProviderException as exc:
         # 非临时错误或单个 provider 已经明确失败时，返回网关错误给前端。
         raise HTTPException(status_code=502, detail=str(exc)) from exc
