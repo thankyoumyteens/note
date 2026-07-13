@@ -17,13 +17,11 @@
   - [基于 MCP 接入自定义工具](./skills/mcp_skill.md)
   - [常用 SKILL](./skills/examples/examples.md)
 
-- [常用工具](./plugins/plugins.md)
+- [MCP](./plugins/plugins.md)
   - [spec-workflow-mcp](./plugins/spec_workflow/spec_workflow.md)
     - [安装 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp.md)
       - [Codex CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_codex.md)
       - [Claude Code 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_cc.md)
-      <!-- - [Goose 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_goose.md) -->
-      <!-- - [Gemini CLI 配置 spec-workflow-mcp](./plugins/spec_workflow/spec_workflow_mcp_gemini.md) -->
       - [启动 Dashboard](./plugins/spec_workflow/dashboard.md)
 
 - [主 Agent / Sub Agent 分工工作流](./sub_agent/sub_agent.md)

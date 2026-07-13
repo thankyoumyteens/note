@@ -6,10 +6,12 @@ stream_provider_clients.py
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from collections.abc import Iterator
+from collections.abc import AsyncIterator
+from contextlib import aclosing
 
-from anthropic import Anthropic, APIError as AnthropicAPIError
-from openai import APIConnectionError, APIError, APITimeoutError, OpenAI
+from anthropic import APIError as AnthropicAPIError
+from anthropic import AsyncAnthropic
+from openai import APIConnectionError, APIError, APITimeoutError, AsyncOpenAI
 
 from llm_api_demo.exceptions import LlmProviderException
 from llm_api_demo.provider_clients import should_retry_exception
@@ -24,7 +26,7 @@ from llm_api_demo.settings import settings
 
 
 class LlmStreamProviderClient(ABC):
-    """统一流式 ProviderClient 接口。"""
+    """统一异步流式 ProviderClient 接口。"""
 
     @property
     @abstractmethod
@@ -32,23 +34,27 @@ class LlmStreamProviderClient(ABC):
         """返回 provider 名称。"""
 
     @abstractmethod
-    def stream(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent]:
-        """发起流式请求。"""
+    def stream(self, request: UnifiedChatRequest) -> AsyncIterator[UnifiedChatStreamEvent]:
+        """发起异步流式请求。"""
 
 
 class OpenAiCompatibleStreamProviderClient(LlmStreamProviderClient):
-    """OpenAI-compatible 流式 ProviderClient，可用于 OpenAI Chat Completions / DeepSeek。"""
+    """OpenAI-compatible 异步流式 ProviderClient。"""
 
     def __init__(self, provider: LlmProvider, api_key: str, base_url: str, model: str) -> None:
         self._provider = provider  # provider 枚举。
         self._model = model  # 模型名称。
-        self.client = OpenAI(api_key=api_key, base_url=base_url, timeout=settings.request_timeout_seconds)  # SDK 客户端。
+        self.client = AsyncOpenAI(
+            api_key=api_key,
+            base_url=base_url,
+            timeout=settings.request_timeout_seconds,
+        )  # 异步 SDK 客户端。
 
     @property
     def provider(self) -> str:
         return self._provider.value
 
-    def stream(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent]:
+    async def stream(self, request: UnifiedChatRequest) -> AsyncIterator[UnifiedChatStreamEvent]:
         """当前 provider 内部重试；已经输出内容后不再重试。"""
         last_error: LlmProviderException | None = None  # 最后一次 provider 异常。
 
@@ -56,11 +62,13 @@ class OpenAiCompatibleStreamProviderClient(LlmStreamProviderClient):
             content_started = False  # 当前尝试是否已经输出过内容。
 
             try:
-                for event in self._stream_once(request):
-                    if event.type == StreamEventType.MESSAGE:
-                        content_started = True
+                # 外层生成器被关闭时，继续关闭当前单次调用生成器。
+                async with aclosing(self._stream_once(request)) as provider_stream:
+                    async for event in provider_stream:
+                        if event.type == StreamEventType.MESSAGE:
+                            content_started = True
 
-                    yield event
+                        yield event
 
                 return
 
@@ -82,15 +90,15 @@ class OpenAiCompatibleStreamProviderClient(LlmStreamProviderClient):
         if last_error:
             raise last_error
 
-    def _stream_once(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent]:
-        """执行一次 OpenAI-compatible streaming 请求。"""
+    async def _stream_once(self, request: UnifiedChatRequest) -> AsyncIterator[UnifiedChatStreamEvent]:
+        """执行一次 OpenAI-compatible 异步 streaming 请求。"""
         try:
             messages = [{"role": "system", "content": request.system}]  # OpenAI-compatible 消息列表。
 
             for message in request.messages:
                 messages.append({"role": message.role.value, "content": message.content})
 
-            stream = self.client.chat.completions.create(
+            stream = await self.client.chat.completions.create(
                 model=self._model,
                 messages=messages,
                 temperature=request.options.temperature,
@@ -99,22 +107,28 @@ class OpenAiCompatibleStreamProviderClient(LlmStreamProviderClient):
                 stream=True,
             )
 
-            for chunk in stream:
-                if not chunk.choices:
-                    continue
+            # 正常完成、异常或任务取消时都关闭上游 HTTP stream。
+            async with stream:
+                async for chunk in stream:
+                    if not chunk.choices:
+                        continue
 
-                content = chunk.choices[0].delta.content
+                    content = chunk.choices[0].delta.content
 
-                if content:
-                    yield UnifiedChatStreamEvent(
-                        type=StreamEventType.MESSAGE,
-                        provider=self._provider,
-                        model=chunk.model or self._model,
-                        content=content,
-                    )
+                    if content:
+                        yield UnifiedChatStreamEvent(
+                            type=StreamEventType.MESSAGE,
+                            provider=self._provider,
+                            model=chunk.model or self._model,
+                            content=content,
+                        )
 
         except (APITimeoutError, APIConnectionError) as exc:
-            raise LlmProviderException(self.provider, -1, f"{self.provider} timeout or connection error") from exc
+            raise LlmProviderException(
+                self.provider,
+                -1,
+                f"{self.provider} timeout or connection error",
+            ) from exc
         except APIError as exc:
             raise LlmProviderException(
                 self.provider,
@@ -125,16 +139,20 @@ class OpenAiCompatibleStreamProviderClient(LlmStreamProviderClient):
 
 
 class AnthropicStreamProviderClient(LlmStreamProviderClient):
-    """Anthropic Messages API 流式 ProviderClient。"""
+    """Anthropic Messages API 异步流式 ProviderClient。"""
 
     def __init__(self) -> None:
-        self.client = Anthropic(api_key=settings.anthropic_api_key, timeout=settings.request_timeout_seconds)  # SDK 客户端。
+        self.client = AsyncAnthropic(
+            api_key=settings.anthropic_api_key,
+            base_url=settings.anthropic_base_url,
+            timeout=settings.request_timeout_seconds,
+        )  # 异步 SDK 客户端。
 
     @property
     def provider(self) -> str:
         return LlmProvider.ANTHROPIC.value
 
-    def stream(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent]:
+    async def stream(self, request: UnifiedChatRequest) -> AsyncIterator[UnifiedChatStreamEvent]:
         """把 Anthropic content_block_delta 转成统一 MESSAGE 事件。"""
         try:
             messages = [
@@ -143,7 +161,7 @@ class AnthropicStreamProviderClient(LlmStreamProviderClient):
                 if message.role in {ChatRole.USER, ChatRole.ASSISTANT}
             ]  # Anthropic messages 只放 user / assistant。
 
-            stream = self.client.messages.create(
+            stream = await self.client.messages.create(
                 model=settings.anthropic_model,
                 system=request.system,
                 messages=messages,
@@ -152,24 +170,26 @@ class AnthropicStreamProviderClient(LlmStreamProviderClient):
                 stream=True,
             )
 
-            for event in stream:
-                if event.type != "content_block_delta":
-                    continue
+            # 正常完成、异常或任务取消时都关闭上游 HTTP stream。
+            async with stream:
+                async for event in stream:
+                    if event.type != "content_block_delta":
+                        continue
 
-                delta = event.delta
+                    delta = event.delta
 
-                if getattr(delta, "type", "") != "text_delta":
-                    continue
+                    if getattr(delta, "type", "") != "text_delta":
+                        continue
 
-                text = getattr(delta, "text", "")
+                    text = getattr(delta, "text", "")
 
-                if text:
-                    yield UnifiedChatStreamEvent(
-                        type=StreamEventType.MESSAGE,
-                        provider=LlmProvider.ANTHROPIC,
-                        model=settings.anthropic_model,
-                        content=text,
-                    )
+                    if text:
+                        yield UnifiedChatStreamEvent(
+                            type=StreamEventType.MESSAGE,
+                            provider=LlmProvider.ANTHROPIC,
+                            model=settings.anthropic_model,
+                            content=text,
+                        )
 
         except AnthropicAPIError as exc:
             raise LlmProviderException(

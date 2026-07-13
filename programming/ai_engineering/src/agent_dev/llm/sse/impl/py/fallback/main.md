@@ -5,9 +5,10 @@ sse_main.py
 ```py
 from __future__ import annotations
 
+import asyncio
 import json
+from collections.abc import AsyncIterator
 from dataclasses import asdict
-from collections.abc import Iterator
 
 from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
@@ -26,7 +27,7 @@ app = FastAPI(title="LLM SSE Fallback Demo")
 
 
 def build_stream_clients() -> list[LlmStreamProviderClient]:
-    """根据 settings.provider_order 装配流式 provider clients。"""
+    """根据 settings.provider_order 装配异步流式 provider clients。"""
     client_map: dict[str, LlmStreamProviderClient] = {
         "openai": OpenAiCompatibleStreamProviderClient(
             provider=LlmProvider.OPENAI,
@@ -55,14 +56,22 @@ def sse_event(event: UnifiedChatStreamEvent) -> str:
     return f"event:{event.type.value}\ndata:{data}\n\n"
 
 
-@app.post("/api/ai/chat/stream")
-def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
-    """流式聊天接口。"""
+@app.post("/api/llm/chat/stream")
+async def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
+    """异步流式聊天接口。"""
 
-    def event_generator() -> Iterator[str]:
+    async def event_generator() -> AsyncIterator[str]:
         try:
-            for event in router.stream(request):
+            async for event in router.stream(request):
                 yield sse_event(event)
+
+        except asyncio.CancelledError:
+            # 客户端断开属于正常取消；继续抛出，让 Router 和 SDK stream 关闭。
+            print(
+                "客户端断开了, requestId="
+                + str(request.metadata.get("requestId"))
+            )
+            raise
 
         except AllProvidersFailedException:
             yield sse_event(
@@ -95,7 +104,7 @@ uv run uvicorn llm_api_demo.sse_main:app --reload --port 8000
 
 ```sh
 curl -N \
-  -X POST http://127.0.0.1:8000/api/ai/chat/stream \
+  -X POST http://127.0.0.1:8000/api/llm/chat/stream \
   -H 'Content-Type: application/json' \
   -d '{
     "system": "你是一个简洁的 AI Engineering 助手",
@@ -108,6 +117,9 @@ curl -N \
     "options": {
       "temperature": 0.2,
       "max_tokens": 800
+    },
+    "metadata": {
+      "requestId": "async-sse-test-001"
     }
   }'
 ```

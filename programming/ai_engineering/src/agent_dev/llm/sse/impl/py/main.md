@@ -3,6 +3,7 @@
 ```python
 from __future__ import annotations
 
+import asyncio
 from collections.abc import AsyncIterator
 
 from fastapi import FastAPI
@@ -31,6 +32,11 @@ async def stream_chat(request: StreamChatRequest) -> StreamingResponse:
                 yield sse_event("message", chunk)
 
             yield sse_event("done", "[DONE]")
+
+        except asyncio.CancelledError:
+            # 客户端断开属于正常取消；继续抛出，让上游 async stream 执行关闭逻辑。
+            print("客户端断开了")
+            raise
 
         except Exception as exc:
             yield sse_event("error", to_safe_error_message(exc))

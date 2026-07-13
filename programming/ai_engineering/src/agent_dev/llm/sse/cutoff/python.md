@@ -115,7 +115,7 @@ def stream(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent
 最后修改 sse_main.py：
 
 ```py
-@app.post("/api/ai/chat/stream")
+@app.post("/api/llm/chat/stream")
 def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
 
     def event_generator() -> Iterator[str]:
@@ -164,3 +164,30 @@ def stream_chat(request: UnifiedChatRequest) -> StreamingResponse:
 ```
 
 这里的 `GeneratorExit` 对应 Reactor 中的 `SignalType.CANCEL`，生成器中的 `finally` 对应 `doFinally`。
+
+## 测试
+
+```sh
+curl -N \
+  --max-time 3 \
+  -X POST "http://localhost:8000/api/llm/chat/stream" \
+  -H "Content-Type: application/json" \
+  -H "Accept: text/event-stream" \
+  -d '{
+    "system": "你是一个详细回答问题的 AI 助手。",
+    "messages": [
+      {
+        "role": "user",
+        "content": "请从第一章开始写一篇至少五千字的人工智能发展史，每一章都给出详细例子。"
+      }
+    ],
+    "options": {
+      "temperature": 0.2,
+      "maxTokens": 4000,
+      "topP": null
+    },
+    "metadata": {
+      "requestId": "cutoff-test-001"
+    }
+  }'
+```

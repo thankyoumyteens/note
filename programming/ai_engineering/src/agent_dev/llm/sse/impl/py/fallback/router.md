@@ -5,7 +5,8 @@ stream_fallback_router.py
 ```py
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import AsyncIterator
+from contextlib import aclosing
 
 from llm_api_demo.exceptions import AllProvidersFailedException, LlmProviderException
 from llm_api_demo.schemas import StreamEventType, UnifiedChatRequest, UnifiedChatStreamEvent
@@ -13,12 +14,12 @@ from llm_api_demo.stream_provider_clients import LlmStreamProviderClient
 
 
 class StreamProviderFallbackRouter:
-    """显式 Provider 流式降级链。"""
+    """显式 Provider 异步流式降级链。"""
 
     def __init__(self, clients: list[LlmStreamProviderClient]) -> None:
         self.clients = clients  # 按优先级排序的 provider client 列表。
 
-    def stream(self, request: UnifiedChatRequest) -> Iterator[UnifiedChatStreamEvent]:
+    async def stream(self, request: UnifiedChatRequest) -> AsyncIterator[UnifiedChatStreamEvent]:
         """只有当前 provider 尚未输出 message chunk 时，才允许 fallback。"""
         failures: list[LlmProviderException] = []  # provider 失败链路。
 
@@ -26,11 +27,13 @@ class StreamProviderFallbackRouter:
             content_started = False  # 当前 provider 是否已经输出过内容。
 
             try:
-                for event in client.stream(request):
-                    if event.type == StreamEventType.MESSAGE:
-                        content_started = True
+                # Router 被关闭时，继续关闭当前 ProviderClient 的异步生成器。
+                async with aclosing(client.stream(request)) as provider_stream:
+                    async for event in provider_stream:
+                        if event.type == StreamEventType.MESSAGE:
+                            content_started = True
 
-                    yield event
+                        yield event
 
                 yield UnifiedChatStreamEvent(type=StreamEventType.DONE)
                 return

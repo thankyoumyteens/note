@@ -119,7 +119,7 @@
         - [ProviderClient](./agent_dev/llm/sse/impl/py/fallback/provider_clients.md)
         - [显式 Provider 降级链](./agent_dev/llm/sse/impl/py/fallback/router.md)
         - [main](./agent_dev/llm/sse/impl/py/fallback/main.md)
-        - [Iterator 和 yield](./agent_dev/llm/sse/impl/py/fallback/iterator.md)
+        - [AsyncIterator 和 yield](./agent_dev/llm/sse/impl/py/fallback/iterator.md)
   - [代理缓冲](./agent_dev/llm/sse/proxy_cache.md)
   - [超时处理](./agent_dev/llm/sse/timeout/timeout.md)
   - [断流处理](./agent_dev/llm/sse/cutoff/cutoff.md)

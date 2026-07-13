@@ -27,7 +27,7 @@ stream = client.responses.create(
     instructions="你是一个严谨、清晰的 Java 后端和 AI Agent 开发助手。",  # system / developer 类指令
     input="用一句话解释什么是 RAG。",  # 用户输入
     temperature=0.2,  # 控制模型输出随机性的参数
-    max_output_tokens=1000,  # 限制模型最多生成多少 token
+    max_output_tokens=1000,  # 限制模型最多生成的 token 数
     stream=True,  # 启用流式输出
 )
 
