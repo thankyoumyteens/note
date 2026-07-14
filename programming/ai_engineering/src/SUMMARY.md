@@ -3,7 +3,7 @@
 - [Agent 开发](./agent_dev/agent_dev.md)
 - [Agent 开发学习路线大纲](./agent_dev/agent_dev_skills.md)
 
-- [LLM 应用开发基础](./agent_dev/llm/llm.md)
+- [最小 LLM 应用](./agent_dev/llm/llm.md)
   - [LLM 基本原理与能力边界](./agent_dev/llm/llm_info/llm_info.md)
     - [LLM 是什么](./agent_dev/llm/llm_info/llm_concept.md)
     - [LLM 的基本工作流程](./agent_dev/llm/llm_info/llm_flow.md)
@@ -69,6 +69,12 @@
         - [显式 Provider 降级链](./agent_dev/llm/llm_api/python/fallback/router.md)
         - [main](./agent_dev/llm/llm_api/python/fallback/main.md)
 
+- [可靠的模型输出](./agent_dev/llm/reliable_output/reliable_output.md)
+  - [Prompt](./agent_dev/llm/reliable_output/prompt/prompt.md)
+    - [Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/prompt_template.md)
+      - [实现 Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/spring_boot.md)
+        - [PromptTemplate](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/template.md)
+
 - [Streaming / SSE 与统一响应协议](./agent_dev/llm/sse/sse.md)
   - [什么是 Streaming](./agent_dev/llm/sse/streaming.md)
   - [什么是 SSE](./agent_dev/llm/sse/sse_concept.md)
@@ -127,11 +133,6 @@
     - [Spring AI 实现客户端断流](./agent_dev/llm/sse/cutoff/spring_ai.md)
     - [Python 实现客户端断流](./agent_dev/llm/sse/cutoff/python.md)
   - [重连与恢复](./agent_dev/llm/sse/resume.md)
-
-- [Prompt](./agent_dev/llm/prompt/prompt.md)
-  - [Prompt 模板设计](./agent_dev/llm/prompt/prompt_template/prompt_template.md)
-    - [实现 Prompt 模板设计](./agent_dev/llm/prompt/prompt_template/spring_boot/spring_boot.md)
-      - [PromptTemplate](./agent_dev/llm/prompt/prompt_template/spring_boot/template.md)
 
 <!-- 
 - [Java转AI应用开发(2026)](./v2026/route.md)

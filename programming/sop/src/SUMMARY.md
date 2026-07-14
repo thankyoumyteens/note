@@ -5,4 +5,3 @@
   - [K8s 宿主机端口占用排查](./spring_boot/address_already_in_use.md)
 
 - [FastAPI](./fastapi/fastapi.md)
-  - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./fastapi/ios_bug.md)

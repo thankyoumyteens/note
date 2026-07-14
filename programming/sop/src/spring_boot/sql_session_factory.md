@@ -1,119 +1,116 @@
-# Spring Boot 启动失败 SOP：端口冲突导致容器初始化异常
+# Spring Boot 启动报 `sqlSessionFactory` 销毁异常：排查 XXL-Job 端口冲突
+
+> 适用场景：Spring Boot 启动过程中出现 `BeanCreationNotAllowedException`，同时日志中存在端口占用、Bean 初始化失败或上下文刷新失败。
 
 ## 一、问题现象
 
-Spring Boot 应用启动时抛出 `BeanCreationNotAllowedException`，提示 `sqlSessionFactory` 无法在容器销毁期间创建：
+应用启动失败，日志末尾出现：
 
-```
-org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name ‘sqlSessionFactory’:
+```text
+org.springframework.beans.factory.BeanCreationNotAllowedException:
+Error creating bean with name 'sqlSessionFactory':
 Singleton bean creation not allowed while singletons of this factory are in destruction
 ```
 
-完整日志如下:
+但在该异常之前，日志已经出现真正触发启动失败的异常：
 
+```text
+BeanCreationException: Error creating bean with name 'xxlJobExecutor'
+Caused by: com.xxl.rpc.util.XxlRpcException:
+xxl-rpc provider port[9999] is used.
 ```
-2026-05-28 14:39:37.310 - [] - [main] WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext.()- Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name ’xxlJobExecutor‘ defined in class path resource [cn/hsa/pw/config/XxlJobConfig.class]: Invocation of init method failed; nested exception is com.xxl.rpc.util.XxlRpcException: xxl-rpc provider port[9999] is used. - []
-2026-05-28 14:39:37.322 - [] - [main] INFO  org.springframework.context.annotation.AnnotationConfigApplicationContext.()- Closing FeignContext-ant-hsa-iep-msc-nation: startup date [Thu May 28 14:39:16 CST 2026]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@62360a68 - []
-2026-05-28 14:39:37.323 - [] - [main] WARN  org.springframework.context.annotation.AnnotationConfigApplicationContext.()- Exception thrown from ApplicationListener handling ContextClosedEvent - []
-org.springframework.beans.factory.BeanCreationNotAllowedException: Error creating bean with name ’sqlSessionFactory‘: Singleton bean creation not allowed while singletons of this factory are in destruction (Do not request a bean from a BeanFactory in a destroy method implementation!)
-        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:208) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.event.AbstractApplicationEventMulticaster.retrieveApplicationListeners(AbstractApplicationEventMulticaster.java:239) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.event.AbstractApplicationEventMulticaster.getApplicationListeners(AbstractApplicationEventMulticaster.java:196) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:133) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:404) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:410) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:358) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1013) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:979) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:76) ~[spring-cloud-context-2.0.4.RELEASE.jar!/:2.0.4.RELEASE]
-        at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:256) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:957) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:964) ~[spring-beans-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1061) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564) ~[spring-context-5.0.13.RELEASE.jar!/:5.0.13.RELEASE]
-        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142) ~[spring-boot-2.0.9.RELEASE.jar!/:2.0.9.RELEASE]
-        at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754) ~[spring-boot-2.0.9.RELEASE.jar!/:2.0.9.RELEASE]
-        at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:386) ~[spring-boot-2.0.9.RELEASE.jar!/:2.0.9.RELEASE]
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.0.9.RELEASE.jar!/:2.0.9.RELEASE]
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1242) ~[spring-boot-2.0.9.RELEASE.jar!/:2.0.9.RELEASE]
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1230) ~[spring-boot-2.0.9.RELEASE.jar!/:2.0.9.RELEASE]
-        at cn.hsa.pw.ExampleApplication.main(ExampleApplication.java:38) ~[classes!/:?]
-        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_422]
-        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_422]
-        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_422]
-        at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_422]
-        at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) ~[application.jar:?]
-        at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) ~[application.jar:?]
-        at org.springframework.boot.loader.Launcher.launch(Launcher.java:50) ~[application.jar:?]
-        at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:51) ~[application.jar:?]
-```
-
-—
 
 ## 二、根因分析
 
-| 层级 | 异常 | 性质 |
-|—|—|—|
-| **根因** | `XxlRpcException: xxl-rpc provider port[9999] is used.` | 端口 9999 被占用，XXL-Job executor 初始化失败 |
-| 级联 | `BeanCreationException: Error creating bean with name ‘xxlJobExecutor’` | Bean 创建失败，Spring 取消上下文刷新 |
-| 连带 | `BeanCreationNotAllowedException: ... sqlSessionFactory ...` | 容器销毁期间，某个 `ContextClosedEvent` 监听器尝试获取已销毁的 Bean，属于清理过程中的二次异常 |
+| 层级         | 异常                                                   | 含义                                          |
+| ------------ | ------------------------------------------------------ | --------------------------------------------- |
+| 根因         | `XxlRpcException: xxl-rpc provider port[9999] is used` | XXL-Job executor 监听端口被占用，初始化失败   |
+| 级联异常     | `BeanCreationException: xxlJobExecutor`                | Bean 创建失败，Spring 取消上下文刷新          |
+| 清理阶段异常 | `BeanCreationNotAllowedException: sqlSessionFactory`   | 容器销毁期间，监听器又尝试获取正在销毁的 Bean |
 
-**关键判断依据**：堆栈中 `AbstractApplicationContext.refresh()` 在第 564 行进入 `destroyBeans()`，说明 `refresh()` 内部已在此之前捕获到其他异常，被迫进入清理流程。`BeanCreationNotAllowedException` 永远不是第一现场。
+本案例中，`sqlSessionFactory` 异常发生在 Spring 清理失败上下文的过程中，不是导致本次启动失败的第一现场。
 
-—
+> 不要机械地把“第一条 WARN/ERROR”当作根因。应从上下文初始化失败的首个异常链开始，沿 `Caused by` 追到最内层，再结合此前日志确认触发点。
 
-## 三、排查思路
+## 三、排查流程
 
-```
-启动失败
-  │
-  └─→ 1. 看第一条 WARN/ERROR（不是最后一条）
-        │  日志中第一个异常才是根因，后面的通常是清理过程的连带错误
-        │
-        └─→ 2. 定位根因异常类型
-              │
-              ├─ XxlRpcException / port is used → 端口冲突
-              ├─ Connection refused / timeout    → 数据库/中间件不可达
-              ├─ ClassNotFoundException         → 依赖缺失
-              └─ ...                            → 根据具体异常处理
-                    │
-                    └─→ 3. 验证端口占用情况
-                          ss -tlnp | grep <端口>
-                          lsof -i :<端口>
-                          netstat -anp | grep <端口>
-```
+### Step 1：定位首次上下文初始化失败
 
-—
-
-## 四、解决方案
-
-**第一步**：找到 XXL-Job 端口配置位置。
+从启动日志中搜索以下关键字：
 
 ```bash
-grep -r “9999” . 2>/dev/null
-grep -r “xxl” . 2>/dev/null | grep -i port
+grep -nE "Application run failed|Exception encountered during context initialization|BeanCreationException|Caused by:" <application.log>
 ```
 
-**第二步**：修改配置，更换为未占用的端口。
+重点查看：
+
+1. Spring 开始关闭上下文之前出现的异常。
+2. 完整的 `Caused by` 链。
+3. 失败 Bean 的初始化方法及其依赖资源。
+
+### Step 2：确认端口是否正在监听
+
+在应用实际运行的宿主机或对应网络命名空间内执行：
+
+```bash
+PORT=9999
+sudo ss -ltnp "sport = :${PORT}"
+```
+
+如果当前环境的 `ss` 不支持过滤表达式，可使用：
+
+```bash
+sudo ss -ltnp | grep -E ":9999([[:space:]]|$)"
+sudo lsof -nP -iTCP:9999 -sTCP:LISTEN
+```
+
+记录占用进程的 PID、启动命令、所属容器或服务，不要在确认身份前终止进程。
+
+### Step 3：确认端口配置来源
+
+在应用源码或部署配置目录执行：
+
+```bash
+grep -RIn --exclude-dir=.git "9999" .
+grep -RIn --exclude-dir=.git -E "xxl.*port|executor.*port" .
+```
+
+同时检查环境变量、配置中心、启动参数和 Kubernetes manifest，避免只修改仓库内配置却被外部配置覆盖。
+
+### Step 4：选择处置方式
+
+根据端口占用者选择：
+
+| 场景                             | 处置方式                                               |
+| -------------------------------- | ------------------------------------------------------ |
+| 合法运行实例正在使用端口         | 不终止对方；调整当前实例端口或调度位置                 |
+| 同一应用的旧实例或残留容器       | 通过部署平台正常下线并清理旧实例                       |
+| 误启动的本机进程                 | 确认业务影响后优先发送 `SIGTERM`，必要时再升级处理     |
+| 多副本被配置为争用同一宿主机端口 | 调整网络、端口或调度策略，不能只在单次部署中临时换端口 |
+
+如果决定修改 XXL-Job executor 端口，必须同步检查服务发现、调度中心、容器端口、`hostPort`、防火墙和健康检查等依赖配置。
+
+示例配置仅用于说明配置位置，端口值应根据实际环境确定：
 
 ```yaml
-# application.yml 或对应配置文件
 xxl:
   job:
     executor:
-      port: 9998 # 换一个未被占用的端口
+      port: 9998
 ```
 
-**第三步**：重新打包部署，验证启动成功。
+## 四、验证
 
-—
+重新部署后至少验证：
 
-## 五、通用故障排查口诀
+1. 新端口处于监听状态，且 PID/容器身份正确。
+2. 日志中不再出现 `port is used` 和上下文初始化失败。
+3. 应用健康检查通过。
+4. XXL-Job executor 已使用正确地址和端口完成注册。
+5. 调度一次低风险测试任务，确认回调链路正常。
 
-> **第一个异常是根因，最后一个往往是误导。**  
-> 启动失败的日志从第一条 WARN/ERROR 读起，不要从堆栈底部往上读。
+## 五、排查要点
+
+> 从“上下文为何开始销毁”向前追，而不是只处理销毁阶段最后打印的异常。
+
+`BeanCreationNotAllowedException` 可能是重要问题，但在启动失败场景中，应先确认它是否只是清理阶段的连带异常。

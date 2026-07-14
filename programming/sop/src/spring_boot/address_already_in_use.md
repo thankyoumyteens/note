@@ -1,4 +1,4 @@
-# K8s 宿主机端口占用排查 SOP
+# K8s Pod 启动报 `Address already in use`：排查节点与容器端口占用
 
 > 适用场景:K8s Pod 内应用启动报 `java.net.BindException: Address already in use` / `Protocol handler start failed`,端口被占用无法启动。
 > 本 SOP 基于 2026-07-13 一次真实排查整理(PID 2756882 的孤儿 java 进程占用 hostNetwork 的 8085)。
