@@ -16,7 +16,8 @@
     }
   ],
   "temperature": 0.2,
-  "max_tokens": 1000
+  "max_tokens": 1000,
+  "stream": false
 }
 ```
 
@@ -26,6 +27,7 @@
 - messages = 给模型看的上下文
 - temperature = 回答随机性 / 稳定性
 - max_tokens = 最多生成多少 token
+- stream = 一次性返回完整响应，还是边生成边返回
 
 ## model：选择哪个模型
 
@@ -228,3 +230,67 @@ llm:
   "max_tokens": 1000
 }
 ```
+
+## stream：是否使用流式响应
+
+`stream` 决定模型响应是一次性返回，还是在生成过程中分批返回。
+
+### stream=false
+
+`stream=false` 表示使用非流式响应：
+
+1. 客户端发送请求。
+2. Provider 等模型生成完成。
+3. Provider 返回一个完整的响应对象。
+4. 客户端从完整响应中读取文本、停止原因和 Token usage。
+
+这种模式的响应边界清晰，可以直接映射为普通的统一响应 DTO，适合先学习模型调用、参数映射、错误处理、重试和 Provider 降级。
+
+阶段一的示例以非流式调用为主，因此建议显式使用：
+
+```json
+{
+  "stream": false
+}
+```
+
+### stream=true
+
+`stream=true` 表示使用流式响应：
+
+1. 客户端发送请求。
+2. Provider 在生成过程中持续返回事件或数据块。
+3. 客户端逐个解析并处理这些事件。
+4. 收到结束事件后，本次响应才算完成。
+
+```json
+{
+  "stream": true
+}
+```
+
+流式响应不是一个普通响应对象，而是一段随时间到达的事件序列。不同事件可能分别携带：
+
+- 增量文本
+- 响应标识和模型信息
+- 停止原因
+- Token usage
+- 错误信息
+- 结束标记
+
+因此，`stream=true` 的响应不能直接反序列化为非流式调用使用的普通响应 DTO。客户端需要持续读取事件，并根据 Provider 的事件协议提取和组合信息。
+
+## 两种模式的响应结构差异
+
+| 对比项 | `stream=false` | `stream=true` |
+| --- | --- | --- |
+| 返回方式 | 生成完成后一次性返回 | 生成过程中分批返回 |
+| 响应结构 | 一个完整响应对象 | 多个事件或数据块组成的序列 |
+| 文本内容 | 通常位于一个完整字段中 | 分散在多个增量事件中 |
+| 停止原因 | 通常随完整响应返回 | 通常在接近结束的事件中返回 |
+| Token usage | 通常从完整响应读取 | 可能只在结束阶段返回，也可能需要额外配置 |
+| 客户端处理 | 读取并映射一个 DTO | 持续解析、转换和转发事件 |
+
+`stream=true` 只是表示上游模型 API 使用流式响应，不等同于 SSE。Streaming 描述数据逐步返回的方式，SSE 是服务端向客户端推送事件的一种传输格式。
+
+阶段一只需要理解 `stream` 参数和两种响应结构的差异。具体的 OpenAI-compatible、Responses API、Anthropic Messages API 事件格式，以及 Spring Boot + WebClient、Spring AI、Python 的流式实现，统一放在阶段四的[什么是 Streaming](../sse/streaming.md)及其后续章节中。
