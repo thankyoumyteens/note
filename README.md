@@ -266,6 +266,12 @@ cd base/english/
 mdbook build
 rm -rf ${nginx_path}/english/
 cp -r book/ ${nginx_path}/english/
+
+cd "${workdir}/note"
+cd programming/sop/
+mdbook build
+rm -rf ${nginx_path}/sop/
+cp -r book/ ${nginx_path}/sop/
 ```
 
 ### 4. 运行脚本

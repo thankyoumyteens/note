@@ -114,6 +114,3 @@
     - [因不可抗力中断后让 AI 继续执行任务](./work_with_ai/lesson11c/prompt2.md)
   - [第 12 课：Hooks 自动化：测试、格式化、提醒](./work_with_ai/lesson12/lesson12.md)
     - [本课推荐 Prompt](./work_with_ai/lesson12/prompt.md)
-
-- [SOP](./sop/sop.md)
-  - [iOS 端静默断网抢救指南(FastAPI + Nginx 架构专属)](./sop/ios_bug.md)
