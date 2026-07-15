@@ -1,31 +1,5 @@
 # Spring AI
 
-用 Spring AI 后，你不需要自己写 `WebClient.post()`、DTO、响应解析。
+Spring AI 通过 `ChatClient` 和 `ChatModel` 统一不同 Provider 的常见模型调用，减少业务代码对底层 HTTP 协议和 SDK 的依赖。
 
-整体变成：
-
-```text
-                    ┌──────────────┐
-                    │  Controller  │
-                    └──────┬───────┘
-                           │
-                           ▼
-                    ┌──────────────┐
-                    │AiChatService │
-                    └──────┬───────┘
-                           │
-                           ▼
-                    ┌──────────────┐
-                    │  ChatClient  │
-                    └──────┬───────┘
-                           │
-             ┌─────────────┼─────────────┐
-             │             │             │
-             ▼             ▼             ▼
-   ┌────────────────┐ ┌────────────┐ ┌──────────────┐
-   │ OpenAI Model   │ │Claude Model│ │OpenAI兼容模型 │
-   └───────┬────────┘ └─────┬──────┘ └──────┬───────┘
-           │                │               │
-           ▼                ▼               ▼
-      OpenAI API       Claude API     Qwen / DeepSeek API
-```
+统一抽象不保证覆盖 Provider 的全部原生 API。当前项目使用 Spring AI 1.1.6，OpenAI Responses API 需要改用 WebClient，详见[调用 OpenAI Responses API](./responses_api.md)。
