@@ -27,7 +27,7 @@ public final class WebClientFactory {
         HttpClient httpClient = HttpClient.create()
                 // TCP 建连超时。
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectTimeoutMillis)
-                // 等待 provider 响应的超时时间。
+                // 连接建立后，等待或读取 provider 响应的超时时间。
                 .responseTimeout(Duration.ofSeconds(responseTimeoutSeconds));
 
         return WebClient.builder()

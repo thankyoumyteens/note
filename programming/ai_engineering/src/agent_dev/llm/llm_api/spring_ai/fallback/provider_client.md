@@ -97,6 +97,7 @@ public class SpringAiProviderClient implements LlmProviderClient {
 
     private UnifiedChatResponse callOnceWithTimeout(UnifiedChatRequest request) {
         try {
+            // 单次 provider 尝试的请求级总超时。
             return CompletableFuture
                     .supplyAsync(() -> doChat(request), executorService)
                     .orTimeout(requestTimeout.toMillis(), TimeUnit.MILLISECONDS)

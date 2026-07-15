@@ -235,7 +235,7 @@ public class OpenAiCompatibleProviderClient implements LlmProviderClient {
                 )
                 // 将 provider 原始响应反序列化为 OpenAiChatResponse。
                 .bodyToMono(OpenAiChatResponse.class)
-                // 整个 Mono 调用级超时，作为外层兜底。
+                // 单次 provider 尝试的请求级总超时。
                 .timeout(Duration.ofSeconds(requestTimeoutSeconds))
                 // 只重试临时错误，例如超时、网络错误、429、5xx。
                 .retryWhen(
