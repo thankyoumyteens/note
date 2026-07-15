@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -280,11 +281,8 @@ public class SpringAiProviderClient implements LlmProviderClient {
     }
 
     private void sleepBeforeNextRetry(int attempt) {
-        long millis = switch (attempt) {
-            case 0 -> 500L;
-            case 1 -> 1000L;
-            default -> 2000L;
-        };
+        long baseMillis = Math.min(500L << Math.min(attempt, 3), 3000L);
+        long millis = (long) (baseMillis * ThreadLocalRandom.current().nextDouble(0.8, 1.2));
 
         try {
             Thread.sleep(millis);

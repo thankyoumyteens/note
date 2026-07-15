@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 
 from anthropic import AsyncAnthropic, APIError as AnthropicAPIError
 from openai import APIConnectionError, APIError, APITimeoutError, AsyncOpenAI
-from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_random_exponential
 
 from llm_api_demo.exceptions import LlmProviderException
 from llm_api_demo.schemas import (
@@ -108,7 +108,7 @@ class OpenAiResponsesProviderClient(LlmProviderClient):
         # max_retries 表示失败后额外重试几次，所以总尝试次数要 + 1。
         stop=stop_after_attempt(settings.max_retries + 1),
         # 指数退避可以避免在 provider 限流或短暂抖动时立刻打满请求。
-        wait=wait_exponential(multiplier=0.5, min=0.5, max=4),
+        wait=wait_random_exponential(multiplier=0.5, max=3),
         # 最后一次仍失败时，直接抛出原异常交给 fallback router 判断是否切 provider。
         reraise=True,
     )
@@ -184,7 +184,7 @@ class DeepSeekProviderClient(LlmProviderClient):
         # DeepSeek 的 429 / 5xx / timeout 会先在当前 provider 内部重试。
         retry=retry_if_exception(should_retry_exception),
         stop=stop_after_attempt(settings.max_retries + 1),
-        wait=wait_exponential(multiplier=0.5, min=0.5, max=4),
+        wait=wait_random_exponential(multiplier=0.5, max=3),
         reraise=True,
     )
     async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
@@ -258,7 +258,7 @@ class AnthropicProviderClient(LlmProviderClient):
         # Anthropic 临时错误也复用同一套重试判断。
         retry=retry_if_exception(should_retry_exception),
         stop=stop_after_attempt(settings.max_retries + 1),
-        wait=wait_exponential(multiplier=0.5, min=0.5, max=4),
+        wait=wait_random_exponential(multiplier=0.5, max=3),
         reraise=True,
     )
     async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
