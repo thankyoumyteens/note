@@ -31,7 +31,7 @@ public class LlmController {
 ## 测试请求
 
 ```bash
-curl -s -X POST "http://localhost:8080/api/llm/chat" \
+curl -sS -X POST "http://localhost:8080/api/llm/chat" \
   -H "Content-Type: application/json" \
   -d '{
     "system": "你是一个严谨的 Java 后端助手。",

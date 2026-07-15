@@ -299,8 +299,12 @@ class AnthropicProviderClient(LlmProviderClient):
                 metadata={"raw_stop_reason": response.stop_reason},
             )
         except AnthropicAPIError as exc:
-            # Anthropic SDK 的异常也统一转换成 LlmProviderException，
-            # 让 fallback router 不需要理解不同 SDK 的异常类型。
+            # HTTP 异常保留原状态码；超时和网络错误没有状态码，统一使用 -1。
             status_code = getattr(exc, "status_code", -1) or -1
-            raise LlmProviderException(self.provider, status_code, str(exc)) from exc
+            raise LlmProviderException(
+                self.provider,
+                status_code,
+                str(exc),
+                str(getattr(exc, "response", "")),
+            ) from exc
 ```

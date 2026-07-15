@@ -63,6 +63,7 @@
       - [调用 OpenAI-compatible API](./agent_dev/llm/llm_api/python/api.md)
       - [调用 OpenAI Responses API](./agent_dev/llm/llm_api/python/responses_api.md)
       - [调用 Anthropic Messages API](./agent_dev/llm/llm_api/python/messages_api.md)
+      - [错误处理](./agent_dev/llm/llm_api/python/error_handler.md)
       - [重试和降级](./agent_dev/llm/llm_api/python/fallback/fallback.md)
         - [安装依赖](./agent_dev/llm/llm_api/python/fallback/depend.md)
         - [自定义异常](./agent_dev/llm/llm_api/python/fallback/ex.md)

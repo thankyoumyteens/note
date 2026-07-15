@@ -57,7 +57,7 @@ uv run uvicorn llm_api_demo.main:app --reload --port 8000
 ## 测试
 
 ```sh
-curl -X POST http://127.0.0.1:8000/api/ai/chat \
+curl -sS -X POST http://127.0.0.1:8000/api/ai/chat \
   -H 'Content-Type: application/json' \
   -d '{
     "system": "You are a helpful assistant.",

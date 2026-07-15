@@ -23,12 +23,11 @@ class ProviderFallbackRouter:
         for client in self.clients:
             try:
                 return await client.chat(request)
-            except Exception as exc:
-                provider_exception = self._to_provider_exception(client.provider, exc)
-                failures.append(provider_exception)
+            except LlmProviderException as exc:
+                failures.append(exc)
 
-                if not self._should_fallback(provider_exception):
-                    raise provider_exception from exc
+                if not self._should_fallback(exc):
+                    raise
 
         raise AllProvidersFailedException(failures)
 
@@ -37,16 +36,4 @@ class ProviderFallbackRouter:
         """只对限流、5xx、超时、网络错误降级。"""
         return exc.status_code in {429, 500, 502, 503, 504, -1}
 
-    @staticmethod
-    def _to_provider_exception(provider: str, exc: Exception) -> LlmProviderException:
-        """把未知异常统一包装成 LlmProviderException。"""
-        if isinstance(exc, LlmProviderException):
-            return exc
-
-        return LlmProviderException(
-            provider=provider,
-            status_code=-1,
-            message=str(exc),
-            response_body="",
-        )
 ```
