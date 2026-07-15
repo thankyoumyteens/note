@@ -11,7 +11,7 @@
     - [LLM 擅长什么](./agent_dev/llm/llm_info/llm_advantage.md)
     - [LLM 不擅长什么](./agent_dev/llm/llm_info/llm_disadvantage.md)
     - [对 Java 后端来说，应该怎么理解 LLM](./agent_dev/llm/llm_info/llm_with_java.md)
-  - [GPT、Claude、Llama 等主流模型差异](./agent_dev/llm/llm_compare/llm_compare.md)
+  - [模型与 Provider 的差异和选型](./agent_dev/llm/llm_compare/llm_compare.md)
   - [大模型 API 调用](./agent_dev/llm/llm_api/llm_api.md)
     - [API 类型](./agent_dev/llm/llm_api/llm_api_type.md)
     - [请求参数说明](./agent_dev/llm/llm_api/params.md)
