@@ -11,17 +11,21 @@ import com.example.llm.dto.TokenUsage;
 import com.example.llm.dto.UnifiedChatMessage;
 import com.example.llm.dto.UnifiedChatRequest;
 import com.example.llm.dto.UnifiedChatResponse;
+import com.example.llm.dto.UnifiedStopReason;
 import com.example.llm.exceptions.LlmProviderException;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.metadata.EmptyUsage;
+import org.springframework.ai.chat.metadata.Usage;
 import org.springframework.ai.chat.model.ChatResponse;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
@@ -110,19 +114,73 @@ public class SpringAiProviderClient implements LlmProviderClient {
                 .chatResponse();
 
         String content = extractContent(response);
+        String rawStopReason = extractStopReason(response);
 
         return new UnifiedChatResponse(
                 llmProvider,
                 model,
                 content,
-                null,
-                TokenUsage.empty(),
+                toStopReason(rawStopReason),
+                toTokenUsage(response),
                 Map.of(
+                        "rawStopReason", rawStopReason == null ? "" : rawStopReason,
                         "springAiMetadata", response == null || response.getMetadata() == null
                                 ? ""
                                 : response.getMetadata().toString()
                 )
         );
+    }
+
+    private String extractStopReason(ChatResponse response) {
+        if (response == null
+                || response.getResult() == null
+                || response.getResult().getMetadata() == null
+                || response.getResult().getMetadata().getFinishReason() == null
+                || response.getResult().getMetadata().getFinishReason().isBlank()) {
+            return null;
+        }
+
+        return response.getResult().getMetadata().getFinishReason();
+    }
+
+    private UnifiedStopReason toStopReason(String reason) {
+        if (reason == null) {
+            return null;
+        }
+
+        return switch (reason.toLowerCase(Locale.ROOT)) {
+            case "stop" -> UnifiedStopReason.STOP;
+            case "length" -> UnifiedStopReason.LENGTH;
+            case "tool_calls", "function_call" -> UnifiedStopReason.TOOL_CALLS;
+            case "content_filter" -> UnifiedStopReason.CONTENT_FILTER;
+            default -> UnifiedStopReason.OTHER;
+        };
+    }
+
+    /**
+     * 从 Spring AI ChatResponse metadata 提取统一 Token 用量。
+     */
+    private TokenUsage toTokenUsage(ChatResponse response) {
+        if (response == null || response.getMetadata() == null) {
+            return TokenUsage.empty();
+        }
+
+        Usage usage = response.getMetadata().getUsage();
+
+        // EmptyUsage 表示 Provider 没有返回 usage，不能当成真实的零 Token。
+        if (usage == null || usage instanceof EmptyUsage) {
+            return TokenUsage.empty();
+        }
+
+        Integer inputTokens = usage.getPromptTokens();
+        Integer outputTokens = usage.getCompletionTokens();
+        Integer totalTokens = usage.getTotalTokens();
+
+        if (totalTokens == null && inputTokens != null && outputTokens != null) {
+            totalTokens = inputTokens + outputTokens;
+        }
+
+        return new TokenUsage(inputTokens, outputTokens, totalTokens);
     }
 
     private List<Message> toSpringMessages(UnifiedChatRequest request) {
@@ -252,3 +310,11 @@ public class SpringAiProviderClient implements LlmProviderClient {
     }
 }
 ```
+
+## 与另外两种实现的区别
+
+- WebClient 从 Provider 原始 JSON 的 `usage` 字段映射 Token。
+- Spring AI 从 generation metadata 读取停止原因，从 response metadata 读取 `Usage`。
+- Python SDK 从响应对象的 `usage` 属性映射 Token。
+
+三种实现最终都转换为统一 `TokenUsage`；Provider 未返回 usage 时字段为 `null`，真实零 Token 保留为 `0`。
