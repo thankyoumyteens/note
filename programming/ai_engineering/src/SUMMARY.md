@@ -80,6 +80,8 @@
       - [实现 Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/spring_boot.md)
         - [PromptTemplate](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/template.md)
 
+- [最小可用 Agent](./agent_dev/llm/agent/agent.md)
+
 - [Streaming / SSE 与统一响应协议](./agent_dev/llm/sse/sse.md)
   - [什么是 Streaming](./agent_dev/llm/sse/streaming.md)
   - [什么是 SSE](./agent_dev/llm/sse/sse_concept.md)
