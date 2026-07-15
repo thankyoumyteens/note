@@ -18,8 +18,30 @@ from llm_api_demo.schemas import (
     TokenUsage,
     UnifiedChatRequest,
     UnifiedChatResponse,
+    UnifiedStopReason,
 )
 from llm_api_demo.settings import settings
+
+
+def to_unified_stop_reason(reason: str | None) -> UnifiedStopReason | None:
+    """将 Provider 原始停止原因映射为统一值。"""
+    if reason is None:
+        return None
+
+    mapping = {
+        "stop": UnifiedStopReason.STOP,
+        "end_turn": UnifiedStopReason.STOP,
+        "stop_sequence": UnifiedStopReason.STOP,
+        "completed": UnifiedStopReason.STOP,
+        "length": UnifiedStopReason.LENGTH,
+        "max_tokens": UnifiedStopReason.LENGTH,
+        "max_output_tokens": UnifiedStopReason.LENGTH,
+        "tool_calls": UnifiedStopReason.TOOL_CALLS,
+        "tool_use": UnifiedStopReason.TOOL_CALLS,
+        "content_filter": UnifiedStopReason.CONTENT_FILTER,
+        "refusal": UnifiedStopReason.CONTENT_FILTER,
+    }
+    return mapping.get(reason, UnifiedStopReason.OTHER)
 
 
 class LlmProviderClient(ABC):
@@ -111,9 +133,18 @@ class OpenAiResponsesProviderClient(LlmProviderClient):
             # 这样 router 和上层业务不需要感知 provider 的原始返回结构。
             return UnifiedChatResponse(
                 provider=LlmProvider.OPENAI,
-                model=settings.openai_model,
+                model=response.model or settings.openai_model,
                 content=response.output_text,
-                metadata={"response_id": response.id},
+                stop_reason=to_unified_stop_reason(response.status),
+                usage=TokenUsage(
+                    input_tokens=response.usage.input_tokens if response.usage else None,
+                    output_tokens=response.usage.output_tokens if response.usage else None,
+                    total_tokens=response.usage.total_tokens if response.usage else None,
+                ),
+                metadata={
+                    "response_id": response.id,
+                    "raw_stop_reason": response.status,
+                },
             )
         except (APITimeoutError, APIConnectionError) as exc:
             # 超时、连接失败这类错误没有稳定的 HTTP 状态码，用 -1 表示本地调用失败。
@@ -180,14 +211,15 @@ class DeepSeekProviderClient(LlmProviderClient):
 
             return UnifiedChatResponse(
                 provider=LlmProvider.DEEPSEEK,
-                model=settings.deepseek_model,
+                model=response.model or settings.deepseek_model,
                 content=content,
-                stop_reason=response.choices[0].finish_reason,
+                stop_reason=to_unified_stop_reason(response.choices[0].finish_reason),
                 usage=TokenUsage(
                     input_tokens=usage.prompt_tokens if usage else None,
                     output_tokens=usage.completion_tokens if usage else None,
                     total_tokens=usage.total_tokens if usage else None,
                 ),
+                metadata={"raw_stop_reason": response.choices[0].finish_reason},
             )
         except (APITimeoutError, APIConnectionError) as exc:
             # 本地网络或超时错误统一用 -1，后续 router 会把它视为可降级错误。
@@ -256,14 +288,15 @@ class AnthropicProviderClient(LlmProviderClient):
 
             return UnifiedChatResponse(
                 provider=LlmProvider.ANTHROPIC,
-                model=settings.anthropic_model,
+                model=response.model or settings.anthropic_model,
                 content="".join(text_parts),
-                stop_reason=response.stop_reason,
+                stop_reason=to_unified_stop_reason(response.stop_reason),
                 usage=TokenUsage(
                     input_tokens=response.usage.input_tokens,
                     output_tokens=response.usage.output_tokens,
                     total_tokens=response.usage.input_tokens + response.usage.output_tokens,
                 ),
+                metadata={"raw_stop_reason": response.stop_reason},
             )
         except AnthropicAPIError as exc:
             # Anthropic SDK 的异常也统一转换成 LlmProviderException，

@@ -7,8 +7,8 @@ package com.example.llm.dto;
 
 public enum LlmProvider {
     OPENAI,
-    ANTHROPIC,
-    DEEPSEEK
+    DEEPSEEK,
+    ANTHROPIC
 }
 ```
 
@@ -18,6 +18,18 @@ package com.example.llm.dto;
 public enum ChatRole {
     USER,
     ASSISTANT
+}
+```
+
+```java
+package com.example.llm.dto;
+
+public enum UnifiedStopReason {
+    STOP,
+    LENGTH,
+    TOOL_CALLS,
+    CONTENT_FILTER,
+    OTHER
 }
 ```
 
@@ -75,6 +87,7 @@ public record UnifiedChatRequest(
 ) {
 
     public UnifiedChatRequest {
+        system = system == null ? "" : system;
         messages = messages == null ? List.of() : List.copyOf(messages);
         metadata = metadata == null ? Map.of() : Map.copyOf(metadata);
         options = options == null ? LlmGenerationOptions.defaultOptions() : options;
@@ -151,7 +164,7 @@ public record UnifiedChatResponse(
         LlmProvider provider, // 实际命中的模型服务提供方。
         String model, // 实际使用的模型名称。
         String content, // 模型返回的最终文本内容。
-        String stopReason, // 模型停止生成的原因。
+        UnifiedStopReason stopReason, // 统一停止原因；provider 未返回时为 null。
         TokenUsage usage, // 本次调用的 token 用量信息。
         Map<String, Object> metadata // 扩展元数据，用于存放响应 id、原始状态、provider 特有字段等信息。
 ) {
@@ -161,10 +174,15 @@ public record UnifiedChatResponse(
             throw new IllegalArgumentException("provider must not be null");
         }
 
+        if (model == null || model.isBlank()) {
+            throw new IllegalArgumentException("model must not be blank");
+        }
+
         if (content == null) {
             content = "";
         }
 
+        usage = usage == null ? TokenUsage.empty() : usage;
         metadata = metadata == null ? Map.of() : Map.copyOf(metadata);
     }
 }

@@ -21,7 +21,7 @@ public class LlmProviderException extends RuntimeException {
         super(message, cause);
         this.provider = provider;
         this.statusCode = statusCode;
-        this.responseBody = responseBody;
+        this.responseBody = responseBody == null ? "" : responseBody;
     }
 
     public LlmProviderException(
@@ -60,7 +60,7 @@ public class AllProvidersFailedException extends RuntimeException {
 
     public AllProvidersFailedException(List<LlmProviderException> failures) {
         super("All LLM providers failed");
-        this.failures = failures;
+        this.failures = List.copyOf(failures);
     }
 
     public List<LlmProviderException> failures() {

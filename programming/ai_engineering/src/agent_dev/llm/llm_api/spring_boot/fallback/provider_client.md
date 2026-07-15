@@ -337,12 +337,26 @@ public class OpenAiCompatibleProviderClient implements LlmProviderClient {
 
         return new UnifiedChatResponse(
                 toLlmProvider(),
-                response.model(),
+                response.model() == null || response.model().isBlank() ? model : response.model(),
                 response.firstText(),
-                response.firstFinishReason(),
+                toStopReason(response.firstFinishReason()),
                 toTokenUsage(response.usage()),
                 toMetadata(response)
         );
+    }
+
+    private UnifiedStopReason toStopReason(String reason) {
+        if (reason == null) {
+            return null;
+        }
+
+        return switch (reason) {
+            case "stop" -> UnifiedStopReason.STOP;
+            case "length" -> UnifiedStopReason.LENGTH;
+            case "tool_calls" -> UnifiedStopReason.TOOL_CALLS;
+            case "content_filter" -> UnifiedStopReason.CONTENT_FILTER;
+            default -> UnifiedStopReason.OTHER;
+        };
     }
 
     /**
@@ -392,6 +406,7 @@ public class OpenAiCompatibleProviderClient implements LlmProviderClient {
         putIfNotNull(metadata, "object", response.object());
         putIfNotNull(metadata, "created", response.created());
         putIfNotNull(metadata, "systemFingerprint", response.systemFingerprint());
+        putIfNotNull(metadata, "rawStopReason", response.firstFinishReason());
 
         return metadata;
     }

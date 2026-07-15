@@ -3,7 +3,7 @@
 这是核心类：实现 timeout + retry + Spring AI 调用 + 异常归一化，openaiChatClient、deepseekChatClient 等 bean 都会通过它调用大模型接口。
 
 ```java
-package com.example.llm.client;
+package com.example.llm.provider;
 
 import com.example.llm.dto.ChatRole;
 import com.example.llm.dto.LlmProvider;
@@ -11,6 +11,7 @@ import com.example.llm.dto.TokenUsage;
 import com.example.llm.dto.UnifiedChatMessage;
 import com.example.llm.dto.UnifiedChatRequest;
 import com.example.llm.dto.UnifiedChatResponse;
+import com.example.llm.exceptions.LlmProviderException;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
@@ -117,7 +118,6 @@ public class SpringAiProviderClient implements LlmProviderClient {
                 null,
                 TokenUsage.empty(),
                 Map.of(
-                        "provider", provider,
                         "springAiMetadata", response == null || response.getMetadata() == null
                                 ? ""
                                 : response.getMetadata().toString()

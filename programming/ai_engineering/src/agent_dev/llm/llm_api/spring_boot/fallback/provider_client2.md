@@ -391,12 +391,25 @@ public class OpenAiResponsesProviderClient implements LlmProviderClient {
 
         return new UnifiedChatResponse(
                 toLlmProvider(),
-                response.model(),
+                response.model() == null || response.model().isBlank() ? model : response.model(),
                 response.firstText(),
-                response.firstFinishReason(),
+                toStopReason(response.firstFinishReason()),
                 toTokenUsage(response.usage()),
                 toMetadata(response)
         );
+    }
+
+    private UnifiedStopReason toStopReason(String reason) {
+        if (reason == null) {
+            return null;
+        }
+
+        return switch (reason) {
+            case "completed" -> UnifiedStopReason.STOP;
+            case "max_output_tokens" -> UnifiedStopReason.LENGTH;
+            case "content_filter" -> UnifiedStopReason.CONTENT_FILTER;
+            default -> UnifiedStopReason.OTHER;
+        };
     }
 
     /**

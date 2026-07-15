@@ -122,6 +122,7 @@ import com.example.llm.dto.TokenUsage;
 import com.example.llm.dto.UnifiedChatMessage;
 import com.example.llm.dto.UnifiedChatRequest;
 import com.example.llm.dto.UnifiedChatResponse;
+import com.example.llm.dto.UnifiedStopReason;
 import com.example.llm.dto.anthropic.AnthropicChatRequest;
 import com.example.llm.dto.anthropic.AnthropicChatResponse;
 import org.springframework.http.HttpHeaders;
@@ -284,12 +285,26 @@ public class AnthropicProviderClient implements LlmProviderClient {
 
         return new UnifiedChatResponse(
                 LlmProvider.ANTHROPIC,
-                response.model(),
+                response.model() == null || response.model().isBlank() ? model : response.model(),
                 response.firstText(),
-                response.stopReason(),
+                toStopReason(response.stopReason()),
                 toTokenUsage(response.usage()),
                 toMetadata(response)
         );
+    }
+
+    private UnifiedStopReason toStopReason(String reason) {
+        if (reason == null) {
+            return null;
+        }
+
+        return switch (reason) {
+            case "end_turn", "stop_sequence" -> UnifiedStopReason.STOP;
+            case "max_tokens" -> UnifiedStopReason.LENGTH;
+            case "tool_use" -> UnifiedStopReason.TOOL_CALLS;
+            case "refusal" -> UnifiedStopReason.CONTENT_FILTER;
+            default -> UnifiedStopReason.OTHER;
+        };
     }
 
     /**
@@ -317,6 +332,7 @@ public class AnthropicProviderClient implements LlmProviderClient {
         putIfNotNull(metadata, "type", response.type());
         putIfNotNull(metadata, "role", response.role());
         putIfNotNull(metadata, "stopSequence", response.stopSequence());
+        putIfNotNull(metadata, "rawStopReason", response.stopReason());
 
         return metadata;
     }

@@ -18,6 +18,7 @@
     - [返回格式说明](./agent_dev/llm/llm_api/resp.md)
     - [system / user / assistant 消息结构](./agent_dev/llm/llm_api/message.md)
     - [API Key 配置与安全管理](./agent_dev/llm/llm_api/api_key.md)
+    - [统一调用契约](./agent_dev/llm/llm_api/unified_contract.md)
     - [统一 ProviderClient](./agent_dev/llm/llm_api/provider_client.md)
     - [WebClient](./agent_dev/llm/llm_api/spring_boot/spring_boot.md)
       - [调用 OpenAI-compatible API](./agent_dev/llm/llm_api/spring_boot/api/api.md)

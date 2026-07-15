@@ -25,6 +25,6 @@ class AllProvidersFailedException(Exception):
     """所有 provider 都失败。"""
 
     def __init__(self, failures: list[LlmProviderException]) -> None:
-        self.failures = failures  # 每个 provider 的失败原因。
+        self.failures = list(failures)  # 按实际调用顺序保存失败原因。
         super().__init__("All LLM providers failed")
 ```
