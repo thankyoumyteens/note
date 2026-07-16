@@ -166,8 +166,21 @@ public record UnifiedChatResponse(
         String content, // 模型返回的最终文本内容。
         UnifiedStopReason stopReason, // 统一停止原因；provider 未返回时为 null。
         TokenUsage usage, // 本次调用的 token 用量信息。
+        Long providerLatencyMs, // 最终成功 ProviderClient 的完整耗时。
+        Long totalLatencyMs, // 整个 Router 调用耗时。
         Map<String, Object> metadata // 扩展元数据，用于存放响应 id、原始状态、provider 特有字段等信息。
 ) {
+
+    public UnifiedChatResponse(
+            LlmProvider provider,
+            String model,
+            String content,
+            UnifiedStopReason stopReason,
+            TokenUsage usage,
+            Map<String, Object> metadata
+    ) {
+        this(provider, model, content, stopReason, usage, null, null, metadata);
+    }
 
     public UnifiedChatResponse {
         if (provider == null) {
@@ -184,6 +197,19 @@ public record UnifiedChatResponse(
 
         usage = usage == null ? TokenUsage.empty() : usage;
         metadata = metadata == null ? Map.of() : Map.copyOf(metadata);
+    }
+
+    public UnifiedChatResponse withLatency(long providerLatencyMs, long totalLatencyMs) {
+        return new UnifiedChatResponse(
+                provider,
+                model,
+                content,
+                stopReason,
+                usage,
+                providerLatencyMs,
+                totalLatencyMs,
+                metadata
+        );
     }
 }
 ```

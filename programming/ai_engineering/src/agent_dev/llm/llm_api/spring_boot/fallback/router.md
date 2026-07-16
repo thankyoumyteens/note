@@ -32,7 +32,13 @@ public class ProviderFallbackRouter {
      * 从第 0 个 provider 开始尝试，并记录每个失败的 provider 异常。
      */
     public Mono<UnifiedChatResponse> chat(UnifiedChatRequest request) {
-        return callByIndex(request, 0, new ArrayList<>());
+        return callByIndex(request, 0, new ArrayList<>())
+                // 统计 Router 从订阅到返回最终响应的总耗时，结果为 (耗时毫秒, 原始响应)。
+                .elapsed()
+                .map(result -> result.getT2().withLatency(
+                        result.getT2().providerLatencyMs(),
+                        result.getT1()
+                ));
     }
 
     /**
@@ -53,6 +59,9 @@ public class ProviderFallbackRouter {
         LlmProviderClient client = clients.get(index);
 
         return client.chat(request)
+                // 统计当前 ProviderClient 从订阅到返回响应的耗时，结果为 (耗时毫秒, 原始响应)。
+                .elapsed()
+                .map(result -> result.getT2().withLatency(result.getT1(), result.getT1()))
                 .onErrorResume(ex -> {
                     // 将任意异常统一转换成 LlmProviderException，便于统一判断是否降级。
                     LlmProviderException providerException = toProviderException(client.provider(), ex);

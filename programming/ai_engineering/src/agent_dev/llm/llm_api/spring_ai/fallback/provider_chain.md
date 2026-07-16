@@ -31,11 +31,20 @@ public class ProviderFallbackRouter {
     }
 
     public UnifiedChatResponse chat(UnifiedChatRequest request) {
+        long totalStartNanos = System.nanoTime();
         List<LlmProviderException> failures = new ArrayList<>();
 
         for (LlmProviderClient client : clients) {
+            long providerStartNanos = System.nanoTime();
+
             try {
-                return client.chat(request);
+                UnifiedChatResponse response = client.chat(request);
+                long providerLatencyMs = elapsedMillis(providerStartNanos);
+
+                return response.withLatency(
+                        providerLatencyMs,
+                        elapsedMillis(totalStartNanos)
+                );
 
             } catch (LlmProviderException ex) {
                 failures.add(ex);
@@ -47,6 +56,10 @@ public class ProviderFallbackRouter {
         }
 
         throw new AllProvidersFailedException(failures);
+    }
+
+    private long elapsedMillis(long startNanos) {
+        return (System.nanoTime() - startNanos) / 1_000_000;
     }
 
     private boolean shouldFallback(LlmProviderException ex) {

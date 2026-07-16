@@ -22,6 +22,8 @@ Provider 固定为 `openai`、`deepseek`、`anthropic`。
 | content | 没有文本时返回空字符串 |
 | stopReason | 统一为 stop、length、tool_calls、content_filter、other；Provider 未返回时为空 |
 | usage | 始终存在；Provider 未返回的 Token 字段使用 null，不能用 0 代替 |
+| providerLatencyMs | 最终成功 ProviderClient 的完整耗时，单位毫秒 |
+| totalLatencyMs | 整个 Router 调用耗时，单位毫秒 |
 | metadata | 保存响应 ID、原始停止原因等扩展信息，不承载核心业务字段 |
 
 ## 错误

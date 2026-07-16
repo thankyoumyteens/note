@@ -5,6 +5,9 @@ fallback_router.py
 ```py
 from __future__ import annotations
 
+from dataclasses import replace
+from time import perf_counter
+
 from llm_api_demo.exceptions import AllProvidersFailedException, LlmProviderException
 from llm_api_demo.provider_clients import LlmProviderClient
 from llm_api_demo.schemas import UnifiedChatRequest, UnifiedChatResponse
@@ -18,11 +21,22 @@ class ProviderFallbackRouter:
 
     async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
         """异步依次尝试 provider，成功则返回，临时性失败则降级。"""
+        total_started = perf_counter()
         failures: list[LlmProviderException] = []
 
         for client in self.clients:
+            provider_started = perf_counter()
+
             try:
-                return await client.chat(request)
+                response = await client.chat(request)
+                provider_latency_ms = int((perf_counter() - provider_started) * 1000)
+                total_latency_ms = int((perf_counter() - total_started) * 1000)
+
+                return replace(
+                    response,
+                    provider_latency_ms=provider_latency_ms,
+                    total_latency_ms=total_latency_ms,
+                )
             except LlmProviderException as exc:
                 failures.append(exc)
 

@@ -104,6 +104,8 @@ class UnifiedChatResponse:
     content: str  # 模型返回文本。
     stop_reason: UnifiedStopReason | None = None  # 统一停止原因；provider 未返回时为空。
     usage: TokenUsage = field(default_factory=TokenUsage)  # token 用量。
+    provider_latency_ms: int | None = None  # 最终成功 ProviderClient 的完整耗时。
+    total_latency_ms: int | None = None  # 整个 Router 调用耗时。
     metadata: dict[str, Any] = field(default_factory=dict)  # 扩展响应信息。
 
     def __post_init__(self) -> None:
