@@ -6,6 +6,7 @@ schemas.py
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime
 from enum import StrEnum
 from typing import Any
 
@@ -116,4 +117,38 @@ class UnifiedChatResponse:
         object.__setattr__(self, "content", self.content or "")
         object.__setattr__(self, "usage", self.usage or TokenUsage())
         object.__setattr__(self, "metadata", dict(self.metadata or {}))
+
+
+@dataclass(frozen=True)
+class ProviderAttemptRecord:
+    """单次 Provider 尝试记录。"""
+
+    provider: LlmProvider  # 本次尝试的 Provider。
+    model: str  # 本次尝试使用的模型。
+    started_at: datetime  # 尝试开始时间。
+    ended_at: datetime  # 尝试结束时间。
+    status: str  # SUCCESS 或 FAILED。
+    retry_count: int  # 首次请求之后的重试次数。
+    provider_latency_ms: int  # ProviderClient 完整耗时。
+    error_type: str | None = None  # 最终错误类型。
+    status_code: int | None = None  # 最终状态码。
+
+
+@dataclass(frozen=True)
+class LlmCallRecord:
+    """整次 LLM 调用记录。"""
+
+    request_id: str | None  # 业务请求 ID。
+    trace_id: str | None  # 链路追踪 ID。
+    started_at: datetime  # 整次调用开始时间。
+    ended_at: datetime  # 整次调用结束时间。
+    status: str  # SUCCESS 或 FAILED。
+    provider: LlmProvider | None  # 最终成功的 Provider。
+    model: str | None  # 最终实际模型。
+    usage: TokenUsage  # 最终 Token 用量。
+    total_latency_ms: int  # Router 总耗时。
+    fallback_path: list[LlmProvider] = field(default_factory=list)  # Provider 尝试顺序。
+    attempts: list[ProviderAttemptRecord] = field(default_factory=list)  # 尝试明细。
+    final_error_type: str | None = None  # 最终错误类型。
+    final_status_code: int | None = None  # 最终状态码。
 ```

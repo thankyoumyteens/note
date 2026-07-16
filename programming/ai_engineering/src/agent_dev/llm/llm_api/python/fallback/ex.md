@@ -16,6 +16,7 @@ class LlmProviderException(Exception):
     status_code: int  # HTTP 状态码；-1 表示网络、超时等本地异常。
     message: str  # 错误说明。
     response_body: str = ""  # provider 返回的原始错误内容。
+    retry_count: int = 0  # 首次请求之后的重试次数。
 
     def __str__(self) -> str:
         return f"{self.provider} failed: status={self.status_code}, message={self.message}"

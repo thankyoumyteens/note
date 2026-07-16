@@ -5,6 +5,8 @@ main.py
 ```py
 from __future__ import annotations
 
+import logging
+
 from fastapi import FastAPI, HTTPException
 
 from llm_api_demo.exceptions import AllProvidersFailedException, LlmProviderException
@@ -15,10 +17,22 @@ from llm_api_demo.provider_clients import (
     LlmProviderClient,
     OpenAiResponsesProviderClient,
 )
-from llm_api_demo.schemas import UnifiedChatRequest, UnifiedChatResponse
+from llm_api_demo.schemas import LlmCallRecord, UnifiedChatRequest, UnifiedChatResponse
 from llm_api_demo.settings import settings
 
 app = FastAPI(title="LLM Fallback Demo")
+# 复用 Uvicorn 已配置的 handler，确保 INFO 日志输出到控制台。
+logger = logging.getLogger("uvicorn.error")
+
+
+class LoggingLlmCallRecorder:
+    """示例记录器；实际项目可替换为数据库实现。"""
+
+    async def save(self, record: LlmCallRecord) -> None:
+        logger.info("llm_call=%s", record)
+
+
+call_recorder = LoggingLlmCallRecorder()
 
 
 def build_clients() -> list[LlmProviderClient]:
@@ -32,7 +46,7 @@ def build_clients() -> list[LlmProviderClient]:
     return [client_map[name] for name in settings.provider_order]
 
 
-router = ProviderFallbackRouter(build_clients())
+router = ProviderFallbackRouter(build_clients(), call_recorder)
 
 
 @app.post("/api/ai/chat")

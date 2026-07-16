@@ -213,3 +213,62 @@ public record UnifiedChatResponse(
     }
 }
 ```
+
+## 调用记录
+
+ProviderAttemptRecord.java
+
+```java
+package com.example.llm.dto;
+
+import java.time.Instant;
+
+public record ProviderAttemptRecord(
+        LlmProvider provider, // 本次尝试的 Provider。
+        String model, // 本次尝试使用的模型。
+        Instant startedAt, // 尝试开始时间。
+        Instant endedAt, // 尝试结束时间。
+        String status, // SUCCESS 或 FAILED。
+        int retryCount, // 首次请求之后的重试次数。
+        long providerLatencyMs, // ProviderClient 完整耗时。
+        String errorType, // 最终错误类型。
+        Integer statusCode // 最终状态码。
+) {}
+```
+
+LlmCallRecord.java
+
+```java
+package com.example.llm.dto;
+
+import java.time.Instant;
+import java.util.List;
+
+public record LlmCallRecord(
+        String requestId, // 业务请求 ID。
+        String traceId, // 链路追踪 ID。
+        Instant startedAt, // 整次调用开始时间。
+        Instant endedAt, // 整次调用结束时间。
+        String status, // SUCCESS 或 FAILED。
+        LlmProvider provider, // 最终成功的 Provider。
+        String model, // 最终实际模型。
+        TokenUsage usage, // 最终 Token 用量。
+        long totalLatencyMs, // Router 总耗时。
+        List<LlmProvider> fallbackPath, // Provider 实际尝试顺序。
+        List<ProviderAttemptRecord> attempts, // Provider 尝试明细。
+        String finalErrorType, // 最终错误类型。
+        Integer finalStatusCode // 最终状态码。
+) {}
+```
+
+LlmCallRecorder.java
+
+```java
+package com.example.llm.recorder;
+
+import com.example.llm.dto.LlmCallRecord;
+
+public interface LlmCallRecorder {
+    void save(LlmCallRecord record);
+}
+```

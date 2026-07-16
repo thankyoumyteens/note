@@ -13,10 +13,11 @@ ProviderFallbackRouter
 ```java
 package com.example.llm.config;
 
-import com.example.llm.client.LlmProviderClient;
-import com.example.llm.client.SpringAiProviderClient;
 import com.example.llm.dto.LlmProvider;
+import com.example.llm.provider.LlmProviderClient;
+import com.example.llm.provider.SpringAiProviderClient;
 import com.example.llm.router.ProviderFallbackRouter;
+import com.example.llm.recorder.LlmCallRecorder;
 import io.micrometer.observation.ObservationRegistry;
 import org.springframework.ai.anthropic.AnthropicChatModel;
 import org.springframework.ai.anthropic.AnthropicChatOptions;
@@ -30,6 +31,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.support.RetryTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.List;
@@ -46,6 +49,15 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableConfigurationProperties(LlmProperties.class)
 public class LlmSpringAiConfig {
+
+    // 输出 LLM 调用记录。
+    private static final Logger log = LoggerFactory.getLogger(LlmSpringAiConfig.class);
+
+    @Bean
+    public LlmCallRecorder llmCallRecorder() {
+        // 示例写日志；可替换为数据库实现。
+        return record -> log.info("llmCall={}", record);
+    }
 
     @Bean(destroyMethod = "shutdown")
     public ExecutorService llmExecutorService() {
@@ -188,7 +200,8 @@ public class LlmSpringAiConfig {
     @Bean
     public ProviderFallbackRouter providerFallbackRouter(
             List<LlmProviderClient> clients,
-            LlmProperties properties
+            LlmProperties properties,
+            LlmCallRecorder recorder
     ) {
         Map<String, LlmProviderClient> clientMap = clients.stream()
                 .collect(Collectors.toMap(
@@ -209,7 +222,7 @@ public class LlmSpringAiConfig {
                 })
                 .toList();
 
-        return new ProviderFallbackRouter(orderedClients);
+        return new ProviderFallbackRouter(orderedClients, recorder);
     }
 }
 ```

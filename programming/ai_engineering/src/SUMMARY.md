@@ -21,6 +21,7 @@
     - [统一调用契约](./agent_dev/llm/llm_api/unified_contract.md)
     - [三类超时](./agent_dev/llm/llm_api/timeout.md)
     - [响应延迟](./agent_dev/llm/llm_api/latency.md)
+    - [LLM 调用记录](./agent_dev/llm/llm_api/call_record.md)
     - [统一 ProviderClient](./agent_dev/llm/llm_api/provider_client.md)
     - [重试和 Provider 降级](./agent_dev/llm/llm_api/retry_fallback.md)
     - [WebClient](./agent_dev/llm/llm_api/spring_boot/spring_boot.md)

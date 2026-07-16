@@ -8,9 +8,12 @@ import com.example.llm.provider.LlmProviderClient;
 import com.example.llm.provider.OpenAiCompatibleProviderClient;
 import com.example.llm.provider.ProviderFallbackRouter;
 import com.example.llm.provider.OpenAiResponsesProviderClient;
+import com.example.llm.recorder.LlmCallRecorder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +27,15 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableConfigurationProperties(LlmProperties.class)
 public class LlmProviderConfig {
+
+    // 输出 LLM 调用记录。
+    private static final Logger log = LoggerFactory.getLogger(LlmProviderConfig.class);
+
+    @Bean
+    public LlmCallRecorder llmCallRecorder() {
+        // 示例写日志；可替换为数据库实现。
+        return record -> log.info("llmCall={}", record);
+    }
 
     @Bean
     public LlmProviderClient openaiProviderClient(LlmProperties properties) {
@@ -76,7 +88,8 @@ public class LlmProviderConfig {
     @Bean
     public ProviderFallbackRouter providerFallbackRouter(
             List<LlmProviderClient> clients,
-            LlmProperties properties
+            LlmProperties properties,
+            LlmCallRecorder recorder
     ) {
         Map<String, LlmProviderClient> clientMap = clients.stream()
                 .collect(Collectors.toMap(
@@ -97,7 +110,7 @@ public class LlmProviderConfig {
                 })
                 .toList();
 
-        return new ProviderFallbackRouter(orderedClients);
+        return new ProviderFallbackRouter(orderedClients, recorder);
     }
 }
 ```

@@ -7,9 +7,16 @@ import com.example.llm.exceptions.AllProvidersFailedException;
 import com.example.llm.exceptions.LlmProviderException;
 import com.example.llm.dto.UnifiedChatRequest;
 import com.example.llm.dto.UnifiedChatResponse;
+import com.example.llm.dto.LlmCallRecord;
+import com.example.llm.dto.ProviderAttemptRecord;
+import com.example.llm.dto.TokenUsage;
+import com.example.llm.dto.LlmProvider;
+import com.example.llm.recorder.LlmCallRecorder;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
@@ -22,9 +29,12 @@ public class ProviderFallbackRouter {
 
     // 按优先级排序的 provider client 列表，例如 openai -> deepseek -> anthropic。
     private final List<LlmProviderClient> clients;
+    // 保存整次调用及每个 Provider 的尝试过程。
+    private final LlmCallRecorder recorder;
 
-    public ProviderFallbackRouter(List<LlmProviderClient> clients) {
+    public ProviderFallbackRouter(List<LlmProviderClient> clients, LlmCallRecorder recorder) {
         this.clients = clients;
+        this.recorder = recorder;
     }
 
     /**
@@ -32,13 +42,18 @@ public class ProviderFallbackRouter {
      * 从第 0 个 provider 开始尝试，并记录每个失败的 provider 异常。
      */
     public Mono<UnifiedChatResponse> chat(UnifiedChatRequest request) {
-        return callByIndex(request, 0, new ArrayList<>())
+        Instant startedAt = Instant.now();
+        List<ProviderAttemptRecord> attempts = new ArrayList<>();
+
+        return callByIndex(request, 0, new ArrayList<>(), attempts)
                 // 统计 Router 从订阅到返回最终响应的总耗时，结果为 (耗时毫秒, 原始响应)。
                 .elapsed()
                 .map(result -> result.getT2().withLatency(
                         result.getT2().providerLatencyMs(),
                         result.getT1()
-                ));
+                ))
+                .doOnSuccess(response -> save(successRecord(request, startedAt, response, attempts)))
+                .doOnError(error -> save(failedRecord(request, startedAt, error, attempts)));
     }
 
     /**
@@ -48,7 +63,8 @@ public class ProviderFallbackRouter {
     private Mono<UnifiedChatResponse> callByIndex(
             UnifiedChatRequest request,
             int index,
-            List<LlmProviderException> failures
+            List<LlmProviderException> failures,
+            List<ProviderAttemptRecord> attempts
     ) {
         // 所有 provider 都尝试失败后，抛出聚合异常，方便上层查看完整失败链路。
         if (index >= clients.size()) {
@@ -57,14 +73,19 @@ public class ProviderFallbackRouter {
 
         // 获取当前要尝试的 provider client。
         LlmProviderClient client = clients.get(index);
+        Instant providerStartedAt = Instant.now();
 
         return client.chat(request)
                 // 统计当前 ProviderClient 从订阅到返回响应的耗时，结果为 (耗时毫秒, 原始响应)。
                 .elapsed()
+                .doOnNext(result -> attempts.add(successAttempt(
+                        client, result.getT2(), providerStartedAt, result.getT1()
+                )))
                 .map(result -> result.getT2().withLatency(result.getT1(), result.getT1()))
                 .onErrorResume(ex -> {
                     // 将任意异常统一转换成 LlmProviderException，便于统一判断是否降级。
                     LlmProviderException providerException = toProviderException(client.provider(), ex);
+                    attempts.add(failedAttempt(client, providerException, providerStartedAt));
 
                     // 记录当前 provider 的失败原因，最终所有 provider 失败时用于排查。
                     failures.add(providerException);
@@ -75,8 +96,94 @@ public class ProviderFallbackRouter {
                     }
 
                     // 允许降级的错误继续尝试下一个 provider。
-                    return callByIndex(request, index + 1, failures);
+                    return callByIndex(request, index + 1, failures, attempts);
                 });
+    }
+
+    // 以下转换函数只组装 DTO，不记录 Prompt、响应正文、请求头或 API Key。
+    private ProviderAttemptRecord successAttempt(
+            LlmProviderClient client,
+            UnifiedChatResponse response,
+            Instant startedAt,
+            long latencyMs
+    ) {
+        return new ProviderAttemptRecord(
+                response.provider(), response.model(), startedAt, Instant.now(),
+                "SUCCESS", retryCount(response), latencyMs, null, null
+        );
+    }
+
+    private ProviderAttemptRecord failedAttempt(
+            LlmProviderClient client,
+            LlmProviderException error,
+            Instant startedAt
+    ) {
+        return new ProviderAttemptRecord(
+                LlmProvider.valueOf(client.provider().toUpperCase()), null, startedAt, Instant.now(),
+                "FAILED", error.retryCount(), 0, error.getClass().getSimpleName(), error.statusCode()
+        );
+    }
+
+    private int retryCount(UnifiedChatResponse response) {
+        return ((Number) response.metadata().getOrDefault("retryCount", 0)).intValue();
+    }
+
+    private LlmCallRecord successRecord(
+            UnifiedChatRequest request,
+            Instant startedAt,
+            UnifiedChatResponse response,
+            List<ProviderAttemptRecord> attempts
+    ) {
+        return new LlmCallRecord(
+                (String) request.metadata().get("requestId"),
+                (String) request.metadata().get("traceId"),
+                startedAt,
+                Instant.now(),
+                "SUCCESS",
+                response.provider(),
+                response.model(),
+                response.usage(),
+                response.totalLatencyMs(),
+                attempts.stream().map(ProviderAttemptRecord::provider).toList(),
+                List.copyOf(attempts),
+                null,
+                null
+        );
+    }
+
+    private LlmCallRecord failedRecord(
+            UnifiedChatRequest request,
+            Instant startedAt,
+            Throwable error,
+            List<ProviderAttemptRecord> attempts
+    ) {
+        LlmProviderException finalError = attempts.isEmpty()
+                ? null
+                : toProviderException(attempts.getLast().provider().name(), error);
+
+        return new LlmCallRecord(
+                (String) request.metadata().get("requestId"),
+                (String) request.metadata().get("traceId"),
+                startedAt,
+                Instant.now(),
+                "FAILED",
+                null,
+                null,
+                TokenUsage.empty(),
+                Duration.between(startedAt, Instant.now()).toMillis(),
+                attempts.stream().map(ProviderAttemptRecord::provider).toList(),
+                List.copyOf(attempts),
+                error.getClass().getSimpleName(),
+                finalError == null ? -1 : finalError.statusCode()
+        );
+    }
+
+    private void save(LlmCallRecord record) {
+        try {
+            recorder.save(record);
+        } catch (RuntimeException ignored) {
+            // 调用记录失败不能改变 LLM 调用结果。
+        }
     }
 
     /**

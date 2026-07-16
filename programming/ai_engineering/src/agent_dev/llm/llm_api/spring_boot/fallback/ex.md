@@ -10,6 +10,22 @@ public class LlmProviderException extends RuntimeException {
     private final String provider;
     private final int statusCode;
     private final String responseBody;
+    private final int retryCount;
+
+    public LlmProviderException(
+            String provider,
+            int statusCode,
+            String message,
+            String responseBody,
+        Throwable cause,
+        int retryCount
+    ) {
+        super(message, cause);
+        this.provider = provider;
+        this.statusCode = statusCode;
+        this.responseBody = responseBody == null ? "" : responseBody;
+        this.retryCount = retryCount;
+    }
 
     public LlmProviderException(
             String provider,
@@ -18,10 +34,7 @@ public class LlmProviderException extends RuntimeException {
             String responseBody,
             Throwable cause
     ) {
-        super(message, cause);
-        this.provider = provider;
-        this.statusCode = statusCode;
-        this.responseBody = responseBody == null ? "" : responseBody;
+        this(provider, statusCode, message, responseBody, cause, 0);
     }
 
     public LlmProviderException(
@@ -30,7 +43,7 @@ public class LlmProviderException extends RuntimeException {
             String message,
             String responseBody
     ) {
-        this(provider, statusCode, message, responseBody, null);
+        this(provider, statusCode, message, responseBody, null, 0);
     }
 
     public String provider() {
@@ -43,6 +56,10 @@ public class LlmProviderException extends RuntimeException {
 
     public String responseBody() {
         return responseBody;
+    }
+
+    public int retryCount() {
+        return retryCount;
     }
 }
 ```
