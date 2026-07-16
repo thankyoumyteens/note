@@ -110,7 +110,7 @@ class ProviderFallbackRouter:
             started_at=started_at,
             ended_at=datetime.now(UTC),
             status="SUCCESS",
-            retry_count=int(response.metadata.get("retryCount", 0)),
+            retry_count=int(response.metadata.get("retry_count", 0)),
             provider_latency_ms=latency_ms,
         )
 

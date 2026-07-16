@@ -161,6 +161,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * OpenAI-compatible Provider 客户端。
@@ -220,7 +221,10 @@ public class OpenAiCompatibleProviderClient implements LlmProviderClient {
         // 将业务层统一请求转换成 OpenAI-compatible 请求体。
         OpenAiChatRequest providerRequest = toOpenAiRequest(request);
 
-        return webClient.post()
+        return Mono.defer(() -> {
+            AtomicInteger retryCount = new AtomicInteger();
+
+            return webClient.post()
                 // OpenAI-compatible Chat Completions API 路径。
                 .uri("/chat/completions")
                 // OpenAI 风格认证方式：Authorization: Bearer xxx。
@@ -246,11 +250,41 @@ public class OpenAiCompatibleProviderClient implements LlmProviderClient {
                                 .jitter(0.2)
                                 // 只有 isRetryable 返回 true 才会重试。
                                 .filter(this::isRetryable)
+                                // 每次真正重试前累加，首次请求不计入 retryCount。
+                                .doBeforeRetry(signal -> retryCount.incrementAndGet())
                                 // 重试次数耗尽后，继续抛出最后一次失败的原始异常。
                                 .onRetryExhaustedThrow((spec, signal) -> signal.failure())
                 )
                 // 将 provider 原始响应转换成业务层统一响应。
-                .map(this::toUnifiedResponse);
+                .map(this::toUnifiedResponse)
+                .map(response -> withRetryCount(response, retryCount.get()))
+                .onErrorMap(error -> withRetryCount(error, retryCount.get()));
+        });
+    }
+
+    private UnifiedChatResponse withRetryCount(UnifiedChatResponse response, int retryCount) {
+        Map<String, Object> metadata = new LinkedHashMap<>(response.metadata());
+        metadata.put("retryCount", retryCount);
+
+        return new UnifiedChatResponse(
+                response.provider(), response.model(), response.content(), response.stopReason(),
+                response.usage(), metadata
+        );
+    }
+
+    private Throwable withRetryCount(Throwable throwable, int retryCount) {
+        Throwable error = Exceptions.unwrap(throwable);
+
+        if (error instanceof LlmProviderException providerError) {
+            return new LlmProviderException(
+                    providerError.provider(), providerError.statusCode(), providerError.getMessage(),
+                    providerError.responseBody(), providerError.getCause(), retryCount
+            );
+        }
+
+        return new LlmProviderException(
+                provider, -1, "Provider request failed", "", error, retryCount
+        );
     }
 
     /**

@@ -164,7 +164,7 @@ class OpenAiResponsesProviderClient(LlmProviderClient):
                 metadata={
                     "response_id": response.id,
                     "raw_stop_reason": response.status,
-                    "retryCount": retry_count_context.get(),
+                    "retry_count": retry_count_context.get(),
                 },
             )
         except (APITimeoutError, APIConnectionError) as exc:
@@ -244,7 +244,7 @@ class DeepSeekProviderClient(LlmProviderClient):
                 ),
                 metadata={
                     "raw_stop_reason": response.choices[0].finish_reason,
-                    "retryCount": retry_count_context.get(),
+                    "retry_count": retry_count_context.get(),
                 },
             )
         except (APITimeoutError, APIConnectionError) as exc:
@@ -326,7 +326,7 @@ class AnthropicProviderClient(LlmProviderClient):
                 ),
                 metadata={
                     "raw_stop_reason": response.stop_reason,
-                    "retryCount": retry_count_context.get(),
+                    "retry_count": retry_count_context.get(),
                 },
             )
         except AnthropicAPIError as exc:
