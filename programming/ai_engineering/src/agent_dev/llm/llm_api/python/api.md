@@ -9,15 +9,17 @@ uv add openai
 ## 代码
 
 ```python
+import os
+
 from openai import OpenAI
 
 client = OpenAI(
-    api_key="换成你自己的KEY",
-    base_url="https://api.deepseek.com",
+    api_key=os.environ["LLM_API_KEY"],
+    base_url=os.getenv("LLM_BASE_URL", "https://api.deepseek.com"),
 )
 
 response = client.chat.completions.create(
-    model="deepseek-v4-pro",
+    model=os.environ["LLM_MODEL"],
     messages=[
         {
             "role": "system",

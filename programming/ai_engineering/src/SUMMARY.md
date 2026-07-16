@@ -24,6 +24,7 @@
     - [LLM 调用记录](./agent_dev/llm/llm_api/call_record.md)
     - [统一 ProviderClient](./agent_dev/llm/llm_api/provider_client.md)
     - [重试和 Provider 降级](./agent_dev/llm/llm_api/retry_fallback.md)
+    - [三种实现能力对照](./agent_dev/llm/llm_api/implementation_comparison.md)
     - [WebClient](./agent_dev/llm/llm_api/spring_boot/spring_boot.md)
       - [调用 OpenAI-compatible API](./agent_dev/llm/llm_api/spring_boot/api/api.md)
       - [调用 OpenAI Responses API](./agent_dev/llm/llm_api/spring_boot/responses_api.md)

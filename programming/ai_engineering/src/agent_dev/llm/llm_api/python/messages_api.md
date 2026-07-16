@@ -11,15 +11,17 @@ uv add anthropic
 ## 代码
 
 ```python
+import os
+
 from anthropic import Anthropic
 
 client = Anthropic(
-    api_key="换成你自己的KEY",
-    base_url="https://api.anthropic.com",
+    api_key=os.environ["LLM_API_KEY"],
+    base_url=os.getenv("LLM_BASE_URL", "https://api.anthropic.com"),
 )
 
 response = client.messages.create(
-    model="claude-sonnet-4-6",
+    model=os.environ["LLM_MODEL"],
     system="你是一个严谨、清晰的 Java 后端和 AI Agent 开发助手。",
     messages=[
         {

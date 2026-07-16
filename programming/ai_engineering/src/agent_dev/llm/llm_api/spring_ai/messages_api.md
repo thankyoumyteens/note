@@ -9,12 +9,12 @@ spring:
       chat: anthropic
 
     anthropic:
-      api-key: 换成你自己的KEY
-      base-url: https://api.anthropic.com
+      api-key: ${LLM_API_KEY}
+      base-url: ${LLM_BASE_URL:https://api.anthropic.com}
       version: 2023-06-01
       chat:
         options:
-          model: claude-sonnet-4-20250514
+          model: ${LLM_MODEL}
           temperature: 0.2
           max-tokens: 1000
 ```

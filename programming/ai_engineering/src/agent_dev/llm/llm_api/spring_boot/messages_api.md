@@ -164,7 +164,7 @@ public class AnthropicDemo {
     static void main() {
         // 构造 Messages API 请求体。
         AnthropicMessagesRequest request = new AnthropicMessagesRequest(
-                "claude-sonnet-4-5", // 模型
+                System.getenv("LLM_MODEL"), // 模型
                 "你是一个严谨、清晰的 Java 后端和 AI Agent 开发助手。", // system
                 List.of(
                         LlmMessage.user("用一句话解释什么是 RAG。")
@@ -173,11 +173,15 @@ public class AnthropicDemo {
                 false // 不使用流式输出
         );
 
-        String API_KEY = "换成你自己的KEY";
+        String apiKey = System.getenv("LLM_API_KEY");
+        String baseUrl = System.getenv().getOrDefault(
+                "LLM_BASE_URL",
+                "https://api.anthropic.com/v1"
+        );
 
         WebClient webClient = WebClient.builder()
-                .baseUrl("https://api.anthropic.com/v1")
-                .defaultHeader("x-api-key", API_KEY)
+                .baseUrl(baseUrl)
+                .defaultHeader("x-api-key", apiKey)
                 .defaultHeader("anthropic-version", "2023-06-01")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();

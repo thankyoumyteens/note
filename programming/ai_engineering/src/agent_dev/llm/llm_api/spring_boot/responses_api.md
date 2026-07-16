@@ -144,7 +144,7 @@ public class OpenAiResponseApiDemo {
     static void main() {
         // 构造 Responses API 请求体。
         OpenAiResponsesRequest request = new OpenAiResponsesRequest(
-                "gpt-4o-mini", // 模型
+                System.getenv("LLM_MODEL"), // 模型
                 "你是一个严谨、清晰的 Java 后端和 AI Agent 开发助手。", // instructions
                 "用一句话解释什么是 RAG。", // input
                 0.2, // temperature
@@ -152,11 +152,15 @@ public class OpenAiResponseApiDemo {
                 false // 不使用流式输出
         );
 
-        String API_KEY = "换成你自己的KEY";
+        String apiKey = System.getenv("LLM_API_KEY");
+        String baseUrl = System.getenv().getOrDefault(
+                "LLM_BASE_URL",
+                "https://api.openai.com/v1"
+        );
 
         WebClient webClient = WebClient.builder()
-                .baseUrl("https://api.openai.com/v1")
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + API_KEY)
+                .baseUrl(baseUrl)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
         System.out.println("正在询问 AI...");

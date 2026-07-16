@@ -6,10 +6,11 @@ provider_clients.py
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from contextvars import ContextVar
 
 from anthropic import AsyncAnthropic, APIError as AnthropicAPIError
 from openai import APIConnectionError, APIError, APITimeoutError, AsyncOpenAI
-from tenacity import retry, retry_if_exception, stop_after_attempt, wait_random_exponential
+from tenacity import RetryCallState, retry, retry_if_exception, stop_after_attempt, wait_random_exponential
 
 from llm_api_demo.exceptions import LlmProviderException
 from llm_api_demo.schemas import (
@@ -21,6 +22,8 @@ from llm_api_demo.schemas import (
     UnifiedStopReason,
 )
 from llm_api_demo.settings import settings
+
+retry_count_context: ContextVar[int] = ContextVar("retry_count", default=0)
 
 
 def to_unified_stop_reason(reason: str | None) -> UnifiedStopReason | None:
@@ -80,6 +83,21 @@ def should_retry_exception(exc: BaseException) -> bool:
     return False
 
 
+def record_retry_count(retry_state: RetryCallState) -> None:
+    """把首次调用之后的实际重试次数写入最终异常。"""
+    if retry_state.outcome is None or not retry_state.outcome.failed:
+        return
+
+    error = retry_state.outcome.exception()
+    if isinstance(error, LlmProviderException):
+        error.retry_count = retry_state.attempt_number - 1
+
+
+def set_retry_count(retry_state: RetryCallState) -> None:
+    """记录当前异步任务已经发生的重试次数。"""
+    retry_count_context.set(retry_state.attempt_number - 1)
+
+
 class OpenAiResponsesProviderClient(LlmProviderClient):
     """OpenAI Responses API ProviderClient。
 
@@ -109,6 +127,8 @@ class OpenAiResponsesProviderClient(LlmProviderClient):
         stop=stop_after_attempt(settings.max_retries + 1),
         # 指数退避可以避免在 provider 限流或短暂抖动时立刻打满请求。
         wait=wait_random_exponential(multiplier=0.5, max=3),
+        before=set_retry_count,
+        after=record_retry_count,
         # 最后一次仍失败时，直接抛出原异常交给 fallback router 判断是否切 provider。
         reraise=True,
     )
@@ -144,6 +164,7 @@ class OpenAiResponsesProviderClient(LlmProviderClient):
                 metadata={
                     "response_id": response.id,
                     "raw_stop_reason": response.status,
+                    "retryCount": retry_count_context.get(),
                 },
             )
         except (APITimeoutError, APIConnectionError) as exc:
@@ -185,6 +206,8 @@ class DeepSeekProviderClient(LlmProviderClient):
         retry=retry_if_exception(should_retry_exception),
         stop=stop_after_attempt(settings.max_retries + 1),
         wait=wait_random_exponential(multiplier=0.5, max=3),
+        before=set_retry_count,
+        after=record_retry_count,
         reraise=True,
     )
     async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
@@ -219,7 +242,10 @@ class DeepSeekProviderClient(LlmProviderClient):
                     output_tokens=usage.completion_tokens if usage else None,
                     total_tokens=usage.total_tokens if usage else None,
                 ),
-                metadata={"raw_stop_reason": response.choices[0].finish_reason},
+                metadata={
+                    "raw_stop_reason": response.choices[0].finish_reason,
+                    "retryCount": retry_count_context.get(),
+                },
             )
         except (APITimeoutError, APIConnectionError) as exc:
             # 本地网络或超时错误统一用 -1，后续 router 会把它视为可降级错误。
@@ -259,6 +285,8 @@ class AnthropicProviderClient(LlmProviderClient):
         retry=retry_if_exception(should_retry_exception),
         stop=stop_after_attempt(settings.max_retries + 1),
         wait=wait_random_exponential(multiplier=0.5, max=3),
+        before=set_retry_count,
+        after=record_retry_count,
         reraise=True,
     )
     async def chat(self, request: UnifiedChatRequest) -> UnifiedChatResponse:
@@ -296,7 +324,10 @@ class AnthropicProviderClient(LlmProviderClient):
                     output_tokens=response.usage.output_tokens,
                     total_tokens=response.usage.input_tokens + response.usage.output_tokens,
                 ),
-                metadata={"raw_stop_reason": response.stop_reason},
+                metadata={
+                    "raw_stop_reason": response.stop_reason,
+                    "retryCount": retry_count_context.get(),
+                },
             )
         except AnthropicAPIError as exc:
             # HTTP 异常保留原状态码；超时和网络错误没有状态码，统一使用 -1。

@@ -24,6 +24,7 @@ import org.springframework.ai.chat.model.ChatResponse;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -77,14 +78,15 @@ public class SpringAiProviderClient implements LlmProviderClient {
 
         for (int attempt = 0; attempt <= maxRetries; attempt++) {
             try {
-                return callOnceWithTimeout(request);
+                UnifiedChatResponse response = callOnceWithTimeout(request);
+                return withRetryCount(response, attempt);
 
             } catch (RuntimeException ex) {
                 LlmProviderException providerException = toProviderException(unwrap(ex));
                 lastException = providerException;
 
                 if (!isRetryable(providerException) || attempt == maxRetries) {
-                    throw providerException;
+                    throw withRetryCount(providerException, attempt);
                 }
 
                 sleepBeforeNextRetry(attempt);
@@ -94,6 +96,31 @@ public class SpringAiProviderClient implements LlmProviderClient {
         throw lastException == null
                 ? new LlmProviderException(provider, -1, "Provider call failed", "", null)
                 : lastException;
+    }
+
+    private UnifiedChatResponse withRetryCount(UnifiedChatResponse response, int retryCount) {
+        Map<String, Object> metadata = new HashMap<>(response.metadata());
+        metadata.put("retryCount", retryCount);
+
+        return new UnifiedChatResponse(
+                response.provider(),
+                response.model(),
+                response.content(),
+                response.stopReason(),
+                response.usage(),
+                metadata
+        );
+    }
+
+    private LlmProviderException withRetryCount(LlmProviderException error, int retryCount) {
+        return new LlmProviderException(
+                error.provider(),
+                error.statusCode(),
+                error.getMessage(),
+                error.responseBody(),
+                error.getCause(),
+                retryCount
+        );
     }
 
     private UnifiedChatResponse callOnceWithTimeout(UnifiedChatRequest request) {

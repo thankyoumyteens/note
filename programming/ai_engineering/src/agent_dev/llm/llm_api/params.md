@@ -1,5 +1,7 @@
 # 请求参数说明
 
+文中的模型名只用于说明配置方式，运行时应替换为 Provider 当前可用的模型 ID。
+
 调用 **Chat Completions 风格 API** 时最常见的基础参数：
 
 ```json

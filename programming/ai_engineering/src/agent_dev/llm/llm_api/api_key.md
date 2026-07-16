@@ -25,13 +25,12 @@ String apiKey = "sk-xxxxxxxxxxxxxxxx";
 正确做法是放到环境变量：
 
 ```bash
-export OPENAI_API_KEY="sk-xxxx"
-export ANTHROPIC_API_KEY="sk-ant-xxxx"
-export DASHSCOPE_API_KEY="sk-xxxx"
-export DEEPSEEK_API_KEY="sk-xxxx"
+export LLM_API_KEY="sk-xxxx"
+export LLM_BASE_URL="https://api.example.com"
+export LLM_MODEL="model-id"
 ```
 
-然后在配置文件中读取环境变量：
+单 Provider 应用使用通用名称；只有同时配置多个 Provider 时，才需要在配置层区分各组凭证：
 
 ```yaml
 llm:
@@ -63,7 +62,7 @@ llm:
 临时设置：
 
 ```bash
-export OPENAI_API_KEY="sk-xxxx"
+export LLM_API_KEY="sk-xxxx"
 ```
 
 这种只对当前终端有效。
@@ -77,8 +76,7 @@ export OPENAI_API_KEY="sk-xxxx"
 例如：
 
 ```bash
-export OPENAI_API_KEY="sk-xxxx"
-export ANTHROPIC_API_KEY="sk-ant-xxxx"
+export LLM_API_KEY="sk-xxxx"
 ```
 
 然后执行：
@@ -96,7 +94,7 @@ Run/Debug Configurations
   ↓
 Environment variables
   ↓
-OPENAI_API_KEY=sk-xxxx;ANTHROPIC_API_KEY=sk-ant-xxxx
+LLM_API_KEY=sk-xxxx
 ```
 
 这种方式适合本地开发，不会污染代码。

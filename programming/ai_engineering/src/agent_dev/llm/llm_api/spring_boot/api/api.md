@@ -146,19 +146,23 @@ public class OpenAiDemo {
                 LlmMessage.user("用一句话解释什么是泛型")
         );
         OpenAiChatRequest request = new OpenAiChatRequest(
-                "deepseek-v4-pro", // 模型
+                System.getenv("LLM_MODEL"), // 模型
                 messages, // 对话列表
                 0.2, // temperature
                 1000, // max_tokens
                 false // 不使用流式输出
         );
 
-        String API_KEY = "换成你自己的KEY";
+        String apiKey = System.getenv("LLM_API_KEY");
+        String baseUrl = System.getenv().getOrDefault(
+                "LLM_BASE_URL",
+                "https://api.deepseek.com"
+        );
 
         WebClient webClient = WebClient.builder()
                 // 以 DeepSeek 为例
-                .baseUrl("https://api.deepseek.com")
-                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + API_KEY)
+                .baseUrl(baseUrl)
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
         System.out.println("正在询问 AI...");

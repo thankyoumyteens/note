@@ -1,5 +1,7 @@
 # API 类型
 
+请求示例中的模型名是占位示例，不表示当前账号或 Provider 一定可用。
+
 阶段一主要涉及三类 API：
 
 1. OpenAI-compatible Chat Completions API

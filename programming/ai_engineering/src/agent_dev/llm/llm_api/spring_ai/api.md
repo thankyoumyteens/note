@@ -9,12 +9,12 @@ spring:
       chat: openai
 
     openai:
-      api-key: 换成你自己的KEY
-      base-url: https://api.deepseek.com
+      api-key: ${LLM_API_KEY}
+      base-url: ${LLM_BASE_URL:https://api.deepseek.com}
       chat:
         completions-path: /chat/completions
         options:
-          model: deepseek-v4-pro
+          model: ${LLM_MODEL}
           temperature: 0.2
           max-tokens: 1000
 ```

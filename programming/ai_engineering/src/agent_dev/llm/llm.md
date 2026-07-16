@@ -1,31 +1,16 @@
 # 最小 LLM 应用
 
-### 学习目标
+这一阶段把 LLM 作为外部服务接入应用，形成可配置、可切换、可排查的统一调用入口。开始前只需要具备 Java 或 Python 的 HTTP、配置和异常处理基础。
 
-理解模型能力边界，完成稳定、可配置的模型调用，为后续能力建立统一的调用基础。
+先理解 [LLM 的能力边界](./llm_info/llm_info.md)和[模型与 Provider 的差异](./llm_compare/llm_compare.md)，再进入[大模型 API 调用](./llm_api/llm_api.md)。
 
-### 需要掌握
+API 调用分为两步：
 
-- LLM 基本原理、擅长与不擅长的任务
-- OpenAI-compatible API、OpenAI Responses API、Anthropic Messages API
-- OpenAI、DeepSeek、Claude 等 provider 的接口差异
-- model、messages、temperature、max_tokens、stream 等请求参数
-- system、user、assistant 消息结构
-- API Key、Base URL 和模型名的安全配置
-- 统一请求、统一响应和统一 ProviderClient 抽象
-- 400、401、403、429、5xx 等错误的分类处理
-- 连接超时、响应超时、重试、fallback 和显式 provider 降级
-- Token usage、响应延迟和调用结果的基础记录
+1. 单 Provider Demo：理解三类 API 的请求、响应和错误差异。
+2. 统一 Provider 实现：加入统一 DTO、ProviderClient、超时、重试、降级、延迟和调用记录。
 
-### 实现路线
+实现时选择一条路线：
 
-- Spring Boot + WebClient：理解底层 HTTP 协议、provider 差异和错误处理
-- Spring AI：理解 Java 生态中的高层模型抽象
-- Python + uv：完成轻量实验和后续评估工具准备
-
-### 阶段产出与验收
-
-- 同一个请求可以通过统一入口调用至少两类 provider
-- 密钥与环境配置不写死在代码中，也不进入日志
-- 能区分可重试错误与不可重试错误，并说明降级发生的条件
-- 能记录 provider、模型、Token 用量、延迟和最终结果
+- [WebClient](./llm_api/spring_boot/spring_boot.md)：直接控制 HTTP 契约。
+- [Spring AI](./llm_api/spring_ai/spring_ai.md)：使用 Java 统一模型抽象。
+- [Python + uv](./llm_api/python/python.md)：使用官方 SDK，工程调用采用异步实现。
