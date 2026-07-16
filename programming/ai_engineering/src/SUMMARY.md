@@ -82,6 +82,7 @@
     - [Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/prompt_template.md)
       - [实现 Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/spring_boot.md)
         - [PromptTemplate](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/template.md)
+  - [结构化输出](./agent_dev/llm/reliable_output/structure/structure.md)
 
 - [最小可用 Agent](./agent_dev/llm/agent/agent.md)
 
