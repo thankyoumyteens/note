@@ -82,6 +82,11 @@
     - [Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/prompt_template.md)
       - [WebClient](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/spring_boot.md)
         - [PromptTemplate](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/template.md)
+        - [RenderedPrompt](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/rendered_prompt.md)
+        - [PromptRenderer](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/renderer.md)
+        - [创建模板 Bean](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/config.md)
+        - [IntentClassificationService](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/service.md)
+        - [Controller 使用方式](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/controller.md)
   - [结构化输出](./agent_dev/llm/reliable_output/structure/structure.md)
 
 - [最小可用 Agent](./agent_dev/llm/agent/agent.md)
