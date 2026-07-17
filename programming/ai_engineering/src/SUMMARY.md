@@ -80,7 +80,7 @@
 - [可靠的模型输出](./agent_dev/llm/reliable_output/reliable_output.md)
   - [Prompt](./agent_dev/llm/reliable_output/prompt/prompt.md)
     - [Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/prompt_template.md)
-      - [实现 Prompt 模板设计](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/spring_boot.md)
+      - [WebClient](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/spring_boot.md)
         - [PromptTemplate](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/template.md)
   - [结构化输出](./agent_dev/llm/reliable_output/structure/structure.md)
 
