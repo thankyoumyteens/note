@@ -14,7 +14,7 @@
 在项目根目录执行：
 
 ```bash
-git checkout -b workflow/stage-0-context
+git checkout -b workflow/sub_agent
 ```
 
 然后确认项目当前干净：

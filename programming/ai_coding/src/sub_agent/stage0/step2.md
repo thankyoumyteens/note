@@ -3,27 +3,27 @@
 你后续审完文件后，用这个小修提示词：
 
 ```
-阶段 0 文档小修。
+Make minor revisions to the Stage 0 documentation.
 
-只修改我指定的文件和内容。
+Only modify the files and content I specify.
 
-需要调整：
+Required changes:
 
-[在这里列出你要改的点]
+[List the changes you want to make here]
 
-要求：
+Requirements:
 
-* 不重新分析整个项目，除非修改点需要补证据
-* 不修改未指定文件
-* 不修改业务代码
-* 不修改测试代码
-* 不修改 pom.xml
-* steering 文件仍然通过 spec-workflow-mcp 更新
-* 完成后只输出：
+* Do not re-analyze the entire project unless the requested changes require additional evidence
+* Do not modify unspecified files
+* Do not modify business code
+* Do not modify test code
+* Do not modify pom.xml
+* Continue to update steering files through spec-workflow-mcp
+* When finished, output only:
 
-  * 修改文件列表
+  * List of modified files
   * git diff --stat
-  * 是否只改了指定文件
+  * Whether only the specified files were modified
 
-完成后停止。
+Stop when finished.
 ```
