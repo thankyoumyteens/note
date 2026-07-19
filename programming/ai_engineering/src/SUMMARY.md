@@ -87,6 +87,11 @@
         - [创建模板 Bean](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/config.md)
         - [IntentClassificationService](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/service.md)
         - [Controller 使用方式](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_boot/controller.md)
+      - [Spring AI](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/spring_ai.md)
+        - [VersionedPromptTemplate](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/template.md)
+        - [创建模板 Bean](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/config.md)
+        - [IntentClassificationService](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/service.md)
+        - [Controller 使用方式](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/controller.md)
   - [结构化输出](./agent_dev/llm/reliable_output/structure/structure.md)
 
 - [最小可用 Agent](./agent_dev/llm/agent/agent.md)
