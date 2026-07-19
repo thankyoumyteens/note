@@ -92,6 +92,11 @@
         - [创建模板 Bean](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/config.md)
         - [IntentClassificationService](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/service.md)
         - [Controller 使用方式](./agent_dev/llm/reliable_output/prompt/prompt_template/spring_ai/controller.md)
+      - [Python + uv](./agent_dev/llm/reliable_output/prompt/prompt_template/python/python.md)
+        - [PromptTemplate 与 PromptRenderer](./agent_dev/llm/reliable_output/prompt/prompt_template/python/template.md)
+        - [定义订单意图模板](./agent_dev/llm/reliable_output/prompt/prompt_template/python/config.md)
+        - [IntentClassificationService](./agent_dev/llm/reliable_output/prompt/prompt_template/python/service.md)
+        - [FastAPI 使用方式](./agent_dev/llm/reliable_output/prompt/prompt_template/python/main.md)
   - [结构化输出](./agent_dev/llm/reliable_output/structure/structure.md)
 
 - [最小可用 Agent](./agent_dev/llm/agent/agent.md)
