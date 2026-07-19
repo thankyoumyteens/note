@@ -97,6 +97,7 @@
         - [定义订单意图模板](./agent_dev/llm/reliable_output/prompt/prompt_template/python/config.md)
         - [IntentClassificationService](./agent_dev/llm/reliable_output/prompt/prompt_template/python/service.md)
         - [FastAPI 使用方式](./agent_dev/llm/reliable_output/prompt/prompt_template/python/main.md)
+    - [角色设定、任务约束和输出格式约束](./agent_dev/llm/reliable_output/prompt/prompt_constraints/prompt_constraints.md)
   - [结构化输出](./agent_dev/llm/reliable_output/structure/structure.md)
 
 - [最小可用 Agent](./agent_dev/llm/agent/agent.md)
