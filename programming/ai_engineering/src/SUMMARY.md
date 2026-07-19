@@ -7,6 +7,8 @@
   - [LLM 基本原理与能力边界](./agent_dev/llm/llm_info/llm_info.md)
     - [LLM 是什么](./agent_dev/llm/llm_info/llm_concept.md)
     - [LLM 的基本工作流程](./agent_dev/llm/llm_info/llm_flow.md)
+    - [Token 与 Tokenizer](./agent_dev/llm/llm_info/tokenizer.md)
+    - [Token 限制及其工程影响](./agent_dev/llm/llm_info/token_limit.md)
     - [LLM 是怎么训练出来的](./agent_dev/llm/llm_info/llm_train.md)
     - [LLM 擅长什么](./agent_dev/llm/llm_info/llm_advantage.md)
     - [LLM 不擅长什么](./agent_dev/llm/llm_info/llm_disadvantage.md)

@@ -2,7 +2,7 @@
 
 这一阶段把 LLM 作为外部服务接入应用，形成可配置、可切换、可排查的统一调用入口。开始前只需要具备 Java 或 Python 的 HTTP、配置和异常处理基础。
 
-先理解 [LLM 的能力边界](./llm_info/llm_info.md)和[模型与 Provider 的差异](./llm_compare/llm_compare.md)，再进入[大模型 API 调用](./llm_api/llm_api.md)。
+先理解 [LLM 的能力边界](./llm_info/llm_info.md)、Token 和上下文窗口，再了解[模型与 Provider 的差异](./llm_compare/llm_compare.md)，最后进入[大模型 API 调用](./llm_api/llm_api.md)。
 
 API 调用分为两步：
 

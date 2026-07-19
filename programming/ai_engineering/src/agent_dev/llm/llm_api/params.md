@@ -192,6 +192,8 @@ llm:
 
 在 Chat Completions 里，早期 / 非 reasoning 模型仍可用 `max_tokens`，reasoning 模型常用 `max_completion_tokens`，而 Responses API 用的是 `max_output_tokens`。
 
+这些参数只控制允许生成的最大输出长度，不代表模型的完整上下文窗口。输入、输出和截断之间的关系见 [Token 限制及其工程影响](../llm_info/token_limit.md)。
+
 ### 举例
 
 如果你设置：

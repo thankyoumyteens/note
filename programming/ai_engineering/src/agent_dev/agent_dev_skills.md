@@ -43,6 +43,8 @@
 ### 需要掌握
 
 - LLM 基本原理、擅长与不擅长的任务
+- Token、Tokenizer 以及 BPE、WordPiece、SentencePiece 的基本思想
+- Token 数量与上下文长度、截断、推理延迟和调用成本的关系
 - OpenAI-compatible API、OpenAI Responses API、Anthropic Messages API
 - OpenAI、DeepSeek、Claude 等 provider 的接口差异
 - model、messages、temperature、max_tokens、stream 等请求参数
@@ -91,6 +93,13 @@
 - Schema 校验、业务校验和错误反馈
 - 输出不完整、格式错误和语义错误的处理
 - 输出稳定性控制
+
+#### 幻觉与事实可靠性
+
+- 事实型、引用型和推理型幻觉的表现与成因
+- 模型不确定性、知识边界和可靠拒答
+- Prompt、RAG、Tool Calling 和微调对幻觉的缓解边界
+- 事实核查、引用校验、多源验证和人工复核
 
 #### 本阶段评估
 
@@ -189,9 +198,12 @@
 - PDF、Word、Markdown、HTML、网页和表格解析
 - Chunking、overlap 和元数据设计
 - Embedding 模型选型与向量化流程
+- 余弦相似度、点积、欧氏距离和近似最近邻检索的适用边界
 - pgvector、Milvus、Chroma、FAISS、Pinecone 等向量存储的选型边界
 - 关键词检索、Elasticsearch 和混合检索
-- Query Rewrite、召回优化和 Rerank
+- Top-K、相似度阈值、MMR、Query Rewrite、召回优化和 Rerank
+- Embedding 批处理、缓存、增量更新和模型版本变更后的缓存失效
+- 检索缓存与生成结果缓存的适用边界
 - 引用、来源定位和上下文拼接
 - 知识库更新、删除、权限、租户隔离和版本管理
 
@@ -361,9 +373,14 @@
 - 基础机器学习和深度学习
 - PyTorch、sklearn
 - 训练数据、验证集和测试集构建
-- 数据质量评估
-- Fine-tuning 微调及其适用边界
-- 模型量化和部署
+- 训练数据清洗、去重、脱敏、版本管理和质量评估
+- SFT、偏好对齐、LoRA、QLoRA 及其适用边界
+- 灾难性遗忘、跨领域泛化、离线评估、线上评估和回滚
+- 模型量化、蒸馏、裁剪和部署
+- 推理吞吐量、首 Token 延迟、生成速度和并发能力
+- 动态批处理、Continuous Batching 和 KV Cache
+- 模型参数量、上下文长度、GPU 显存和硬件成本的关系
+- 云端 API、私有化部署和边缘部署的选型边界
 - 垂直领域模型优化
 - 多模态模型基础
 - 文本、图像、音频、视频与 Agent 的组合
