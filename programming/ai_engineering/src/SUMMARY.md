@@ -100,6 +100,13 @@
         - [IntentClassificationService](./agent_dev/llm/reliable_output/prompt/prompt_template/python/service.md)
         - [FastAPI 使用方式](./agent_dev/llm/reliable_output/prompt/prompt_template/python/main.md)
     - [角色设定、任务约束和输出格式约束](./agent_dev/llm/reliable_output/prompt/prompt_constraints/prompt_constraints.md)
+    - [Few-shot 示例设计](./agent_dev/llm/reliable_output/prompt/few_shot/few_shot.md)
+      - [WebClient](./agent_dev/llm/reliable_output/prompt/few_shot/spring_boot/spring_boot.md)
+        - [配置 Few-shot 示例](./agent_dev/llm/reliable_output/prompt/few_shot/spring_boot/config.md)
+      - [Spring AI](./agent_dev/llm/reliable_output/prompt/few_shot/spring_ai/spring_ai.md)
+        - [配置 Few-shot 示例](./agent_dev/llm/reliable_output/prompt/few_shot/spring_ai/config.md)
+      - [Python + uv](./agent_dev/llm/reliable_output/prompt/few_shot/python/python.md)
+        - [配置 Few-shot 示例](./agent_dev/llm/reliable_output/prompt/few_shot/python/config.md)
   - [结构化输出](./agent_dev/llm/reliable_output/structure/structure.md)
 
 - [最小可用 Agent](./agent_dev/llm/agent/agent.md)
