@@ -150,6 +150,3 @@
 - [高并发](./high_concurrency/high_concurrency.md)
   - [多线程模型和事件循环模型](./high_concurrency/models.md)
   - [Java21 以下的版本实现事件循环模型](./high_concurrency/java_event_loop.md)
-
-- [Vibe Coding](./vibe_coding/vibe_coding.md)
-  - [入门](./vibe_coding/first_step.md)
